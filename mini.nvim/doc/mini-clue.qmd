@@ -1,61 +1,58 @@
 ---
-title: "mini.clue documentation"
+title: "mini.clue 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 `main` 브랜치에서 생성됨 _
 
-<a name="mini.clue" href="mini-clue.qmd#mini.clue"><b>mini.clue</b></a> Show next key clues
+<a name="mini.clue" href="mini-clue.qmd#mini.clue"><b>mini.clue</b></a> 다음 키 힌트 표시
 
-MIT License Copyright (c) 2023 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+주요 기능:
 
-- Implement custom key query process to reach target key combination:
+- 타겟 키 조합에 도달하기 위한 커스텀 키 쿼리 프로세스를 구현합니다:
 
-    - Starts after customizable opt-in triggers (mode + keys).
-
-
-    - Each key press narrows down set of possible targets.
-      Pressing `<BS>` removes previous user entry.
-      Pressing `<Esc>` or `<C-c>` leads to an early stop.
-      Doesn't depend on 'timeoutlen' and has basic support for 'langmap'.
+    - 사용자 정의 가능한 옵트인 트리거(모드 + 키) 이후에 시작됩니다.
 
 
-    - Ends when there is at most one target left or user pressed `<CR>`.
-      Results into emulating pressing all query keys plus possible postkeys.
+    - 각 키를 누를 때마다 가능한 타겟 세트가 좁혀집니다.
+      `<BS>`를 누르면 이전 사용자 입력이 제거됩니다.
+      `<Esc>` 또는 `<C-c>`를 누르면 프로세스가 조기에 중단됩니다.
+      'timeoutlen'에 의존하지 않으며 'langmap'에 대한 기본 지원이 있습니다.
 
 
-- Show window (after configurable delay) with clues. It lists available
-  next keys along with their descriptions (auto generated from descriptions
-  present keymaps and user-supplied clues; preferring the former).
+    - 타겟이 하나만 남거나 사용자가 `<CR>`을 누르면 종료됩니다.
+      모든 쿼리 키와 가능한 postkeys를 누르는 것을 에뮬레이트하는 결과로 이어집니다.
 
 
-- Configurable "postkeys" for key combinations - keys which will be emulated
-  after combination is reached during key query process.
+- 힌트와 함께 창을 표시합니다 (설정 가능한 지연 시간 이후). 사용 가능한 다음 키와 해당 설명(키맵에 있는 설명과 사용자 제공 클루에서 자동 생성되며 전자를 선호함)을 나열합니다.
 
 
-- Provide customizable sets of clues for common built-in keys/concepts:
-
-    - `g` key.
-
-    - `z` key.
-
-    - Window commands.
-
-    - Built-in completion.
-
-    - Marks.
-
-    - Registers.
+- 키 조합에 대한 구성 가능한 "postkeys"를 제공합니다 - 키 쿼리 프로세스 중에 조합에 도달한 후 에뮬레이트될 키입니다.
 
 
-- Lua functions to disable/enable triggers globally or per buffer.
+- 일반적인 내장 키/개념에 대한 사용자 정의 가능한 클루 세트를 제공합니다:
 
-For more details see:
+    - `g` 키.
+
+    - `z` 키.
+
+    - 창(window) 명령.
+
+    - 내장 완성(completion).
+
+    - 마크(marks).
+
+    - 레지스터(registers).
+
+
+- 전역 또는 버퍼별로 트리거를 활성화/비활성화하는 Lua 함수를 제공합니다.
+
+자세한 내용은 다음을 참조하세요:
 
 - [MiniClue-key-query-process](mini-clue.qmd#miniclue-key-query-process).
 
@@ -65,289 +62,222 @@ For more details see:
 
 - [MiniClue.gen\_clues](mini-clue.qmd#miniclue.gen_clues).
 
-Notes:
+참고:
 
-- There is no functionality to create mappings while defining clues.
-  This is done to clearly separate these two different actions.
-  The best suggested practice is to manually create mappings with
-  descriptions (`desc` field in options), as they will be automatically
-  used inside clue window.
+- 클루를 정의하는 동안 매핑을 생성하는 기능은 없습니다. 이는 이 두 가지 서로 다른 작업을 명확하게 분리하기 위함입니다. 가장 권장되는 방법은 설명(`desc` 필드)이 포함된 매핑을 수동으로 만드는 것이며, 이 설명은 클루 창 내부에서 자동으로 사용됩니다.
 
 
-- Triggers are implemented as special buffer-local mappings. This leads to
-  several caveats:
+- 트리거는 특수한 버퍼 로컬 매핑으로 구현됩니다. 이로 인해 몇 가지 주의 사항이 있습니다:
 
-    - They will override same regular buffer-local mappings and have
-      precedence over global one.
+    - 동일한 일반 버퍼 로컬 매핑을 재정의하며 전역 매핑보다 우선순위를 갖습니다.
 
-      Example: having set `<C-w>` as Normal mode trigger means that
-      there should not be another `<C-w>` mapping.
+      예: `<C-w>`를 Normal 모드 트리거로 설정하면 다른 `<C-w>` 매핑이 없어야 합니다.
 
 
-    - They need to be the latest created buffer-local mappings or they will
-      not function properly. Most common indicator of this is that some
-      mapping starts to work only after clue window is shown.
+    - 트리거는 가장 최근에 생성된 버퍼 로컬 매핑이어야 하며, 그렇지 않으면 제대로 작동하지 않습니다. 이의 가장 흔한 징후는 클루 창이 표시된 후에만 일부 매핑이 작동하기 시작하는 것입니다.
 
-      Example: `g` is set as Normal mode trigger, but `gcc` from [mini.comment](mini-comment.qmd#mini.comment)
-      doesn't work right away. This is probably because there are some
-      other buffer-local mappings starting with `g` which were created after
-      mapping for `g` trigger. Most common places for this are in LSP server's
-      `on_attach` or during tree-sitter start in buffer.
+      예: `g`가 Normal 모드 트리거로 설정되어 있지만 [mini.comment](mini-comment.qmd#mini.comment)의 `gcc`가 즉시 작동하지 않습니다. 이는 `g` 트리거에 대한 매핑 이후에 생성된 `g`로 시작하는 다른 버퍼 로컬 매핑이 있기 때문일 수 있습니다. 가장 흔한 경우는 LSP 서버의 `on_attach` 또는 버퍼에서 tree-sitter가 시작되는 동안입니다.
 
-      To check if trigger is the most recent buffer-local mapping, execute
-      `:<mode-char>map <trigger-keys>` (like `:nmap g` for previous example).
-      Mapping for trigger should be the first listed.
+      트리거가 가장 최근의 버퍼 로컬 매핑인지 확인하려면 `:<mode-char>map <trigger-keys>`를 실행하세요 (예: `nmap g`). 트리거에 대한 매핑이 가장 먼저 나열되어야 합니다.
 
-      This module makes the best effort to work out of the box and cover
-      most common cases, but it is not foolproof. The solution here is to
-      ensure that triggers are created after making all buffer-local mappings:
-      run either [MiniClue.setup()](mini-clue.qmd#miniclue.setup) or [MiniClue.ensure\_buf\_triggers()](mini-clue.qmd#miniclue.ensure_buf_triggers).
+      이 모듈은 기본적으로 잘 작동하고 대부분의 일반적인 경우를 다루기 위해 최선을 다하지만, 모든 상황에서 완벽하지는 않습니다. 여기서 해결책은 모든 버퍼 로컬 매핑을 만든 후에 트리거가 생성되도록 하는 것입니다. [MiniClue.setup()](mini-clue.qmd#miniclue.setup) 또는 [MiniClue.ensure\_buf\_triggers()](mini-clue.qmd#miniclue.ensure_buf_triggers)를 실행하세요.
 
 
-- Descriptions from existing mappings take precedence over user-supplied
-  clues. This is to ensure that information shown in clue window is as
-  relevant as possible. To add/customize description of an already existing
-  mapping, use [MiniClue.set\_mapping\_desc()](mini-clue.qmd#miniclue.set_mapping_desc).
+- 기존 매핑의 설명이 사용자 제공 클루보다 우선합니다. 이는 클루 창에 표시되는 정보가 가능한 한 관련성이 높도록 하기 위함입니다. 이미 존재하는 매핑의 설명을 추가하거나 사용자 정의하려면 [MiniClue.set\_mapping\_desc()](mini-clue.qmd#miniclue.set_mapping_desc)를 사용하세요.
 
 
-- Due to technical difficulties, there is no foolproof support for
-  Operator-pending mode triggers (like `a`/`i` from [mini.ai](mini-ai.qmd#mini.ai)):
+- 기술적인 어려움으로 인해 Operator-pending 모드 트리거(예: [mini.ai](mini-ai.qmd#mini.ai)의 `a`/`i`)에 대한 완벽한 지원은 없습니다:
 
-    - Doesn't work as part of a command in "temporary Normal mode" (like
-      after [i\_CTRL-O](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-O)) due to implementation difficulties.
+    - 구현상의 어려움으로 인해 "임시 Normal 모드"(예: [i\_CTRL-O](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-O) 이후)에서 명령의 일부로 작동하지 않습니다.
 
-    - Can have unexpected behavior with custom operators.
+    - 커스텀 연산자(operators)와 함께 사용할 때 예기치 않은 동작이 발생할 수 있습니다.
 
 
-- Has (mostly solved) issues with macros:
+- 매크로와 관련된 (대부분 해결된) 문제가 있습니다:
 
-    - All triggers are disabled during macro recording due to technical
-      reasons.
+    - 기술적인 이유로 매크로 기록 중에는 모든 트리거가 비활성화됩니다.
 
-    - The `@` and `Q` keys are specially mapped inside [MiniClue.setup()](mini-clue.qmd#miniclue.setup)
-      (if the key is not already mapped) to temporarily disable triggers.
+    - `@` 및 `Q` 키는 트리거를 일시적으로 비활성화하기 위해 [MiniClue.setup()](mini-clue.qmd#miniclue.setup) 내부에서 특수하게 매핑됩니다 (키가 아직 매핑되지 않은 경우).
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.clue').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniClue`
-which you can use for scripting or manually (with `:lua MiniClue.*`).
+이 모듈은 `require('mini.clue').setup({})`으로 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 스크립팅이나 수동으로 사용할 수 있는 글로벌 Lua 테이블 `MiniClue`를 생성합니다 (`:lua MiniClue.*` 사용).
 
-Config table needs to have triggers configured, none is set up by default.
+구성 테이블에는 트리거가 구성되어 있어야 하며, 기본적으로는 아무것도 설정되어 있지 않습니다.
 
-See [MiniClue.config](mini-clue.qmd#miniclue.config) for available config settings.
+사용 가능한 구성 설정은 [MiniClue.config](mini-clue.qmd#miniclue.config)를 참조하세요.
 
-You can override runtime config settings (like clues or window options)
-locally to a buffer inside `vim.b.miniclue_config` which should have same
-structure as `MiniClue.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for
-more details.
+런타임 구성 설정(예: 클루 또는 창 옵션)을 `vim.b.miniclue_config` 내부의 버퍼에 로컬로 재정의할 수 있으며, 이는 `MiniClue.config`와 동일한 구조여야 합니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim):
 
-    - Both have the same main goal: show available next keys along with
-      their customizable descriptions.
+    - 둘 다 사용 가능한 다음 키와 사용자 정의 가능한 설명을 표시한다는 동일한 주요 목표를 가지고 있습니다.
 
-    - Has different UI and content layout.
+    - UI 및 콘텐츠 레이아웃이 다릅니다.
 
-    - Allows creating mappings inside its configuration, while this module
-      doesn't have this by design (to clearly separate two different tasks).
+    - 구성 내에서 매핑을 생성할 수 있게 허용하지만, 이 모듈은 두 가지 서로 다른 작업을 명확하게 분리하기 위해 설계상 이를 지원하지 않습니다.
 
-    - Doesn't allow creating submodes, while this module does (via `postkeys`).
+    - 서브모드(submodes) 생성을 허용하지 않지만, 이 모듈은 (`postkeys`를 통해) 허용합니다.
 
 
 - [anuvyklack/hydra.nvim](https://github.com/anuvyklack/hydra.nvim):
 
-    - Both allow creating submodes: state which starts at certain key
-      combination; treats some keys differently; ends after `<Esc>`.
+    - 둘 다 서브모드 생성을 허용합니다. 서브모드는 특정 키 조합에서 시작하고, 일부 키를 다르게 처리하며, `<Esc>` 이후에 종료되는 상태입니다.
 
-    - Doesn't show information about available next keys (outside of
-      submodes), while that is this module's main goal.
+    - 사용 가능한 다음 키에 대한 정보를 서브모드 외부에서 표시하지 않지만, 그것이 이 모듈의 주요 목표입니다.
 
-#### Highlight groups {#module-highlightgroups}
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
 
-- `MiniClueBorder` - window border.
+- `MiniClueBorder` - 창 테두리.
 
-- `MiniClueDescGroup` - group description in clue window.
+- `MiniClueDescGroup` - 클루 창의 그룹 설명.
 
-- `MiniClueDescSingle` - single target description in clue window.
+- `MiniClueDescSingle` - 클루 창의 단일 타겟 설명.
 
-- `MiniClueNextKey` - next key label in clue window.
+- `MiniClueNextKey` - 클루 창의 다음 키 레이블.
 
-- `MiniClueNextKeyWithPostkeys` - next key label with postkeys in clue window.
+- `MiniClueNextKeyWithPostkeys` - 클루 창의 postkeys가 있는 다음 키 레이블.
 
-- `MiniClueSeparator` - separator in clue window.
+- `MiniClueSeparator` - 클루 창의 구분선.
 
-- `MiniClueTitle` - window title.
+- `MiniClueTitle` - 창 제목.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable creating triggers, set `vim.g.miniclue_disable` (globally) or
-`vim.b.miniclue_disable` (for a buffer) to `true`. Considering high number
-of different scenarios and customization intentions, writing exact rules
-for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+트리거 생성을 비활성화하려면 `vim.g.miniclue_disable`(전역) 또는 `vim.b.miniclue_disable`(버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 레시피는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
-### Key query process {#miniclue-key-query-process .help-syntax-right-anchor}
+### 키 쿼리 프로세스 {#miniclue-key-query-process .help-syntax-right-anchor}
 
-#### General info {#miniclue-key-query-process-generalinfo}
-
-
-This module implements custom key query process imitating a usual built-in
-mechanism of user pressing keys in order to execute a mapping. General idea
-is the same: narrow down key combinations until the target is reached.
-
-Main goals of its existence are:
+#### 일반 정보 {#miniclue-key-query-process-generalinfo}
 
 
-- Allow reaching certain mappings be independent of 'timeoutlen'. That is,
-  there is no fixed timeout after which currently typed keys are executed.
+이 모듈은 매핑을 실행하기 위해 사용자가 키를 순서대로 누르는 일반적인 내장 메커니즘을 모방한 커스텀 키 쿼리 프로세스를 구현합니다. 기본 아이디어는 동일합니다: 타겟에 도달할 때까지 키 조합을 좁혀나갑니다.
+
+이 프로세스가 존재하는 주요 목표는 다음과 같습니다:
 
 
-- Enable automated showing of next key clues after user-supplied delay
-  (also independent of 'timeoutlen').
+- 특정 매핑에 도달하는 것이 'timeoutlen'에 독립적이 되도록 합니다. 즉, 현재 입력된 키가 실행되는 고정된 타임아웃이 없습니다.
 
 
-- Allow emulating configurable key presses after certain key combination is
-  reached. This granular control allows creating so called "submodes".
-  See more at [MiniClue-examples-submodes](mini-clue.qmd#miniclue-examples-submodes).
+- 사용자 제공 지연 시간 이후에 다음 키 클루를 자동으로 표시할 수 있게 합니다 (이 또한 'timeoutlen'에 독립적임).
 
-This process is primarily designed for nested `<Leader>` mappings in Normal
-mode but works in all other main modes: Visual, Insert, Operator-pending
-(with caveats; no foolproof guarantees), Command-line, Terminal.
 
-#### Lifecycle {#miniclue-key-query-process-lifecycle}
+- 특정 키 조합에 도달한 후 구성 가능한 키 입력을 에뮬레이트할 수 있게 합니다. 이 세밀한 제어를 통해 소위 "서브모드(submodes)"를 생성할 수 있습니다. 자세한 내용은 [MiniClue-examples-submodes](mini-clue.qmd#miniclue-examples-submodes)를 참조하세요.
+
+이 프로세스는 주로 Normal 모드의 중첩된 `<Leader>` 매핑을 위해 설계되었지만, 다른 모든 주요 모드에서도 작동합니다: Visual, Insert, Operator-pending (주의 사항 있음, 완벽한 보장 없음), Command-line, Terminal.
+
+#### 라이프사이클 {#miniclue-key-query-process-lifecycle}
 
 
 
-- Key query process starts when user types a trigger: certain keys in certain
-  mode. Those keys are put into key query as a single user input. All possible
-  mode key combinations are filtered to ones starting with the trigger keys.
+- 키 쿼리 프로세스는 사용자가 트리거(특정 모드의 특정 키)를 입력할 때 시작됩니다. 해당 키는 단일 사용자 입력으로 키 쿼리에 추가됩니다. 모든 가능한 모드 키 조합은 트리거 키로 시작하는 것으로 필터링됩니다.
 
-  Note: trigger is implemented as a regular mapping, so if it has at least
-  two keys, they should be pressed within 'timeoutlen' milliseconds.
+  참고: 트리거는 일반 매핑으로 구현되므로 두 개 이상의 키가 있는 경우 'timeoutlen' 밀리초 이내에 눌러야 합니다.
 
 
-- Wait (indefinitely) for user to press a key. Advance depending on the key:
+- 사용자가 키를 누를 때까지 (무기한으로) 기다립니다. 키에 따라 진행됩니다:
 
 
-    - Special key:
+    - 특수 키:
 
 
-        - If `<Esc>` or `<C-c>`, stop the process without any action.
+        - `<Esc>` 또는 `<C-c>`인 경우, 아무 작업 없이 프로세스를 중단합니다.
 
 
-        - If `<CR>`, stop the process and execute current key query, meaning
-          emulate (with [nvim\_feedkeys()](https://neovim.io/doc/user/helptag.html?tag=nvim_feedkeys\(\))) user pressing those keys.
+        - `<CR>`인 경우, 프로세스를 중단하고 현재 키 쿼리를 실행합니다. 즉, 사용자가 해당 키를 누르는 것을 에뮬레이트합니다 ([nvim\_feedkeys()](https://neovim.io/doc/user/helptag.html?tag=nvim_feedkeys\(\)) 사용).
 
 
-        - If `<BS>`, remove previous user input from the query. If query becomes
-          empty, stop the process without any action.
+        - `<BS>`인 경우, 쿼리에서 이전 사용자 입력을 제거합니다. 쿼리가 비어 있게 되면 아무 작업 없이 프로세스를 중단합니다.
 
 
-        - If a key for scrolling clue window (`scroll_down` / `scroll_up`
-          in `config.window`; `<C-d>` / `<C-u>` by default), scroll clue window
-          and wait for the next user key.
-          Note: if clue window is not shown, treated as a not special key.
+        - 클루 창을 스크롤하기 위한 키(`config.window`의 `scroll_down` / `scroll_up`, 기본값은 `<C-d>` / `<C-u>`)인 경우, 클루 창을 스크롤하고 다음 사용자 키를 기다립니다.
+          참고: 클루 창이 표시되지 않은 경우 특수 키가 아닌 키로 취급됩니다.
 
 
-    - Not special key. Add key to the query while filtering all available
-      key combinations to start with the current key query. Advance:
+    - 특수 키가 아닌 키. 현재 키 쿼리로 시작하도록 모든 사용 가능한 키 조합을 필터링하면서 쿼리에 키를 추가합니다. 진행:
 
 
-        - If there is a single available key combination matching current
-          key query, execute it.
+        - 현재 키 쿼리와 일치하는 사용 가능한 키 조합이 하나만 있는 경우 이를 실행합니다.
 
 
-        - If there is no key combinations starting with the current query,
-          execute it. This, for instance, allows a seamless execution of
-          operators in presence of a longer key combinations. Example: with
-<p align="center">`g` as trigger in Normal mode and available mappings `gc` / `gcc`</p>
-          (like from [mini.comment](mini-comment.qmd#mini.comment)), this allows typing `gcip` to comment
-          current paragraph, although there are no key combinations
-          starting with `gci`.
+        - 현재 쿼리로 시작하는 키 조합이 없는 경우 이를 실행합니다. 예를 들어, 이는 더 긴 키 조합이 있는 상황에서도 연산자(operators)를 원활하게 실행할 수 있게 합니다. 예:
+<p align="center">Normal 모드에서 `g`가 트리거이고 사용 가능한 매핑이 `gc` / `gcc`인 경우</p>
+          (예: [mini.comment](mini-comment.qmd#mini.comment)에서), 이는 `gci`로 시작하는 키 조합이 없더라도 현재 단락에 주석을 달기 위해 `gcip`를 입력할 수 있게 해줍니다.
 
 
-        - Otherwise wait for the new user key press.
+        - 그렇지 않으면 새로운 사용자 키 입력을 기다립니다.
 
-#### Clue window {#miniclue-key-query-process-cluewindow}
-
-
-After initiating key query process and after each key press, a timer is
-started to show a clue window: floating window with information about
-available next keys along with their descriptions. Note: if window is
-already shown, its content is updated right away.
-
-Clues can have these types:
+#### 클루 창 {#miniclue-key-query-process-cluewindow}
 
 
-- "Terminal next key": when pressed, will lead to query execution.
+키 쿼리 프로세스를 시작한 후와 각 키를 누른 후에 타이머가 시작되어 클루 창(사용 가능한 다음 키와 해당 설명에 대한 정보가 포함된 플로팅 창)을 표시합니다. 참고: 창이 이미 표시되어 있는 경우 콘텐츠가 즉시 업데이트됩니다.
+
+클루는 다음과 같은 유형을 가질 수 있습니다:
 
 
-- "Terminal next key with postkeys": when pressed, will lead to query
-  execution plus some configured postkeys.
+- "Terminal next key": 누르면 쿼리 실행으로 이어집니다.
 
 
-- "Group next key": when pressed, will narrow down available key combinations
-  and wait for another key press. Note: can have configured description
-  (inside `config.clues`) or it will be auto generated based on the number of
-  available key combinations.
+- "Terminal next key with postkeys": 누르면 쿼리 실행과 함께 일부 구성된 postkeys로 이어집니다.
+
+
+- "Group next key": 누르면 사용 가능한 키 조합을 좁히고 다른 키 입력을 기다립니다. 참고: 구성된 설명(`config.clues` 내부)을 가질 수 있으며, 그렇지 않으면 사용 가능한 키 조합의 수에 따라 자동으로 생성됩니다.
 
 ---
 
-### Examples {#miniclue-examples .help-syntax-right-anchor}
+### 예제 {#miniclue-examples .help-syntax-right-anchor}
 
-#### Full starter example {#miniclue-examples-fullstarterexample}
+#### 전체 시작 예제 {#miniclue-examples-fullstarterexample}
 
 
-If not sure where to start, try this example with all provided clues from
-this module plus all [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>) mappings in Normal and Visual modes:
+어디서 시작해야 할지 모르겠다면, 이 모듈에서 제공하는 모든 클루와 Normal 및 Visual 모드의 모든 [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>) 매핑을 포함하는 이 예제를 시도해 보세요:
 
   ```lua
   local miniclue = require('mini.clue')
   miniclue.setup({
     triggers = {
-      -- Leader triggers
+      -- Leader 트리거
       { mode = { 'n', 'x' }, keys = '<Leader>' },
 
-      -- `[` and `]` keys
+      -- `[` 및 `]` 키
       { mode = 'n', keys = '[' },
       { mode = 'n', keys = ']' },
 
-      -- Built-in completion
+      -- 내장 완성
       { mode = 'i', keys = '<C-x>' },
 
-      -- `g` key
+      -- `g` 키
       { mode = { 'n', 'x' }, keys = 'g' },
 
-      -- Marks
+      -- 마크
       { mode = { 'n', 'x' }, keys = "'" },
       { mode = { 'n', 'x' }, keys = '`' },
 
-      -- Registers
+      -- 레지스터
       { mode = { 'n', 'x' }, keys = '"' },
       { mode = { 'i', 'c' }, keys = '<C-r>' },
 
-      -- Window commands
+      -- 창 명령
       { mode = 'n', keys = '<C-w>' },
 
-      -- `z` key
+      -- `z` 키
       { mode = { 'n', 'x' }, keys = 'z' },
     },
 
     clues = {
-      -- Enhance this by adding descriptions for <Leader> mapping groups
+      -- <Leader> 매핑 그룹에 대한 설명을 추가하여 이를 보완하세요
       miniclue.gen_clues.square_brackets(),
       miniclue.gen_clues.builtin_completion(),
       miniclue.gen_clues.g(),
@@ -359,13 +289,13 @@ this module plus all [<span class="help-syntax-keys">\<Leader\></span>](https://
   })
   ```
 
-#### Leader clues {#miniclue-examples-leaderclues}
+#### Leader 클루 {#miniclue-examples-leaderclues}
 
 
-Assume there are these [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>) mappings set up:
+다음과 같은 [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>) 매핑이 설정되어 있다고 가정합니다:
 
   ```lua
-  -- Set `<Leader>` before making any mappings and configuring 'mini.clue'
+  -- 매핑을 만들고 'mini.clue'를 구성하기 전에 `<Leader>`를 설정하세요
   vim.g.mapleader = ' '
 
   local nmap_leader = function(suffix, rhs, desc)
@@ -375,107 +305,95 @@ Assume there are these [<span class="help-syntax-keys">\<Leader\></span>](https:
     vim.keymap.set('x', '<Leader>' .. suffix, rhs, { desc = desc })
   end
 
-  nmap_leader('bd', '<Cmd>lua MiniBufremove.delete()<CR>',  'Delete')
-  nmap_leader('bw', '<Cmd>lua MiniBufremove.wipeout()<CR>', 'Wipeout')
+  nmap_leader('bd', '<Cmd>lua MiniBufremove.delete()<CR>',  '삭제(Delete)')
+  nmap_leader('bw', '<Cmd>lua MiniBufremove.wipeout()<CR>', '완전삭제(Wipeout)')
 
-  nmap_leader('lf', '<Cmd>lua vim.lsp.buf.format()<CR>',     'Format')
-  xmap_leader('lf', '<Cmd>lua vim.lsp.buf.format()<CR>',     'Format')
-  nmap_leader('lr', '<Cmd>lua vim.lsp.buf.rename()<CR>',     'Rename')
-  nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>', 'References')
+  nmap_leader('lf', '<Cmd>lua vim.lsp.buf.format()<CR>',     '포맷(Format)')
+  xmap_leader('lf', '<Cmd>lua vim.lsp.buf.format()<CR>',     '포맷(Format)')
+  nmap_leader('lr', '<Cmd>lua vim.lsp.buf.rename()<CR>',     '이름변경(Rename)')
+  nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>', '참조(References)')
   ```
 
-The following setup will enable [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>) as trigger in Normal and Visual
-modes and add descriptions to mapping groups:
+다음 설정은 Normal 및 Visual 모드에서 [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>)를 트리거로 활성화하고 매핑 그룹에 설명을 추가합니다:
 
   ```lua
   require('mini.clue').setup({
-    -- Register `<Leader>` as trigger
+    -- `<Leader>`를 트리거로 등록
     triggers = {
       { mode = { 'n', 'x' }, keys = '<Leader>' },
     },
 
-    -- Add descriptions for mapping groups
+    -- 매핑 그룹에 대한 설명 추가
     clues = {
-      { mode = 'n', keys = '<Leader>b', desc = '+Buffers' },
+      { mode = 'n', keys = '<Leader>b', desc = '+버퍼(Buffers)' },
       { mode = 'n', keys = '<Leader>l', desc = '+LSP' },
     },
   })
   ```
 
-#### Clues without mappings {#miniclue-examples-clueswithoutmappings}
+#### 매핑이 없는 클루 {#miniclue-examples-clueswithoutmappings}
 
 
-Clues can be shown not only for actually present mappings. This is helpful for
-showing clues for built-in key combinations. Here is an example of clues for
-a subset of built-in completion (see [MiniClue.gen\_clues.builtin\_completion()](mini-clue.qmd#miniclue.gen_clues.builtin_completion)
-to generate clues for all available completion sources):
+실제로 존재하는 매핑에 대해서만 클루를 표시할 수 있는 것은 아닙니다. 이는 내장 키 조합에 대한 클루를 표시하는 데 유용합니다. 다음은 내장 완성의 하위 집합에 대한 클루 예제입니다 (모든 사용 가능한 완성 소스에 대한 클루를 생성하려면 [MiniClue.gen\_clues.builtin\_completion()](mini-clue.qmd#miniclue.gen_clues.builtin_completion)을 참조하세요):
 
   ```lua
   require('mini.clue').setup({
-    -- Make `<C-x>` a trigger. Otherwise, key query process won't start.
+    -- `<C-x>`를 트리거로 만듭니다. 그렇지 않으면 키 쿼리 프로세스가 시작되지 않습니다.
     triggers = {
       { mode = 'i', keys = '<C-x>' },
     },
 
-    -- Register custom clues
+    -- 커스텀 클루 등록
     clues = {
-      { mode = 'i', keys = '<C-x><C-f>', desc = 'File names' },
-      { mode = 'i', keys = '<C-x><C-l>', desc = 'Whole lines' },
-      { mode = 'i', keys = '<C-x><C-o>', desc = 'Omni completion' },
-      { mode = 'i', keys = '<C-x><C-s>', desc = 'Spelling suggestions' },
-      { mode = 'i', keys = '<C-x><C-u>', desc = "With 'completefunc'" },
+      { mode = 'i', keys = '<C-x><C-f>', desc = '파일명(File names)' },
+      { mode = 'i', keys = '<C-x><C-l>', desc = '전체 행(Whole lines)' },
+      { mode = 'i', keys = '<C-x><C-o>', desc = 'Omni 완성' },
+      { mode = 'i', keys = '<C-x><C-s>', desc = '맞춤법 제안(Spelling suggestions)' },
+      { mode = 'i', keys = '<C-x><C-u>', desc = "'completefunc' 사용" },
     }
   })
   ```
 
-#### Triggers in special buffers {#miniclue-examples-triggersinspecialbuffers}
+#### 특수 버퍼에서의 트리거 {#miniclue-examples-triggersinspecialbuffers}
 
 
-By default triggers are automatically created in listed ('buflisted') and some
-special non-listed buffers. Use [MiniClue.ensure\_buf\_triggers()](mini-clue.qmd#miniclue.ensure_buf_triggers) to manually
-enable in when you need them. For example:
+기본적으로 트리거는 나열된('buflisted') 버퍼와 일부 특수한 나열되지 않은 버퍼에서 자동으로 생성됩니다. 필요할 때 수동으로 활성화하려면 [MiniClue.ensure\_buf\_triggers()](mini-clue.qmd#miniclue.ensure_buf_triggers)를 사용하세요. 예를 들어:
 
   ```vim
   au FileType special_ft lua MiniClue.ensure_buf_triggers()
   ```
 
-#### Submodes {#miniclue-examples-submodes}
+#### 서브모드 {#miniclue-examples-submodes}
 
 
 <a name="miniclue-examples-submodes" href="mini-clue.qmd#miniclue-examples-submodes"><b>MiniClue-examples-submodes</b></a>
 
-Submode is a state initiated after pressing certain key combination ("prefix")
-during which some keys are interpreted differently.
+서브모드는 키 쿼리 프로세스 중에 특정 키 조합("접두사")을 누른 후에 시작되는 상태로, 일부 키가 다르게 해석됩니다.
 
-In this module submode can be implemented following these steps:
-
-
-- Create mappings for each key inside submode. Left hand side of mappings
-  should consist from prefix followed by the key.
+이 모듈에서 서브모드는 다음 단계에 따라 구현될 수 있습니다:
 
 
-- Create clue for each key inside submode with `postkeys` value equal to
-  prefix. It would mean that after executing particular key combination from
-  this submode, pressing its prefix will be automatically emulated (leading
-  back to being inside submode).
+- 서브모드 내부의 각 키에 대한 매핑을 생성합니다. 매핑의 왼쪽(LHS)은 접두사 뒤에 해당 키가 오는 형태여야 합니다.
 
 
-- Register submode prefix (or some of its starting part) as trigger. Do not
-  register "overlapping" triggers, like `<Leader>` and `<Leader>m`.
+- 서브모드 내부의 각 키에 대해 `postkeys` 값이 접두사와 동일한 클루를 생성합니다. 이는 이 서브모드에서 특정 키 조합을 실행한 후 해당 접두사를 누르는 것이 자동으로 에뮬레이트됨을 의미합니다 (다시 서브모드 내부로 돌아감).
 
-##### Submode examples {#miniclue-examples-submodes-submodeexamples}
+
+- 서브모드 접두사(또는 시작 부분의 일부)를 트리거로 등록합니다. `<Leader>` 및 `<Leader>m`과 같이 "겹치는" 트리거를 등록하지 마세요.
+
+##### 서브모드 예제 {#miniclue-examples-submodes-submodeexamples}
 
 
 
-- Submode for moving with [mini.move](mini-move.qmd#mini.move):
+- [mini.move](mini-move.qmd#mini.move)로 이동하기 위한 서브모드:
 
-    - Press `<Leader>m` to start submode.
+    - `<Leader>m`을 눌러 서브모드를 시작합니다.
 
-    - Press any of `h`/`j`/`k`/`l` to move selection/line.
+    - `h`/`j`/`k`/`l` 중 하나를 눌러 선택 영역/행을 이동합니다.
 
-    - Press `<Esc>` to stop submode.
+    - `<Esc>`를 눌러 서브모드를 중지합니다.
 
-  The code:
+  코드:
 
   ```lua
   require('mini.move').setup({
@@ -493,12 +411,12 @@ In this module submode can be implemented following these steps:
 
   require('mini.clue').setup({
     triggers = {
-      -- This can also set up directly `<Leader>m` as a trigger, but make
-      -- sure to not also use `<Leader>`, as they would "overlap"
+      -- `<Leader>m`을 직접 트리거로 설정할 수도 있지만,
+      -- `<Leader>`도 사용하지 않도록 주의하세요. 서로 "겹칠" 수 있습니다.
       { mode = { 'n', 'x' }, keys = '<Leader>' },
     },
     clues = {
-      { mode = 'n', keys = '<Leader>m', desc = '+Move' },
+      { mode = 'n', keys = '<Leader>m', desc = '+이동(Move)' },
 
       { mode = { 'n', 'x' }, keys = '<Leader>mh', postkeys = '<Leader>m' },
       { mode = { 'n', 'x' }, keys = '<Leader>mj', postkeys = '<Leader>m' },
@@ -509,15 +427,15 @@ In this module submode can be implemented following these steps:
   ```
 
 
-- Submode for iterating buffers and windows with [mini.bracketed](mini-bracketed.qmd#mini.bracketed):
+- [mini.bracketed](mini-bracketed.qmd#mini.bracketed)를 사용하여 버퍼와 창을 반복하기 위한 서브모드:
 
-    - Press `[` or `]` to start key query process for certain direction.
+    - 특정 방향에 대한 키 쿼리 프로세스를 시작하려면 `[` 또는 `]`를 누릅니다.
 
-    - Press `b` / `w` to iterate buffers/windows until reach target one.
+    - 타겟에 도달할 때까지 `b` / `w`를 눌러 버퍼/창을 반복합니다.
 
-    - Press `<Esc>` to stop submode.
+    - `<Esc>`를 눌러 서브모드를 중지합니다.
 
-  The code:
+  코드:
 
   ```lua
   require('mini.bracketed').setup()
@@ -538,15 +456,15 @@ In this module submode can be implemented following these steps:
   ```
 
 
-- Submode for window commands using [MiniClue.gen\_clues.windows()](mini-clue.qmd#miniclue.gen_clues.windows):
+- [MiniClue.gen\_clues.windows()](mini-clue.qmd#miniclue.gen_clues.windows)를 사용한 창 명령 서브모드:
 
-    - Press `<C-w>` to start key query process.
+    - 키 쿼리 프로세스를 시작하려면 `<C-w>`를 누릅니다.
 
-    - Press keys which move / change focus / resize windows.
+    - 창을 이동 / 포커스 변경 / 크기 조절하는 키를 누릅니다.
 
-    - Press `<Esc>` to stop submode.
+    - `<Esc>`를 눌러 서브모드를 중지합니다.
 
-  The code:
+  코드:
 
   ```lua
   local miniclue = require('mini.clue')
@@ -564,7 +482,7 @@ In this module submode can be implemented following these steps:
   })
   ```
 
-#### Window config {#miniclue-examples-windowconfig}
+#### 창 구성 {#miniclue-examples-windowconfig}
 
 
 
@@ -573,14 +491,14 @@ In this module submode can be implemented following these steps:
     triggers = { { mode = 'n', keys = '<Leader>' } },
 
     window = {
-      -- Show window immediately
+      -- 창을 즉시 표시
       delay = 0,
 
       config = {
-        -- Compute window width automatically
+        -- 창 너비를 자동으로 계산
         width = 'auto',
 
-        -- Use double-line border
+        -- 이중선 테두리 사용
         border = 'double',
       },
     },
@@ -592,21 +510,21 @@ In this module submode can be implemented following these steps:
 ### setup() {#miniclue.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#miniclue.setup-parameters}
+#### 매개변수 {#miniclue.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniClue.config](mini-clue.qmd#miniclue.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 구성 테이블. [MiniClue.config](mini-clue.qmd#miniclue.config)를 참조하세요.
 
-#### Usage {#miniclue.setup-usage}
+#### 사용법 {#miniclue.setup-usage}
 
 
 
   ```lua
-  require('mini.clue').setup({}) -- replace {} with your config table
-                                 -- needs `triggers` field present
+  require('mini.clue').setup({}) -- {}를 사용자 구성 테이블로 교체
+                                 -- `triggers` 필드가 필요함
   ```
 
 ---
@@ -614,115 +532,95 @@ Module setup
 ### config {#miniclue.config .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.config`</p>
-#### Defaults {#miniclue.config-defaults}
+#### 기본값 {#miniclue.config-defaults}
 
 
 
   ```lua
   MiniClue.config = {
-    -- Array of extra clues to show
+    -- 표시할 추가 클루 배열
     clues = {},
 
-    -- Array of opt-in triggers which start custom key query process.
-    -- **Needs to have something in order to show clues**.
+    -- 커스텀 키 쿼리 프로세스를 시작하는 옵트인 트리거 배열.
+    -- **클루를 표시하려면 무언가 설정되어 있어야 합니다**.
     triggers = {},
 
-    -- Clue window settings
+    -- 클루 창 설정
     window = {
-      -- Floating window config
+      -- 플로팅 창 구성
       config = {},
 
-      -- Delay before showing clue window
+      -- 클루 창이 나타나기 전의 지연 시간
       delay = 1000,
 
-      -- Keys to scroll inside the clue window
+      -- 클루 창 내부에서 스크롤하기 위한 키
       scroll_down = '<C-d>',
       scroll_up = '<C-u>',
     },
   }
   ```
 
-#### General info {#miniclue.config-generalinfo}
+#### 일반 정보 {#miniclue.config-generalinfo}
 
 
 
-- To use [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>) as part of the config (either as trigger or inside clues),
-  set it prior to running [MiniClue.setup()](mini-clue.qmd#miniclue.setup).
+- 구성의 일부(트리거 또는 클루 내부)로 [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>)를 사용하려면 [MiniClue.setup()](mini-clue.qmd#miniclue.setup)을 실행하기 전에 이를 설정하세요.
 
 
-- See [MiniClue-examples](mini-clue.qmd#miniclue-examples) for examples.
+- 예제는 [MiniClue-examples](mini-clue.qmd#miniclue-examples)를 참조하세요.
 
-#### Clues {#miniclue.config-clues}
-
-
-`config.clues` is an array with extra information about key combinations.
-Each element can be one of:
-
-- Clue table.
-
-- Array (possibly nested) of clue tables.
-
-- Callable (function) returning either of the previous two.
-
-A clue table is a table with the following fields:
-
-- <span class="help-syntax-keys">\<mode\></span> `(string|table)` - single character describing mode short-name of
-  key combination as in `nvim_set_keymap()` ('n', 'x', 'i', 'o', 'c', etc.),
-  or a array thereof.
-
-- <span class="help-syntax-keys">\<keys\></span> `(string)` - key combination for which clue will be shown.
-  "Human-readable" key names as in [key-notation](https://neovim.io/doc/user/helptag.html?tag=key-notation) (like "<span class="help-syntax-keys">\<Leader\></span>", "<span class="help-syntax-keys">\<Space\></span>",
-  "<span class="help-syntax-keys">\<Tab\></span>", etc.) are allowed.
-
-- <span class="help-syntax-keys">\<desc\></span> `(string|function|nil)` - optional key combination description which is
-  shown in clue window. If function, should return string description.
-
-- <span class="help-syntax-keys">\<postkeys\></span> `(string|nil)` - optional postkeys which will be executed
-  automatically after `keys`. Allows creation of submodes
-  (see [MiniClue-examples-submodes](mini-clue.qmd#miniclue-examples-submodes)).
-
-Notes:
-
-- Postkeys are literal simulation of keypresses with [nvim\_feedkeys()](https://neovim.io/doc/user/helptag.html?tag=nvim_feedkeys\(\)).
+#### 클루 {#miniclue.config-clues}
 
 
-- Suggested approach to configuring clues is to create mappings with `desc`
-  field while supplying to `config.clues` only elements describing groups,
-  postkeys, and built-in mappings.
+`config.clues`는 키 조합에 대한 추가 정보가 포함된 배열입니다. 각 요소는 다음 중 하나일 수 있습니다:
 
-#### Triggers {#miniclue.config-triggers}
+- 클루 테이블.
+
+- 클루 테이블의 배열 (중첩 가능).
+
+- 이전 두 가지 중 하나를 반환하는 콜러블(함수).
+
+클루 테이블은 다음과 같은 필드를 갖는 테이블입니다:
+
+- <span class="help-syntax-keys">\<mode\></span> `(string|table)` - `nvim_set_keymap()`에서와 같이 키 조합의 모드 단축 이름('n', 'x', 'i', 'o', 'c' 등)을 나타내는 단일 문자 또는 그 배열.
+
+- <span class="help-syntax-keys">\<keys\></span> `(string)` - 클루가 표시될 키 조합. [key-notation](https://neovim.io/doc/user/helptag.html?tag=key-notation)에서와 같은 "사람이 읽을 수 있는" 키 이름(예: "<span class="help-syntax-keys">\<Leader\></span>", "<span class="help-syntax-keys">\<Space\></span>", "<span class="help-syntax-keys">\<Tab\></span>" 등)이 허용됩니다.
+
+- <span class="help-syntax-keys">\<desc\></span> `(string|function|nil)` - 클루 창에 표시되는 선택적인 키 조합 설명. 함수인 경우 문자열 설명을 반환해야 합니다.
+
+- <span class="help-syntax-keys">\<postkeys\></span> `(string|nil)` - `keys` 이후에 자동으로 실행될 선택적인 postkeys. 서브모드 생성을 허용합니다 ([MiniClue-examples-submodes](mini-clue.qmd#miniclue-examples-submodes) 참조).
+
+참고:
+
+- Postkeys는 [nvim\_feedkeys()](https://neovim.io/doc/user/helptag.html?tag=nvim_feedkeys\(\))를 사용한 키 입력의 리터럴 시뮬레이션입니다.
 
 
-`config.triggers` is an array with information when [MiniClue-key-query-process](mini-clue.qmd#miniclue-key-query-process)
-should start. Each element is a trigger table with the fields <span class="help-syntax-keys">\<mode\></span> and
-<span class="help-syntax-keys">\<keys\></span> which are treated the same as in clue table.
+- 클루 구성을 위한 권장 방법은 `desc` 필드를 사용하여 매핑을 생성하고, `config.clues`에는 그룹, postkeys 및 내장 매핑을 설명하는 요소만 제공하는 것입니다.
 
-#### Window {#miniclue.config-window}
+#### 트리거 {#miniclue.config-triggers}
 
 
-`config.window` defines behavior of clue window.
+`config.triggers`는 [MiniClue-key-query-process](mini-clue.qmd#miniclue-key-query-process)가 언제 시작되어야 하는지에 대한 정보가 포함된 배열입니다. 각 요소는 클루 테이블에서와 동일하게 처리되는 <span class="help-syntax-keys">\<mode\></span> 및 <span class="help-syntax-keys">\<keys\></span> 필드를 갖는 트리거 테이블입니다.
 
-`config.window.delay` is a number of milliseconds after which clue window will
-appear. Can be 0 to show immediately.
+#### 창 {#miniclue.config-window}
 
-`config.window.config` is a table defining floating window characteristics
-or a callable returning such table (will be called with identifier of
-window's buffer already showing all clues). It should have the same
-structure as in [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\)) with the following enhancements:
 
-- <span class="help-syntax-keys">\<width\></span> field can be equal to `"auto"` leading to window width being
-  computed automatically based on its content. Default is fixed width of 30.
+`config.window`는 클루 창의 동작을 정의합니다.
 
-- <span class="help-syntax-keys">\<row\></span> and <span class="help-syntax-keys">\<col\></span> can be equal to `"auto"` in which case they will be
-  computed to "stick" to set anchor ("SE" by default; see [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\))).
-  This allows changing corner in which window is shown:
+`config.window.delay`는 클루 창이 나타날 때까지의 시간(밀리초)입니다. 즉시 표시하려면 0으로 설정할 수 있습니다.
+
+`config.window.config`는 플로팅 창의 특성을 정의하는 테이블 또는 이러한 테이블을 반환하는 콜러블입니다 (모든 클루를 이미 표시하고 있는 창 버퍼의 식별자와 함께 호출됩니다). 이는 [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\))과 동일한 구조여야 하며 다음과 같은 향상된 기능이 있습니다:
+
+- <span class="help-syntax-keys">\<width\></span> 필드는 `"auto"`와 같을 수 있으며, 이 경우 창 너비는 콘텐츠에 따라 자동으로 계산됩니다. 기본값은 30의 고정 너비입니다.
+
+- <span class="help-syntax-keys">\<row\></span> 및 <span class="help-syntax-keys">\<col\></span>은 `"auto"`와 같을 수 있으며, 이 경우 설정된 앵커(기본값은 "SE", [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\)) 참조)에 "달라붙도록" 계산됩니다. 이를 통해 창이 표시되는 모서리를 변경할 수 있습니다:
 
   ```lua
-  -- Pick one anchor
-  local anchor = 'NW' -- top-left
-  local anchor = 'NE' -- top-right
-  local anchor = 'SW' -- bottom-left
-  local anchor = 'SE' -- bottom-right
+  -- 하나의 앵커 선택
+  local anchor = 'NW' -- 왼쪽 상단
+  local anchor = 'NE' -- 오른쪽 상단
+  local anchor = 'SW' -- 왼쪽 하단
+  local anchor = 'SE' -- 오른쪽 하단
 
   require('mini.clue').setup({
     window = {
@@ -731,165 +629,161 @@ structure as in [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=
   })
   ```
 
-`config.window.scroll_down` / `config.window.scroll_up` are strings defining
-keys which will scroll clue window down / up which is useful in case not
-all clues fit in current window height. Set to empty string `''` to disable
-either of them.
+`config.window.scroll_down` / `config.window.scroll_up`은 클루가 현재 창 높이에 다 맞지 않는 경우 클루 창을 아래로 / 위로 스크롤하는 키를 정의하는 문자열입니다. 비활성화하려면 빈 문자열 `''`로 설정하세요.
 
 ---
 
 ### enable_all_triggers() {#miniclue.enable_all_triggers .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.enable_all_triggers`()</p>
-Enable triggers in loaded listed and some special buffers
+로드되고 나열된 버퍼 및 일부 특수 버퍼에서 트리거 활성화
 
 ---
 
 ### enable_buf_triggers() {#miniclue.enable_buf_triggers .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.enable_buf_triggers`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Enable triggers in buffer
+버퍼에서 트리거 활성화
 
-#### Parameters {#miniclue.enable_buf_triggers-parameters}
+#### 매개변수 {#miniclue.enable_buf_triggers-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier. Default: current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 버퍼 식별자. 기본값: 현재 버퍼.
 
 ---
 
 ### disable_all_triggers() {#miniclue.disable_all_triggers .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.disable_all_triggers`()</p>
-Disable triggers in loaded buffers
+로드된 버퍼에서 트리거 비활성화
 
 ---
 
 ### disable_buf_triggers() {#miniclue.disable_buf_triggers .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.disable_buf_triggers`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Disable triggers in buffer
+버퍼에서 트리거 비활성화
 
-#### Parameters {#miniclue.disable_buf_triggers-parameters}
+#### 매개변수 {#miniclue.disable_buf_triggers-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier. Default: current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 버퍼 식별자. 기본값: 현재 버퍼.
 
 ---
 
 ### ensure_all_triggers() {#miniclue.ensure_all_triggers .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.ensure_all_triggers`()</p>
-Ensure all triggers are valid
+모든 트리거가 유효한지 확인
 
 ---
 
 ### ensure_buf_triggers() {#miniclue.ensure_buf_triggers .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.ensure_buf_triggers`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Ensure buffer triggers are valid
+버퍼 트리거가 유효한지 확인
 
-#### Parameters {#miniclue.ensure_buf_triggers-parameters}
+#### 매개변수 {#miniclue.ensure_buf_triggers-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier. Default: current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 버퍼 식별자. 기본값: 현재 버퍼.
 
 ---
 
 ### set_mapping_desc() {#miniclue.set_mapping_desc .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.set_mapping_desc`(<span class="help-syntax-special">{mode}</span>, <span class="help-syntax-special">{lhs}</span>, <span class="help-syntax-special">{desc}</span>)</p>
-Update description of an existing mapping
+기존 매핑의 설명 업데이트
 
-Notes:
+참고:
 
-- Uses buffer-local mapping in case there are both global and buffer-local
-  mappings with same mode and LHS. Similar to [maparg()](https://neovim.io/doc/user/helptag.html?tag=maparg\(\)).
+- 동일한 모드와 LHS를 갖는 전역 매핑과 버퍼 로컬 매핑이 모두 있는 경우 버퍼 로컬 매핑을 사용합니다. [maparg()](https://neovim.io/doc/user/helptag.html?tag=maparg\(\))와 유사합니다.
 
-#### Parameters {#miniclue.set_mapping_desc-parameters}
-
+#### 매개변수 {#miniclue.set_mapping_desc-parameters}
 
 
-<span class="help-syntax-special">{mode}</span> `(string)` Mapping mode (as in `maparg()`).
 
-<span class="help-syntax-special">{lhs}</span> `(string)` Mapping left hand side (as `name` in `maparg()`).
+<span class="help-syntax-special">{mode}</span> `(string)` 매핑 모드 (`maparg()`에서와 동일).
 
-<span class="help-syntax-special">{desc}</span> `(string)` New description to set.
+<span class="help-syntax-special">{lhs}</span> `(string)` 매핑의 왼쪽 부분 (`maparg()`에서 `name`과 동일).
+
+<span class="help-syntax-special">{desc}</span> `(string)` 새로 설정할 설명.
 
 ---
 
 ### gen_clues {#miniclue.gen_clues .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.gen_clues`</p>
-Generate pre-configured clues
+사전 구성된 클루 생성
 
-This is a table with function elements. Call to actually get array of clues.
+이것은 함수 요소를 가진 테이블입니다. 실제로 클루 배열을 가져오려면 호출하세요.
 
 ---
 
 ### gen_clues.builtin_completion() {#miniclue.gen_clues.builtin_completion .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.gen_clues.builtin_completion`()</p>
-Generate clues for built-in completion
+내장 완성에 대한 클루 생성
 
-Contains clues for the following triggers:
+다음 트리거에 대한 클루를 포함합니다:
 
   ```lua
   { mode = 'i', keys = '<C-x>' }
   ```
 
-#### Return {#miniclue.gen_clues.builtin_completion-return}
+#### 반환 {#miniclue.gen_clues.builtin_completion-return}
 
 
-`(table)` Array of clues.
+`(table)` 클루 배열.
 
 ---
 
 ### gen_clues.g() {#miniclue.gen_clues.g .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.gen_clues.g`()</p>
-Generate clues for `g` key
+`g` 키에 대한 클루 생성
 
-Contains clues for the following triggers:
+다음 트리거에 대한 클루를 포함합니다:
 
   ```lua
   { mode = { 'n', 'x' }, keys = 'g' }
   ```
 
-#### Return {#miniclue.gen_clues.g-return}
+#### 반환 {#miniclue.gen_clues.g-return}
 
 
-`(table)` Array of clues.
+`(table)` 클루 배열.
 
 ---
 
 ### gen_clues.square_brackets() {#miniclue.gen_clues.square_brackets .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.gen_clues.square_brackets`()</p>
-Generate clues for `[` and `]` keys
+`[` 및 `]` 키에 대한 클루 생성
 
-Contains clues for the following triggers:
+다음 트리거에 대한 클루를 포함합니다:
 
   ```lua
   { mode = 'n', keys = '[' }
   { mode = 'n', keys = ']' }
   ```
 
-#### Return {#miniclue.gen_clues.square_brackets-return}
+#### 반환 {#miniclue.gen_clues.square_brackets-return}
 
 
-`(table)` Array of clues.
+`(table)` 클루 배열.
 
 ---
 
 ### gen_clues.marks() {#miniclue.gen_clues.marks .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.gen_clues.marks`()</p>
-Generate clues for marks
+마크에 대한 클루 생성
 
-Contains clues for the following triggers:
+다음 트리거에 대한 클루를 포함합니다:
 
   ```lua
   { mode = { 'n', 'x' }, keys = "'" }
@@ -898,15 +792,14 @@ Contains clues for the following triggers:
   { mode = { 'n', 'x' }, keys = 'g`' }
   ```
 
-Note: if you use "g" as trigger (like to enable [MiniClue.gen\_clues.g()](mini-clue.qmd#miniclue.gen_clues.g)),
-don't add "g'" and "g`" as triggers: they already will be taken into account.
+참고: "g"를 트리거로 사용하는 경우 (예: [MiniClue.gen\_clues.g()](mini-clue.qmd#miniclue.gen_clues.g)를 활성화하기 위해), "g'" 및 "g`"를 트리거로 추가하지 마세요. 이미 고려됩니다.
 
-#### Return {#miniclue.gen_clues.marks-return}
+#### 반환 {#miniclue.gen_clues.marks-return}
 
 
-`(table)` Array of clues.
+`(table) ` 클루 배열.
 
-#### See also {#miniclue.gen_clues.marks-seealso}
+#### 참고 항목 {#miniclue.gen_clues.marks-seealso}
 
 
 [mark-motions](https://neovim.io/doc/user/helptag.html?tag=mark-motions)
@@ -916,31 +809,29 @@ don't add "g'" and "g`" as triggers: they already will be taken into account.
 ### gen_clues.registers() {#miniclue.gen_clues.registers .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.gen_clues.registers`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate clues for registers
+레지스터에 대한 클루 생성
 
-Contains clues for the following triggers:
+다음 트리거에 대한 클루를 포함합니다:
 
   ```lua
   { mode = { 'n', 'x' }, keys = '"' }
   { mode = { 'i', 'c' }, keys = '<C-r>' }
   ```
 
-#### Parameters {#miniclue.gen_clues.registers-parameters}
+#### 매개변수 {#miniclue.gen_clues.registers-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible keys:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 키:
 
-  - <span class="help-syntax-keys">\<show_contents\></span> `(boolean)` - whether to show contents of all possible
-    registers. If `false`, only description of special registers is shown.
-    Default: `false`.
+  - <span class="help-syntax-keys">\<show_contents\></span> `(boolean)` - 모든 가능한 레지스터의 내용을 표시할지 여부. `false`인 경우 특수 레지스터의 설명만 표시됩니다. 기본값: `false`.
 
-#### Return {#miniclue.gen_clues.registers-return}
+#### 반환 {#miniclue.gen_clues.registers-return}
 
 
-`(table)` Array of clues.
+`(table)` 클루 배열.
 
-#### See also {#miniclue.gen_clues.registers-seealso}
+#### 참고 항목 {#miniclue.gen_clues.registers-seealso}
 
 
 [registers](https://neovim.io/doc/user/helptag.html?tag=registers)
@@ -950,51 +841,47 @@ Contains clues for the following triggers:
 ### gen_clues.windows() {#miniclue.gen_clues.windows .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.gen_clues.windows`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate clues for window commands
+창 명령에 대한 클루 생성
 
-Contains clues for the following triggers:
+다음 트리거에 대한 클루를 포함합니다:
 
   ```lua
   { mode = 'n', keys = '<C-w>' }
   ```
 
-Note: only non-duplicated commands are included. For full list see [CTRL-W](https://neovim.io/doc/user/helptag.html?tag=CTRL-W).
+참고: 중복되지 않은 명령만 포함됩니다. 전체 목록은 [CTRL-W](https://neovim.io/doc/user/helptag.html?tag=CTRL-W)를 참조하세요.
 
-#### Parameters {#miniclue.gen_clues.windows-parameters}
-
-
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible keys:
-
-  - <span class="help-syntax-keys">\<submode_move\></span> `(boolean)` - whether to make move (change layout)
-    commands a submode by using `postkeys` field. Default: `false`.
-
-  - <span class="help-syntax-keys">\<submode_navigate\></span> `(boolean)` - whether to make navigation (change
-    focus) commands a submode by using `postkeys` field. Default: `false`.
-
-  - <span class="help-syntax-keys">\<submode_resize\></span> `(boolean)` - whether to make resize (change size)
-    commands a submode by using `postkeys` field. Default: `false`.
-
-#### Return {#miniclue.gen_clues.windows-return}
+#### 매개변수 {#miniclue.gen_clues.windows-parameters}
 
 
-`(table)` Array of clues.
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 키:
+
+  - <span class="help-syntax-keys">\<submode_move\></span> `(boolean)` - `postkeys` 필드를 사용하여 이동 (레이아웃 변경) 명령을 서브모드로 만들지 여부. 기본값: `false`.
+
+  - <span class="help-syntax-keys">\<submode_navigate\></span> `(boolean)` - `postkeys` 필드를 사용하여 탐색 (포커스 변경) 명령을 서브모드로 만들지 여부. 기본값: `false`.
+
+  - <span class="help-syntax-keys">\<submode_resize\></span> `(boolean)` - `postkeys` 필드를 사용하여 크기 조절 (크기 변경) 명령을 서브모드로 만들지 여부. 기본값: `false`.
+
+#### 반환 {#miniclue.gen_clues.windows-return}
+
+
+`(table)` 클루 배열.
 
 ---
 
 ### gen_clues.z() {#miniclue.gen_clues.z .help-syntax-right-anchor}
 
 <p align="center">`MiniClue.gen_clues.z`()</p>
-Generate clues for `z` key
+`z` 키에 대한 클루 생성
 
-Contains clues for the following triggers:
+다음 트리거에 대한 클루를 포함합니다:
 
   ```lua
   { mode = { 'n', 'x' }, keys = 'z' }
   ```
 
-#### Return {#miniclue.gen_clues.z-return}
+#### 반환 {#miniclue.gen_clues.z-return}
 
 
-`(table)` Array of clues.
-
+`(table)` 클루 배열.

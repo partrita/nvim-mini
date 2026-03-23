@@ -1,64 +1,64 @@
 ---
-title: "Announcing 'mini.doc'"
+title: "'mini.doc' 발표"
 author: Evgeni Chasnovski
 date: 2022-01-20
 categories: [announce, reddit]
-description: Generate help files from EmmyLua-like annotations
+description: EmmyLua와 유사한 어노테이션에서 도움말 파일 생성
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/s8p7g8/minidoc_generate_help_files_from_emmylualike/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/s8p7g8/minidoc_generate_help_files_from_emmylualike/)*
 
-Hello people!
+안녕하세요 여러분!
 
-I am happy to announce [mini.doc](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-doc.md) - module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) for generating help files (what you read when using `:help`) from [EmmyLua](https://github.com/sumneko/lua-language-server/wiki/EmmyLua-Annotations)-like annotations (not **fully** complying with this standard but very close). The basic idea is to keep documentation close to Lua implementation and generate help files automatically. It was written mainly to document 'mini.nvim' (instead of previous great but not that flexible [tjdevries/tree-sitter-lua](https://github.com/tjdevries/tree-sitter-lua)), but other people can also benefit from this. And not only plugin authors: general user can also document their Neovim Lua setup!
+[EmmyLua](https://github.com/sumneko/lua-language-server/wiki/EmmyLua-Annotations)와 유사한 어노테이션(이 표준을 **완전히** 따르지는 않지만 매우 가깝습니다)으로부터 도움말 파일(`:help`를 사용할 때 읽는 것)을 생성하기 위한 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 모듈인 [mini.doc](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-doc.md)을 발표하게 되어 기쁩니다. 기본 아이디어는 문서를 Lua 구현 가까이에 두고 도움말 파일을 자동으로 생성하는 것입니다. 이것은 주로 'mini.nvim'을 문서화하기 위해 작성되었지만 (기존의 훌륭하지만 유연하지 않았던 [tjdevries/tree-sitter-lua](https://github.com/tjdevries/tree-sitter-lua)를 대신하여), 다른 사람들도 이 혜택을 누릴 수 있습니다. 플러그인 저자뿐만 아니라 일반 사용자도 자신의 Neovim Lua 설정을 문서화할 수 있습니다!
 
-Basically, it works like this:
+기본적으로 다음과 같이 작동합니다:
 
-- Parse every input file line by line from top to bottom to separate annotations from what is annotated ("afterlines").
-- Parse every consecutive annotation lines from top to bottom to determine for every line to which 'section' it belongs.
-- Construct hierarchical data structure that describes parsing result. Every hierarchy level is an enhanced Lua array of objects one level lower. Levels are 'section' (array of consecutive parsed annotation lines) < 'block' < 'file' < 'doc'.
-- Iteratively apply extensive (but fully configurable!) hooks to modify output. This is where everything essential happens: infer tag and signature from "afterlines", add new lines, format existing ones, and many more.
-- Collect lines and put them in output path.
+- 모든 입력 파일을 위에서 아래로 한 줄씩 파싱하여 어노테이션과 어노테이션이 달린 대상("afterlines")을 분리합니다.
+- 연속된 모든 어노테이션 줄을 위에서 아래로 파싱하여 각 줄이 어떤 '섹션(section)'에 속하는지 결정합니다.
+- 파싱 결과를 설명하는 계층적 데이터 구조를 구축합니다. 각 계층 레벨은 한 단계 아래 객체들의 확장된 Lua 배열입니다. 레벨은 '섹션(section)' (연속된 파싱된 어노테이션 줄의 배열) < '블록(block)' < '파일(file)' < '문서(doc)'입니다.
+- 광범위한 (하지만 완전히 설정 가능한!) 훅(hook)을 반복적으로 적용하여 출력을 수정합니다. 여기서 필수적인 모든 작업이 일어납니다: "afterlines"에서 태그와 시그니처를 유추하고, 새 줄을 추가하고, 기존 줄의 형식을 맞추는 등 다양한 작업이 수행됩니다.
+- 줄을 모아서 출력 경로에 넣습니다.
 
-To give an example, this Lua code ...
+예를 들어, 이 Lua 코드 ...
 
 ```lua
---- My very first Lua function
+--- 저의 첫 번째 Lua 함수
 ---
----@param x number First number.
----@param y number Second number.
+---@param x number 첫 번째 숫자.
+---@param y number 두 번째 숫자.
 ---
----@return number Sum of `x` and `y`.
+---@return number `x`와 `y`의 합.
 Module.my_fun = function(x, y)
   return x + y
 end
 ```
 
-... will be converted into these lines (in actual help file they are a bit more colorful):
+... 는 다음과 같은 줄로 변환됩니다 (실제 도움말 파일에서는 좀 더 다채롭게 표시됩니다):
 
 ```
                                                                *Module.my_fun()*
                            `Module.my_fun`({x}, {y})
-My very first Lua function
+저의 첫 번째 Lua 함수
 
-Parameters~
-{x} `(number)` First number.
-{y} `(number)` Second number.
+매개변수(Parameters)~
+{x} `(number)` 첫 번째 숫자.
+{y} `(number)` 두 번째 숫자.
 
-Return~
-`(number)` Sum of `x` and `y`.
+반환(Return)~
+`(number)` `x`와 `y`의 합.
 ```
 
-What extra features I consider to be very useful:
+제가 매우 유용하다고 생각하는 추가 기능들:
 
-- Having a way of automatically generate help lines based on what is documented (use `@eval` section with executable Lua code). It was a relief to be able to automatically generate default `config` values for all 'mini.nvim' modules.
-- Supporting `@alias` sections to avoid annotation duplication.
-- Supporting local configuration by creating a plain Lua script at configurable path. This is a currently proposed way of controlling which Lua files are parsed, where and how output is created, etc.
+- 문서화된 내용을 기반으로 도움말 줄을 자동으로 생성하는 방법 (실행 가능한 Lua 코드가 포함된 `@eval` 섹션 사용). 모든 'mini.nvim' 모듈에 대해 기본 `config` 값을 자동으로 생성할 수 있게 된 것은 정말 다행이었습니다.
+- 어노테이션 중복을 피하기 위한 `@alias` 섹션 지원.
+- 설정 가능한 경로에 일반 Lua 스크립트를 생성하여 로컬 설정을 지원함. 이것은 현재 어떤 Lua 파일이 파싱되는지, 출력이 어디에 어떻게 생성되는지 등을 제어하기 위해 제안되는 방법입니다.
 
-For full disclosure, what features are not that great but probably will stay in order to manage complexity:
+완전한 공개를 위해, 복잡성을 관리하기 위해 유지될 수밖에 없지만 그리 좋지 않은 기능들:
 
-- Not supporting markdown in comments in favor of [Vim's help syntax](https://vimhelp.org/helphelp.txt.html#help-writing).
-- Using [Lua string manipulation](https://www.lua.org/manual/5.1/manual.html#5.4) by default for basic tasks: what lines are recognized as annotations, how they are modified, how tag and signature are automatically created, etc.
-- Not having rich auto-formatting capabilities (like wrapping for target width, auto-indenting, etc.).
+- [Vim의 도움말 구문](https://vimhelp.org/helphelp.txt.html#help-writing)을 선호하여 주석에서 마크다운을 지원하지 않음.
+- 기본 작업을 위해 [Lua 문자열 조작](https://www.lua.org/manual/5.1/manual.html#5.4)을 사용함: 어떤 줄이 어노테이션으로 인식되는지, 어떻게 수정되는지, 태그와 시그니처가 어떻게 자동으로 생성되는지 등.
+- 풍부한 자동 포맷팅 기능(대상 너비에 따른 줄 바꿈, 자동 들여쓰기 등)이 없음.
 
-Give it a try! Feedback is highly welcome (either here or in [this dedicated issue](https://github.com/nvim-mini/mini.nvim/issues/40)). I consider general design to be stable enough with only default behavior subject to change (based on your feedback) before next 'mini.nvim' stable release.
+한번 사용해 보세요! 피드백은 언제나 환영합니다 (여기나 [이 전용 이슈](https://github.com/nvim-mini/mini.nvim/issues/40)를 이용해 주세요). 일반적인 디자인은 충분히 안정적이라고 생각하며, 다음 'mini.nvim' 안정 버전 릴리스 전까지 (여러분의 피드백에 따라) 기본 동작만 변경될 수 있습니다.

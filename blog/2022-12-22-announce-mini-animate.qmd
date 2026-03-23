@@ -1,35 +1,35 @@
 ---
-title: "Announcing 'mini.animate'"
+title: "'mini.animate' 발표"
 author: Evgeni Chasnovski
 date: 2022-12-22
 categories: [announce, reddit]
-description: Animate common Neovim actions (cursor movement, scroll, resize, window open/close)
+description: 일반적인 Neovim 동작 애니메이션 (커서 이동, 스크롤, 크기 조정, 창 열기/닫기)
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/zsos1d/minianimate_animate_common_neovim_actions_cursor/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/zsos1d/minianimate_animate_common_neovim_actions_cursor/)*
 
 {{< video 2022-12-22-announce-mini-animate/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-After a lot of struggle, I am happy to announce [mini.animate](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-animate.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) which adds animation to some common Neovim actions. Following [dual distribution model](2022-10-30-announce-dual-distribution.qmd), it can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.animate).
+많은 우여곡절 끝에, 몇 가지 일반적인 Neovim 동작에 애니메이션을 추가하는 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈인 [mini.animate](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-animate.md)를 발표하게 되어 기쁩니다. [이중 배포 모델](2022-10-30-announce-dual-distribution.qmd)에 따라 [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.animate)를 통해서도 설치할 수 있습니다.
 
-This module aims to enhance visual user experience with as little setup and config intrusion as possible. Granted, not everyone likes animations in their editor, and that is OK. I myself didn't use this kind of plugins, but recently found that animation helps in various subtle ways to more precisely target my focus.
+이 모듈은 설정과 구성을 최소화하면서 시각적인 사용자 경험을 향상하는 것을 목표로 합니다. 물론 모든 사람이 편집기에서 애니메이션을 좋아하는 것은 아니며, 그것은 괜찮습니다. 저 자신도 이런 종류의 플러그인을 사용하지 않았지만, 최근에 애니메이션이 제 집중력을 더 정확하게 타겟팅하는 데 미묘하게 도움이 된다는 것을 발견했습니다.
 
-Main features:
+주요 기능:
 
-- Works out of the box with a single `require('mini.animate').setup()`. No extra mappings or commands needed.
-- Animate **cursor movement** inside same buffer by showing customizable path.
-- Animate **scrolling** with a series of subscrolls ("smooth scrolling").
-- Animate **window resize** by gradually changing sizes of all windows.
-- Animate **window open/close** with visually updating floating window.
-- Timings for all actions can be customized independently.
-- Action animations can be enabled/disabled independently.
-- All animations are asynchronous/non-blocking and trigger a targeted event which can be used to perform actions after animation is done.
-- `MiniAnimate.animate()` function which can be used to perform own animations.
+- `require('mini.animate').setup()` 한 줄로 바로 작동합니다. 추가적인 매핑이나 명령이 필요하지 않습니다.
+- 커스터마이징 가능한 경로를 보여줌으로써 동일한 버퍼 내의 **커서 이동**을 애니메이션화합니다.
+- 일련의 서브스크롤("부드러운 스크롤")로 **스크롤**을 애니메이션화합니다.
+- 모든 창의 크기를 점진적으로 변경하여 **창 크기 조정**을 애니메이션화합니다.
+- 시각적으로 업데이트되는 플로팅 창을 통해 **창 열기/닫기**를 애니메이션화합니다.
+- 모든 동작에 대한 타이밍을 독립적으로 커스터마이징할 수 있습니다.
+- 각 동작 애니메이션을 독립적으로 활성화/비활성화할 수 있습니다.
+- 모든 애니메이션은 비동기적/비차단 방식으로 작동하며, 애니메이션이 완료된 후 동작을 수행하는 데 사용할 수 있는 타겟 이벤트를 트리거합니다.
+- 자신만의 애니메이션을 만드는 데 사용할 수 있는 `MiniAnimate.animate()` 함수를 제공합니다.
 
-For more information, see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-animate.txt).
+자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-animate.txt)을 참조하세요.
 
-Please, check it out and tell me what you think! Either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/177).
+사용해 보시고 의견을 들려주세요! 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/177)를 통해 피드백을 주시면 감사하겠습니다.
 
-Thanks!
+감사합니다!

@@ -1,34 +1,34 @@
 ---
-title: "Announcing 'mini.move'"
+title: "'mini.move' 발표"
 author: Evgeni Chasnovski
 date: 2023-01-15
 categories: [announce, reddit]
-description: Move any selection in any direction
+description: 모든 선택 영역을 모든 방향으로 이동
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/10cigze/minimove_move_any_selection_in_any_direction/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/10cigze/minimove_move_any_selection_in_any_direction/)*
 
 {{< video 2023-01-15-announce-mini-move/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-Let me introduce you to [mini.move](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-move.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) which adds ability to move current visual selection or current line in all four directions (left, right, down, up). It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.move).
+현재의 비주얼 선택 영역이나 현재 행을 네 방향(왼쪽, 오른쪽, 아래, 위) 모두로 이동할 수 있는 기능을 추가하는 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈인 [mini.move](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-move.md)를 소개합니다. [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.move)를 통해서도 설치할 수 있습니다.
 
-To be perfectly honest, I didn't plan to write this module, as most of its functionality can be replicated using basic Vim actions. But while doing research for another upcoming module, I stumbled upon this kind of functionality in a form of simple mappings. It worked only for vertical movement in Visual mode and had several "quality of life" drawbacks (lack of `v:count` support, handling of undo, etc.). So **of course** it got me thinking if I can make it better without much complications (there are plugins with this functionality already, but their implementation feels disproportionally complex). Several couples of days later we got this module and I can appreciate visual feedback of this movement approach :)
+솔직히 말씀드리면, 이 모듈의 대부분의 기능이 기본적인 Vim 동작으로 재현될 수 있기 때문에 이 모듈을 작성할 계획은 없었습니다. 하지만 다른 모듈을 준비하던 중 간단한 매핑 형태의 이런 기능을 우연히 발견했습니다. 비주얼 모드에서 수직 이동에만 작동했고 몇 가지 "삶의 질" 측면에서의 단점(`v:count` 지원 부족, 실행 취소 처리 등)이 있었습니다. 그래서 **당연히** 저는 복잡한 과정 없이 이를 더 좋게 만들 수 있을지 고민하게 되었습니다 (이미 이 기능을 가진 플러그인들이 있지만, 그 구현이 비정상적으로 복잡하게 느껴졌습니다). 며칠 후 이 모듈이 완성되었고, 저는 이 이동 방식이 주는 시각적 피드백의 가치를 느낄 수 있었습니다 :)
 
-Main features:
+주요 기능:
 
-- Works in two modes:
-    - Visual mode. Select text (charwise with `v`, linewise with `V`, and blockwise with `CTRL-V`) and press customizable mapping to move in all four directions (left, right, down, up). It keeps Visual mode.
-    - Normal mode. Press customizable mapping to move current line in all four directions (left, right, down, up).
-    - Vertical linewise movement gets reindented with `=`. Horizontal linewise movement is same as indent with `>` and dedent with `<`.
-- Provides both mappings and Lua functions for motions.
-- Respects `v:count`. Movement mappings can be preceded by a number which multiplies command effect.
-- All consecutive moves (regardless of direction) can be undone by a single `u`.
-- Respects preferred column for vertical movement. It will vertically move selection as how cursor is moving (not strictly vertically if target column is not present in target line).
+- 두 가지 모드에서 작동합니다:
+    - 비주얼(Visual) 모드: 텍스트를 선택(문자 단위 `v`, 행 단위 `V`, 블록 단위 `CTRL-V`)하고 커스터마이징 가능한 매핑을 눌러 네 방향(왼쪽, 오른쪽, 아래, 위) 모두로 이동합니다. 비주얼 모드 상태를 유지합니다.
+    - 노멀(Normal) 모드: 커스터마이징 가능한 매핑을 눌러 현재 행을 네 방향 모두로 이동합니다.
+    - 수직 행 단위 이동은 `=`를 통해 다시 들여쓰기됩니다. 수평 행 단위 이동은 `>`를 통한 들여쓰기 및 `<`를 통한 내어쓰기와 동일합니다.
+- 동작(motions)을 위한 매핑과 Lua 함수를 모두 제공합니다.
+- `v:count`를 존중합니다. 이동 매핑 앞에 숫자를 붙여 명령의 효과를 배수할 수 있습니다.
+- (방향에 상관없이) 모든 연속적인 이동은 단일 `u`로 실행 취소할 수 있습니다.
+- 수직 이동 시 선호하는 열(column)을 존중합니다. 커서가 이동하는 방식과 같이 선택 영역을 수직으로 이동합니다 (대상 행에 대상 열이 없는 경우 엄격하게 수직은 아님).
 
-For more information, see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-move.txt).
+자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-move.txt)을 참조하세요.
 
-Please, check it out and tell me what you think! Either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/199).
+사용해 보시고 의견을 들려주세요! 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/199)를 통해 피드백을 주시면 감사하겠습니다.
 
-Thanks!
+감사합니다!

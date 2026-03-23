@@ -1,150 +1,138 @@
 ---
-title: "mini.notify documentation"
+title: "mini.notify 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_이 문서는 'mini.nvim'의 `main` 브랜치에서 생성되었습니다._
 
-<a name="mini.notify" href="mini-notify.qmd#mini.notify"><b>mini.notify</b></a> Show notifications
+<a name="mini.notify" href="mini-notify.qmd#mini.notify"><b>mini.notify</b></a> 알림 표시
 
-MIT License Copyright (c) 2024 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2024 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
-
-
-- Show one or more highlighted notifications in a single floating window.
+기능:
 
 
-- Manage notifications (add, update, remove, clear).
+- 단일 플로팅 창에 하나 이상의 하이라이트된 알림을 표시합니다.
 
 
-- Custom [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) implementation. To adjust, use [MiniNotify.make\_notify()](mini-notify.qmd#mininotify.make_notify)
-  or save-restore `vim.notify` manually after calling [MiniNotify.setup()](mini-notify.qmd#mininotify.setup).
+- 알림 관리 (추가, 업데이트, 제거, 지우기).
 
 
-- Automated show of LSP progress report.
+- 커스텀 [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) 구현. 조정하려면 [MiniNotify.make\_notify()](mini-notify.qmd#mininotify.make_notify)를 사용하거나
+  [MiniNotify.setup()](mini-notify.qmd#mininotify.setup) 호출 후 수동으로 `vim.notify`를 저장-복구하세요.
 
 
-- Track history which can be accessed with [MiniNotify.get\_all()](mini-notify.qmd#mininotify.get_all)
-  and shown with [MiniNotify.show\_history()](mini-notify.qmd#mininotify.show_history).
-
-#### Setup {#module-setup}
+- LSP 진행 보고서 자동 표시.
 
 
-This module needs a setup with `require('mini.notify').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniNotify`
-which you can use for scripting or manually (with `:lua MiniNotify.*`).
+- [MiniNotify.get\_all()](mini-notify.qmd#mininotify.get_all)로 액세스하고 [MiniNotify.show\_history()](mini-notify.qmd#mininotify.show_history)로 표시할 수 있는 히스토리 추적.
 
-See [MiniNotify.config](mini-notify.qmd#mininotify.config) for `config` structure and default values.
+#### 설정 {#module-setup}
 
-You can override runtime config settings locally to buffer inside
-`vim.b.mininotify_config` which should have same structure as
-`MiniNotify.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
 
-#### Comparisons {#module-comparisons}
+이 모듈은 `require('mini.notify').setup({})`으로 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniNotify`를 생성합니다 (예: `:lua MiniNotify.*`).
+
+`config` 구조와 기본값은 [MiniNotify.config](mini-notify.qmd#mininotify.config)를 참조하세요.
+
+`MiniNotify.config`와 동일한 구조를 가져야 하는 `vim.b.mininotify_config`를 통해 버퍼 로컬에서 런타임 설정 설정을 재정의할 수 있습니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
+
+#### 비교 {#module-comparisons}
 
 
 
 - [j-hui/fidget.nvim](https://github.com/j-hui/fidget.nvim):
 
-    - Basic goals of providing interface for notifications are similar.
+    - 알림 인터페이스 제공이라는 기본 목표는 유사합니다.
 
-    - Has more configuration options and visual effects, while this module
-      does not (by design).
+    - 더 많은 설정 옵션과 시각적 효과가 있는 반면, 이 모듈은 그렇지 않습니다 (의도적 설계).
 
 
 - [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify):
 
-    - Similar to 'j-hui/fidget.nvim'.
+    - 'j-hui/fidget.nvim'과 유사합니다.
 
-#### Highlight groups {#module-highlightgroups}
-
-
-
-- `MiniNotifyBorder` - window border.
-
-- `MiniNotifyLspProgress` - notifications from built-in LSP progress report.
-
-- `MiniNotifyNormal` - basic foreground/background highlighting.
-
-- `MiniNotifyTitle` - window title.
-
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
-
-NOTE: [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) override after [MiniNotify.make\_notify()](mini-notify.qmd#mininotify.make_notify) uses own
-highlight groups per notification level.
-
-#### Disabling {#module-disabling}
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
-To disable showing notifications, set `vim.g.mininotify_disable` (globally) or
-`vim.b.mininotify_disable` (for a buffer) to `true`. Considering high number
-of different scenarios and customization intentions, writing exact rules
-for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+
+- `MiniNotifyBorder` - 창 테두리.
+
+- `MiniNotifyLspProgress` - 내장 LSP 진행 보고서의 알림.
+
+- `MiniNotifyNormal` - 기본 전경/배경 하이라이트.
+
+- `MiniNotifyTitle` - 창 제목.
+
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))로 직접 설정하세요.
+
+참고: [MiniNotify.make\_notify()](mini-notify.qmd#mininotify.make_notify) 이후의 [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) 재정의는 알림 수준마다 고유한 하이라이트 그룹을 사용합니다.
+
+#### 비활성화 {#module-disabling}
+
+
+알림 표시를 비활성화하려면 `vim.g.mininotify_disable` (전역) 또는 `vim.b.mininotify_disable` (버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 레시피는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
-### Specification {#mininotify-specification .help-syntax-right-anchor}
+### 사양 {#mininotify-specification .help-syntax-right-anchor}
 
-#### Notification specification {#mininotify-specification-notificationspecification}
-
-
-Notification is a table with the following keys:
+#### 알림 사양 {#mininotify-specification-notificationspecification}
 
 
-- <span class="help-syntax-keys">\<msg\></span> `(string)` - single string with notification message.
-  Use `\n` to delimit several lines.
+알림은 다음 키를 가진 테이블입니다:
 
-- <span class="help-syntax-keys">\<level\></span> `(string)` - notification level as key of [vim.log.levels](https://neovim.io/doc/user/helptag.html?tag=vim.log.levels).
-  Like "ERROR", "WARN", "INFO", etc.
 
-- <span class="help-syntax-keys">\<hl_group\></span> `(string)` - highlight group with which notification is shown.
+- <span class="help-syntax-keys">\<msg\></span> `(string)` - 알림 메시지가 포함된 단일 문자열.
+  여러 줄을 구분하려면 `\n`을 사용하세요.
 
-- <span class="help-syntax-keys">\<data\></span> `(table)` - extra data to store in notification (like `source`, etc.).
+- <span class="help-syntax-keys">\<level\></span> `(string)` - [vim.log.levels](https://neovim.io/doc/user/helptag.html?tag=vim.log.levels)의 키로 된 알림 수준.
+  "ERROR", "WARN", "INFO" 등.
 
-- <span class="help-syntax-keys">\<ts_add\></span> `(number)` - timestamp of when notification is added.
+- <span class="help-syntax-keys">\<hl_group\></span> `(string)` - 알림이 표시되는 하이라이트 그룹.
 
-- <span class="help-syntax-keys">\<ts_update\></span> `(number)` - timestamp of the latest notification update.
+- <span class="help-syntax-keys">\<data\></span> `(table)` - 알림에 저장할 추가 데이터 (`source` 등).
 
-- <span class="help-syntax-keys">\<ts_remove\></span> `(number|nil)` - timestamp of when notification is removed.
-  It is `nil` if notification was never removed and thus considered "active".
+- <span class="help-syntax-keys">\<ts_add\></span> `(number)` - 알림이 추가된 시점의 타임스탬프.
 
-Notes:
+- <span class="help-syntax-keys">\<ts_update\></span> `(number)` - 최신 알림 업데이트 시점의 타임스탬프.
 
-- Timestamps are compatible with [strftime()](https://neovim.io/doc/user/helptag.html?tag=strftime\(\)) and have fractional part.
+- <span class="help-syntax-keys">\<ts_remove\></span> `(number|nil)` - 알림이 제거된 시점의 타임스탬프.
+  알림이 제거되지 않아 "활성" 상태인 경우 `nil`입니다.
+
+참고:
+
+- 타임스탬프는 [strftime()](https://neovim.io/doc/user/helptag.html?tag=strftime\(\))과 호환되며 소수점 부분을 가집니다.
 
 ---
 
 ### setup() {#mininotify.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-This will also:
+다음 작업도 수행합니다:
 
-- Set [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) custom implementation (see [MiniNotify.make\_notify()](mini-notify.qmd#mininotify.make_notify)).
+- [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) 커스텀 구현 설정 ([MiniNotify.make\_notify()](mini-notify.qmd#mininotify.make_notify) 참조).
 
-- Clean the history. Use `MiniNotify.setup(MiniNotify.config)` to force
-  clean history while preserving the config.
+- 히스토리 정리. 설정을 유지하면서 히스토리를 강제로 정리하려면 `MiniNotify.setup(MiniNotify.config)`를 사용하세요.
 
-#### Parameters {#mininotify.setup-parameters}
-
+#### 매개변수 {#mininotify.setup-parameters}
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniNotify.config](mini-notify.qmd#mininotify.config).
 
-#### Usage {#mininotify.setup-usage}
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniNotify.config](mini-notify.qmd#mininotify.config)를 참조하세요.
+
+#### 사용법 {#mininotify.setup-usage}
 
 
 
   ```lua
-  require('mini.notify').setup() -- use default config
-  -- OR
-  require('mini.notify').setup({}) -- replace {} with your config table
+  require('mini.notify').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.notify').setup({}) -- {}를 설정 테이블로 교체
   ```
 
 ---
@@ -152,78 +140,74 @@ This will also:
 ### config {#mininotify.config .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.config`</p>
-#### Defaults {#mininotify.config-defaults}
+#### 기본값 {#mininotify.config-defaults}
 
 
 
   ```lua
   MiniNotify.config = {
-    -- Content management
+    -- 콘텐츠 관리
     content = {
-      -- Function which formats the notification message
-      -- By default prepends message with notification time
+      -- 알림 메시지 형식을 지정하는 함수
+      -- 기본적으로 메시지 앞에 알림 시간을 추가합니다
       format = nil,
 
-      -- Function which orders notification array from most to least important
-      -- By default orders first by level and then by update timestamp
+      -- 알림 배열을 중요도 순으로 정렬하는 함수
+      -- 기본적으로 레벨 순으로 정렬한 다음 업데이트 타임스탬프 순으로 정렬합니다
       sort = nil,
     },
 
-    -- Notifications about LSP progress
+    -- LSP 진행 상황에 대한 알림
     lsp_progress = {
-      -- Whether to enable showing
+      -- 표시 활성화 여부
       enable = true,
 
-      -- Notification level
+      -- 알림 수준
       level = 'INFO',
 
-      -- Duration (in ms) of how long last message should be shown
+      -- 마지막 메시지가 표시되어야 하는 기간 (ms)
       duration_last = 1000,
     },
 
-    -- Window options
+    -- 창 옵션
     window = {
-      -- Floating window config
+      -- 플로팅 창 설정
       config = {},
 
-      -- Maximum window width as share (between 0 and 1) of available columns
+      -- 사용 가능한 열의 점유율(0에서 1 사이)로서의 최대 창 너비
       max_width_share = 0.382,
 
-      -- Value of 'winblend' option
+      -- 'winblend' 옵션 값
       winblend = 25,
     },
   }
   ```
 
-#### Content {#mininotify.config-content}
+#### 콘텐츠 {#mininotify.config-content}
 
 
-`config.content` defines how notifications are shown.
+`config.content`는 알림이 표시되는 방식을 정의합니다.
 
-`content.format` is a function which takes single notification object
-(see [MiniNotify-specification](mini-notify.qmd#mininotify-specification)) and returns a string to be used directly
-when showing notification.
-Default: `nil` for [MiniNotify.default\_format()](mini-notify.qmd#mininotify.default_format).
+`content.format`은 단일 알림 객체([MiniNotify-specification](mini-notify.qmd#mininotify-specification) 참조)를 받아 알림을 표시할 때 직접 사용할 문자열을 반환하는 함수입니다.
+기본값: [MiniNotify.default\_format()](mini-notify.qmd#mininotify.default_format)의 경우 `nil`.
 
-`content.sort` is a function which takes array of notification objects
-(see [MiniNotify-specification](mini-notify.qmd#mininotify-specification)) and returns an array of such objects.
-It can be used to define custom order and/or filter for notifications which
-are shown simultaneously.
-Note: Input contains notifications before applying `content.format`.
-Default: `nil` for [MiniNotify.default\_sort()](mini-notify.qmd#mininotify.default_sort).
+`content.sort`는 알림 객체 배열([MiniNotify-specification](mini-notify.qmd#mininotify-specification) 참조)을 받아 해당 객체 배열을 반환하는 함수입니다.
+동시에 표시되는 알림에 대한 커스텀 순서 및/또는 필터를 정의하는 데 사용할 수 있습니다.
+참고: 입력에는 `content.format`을 적용하기 전의 알림이 포함됩니다.
+기본값: [MiniNotify.default\_sort()](mini-notify.qmd#mininotify.default_sort)의 경우 `nil`.
 
-Example:
+예시:
 
   ```lua
   require('mini.notify').setup({
     content = {
-      -- Use notification message as is for LSP progress
+      -- LSP 진행 상황에 대해 알림 메시지를 그대로 사용
       format = function(notif)
         if notif.data.source == 'lsp_progress' then return notif.msg end
         return MiniNotify.default_format(notif)
       end,
 
-      -- Show more recent notifications first
+      -- 최신 알림을 먼저 표시
       sort = function(notif_arr)
         table.sort(
           notif_arr,
@@ -235,73 +219,61 @@ Example:
   })
   ```
 
-#### LSP progress {#mininotify.config-lspprogress}
+#### LSP 진행 상황 {#mininotify.config-lspprogress}
 
 
-`config.lsp_progress` defines automated notifications for LSP progress.
-It is implemented as a single updating notification per progress with all
-information about it.
-Setting up is done inside [MiniNotify.setup()](mini-notify.qmd#mininotify.setup) via [vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\))'ed setting
-of [lsp-handler](https://neovim.io/doc/user/helptag.html?tag=lsp-handler) for "$/progress" method.
+`config.lsp_progress`는 LSP 진행 상황에 대한 자동 알림을 정의합니다.
+진행 상황당 모든 정보가 포함된 단일 업데이트 알림으로 구현됩니다.
+설정은 [MiniNotify.setup()](mini-notify.qmd#mininotify.setup) 내부에서 "$/progress" 메서드에 대한 [lsp-handler](https://neovim.io/doc/user/helptag.html?tag=lsp-handler)의 [vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\)) 예약 설정을 통해 수행됩니다.
 
-`lsp_progress.enable` is a boolean indicating whether LSP progress should
-be shown in notifications. Can be disabled in current session.
-Default: `true`. Note: Should be `true` during [MiniNotify.setup()](mini-notify.qmd#mininotify.setup) call to be able
-to enable it in current session.
+`lsp_progress.enable`은 알림에 LSP 진행 상황을 표시할지 여부를 나타내는 불리언 값입니다. 현재 세션에서 비활성화할 수 있습니다.
+기본값: `true`. 참고: 현재 세션에서 활성화하려면 [MiniNotify.setup()](mini-notify.qmd#mininotify.setup) 호출 중에 `true`여야 합니다.
 
-`lsp_progress.level` is a level to be used in [MiniNotify.add()](mini-notify.qmd#mininotify.add).
-Default: `'INFO'`.
+`lsp_progress.level`은 [MiniNotify.add()](mini-notify.qmd#mininotify.add)에서 사용할 레벨입니다.
+기본값: `'INFO'`.
 
-`lsp_progress.duration_last` is a number of milliseconds for the last progress
-report to be shown on screen before removing it.
-Default: 1000.
+`lsp_progress.duration_last`는 마지막 진행 보고서를 제거하기 전 화면에 표시할 시간(밀리초)입니다.
+기본값: 1000.
 
-Notes:
+참고:
 
-- This respects previously set handler by saving and calling it.
+- 이는 이전에 설정된 핸들러를 저장하고 호출하여 존중합니다.
 
-- Overriding "$/progress" method of `vim.lsp.handlers` disables notifications.
+- `vim.lsp.handlers`의 "$/progress" 메서드를 재정의하면 알림이 비활성화됩니다.
 
-- All LSP progress notifications set the following fields in `data`:
+- 모든 LSP 진행 알림은 `data`에서 다음 필드를 설정합니다:
 
-    - <span class="help-syntax-keys">\<source\></span> is `"lsp_progress"`.
+    - <span class="help-syntax-keys">\<source\></span>는 `"lsp_progress"`입니다.
 
-    - <span class="help-syntax-keys">\<client_name\></span> is set to client's name (provided by client or inferred).
+    - <span class="help-syntax-keys">\<client_name\></span>은 클라이언트 이름으로 설정됩니다 (클라이언트가 제공하거나 유추됨).
 
-    - <span class="help-syntax-keys">\<context\></span> is the latest LSP request context (`ctx` arg of [lsp-handler](https://neovim.io/doc/user/helptag.html?tag=lsp-handler)).
+    - <span class="help-syntax-keys">\<context\></span>는 최신 LSP 요청 컨텍스트입니다 ([lsp-handler](https://neovim.io/doc/user/helptag.html?tag=lsp-handler)의 `ctx` 인수).
 
-    - <span class="help-syntax-keys">\<response\></span> is the latest LSP response (`result` arg of [lsp-handler](https://neovim.io/doc/user/helptag.html?tag=lsp-handler)).
+    - <span class="help-syntax-keys">\<response\></span>는 최신 LSP 응답입니다 ([lsp-handler](https://neovim.io/doc/user/helptag.html?tag=lsp-handler)의 `result` 인수).
 
-#### Window {#mininotify.config-window}
+#### 창 {#mininotify.config-window}
 
 
-`config.window` defines behavior of notification window.
+`config.window`는 알림 창의 동작을 정의합니다.
 
-`window.config` is a table defining floating window characteristics
-or a callable returning such table (will be called with identifier of
-window's buffer already showing notifications). It should have the same
-structure as in [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\)). It has the following default values
-which show notifications in the upper right corner with upper limit on width:
+`window.config`는 플로팅 창 특성을 정의하는 테이블 또는 이러한 테이블을 반환하는 호출 가능 객체입니다 (이미 알림을 표시하고 있는 창 버퍼의 식별자와 함께 호출됨). [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\))과 동일한 구조를 가져야 합니다. 너비에 대한 상한선과 함께 오른쪽 상단 모서리에 알림을 표시하는 다음과 같은 기본값이 있습니다:
 
-- `width` is chosen to fit buffer content but at most `window.max_width_share`
-  share of 'columns'.
-  To have higher maximum width, use function in `config.window` which computes
-  dimensions inside of it (based on buffer content).
+- `width`는 버퍼 콘텐츠에 맞게 선택되지만 'columns'의 최대 `window.max_width_share` 점유율입니다.
+  더 높은 최대 너비를 가지려면 버퍼 콘텐츠에 따라 내부에서 치수를 계산하는 `config.window`의 함수를 사용하세요.
 
-- `height` is chosen to fit buffer content with enabled 'wrap' (assuming
-  default value of `width`).
+- `height`는 'wrap'이 활성화된 버퍼 콘텐츠에 맞게 선택됩니다 (`width`의 기본값을 가정).
 
-- `anchor`, `col`, and `row` are "NE", 'columns', and 0 or 1 (depending on tabline).
+- `anchor`, `col`, `row`는 각각 "NE", 'columns', 0 또는 1 (탭라인에 따라 다름)입니다.
 
-- `border` is "single".
+- `border`는 "single"입니다.
 
-- `zindex` is 999 to be as much on top as reasonably possible.
+- `zindex`는 합리적으로 가능한 한 위에 있도록 999입니다.
 
-`window.max_width_share` defines maximum window width as a share of 'columns'.
-Should be a number between 0 (not included) and 1.
-Default: 0.382.
+`window.max_width_share`는 'columns'의 점유율로 최대 창 너비를 정의합니다.
+0(포함 안 함)과 1 사이의 숫자여야 합니다.
+기본값: 0.382.
 
-Example for showing notifications in bottom right corner:
+오른쪽 하단 모서리에 알림을 표시하는 예시:
 
   ```lua
   local win_config = function()
@@ -312,31 +284,28 @@ Example for showing notifications in bottom right corner:
   require('mini.notify').setup({ window = { config = win_config } })
   ```
 
-`window.winblend` defines 'winblend' value for notification window.
-Default: 25.
+`window.winblend`는 알림 창의 'winblend' 값을 정의합니다.
+기본값: 25.
 
 ---
 
 ### make_notify() {#mininotify.make_notify .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.make_notify`(<span class="help-syntax-special">{opts}</span>)</p>
-Make vim.notify wrapper
+vim.notify 래퍼 만들기
 
-Calling this function creates an implementation of [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) powered by
-this module. General idea is to show notification as soon as safely possible
-(see [vim.schedule\_wrap()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule_wrap\(\))) and remove it after a configurable amount of time.
+이 함수를 호출하면 이 모듈을 기반으로 하는 [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) 구현이 생성됩니다. 일반적인 아이디어는 안전하게 가능한 한 빨리 알림을 표시하고 ([vim.schedule\_wrap()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule_wrap\(\)) 참조) 설정 가능한 시간이 지나면 제거하는 것입니다.
 
-All notifications set `source = "vim.notify"` in their `data` field.
+모든 알림은 `data` 필드에 `source = "vim.notify"`를 설정합니다.
 
-This is used with default options inside [MiniNotify.setup()](mini-notify.qmd#mininotify.setup). To adjust,
-call manually after `setup()`. For example, to show errors longer:
+이는 [MiniNotify.setup()](mini-notify.qmd#mininotify.setup) 내부에서 기본 옵션과 함께 사용됩니다. 조정하려면 `setup()` 후에 수동으로 호출하세요. 예를 들어 오류를 더 오래 표시하려면 다음과 같이 하세요:
 
   ```lua
   require('mini.notify').setup()
   vim.notify = MiniNotify.make_notify({ ERROR = { duration = 10000 } })
   ```
 
-To preserve original `vim.notify`:
+원본 `vim.notify`를 유지하려면 다음과 같이 하세요:
 
   ```lua
   local notify_orig = vim.notify
@@ -344,21 +313,21 @@ To preserve original `vim.notify`:
   vim.notify = notify_orig
   ```
 
-#### Parameters {#mininotify.make_notify-parameters}
+#### 매개변수 {#mininotify.make_notify-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options to configure behavior of notification `level`
-  (as in [MiniNotify.add()](mini-notify.qmd#mininotify.add)). Fields are the same as names of `vim.log.levels`
-  with values being tables with possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 알림 `level`의 동작을 구성하는 옵션
+  ([MiniNotify.add()](mini-notify.qmd#mininotify.add)와 동일). 필드는 `vim.log.levels`의 이름과 동일하며
+  값은 가능한 필드가 있는 테이블입니다:
 
-  - <span class="help-syntax-keys">\<duration\></span> `(number)` - duration (in ms) of how much a notification
-    should be shown. If 0 or negative, notification is not shown at all.
+  - <span class="help-syntax-keys">\<duration\></span> `(number)` - 알림이 표시되어야 하는 기간 (ms).
+    0 이하인 경우 알림이 표시되지 않습니다.
 
-  - <span class="help-syntax-keys">\<hl_group\></span> `(string)` - highlight group of notification.
-  Only data different to default can be supplied.
+  - <span class="help-syntax-keys">\<hl_group\></span> `(string)` - 알림의 하이라이트 그룹.
+    기본값과 다른 데이터만 제공할 수 있습니다.
 
-  Default:
+  기본값:
 
   ```lua
   {
@@ -376,204 +345,198 @@ To preserve original `vim.notify`:
 ### add() {#mininotify.add .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.add`(<span class="help-syntax-special">{msg}</span>, <span class="help-syntax-special">{level}</span>, <span class="help-syntax-special">{hl_group}</span>, <span class="help-syntax-special">{data}</span>)</p>
-Add notification
+알림 추가
 
-Add notification to history. It is considered "active" and is shown.
-To hide, call [MiniNotify.remove()](mini-notify.qmd#mininotify.remove) with identifier this function returns.
+히스토리에 알림을 추가합니다. 이는 "활성" 상태로 간주되어 표시됩니다.
+숨기려면 이 함수가 반환하는 식별자와 함께 [MiniNotify.remove()](mini-notify.qmd#mininotify.remove)를 호출하세요.
 
-Example:
+예시:
 
   ```lua
   local id = MiniNotify.add('Hello', 'WARN', 'Comment')
   vim.defer_fn(function() MiniNotify.remove(id) end, 1000)
   ```
 
-#### Parameters {#mininotify.add-parameters}
+#### 매개변수 {#mininotify.add-parameters}
 
 
 
-<span class="help-syntax-special">{msg}</span> `(string)` Notification message.
+<span class="help-syntax-special">{msg}</span> `(string)` 알림 메시지.
 
-<span class="help-syntax-special">{level}</span> `(string|nil)` Notification level as key of [vim.log.levels](https://neovim.io/doc/user/helptag.html?tag=vim.log.levels).
-  Default: `'INFO'`.
+<span class="help-syntax-special">{level}</span> `(string|nil)` [vim.log.levels](https://neovim.io/doc/user/helptag.html?tag=vim.log.levels)의 키로 된 알림 수준.
+  기본값: `'INFO'`.
 
-<span class="help-syntax-special">{hl_group}</span> `(string|nil)` Notification highlight group.
-  Default: `'MiniNotifyNormal'`.
+<span class="help-syntax-special">{hl_group}</span> `(string|nil)` 알림 하이라이트 그룹.
+  기본값: `'MiniNotifyNormal'`.
 
-<span class="help-syntax-special">{data}</span> `(table|nil)` Extra data to store in the notification.
-  Default: `{}`.
+<span class="help-syntax-special">{data}</span> `(table|nil)` 알림에 저장할 추가 데이터.
+  기본값: `{}`.
 
-#### Return {#mininotify.add-return}
+#### 반환 {#mininotify.add-return}
 
 
-`(number)` Notification identifier.
+`(number)` 알림 식별자.
 
 ---
 
 ### update() {#mininotify.update .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.update`(<span class="help-syntax-special">{id}</span>, <span class="help-syntax-special">{new}</span>)</p>
-Update active notification
+활성 알림 업데이트
 
-Modify contents of active notification.
+활성 알림의 내용을 수정합니다.
 
-#### Parameters {#mininotify.update-parameters}
+#### 매개변수 {#mininotify.update-parameters}
 
 
 
-<span class="help-syntax-special">{id}</span> `(number)` Identifier of currently active notification as returned
-  by [MiniNotify.add()](mini-notify.qmd#mininotify.add).
+<span class="help-syntax-special">{id}</span> `(number)` [MiniNotify.add()](mini-notify.qmd#mininotify.add)가 반환한 현재 활성 알림의 식별자.
 
-<span class="help-syntax-special">{new}</span> `(table)` Table with contents to update. Keys should be as non-timestamp
-  fields of [MiniNotify-specification](mini-notify.qmd#mininotify-specification) and values - new content values.
-  If present, field `data` is updated as is. Use [MiniNotify.get()](mini-notify.qmd#mininotify.get) together
-  with [vim.tbl\_deep\_extend()](https://neovim.io/doc/user/helptag.html?tag=vim.tbl_deep_extend\(\)) to change only part of it.
+<span class="help-syntax-special">{new}</span> `(table)` 업데이트할 내용이 있는 테이블. 키는 [MiniNotify-specification](mini-notify.qmd#mininotify-specification)의
+  타임스탬프가 아닌 필드여야 하며 값은 새로운 내용 값이어야 합니다.
+  있는 경우, `data` 필드는 그대로 업데이트됩니다. 일부만 변경하려면 [MiniNotify.get()](mini-notify.get)과
+  [vim.tbl\_deep\_extend()](https://neovim.io/doc/user/helptag.html?tag=vim.tbl_deep_extend\(\))를 함께 사용하세요.
 
 ---
 
 ### remove() {#mininotify.remove .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.remove`(<span class="help-syntax-special">{id}</span>)</p>
-Remove notification
+알림 제거
 
-If notification is active, make it not active (by setting `ts_remove` field).
-If not active, do nothing.
+알림이 활성 상태인 경우 활성 상태가 아니게 만듭니다 (`ts_remove` 필드 설정).
+활성 상태가 아닌 경우 아무 작업도 하지 않습니다.
 
-#### Parameters {#mininotify.remove-parameters}
+#### 매개변수 {#mininotify.remove-parameters}
 
 
 
-<span class="help-syntax-special">{id}</span> `(number|nil)` Identifier of previously added notification.
-  If it is not, nothing is done (silently).
+<span class="help-syntax-special">{id}</span> `(number|nil)` 이전에 추가된 알림의 식별자.
+  그렇지 않은 경우 아무 작업도 수행되지 않습니다 (조용히).
 
 ---
 
 ### clear() {#mininotify.clear .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.clear`()</p>
-Remove all active notifications
+모든 활성 알림 제거
 
-Hide all active notifications and stop showing window (if shown).
+모든 활성 알림을 숨기고 창 표시를 중단합니다 (표시 중인 경우).
 
 ---
 
 ### refresh() {#mininotify.refresh .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.refresh`()</p>
-Refresh notification window
+알림 창 새로 고침
 
-Make notification window show relevant information:
+알림 창에 관련 정보를 표시합니다:
 
-- Create an array of active notifications (see [MiniNotify-specification](mini-notify.qmd#mininotify-specification)).
+- 활성 알림 배열을 만듭니다 ([MiniNotify-specification](mini-notify.qmd#mininotify-specification) 참조).
 
-- Apply `config.content.sort` to an array. If output has zero notifications,
-  make notification window to not show.
+- 배열에 `config.content.sort`를 적용합니다. 출력이 알림이 0개인 경우 알림 창이 표시되지 않도록 합니다.
 
-- Apply `config.content.format` to each element of notification array and
-  update its message.
+- 알림 배열의 각 요소에 `config.content.format`을 적용하고 해당 메시지를 업데이트합니다.
 
-- Construct content from notifications and show them in a window.
+- 알림으로 콘텐츠를 구성하고 창에 표시합니다.
 
-Note: effects are delayed if inside fast event ([vim.in\_fast\_event()](https://neovim.io/doc/user/helptag.html?tag=vim.in_fast_event\(\))).
+참고: 빠른 이벤트 ([vim.in\_fast\_event()](https://neovim.io/doc/user/helptag.html?tag=vim.in_fast_event\(\)) 내부에 있는 경우 효과가 지연됩니다.
 
 ---
 
 ### get() {#mininotify.get .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.get`(<span class="help-syntax-special">{id}</span>)</p>
-Get previously added notification by id
+ID로 이전에 추가된 알림 가져오기
 
-#### Parameters {#mininotify.get-parameters}
-
-
-
-<span class="help-syntax-special">{id}</span> `(number)` Identifier of notification.
-
-#### Return {#mininotify.get-return}
+#### 매개변수 {#mininotify.get-parameters}
 
 
-`(table)` Notification object (see [MiniNotify-specification](mini-notify.qmd#mininotify-specification)).
+
+<span class="help-syntax-special">{id}</span> `(number)` 알림 식별자.
+
+#### 반환 {#mininotify.get-return}
+
+
+`(table)` 알림 객체 ([MiniNotify-specification](mini-notify.qmd#mininotify-specification) 참조).
 
 ---
 
 ### get_all() {#mininotify.get_all .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.get_all`()</p>
-Get all previously added notifications
+이전에 추가된 모든 알림 가져오기
 
-Get map of used notifications with keys being notification identifiers.
+알림 식별자를 키로 하는 사용된 알림 맵을 가져옵니다.
 
-Can be used to get only active notification objects. Example:
+활성 알림 객체만 가져오는 데 사용할 수 있습니다. 예시:
 
   ```lua
-  -- Get active notifications
+  -- 활성 알림 가져오기
   vim.tbl_filter(
     function(notif) return notif.ts_remove == nil end,
     MiniNotify.get_all()
   )
   ```
 
-#### Return {#mininotify.get_all-return}
+#### 반환 {#mininotify.get_all-return}
 
 
-`(table)` Map with notification object values (see [MiniNotify-specification](mini-notify.qmd#mininotify-specification)).
-  Note: messages are taken from last valid update.
+`(table)` 알림 객체 값을 가진 맵 ([MiniNotify-specification](mini-notify.qmd#mininotify-specification) 참조).
+  참고: 메시지는 마지막 유효한 업데이트에서 가져옵니다.
 
 ---
 
 ### show_history() {#mininotify.show_history .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.show_history`()</p>
-Show history
+히스토리 표시
 
-Open or reuse a scratch buffer with all previously shown notifications.
+이전에 표시된 모든 알림이 있는 스크래치 버퍼를 열거나 재사용합니다.
 
-Notes:
+참고:
 
-- Content is ordered from oldest to newest based on latest update time.
+- 콘텐츠는 최신 업데이트 시간을 기준으로 가장 오래된 것부터 최신 것 순으로 정렬됩니다.
 
-- Message is formatted with `config.content.format`.
+- 메시지는 `config.content.format`으로 형식이 지정됩니다.
 
 ---
 
 ### default_format() {#mininotify.default_format .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.default_format`(<span class="help-syntax-special">{notif}</span>)</p>
-Default content format
+기본 콘텐츠 형식
 
-Used by default as `config.content.format`. Prepends notification message
-with the human readable update time and a separator.
+`config.content.format`으로 기본 사용됩니다. 알림 메시지 앞에 사람이 읽을 수 있는 업데이트 시간과 구분 기호를 추가합니다.
 
-#### Parameters {#mininotify.default_format-parameters}
-
+#### 매개변수 {#mininotify.default_format-parameters}
 
 
-<span class="help-syntax-special">{notif}</span> `(table)` Notification object (see [MiniNotify-specification](mini-notify.qmd#mininotify-specification)).
 
-#### Return {#mininotify.default_format-return}
+<span class="help-syntax-special">{notif}</span> `(table)` 알림 객체 ([MiniNotify-specification](mini-notify.qmd#mininotify-specification) 참조).
+
+#### 반환 {#mininotify.default_format-return}
 
 
-`(string)` Formatted notification message.
+`(string)` 형식화된 알림 메시지.
 
 ---
 
 ### default_sort() {#mininotify.default_sort .help-syntax-right-anchor}
 
 <p align="center">`MiniNotify.default_sort`(<span class="help-syntax-special">{notif_arr}</span>)</p>
-Default content sort
+기본 콘텐츠 정렬
 
-Used by default as `config.content.sort`. First sorts by notification's `level`
-("ERROR" > "WARN" > "INFO" > "DEBUG" > "TRACE" > "OFF"; the bigger the more
-important); if draw - by latest update time (the later the more important).
+`config.content.sort`로 기본 사용됩니다. 먼저 알림의 `level`로 정렬합니다
+("ERROR" > "WARN" > "INFO" > "DEBUG" > "TRACE" > "OFF"; 클수록 더 중요함). 동일한 경우 최신 업데이트 시간으로 정렬합니다 (나중일수록 더 중요함).
 
-#### Parameters {#mininotify.default_sort-parameters}
-
+#### 매개변수 {#mininotify.default_sort-parameters}
 
 
-<span class="help-syntax-special">{notif_arr}</span> `(table)` Array of notifications (see [MiniNotify-specification](mini-notify.qmd#mininotify-specification)).
 
-#### Return {#mininotify.default_sort-return}
+<span class="help-syntax-special">{notif_arr}</span> `(table)` 알림 배열 ([MiniNotify-specification](mini-notify.qmd#mininotify-specification) 참조).
+
+#### 반환 {#mininotify.default_sort-return}
 
 
-`(table)` Sorted array of notifications.
-
+`(table)` 정렬된 알림 배열.

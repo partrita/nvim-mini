@@ -1,40 +1,40 @@
 ---
-title: "Release 0.7.0"
+title: "릴리스 0.7.0"
 author: Evgeni Chasnovski
 date: 2023-02-12
 categories: [release, reddit]
-description: "Three new modules, some breaking changes, many new features"
+description: "3개의 새로운 모듈, 일부 파괴적 변경 사항, 많은 새로운 기능"
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/110ea8n/mininvim_new_version_070_is_released/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/110ea8n/mininvim_new_version_070_is_released/)*
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am glad to finally announce that [mini.nvim](https://github.com/nvim-mini/mini.nvim) had a release of version 0.7.0.
+드디어 [mini.nvim](https://github.com/nvim-mini/mini.nvim) 버전 0.7.0의 릴리스를 발표하게 되어 기쁩니다.
 
-If you are following `main` branch (on 'mini.nvim' itself or any of its standalone repositories) or Reddit posts, there is not much news for you (apart from new modules are now out of beta-testing phase).
+만약 'mini.nvim' 자체나 그 독립형 저장소의 `main` 브랜치를 팔로우하고 계시거나 Reddit 포스트를 보고 계셨다면, 새로운 소식은 많지 않을 것입니다 (새로운 모듈들이 이제 베타 테스트 단계를 마쳤다는 점을 제외하면요).
 
-If you are following `stable` branch or latest tag (like with 'folke/lazy.nvim'), there are some new modules, features, and breaking changes.
+하지만 `stable` 브랜치나 최신 태그(예: 'folke/lazy.nvim' 사용 시)를 팔로우하고 계셨다면, 몇 가지 새로운 모듈과 기능, 그리고 파괴적 변경 사항이 있습니다.
 
-Here is a [relevant part of changelog](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.7.0). A quick summary:
+여기에 [관련 변경 이력](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.7.0)이 있습니다. 간략한 요약은 다음과 같습니다:
 
-- There are **three new modules** (main part of release):
-    - [mini.animate](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-animate.md) - Animate common Neovim actions.
-    - [mini.basics](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-basics.md) - Common configuration presets.
-    - [mini.move](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-move.md) - Move any selection in any direction.
-- There are **four breaking changes** (most previous behavior still works but will be removed soon in `main` branch):
-    - In 'mini.ai' the `separators` option for argument specification is deprecated in favor of `separator`. See [here about migration](https://github.com/nvim-mini/mini.nvim/blob/427751024313e2270ca723eb16af7b218c83a7fc/doc/mini-ai.txt#L591).
-    - In 'mini.completion' the `window_dimensions` option is renamed to `window` to handle more general configuration.
-    - In 'mini.indentscope' the `gen_animation` is now a table with methods instead of a function. See [here about migration](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-indentscope.txt#L319).
-    - In 'mini.indentscope' the `MiniIndentscopePrefix` highlighting group is deprecated as it is no longer needed.
-- There are **five new features**:
-    - 'mini.misc' got `setup_auto_root()` and `find_root()` functions for root finding functionality (a.k.a "simplified vim-rooter").
-    - 'mini.misc' got `setup_restore_cursor()` function to automatically restore latest cursor position on file reopen. Thanks [@cryptomilk](https://github.com/cryptomilk) for most part of the work!
-    - 'mini.completion' can now customize borders of info and signature windows.
-    - 'mini.indentscope' now doesn't obscure region to the left of vertical line. Specifically, it means that it works with 'lukas-reineke/indent-blankline.nvim'.
-    - 'mini.ai' can now define separator for argument textobject via Lua pattern instead of an array of single characters.
-- **Support for Neovim 0.6 is now soft deprecated**. All versions prior Neovim 0.7.0 will stop working some time after Neovim 0.9.0 release.
+- **세 개의 새로운 모듈** (릴리스의 주요 부분):
+    - [mini.animate](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-animate.md) - 일반적인 Neovim 동작 애니메이션.
+    - [mini.basics](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-basics.md) - 일반적인 설정 프리셋.
+    - [mini.move](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-move.md) - 모든 선택 영역을 모든 방향으로 이동.
+- **네 가지 파괴적 변경 사항** (대부분 이전 동작이 여전히 작동하지만 곧 `main` 브랜치에서 제거될 예정입니다):
+    - 'mini.ai'에서 인수(argument) 사양의 `separators` 옵션이 `separator`를 선호하여 지원 중단되었습니다. [여기에서 마이그레이션 방법](https://github.com/nvim-mini/mini.nvim/blob/427751024313e2270ca723eb16af7b218c83a7fc/doc/mini-ai.txt#L591)을 참조하세요.
+    - 'mini.completion'에서 `window_dimensions` 옵션이 더 일반적인 구성을 처리하기 위해 `window`로 이름이 변경되었습니다.
+    - 'mini.indentscope'에서 `gen_animation`이 이제 함수 대신 메서드가 포함된 테이블이 되었습니다. [여기에서 마이그레이션 방법](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-indentscope.txt#L319)을 참조하세요.
+    - 'mini.indentscope'에서 `MiniIndentscopePrefix` 하이라이트 그룹이 더 이상 필요하지 않아 지원 중단되었습니다.
+- **다섯 가지 새로운 기능**:
+    - 'mini.misc'에 루트 찾기 기능을 위한 `setup_auto_root()` 및 `find_root()` 함수가 추가되었습니다 (일명 "단순화된 vim-rooter").
+    - 'mini.misc'에 파일 재오픈 시 마지막 커서 위치를 자동으로 복원하는 `setup_restore_cursor()` 함수가 추가되었습니다. 작업의 대부분을 도와주신 [@cryptomilk](https://github.com/cryptomilk)님께 감사드립니다!
+    - 'mini.completion'에서 이제 정보 및 시그니처 창의 테두리를 커스터마이징할 수 있습니다.
+    - 'mini.indentscope'가 이제 수직선 왼쪽 영역을 가리지 않습니다. 구체적으로는 'lukas-reineke/indent-blankline.nvim'과 함께 작동함을 의미합니다.
+    - 'mini.ai'에서 이제 단일 문자 배열 대신 Lua 패턴을 통해 인수 텍스트 객체의 구분 기호를 정의할 수 있습니다.
+- **Neovim 0.6 지원이 이제 소프트웨어적으로 중단되었습니다**. Neovim 0.7.0 이전의 모든 버전은 Neovim 0.9.0 출시 이후 언젠가 작동이 멈출 것입니다.
 
-If you were waiting for new modules to come out of beta-testing, this is the time to try them out!
+새로운 모듈이 베타 테스트에서 나오기를 기다리셨다면, 지금이 바로 사용해 볼 적기입니다!
 
-Thanks for reading!
+읽어주셔서 감사합니다!

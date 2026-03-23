@@ -1,38 +1,38 @@
 ---
-title: "Release 0.12.0"
+title: "0.12.0 버전 출시"
 author: Evgeni Chasnovski
 date: 2024-02-29
 categories: [release, reddit]
-description: Three new modules, a few updates to already present ones
+description: 세 개의 새로운 모듈 추가 및 기존 모듈 업데이트
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/1b342yx/mininvim_release_0120_three_new_modules_a_few/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/1b342yx/mininvim_release_0120_three_new_modules_a_few/)*
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-Let's celebrate the leap year day by making a long overdue 0.12.0 release of [mini.nvim](https://github.com/nvim-mini/mini.nvim). It includes three major plugins coming out of beta-testing and quite a few small updates to other modules.
+윤달을 기념하여 오랫동안 기다려온 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 0.12.0 버전을 출시합니다. 이번 릴리스에는 베타 테스트를 마친 세 개의 주요 플러그인과 기존 모듈들에 대한 수많은 소규모 업데이트가 포함되어 있습니다.
 
-Here is a [full release description](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.12.0) if you are curious.
-
-------
-
-Three new modules coming out of beta-testing:
-
-- [mini.visits](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-visits.md) - module to track and reuse file system visits. This is a 'mini.nvim' version of 'nvim-telescope/telescope-frecency.nvim' (persistently track file visits and select from them) partially combined with 'ThePrimeagen/harpoon' (persistently add/remove labels to paths and select based on them).
-
-- [mini.notify](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-notify.md) - module to show notifications. It provides custom 'vim.notify' maker so that users can have pretty and less intrusive plugin notifications. Also by default it sets up notifications for LSP progress updates (feature I didn't know I needed until I tried it).
-
-- [mini.deps](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md) - plugin manager module. Although 'mini.nvim' already includes most of the necessary editor functionality, there are other great plugins out there. 'mini.deps' helps installing/updating/cleaning/snapshotting other plugins with minimal yet sufficient user experience (in my opinion it ended up somewhere near 'junegunn/vim-plug' in that regard).
+궁금하신 분들은 [전체 릴리스 설명](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.12.0)을 확인해 보세요.
 
 ------
 
-Already present modules got their fair share of updates:
+베타 테스트를 마치고 정식 출시된 세 개의 새로운 모듈:
 
-- 'mini.comment' now calls hooks with data about commenting action.
-- 'mini.hues' now implements support for the new tree-sitter captures introduced in 'nvim-treesitter' and Neovim>=0.10.
-- 'mini.statusline' now has `search_count` section in default content.
-- And more...
+- [mini.visits](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-visits.md) - 파일 시스템 방문 기록을 추적하고 재사용하는 모듈입니다. 'nvim-telescope/telescope-frecency.nvim'(파일 방문을 지속적으로 추적하고 선택)의 'mini.nvim' 버전이며, 'ThePrimeagen/harpoon'(경로에 레이블을 지속적으로 추가/제거하고 선택)의 기능이 일부 결합되었습니다.
+
+- [mini.notify](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-notify.md) - 알림 표시 모듈입니다. 커스텀 'vim.notify' 생성기를 제공하여 사용자가 예쁘고 덜 방해되는 플러그인 알림을 받을 수 있게 해줍니다. 또한 기본적으로 LSP 진행 상황 업데이트에 대한 알림을 설정합니다 (직접 써보기 전까지는 필요성을 몰랐던 기능입니다).
+
+- [mini.deps](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md) - 플러그인 관리자 모듈입니다. 'mini.nvim'이 이미 대부분의 필수 에디터 기능을 포함하고 있지만, 세상에는 훌륭한 다른 플러그인들도 많습니다. 'mini.deps'는 최소한의 구성으로 충분한 사용자 경험을 제공하며 다른 플러그인의 설치/업데이트/제거/스냅샷 생성을 도와줍니다 (이 점에서는 'junegunn/vim-plug'와 비슷하다고 생각합니다).
 
 ------
 
-Thanks for reading! Hope to see you soon in the next module release!
+기존 모듈들도 상당한 업데이트가 있었습니다:
+
+- 'mini.comment'는 이제 주석 처리 동작에 대한 데이터와 함께 훅을 호출합니다.
+- 'mini.hues'는 이제 'nvim-treesitter'와 Neovim>=0.10에서 도입된 새로운 tree-sitter 캡처를 지원합니다.
+- 'mini.statusline'의 기본 콘텐츠에 `search_count` 섹션이 추가되었습니다.
+- 그 외 다수...
+
+------
+
+읽어주셔서 감사합니다! 곧 다음 모듈 출시 소식으로 찾아뵙겠습니다!

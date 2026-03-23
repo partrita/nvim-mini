@@ -1,43 +1,43 @@
 ---
-title: "Announcing 'mini.cmdline'"
+title: "'mini.cmdline' 발표"
 author: Evgeni Chasnovski
 date: 2025-12-07
 categories: [announce]
-description: "Command line tweaks: autocompletion, autocorrection, autopeek range"
+description: "커맨드 라인 개선: 자동 완성, 자동 수정, 범위 미리보기 기능을 제공합니다."
 ---
 
 ![](2025-12-07-announce-mini-cmdline/demo.mp4)
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-After what feels like an eternity, there is now a new module: ['mini.cmdline'](/mini.nvim/readmes/mini-cmdline.md).
+영겁과도 같은 시간 끝에 드디어 새로운 모듈인 ['mini.cmdline'](/mini.nvim/readmes/mini-cmdline.md)을 선보입니다.
 
-The 'mini.nvim' is long overdue a new 0.17 release. After contemplating a "just do it" approach, I decided that keeping the "every release has at least one new module" streak is worth it.
+'mini.nvim'은 0.17 릴리스를 앞두고 있습니다. "일단 출시하자"는 생각도 했었지만, "모든 릴리스에는 적어도 하나의 새로운 모듈이 포함되어야 한다"는 전통을 지키는 것이 가치 있다고 판단했습니다.
 
-So after looking for which module would be the most beneficial while taking not-so-long to write, the choice fell on implementing various Neovim command line tweaks.
-
-------
-
-Features of 'mini.cmdline':
-
-- Autocomplete with customizable delay. This is basically an automated pressing of [`'wildchar'`](https://neovim.io/doc/user/helptag.html?tag='wildchar') (`<Tab>` by default) with some extra configuration possibilities. Proved to be more useful than I anticipated.
-
-    Requires Neovim>=0.11, though Neovim>=0.12 is recommended.
-
-- Autocorrect words as-you-type. Only words that must come from a fixed set of candidates (like commands and options) are autocorrected by default.
-
-- Autopeek command range as-you-type. Shows a floating window with range lines along with customizable context lines. Looks really cool!
-
-What it doesn't do:
-
-- Customization of command line UI. Hopefully [`:h vim._extui`](https://neovim.io/doc/user/helptag.html?tag=vim._extui) will be enough for that (on Neovim>=0.12).
-
-- Customization of autocompletion candidates. They are computed via [`:h cmdline-completion`](https://neovim.io/doc/user/helptag.html?tag=cmdline-completion) based on how current command defines its completion.
+그래서 구현에 너무 오랜 시간이 걸리지 않으면서도 가장 큰 이점을 줄 수 있는 모듈이 무엇일까 고민한 끝에, Neovim의 커맨드 라인 기능을 개선하는 작업을 선택했습니다.
 
 ------
 
-Please, check it out and tell me what you think! For the time being (until there are comments on the site) leave a comment in a dedicated [beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/2158).
+'mini.cmdline'의 주요 기능:
 
-I'd like to make 0.17 release relatively soon, so extensive public beta-testing will help a lot.
+- 설정 가능한 지연 시간을 갖춘 자동 완성. 기본적으로 [`'wildchar'`](https://neovim.io/doc/user/helptag.html?tag='wildchar') (기본값 `<Tab>`)를 자동으로 누르는 기능이며, 몇 가지 추가 설정이 가능합니다. 예상했던 것보다 훨씬 유용하다는 것이 증명되었습니다.
 
-Thanks!
+    Neovim>=0.11이 필요하며, Neovim>=0.12를 권장합니다.
+
+- 입력 중 단어 자동 수정. 기본적으로 명령어(command)나 옵션(option)처럼 고정된 후보 목록에서 선택해야 하는 단어들만 자동 수정 대상이 됩니다.
+
+- 입력 중 명령어 범위 자동 미리보기 (autopeek). 설정 가능한 컨텍스트 라인과 함께 범위에 해당하는 줄들을 플로팅 창으로 보여줍니다. 정말 멋져 보입니다!
+
+지원하지 않는 기능:
+
+- 커맨드 라인 UI 커스터마이징. 이에 대해서는 (Neovim>=0.12에서) [`:h vim._extui`](https://neovim.io/doc/user/helptag.html?tag=vim._extui)로 충분하기를 바랍니다.
+
+- 자동 완성 후보 커스터마이징. 후보들은 현재 명령어가 정의한 완성 방식에 따라 [`:h cmdline-completion`](https://neovim.io/doc/user/helptag.html?tag=cmdline-completion)을 통해 계산됩니다.
+
+------
+
+한번 사용해 보시고 의견을 들려주세요! 사이트에 댓글 기능이 생기기 전까지는 전용 [베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/2158)에 의견을 남겨주시면 감사하겠습니다.
+
+0.17 버전을 가급적 빨리 출시하고 싶으므로, 여러분의 폭넓은 베타 테스트 참여가 큰 도움이 될 것입니다.
+
+감사합니다!

@@ -1,52 +1,52 @@
 ---
-title: "Announcing 'mini.files'"
+title: "'mini.files' 발표"
 author: Evgeni Chasnovski
 date: 2023-06-22
 categories: [announce, reddit]
-description: Navigate and manipulate file system (with column view and editing text)
+description: 파일 시스템 탐색 및 조작 (열 보기 및 텍스트 편집 방식)
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/14g36rs/minifiles_navigate_and_manipulate_file_system/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/14g36rs/minifiles_navigate_and_manipulate_file_system/)*
 
 {{< video 2023-06-22-announce-mini-files/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am thrilled to tell you about the release of [mini.files](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-files.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) to navigate and manipulate file system. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.files).
-
-------
-
-Writing a file explorer for Neovim was a dream goal of mine for almost a couple of years now. But I didn't have any interesting ideas while popular alternatives worked OK. Until about a month ago a thought came to me: how about a combination of a column view for file navigation and a great approach of "manipulate files by editing text" (as in [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim))? And thus (after a full bucket of sweat and tears) the 'mini.files' module now starts the fourth decade of 'mini.nvim' modules.
+파일 시스템을 탐색하고 조작하기 위한 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.files](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-files.md)의 출시 소식을 전하게 되어 정말 기쁩니다. [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.files)를 통해서도 설치할 수 있습니다.
 
 ------
 
-Here are main features of 'mini.files':
-
-- Navigate file system using column view (Miller columns) to display nested directories. See [`*MiniFiles-navigation*` tag](https://github.com/nvim-mini/mini.nvim/blob/4b0881b9fa22ddce26ba30cdf3711226e89ba81f/doc/mini-files.txt#L98) in help file for overview.
-
-- Manipulate files and directories by editing text buffers: create, delete, copy, rename, move. See [`*MiniFiles-manipulation*` tag](https://github.com/nvim-mini/mini.nvim/blob/4b0881b9fa22ddce26ba30cdf3711226e89ba81f/doc/mini-files.txt#L195) in help file for overview.
-
-- Use as default file explorer instead of `netrw`.
-
-- Configurable:
-    - Filter/sort of file system entries.
-    - Mappings used for common explorer actions.
-    - UI options: whether to show preview of directory under cursor, etc.
-
-See ["Quick start"](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-files.md#quick-start) section of README for some quick start.
-
-See [`*MiniFiles-examples*` tag](https://github.com/nvim-mini/mini.nvim/blob/4b0881b9fa22ddce26ba30cdf3711226e89ba81f/doc/mini-files.txt#L315) in help file for some common configuration examples.
-
-Notes:
-
-- This module is written and thoroughly tested on Linux. Support for other platform/OS (like Windows or MacOS) is a goal, but there is no guarantee.
-
-- Works on all supported versions but using Neovim>=0.9 is recommended.
-
-For more information, see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-files.txt).
+Neovim용 파일 탐색기를 작성하는 것은 거의 2년 동안 저의 꿈이었습니다. 하지만 대안들이 잘 작동했기에 특별히 흥미로운 아이디어가 없었습니다. 그러다 약 한 달 전쯤 아이디어가 떠올랐습니다. 파일 탐색을 위한 열 보기(column view)와 "텍스트를 편집하여 파일을 조작하는" ( [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim)과 같은) 훌륭한 방식을 결합해 보는 건 어떨까? 그렇게 (많은 땀과 눈물 끝에) 'mini.files' 모듈이 'mini.nvim'의 네 번째 10년을 시작하게 되었습니다.
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/377).
+'mini.files'의 주요 기능은 다음과 같습니다:
 
-Thanks!
+- 중첩된 디렉터리를 표시하기 위해 열 보기(Miller columns)를 사용하여 파일 시스템을 탐색합니다. 개요는 도움말 파일의 [`*MiniFiles-navigation*` 태그](https://github.com/nvim-mini/mini.nvim/blob/4b0881b9fa22ddce26ba30cdf3711226e89ba81f/doc/mini-files.txt#L98)를 참조하세요.
+
+- 텍스트 버퍼를 편집하여 파일과 디렉터리를 조작합니다: 생성, 삭제, 복사, 이름 변경, 이동. 개요는 도움말 파일의 [`*MiniFiles-manipulation*` 태그](https://github.com/nvim-mini/mini.nvim/blob/4b0881b9fa22ddce26ba30cdf3711226e89ba81f/doc/mini-files.txt#L195)를 참조하세요.
+
+- `netrw` 대신 기본 파일 탐색기로 사용합니다.
+
+- 커스터마이징 가능:
+    - 파일 시스템 항목의 필터링/정렬.
+    - 일반적인 탐색기 동작에 사용되는 매핑.
+    - UI 옵션: 커서 아래 디렉터리의 미리보기 표시 여부 등.
+
+빠른 시작은 README의 ["Quick start"](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-files.md#quick-start) 섹션을 참조하세요.
+
+일반적인 설정 예시는 도움말 파일의 [`*MiniFiles-examples*` 태그](https://github.com/nvim-mini/mini.nvim/blob/4b0881b9fa22ddce26ba30cdf3711226e89ba81f/doc/mini-files.txt#L315)를 참조하세요.
+
+참고:
+
+- 이 모듈은 리눅스에서 작성되었으며 철저히 테스트되었습니다. 다른 플랫폼/OS(윈도우나 MacOS 등) 지원이 목표이지만 보장되지는 않습니다.
+
+- 모든 지원 버전에서 작동하지만 Neovim>=0.9 사용을 권장합니다.
+
+자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-files.txt)을 참조하세요.
+
+------
+
+사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/377)를 통해 남겨주시면 감사하겠습니다.
+
+감사합니다!

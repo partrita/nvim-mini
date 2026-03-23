@@ -1,40 +1,40 @@
 ---
-title: "Moving from `nvim-0.11` to `nvim-0.12`"
+title: "`nvim-0.11`에서 `nvim-0.12`로 이동하기"
 ---
 
-_Generated from the `main` branch of 'MiniMax'_
+_ 'MiniMax'의 `main` 브랜치에서 생성되었습니다._
 
-### Moving from `nvim-0.11` to `nvim-0.12`
+### `nvim-0.11`에서 `nvim-0.12`로 이동하기
 
-This page shows changes when moving from config [`nvim-0.11`](../../nvim-0.11/index.qmd) to config [`nvim-0.12`](../../nvim-0.12/index.qmd).
-They are broken down into per-file differences that are shown in the [unified `diff` format](https://en.wikipedia.org/wiki/Diff#Unified_format).
-The suggested usage is to consult this page when updating from `nvim-0.11` to `nvim-0.12` to see what is new.
+이 페이지는 설정 [`nvim-0.11`](../../nvim-0.11/index.qmd)에서 설정 [`nvim-0.12`](../../nvim-0.12/index.qmd)로 이동할 때의 변경 사항을 보여줍니다.
+변경 사항은 [통합 `diff` 형식](https://en.wikipedia.org/wiki/Diff#Unified_format)으로 표시되는 파일별 차이점으로 나뉩니다.
+`nvim-0.11`에서 `nvim-0.12`로 업데이트할 때 무엇이 새로운지 확인하기 위해 이 페이지를 참고하는 것이 좋습니다.
 
-In short:
+요약하면:
 
-- Lines with `@` show line numbers of where the change is made.
-- Lines with `-` are removed from `nvim-0.11` config file.
-- Lines with `+` are added into `nvim-0.12` config file.
+- `@`로 시작하는 줄은 변경이 이루어진 줄 번호를 나타냅니다.
+- `-`로 시작하는 줄은 `nvim-0.11` 설정 파일에서 제거되었습니다.
+- `+`로 시작하는 줄은 `nvim-0.12` 설정 파일에 추가되었습니다.
 
-Notes:
+참고:
 
-- `nvim-0.12` moves from 'mini.deps' to `vim.pack` as its plugin manager. Make sure to remove all plugins installed the previous way to not have plugin conflicts. They are located in '`$XDG_DATA_HOME`/`$NVIM_APPNAME`/site/pack/deps/' directory (`$NVIM_APPNAME` is usually `nvim` or `nvim-minimax`).
+- `nvim-0.12`는 플러그인 매니저로 'mini.deps'에서 `vim.pack`으로 이동합니다. 플러그인 충돌을 피하기 위해 이전 방식으로 설치된 모든 플러그인을 제거해야 합니다. 해당 플러그인들은 '`$XDG_DATA_HOME`/`$NVIM_APPNAME`/site/pack/deps/' 디렉토리에 위치해 있습니다 (`$NVIM_APPNAME`은 보통 `nvim` 또는 `nvim-minimax`입니다).
 
-    For example, from the active Neovim instance run `:call delete(stdpath('data') . '/site/pack/deps', 'rf')`
+    예를 들어, 실행 중인 Neovim 인스턴스에서 `:call delete(stdpath('data') . '/site/pack/deps', 'rf')`를 실행하세요.
 
 #### init.lua {#init.lua}
 
-<details><summary>Diff</summary>
+<details><summary>차이점</summary>
 
 ```diffhunks
 @@ -0,0 +1,5 @@
-+-- WARNING: NEOVIM 0.12 IS STILL UNDER DEVELOPMENT AND NOT YET STABLE.
-+-- BE SURE YOU ARE COMFORTABLE WITH KEEPING UP TO DATE DEVELOPMENT VERSION.
-+-- THIS CONFIG IS VERIFIED FOR AT LEAST VERSION `v0.12.0-dev-2260+g6b4ec2264e`.
-+-- WHEN IN DOUBT - UPDATE TO THE LATEST DEVELOPMENT VERSION.
++-- 경고: NEOVIM 0.12는 아직 개발 중이며 안정적이지 않습니다.
++-- 최신 개발 버전을 유지하는 데 익숙한지 확인하세요.
++-- 이 설정은 최소 `v0.12.0-dev-2260+g6b4ec2264e` 버전에서 확인되었습니다.
++-- 확실하지 않은 경우 - 최신 개발 버전으로 업데이트하세요.
 +
 @@ -45,12 +50,8 @@
---- Bootstrap 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
+--- 'mini.nvim'을 'mini.deps'가 관리할 수 있도록 수동으로 부트스트랩합니다.
 -local mini_path = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim'
 -if not vim.loop.fs_stat(mini_path) then
 -  vim.cmd('echo "Installing `mini.nvim`" | redraw')
@@ -45,53 +45,53 @@ Notes:
 -  vim.cmd('echo "Installed `mini.nvim`" | redraw')
 -end
 -
---- Plugin manager. Set up immediately for `now()`/`later()` helpers.
+--- 플러그인 매니저. `now()`/`later()` 헬퍼를 위해 즉시 설정합니다.
 +-- ┌────────────────┐
-+-- │ Plugin manager │
++-- │ 플러그인 매니저 │
 +-- └────────────────┘
 +--
-+-- This config uses `vim.pack` - built-in plugin manager. Its main entry
-+-- point is a `vim.pack.add()` function, which acts like a "smarter `:packadd`":
-+-- load plugin after making sure it is installed from source. The state of
-+-- installed plugins is recorded in the lockfile named 'nvim-pack-lock.json'.
++-- 이 설정은 내장 플러그인 매니저인 `vim.pack`을 사용합니다. 주요 진입점은
++-- "더 똑똑한 `:packadd`"처럼 작동하는 `vim.pack.add()` 함수입니다.
++-- 소스에서 설치되었는지 확인한 후 플러그인을 로드합니다. 설치된
++-- 플러그인의 상태는 'nvim-pack-lock.json'이라는 이름의 잠금 파일에 기록됩니다.
 @@ -58,3 +59,3 @@
---- - `MiniDeps.add('...')` - use inside config to add a plugin
---- - `:DepsUpdate` - update all plugins
---- - `:DepsSnapSave` - save a snapshot of currently active plugins
-+-- - `vim.pack.add({ ... })` - use inside config to add one or more plugins.
-+-- - `:lua vim.pack.update()` - update all plugins; execute `:write` to confirm.
-+-- - `:lua vim.pack.del({ ... })` - delete specific plugins.
+--- - `MiniDeps.add('...')` - 설정을 추가하려면 설정 내부에서 사용하세요.
+--- - `:DepsUpdate` - 모든 플러그인을 업데이트합니다.
+--- - `:DepsSnapSave` - 현재 활성화된 플러그인의 스냅샷을 저장합니다.
++-- - `vim.pack.add({ ... })` - 하나 이상의 플러그인을 추가하려면 설정 내부에서 사용하세요.
++-- - `:lua vim.pack.update()` - 모든 플러그인을 업데이트합니다. 확인하려면 `:write`를 실행하세요.
++-- - `:lua vim.pack.del({ ... })` - 특정 플러그인을 삭제합니다.
 @@ -63,4 +64,4 @@
---- - `:h MiniDeps-overview` - how to use it
---- - `:h MiniDeps-commands` - all available commands
---- - 'plugin/30_mini.lua' - more details about 'mini.nvim' in general
+--- - `:h MiniDeps-overview` - 사용 방법
+--- - `:h MiniDeps-commands` - 사용 가능한 모든 명령
+--- - 'plugin/30_mini.lua' - 'mini.nvim'에 대한 일반적인 세부 정보
 -require('mini.deps').setup()
-+-- - `:h vim.pack-examples` - how to use it
-+-- - `:h vim.pack-lockfile` - lockfile info
-+-- - `:h vim.pack-events` - available events and plugin hooks examples
-+-- - `:h vim.pack.update()` - more details about confirmation step
++-- - `:h vim.pack-examples` - 사용 방법
++-- - `:h vim.pack-lockfile` - 잠금 파일 정보
++-- - `:h vim.pack-events` - 사용 가능한 이벤트 및 플러그인 훅 예제
++-- - `:h vim.pack.update()` - 확인 단계에 대한 자세한 정보
 @@ -71,0 +73,28 @@
-+-- 'mini.nvim' - all-in-one plugin powering most MiniMax features.
-+-- See 'plugin/30_mini.lua' for how it is used.
-+-- Load now to have 'mini.misc' available for custom loading helpers.
++-- 'mini.nvim' - 대부분의 MiniMax 기능을 지원하는 올인원 플러그인.
++-- 어떻게 사용되는지는 'plugin/30_mini.lua'를 참고하세요.
++-- 커스텀 로딩 헬퍼를 위해 'mini.misc'를 사용할 수 있도록 지금 로드합니다.
 +vim.pack.add({ 'https://github.com/nvim-mini/mini.nvim' })
 +
-+-- Loading helpers used to organize config into fail-safe parts. Example usage:
-+-- - `now` - execute immediately. Use for what must be executed during startup.
-+--   Like colorscheme, statusline, tabline, dashboard, etc.
-+-- - `later` - execute a bit later. Use for things not needed during startup.
-+-- - `now_if_args` - use only if needed during startup when Neovim is started
-+--   like `nvim -- path/to/file`, but otherwise delaying is fine.
-+-- - Others are better used only if the above is not enough for good performance.
-+--   Use only if you are comfortable with adding complexity to your config:
-+--   - `on_event` - execute once on a first matched event. Like "delay until
-+--     first Insert mode enter": `on_event('InsertEnter', function() ... end)`.
-+--   - `on_filetype` - execute once on a first matched filetype. Like "delay
-+--     until first Lua file": `on_filetype('lua', function() ... end)`.
++-- 설정을 안전한 부분으로 구성하는 데 사용되는 로딩 헬퍼입니다. 사용 예:
++-- - `now` - 즉시 실행합니다. 시작 중에 실행되어야 하는 항목에 사용하세요.
++--   색상 구성표, 상태줄, 탭줄, 대시보드 등.
++-- - `later` - 잠시 후에 실행합니다. 시작 중에 필요하지 않은 항목에 사용하세요.
++-- - `now_if_args` - `nvim -- path/to/file`과 같이 시작할 때만 사용하고,
++--   그 외의 경우에는 지연시켜도 괜찮은 경우에 사용하세요.
++-- - 다른 것들은 위의 것들만으로 좋은 성능을 얻기에 부족할 때만 사용하는 것이 좋습니다.
++--   설정에 복잡성을 추가하는 데 익숙한 경우에만 사용하세요:
++--   - `on_event` - 첫 번째로 일치하는 이벤트에서 한 번 실행합니다. "첫 번째 입력 모드
++--     진입 시까지 지연"과 같습니다: `on_event('InsertEnter', function() ... end)`.
++--   - `on_filetype` - 첫 번째로 일치하는 파일 유형에서 한 번 실행합니다. "첫 번째 Lua
++--     파일 시까지 지연"과 같습니다: `on_filetype('lua', function() ... end)`.
 +--
-+-- See also:
++-- 참고:
 +-- - `:h MiniMisc.safely()`
-+-- - 'plugin/30_mini.lua' and 'plugin/40_plugins.lua'
++-- - 'plugin/30_mini.lua' 및 'plugin/40_plugins.lua'
 +local misc = require('mini.misc')
 +Config.now = function(f) misc.safely('now', f) end
 +Config.later = function(f) misc.safely('later', f) end
@@ -100,11 +100,11 @@ Notes:
 +Config.on_filetype = function(ft, f) misc.safely('filetype:' .. ft, f) end
 +
 @@ -86,3 +115,11 @@
---- Some plugins and 'mini.nvim' modules only need setup during startup if Neovim
---- is started like `nvim -- path/to/file`, otherwise delaying setup is fine
+--- 일부 플러그인과 'mini.nvim' 모듈은 `nvim -- path/to/file`과 같이 시작될 때만
+--- 시작 중에 설정이 필요하며, 그렇지 않으면 설정을 지연시켜도 괜찮습니다.
 -Config.now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
-+-- Define custom `vim.pack.add()` hook helper. See `:h vim.pack-events`.
-+-- Example usage: see 'plugin/40_plugins.lua'.
++-- 커스텀 `vim.pack.add()` 훅 헬퍼를 정의합니다. `:h vim.pack-events`를 참고하세요.
++-- 사용 예: 'plugin/40_plugins.lua'를 참고하세요.
 +Config.on_packchanged = function(plugin_name, kinds, callback, desc)
 +  local f = function(ev)
 +    local name, kind = ev.data.spec.name, ev.data.kind
@@ -120,7 +120,7 @@ Notes:
 
 #### nvim-pack-lock.json {#nvim-pack-lock.json}
 
-<details><summary>Diff</summary>
+<details><summary>차이점</summary>
 
 ```diffhunks
 @@ -0,0 +1,28 @@
@@ -158,19 +158,19 @@ Notes:
 
 #### plugin/10_options.lua {#plugin-10_options.lua}
 
-<details><summary>Diff</summary>
+<details><summary>차이점</summary>
 
 ```diffhunks
 @@ -43,0 +44 @@
-+vim.o.pumborder      = 'single'   -- Use border in popup menu
++vim.o.pumborder      = 'single'   -- 팝업 메뉴에 테두리 사용
 @@ -44,0 +46 @@
-+vim.o.pummaxwidth    = 100        -- Make popup menu not too wide
++vim.o.pummaxwidth    = 100        -- 팝업 메뉴가 너무 넓지 않게 설정
 @@ -89,2 +91,3 @@
--vim.o.complete    = '.,w,b,kspell'                  -- Use less sources
--vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
-+vim.o.complete        = '.,w,b,kspell'                  -- Use less sources
-+vim.o.completeopt     = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
-+vim.o.completetimeout = 100                             -- Limit sources delay
+-vim.o.complete    = '.,w,b,kspell'                  -- 적은 소스 사용
+-vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- 커스텀 동작 사용
++vim.o.complete        = '.,w,b,kspell'                  -- 적은 소스 사용
++vim.o.completeopt     = 'menuone,noselect,fuzzy,nosort' -- 커스텀 동작 사용
++vim.o.completetimeout = 100                             -- 소스 지연 제한
 @@ -125 +128 @@
 -MiniDeps.later(function() vim.diagnostic.config(diagnostic_opts) end)
 +Config.later(function() vim.diagnostic.config(diagnostic_opts) end)
@@ -180,21 +180,21 @@ Notes:
 
 #### plugin/20_keymaps.lua {#plugin-20_keymaps.lua}
 
-<details><summary>Diff</summary>
+<details><summary>차이점</summary>
 
 ```diffhunks
 @@ -19,2 +19,2 @@
--nmap('[p', '<Cmd>exe "put! " . v:register<CR>', 'Paste Above')
--nmap(']p', '<Cmd>exe "put "  . v:register<CR>', 'Paste Below')
-+nmap('[p', '<Cmd>exe "iput! " . v:register<CR>', 'Paste Above')
-+nmap(']p', '<Cmd>exe "iput "  . v:register<CR>', 'Paste Below')
+-nmap('[p', '<Cmd>exe "put! " . v:register<CR>', '위에 붙여넣기')
+-nmap(']p', '<Cmd>exe "put "  . v:register<CR>', '아래에 붙여넣기')
++nmap('[p', '<Cmd>exe "iput! " . v:register<CR>', '위에 붙여넣기')
++nmap(']p', '<Cmd>exe "iput "  . v:register<CR>', '아래에 붙여넣기')
 ```
 
 </details>
 
 #### plugin/30_mini.lua {#plugin-30_mini.lua}
 
-<details><summary>Diff</summary>
+<details><summary>차이점</summary>
 
 ```diffhunks
 @@ -27,2 +27 @@
@@ -203,16 +203,16 @@ Notes:
 +local now, now_if_args, later = Config.now, Config.now_if_args, Config.later
 @@ -232,2 +231,2 @@
 -    local minideps_plugins = vim.fn.stdpath('data') .. '/site/pack/deps/opt'
--    MiniFiles.set_bookmark('p', minideps_plugins, { desc = 'Plugins' })
+-    MiniFiles.set_bookmark('p', minideps_plugins, { desc = '플러그인' })
 +    local vimpack_plugins = vim.fn.stdpath('data') .. '/site/pack/core/opt'
-+    MiniFiles.set_bookmark('p', vimpack_plugins, { desc = 'Plugins' })
++    MiniFiles.set_bookmark('p', vimpack_plugins, { desc = '플러그인' })
 ```
 
 </details>
 
 #### plugin/40_plugins.lua {#plugin-40_plugins.lua}
 
-<details><summary>Diff</summary>
+<details><summary>차이점</summary>
 
 ```diffhunks
 @@ -12,2 +12,2 @@
@@ -221,13 +221,13 @@ Notes:
 +local add = vim.pack.add
 +local now_if_args, later = Config.now_if_args, Config.later
 @@ -40,0 +41,4 @@
-+  -- Define hook to update tree-sitter parsers after plugin is updated
++  -- 플러그인이 업데이트된 후 tree-sitter 파서를 업데이트하기 위한 훅 정의
 +  local ts_update = function() vim.cmd('TSUpdate') end
 +  Config.on_packchanged('nvim-treesitter', { 'update' }, ts_update, ':TSUpdate')
 +
 @@ -42,3 +46,2 @@
 -    source = 'nvim-treesitter/nvim-treesitter',
--    -- Update tree-sitter parser after plugin is updated
+-    -- 플러그인이 업데이트된 후 tree-sitter 파서 업데이트
 -    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 +    'https://github.com/nvim-treesitter/nvim-treesitter',
 +    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
@@ -250,12 +250,12 @@ Notes:
 +--   add({ 'https://github.com/mason-org/mason.nvim' })
 @@ -161,5 +163,7 @@
 --- MiniDeps.now(function()
----   -- Install only those that you need
+---   -- 필요한 것들만 설치하세요
 ---   add('sainnhe/everforest')
 ---   add('Shatur/neovim-ayu')
 ---   add('ellisonleao/gruvbox.nvim')
 +-- Config.now(function()
-+--  -- Install only those that you need
++--  -- 필요한 것들만 설치하세요
 +--  add({
 +--    'https://github.com/sainnhe/everforest',
 +--    'https://github.com/Shatur/neovim-ayu',
@@ -267,16 +267,16 @@ Notes:
 
 #### snippets/global.json {#snippets-global.json}
 
-No difference
+차이점 없음
 
 #### after/ftplugin/markdown.lua {#after-ftplugin-markdown.lua}
 
-No difference
+차이점 없음
 
 #### after/lsp/lua_ls.lua {#after-lsp-lua_ls.lua}
 
-No difference
+차이점 없음
 
 #### after/snippets/lua.json {#after-snippets-lua.json}
 
-No difference
+차이점 없음

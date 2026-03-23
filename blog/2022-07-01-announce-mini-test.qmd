@@ -1,35 +1,35 @@
 ---
-title: "Announcing 'mini.test'"
+title: "'mini.test' 발표"
 author: Evgeni Chasnovski
 date: 2022-07-01
 categories: [announce, reddit]
-description: Test Neovim plugins with parametrization, screen tests, and more
+description: 매개변수화, 화면 테스트 등을 지원하는 Neovim 플러그인 테스트
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/vp17jm/minitest_test_neovim_plugins_with_parametrization/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/vp17jm/minitest_test_neovim_plugins_with_parametrization/)*
 
 {{< video 2022-07-01-announce-mini-test/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am thrilled to announce [mini.test](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-test.md) - module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) with framework for writing extensive Neovim plugin tests. It is very feature-rich, which makes me both proud and not proud. It took me too long to implement everything I wanted to see in testing framework and the outcome is too big for my taste (it is ~80% larger by line count than the next largest module). But... **it is awesome**.
+방대한 Neovim 플러그인 테스트를 작성하기 위한 프레임워크인 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 모듈 [mini.test](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-test.md)를 발표하게 되어 매우 기쁩니다. 이 모듈은 기능이 매우 풍부하며, 이는 저에게 자부심과 동시에 부담을 줍니다. 제가 테스트 프레임워크에서 보고 싶었던 모든 것을 구현하는 데 너무 오랜 시간이 걸렸고, 그 결과물이 제 기준에는 너무 큽니다 (행 수 기준으로 다음으로 큰 모듈보다 약 80% 더 큽니다). 하지만... **정말 멋집니다**.
 
-It has:
+다음과 같은 기능을 포함합니다:
 
-- Hierarchical organization of tests with custom hooks, parametrization, and user data.
-- Predefined small yet usable set of expectations (`assert`-like functions).
-- Helper for creating child Neovim process which is designed to be used in tests. It has helpers for using it directly (like `child.o.lines` returns `vim.o.lines` executed inside child process, etc.). It can also create a **screenshot of current state**. Together with dedicated expectation it makes quite easy testing visual effects (like highlighting, extmarks, etc.).
-- Emulation of 'Olivine-Labs/busted' interface (`describe`, `it`, etc.).
-- Test case filtering. There are predefined wrappers for testing a file and case at a location like current cursor position.
-- Customizable reporter of output results. There are two predefined ones: for interactive usage and for headless Neovim (like from command line or continuous integration services).
-- And more.
+- 커스텀 훅, 매개변수화 및 사용자 데이터를 사용한 테스트의 계층적 조직.
+- 작지만 유용한 미리 정의된 기대값(`assert`와 유사한 함수) 세트.
+- 테스트에서 사용하도록 설계된 하위 Neovim 프로세스 생성 도우미. 이를 직접 사용하기 위한 도우미가 있습니다 (예: `child.o.lines`는 하위 프로세스 내부에서 실행된 `vim.o.lines`를 반환하는 등). 또한 **현재 상태의 스크린샷**을 생성할 수 있습니다. 전용 기대값과 함께 사용하면 시각적 효과(하이라이트, extmarks 등)를 매우 쉽게 테스트할 수 있습니다.
+- 'Olivine-Labs/busted' 인터페이스(`describe`, `it` 등) 에뮬레이션.
+- 테스트 케이스 필터링. 현재 커서 위치와 같은 위치에서 파일과 케이스를 테스트하기 위한 미리 정의된 래퍼(wrapper)가 있습니다.
+- 커스터마이징 가능한 출력 결과 보고기(reporter). 대화형 사용을 위한 것과 헤드리스(headless) Neovim(명령줄 또는 지속적 통합 서비스 등)을 위한 두 가지 미리 정의된 보고기가 있습니다.
+- 그 외 다수.
 
-Sources for more information:
+더 많은 정보는 다음을 참조하세요:
 
-- 'mini.test' section of [help file](https://github.com/nvim-mini/mini.nvim/blob/2dfc6bf0b88c03106e5d21335336e1da36e3320e/doc/mini.txt).
-- [TESTING.md](https://github.com/nvim-mini/mini.nvim/blob/main/TESTING.md) for a hands-on introduction based on examples.
-- [Tests of 'mini.nvim'](https://github.com/nvim-mini/mini.nvim/tree/main/tests).
+- [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/2dfc6bf0b88c03106e5d21335336e1da36e3320e/doc/mini.txt)의 'mini.test' 섹션.
+- 예제 기반의 실전 소개인 [TESTING.md](https://github.com/nvim-mini/mini.nvim/blob/main/TESTING.md).
+- ['mini.nvim'의 테스트 코드](https://github.com/nvim-mini/mini.nvim/tree/main/tests).
 
-With release of this module I hope to finally fully pay this plugin's technical debt. Previously it had no tests which slowed down bug fixes and feature implementations. Now, judging by size, it has three times bigger tests than actual code (granted, most of it is screenshots). Now I hope to work on more tightly focused modules.
+이 모듈의 릴리스로 이 플러그인의 기술적 부채를 마침내 완전히 청산할 수 있기를 바랍니다. 이전에는 테스트가 없어 버그 수정과 기능 구현이 늦어졌습니다. 이제 크기로 판단하건대, 실제 코드보다 3배 더 큰 테스트를 보유하게 되었습니다 (물론 대부분은 스크린샷입니다). 이제 좀 더 집중된 모듈 작업에 매진할 수 있기를 바랍니다.
 
-Neovim plugin authors, try it and tell me what you think. Either here, in [dedicated issue](https://github.com/nvim-mini/mini.nvim/issues/93), or in [Discussions](https://github.com/nvim-mini/mini.nvim/discussions). Thanks!
+Neovim 플러그인 제작자분들, 사용해 보시고 의견을 들려주세요. 여기 댓글이나 [전용 이슈](https://github.com/nvim-mini/mini.nvim/issues/93), 또는 [Discussions](https://github.com/nvim-mini/mini.nvim/discussions)를 통해 피드백을 주시면 감사하겠습니다. 감사합니다!

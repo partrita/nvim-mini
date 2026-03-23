@@ -1,82 +1,81 @@
 ---
-title: "mini.trailspace documentation"
+title: "mini.trailspace 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 `main` 브랜치에서 생성됨 _
 
-<a name="mini.trailspace" href="mini-trailspace.qmd#mini.trailspace"><b>mini.trailspace</b></a> Trailspace (highlight and remove)
+<a name="mini.trailspace" href="mini-trailspace.qmd#mini.trailspace"><b>mini.trailspace</b></a> 트레일스페이스 (강조 및 제거)
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Highlighting is done only in modifiable buffer by default, only in Normal
-  mode, and stops in Insert mode and when leaving window.
-
-
-- Trim all trailing whitespace with [MiniTrailspace.trim()](mini-trailspace.qmd#minitrailspace.trim).
+- 기본적으로 수정 가능한 버퍼에서만, 일반(Normal) 모드에서만 강조 표시되며,
+  삽입(Insert) 모드일 때와 창을 떠날 때 강조 표시가 중단됩니다.
 
 
-- Trim all trailing empty lines with [MiniTrailspace.trim\_last\_lines()](mini-trailspace.qmd#minitrailspace.trim_last_lines).
-
-#### Setup {#module-setup}
+- [MiniTrailspace.trim()](mini-trailspace.qmd#minitrailspace.trim)으로 모든 행 끝의 공백을 제거합니다.
 
 
-This module needs a setup with `require('mini.trailspace').setup({})`
-(replace `{}` with your `config` table). It will create global Lua table
-`MiniTrailspace` which you can use for scripting or manually (with
-`:lua MiniTrailspace.*`).
+- [MiniTrailspace.trim\_last\_lines()](mini-trailspace.qmd#minitrailspace.trim_last_lines)로 마지막의 모든 빈 줄을 제거합니다.
 
-See [MiniTrailspace.config](mini-trailspace.qmd#minitrailspace.config) for `config` structure and default values.
-
-You can override runtime config settings locally to buffer inside
-`vim.b.minitrailspace_config` which should have same structure as
-`MiniTrailspace.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
-
-#### Highlight groups {#module-highlightgroups}
+#### 설정 {#module-setup}
 
 
+이 모듈은 `require('mini.trailspace').setup({})`으로 설정이 필요합니다
+(`{}`를 `config` 테이블로 교체하세요). 이를 통해 스크립팅이나 수동으로
+(`:lua MiniTrailspace.*` 사용) 사용할 수 있는 전역 Lua 테이블 `MiniTrailspace`가 생성됩니다.
 
-- `MiniTrailspace` - highlight group for trailing space.
+`config` 구조와 기본값은 [MiniTrailspace.config](mini-trailspace.qmd#minitrailspace.config)를 참조하세요.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+`vim.b.minitrailspace_config`를 통해 버퍼 로컬에서 런타임 설정 구성을 재정의할 수 있으며,
+이는 `MiniTrailspace.config`와 동일한 구조를 가져야 합니다. 자세한 내용은
+[mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
 
-#### Disabling {#module-disabling}
+#### 강조 그룹 {#module-highlightgroups}
 
 
-To disable, set `vim.g.minitrailspace_disable` (globally) or
-`vim.b.minitrailspace_disable` (for a buffer) to `true`. Considering high
-number of different scenarios and customization intentions, writing exact
-rules for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes. Note: after disabling
-there might be highlighting left; it will be removed after next
-highlighting update (see [events](https://neovim.io/doc/user/helptag.html?tag=events) and `MiniTrailspace` [:augroup](https://neovim.io/doc/user/helptag.html?tag=:augroup)).
+
+- `MiniTrailspace` - 행 끝 공백의 강조 그룹.
+
+강조 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
+
+#### 비활성화 {#module-disabling}
+
+
+비활성화하려면 `vim.g.minitrailspace_disable`(전역) 또는
+`vim.b.minitrailspace_disable`(버퍼별)을 `true`로 설정하세요. 다양한 시나리오와
+커스터마이징 의도를 고려하여, 모듈 기능의 비활성화를 위한 정확한 규칙을 작성하는 것은
+사용자의 몫으로 남겨둡니다. 일반적인 방법은 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를
+참조하세요. 참고: 비활성화 후에도 강조 표시가 남아 있을 수 있으며, 다음 강조 표시
+업데이트 시에 제거됩니다 ([events](https://neovim.io/doc/user/helptag.html?tag=events) 및
+`MiniTrailspace` [:augroup](https://neovim.io/doc/user/helptag.html?tag=:augroup) 참조).
 
 ---
 
 ### setup() {#minitrailspace.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniTrailspace.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minitrailspace.setup-parameters}
+#### 매개변수 {#minitrailspace.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniTrailspace.config](mini-trailspace.qmd#minitrailspace.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniTrailspace.config](mini-trailspace.qmd#minitrailspace.config)를 참조하세요.
 
-#### Usage {#minitrailspace.setup-usage}
+#### 사용법 {#minitrailspace.setup-usage}
 
 
 
   ```lua
-  require('mini.trailspace').setup() -- use default config
-  -- OR
-  require('mini.trailspace').setup({}) -- replace {} with your config table
+  require('mini.trailspace').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.trailspace').setup({}) -- {}를 설정 테이블로 교체
   ```
 
 ---
@@ -84,14 +83,14 @@ Module setup
 ### config {#minitrailspace.config .help-syntax-right-anchor}
 
 <p align="center">`MiniTrailspace.config`</p>
-#### Defaults {#minitrailspace.config-defaults}
+#### 기본값 {#minitrailspace.config-defaults}
 
 
 
   ```lua
   MiniTrailspace.config = {
-    -- Highlight only in normal buffers (ones with empty 'buftype'). This is
-    -- useful to not show trailing whitespace where it usually doesn't matter.
+    -- 일반 버퍼('buftype'이 비어 있는 버퍼)에서만 강조 표시합니다.
+    -- 이는 보통 중요하지 않은 곳에 행 끝 공백이 표시되지 않도록 하는 데 유용합니다.
     only_in_normal_buffers = true,
   }
   ```
@@ -101,26 +100,25 @@ Module setup
 ### highlight() {#minitrailspace.highlight .help-syntax-right-anchor}
 
 <p align="center">`MiniTrailspace.highlight`()</p>
-Highlight trailing whitespace in current window
+현재 창에서 행 끝 공백 강조 표시
 
 ---
 
 ### unhighlight() {#minitrailspace.unhighlight .help-syntax-right-anchor}
 
 <p align="center">`MiniTrailspace.unhighlight`()</p>
-Unhighlight trailing whitespace in current window
+현재 창에서 행 끝 공백 강조 표시 해제
 
 ---
 
 ### trim() {#minitrailspace.trim .help-syntax-right-anchor}
 
 <p align="center">`MiniTrailspace.trim`()</p>
-Trim trailing whitespace
+행 끝 공백 제거
 
 ---
 
 ### trim_last_lines() {#minitrailspace.trim_last_lines .help-syntax-right-anchor}
 
 <p align="center">`MiniTrailspace.trim_last_lines`()</p>
-Trim last blank lines
-
+마지막 빈 줄 제거

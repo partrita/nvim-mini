@@ -1,46 +1,40 @@
 ---
-title: "mini.git documentation"
+title: "mini.git 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 `main` 브랜치에서 생성됨 _
 
-<a name="mini.git" href="mini-git.qmd#mini.git"><b>mini.git</b></a> Git integration
+<a name="mini.git" href="mini-git.qmd#mini.git"><b>mini.git</b></a> Git 통합
 
-MIT License Copyright (c) 2024 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2024 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
-
-
-- Automated tracking of Git related data: root path, status, HEAD, etc.
-  Exposes buffer-local variables for convenient use in statusline.
-  See [MiniGit.enable()](mini-git.qmd#minigit.enable) and [MiniGit.get\_buf\_data()](mini-git.qmd#minigit.get_buf_data) for more information.
+기능:
 
 
-- [:Git](mini-git.qmd#git) command for executing any `git` call inside file's repository root with
-  deeper current instance integration (show output as notification/buffer,
-  use to edit commit messages, etc.).
+- Git 관련 데이터 자동 추적: 루트 경로, 상태, HEAD 등. 상태줄(statusline)에서 편리하게 사용할 수 있도록 버퍼 로컬 변수를 노출합니다. 자세한 내용은 [MiniGit.enable()](mini-git.qmd#minigit.enable) 및 [MiniGit.get\_buf\_data()](mini-git.qmd#minigit.get_buf_data)를 참조하세요.
 
 
-- Helper functions to inspect Git history:
-
-    - [MiniGit.show\_range\_history()](mini-git.qmd#minigit.show_range_history) shows how certain line range evolved.
-
-    - [MiniGit.show\_diff\_source()](mini-git.qmd#minigit.show_diff_source) shows file state as it was at diff entry.
-
-    - [MiniGit.show\_at\_cursor()](mini-git.qmd#minigit.show_at_cursor) shows Git related data depending on context.
-
-What it doesn't do:
+- [:Git](mini-git.qmd#git) 명령어: 현재 인스턴스와의 긴밀한 통합을 통해 파일의 저장소 루트 내에서 임의의 `git` 호출을 실행합니다 (출력을 알림/버퍼로 표시, 커밋 메시지 편집에 사용 등).
 
 
-- Replace fully featured Git client. Rule of thumb: if feature does not rely
-  on a state of current Neovim (opened buffers, etc.), it is out of scope.
-  For more functionality, use either [mini.diff](mini-diff.qmd#mini.diff) or fully featured Git client.
+- Git 히스토리를 조사하기 위한 헬퍼 함수:
 
-Sources with more details:
+    - [MiniGit.show\_range\_history()](mini-git.qmd#minigit.show_range_history): 특정 줄 범위가 어떻게 변해왔는지 보여줍니다.
+
+    - [MiniGit.show\_diff\_source()](mini-git.qmd#minigit.show_diff_source): diff 항목 시점의 파일 상태를 보여줍니다.
+
+    - [MiniGit.show\_at\_cursor()](mini-git.qmd#minigit.show_at_cursor): 컨텍스트에 따라 Git 관련 데이터를 보여줍니다.
+
+제공하지 않는 기능:
+
+
+- 모든 기능을 갖춘 Git 클라이언트를 대체하지 않습니다. 원칙: 기능이 현재 Neovim의 상태(열려 있는 버퍼 등)에 의존하지 않는다면 범위 밖입니다. 더 많은 기능이 필요한 경우 [mini.diff](mini-diff.qmd#mini.diff)를 사용하거나 모든 기능을 갖춘 Git 클라이언트를 사용하세요.
+
+상세 정보 소스:
 
 - [:Git](mini-git.qmd#git)
 
@@ -50,69 +44,53 @@ Sources with more details:
 
 - [MiniGit.get\_buf\_data()](mini-git.qmd#minigit.get_buf_data)
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.git').setup({})` (replace `{}` with
-your `config` table). It will create global Lua table `MiniGit` which you can use
-for scripting or manually (with `:lua MiniGit.*`).
+이 모듈은 `require('mini.git').setup({})`을 통한 설정이 필요합니다 (`{}`를 사용자 `config` 테이블로 대체). 그러면 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniGit`이 생성됩니다 (예: `:lua MiniGit.*`).
 
-See [MiniGit.config](mini-git.qmd#minigit.config) for `config` structure and default values.
+`config` 구조와 기본값은 [MiniGit.config](mini-git.qmd#minigit.config)를 참조하세요.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive):
 
-    - Mostly a dedicated Git client, while this module is not (by design).
+    - 주로 전용 Git 클라이언트인 반면, 이 모듈은 그렇지 않습니다 (의도된 설계).
 
-    - Provides buffer-local Git data only through fixed statusline component,
-      while this module has richer data in the form of a Lua table.
+    - 고정된 상태줄 구성 요소를 통해서만 버퍼 로컬 Git 데이터를 제공하지만, 이 모듈은 Lua 테이블 형태로 더 풍부한 데이터를 제공합니다.
 
-    - Both provide [:Git](mini-git.qmd#git) command with 'vim-fugitive' treating some cases
-      extra specially (like `:Git blame`, etc.), while this module mostly
-      treats all cases the same. See [MiniGit-examples](mini-git.qmd#minigit-examples) for how they can be
-      manually customized.
-      Also this module provides slightly different (usually richer)
-      completion suggestions.
+    - 둘 다 [:Git](mini-git.qmd#git) 명령어를 제공하지만, 'vim-fugitive'는 일부 사례(예: `:Git blame` 등)를 특별하게 처리하는 반면, 이 모듈은 대부분 모든 사례를 동일하게 처리합니다. 수동으로 사용자 정의하는 방법은 [MiniGit-examples](mini-git.qmd#minigit-examples)를 참조하세요. 또한 이 모듈은 약간 다른 (보통 더 풍부한) 자동 완성 제안을 제공합니다.
 
 
 - [NeogitOrg/neogit](https://github.com/NeogitOrg/neogit):
 
-    - Similar to 'tpope/vim-fugitive', but without `:Git` command.
+    - 'tpope/vim-fugitive'와 유사하지만 `:Git` 명령어가 없습니다.
 
 
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim):
 
-    - Provides buffer-local Git data with emphasis on granular diff status,
-      while this module is more oriented towards repository and file level
-      data (root, HEAD, file status, etc.). Use [mini.diff](mini-diff.qmd#mini.diff) for diff tracking.
+    - 세부적인 diff 상태에 중점을 둔 버퍼 로컬 Git 데이터를 제공하지만, 이 모듈은 저장소 및 파일 레벨 데이터(루트, HEAD, 파일 상태 등)에 더 중점을 둡니다. diff 추적에는 [mini.diff](mini-diff.qmd#mini.diff)를 사용하세요.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To prevent buffer(s) from being tracked, set `vim.g.minigit_disable` (globally)
-or `vim.b.minigit_disable` (for a buffer) to `true`. Considering high number of
-different scenarios and customization intentions, writing exact rules for
-disabling module's functionality is left to user.
-See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+버퍼가 추적되지 않게 하려면 `vim.g.minigit_disable`(전역) 또는 `vim.b.minigit_disable`(버퍼별)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화에 대한 정확한 규칙을 작성하는 것은 사용자의 몫으로 남겨둡니다. 일반적인 방법은 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
-### Examples {#minigit-examples .help-syntax-right-anchor}
+### 예시 {#minigit-examples .help-syntax-right-anchor}
 
-#### Statusline component {#minigit-examples-statuslinecomponent}
+#### 상태줄 구성 요소 {#minigit-examples-statuslinecomponent}
 
 
-Tracked buffer data can be used in statusline via `vim.b.minigit_summary_string`
-buffer-local variable. It is expected to be used as is. To show another info,
-tweak buffer-local variable directly inside `MiniGitUpdated` `User` event:
+추적된 버퍼 데이터는 `vim.b.minigit_summary_string` 버퍼 로컬 변수를 통해 상태줄에서 사용할 수 있습니다. 이는 있는 그대로 사용될 것으로 예상됩니다. 다른 정보를 표시하려면 `MiniGitUpdated` `User` 이벤트 내에서 버퍼 로컬 변수를 직접 수정하세요:
 
   ```lua
-  -- Use only HEAD name as summary string
+  -- HEAD 이름만 요약 문자열로 사용
   local format_summary = function(data)
-    -- Utilize buffer-local table summary
+    -- 버퍼 로컬 테이블 요약 활용
     local summary = vim.b[data.buf].minigit_summary
     vim.b[data.buf].minigit_summary_string = summary.head_name or ''
   end
@@ -121,25 +99,22 @@ tweak buffer-local variable directly inside `MiniGitUpdated` `User` event:
   vim.api.nvim_create_autocmd('User', au_opts)
   ```
 
-#### Tweaking command output {#minigit-examples-tweakingcommandoutput}
+#### 명령어 출력 조정 {#minigit-examples-tweakingcommandoutput}
 
 
-Buffer output of [:Git](mini-git.qmd#git) command can be tweaked inside autocommand for
-`MiniGitCommandSplit` `User` event (see [MiniGit-command-events](mini-git.qmd#minigit-command-events)).
-For example, to make `:vertical Git blame -- %` align blame output with the
-current window state, use the following code:
+[:Git](mini-git.qmd#git) 명령어의 버퍼 출력은 `MiniGitCommandSplit` `User` 이벤트의 자동 명령 내에서 조정할 수 있습니다 ([MiniGit-command-events](mini-git.qmd#minigit-command-events) 참조). 예를 들어, `:vertical Git blame -- %` 명령어가 blame 출력을 현재 창 상태와 맞추도록 하려면 다음 코드를 사용하세요:
 
   ```lua
   local align_blame = function(au_data)
     if au_data.data.git_subcommand ~= 'blame' then return end
 
-    -- Align blame output with source
+    -- blame 출력을 소스와 맞춤
     local win_src = au_data.data.win_source
     vim.wo.wrap = false
     vim.fn.winrestview({ topline = vim.fn.line('w0', win_src) })
     vim.api.nvim_win_set_cursor(0, { vim.fn.line('.', win_src), 0 })
 
-    -- Bind both windows so that they scroll together
+    -- 두 창을 묶어서 함께 스크롤되도록 함
     vim.wo[win_src].scrollbind, vim.wo.scrollbind = true, true
   end
 
@@ -147,29 +122,21 @@ current window state, use the following code:
   vim.api.nvim_create_autocmd('User', au_opts)
   ```
 
-#### History navigation {#minigit-examples-historynavigation}
+#### 히스토리 탐색 {#minigit-examples-historynavigation}
 
 
-Function [MiniGit.show\_at\_cursor()](mini-git.qmd#minigit.show_at_cursor) is specifically exported to make Git
-history navigation easier. Here are some different ways it can be used:
+[MiniGit.show\_at\_cursor()](mini-git.qmd#minigit.show_at_cursor) 함수는 Git 히스토리 탐색을 쉽게 하기 위해 특별히 제공됩니다. 다음과 같은 다양한 방식으로 사용할 수 있습니다:
 
 
-- Call inside buffer for already committed file to show the evolution of
-  the current line (or visually selected range) through history.
-  It is essentially a `:Git log HEAD` with proper `-L` flag.
-  This also works inside output of [MiniGit.show\_diff\_source()](mini-git.qmd#minigit.show_diff_source).
+- 이미 커밋된 파일의 버퍼 내에서 호출하여 현재 줄(또는 비주얼 모드로 선택된 범위)의 히스토리 진화를 보여줍니다. 이는 본질적으로 적절한 `-L` 플래그가 붙은 `:Git log HEAD`입니다. 이는 [MiniGit.show\_diff\_source()](mini-git.qmd#minigit.show_diff_source)의 출력 내부에서도 작동합니다.
 
 
-- Call with cursor on commit hash to inspect that commit in full.
-  This is usually helpful in the output of `:Git log`.
+- 커밋 해시 위에서 호출하여 해당 커밋을 전체적으로 조사합니다. 이는 보통 `:Git log` 출력에서 유용합니다.
 
 
-- Call with cursor inside diff entry to inspect its file in the state how it
-  was at certain commit. By default it shows state after commit, unless cursor
-  is on the "deleted" line (i.e. line starting with "-") in which case
-  state before commit is shown.
+- diff 항목 내에서 호출하여 특정 커밋 시점의 파일 상태를 조사합니다. 기본적으로 커밋 후의 상태를 보여주지만, 커서가 "삭제된" 줄(즉, "-"로 시작하는 줄)에 있는 경우 커밋 전의 상태를 보여줍니다.
 
-This workflow can be made more interactive when used with mapping, like this:
+이 워크플로우는 다음과 같이 매핑을 사용하면 더 대화형으로 만들 수 있습니다:
 
   ```lua
   local rhs = '<Cmd>lua MiniGit.show_at_cursor()<CR>'
@@ -180,129 +147,106 @@ This workflow can be made more interactive when used with mapping, like this:
 
 ### :Git {#git .help-syntax-right-anchor}
 
-The `:Git` user command runs `git` CLI call with extra integration for currently
-opened Neovim process:
+`:Git` 사용자 명령어는 현재 열려 있는 Neovim 프로세스와의 추가 통합을 통해 `git` CLI 호출을 실행합니다:
 
-- Command is executed inside repository root of the currently active file
-  (or [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory) if file is not tracked by this module).
+- 명령어는 현재 활성화된 파일의 저장소 루트 내에서 실행됩니다 (파일이 이 모듈에 의해 추적되지 않는 경우 [현재 디렉토리(current-directory)](https://neovim.io/doc/user/helptag.html?tag=current-directory) 내에서 실행됨).
 
 
-- Command output is shown either in dedicated buffer in window split or as
-  notification via [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)). Which method is used depends on whether
-  particular Git subcommand is supposed to show data for user to inspect
-  (like `log`, `status`, etc.) or not (like `commit`, `push`, etc.). This is
-  determined automatically based on the data Git itself provides.
-  Split window is made current after command execution.
+- 명령어 출력은 창 분할 내의 전용 버퍼 또는 [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\))를 통한 알림으로 표시됩니다. 어떤 방식이 사용될지는 특정 Git 하위 명령어가 사용자가 조사할 데이터를 보여주기로 되어 있는지(`log`, `status` 등) 아니면 그렇지 않은지(`commit`, `push` 등)에 따라 결정됩니다. 이는 Git 자체가 제공하는 데이터를 기반으로 자동으로 결정됩니다. 명령어 실행 후 분할 창이 현재 창이 됩니다.
 
-  Use split-related [:command-modifiers](https://neovim.io/doc/user/helptag.html?tag=:command-modifiers) ([:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical), [:horizontal](https://neovim.io/doc/user/helptag.html?tag=:horizontal), or [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab))
-  to force output in a particular type of split. Default split direction is
-  controlled by `command.split` in [MiniGit.config](mini-git.qmd#minigit.config).
+  출력을 특정 유형의 분할로 강제하려면 분할 관련 [:command-modifiers](https://neovim.io/doc/user/helptag.html?tag=:command-modifiers) ([:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical), [:horizontal](https://neovim.io/doc/user/helptag.html?tag=:horizontal), 또는 [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab))를 사용하세요. 기본 분할 방향은 [MiniGit.config](mini-git.qmd#minigit.config)의 `command.split`에 의해 제어됩니다.
 
-  Use [:silent](https://neovim.io/doc/user/helptag.html?tag=:silent) command modifier to not show any output.
+  출력을 전혀 표시하지 않으려면 [:silent](https://neovim.io/doc/user/helptag.html?tag=:silent) 명령 수식어를 사용하세요.
 
-  Errors and warnings are always shown as notifications.
+  에러와 경고는 항상 알림으로 표시됩니다.
 
-  See [MiniGit-examples](mini-git.qmd#minigit-examples) for the example of tweaking command output.
+  명령어 출력을 조정하는 예시는 [MiniGit-examples](mini-git.qmd#minigit-examples)를 참조하세요.
 
 
-- Editor for tasks that require interactive user input (like `:Git commit` or
-  `:Git rebase --interactive`) is opened inside current session in a separate
-  split. Make modifications as in regular buffer, [:write](https://neovim.io/doc/user/helptag.html?tag=:write) changes followed by
-  [:close](https://neovim.io/doc/user/helptag.html?tag=:close) / [:quit](https://neovim.io/doc/user/helptag.html?tag=:quit) for Git CLI command to resume.
+- 대화형 사용자 입력이 필요한 작업(예: `:Git commit` 또는 `:Git rebase --interactive`)을 위한 편집기는 현재 세션 내의 별도 분할 창에서 열립니다. 일반 버퍼에서와 같이 수정하고, [:write](https://neovim.io/doc/user/helptag.html?tag=:write)로 변경 사항을 저장한 후 [:close](https://neovim.io/doc/user/helptag.html?tag=:close) / [:quit](https://neovim.io/doc/user/helptag.html?tag=:quit)을 실행하면 Git CLI 명령어가 재개됩니다.
 
-Examples of usage:
+사용 예시:
 
-- `:Git log --oneline` - show compact log of current repository.
+- `:Git log --oneline`: 현재 저장소의 요약 로그 표시.
 
-- `:vert Git blame -- %` - show latest commits per line in vertical split.
+- `:vert Git blame -- %`: 수직 분할 창에서 줄별 최신 커밋 표시.
 
-- `:Git help rebase` - show help page for `rebase` subcommand.
+- `:Git help rebase`: `rebase` 하위 명령에 대한 도움말 페이지 표시.
 
-- `:Git -C <cwd> status` - execute `git status` inside [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+- `:Git -C <cwd> status`: [현재 디렉토리(current-directory)](https://neovim.io/doc/user/helptag.html?tag=current-directory) 내에서 `git status` 실행.
 
-There is also a context aware completion which can be invoked with `<Tab>`:
+`<Tab>` 키로 호출할 수 있는 컨텍스트 인식 자동 완성도 제공됩니다:
 
-- If completed word starts with "-", options for the current Git subcommand
-  are shown. Like completion at `:Git log -` will suggest `-L`, `--oneline`, etc.
+- 완성할 단어가 "-"로 시작하면 현재 Git 하위 명령에 대한 옵션이 표시됩니다. 예를 들어 `:Git log -`에서 자동 완성을 하면 `-L`, `--oneline` 등이 제안됩니다.
 
-- If there is an explicit " -- " to the cursor's left, incremental path
-  suggestions will be shown.
+- 커서 왼쪽에 명시적인 " -- "가 있으면 점진적인 경로 제안이 표시됩니다.
 
-- If there is no recognized Git subcommand yet, show list of subcommands.
-  Otherwise for some common subcommands list of its targets will be suggested:
-  like for `:Git branch` it will be list of branches, etc.
+- 아직 인식된 Git 하위 명령이 없으면 하위 명령 목록을 보여줍니다. 그렇지 않으면 일부 일반적인 하위 명령의 경우 대상 목록이 제안됩니다. 예: `:Git branch`의 경우 브랜치 목록 등.
 
-Notes:
+참고 사항:
 
-- Paths are always treated as relative to command's execution directory
-  (file's repository root or [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory) if absent).
+- 경로는 항상 명령어 실행 디렉토리(파일의 저장소 루트 또는 없는 경우 [현재 디렉토리(current-directory)](https://neovim.io/doc/user/helptag.html?tag=current-directory))에 대한 상대 경로로 처리됩니다.
 
-- Don't use quotes for entries containing space, escape it with `\` directly.
-  Like `:Git commit -m Hello\ world` and not `:Git commit -m 'Hello world'`
-  (which treats `'Hello` and `world'` as separate arguments).
+- 공백이 포함된 항목에 따옴표를 사용하지 말고, 직접 `\`로 이스케이프하세요. 예: `:Git commit -m Hello\ world` ( `:Git commit -m 'Hello world'`는 `'Hello`와 `world'`를 별개의 인수로 취급하므로 사용하지 마세요).
 
-#### Events {#git-events}
+#### 이벤트 {#git-events}
 
 
 <a name="minigit-command-events" href="mini-git.qmd#minigit-command-events"><b>MiniGit-command-events</b></a>
 
-There are several `User` events triggered during command execution:
+명령어 실행 중에 트리거되는 여러 `User` 이벤트가 있습니다:
 
 
-- `MiniGitCommandDone` - after command is done executing. For Lua callbacks it
-  provides a special `data` table with the following fields:
+- `MiniGitCommandDone`: 명령어 실행이 완료된 후. Lua 콜백의 경우 다음과 같은 필드를 가진 특수 `data` 테이블을 제공합니다:
 
-    - <span class="help-syntax-keys">\<cmd_input\></span> `(table)` - structured data about executed command.
-      Has same structure as Lua function input in [nvim\_create\_user\_command()](https://neovim.io/doc/user/helptag.html?tag=nvim_create_user_command\(\)).
+    - <span class="help-syntax-keys">\<cmd_input\></span> `(table)`: 실행된 명령어에 대한 구조화된 데이터. [nvim\_create\_user\_command()](https://neovim.io/doc/user/helptag.html?tag=nvim_create_user_command\(\))의 Lua 함수 입력과 동일한 구조를 가집니다.
 
-    - <span class="help-syntax-keys">\<cwd\></span> `(string)` - directory path inside which Git command was executed.
+    - <span class="help-syntax-keys">\<cwd\></span> `(string)`: Git 명령어가 실행된 디렉토리 경로.
 
-    - <span class="help-syntax-keys">\<exit_code\></span> `(number)` - exit code of CLI process.
+    - <span class="help-syntax-keys">\<exit_code\></span> `(number)`: CLI 프로세스의 종료 코드.
 
-    - <span class="help-syntax-keys">\<git_command\></span> `(table)` - array with arguments of full executed command.
+    - <span class="help-syntax-keys">\<git_command\></span> `(table)`: 실행된 전체 명령어의 인수가 포함된 배열.
 
-    - <span class="help-syntax-keys">\<git_subcommand\></span> `(string)` - detected Git subcommand (like "log", etc.).
+    - <span class="help-syntax-keys">\<git_subcommand\></span> `(string)`: 감지된 Git 하위 명령 (예: "log" 등).
 
-    - <span class="help-syntax-keys">\<stderr\></span> `(string)` - `stderr` process output.
+    - <span class="help-syntax-keys">\<stderr\></span> `(string)`: 프로세스의 `stderr` 출력.
 
-    - <span class="help-syntax-keys">\<stdout\></span> `(string)` - `stdout` process output.
+    - <span class="help-syntax-keys">\<stdout\></span> `(string)`: 프로세스의 `stdout` 출력.
 
 
-- `MiniGitCommandSplit` - after command showed its output in a split. Triggered
-  after `MiniGitCommandDone` and provides similar `data` table with extra fields:
+- `MiniGitCommandSplit`: 명령어가 분할 창에 출력을 표시한 후. `MiniGitCommandDone` 이후에 트리거되며, 추가 필드가 포함된 유사한 `data` 테이블을 제공합니다:
 
-    - <span class="help-syntax-keys">\<win_source\></span> `(number)` - window identifier of "source" window (current at
-      the moment before command execution).
+    - <span class="help-syntax-keys">\<win_source\></span> `(number)`: "소스" 창(명령 실행 직전의 현재 창)의 식별자.
 
-    - <span class="help-syntax-keys">\<win_stdout\></span> `(number)` - window identifier of command output.
+    - <span class="help-syntax-keys">\<win_stdout\></span> `(number)`: 명령어 출력 창의 식별자.
 
 ---
 
 ### setup() {#minigit.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-Besides general side effects (see [mini.nvim](mini-nvim.qmd#mini.nvim)), it also:
+일반적인 부수 효과( [mini.nvim](mini-nvim.qmd#mini.nvim) 참조) 외에도 다음을 수행합니다:
 
-- Sets up auto enabling in every normal buffer for an actual file on disk.
+- 디스크에 있는 실제 파일에 대해 모든 일반 버퍼에서 자동 활성화를 설정합니다.
 
-- Creates [:Git](mini-git.qmd#git) command.
+- [:Git](mini-git.qmd#git) 명령어를 생성합니다.
 
-#### Parameters {#minigit.setup-parameters}
+#### 매개변수 {#minigit.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniGit.config](mini-git.qmd#minigit.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniGit.config](mini-git.qmd#minigit.config)를 참조하세요.
 
-#### Usage {#minigit.setup-usage}
+#### 사용법 {#minigit.setup-usage}
 
 
 
   ```lua
-  require('mini.git').setup() -- use default config
-  -- OR
-  require('mini.git').setup({}) -- replace {} with your config table
+  require('mini.git').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.git').setup({}) -- {}를 사용자 설정 테이블로 대체
   ```
 
 ---
@@ -310,280 +254,243 @@ Besides general side effects (see [mini.nvim](mini-nvim.qmd#mini.nvim)), it also
 ### config {#minigit.config .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.config`</p>
-#### Defaults {#minigit.config-defaults}
+#### 기본값 {#minigit.config-defaults}
 
 
 
   ```lua
   MiniGit.config = {
-    -- General CLI execution
+    -- 일반 CLI 실행
     job = {
-      -- Path to Git executable
+      -- Git 실행 파일 경로
       git_executable = 'git',
 
-      -- Timeout (in ms) for each job before force quit
+      -- 강제 종료 전까지 각 작업의 타임아웃 (ms 단위)
       timeout = 30000,
     },
 
-    -- Options for `:Git` command
+    -- `:Git` 명령어 옵션
     command = {
-      -- Default split direction
+      -- 기본 분할 방향
       split = 'auto',
     },
   }
   ```
 
-#### Job {#minigit.config-job}
+#### 작업(Job) {#minigit.config-job}
 
 
-`config.job` contains options for customizing CLI executions.
+`config.job`은 CLI 실행을 사용자 정의하기 위한 옵션을 포함합니다.
 
-`job.git_executable` defines a full path to Git executable. Default: "git".
+`job.git_executable`은 Git 실행 파일의 전체 경로를 정의합니다. 기본값: "git".
 
-`job.timeout` is a duration (in ms) from job start until it is forced to stop.
-Default: 30000.
+`job.timeout`은 작업 시작부터 강제로 중단될 때까지의 기간(ms 단위)입니다. 기본값: 30000.
 
-#### Command {#minigit.config-command}
+#### 명령어(Command) {#minigit.config-command}
 
 
-`config.command` contains options for customizing [:Git](mini-git.qmd#git) command.
+`config.command`는 [:Git](mini-git.qmd#git) 명령어를 사용자 정의하기 위한 옵션을 포함합니다.
 
-`command.split` defines default split direction for [:Git](mini-git.qmd#git) command output. Can be
-one of "horizontal", "vertical", "tab", or "auto". Value "auto" uses [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical)
-if only 'mini.git' buffers are shown in the tabpage and [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab) otherwise.
-Default: "auto".
+`command.split`은 [:Git](mini-git.qmd#git) 명령어 출력의 기본 분할 방향을 정의합니다. "horizontal", "vertical", "tab", "auto" 중 하나일 수 있습니다. "auto" 값은 탭페이지에 'mini.git' 버퍼만 표시되는 경우 [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical)을 사용하고, 그렇지 않으면 [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab)을 사용합니다. 기본값: "auto".
 
 ---
 
 ### show_at_cursor() {#minigit.show_at_cursor .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.show_at_cursor`(<span class="help-syntax-special">{opts}</span>)</p>
-Show Git related data at cursor
+커서 위치의 Git 관련 데이터 표시
 
 
-- If inside [mini.deps](mini-deps.qmd#mini.deps) confirmation buffer, show in split relevant commit data.
+- [mini.deps](mini-deps.qmd#mini.deps) 확인 버퍼 내부인 경우, 분할 창에 관련 커밋 데이터를 표시합니다.
 
-- If there is a commit-like [<span class="help-syntax-keys">\<cword\></span>](https://neovim.io/doc/user/helptag.html?tag=<cword>), show it in split.
+- 커밋 형태의 [<span class="help-syntax-keys">\<cword\></span>](https://neovim.io/doc/user/helptag.html?tag=<cword>)가 있으면 분할 창에 표시합니다.
 
-- If possible, show diff source via [MiniGit.show\_diff\_source()](mini-git.qmd#minigit.show_diff_source).
+- 가능하다면 [MiniGit.show\_diff\_source()](mini-git.qmd#minigit.show_diff_source)를 통해 diff 소스를 표시합니다.
 
-- If possible, show range history via [MiniGit.show\_range\_history()](mini-git.qmd#minigit.show_range_history).
+- 가능하다면 [MiniGit.show\_range\_history()](mini-git.qmd#minigit.show_range_history)를 통해 범위 히스토리를 표시합니다.
 
-- Otherwise throw an error.
+- 그렇지 않으면 에러를 발생시킵니다.
 
-#### Parameters {#minigit.show_at_cursor-parameters}
+#### 매개변수 {#minigit.show_at_cursor-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible values:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 값:
 
-  - <span class="help-syntax-keys">\<split\></span> `(string)` - split direction. One of "horizontal", "vertical",
-    "tab", or "auto" (default). Value "auto" uses [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical) if only 'mini.git'
-    buffers are shown in the tabpage and [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab) otherwise.
+  - <span class="help-syntax-keys">\<split\></span> `(string)`: 분할 방향. "horizontal", "vertical", "tab", "auto"(기본값) 중 하나. "auto" 값은 탭페이지에 'mini.git' 버퍼만 표시되는 경우 [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical)을 사용하고, 그렇지 않으면 [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab)을 사용합니다.
 
-  - Fields appropriate for forwarding to other functions.
+  - 다른 함수로 전달하기에 적절한 필드들.
 
 ---
 
 ### show_diff_source() {#minigit.show_diff_source .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.show_diff_source`(<span class="help-syntax-special">{opts}</span>)</p>
-Show diff source
+diff 소스 표시
 
-When buffer contains text formatted as unified patch (like after
-`:Git log --patch`, `:Git diff`, or [MiniGit.show\_range\_history()](mini-git.qmd#minigit.show_range_history)),
-show state of the file at the particular state. Target commit/state, path,
-and line number are deduced from cursor position.
+버퍼에 통합 패치(unified patch) 형식의 텍스트가 포함된 경우 (예: `:Git log --patch`, `:Git diff`, [MiniGit.show\_range\_history()](mini-git.qmd#minigit.show_range_history) 이후), 특정 시점의 파일 상태를 보여줍니다. 대상 커밋/상태, 경로 및 줄 번호는 커서 위치에서 추론됩니다.
 
-Notes:
+참고 사항:
 
-- Needs [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory) to be the Git root for relative paths to work.
+- 상대 경로가 작동하려면 [현재 디렉토리(current-directory)](https://neovim.io/doc/user/helptag.html?tag=current-directory)가 Git 루트여야 합니다.
 
-- Needs cursor to be inside hunk lines or on "---" / "+++" lines with paths.
+- 커서가 헌크(hunk) 줄 내부 또는 경로가 있는 "---" / "+++" 줄 위에 있어야 합니다.
 
-- Only basic forms of `:Git diff` output is supported: `:Git diff`,
-  `:Git diff --cached`, and `:Git diff <commit>`.
+- `:Git diff` 출력의 기본 형식만 지원됩니다: `:Git diff`, `:Git diff --cached`, `:Git diff <commit>`.
 
-#### Parameters {#minigit.show_diff_source-parameters}
+#### 매개변수 {#minigit.show_diff_source-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible values:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 값:
 
-  - <span class="help-syntax-keys">\<split\></span> `(string)` - split direction. One of "horizontal", "vertical",
-    "tab", or "auto" (default). Value "auto" uses [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical) if only 'mini.git'
-    buffers are shown in the tabpage and [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab) otherwise.
+  - <span class="help-syntax-keys">\<split\></span> `(string)`: 분할 방향. "horizontal", "vertical", "tab", "auto"(기본값) 중 하나. "auto" 값은 탭페이지에 'mini.git' 버퍼만 표시되는 경우 [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical)을 사용하고, 그렇지 않으면 [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab)을 사용합니다.
 
-  - <span class="help-syntax-keys">\<target\></span> `(string)` - which file state to show. One of "before", "after",
-    "both" (both states in vertical split), "auto" (default). Value "auto"
-    shows "before" state if cursor line starts with "-", otherwise - "after".
+  - <span class="help-syntax-keys">\<target\></span> `(string)`: 어떤 파일 상태를 보여줄지 설정. "before", "after", "both" (수직 분할로 두 상태 모두 표시), "auto"(기본값) 중 하나. "auto" 값은 커서 줄이 "-"로 시작하면 "before" 상태를, 그렇지 않으면 "after" 상태를 보여줍니다.
 
 ---
 
 ### show_range_history() {#minigit.show_range_history .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.show_range_history`(<span class="help-syntax-special">{opts}</span>)</p>
-Show range history
+범위 히스토리 표시
 
-Compute and show in split data about how particular line range in current
-buffer evolved through Git history. Essentially a `git log` with `-L` flag.
+현재 버퍼의 특정 줄 범위가 Git 히스토리를 통해 어떻게 변해왔는지에 대한 데이터를 계산하고 분할 창에 표시합니다. 본질적으로 `-L` 플래그가 붙은 `git log`입니다.
 
-Notes:
+참고 사항:
 
-- Works well with [MiniGit.diff\_foldexpr()](mini-git.qmd#minigit.diff_foldexpr).
+- [MiniGit.diff\_foldexpr()](mini-git.qmd#minigit.diff_foldexpr)와 잘 작동합니다.
 
-- Does not work if there are uncommited changes, as there is no easy way to
-  compute effective range line numbers.
+- 유효한 줄 범위를 계산하기 쉽지 않으므로, 커밋되지 않은 변경 사항이 있는 경우에는 작동하지 않습니다.
 
-#### Parameters {#minigit.show_range_history-parameters}
+#### 매개변수 {#minigit.show_range_history-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<line_start\></span> `(number)` - range start line.
+  - <span class="help-syntax-keys">\<line_start\></span> `(number)`: 범위 시작 줄.
 
-  - <span class="help-syntax-keys">\<line_end\></span> `(number)` - range end line.
-    If both <span class="help-syntax-keys">\<line_start\></span> and <span class="help-syntax-keys">\<line_end\></span> are not supplied, they default to
-    current line in Normal mode and visual selection in Visual mode.
+  - <span class="help-syntax-keys">\<line_end\></span> `(number)`: 범위 끝 줄.
+    <span class="help-syntax-keys">\<line_start\></span>와 <span class="help-syntax-keys">\<line_end\></span>가 모두 제공되지 않으면 노멀 모드에서는 현재 줄이, 비주얼 모드에서는 비주얼 선택 영역이 기본값이 됩니다.
 
-  - <span class="help-syntax-keys">\<log_args\></span> `(table)` - array of options to append to `git log` call.
+  - <span class="help-syntax-keys">\<log_args\></span> `(table)`: `git log` 호출에 추가할 옵션 배열.
 
-  - <span class="help-syntax-keys">\<split\></span> `(string)` - split direction. One of "horizontal", "vertical",
-    "tab", or "auto" (default). Value "auto" uses [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical) if only 'mini.git'
-    buffers are shown in the tabpage and [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab) otherwise.
+  - <span class="help-syntax-keys">\<split\></span> `(string)`: 분할 방향. "horizontal", "vertical", "tab", "auto"(기본값) 중 하나. "auto" 값은 탭페이지에 'mini.git' 버퍼만 표시되는 경우 [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical)을 사용하고, 그렇지 않으면 [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab)을 사용합니다.
 
 ---
 
 ### diff_foldexpr() {#minigit.diff_foldexpr .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.diff_foldexpr`(<span class="help-syntax-special">{lnum}</span>)</p>
-Fold expression for Git logs
+Git 로그를 위한 접기 표현식
 
-Folds contents of hunks, file patches, and log entries in unified diff.
-Useful for filetypes "diff" (like after `:Git diff`) and "git" (like after
-`:Git log --patch` or `:Git show` for commit).
-Works well with [MiniGit.show\_range\_history()](mini-git.qmd#minigit.show_range_history).
+통합 diff(unified diff)에서 헌크(hunk), 파일 패치 및 로그 항목의 내용을 접습니다. "diff" (예: `:Git diff` 이후) 및 "git" (예: `:Git log --patch` 또는 커밋에 대한 `:Git show` 이후) 파일 유형에 유용합니다. [MiniGit.show\_range\_history()](mini-git.qmd#minigit.show_range_history)와 잘 작동합니다.
 
-General idea of folding levels (use [zr](https://neovim.io/doc/user/helptag.html?tag=zr) and [zm](https://neovim.io/doc/user/helptag.html?tag=zm) to adjust interactively):
+접기 레벨의 일반적인 개념 ( [zr](https://neovim.io/doc/user/helptag.html?tag=zr) 및 [zm](https://neovim.io/doc/user/helptag.html?tag=zm)을 사용하여 대화형으로 조정 가능):
 
-- At level 0 there is one line per whole patch or log entry.
+- 레벨 0에서는 전체 패치 또는 로그 항목당 한 줄이 표시됩니다.
 
-- At level 1 there is one line per patched file.
+- 레벨 1에서는 패치된 파일당 한 줄이 표시됩니다.
 
-- At level 2 there is one line per hunk.
+- 레벨 2에서는 헌크(hunk)당 한 줄이 표시됩니다.
 
-- At level 3 there is no folds.
+- 레벨 3에서는 접기가 없습니다.
 
-For automated setup, set the following for "git" and "diff" filetypes (either
-inside [FileType](https://neovim.io/doc/user/helptag.html?tag=FileType) autocommand or [ftplugin](https://neovim.io/doc/user/helptag.html?tag=ftplugin)):
+자동 설정을 위해 "git" 및 "diff" 파일 유형에 대해 다음과 같이 설정하세요 ( [FileType](https://neovim.io/doc/user/helptag.html?tag=FileType) 자동 명령 또는 [ftplugin](https://neovim.io/doc/user/helptag.html?tag=ftplugin) 내부):
 
   ```vim
   setlocal foldmethod=expr foldexpr=v:lua.MiniGit.diff_foldexpr()
   ```
 
-#### Parameters {#minigit.diff_foldexpr-parameters}
+#### 매개변수 {#minigit.diff_foldexpr-parameters}
 
 
 
-<span class="help-syntax-special">{lnum}</span> `(number|nil)` Line number for which fold level is computed.
-  Default: [v:lnum](https://neovim.io/doc/user/helptag.html?tag=v:lnum).
+<span class="help-syntax-special">{lnum}</span> `(number|nil)` 접기 레벨이 계산되는 줄 번호. 기본값: [v:lnum](https://neovim.io/doc/user/helptag.html?tag=v:lnum).
 
-#### Return {#minigit.diff_foldexpr-return}
+#### 반환값 {#minigit.diff_foldexpr-return}
 
 
-`(number|string)` Line fold level. See [fold-expr](https://neovim.io/doc/user/helptag.html?tag=fold-expr).
+`(number|string)` 줄 접기 레벨. [fold-expr](https://neovim.io/doc/user/helptag.html?tag=fold-expr)을 참조하세요.
 
 ---
 
 ### enable() {#minigit.enable .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.enable`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Enable Git tracking in a file buffer
+파일 버퍼에서 Git 추적 활성화
 
-Tracking is done by reacting to changes in file content or file's repository
-in the form of keeping buffer data up to date. The data can be used via:
+추적은 파일 내용 또는 파일 저장소의 변경에 반응하여 버퍼 데이터를 최신 상태로 유지함으로써 수행됩니다. 데이터는 다음을 통해 사용할 수 있습니다:
 
-- [MiniGit.get\_buf\_data()](mini-git.qmd#minigit.get_buf_data). See its help for a list of actually tracked data.
+- [MiniGit.get\_buf\_data()](mini-git.qmd#minigit.get_buf_data): 실제로 추적되는 데이터 목록은 해당 도움말을 참조하세요.
 
-- `vim.b.minigit_summary` (table) and `vim.b.minigit_summary_string` (string)
-  buffer-local variables which are more suitable for statusline.
-  `vim.b.minigit_summary_string` contains information about HEAD, file status,
-  and in progress action (see [MiniGit.get\_buf\_data()](mini-git.qmd#minigit.get_buf_data) for more details).
-  See [MiniGit-examples](mini-git.qmd#minigit-examples) for how it can be tweaked and used in statusline.
+- `vim.b.minigit_summary` (테이블) 및 `vim.b.minigit_summary_string` (문자열) 버퍼 로컬 변수: 상태줄에 더 적합합니다. `vim.b.minigit_summary_string`은 HEAD, 파일 상태 및 진행 중인 작업에 대한 정보를 포함합니다 (자세한 내용은 [MiniGit.get\_buf\_data()](mini-git.qmd#minigit.get_buf_data) 참조). 상태줄에서 조정하고 사용하는 방법은 [MiniGit-examples](mini-git.qmd#minigit-examples)를 참조하세요.
 
-Note: this function is called automatically for all new normal buffers.
-Use it explicitly if buffer was disabled.
+참고: 이 함수는 모든 새로운 일반 버퍼에 대해 자동으로 호출됩니다. 버퍼가 비활성화된 경우 명시적으로 호출하세요.
 
-`User` event `MiniGitUpdated` is triggered whenever tracking data is updated.
-Note that not all data listed in [MiniGit.get\_buf\_data()](mini-git.qmd#minigit.get_buf_data) can be present (yet)
-at the point of event being triggered.
+추적 데이터가 업데이트될 때마다 `User` 이벤트 `MiniGitUpdated`가 트리거됩니다. 이벤트가 트리거되는 시점에 [MiniGit.get\_buf\_data()](mini-git.qmd#minigit.get_buf_data)에 나열된 모든 데이터가 (아직) 존재하지 않을 수도 있습니다.
 
-#### Parameters {#minigit.enable-parameters}
+#### 매개변수 {#minigit.enable-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number)` Target buffer identifier. Default: 0 for current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number)` 대상 버퍼 식별자. 기본값: 현재 버퍼의 경우 0.
 
 ---
 
 ### disable() {#minigit.disable .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.disable`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Disable Git tracking in buffer
+버퍼에서 Git 추적 비활성화
 
-#### Parameters {#minigit.disable-parameters}
+#### 매개변수 {#minigit.disable-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number)` Target buffer identifier. Default: 0 for current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number)` 대상 버퍼 식별자. 기본값: 현재 버퍼의 경우 0.
 
 ---
 
 ### toggle() {#minigit.toggle .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.toggle`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Toggle Git tracking in buffer
+버퍼에서 Git 추적 토글
 
-Enable if disabled, disable if enabled.
+비활성화되어 있으면 활성화하고, 활성화되어 있으면 비활성화합니다.
 
-#### Parameters {#minigit.toggle-parameters}
+#### 매개변수 {#minigit.toggle-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number)` Target buffer identifier. Default: 0 for current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number)` 대상 버퍼 식별자. 기본값: 현재 버퍼의 경우 0.
 
 ---
 
 ### get_buf_data() {#minigit.get_buf_data .help-syntax-right-anchor}
 
 <p align="center">`MiniGit.get_buf_data`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Get buffer data
+버퍼 데이터 가져오기
 
-#### Parameters {#minigit.get_buf_data-parameters}
-
-
-
-<span class="help-syntax-special">{buf_id}</span> `(number)` Target buffer identifier. Default: 0 for current buffer.
-
-#### Return {#minigit.get_buf_data-return}
+#### 매개변수 {#minigit.get_buf_data-parameters}
 
 
-`(table|nil)` Table with buffer Git data or `nil` if buffer is not enabled.
-  If the file is not part of Git repo, table will be empty.
-  Table has the following fields:
 
-  - <span class="help-syntax-keys">\<repo\></span> `(string)` - full path to '.git' directory.
+<span class="help-syntax-special">{buf_id}</span> `(number)` 대상 버퍼 식별자. 기본값: 현재 버퍼의 경우 0.
 
-  - <span class="help-syntax-keys">\<root\></span> `(string)` - full path to worktree root.
+#### 반환값 {#minigit.get_buf_data-return}
 
-  - <span class="help-syntax-keys">\<head\></span> `(string)` - full commit of current HEAD.
 
-  - <span class="help-syntax-keys">\<head_name\></span> `(string)` - short name of current HEAD (like "master").
-    For detached HEAD it is "HEAD".
+`(table|nil)` 버퍼의 Git 데이터가 포함된 테이블 또는 버퍼가 활성화되지 않은 경우 `nil`. 파일이 Git 저장소의 일부가 아닌 경우 테이블은 비어 있습니다. 테이블에는 다음 필드가 있습니다:
 
-  - <span class="help-syntax-keys">\<status\></span> `(string)` - two character file status as returned by `git status`.
+  - <span class="help-syntax-keys">\<repo\></span> `(string)`: '.git' 디렉토리의 전체 경로.
 
-  - <span class="help-syntax-keys">\<in_progress\></span> `(string)` - name of action(s) currently in progress
-    (bisect, merge, etc.). Can be a combination of those separated by ",".
+  - <span class="help-syntax-keys">\<root\></span> `(string)`: 워킹 트리 루트의 전체 경로.
 
+  - <span class="help-syntax-keys">\<head\></span> `(string)`: 현재 HEAD의 전체 커밋.
+
+  - <span class="help-syntax-keys">\<head_name\></span> `(string)`: 현재 HEAD의 짧은 이름 (예: "master"). 분리된(detached) HEAD인 경우 "HEAD"입니다.
+
+  - <span class="help-syntax-keys">\<status\></span> `(string)`: `git status`에 의해 반환된 두 문자 파일 상태.
+
+  - <span class="help-syntax-keys">\<in_progress\></span> `(string)`: 현재 진행 중인 작업의 이름 (bisect, merge 등). ","로 구분된 여러 작업의 조합일 수 있습니다.

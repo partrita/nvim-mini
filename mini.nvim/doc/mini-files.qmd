@@ -1,511 +1,443 @@
 ---
-title: "mini.files documentation"
+title: "mini.files 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 `main` 브랜치에서 생성됨 _
 
-<a name="mini.files" href="mini-files.qmd#mini.files"><b>mini.files</b></a> Navigate and manipulate file system
+<a name="mini.files" href="mini-files.qmd#mini.files"><b>mini.files</b></a> 파일 시스템 탐색 및 조작
 
-MIT License Copyright (c) 2023 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+주요 기능:
 
-- Navigate file system using column view (Miller columns) to display nested
-  directories. See [MiniFiles-navigation](mini-files.qmd#minifiles-navigation) for overview.
-
-
-- Opt-in preview of file or directory under cursor.
+- 중첩된 디렉토리를 표시하기 위해 열 보기(Miller columns)를 사용하여 파일 시스템을 탐색합니다. 개요는 [MiniFiles-navigation](mini-files.qmd#minifiles-navigation)을 참조하세요.
 
 
-- Manipulate files and directories by editing text buffers: create, delete,
-  copy, rename, move. See [MiniFiles-manipulation](mini-files.qmd#minifiles-manipulation) for overview.
+- 커서 아래의 파일이나 디렉토리에 대한 선택적 미리보기를 제공합니다.
 
 
-- Use as default file explorer instead of `netrw`.
+- 텍스트 버퍼를 편집하여 파일 및 디렉토리를 조작합니다: 생성, 삭제, 복사, 이름 변경, 이동. 개요는 [MiniFiles-manipulation](mini-files.qmd#minifiles-manipulation)을 참조하세요.
 
 
-- Configurable:
-
-    - Filter/prefix/sort of file system entries.
-
-    - Mappings used for common explorer actions.
-
-    - UI options: whether to show preview of file/directory under cursor, etc.
-
-    - Bookmarks for quicker navigation.
-
-What it doesn't do:
-
-- Try to be replacement of system file explorer. It is mostly designed to
-  be used within Neovim to quickly explore file system structure, open
-  files, and perform some quick file system edits.
+- `netrw` 대신 기본 파일 탐색기로 사용합니다.
 
 
-- Work on remote locations. Only local file system is supported.
+- 설정 가능:
+
+    - 파일 시스템 항목의 필터링/접두사/정렬.
+
+    - 일반적인 탐색기 작업에 사용되는 매핑.
+
+    - UI 옵션: 커서 아래의 파일/디렉토리 미리보기 표시 여부 등.
+
+    - 빠른 탐색을 위한 북마크.
+
+하지 않는 작업:
+
+- 시스템 파일 탐색기를 대체하려고 시도하지 않습니다. 주로 Neovim 내에서 파일 시스템 구조를 빠르게 탐색하고, 파일을 열고, 몇 가지 빠른 파일 시스템 편집을 수행하도록 설계되었습니다.
 
 
-- Provide built-in interactive toggle of content `filter` and `sort`.
-  See [MiniFiles-examples](mini-files.qmd#minifiles-examples) for some common examples.
+- 원격 위치에서 작동하지 않습니다. 로컬 파일 시스템만 지원됩니다.
 
 
-- Provide out of the box extra information like git or diagnostic status.
-  This can be achieved by setting [extmarks](https://neovim.io/doc/user/helptag.html?tag=extmarks) on appropriate event(s)
-  (see [MiniFiles-events](mini-files.qmd#minifiles-events))
-
-Notes:
-
-- This module is written and thoroughly tested on Linux. Support for other
-  platform/OS (like Windows or MacOS) is a goal, but there is no guarantee.
+- 내장된 대화형 콘텐츠 `filter` 및 `sort` 토글을 제공하지 않습니다. 몇 가지 일반적인 예제는 [MiniFiles-examples](mini-files.qmd#minifiles-examples)를 참조하세요.
 
 
-- This module silently reacts to not enough permissions:
+- git이나 진단(diagnostic) 상태와 같은 추가 정보를 기본적으로 제공하지 않습니다. 이는 적절한 이벤트에 [extmarks](https://neovim.io/doc/user/helptag.html?tag=extmarks)를 설정하여 달성할 수 있습니다. ([MiniFiles-events](mini-files.qmd#minifiles-events) 참조)
 
-    - In case of missing file, check its or its parent read permissions.
+참고:
 
-    - In case of no manipulation result, check write permissions.
-
-#### Dependencies {#module-dependencies}
+- 이 모듈은 Linux에서 작성되고 철저하게 테스트되었습니다. 다른 플랫폼/OS(Windows 또는 MacOS 등) 지원이 목표이지만 보장되지는 않습니다.
 
 
-Suggested dependencies (provide extra functionality, will work without them):
+- 이 모듈은 권한 부족에 대해 조용히 반응합니다:
+
+    - 파일이 없는 경우, 해당 파일이나 상위 디렉토리의 읽기 권한을 확인하세요.
+
+    - 조작 결과가 없는 경우, 쓰기 권한을 확인하세요.
+
+#### 의존성 {#module-dependencies}
 
 
-- Enabled [mini.icons](mini-icons.qmd#mini.icons) module to show icons near file/directory names.
-  Falls back to [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
-  plugin or uses default icons.
-
-#### Setup {#module-setup}
+제안된 의존성 (추가 기능을 제공하며, 없어도 작동합니다):
 
 
-This module needs a setup with `require('mini.files').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniFiles`
-which you can use for scripting or manually (with `:lua MiniFiles.*`).
+- 파일/디렉토리 이름 옆에 아이콘을 표시하려면 [mini.icons](mini-icons.qmd#mini.icons) 모듈을 활성화하세요.
+  [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) 플러그인으로 대체되거나 기본 아이콘을 사용합니다.
 
-See [MiniFiles.config](mini-files.qmd#minifiles.config) for available config settings.
+#### 설정 {#module-setup}
 
-You can override runtime config settings (like mappings or window options)
-locally to buffer inside `vim.b.minifiles_config` which should have same
-structure as `MiniFiles.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for
-more details.
 
-#### Comparisons {#module-comparisons}
+이 모듈은 `require('mini.files').setup({})`으로 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniFiles`를 생성합니다 (`:lua MiniFiles.*` 사용).
+
+사용 가능한 설정은 [MiniFiles.config](mini-files.qmd#minifiles.config)를 참조하세요.
+
+런타임 설정(매핑 또는 창 옵션 등)을 `MiniFiles.config`와 동일한 구조를 가져야 하는 `vim.b.minifiles_config` 내부 버퍼에 로컬로 재정의할 수 있습니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
+
+#### 비교 {#module-comparisons}
 
 
 
 - [nvim-tree/nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua):
 
-    - Provides tree view of file system, while this module uses column view.
+    - 파일 시스템의 트리 보기를 제공하는 반면, 이 모듈은 열 보기를 사용합니다.
 
-    - File system manipulation is done with custom set of mappings for each
-      action, while this module is designed to do that by editing text.
+    - 파일 시스템 조작은 각 작업에 대한 사용자 정의 매핑 세트로 수행되는 반면, 이 모듈은 텍스트를 편집하여 수행하도록 설계되었습니다.
 
-    - Has more out of the box functionality with extra configuration, while
-      this module has not (by design).
+    - 추가 설정을 통해 더 많은 기능을 바로 제공하는 반면, 이 모듈은 그렇지 않습니다(설계상).
 
 
 - [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim):
 
-    - Uses single window to show information only about currently explored
-      directory, while this module uses column view to show whole currently
-      explored branch.
+    - 현재 탐색 중인 디렉토리에 대한 정보만 표시하기 위해 단일 창을 사용하는 반면, 이 모듈은 현재 탐색 중인 전체 분기를 표시하기 위해 열 보기를 사용합니다.
 
-    - Also uses text editing to manipulate file system entries.
+    - 또한 파일 시스템 항목을 조작하기 위해 텍스트 편집을 사용합니다.
 
-    - Can work for remote file systems, while this module can not (by design).
+    - 원격 파일 시스템에서 작동할 수 있는 반면, 이 모듈은 그렇지 않습니다(설계상).
 
 
 - [nvim-neo-tree/neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim):
 
-    - Compares to this module mostly the same as 'nvim-tree/nvim-tree.lua'.
+    - 'nvim-tree/nvim-tree.lua'와 거의 동일하게 이 모듈과 비교됩니다.
 
-#### Highlight groups {#module-highlightgroups}
-
-
-
-- `MiniFilesBorder` - border of regular windows.
-
-- `MiniFilesBorderModified` - border of windows showing modified buffer.
-
-- `MiniFilesCursorLine` - cursor line in explorer windows.
-
-- `MiniFilesDirectory` - text and icon representing directory.
-
-- `MiniFilesFile` - text representing file.
-
-- `MiniFilesNormal` - basic foreground/background highlighting.
-
-- `MiniFilesTitle` - title of regular windows.
-
-- `MiniFilesTitleFocused` - title of focused window.
-
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
-
-#### Disabling {#module-disabling}
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
-This plugin provides only manually started functionality, so no disabling
-is available.
+
+- `MiniFilesBorder` - 일반 창의 테두리.
+
+- `MiniFilesBorderModified` - 수정된 버퍼를 표시하는 창의 테두리.
+
+- `MiniFilesCursorLine` - 탐색기 창의 커서 라인.
+
+- `MiniFilesDirectory` - 디렉토리를 나타내는 텍스트 및 아이콘.
+
+- `MiniFilesFile` - 파일을 나타내는 텍스트.
+
+- `MiniFilesNormal` - 기본적인 전경/배경 하이라이트.
+
+- `MiniFilesTitle` - 일반 창의 제목.
+
+- `MiniFilesTitleFocused` - 포커스된 창의 제목.
+
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
+
+#### 비활성화 {#module-disabling}
+
+
+이 플러그인은 수동으로 시작된 기능만 제공하므로 비활성화를 사용할 수 없습니다.
 
 ---
 
-### Navigation {#minifiles-navigation .help-syntax-right-anchor}
+### 탐색 {#minifiles-navigation .help-syntax-right-anchor}
 
-Every navigation starts by calling [MiniFiles.open()](mini-files.qmd#minifiles.open), either directly or via
-mapping (see its help for examples of some common scenarios). It will show
-an explorer consisting of side-by-side floating windows with the following
-principles:
+모든 탐색은 직접 또는 매핑을 통해 [MiniFiles.open()](mini-files.qmd#minifiles.open)을 호출하여 시작됩니다 (몇 가지 일반적인 시나리오의 예는 해당 도움말을 참조하세요). 다음 원칙에 따라 나란히 놓인 플로팅 창으로 구성된 탐색기가 표시됩니다:
 
 
-- Explorer shows one branch of nested directories at a time.
+- 탐색기는 한 번에 하나의 중첩된 디렉토리 분기를 보여줍니다.
 
 
-- Explorer consists from several windows:
+- 탐색기는 여러 창으로 구성됩니다:
 
 
-    - Each window displays entries of a single directory in a modifiable
-      scratch buffer.
+    - 각 창은 수정 가능한 스크래치 버퍼에 단일 디렉토리의 항목을 표시합니다.
 
 
-    - Windows are organized left to right: for any particular window the left
-      neighbor is its parent directory and right neighbor - its child.
+    - 창은 왼쪽에서 오른쪽으로 구성됩니다. 특정 창의 경우 왼쪽 이웃은 상위 디렉토리이고 오른쪽 이웃은 하위 디렉토리입니다.
 
 
-- Explorer windows are the viewport to some part of current branch, meaning
-  that their opening/closing does not affect the branch. This matters, for
-  example, if there are more elements in the branch than can be shown windows.
+- 탐색기 창은 현재 분기의 일부에 대한 뷰포트이며, 창을 열거나 닫는 것이 분기에 영향을 미치지 않음을 의미합니다. 예를 들어 분기에 표시될 수 있는 창보다 더 많은 요소가 있는 경우에 중요합니다.
 
 
-- Every buffer line represents separate file system entry following certain
-  format (not visible for users by default; set ['conceallevel'](https://neovim.io/doc/user/helptag.html?tag='conceallevel') to 0 to see it)
+- 모든 버퍼 라인은 특정 형식을 따르는 별도의 파일 시스템 항목을 나타냅니다 (기본적으로 사용자에게 보이지 않음. 보려면 ['conceallevel'](https://neovim.io/doc/user/helptag.html?tag='conceallevel')을 0으로 설정하세요).
 
 
-- Once directory is shown, its buffer is not updated automatically following
-  external file system changes. Manually use [MiniFiles.synchronize()](mini-files.qmd#minifiles.synchronize) for that.
+- 디렉토리가 표시되면 해당 버퍼는 외부 파일 시스템 변경에 따라 자동으로 업데이트되지 않습니다. 이를 위해 [MiniFiles.synchronize()](mini-files.qmd#minifiles.synchronize)를 수동으로 사용하세요.
 
-After opening explorer, in-buffer navigation is done the same way as any
-regular buffer, except without some keys reserved for built-in actions.
+탐색기를 연 후 버퍼 내 탐색은 내장 작업용으로 예약된 일부 키를 제외하고 일반 버퍼와 동일한 방식으로 수행됩니다.
 
-Most common ways to navigate are:
+가장 일반적인 탐색 방법은 다음과 같습니다:
 
 
-- Press `j` to move cursor onto next (lower) entry in current directory.
+- 현재 디렉토리에서 다음(아래) 항목으로 커서를 이동하려면 `j`를 누릅니다.
 
-- Press `k` to move cursor onto previous (higher) entry in current directory.
+- 현재 디렉토리에서 이전(위) 항목으로 커서를 이동하려면 `k`를 누릅니다.
 
-- Press `l` to expand entry under cursor (see "Go in" action).
+- 커서 아래의 항목을 확장하려면 `l`을 누릅니다 ("들어가기(Go in)" 작업 참조).
 
-- Press `h` to focus on parent directory (see "Go out" action).
+- 상위 디렉토리에 포커스하려면 `h`를 누릅니다 ("나가기(Go out)" 작업 참조).
 
-Cursor positions in each directory buffer are tracked and saved during
-navigation. This allows for more convenient repeated navigation to some
-previously visited branch.
+각 디렉토리 버퍼의 커서 위치는 탐색 중에 추적되고 저장됩니다. 이를 통해 이전에 방문한 일부 분기로 보다 편리하게 반복 탐색할 수 있습니다.
 
-Available built-in actions (see "Details" for more information):
+사용 가능한 내장 작업 (자세한 내용은 "세부 정보" 참조):
 
  ```
- | Action      | Keys | Description                                    |
+ | 작업        | 키   | 설명                                           |
  |-------------|------|------------------------------------------------|
- | Close       |  q   | Close explorer                                 |
+ | 닫기        |  q   | 탐색기 닫기                                    |
  |-------------|------|------------------------------------------------|
- | Go in       |  l   | Expand entry (show directory or open file)     |
+ | 들어가기    |  l   | 항목 확장 (디렉토리 표시 또는 파일 열기)       |
  |-------------|------|------------------------------------------------|
- | Go in plus  |  L   | Expand entry plus extra action                 |
+ | 들어가기+   |  L   | 항목 확장 및 추가 작업                         |
  |-------------|------|------------------------------------------------|
- | Go out      |  h   | Focus on parent directory                      |
+ | 나가기      |  h   | 상위 디렉토리에 포커스                         |
  |-------------|------|------------------------------------------------|
- | Go out plus |  H   | Focus on parent directory plus extra action    |
+ | 나가기+     |  H   | 상위 디렉토리에 포커스 및 추가 작업           |
  |-------------|------|------------------------------------------------|
- | Go to mark  |  '   | Jump to bookmark (waits for single key id)     |
+ | 북마크 이동 |  '   | 북마크로 이동 (단일 키 ID 대기)                |
  |-------------|------|------------------------------------------------|
- | Set mark    |  m   | Set bookmark (waits for single key id)         |
+ | 북마크 설정 |  m   | 북마크 설정 (단일 키 ID 대기)                  |
  |-------------|------|------------------------------------------------|
- | Reset       | <BS> | Reset current explorer                         |
+ | 재설정      | <BS> | 현재 탐색기 재설정                             |
  |-------------|------|------------------------------------------------|
- | Reveal cwd  |  @   | Reset current current working directory        |
+ | cwd 표시    |  @   | 현재 작업 디렉토리 재설정                      |
  |-------------|------|------------------------------------------------|
- | Show help   |  g?  | Show help window                               |
+ | 도움말 표시 |  g?  | 도움말 창 표시                                 |
  |-------------|------|------------------------------------------------|
- | Synchronize |  =   | Synchronize user edits and/or external changes |
+ | 동기화      |  =   | 사용자 편집 및/또는 외부 변경 사항 동기화      |
  |-------------|------|------------------------------------------------|
- | Trim left   |  <   | Trim left part of branch                       |
+ | 왼쪽 자르기 |  <   | 분기의 왼쪽 부분 자르기                        |
  |-------------|------|------------------------------------------------|
- | Trim right  |  >   | Trim right part of branch                      |
+ | 오른쪽 자르기|  >   | 분기의 오른쪽 부분 자르기                       |
  |-------------|------|------------------------------------------------|
  ```
 
-Details:
+세부 정보:
 
 
-- "Go in":
+- "들어가기(Go in)":
 
-    - Always opens file in the latest window before `MiniFiles.open()` call.
+    - 항상 [MiniFiles.open()](mini-files.qmd#minifiles.open) 호출 전 마지막 창에서 파일을 엽니다.
 
-    - Never closes explorer.
+    - 탐색기를 닫지 않습니다.
 
-    - Works in linewise Visual mode to expand multiple entries.
-
-
-- "Go in plus" is regular "Go in" but closes explorer after opening a file.
+    - 행 단위 비주얼 모드에서 여러 항목을 확장하는 데 작동합니다.
 
 
-- "Go out plus" is regular "Go out" but trims right part of branch.
+- "들어가기+(Go in plus)"는 일반적인 "들어가기"와 같지만 파일을 연 후 탐색기를 닫습니다.
 
 
-- "Set mark" and "Go to mark" both wait for user to press a single character
-  of a bookmark id. Example: `ma` sets directory path of focused window as
-  bookmark "a"; `'a` jumps (sets as whole branch) to bookmark "a".
-  Special bookmark "'" always points to path before the latest bookmark jump.
+- "나가기+(Go out plus)"는 일반적인 "나가기"와 같지만 분기의 오른쪽 부분을 자릅니다.
 
 
-- "Reset" focuses only on "anchor" directory (the one used to open current
-  explorer) and resets all stored directory cursor positions.
+- "북마크 설정" 및 "북마크 이동"은 모두 사용자가 북마크 ID의 단일 문자를 누를 때까지 기다립니다. 예: `ma`는 포커스된 창의 디렉토리 경로를 북마크 "a"로 설정합니다. `'a`는 북마크 "a"로 점프(전체 분기로 설정)합니다.
+  특수 북마크 "'"는 항상 최신 북마크 점프 전의 경로를 가리킵니다.
 
 
-- "Reveal cwd" extends branch to include [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
-  If it is not an ancestor of the current branch, nothing is done.
+- "재설정"은 "앵커" 디렉토리(현재 탐색기를 여는 데 사용된 디렉토리)에만 포커스하고 저장된 모든 디렉토리 커서 위치를 재설정합니다.
 
 
-- "Show help" results into new window with helpful information about current
-  explorer (like buffer mappings and bookmarks). Press `q` to close it.
+- "cwd 표시"는 분기를 확장하여 [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory)를 포함합니다.
+  현재 분기의 조상이 아니면 아무것도 수행되지 않습니다.
 
 
-- "Synchronize" parses user edits in directory buffers, applies them (after
-  confirmation), and updates all directory buffers with the most relevant
-  file system information. Can also be used without user edits to show up
-  to date file system entries.
-  See [MiniFiles-manipulation](mini-files.qmd#minifiles-manipulation) for more info about file system manipulation.
+- "도움말 표시"는 현재 탐색기에 대한 유용한 정보(버퍼 매핑 및 북마크 등)가 포함된 새 창을 생성합니다. 닫으려면 `q`를 누르세요.
 
 
-- "Trim left" and "Trim right" trim parts of the whole branch, not only its
-  currently visible parts.
-
-Notes:
+- "동기화"는 디렉토리 버퍼에서 사용자의 편집 내용을 파싱하고, 확인 후 적용하며, 가장 관련성 있는 파일 시스템 정보로 모든 디렉토리 버퍼를 업데이트합니다. 사용자 편집 없이 최신 파일 시스템 항목을 표시하는 데에도 사용할 수 있습니다.
+  파일 시스템 조작에 대한 자세한 내용은 [MiniFiles-manipulation](mini-files.qmd#minifiles-manipulation)을 참조하세요.
 
 
-- Each action has exported function with more details about it.
+- "왼쪽 자르기" 및 "오른쪽 자르기"는 현재 보이는 부분뿐만 아니라 전체 분기의 일부를 자릅니다.
+
+참고:
 
 
-- Keys can be configured with `mappings` table of [MiniFiles.config](mini-files.qmd#minifiles.config).
+- 각 작업에는 해당 작업에 대한 자세한 정보가 포함된 내보낸 함수가 있습니다.
+
+
+- 키는 [MiniFiles.config](mini-files.qmd#minifiles.config)의 `mappings` 테이블로 설정할 수 있습니다.
 
 ---
 
-### Manipulation {#minifiles-manipulation .help-syntax-right-anchor}
+### 조작 {#minifiles-manipulation .help-syntax-right-anchor}
 
-File system manipulation is done by editing text inside directory buffers,
-which are shown inside dedicated window(s). See [MiniFiles-navigation](mini-files.qmd#minifiles-navigation) for
-more information about navigating to a particular directory.
+파일 시스템 조작은 전용 창 내에 표시되는 디렉토리 버퍼 내부의 텍스트를 편집하여 수행됩니다. 특정 디렉토리로 탐색하는 방법에 대한 자세한 내용은 [MiniFiles-navigation](mini-files.qmd#minifiles-navigation)을 참조하세요.
 
-General workflow:
+일반적인 워크플로우:
 
 
-- Navigate to the directory in which manipulation should be done.
+- 조작을 수행할 디렉토리로 탐색합니다.
 
 
-- Edit buffer in the way representing file system action.
+- 파일 시스템 작업을 나타내는 방식으로 버퍼를 편집합니다.
 
 
-- Repeat previous steps until all necessary file system actions are recorded.
-  Note: even if directory buffer is hidden, its modifications are preserved,
-  so you can navigate in and out of directory with modified buffer.
+- 필요한 모든 파일 시스템 작업이 기록될 때까지 이전 단계를 반복합니다.
+  참고: 디렉토리 버퍼가 숨겨져 있어도 수정 사항은 유지되므로 수정된 버퍼가 있는 디렉토리를 탐색할 수 있습니다.
 
 
-- Execute [MiniFiles.synchronize()](mini-files.qmd#minifiles.synchronize) (default key is `=`). This will prompt
-  confirmation dialog listing all file system actions (per directory) it is
-  about to perform. READ IT CAREFULLY.
+- [MiniFiles.synchronize()](mini-files.qmd#minifiles.synchronize)를 실행합니다 (기본 키는 `=`). 수행하려는 모든 파일 시스템 작업(디렉토리당)을 나열하는 확인 대화 상자가 나타납니다. 주의 깊게 읽으세요.
 
 
-- Confirm by pressing `y` / `<CR>` (apply edits and update buffers) or
-  don't confirm by pressing `n` / `<Esc>` (update buffers without applying edits).
+- `y` / `<CR>`을 눌러 확인(편집 내용 적용 및 버퍼 업데이트)하거나 `n` / `<Esc>`를 눌러 확인하지 않습니다(편집 내용을 적용하지 않고 버퍼 업데이트).
 
-Note: prefer small and not related steps with more frequent synchronization
-over single complex manipulation. There are (known) cases which won't work.
+참고: 단일 복합 조작보다 더 빈번한 동기화와 함께 작고 관련 없는 단계를 선호하세요. 작동하지 않는 (알려진) 사례가 있습니다.
 
-#### How does it work {#minifiles-manipulation-howdoesitwork}
+#### 작동 방식 {#minifiles-manipulation-howdoesitwork}
 
 
-All manipulation functionality is powered by creating and keeping track of
-path indexes: text of the form `/xxx` (`xxx` is the number path index) placed
-at the start of every line representing file system entry.
+모든 조작 기능은 경로 인덱스를 생성하고 추적함으로써 구동됩니다. 파일 시스템 항목을 나타내는 모든 줄의 시작 부분에는 `/xxx`(`xxx`는 숫자 경로 인덱스) 형식의 텍스트가 배치됩니다.
 
-By default they are hidden as concealed text (along with prefix separators)
-for more convenience but you can see them by setting ['conceallevel'](https://neovim.io/doc/user/helptag.html?tag='conceallevel') to 0.
-DO NOT modify text to the left of entry name.
+기본적으로 이들은 편의를 위해 숨겨져 있지만 (접두사 구분 기호와 함께), ['conceallevel'](https://neovim.io/doc/user/helptag.html?tag='conceallevel')을 0으로 설정하여 볼 수 있습니다.
+항목 이름 왼쪽의 텍스트를 수정하지 마세요.
 
-During synchronization, actual text for entry name is compared to path index
-at that line (if present) to deduce which file system action to perform.
-Note that order of text manipulation steps does not affect performed actions.
+동기화 중에 항목 이름의 실제 텍스트를 해당 줄의 경로 인덱스(있는 경우)와 비교하여 수행할 파일 시스템 작업을 추론합니다. 텍스트 조작 단계의 순서는 수행되는 작업에 영향을 미치지 않습니다.
 
-#### Supported file system actions {#minifiles-manipulation-supportedfilesystemactions}
+#### 지원되는 파일 시스템 작업 {#minifiles-manipulation-supportedfilesystemactions}
 
 
-##### Create {#minifiles-manipulation-supportedfilesystemactions-create}
+##### 생성 {#minifiles-manipulation-supportedfilesystemactions-create}
 
 
 
-- Create file by creating new line with file name (including extension).
+- 파일 이름(확장자 포함)으로 새 줄을 만들어 파일을 생성합니다.
 
 
-- Create directory by creating new line with directory name followed by `/`.
+- 디렉토리 이름 뒤에 `/`를 붙여 새 줄을 만들어 디렉토리를 생성합니다.
 
 
-- Create file or directory inside nested directories by creating new line
-  with text like 'dir/nested-dir/' or 'dir/nested-dir/file'.
-  Always use `/` on any OS.
+- 'dir/nested-dir/' 또는 'dir/nested-dir/file'과 같은 텍스트로 새 줄을 만들어 중첩된 디렉토리 내부에 파일이나 디렉토리를 생성합니다.
+  모든 OS에서 항상 `/`를 사용하세요.
 
-##### Delete {#minifiles-manipulation-supportedfilesystemactions-delete}
+##### 삭제 {#minifiles-manipulation-supportedfilesystemactions-delete}
 
 
 
-- Delete file or directory by deleting whole line describing it.
+- 설명하는 줄 전체를 삭제하여 파일이나 디렉토리를 삭제합니다.
 
 
-- If `options.permanent_delete` is `true`, delete is permanent. Otherwise
-  file system entry is moved to a module-specific trash directory
-  (see [MiniFiles.config](mini-files.qmd#minifiles.config) for more details).
+- `options.permanent_delete`가 `true`이면 삭제가 영구적입니다. 그렇지 않으면 파일 시스템 항목이 모듈 특정 휴지통 디렉토리로 이동됩니다.
+  (자세한 내용은 [MiniFiles.config](mini-files.qmd#minifiles.config)를 참조하세요).
 
-##### Rename {#minifiles-manipulation-supportedfilesystemactions-rename}
+##### 이름 변경 {#minifiles-manipulation-supportedfilesystemactions-rename}
 
 
 
-- Rename file or directory by editing its name (not icon or path index to
-  the left of it).
+- 파일이나 디렉토리의 이름을 편집하여 이름을 변경합니다 (왼쪽의 아이콘이나 경로 인덱스가 아님).
 
 
-- With default mappings for `h` / `l` it might be not convenient to rename
-  only part of an entry. You can adopt any of the following approaches:
+- `h` / `l`의 기본 매핑을 사용하면 항목의 일부만 이름을 변경하는 것이 편리하지 않을 수 있습니다. 다음 접근 방식 중 하나를 채택할 수 있습니다:
 
-    - Use different motions, like [\$](https://neovim.io/doc/user/helptag.html?tag=$), [e](https://neovim.io/doc/user/helptag.html?tag=e), [f](https://neovim.io/doc/user/helptag.html?tag=f), etc.
+    - [\$](https://neovim.io/doc/user/helptag.html?tag=$), [e](https://neovim.io/doc/user/helptag.html?tag=e), [f](https://neovim.io/doc/user/helptag.html?tag=f) 등과 같은 다른 동작을 사용합니다.
 
-    - Go into Insert mode and navigate inside it.
+    - 입력(Insert) 모드로 들어가 그 안에서 탐색합니다.
 
-    - Change mappings to be more suited for manipulation and not navigation.
-      See "Mappings" section in [MiniFiles.config](mini-files.qmd#minifiles.config).
+    - 탐색이 아닌 조작에 더 적합하도록 매핑을 변경합니다.
+      [MiniFiles.config](mini-files.qmd#minifiles.config)의 "Mappings" 섹션을 참조하세요.
 
 
-- It is not needed to end directory name with `/`.
+- 디렉토리 이름을 `/`로 끝낼 필요는 없습니다.
 
 
-- Appending `/` to a file name will delete it and create empty directory
-  with the same name.
+- 파일 이름 뒤에 `/`를 추가하면 파일이 삭제되고 같은 이름의 빈 디렉토리가 생성됩니다.
 
 
-- Cyclic renames ("a" to "b" and "b" to "a") are not supported.
+- 순환 이름 변경("a"를 "b"로, "b"를 "a"로)은 지원되지 않습니다.
 
-##### Copy {#minifiles-manipulation-supportedfilesystemactions-copy}
+##### 복사 {#minifiles-manipulation-supportedfilesystemactions-copy}
 
 
 
-- Copy file or directory by copying whole line describing it and pasting
-  it inside buffer of target directory.
+- 파일이나 디렉토리를 설명하는 전체 줄을 복사하여 대상 디렉토리의 버퍼 내부에 붙여넣어 복사합니다.
 
 
-- Change of target path is allowed. Edit only entry name in target location
-  (not icon or path index to the left of it).
+- 대상 경로 변경이 허용됩니다. 대상 위치의 항목 이름만 편집하세요 (왼쪽의 아이콘이나 경로 인덱스가 아님).
 
 
-- Copying inside same parent directory is supported only if target path has
-  different name.
+- 동일한 상위 디렉토리 내에서의 복사는 대상 경로의 이름이 다른 경우에만 지원됩니다.
 
 
-- Copying inside child directory is supported.
+- 하위 디렉토리 내에서의 복사가 지원됩니다.
 
-##### Move {#minifiles-manipulation-supportedfilesystemactions-move}
+##### 이동 {#minifiles-manipulation-supportedfilesystemactions-move}
 
 
 
-- Move file or directory by cutting whole line describing it and then
-  pasting it inside target directory.
+- 파일이나 디렉토리를 설명하는 전체 줄을 잘라낸 다음 대상 디렉토리 내부에 붙여넣어 이동합니다.
 
 
-- Change of target path is allowed. Edit only entry name in target location
-  (not icon or path index to the left of it).
+- 대상 경로 변경이 허용됩니다. 대상 위치의 항목 이름만 편집하세요 (왼쪽의 아이콘이나 경로 인덱스가 아님).
 
 
-- Moving directory inside itself is not supported.
+- 디렉토리를 자기 자신 내부로 이동하는 것은 지원되지 않습니다.
 
 ---
 
-### Events {#minifiles-events .help-syntax-right-anchor}
+### 이벤트 {#minifiles-events .help-syntax-right-anchor}
 
-To allow user customization and integration of external tools, certain [User](https://neovim.io/doc/user/helptag.html?tag=User)
-autocommand events are triggered under common circumstances.
+사용자 정의 및 외부 도구의 통합을 허용하기 위해 일반적인 상황에서 특정 [User](https://neovim.io/doc/user/helptag.html?tag=User) 자동 명령(autocommand) 이벤트가 트리거됩니다.
 
-#### UI events {#minifiles-events-uievents}
-
-
-
-- `MiniFilesExplorerOpen` - just after explorer finishes opening.
-
-
-- `MiniFilesExplorerClose` - just before explorer starts closing.
-
-
-- `MiniFilesBufferCreate` - when buffer is created to show a particular
-  directory/file. Triggered once per path during explorer session.
-  Can be used to create buffer-local mappings.
-
-
-- `MiniFilesBufferUpdate` - when path buffer is updated with new content.
-  Can be used for integrations to set useful [extmarks](https://neovim.io/doc/user/helptag.html?tag=extmarks).
-
-
-- `MiniFilesWindowOpen` - when new window is opened. Can be used to set
-  window-local settings (like border, 'winblend', etc.)
-
-
-- `MiniFilesWindowUpdate` - when a window is updated. Triggers VERY frequently.
-  At least after every cursor movement and "go in" / "go out" action.
-
-Callback for each buffer/window UI event will receive <span class="help-syntax-keys">\<data\></span> field
-(see [nvim\_create\_autocmd()](https://neovim.io/doc/user/helptag.html?tag=nvim_create_autocmd\(\))) with the following information:
-
-
-- <span class="help-syntax-keys">\<buf_id\></span> - index of target buffer.
-
-- <span class="help-syntax-keys">\<win_id\></span> - index of target window. Can be `nil`, like in
-  `MiniFilesBufferCreate` and buffer's first `MiniFilesBufferUpdate` as
-  they are triggered before window is created.
-
-#### File action events {#minifiles-events-fileactionevents}
+#### UI 이벤트 {#minifiles-events-uievents}
 
 
 
-- `MiniFilesActionCreate` - after entry is successfully created.
+- `MiniFilesExplorerOpen` - 탐색기 열기가 완료된 직후.
 
 
-- `MiniFilesActionDelete` - after entry is successfully deleted.
+- `MiniFilesExplorerClose` - 탐색기 닫기가 시작되기 직전.
 
 
-- `MiniFilesActionRename` - after entry is successfully renamed.
+- `MiniFilesBufferCreate` - 특정 디렉토리/파일을 표시하기 위해 버퍼가 생성될 때. 탐색기 세션 동안 경로당 한 번 트리거됩니다.
+  버퍼 로컬 매핑을 만드는 데 사용할 수 있습니다.
 
 
-- `MiniFilesActionCopy` - after entry is successfully copied.
+- `MiniFilesBufferUpdate` - 경로 버퍼가 새 콘텐츠로 업데이트될 때.
+  유용한 [extmarks](https://neovim.io/doc/user/helptag.html?tag=extmarks)를 설정하기 위한 통합에 사용할 수 있습니다.
 
 
-- `MiniFilesActionMove` - after entry is successfully moved.
-
-Callback for each file action event will receive `data` field
-(see [nvim\_create\_autocmd()](https://neovim.io/doc/user/helptag.html?tag=nvim_create_autocmd\(\))) with the following information:
+- `MiniFilesWindowOpen` - 새 창이 열릴 때. 창 로컬 설정(테두리, 'winblend' 등)을 설정하는 데 사용할 수 있습니다.
 
 
-- <span class="help-syntax-keys">\<action\></span> - string with action name.
+- `MiniFilesWindowUpdate` - 창이 업데이트될 때. 매우 빈번하게 트리거됩니다.
+  최소한 모든 커서 이동 및 "들어가기" / "나가기" 작업 후에 발생합니다.
 
-- <span class="help-syntax-keys">\<from\></span> - full path of entry before action (`nil` for "create" action).
+각 버퍼/창 UI 이벤트에 대한 콜백은 다음 정보가 포함된 <span class="help-syntax-keys">\<data\></span> 필드([nvim\_create\_autocmd()](https://neovim.io/doc/user/helptag.html?tag=nvim_create_autocmd\(\)) 참조)를 받습니다:
 
-- <span class="help-syntax-keys">\<to\></span> - full path of entry after action (`nil` for permanent "delete" action).
+
+- <span class="help-syntax-keys">\<buf_id\></span> - 대상 버퍼의 인덱스.
+
+- <span class="help-syntax-keys">\<win_id\></span> - 대상 창의 인덱스. 창이 생성되기 전에 트리거되므로 `MiniFilesBufferCreate` 및 버퍼의 첫 번째 `MiniFilesBufferUpdate`에서는 `nil`이 될 수 있습니다.
+
+#### 파일 작업 이벤트 {#minifiles-events-fileactionevents}
+
+
+
+- `MiniFilesActionCreate` - 항목이 성공적으로 생성된 후.
+
+
+- `MiniFilesActionDelete` - 항목이 성공적으로 삭제된 후.
+
+
+- `MiniFilesActionRename` - 항목이 성공적으로 이름 변경된 후.
+
+
+- `MiniFilesActionCopy` - 항목이 성공적으로 복사된 후.
+
+
+- `MiniFilesActionMove` - 항목이 성공적으로 이동된 후.
+
+각 파일 작업 이벤트에 대한 콜백은 다음 정보가 포함된 `data` 필드([nvim\_create\_autocmd()](https://neovim.io/doc/user/helptag.html?tag=nvim_create_autocmd\(\)) 참조)를 받습니다:
+
+
+- <span class="help-syntax-keys">\<action\></span> - 작업 이름이 포함된 문자열.
+
+- <span class="help-syntax-keys">\<from\></span> - 작업 전 항목의 전체 경로 ("create" 작업의 경우 `nil`).
+
+- <span class="help-syntax-keys">\<to\></span> - 작업 후 항목의 전체 경로 (영구적인 "delete" 작업의 경우 `nil`).
 
 ---
 
-### Examples {#minifiles-examples .help-syntax-right-anchor}
+### 예제 {#minifiles-examples .help-syntax-right-anchor}
 
-#### Toggle explorer {#minifiles-examples-toggleexplorer}
+#### 탐색기 토글 {#minifiles-examples-toggleexplorer}
 
 
-Use a combination of [MiniFiles.open()](mini-files.qmd#minifiles.open) and [MiniFiles.close()](mini-files.qmd#minifiles.close):
+[MiniFiles.open()](mini-files.qmd#minifiles.open) 및 [MiniFiles.close()](mini-files.qmd#minifiles.close)의 조합을 사용하세요:
 
   ```lua
   local minifiles_toggle = function(...)
@@ -513,11 +445,10 @@ Use a combination of [MiniFiles.open()](mini-files.qmd#minifiles.open) and [Mini
   end
   ```
 
-#### Customize windows {#minifiles-examples-customizewindows}
+#### 창 사용자 정의 {#minifiles-examples-customizewindows}
 
 
-For most of the common customizations using `MiniFilesWindowOpen` event
-autocommand is the suggested approach:
+`MiniFilesWindowOpen` 이벤트 자동 명령을 사용하는 것이 대부분의 일반적인 사용자 정의에 제안되는 접근 방식입니다:
 
   ```lua
   vim.api.nvim_create_autocmd('User', {
@@ -525,7 +456,7 @@ autocommand is the suggested approach:
     callback = function(args)
       local win_id = args.data.win_id
 
-      -- Customize window-local settings
+      -- 창 로컬 설정 사용자 정의
       vim.wo[win_id].winblend = 50
       local config = vim.api.nvim_win_get_config(win_id)
       config.border, config.title_pos = 'double', 'right'
@@ -534,8 +465,7 @@ autocommand is the suggested approach:
   })
   ```
 
-However, some parts (like window title and height) of window config are later
-updated internally. Use `MiniFilesWindowUpdate` event for them:
+그러나 창 구성의 일부(창 제목 및 높이 등)는 나중에 내부적으로 업데이트됩니다. 이를 위해 `MiniFilesWindowUpdate` 이벤트를 사용하세요:
 
   ```lua
   vim.api.nvim_create_autocmd('User', {
@@ -543,10 +473,10 @@ updated internally. Use `MiniFilesWindowUpdate` event for them:
     callback = function(args)
       local config = vim.api.nvim_win_get_config(args.data.win_id)
 
-      -- Ensure fixed height
+      -- 고정 높이 보장
       config.height = 10
 
-      -- Ensure no title padding
+      -- 제목 패딩 없음 보장
       local n = #config.title
       config.title[1][1] = config.title[1][1]:gsub('^ ', '')
       config.title[n][1] = config.title[n][1]:gsub(' $', '')
@@ -556,15 +486,15 @@ updated internally. Use `MiniFilesWindowUpdate` event for them:
   })
   ```
 
-#### Customize icons {#minifiles-examples-customizeicons}
+#### 아이콘 사용자 정의 {#minifiles-examples-customizeicons}
 
 
-Use different directory icon (if you don't use [mini.icons](mini-icons.qmd#mini.icons)):
+다른 디렉토리 아이콘 사용 ([mini.icons](mini-icons.qmd#mini.icons)를 사용하지 않는 경우):
 
   ```lua
   local my_prefix = function(fs_entry)
     if fs_entry.fs_type == 'directory' then
-      -- NOTE: it is usually a good idea to use icon followed by space
+      -- 참고: 일반적으로 아이콘 뒤에 공백을 사용하는 것이 좋습니다.
       return ' ', 'MiniFilesDirectory'
     end
     return MiniFiles.default_prefix(fs_entry)
@@ -573,17 +503,16 @@ Use different directory icon (if you don't use [mini.icons](mini-icons.qmd#mini.
   require('mini.files').setup({ content = { prefix = my_prefix } })
   ```
 
-Show no icons:
+아이콘 표시 안 함:
 
   ```lua
   require('mini.files').setup({ content = { prefix = function() end } })
   ```
 
-#### Create mapping to show/hide dot-files {#minifiles-examples-createmappingtoshowhidedot-files}
+#### 숨김 파일 표시/숨기기 매핑 생성 {#minifiles-examples-createmappingtoshowhidedot-files}
 
 
-Create an autocommand for `MiniFilesBufferCreate` event which calls
-[MiniFiles.refresh()](mini-files.qmd#minifiles.refresh) with explicit `content.filter` functions:
+명시적인 `content.filter` 함수와 함께 [MiniFiles.refresh()](mini-files.qmd#minifiles.refresh)를 호출하는 `MiniFilesBufferCreate` 이벤트에 대한 자동 명령을 만듭니다:
 
   ```lua
   local show_dotfiles = true
@@ -604,21 +533,21 @@ Create an autocommand for `MiniFilesBufferCreate` event which calls
     pattern = 'MiniFilesBufferCreate',
     callback = function(args)
       local buf_id = args.data.buf_id
-      -- Tweak left-hand side of mapping to your liking
+      -- 취향에 따라 매핑의 왼쪽(LHS)을 조정하세요.
       vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id })
     end,
   })
   ```
 
-#### Create mappings to modify target window via split {#minifiles-examples-createmappingstomodifytargetwindowviasplit}
+#### 분할을 통해 대상 창을 수정하는 매핑 생성 {#minifiles-examples-createmappingstomodifytargetwindowviasplit}
 
 
-Combine [MiniFiles.get\_explorer\_state()](mini-files.qmd#minifiles.get_explorer_state) and [MiniFiles.set\_target\_window()](mini-files.qmd#minifiles.set_target_window):
+[MiniFiles.get\_explorer\_state()](mini-files.qmd#minifiles.get_explorer_state) 및 [MiniFiles.set\_target\_window()](mini-files.qmd#minifiles.set_target_window)를 결합합니다:
 
   ```lua
   local map_split = function(buf_id, lhs, direction)
     local rhs = function()
-      -- Make new window and set it as target
+      -- 새 창을 만들고 대상으로 설정
       local cur_target = MiniFiles.get_explorer_state().target_window
       local new_target = vim.api.nvim_win_call(cur_target, function()
         vim.cmd(direction .. ' split')
@@ -627,13 +556,13 @@ Combine [MiniFiles.get\_explorer\_state()](mini-files.qmd#minifiles.get_explorer
 
       MiniFiles.set_target_window(new_target)
 
-      -- This intentionally doesn't act on file under cursor in favor of
-      -- explicit "go in" action (`l` / `L`). To immediately open file,
-      -- add appropriate `MiniFiles.go_in()` call instead of this comment.
+      -- 이는 명시적인 "들어가기" 작업(`l` / `L`)을 위해 커서 아래의 파일에서
+      -- 의도적으로 작동하지 않습니다. 파일을 즉시 열려면 이 주석 대신
+      -- 적절한 `MiniFiles.go_in()` 호출을 추가하세요.
     end
 
-    -- Adding `desc` will result into `show_help` entries
-    local desc = 'Split ' .. direction
+    -- `desc`를 추가하면 `show_help` 항목에 나타납니다.
+    local desc = direction .. ' 분할'
     vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
   end
 
@@ -641,7 +570,7 @@ Combine [MiniFiles.get\_explorer\_state()](mini-files.qmd#minifiles.get_explorer
     pattern = 'MiniFilesBufferCreate',
     callback = function(args)
       local buf_id = args.data.buf_id
-      -- Tweak keys to your liking
+      -- 취향에 따라 키를 조정하세요.
       map_split(buf_id, '<C-s>', 'belowright horizontal')
       map_split(buf_id, '<C-v>', 'belowright vertical')
       map_split(buf_id, '<C-t>', 'tab')
@@ -649,44 +578,44 @@ Combine [MiniFiles.get\_explorer\_state()](mini-files.qmd#minifiles.get_explorer
   })
   ```
 
-#### Create mappings which use data from entry under cursor {#minifiles-examples-createmappingswhichusedatafromentryundercursor}
+#### 커서 아래의 항목 데이터를 사용하는 매핑 생성 {#minifiles-examples-createmappingswhichusedatafromentryundercursor}
 
 
-Use [MiniFiles.get\_fs\_entry()](mini-files.qmd#minifiles.get_fs_entry):
+[MiniFiles.get\_fs\_entry()](mini-files.qmd#minifiles.get_fs_entry)를 사용하세요:
 
   ```lua
-  -- Set focused directory as current working directory
+  -- 포커스된 디렉토리를 현재 작업 디렉토리로 설정
   local set_cwd = function()
     local path = (MiniFiles.get_fs_entry() or {}).path
-    if path == nil then return vim.notify('Cursor is not on valid entry') end
+    if path == nil then return vim.notify('커서가 유효한 항목에 있지 않습니다') end
     vim.fn.chdir(vim.fs.dirname(path))
   end
 
-  -- Yank in register full path of entry under cursor
+  -- 커서 아래 항목의 전체 경로를 레지스터에 복사(yank)
   local yank_path = function()
     local path = (MiniFiles.get_fs_entry() or {}).path
-    if path == nil then return vim.notify('Cursor is not on valid entry') end
+    if path == nil then return vim.notify('커서가 유효한 항목에 있지 않습니다') end
     vim.fn.setreg(vim.v.register, path)
   end
 
-  -- Open path with system default handler (useful for non-text files)
+  -- 시스템 기본 핸들러로 경로 열기 (텍스트 파일이 아닌 경우 유용)
   local ui_open = function() vim.ui.open(MiniFiles.get_fs_entry().path) end
 
   vim.api.nvim_create_autocmd('User', {
     pattern = 'MiniFilesBufferCreate',
     callback = function(args)
       local b = args.data.buf_id
-      vim.keymap.set('n', 'g~', set_cwd,   { buffer = b, desc = 'Set cwd' })
-      vim.keymap.set('n', 'gX', ui_open,   { buffer = b, desc = 'OS open' })
-      vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
+      vim.keymap.set('n', 'g~', set_cwd,   { buffer = b, desc = 'cwd 설정' })
+      vim.keymap.set('n', 'gX', ui_open,   { buffer = b, desc = 'OS 열기' })
+      vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = '경로 복사' })
     end,
   })
   ```
 
-#### Set custom bookmarks {#minifiles-examples-setcustombookmarks}
+#### 사용자 정의 북마크 설정 {#minifiles-examples-setcustombookmarks}
 
 
-Use [MiniFiles.set\_bookmark()](mini-files.qmd#minifiles.set_bookmark) inside `MiniFilesExplorerOpen` event:
+`MiniFilesExplorerOpen` 이벤트 내부에서 [MiniFiles.set\_bookmark()](mini-files.qmd#minifiles.set_bookmark)를 사용하세요:
 
   ```lua
   local set_mark = function(id, path, desc)
@@ -695,9 +624,9 @@ Use [MiniFiles.set\_bookmark()](mini-files.qmd#minifiles.set_bookmark) inside `M
   vim.api.nvim_create_autocmd('User', {
     pattern = 'MiniFilesExplorerOpen',
     callback = function()
-      set_mark('c', vim.fn.stdpath('config'), 'Config') -- path
-      set_mark('w', vim.fn.getcwd, 'Working directory') -- callable
-      set_mark('~', '~', 'Home directory')
+      set_mark('c', vim.fn.stdpath('config'), '설정') -- 경로
+      set_mark('w', vim.fn.getcwd, '작업 디렉토리') -- 호출 가능
+      set_mark('~', '~', '홈 디렉토리')
     end,
   })
   ```
@@ -707,22 +636,22 @@ Use [MiniFiles.set\_bookmark()](mini-files.qmd#minifiles.set_bookmark) inside `M
 ### setup() {#minifiles.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minifiles.setup-parameters}
+#### 매개변수 {#minifiles.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniFiles.config](mini-files.qmd#minifiles.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniFiles.config](mini-files.qmd#minifiles.config)를 참조하세요.
 
-#### Usage {#minifiles.setup-usage}
+#### 사용법 {#minifiles.setup-usage}
 
 
 
   ```lua
-  require('mini.files').setup() -- use default config
-  -- OR
-  require('mini.files').setup({}) -- replace {} with your config table
+  require('mini.files').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.files').setup({}) -- {}를 설정 테이블로 교체
   ```
 
 ---
@@ -730,26 +659,26 @@ Module setup
 ### config {#minifiles.config .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.config`</p>
-#### Defaults {#minifiles.config-defaults}
+#### 기본값 {#minifiles.config-defaults}
 
 
 
   ```lua
   MiniFiles.config = {
-    -- Customization of shown content
+    -- 표시되는 콘텐츠의 사용자 정의
     content = {
-      -- Predicate for which file system entries to show
+      -- 표시할 파일 시스템 항목에 대한 서술어
       filter = nil,
-      -- Highlight group to use for a file system entry
+      -- 파일 시스템 항목에 사용할 하이라이트 그룹
       highlight = nil,
-      -- Prefix text and highlight to show to the left of file system entry
+      -- 파일 시스템 항목의 왼쪽에 표시할 접두사 텍스트 및 하이라이트
       prefix = nil,
-      -- Order in which to show file system entries
+      -- 파일 시스템 항목을 표시할 순서
       sort = nil,
     },
 
-    -- Module mappings created only inside explorer.
-    -- Use `''` (empty string) to not create one.
+    -- 탐색기 내부에서만 생성되는 모듈 매핑.
+    -- 생성하지 않으려면 `''`(빈 문자열)을 사용하세요.
     mappings = {
       close       = 'q',
       go_in       = 'l',
@@ -766,83 +695,70 @@ Module setup
       trim_right  = '>',
     },
 
-    -- General options
+    -- 일반 옵션
     options = {
-      -- Whether to delete permanently or move into module-specific trash
+      -- 영구적으로 삭제할지 또는 모듈 특정 휴지통으로 이동할지 여부
       permanent_delete = true,
-      -- Whether to use for editing directories
+      -- 디렉토리 편집에 사용할지 여부
       use_as_default_explorer = true,
     },
 
-    -- Customization of explorer windows
+    -- 탐색기 창의 사용자 정의
     windows = {
-      -- Maximum number of windows to show side by side
+      -- 나란히 표시할 최대 창 수
       max_number = math.huge,
-      -- Whether to show preview of file/directory under cursor
+      -- 커서 아래의 파일/디렉토리 미리보기를 표시할지 여부
       preview = false,
-      -- Width of focused window
+      -- 포커스된 창의 너비
       width_focus = 50,
-      -- Width of non-focused window
+      -- 포커스되지 않은 창의 너비
       width_nofocus = 15,
-      -- Width of preview window
+      -- 미리보기 창의 너비
       width_preview = 25,
     },
   }
   ```
 
-#### Content {#minifiles.config-content}
+#### 콘텐츠 {#minifiles.config-content}
 
 
-`content.filter` is a predicate which takes file system entry data as input
-and returns `true`-ish value if it should be shown.
-Uses [MiniFiles.default\_filter()](mini-files.qmd#minifiles.default_filter) by default.
+`content.filter`는 파일 시스템 항목 데이터를 입력으로 받아 표시해야 하는 경우 `true`와 같은 값을 반환하는 서술어입니다.
+기본적으로 [MiniFiles.default\_filter()](mini-files.qmd#minifiles.default_filter)를 사용합니다.
 
-A file system entry data is a table with the following fields:
+파일 시스템 항목 데이터는 다음 필드가 있는 테이블입니다:
 
-  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - one of "file" or "directory".
+  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - "file" 또는 "directory" 중 하나.
 
-  - <span class="help-syntax-keys">\<name\></span> `(string)` - basename of an entry (including extension).
+  - <span class="help-syntax-keys">\<name\></span> `(string)` - 항목의 베이스 이름 (확장자 포함).
 
-  - <span class="help-syntax-keys">\<path\></span> `(string)` - full path of an entry.
+  - <span class="help-syntax-keys">\<path\></span> `(string)` - 항목의 전체 경로.
 
-`content.highlight` describes how file system entry name should be highlighted.
-Takes file system entry data as input and returns a highlight group name.
-Uses [MiniFiles.default\_highlight()](mini-files.qmd#minifiles.default_highlight) by default.
+`content.highlight`는 파일 시스템 항목 이름을 하이라이트하는 방법을 설명합니다.
+파일 시스템 항목 데이터를 입력으로 받아 하이라이트 그룹 이름을 반환합니다.
+기본적으로 [MiniFiles.default\_highlight()](mini-files.qmd#minifiles.default_highlight)를 사용합니다.
 
-`content.prefix` describes what text (prefix) to show to the left of file
-system entry name (if any) and how to highlight it. It also takes file
-system entry data as input and returns tuple of text and highlight group
-name to be used to highlight prefix. See [MiniFiles-examples](mini-files.qmd#minifiles-examples) for common
-examples of how to use it.
-Note: due to how lines are parsed to detect user edits for file system
-manipulation, output of `content.prefix` should not contain `/` character.
-Uses [MiniFiles.default\_prefix()](mini-files.qmd#minifiles.default_prefix) by default.
+`content.prefix`는 파일 시스템 항목 이름의 왼쪽에 표시할 텍스트(접두사)와 하이라이트 방법을 설명합니다. 또한 파일 시스템 항목 데이터를 입력으로 받아 접두사를 하이라이트하는 데 사용할 텍스트와 하이라이트 그룹 이름의 튜플을 반환합니다. 사용법은 [MiniFiles-examples](mini-files.qmd#minifiles-examples)를 참조하세요.
+참고: 파일 시스템 조작을 위해 사용자 편집을 감지하도록 줄이 파싱되는 방식 때문에 `content.prefix`의 출력에는 `/` 문자가 포함되어서는 안 됩니다.
+기본적으로 [MiniFiles.default\_prefix()](mini-files.qmd#minifiles.default_prefix)를 사용합니다.
 
-`content.sort` describes in which order directory entries should be shown
-in directory buffer. Takes as input and returns as output an array of file
-system entry data. Note: technically, it can be used to filter and modify
-its elements as well.
-Uses [MiniFiles.default\_sort()](mini-files.qmd#minifiles.default_sort) by default.
+`content.sort`는 디렉토리 버퍼에 디렉토리 항목을 표시할 순서를 설명합니다. 파일 시스템 항목 데이터 배열을 입력으로 받아 배열로 반환합니다. 참고: 기술적으로 요소를 필터링하고 수정하는 데에도 사용할 수 있습니다.
+기본적으로 [MiniFiles.default\_sort()](mini-files.qmd#minifiles.default_sort)를 사용합니다.
 
-#### Mappings {#minifiles.config-mappings}
+#### 매핑 {#minifiles.config-mappings}
 
 
-`mappings` table can be used to customize buffer-local mappings created in each
-directory buffer for built-in actions. Entry name corresponds to the function
-name of the action, value - right hand side of the mapping. Supply empty
-string to not create a particular mapping.
+`mappings` 테이블은 내장 작업을 위해 각 디렉토리 버퍼에 생성된 버퍼 로컬 매핑을 사용자 정의하는 데 사용할 수 있습니다. 항목 이름은 작업의 함수 이름에 해당하고, 값은 매핑의 오른쪽(RHS)입니다. 특정 매핑을 생성하지 않으려면 빈 문자열을 제공하세요.
 
-Default mappings are mostly designed for consistent navigation experience.
-Here are some alternatives:
+기본 매핑은 주로 일관된 탐색 환경을 위해 설계되었습니다. 다음은 몇 가지 대안입니다:
 
   ```lua
-  -- Close explorer after opening file with `l`
+  -- `l`로 파일을 연 후 탐색기 닫기
   mappings = {
     go_in = 'L',
     go_in_plus = 'l',
   }
 
-  -- Don't use `h`/`l` for easier cursor navigation during text edit
+  -- 텍스트 편집 중에 커서 탐색을 쉽게 하기 위해 `h`/`l`을 사용하지 않음
   mappings = {
     go_in = 'L',
     go_in_plus = '',
@@ -851,281 +767,266 @@ Here are some alternatives:
   }
   ```
 
-#### Options {#minifiles.config-options}
+#### 옵션 {#minifiles.config-options}
 
 
-`options.use_as_default_explorer` is a boolean indicating whether this module
-will be used as a default file explorer to edit directory (instead of `netrw`).
-Note: to work with directory in [arglist](https://neovim.io/doc/user/helptag.html?tag=arglist), do not lazy load this module.
+`options.use_as_default_explorer`는 이 모듈이 디렉토리를 편집하기 위한 기본 파일 탐색기로 사용될지 여부를 나타내는 불리언 값입니다 (`netrw` 대신).
+참고: [arglist](https://neovim.io/doc/user/helptag.html?tag=arglist)에서 디렉토리와 함께 작동하려면 이 모듈을 지연 로드하지 마세요.
 
-`options.permanent_delete` is a boolean indicating whether to perform
-permanent delete or move into special trash directory.
-This is a module-specific variant of "remove to trash".
-Target directory is 'mini.files/trash' inside standard path of Neovim data
-directory (execute `:echo stdpath('data')` to see its path in your case).
+`options.permanent_delete`는 영구 삭제를 수행할지 아니면 특수 휴지통 디렉토리로 이동할지를 나타내는 불리언 값입니다.
+이는 "휴지통으로 이동"의 모듈별 변형입니다.
+대상 디렉토리는 Neovim 데이터 디렉토리의 표준 경로 내에 있는 'mini.files/trash'입니다 (경우에 따라 경로를 확인하려면 `:echo stdpath('data')`를 실행하세요).
 
-#### Windows {#minifiles.config-windows}
+#### 창 {#minifiles.config-windows}
 
 
-`windows.max_number` is a maximum number of windows allowed to be open
-simultaneously. For example, use value 1 to always show single window.
-There is no constraint by default.
+`windows.max_number`는 동시에 열 수 있는 최대 창 수입니다. 예를 들어, 항상 단일 창만 표시하려면 값 1을 사용합니다.
+기본적으로 제약 조건이 없습니다.
 
-`windows.preview` is a boolean indicating whether to show preview of
-file/directory under cursor. Notes:
+`windows.preview`는 커서 아래의 파일/디렉토리 미리보기를 표시할지 여부를 나타내는 불리언 값입니다. 참고:
 
-- It is always shown, even if current line is for not yet existing path.
+- 현재 줄이 아직 존재하지 않는 경로에 대한 것이더라도 항상 표시됩니다.
 
-- File preview is highlighted if its size is small enough (less than 1K
-  bytes per line or 1M bytes in total).
+- 파일 미리보기는 크기가 충분히 작을 때(행당 1K 바이트 미만 또는 총 1M 바이트 미만) 하이라이트됩니다.
 
-`windows.width_focus` and `windows.width_nofocus` are number of columns used
-as `width` for focused and non-focused windows respectively.
+`windows.width_focus` 및 `windows.width_nofocus`는 각각 포커스된 창과 포커스되지 않은 창의 `width`로 사용되는 열의 수입니다.
 
 ---
 
 ### open() {#minifiles.open .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.open`(<span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{use_latest}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Open file explorer
+파일 탐색기 열기
 
-Common ways to use this function:
+이 함수를 사용하는 일반적인 방법:
 
   ```lua
-  -- Open current working directory in a last used state
+  -- 마지막으로 사용된 상태로 현재 작업 디렉토리 열기
   MiniFiles.open()
 
-  -- Fresh explorer in current working directory
+  -- 현재 작업 디렉토리에서 새 탐색기 열기
   MiniFiles.open(nil, false)
 
-  -- Open directory of current file (in last used state) focused on the file
+  -- 파일에 포커스된 상태로 현재 파일의 디렉토리 열기 (마지막 사용 상태)
   MiniFiles.open(vim.api.nvim_buf_get_name(0))
 
-  -- Fresh explorer in directory of current file
+  -- 현재 파일의 디렉토리에서 새 탐색기 열기
   MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
 
-  -- Open last used `path` (per tabpage)
-  -- Current working directory for the first time
+  -- 마지막으로 사용된 `path` 열기 (탭 페이지별)
+  -- 처음인 경우 현재 작업 디렉토리
   MiniFiles.open(MiniFiles.get_latest_path())
   ```
 
-#### Parameters {#minifiles.open-parameters}
+#### 매개변수 {#minifiles.open-parameters}
 
 
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` A valid file system path used as anchor.
-  If it is a path to directory, used directly.
-  If it is a path to file, its parent directory is used as anchor while
-  explorer will focus on the supplied file.
-  Default: path of [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+<span class="help-syntax-special">{path}</span> `(string|nil)` 앵커로 사용되는 유효한 파일 시스템 경로.
+  디렉토리 경로인 경우 직접 사용됩니다.
+  파일 경로인 경우 상위 디렉토리가 앵커로 사용되고 탐색기는 제공된 파일에 포커스합니다.
+  기본값: [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory)의 경로.
 
-<span class="help-syntax-special">{use_latest}</span> `(boolean|nil)` Whether to load explorer state from history
-  (based on the supplied anchor path). Default: `true`.
+<span class="help-syntax-special">{use_latest}</span> `(boolean|nil)` 히스토리에서 탐색기 상태를 로드할지 여부
+  (제공된 앵커 경로 기준). 기본값: `true`.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Table of options overriding [MiniFiles.config](mini-files.qmd#minifiles.config) and
-  `vim.b.minifiles_config` for this particular explorer session.
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 이 특정 탐색기 세션에 대해 [MiniFiles.config](mini-files.qmd#minifiles.config) 및
+  `vim.b.minifiles_config`를 재정의하는 옵션 테이블.
 
 ---
 
 ### refresh() {#minifiles.refresh .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.refresh`(<span class="help-syntax-special">{opts}</span>)</p>
-Refresh explorer
+탐색기 새로 고침
 
-Notes:
+참고:
 
-- If in `opts` at least one of `content` entry is not `nil`, all directory
-  buffers are forced to update.
+- `opts`에서 적어도 하나의 `content` 항목이 `nil`이 아니면 모든 디렉토리 버퍼가 강제로 업데이트됩니다.
 
-#### Parameters {#minifiles.refresh-parameters}
-
+#### 매개변수 {#minifiles.refresh-parameters}
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Table of options to update.
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 업데이트할 옵션 테이블.
 
 ---
 
 ### synchronize() {#minifiles.synchronize .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.synchronize`()</p>
-Synchronize explorer
+탐색기 동기화
 
 
-- Parse user edits in directory buffers.
+- 디렉토리 버퍼에서 사용자의 편집 내용을 파싱합니다.
 
-- Convert edits to file system actions and apply them after confirmation.
-  Choosing "No" skips application while "Cancel" stops synchronization.
+- 편집 내용을 파일 시스템 작업으로 변환하고 확인 후 적용합니다.
+  "아니요(No)"를 선택하면 적용을 건너뛰고 "취소(Cancel)"를 선택하면 동기화가 중단됩니다.
 
-- Update all directory buffers with the most relevant file system information.
-  Can be used without user edits to account for external file system changes.
+- 가장 관련성 있는 파일 시스템 정보로 모든 디렉토리 버퍼를 업데이트합니다.
+  외부 파일 시스템 변경 사항을 반영하기 위해 사용자 편집 없이 사용할 수 있습니다.
 
-#### Return {#minifiles.synchronize-return}
+#### 반환값 {#minifiles.synchronize-return}
 
 
-`(boolean)` Whether synchronization was done.
+`(boolean)` 동기화가 수행되었는지 여부.
 
 ---
 
 ### reset() {#minifiles.reset .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.reset`()</p>
-Reset explorer
+탐색기 재설정
 
 
-- Show single window focused on anchor directory (which was used as first
-  argument for [MiniFiles.open()](mini-files.qmd#minifiles.open)).
+- ([MiniFiles.open()](mini-files.qmd#minifiles.open)의 첫 번째 인수로 사용된) 앵커 디렉토리에 포커스된 단일 창을 표시합니다.
 
-- Reset all tracked directory cursors to point at first entry.
+- 모든 추적된 디렉토리 커서가 첫 번째 항목을 가리키도록 재설정합니다.
 
 ---
 
 ### close() {#minifiles.close .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.close`()</p>
-Close explorer
+탐색기 닫기
 
-#### Return {#minifiles.close-return}
+#### 반환값 {#minifiles.close-return}
 
 
-`(boolean|nil)` Whether closing was done or `nil` if there was nothing to close.
+`(boolean|nil)` 닫기가 수행되었는지 여부 또는 닫을 것이 없으면 `nil`.
 
 ---
 
 ### go_in() {#minifiles.go_in .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.go_in`(<span class="help-syntax-special">{opts}</span>)</p>
-Go in entry under cursor
+커서 아래 항목으로 들어가기
 
-Depends on entry under cursor:
+커서 아래의 항목에 따라 다릅니다:
 
-- If directory, focus on it in the window to the right.
+- 디렉토리인 경우 오른쪽 창에서 해당 디렉토리에 포커스합니다.
 
-- If file, open it in the window which was current during [MiniFiles.open()](mini-files.qmd#minifiles.open).
-  Explorer is not closed after that.
+- 파일인 경우 [MiniFiles.open()](mini-files.qmd#minifiles.open) 중에 현재 창이었던 창에서 파일을 엽니다.
+  그 후에 탐색기는 닫히지 않습니다.
 
-#### Parameters {#minifiles.go_in-parameters}
+#### 매개변수 {#minifiles.go_in-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<close_on_file\></span> `(boolean)` - whether to close explorer after going
-    inside a file. Powers the `go_in_plus` mapping.
-    Default: `false`.
+  - <span class="help-syntax-keys">\<close_on_file\></span> `(boolean)` - 파일 내부로 들어간 후 탐색기를 닫을지 여부. `go_in_plus` 매핑을 구동합니다.
+    기본값: `false`.
 
 ---
 
 ### go_out() {#minifiles.go_out .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.go_out`()</p>
-Go out to parent directory
+상위 디렉토리로 나가기
 
 
-- Focus on window to the left showing parent of current directory.
+- 현재 디렉토리의 상위 디렉토리를 표시하는 왼쪽 창에 포커스합니다.
 
 ---
 
 ### trim_left() {#minifiles.trim_left .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.trim_left`()</p>
-Trim left part of branch
+분기의 왼쪽 부분 자르기
 
 
-- Remove all branch paths to the left of currently focused one. This also
-  results into current window becoming the most left one.
+- 현재 포커스된 경로의 왼쪽에 있는 모든 분기 경로를 제거합니다. 또한 현재 창이 가장 왼쪽 창이 됩니다.
 
 ---
 
 ### trim_right() {#minifiles.trim_right .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.trim_right`()</p>
-Trim right part of branch
+분기의 오른쪽 부분 자르기
 
 
-- Remove all branch paths to the right of currently focused one. This also
-  results into current window becoming the most right one.
+- 현재 포커스된 경로의 오른쪽에 있는 모든 분기 경로를 제거합니다. 또한 현재 창이 가장 오른쪽 창이 됩니다.
 
 ---
 
 ### reveal_cwd() {#minifiles.reveal_cwd .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.reveal_cwd`()</p>
-Reveal current working directory
+현재 작업 디렉토리 표시
 
 
-- Prepend branch with parent paths until current working directory is reached.
-  Do nothing if not inside it.
+- 현재 작업 디렉토리에 도달할 때까지 분기 앞에 상위 경로를 추가합니다.
+  그 안에 있지 않으면 아무것도 수행하지 않습니다.
 
 ---
 
 ### show_help() {#minifiles.show_help .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.show_help`()</p>
-Show help window
+도움말 창 표시
 
 
-- Open window with helpful information about currently shown explorer and
-  focus on it. To close it, press `q`.
+- 현재 표시된 탐색기에 대한 유용한 정보가 포함된 창을 열고 포커스합니다. 닫으려면 `q`를 누르세요.
 
 ---
 
 ### get_fs_entry() {#minifiles.get_fs_entry .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.get_fs_entry`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{line}</span>)</p>
-Get file system entry data
+파일 시스템 항목 데이터 가져오기
 
-#### Parameters {#minifiles.get_fs_entry-parameters}
-
-
-
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier of valid directory buffer.
-  Default: current buffer.
-
-<span class="help-syntax-special">{line}</span> `(number|nil)` Line number of entry for which to return information.
-  Default: cursor line.
-
-#### Return {#minifiles.get_fs_entry-return}
+#### 매개변수 {#minifiles.get_fs_entry-parameters}
 
 
-`(table|nil)` Table of file system entry data with the following fields:
 
-  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - one of "file" or "directory".
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 유효한 디렉토리 버퍼의 버퍼 식별자.
+  기본값: 현재 버퍼.
 
-  - <span class="help-syntax-keys">\<name\></span> `(string)` - basename of an entry (including extension).
+<span class="help-syntax-special">{line}</span> `(number|nil)` 정보를 반환할 항목의 줄 번호.
+  기본값: 커서 라인.
 
-  - <span class="help-syntax-keys">\<path\></span> `(string)` - full path of an entry.
+#### 반환값 {#minifiles.get_fs_entry-return}
 
-Returns `nil` if there is no proper file system entry path at the line.
+
+`(table|nil)` 다음 필드가 있는 파일 시스템 항목 데이터 테이블:
+
+  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - "file" 또는 "directory" 중 하나.
+
+  - <span class="help-syntax-keys">\<name\></span> `(string)` - 항목의 베이스 이름 (확장자 포함).
+
+  - <span class="help-syntax-keys">\<path\></span> `(string)` - 항목의 전체 경로.
+
+줄에 적절한 파일 시스템 항목 경로가 없으면 `nil`을 반환합니다.
 
 ---
 
 ### get_explorer_state() {#minifiles.get_explorer_state .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.get_explorer_state`()</p>
-Get state of active explorer
+활성 탐색기의 상태 가져오기
 
-#### Return {#minifiles.get_explorer_state-return}
+#### 반환값 {#minifiles.get_explorer_state-return}
 
 
-`(table|nil)` Table with explorer state data or `nil` if no active explorer.
-  State data is a table with the following fields:
+`(table|nil)` 탐색기 상태 데이터가 포함된 테이블 또는 활성 탐색기가 없는 경우 `nil`.
+  상태 데이터는 다음 필드가 있는 테이블입니다:
 
-  - <span class="help-syntax-keys">\<anchor\></span> `(string)` - anchor directory path (see [MiniFiles.open()](mini-files.qmd#minifiles.open)).
+  - <span class="help-syntax-keys">\<anchor\></span> `(string)` - 앵커 디렉토리 경로 ([MiniFiles.open()](mini-files.qmd#minifiles.open) 참조).
 
-  - <span class="help-syntax-keys">\<bookmarks\></span> `(table)` - map from bookmark id (single character) to its data:
-    table with <span class="help-syntax-keys">\<path\></span> and <span class="help-syntax-keys">\<desc\></span> fields (see [MiniFiles.set\_bookmark()](mini-files.qmd#minifiles.set_bookmark)).
+  - <span class="help-syntax-keys">\<bookmarks\></span> `(table)` - 북마크 ID(단일 문자)에서 해당 데이터로의 맵:
+    <span class="help-syntax-keys">\<path\></span> 및 <span class="help-syntax-keys">\<desc\></span> 필드가 있는 테이블 ([MiniFiles.set\_bookmark()](mini-files.qmd#minifiles.set_bookmark) 참조).
 
-  - <span class="help-syntax-keys">\<branch\></span> `(table)` - array of nested paths for currently opened branch.
+  - <span class="help-syntax-keys">\<branch\></span> `(table)` - 현재 열려 있는 분기에 대한 중첩 경로 배열.
 
-  - <span class="help-syntax-keys">\<depth_focus\></span> `(number)` - an index in <span class="help-syntax-keys">\<branch\></span> for currently focused path.
+  - <span class="help-syntax-keys">\<depth_focus\></span> `(number)` - 현재 포커스된 경로에 대한 <span class="help-syntax-keys">\<branch\></span>의 인덱스.
 
-  - <span class="help-syntax-keys">\<target_window\></span> `(number)` - identifier of target window.
+  - <span class="help-syntax-keys">\<target_window\></span> `(number)` - 대상 창의 식별자.
 
-  - <span class="help-syntax-keys">\<windows\></span> `(table)` - array with data about currently opened windows.
-    Each element is a table with <span class="help-syntax-keys">\<win_id\></span> (window identifier) and <span class="help-syntax-keys">\<path\></span> (path
-    shown in the window) fields.
+  - <span class="help-syntax-keys">\<windows\></span> `(table)` - 현재 열려 있는 창에 대한 데이터가 포함된 배열.
+    각 요소는 <span class="help-syntax-keys">\<win_id\></span>(창 식별자) 및 <span class="help-syntax-keys">\<path\></span>(창에 표시된 경로) 필드가 있는 테이블입니다.
 
-#### See also {#minifiles.get_explorer_state-seealso}
+#### 참고 {#minifiles.get_explorer_state-seealso}
 
 
 
@@ -1140,39 +1041,38 @@ Get state of active explorer
 ### set_target_window() {#minifiles.set_target_window .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.set_target_window`(<span class="help-syntax-special">{win_id}</span>)</p>
-Set target window
+대상 창 설정
 
-#### Parameters {#minifiles.set_target_window-parameters}
+#### 매개변수 {#minifiles.set_target_window-parameters}
 
 
 
-<span class="help-syntax-special">{win_id}</span> `(number)` Window identifier inside which file will be opened.
+<span class="help-syntax-special">{win_id}</span> `(number)` 파일을 열 창 식별자.
 
 ---
 
 ### set_branch() {#minifiles.set_branch .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.set_branch`(<span class="help-syntax-special">{branch}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Set branch
+분기 설정
 
-Set which paths to display. Preview (if enabled) is applied afterwards.
+표시할 경로를 설정합니다. 미리보기(활성화된 경우)는 나중에 적용됩니다.
 
-#### Parameters {#minifiles.set_branch-parameters}
+#### 매개변수 {#minifiles.set_branch-parameters}
 
 
 
-<span class="help-syntax-special">{branch}</span> `(table)` Array of strings representing actually present on disk paths.
-  Each consecutive pair should represent direct parent-child paths.
-  Should contain at least one directory path.
-  May end with file path (will be previwed).
-  Relative paths are resolved using [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+<span class="help-syntax-special">{branch}</span> `(table)` 실제로 디스크에 존재하는 경로를 나타내는 문자열 배열.
+  연속된 각 쌍은 직접적인 부모-자식 경로를 나타내야 합니다.
+  적어도 하나의 디렉토리 경로를 포함해야 합니다.
+  파일 경로로 끝날 수 있습니다(미리보기가 표시됨).
+  상대 경로는 [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory)를 사용하여 확인됩니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<depth_focus\></span> `(number)` - an index in `branch` for path to focus. Will
-    be normalized to fit inside `branch`. Default: index of deepest directory.
+  - <span class="help-syntax-keys">\<depth_focus\></span> `(number)` - 포커스할 경로에 대한 `branch`의 인덱스. `branch` 내부에 맞게 정규화됩니다. 기본값: 가장 깊은 디렉토리의 인덱스.
 
-#### See also {#minifiles.set_branch-seealso}
+#### 참고 {#minifiles.set_branch-seealso}
 
 
 [MiniFiles.get\_explorer\_state()](mini-files.qmd#minifiles.get_explorer_state)
@@ -1182,143 +1082,138 @@ Set which paths to display. Preview (if enabled) is applied afterwards.
 ### set_bookmark() {#minifiles.set_bookmark .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.set_bookmark`(<span class="help-syntax-special">{id}</span>, <span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Set bookmark
+북마크 설정
 
-#### Parameters {#minifiles.set_bookmark-parameters}
+#### 매개변수 {#minifiles.set_bookmark-parameters}
 
 
 
-<span class="help-syntax-special">{id}</span> `(string)` Single character bookmark id.
+<span class="help-syntax-special">{id}</span> `(string)` 단일 문자 북마크 ID.
 
-<span class="help-syntax-special">{path}</span> `(string|function)` Path of a present on disk directory to set as
-  a bookmark's path. If callable, should return such path.
+<span class="help-syntax-special">{path}</span> `(string|function)` 북마크 경로로 설정할 디스크에 존재하는 디렉토리의 경로. 호출 가능한 경우 해당 경로를 반환해야 합니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<desc\></span> `(string)` - bookmark description (used in help window).
+  - <span class="help-syntax-keys">\<desc\></span> `(string)` - 북마크 설명 (도움말 창에서 사용됨).
 
 ---
 
 ### get_latest_path() {#minifiles.get_latest_path .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.get_latest_path`()</p>
-Get latest used anchor path
+마지막으로 사용된 앵커 경로 가져오기
 
-Note: if latest used `path` argument for [MiniFiles.open()](mini-files.qmd#minifiles.open) was for file,
-this will return its parent (as it was used as anchor path).
+참고: [MiniFiles.open()](mini-files.qmd#minifiles.open)에 대한 마지막으로 사용된 `path` 인수가 파일용인 경우, 해당 부모를 반환합니다 (앵커 경로로 사용되었기 때문).
 
 ---
 
 ### default_filter() {#minifiles.default_filter .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.default_filter`(<span class="help-syntax-special">{fs_entry}</span>)</p>
-Default filter of file system entries
+파일 시스템 항목의 기본 필터
 
-Currently does not filter anything out.
+현재는 아무것도 필터링하지 않습니다.
 
-#### Parameters {#minifiles.default_filter-parameters}
-
-
-
-<span class="help-syntax-special">{fs_entry}</span> `(table)` Table with the following fields:
-
-  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - one of "file" or "directory".
-
-  - <span class="help-syntax-keys">\<name\></span> `(string)` - basename of an entry (including extension).
-
-  - <span class="help-syntax-keys">\<path\></span> `(string)` - full path of an entry.
-
-#### Return {#minifiles.default_filter-return}
+#### 매개변수 {#minifiles.default_filter-parameters}
 
 
-`(boolean)` Always `true`.
+
+<span class="help-syntax-special">{fs_entry}</span> `(table)` 다음 필드가 있는 테이블:
+
+  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - "file" 또는 "directory" 중 하나.
+
+  - <span class="help-syntax-keys">\<name\></span> `(string)` - 항목의 베이스 이름 (확장자 포함).
+
+  - <span class="help-syntax-keys">\<path\></span> `(string)` - 항목의 전체 경로.
+
+#### 반환값 {#minifiles.default_filter-return}
+
+
+`(boolean)` 항상 `true`.
 
 ---
 
 ### default_prefix() {#minifiles.default_prefix .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.default_prefix`(<span class="help-syntax-special">{fs_entry}</span>)</p>
-Default prefix of file system entries
+파일 시스템 항목의 기본 접두사
 
 
-- If set up [mini.icons](mini-icons.qmd#mini.icons), use [MiniIcons.get()](mini-icons.qmd#miniicons.get) for "directory"/"file" category.
+- [mini.icons](mini-icons.qmd#mini.icons)가 설정된 경우, "directory"/"file" 카테고리에 대해 [MiniIcons.get()](mini-icons.qmd#miniicons.get)을 사용합니다.
 
-- Otherwise:
+- 그렇지 않으면:
 
-    - For directory return fixed icon and "MiniFilesDirectory" group name.
+    - 디렉토리의 경우 고정 아이콘과 "MiniFilesDirectory" 그룹 이름을 반환합니다.
 
-    - For file try to use `get_icon()` from 'nvim-tree/nvim-web-devicons'.
-      If missing, return fixed icon and 'MiniFilesFile' group name.
+    - 파일의 경우 'nvim-tree/nvim-web-devicons'에서 `get_icon()`을 사용해 봅니다.
+      없는 경우 고정 아이콘과 'MiniFilesFile' 그룹 이름을 반환합니다.
 
-#### Parameters {#minifiles.default_prefix-parameters}
-
-
-
-<span class="help-syntax-special">{fs_entry}</span> `(table)` Table with the following fields:
-
-  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - one of "file" or "directory".
-
-  - <span class="help-syntax-keys">\<name\></span> `(string)` - basename of an entry (including extension).
-
-  - <span class="help-syntax-keys">\<path\></span> `(string)` - full path of an entry.
-
-#### Return {#minifiles.default_prefix-return}
+#### 매개변수 {#minifiles.default_prefix-parameters}
 
 
-`(...)` Icon and highlight group name. For more details, see [MiniFiles.config](mini-files.qmd#minifiles.config)
-  and [MiniFiles-examples](mini-files.qmd#minifiles-examples).
+
+<span class="help-syntax-special">{fs_entry}</span> `(table)` 다음 필드가 있는 테이블:
+
+  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - "file" 또는 "directory" 중 하나.
+
+  - <span class="help-syntax-keys">\<name\></span> `(string)` - 항목의 베이스 이름 (확장자 포함).
+
+  - <span class="help-syntax-keys">\<path\></span> `(string)` - 항목의 전체 경로.
+
+#### 반환값 {#minifiles.default_prefix-return}
+
+
+`(...)` 아이콘 및 하이라이트 그룹 이름. 자세한 내용은 [MiniFiles.config](mini-files.qmd#minifiles.config) 및 [MiniFiles-examples](mini-files.qmd#minifiles-examples)를 참조하세요.
 
 ---
 
 ### default_sort() {#minifiles.default_sort .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.default_sort`(<span class="help-syntax-special">{fs_entries}</span>)</p>
-Default sort of file system entries
+파일 시스템 항목의 기본 정렬
 
-Sort directories and files separately (alphabetically ignoring case) and
-put directories first.
+디렉토리와 파일을 별도로 정렬하고 (대소문자 무시 알파벳순), 디렉토리를 먼저 배치합니다.
 
-#### Parameters {#minifiles.default_sort-parameters}
-
+#### 매개변수 {#minifiles.default_sort-parameters}
 
 
-<span class="help-syntax-special">{fs_entries}</span> `(table)` Array of file system entry data.
-  Each one is a table with the following fields:
 
-  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - one of "file" or "directory".
+<span class="help-syntax-special">{fs_entries}</span> `(table)` 파일 시스템 항목 데이터 배열.
+  각각은 다음 필드가 있는 테이블입니다:
 
-  - <span class="help-syntax-keys">\<name\></span> `(string)` - basename of an entry (including extension).
+  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - "file" 또는 "directory" 중 하나.
 
-  - <span class="help-syntax-keys">\<path\></span> `(string)` - full path of an entry.
+  - <span class="help-syntax-keys">\<name\></span> `(string)` - 항목의 베이스 이름 (확장자 포함).
 
-#### Return {#minifiles.default_sort-return}
+  - <span class="help-syntax-keys">\<path\></span> `(string)` - 항목의 전체 경로.
+
+#### 반환값 {#minifiles.default_sort-return}
 
 
-`(table)` Sorted array of file system entries.
+`(table)` 정렬된 파일 시스템 항목 배열.
 
 ---
 
 ### default_highlight() {#minifiles.default_highlight .help-syntax-right-anchor}
 
 <p align="center">`MiniFiles.default_highlight`(<span class="help-syntax-special">{fs_entry}</span>)</p>
-Default file system entry highlight
+기본 파일 시스템 항목 하이라이트
 
-Returns `'MiniFilesDirectory'` for directory and `'MiniFilesFile'` otherwise.
+디렉토리에 대해서는 `'MiniFilesDirectory'`를 반환하고 그 외에는 `'MiniFilesFile'`을 반환합니다.
 
-#### Parameters {#minifiles.default_highlight-parameters}
-
-
-
-<span class="help-syntax-special">{fs_entry}</span> `(table)` Table with the following fields:
-
-  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - one of "file" or "directory".
-
-  - <span class="help-syntax-keys">\<name\></span> `(string)` - basename of an entry (including extension).
-
-  - <span class="help-syntax-keys">\<path\></span> `(string)` - full path of an entry.
-
-#### Return {#minifiles.default_highlight-return}
+#### 매개변수 {#minifiles.default_highlight-parameters}
 
 
-`(string)` Highlight group name.
 
+<span class="help-syntax-special">{fs_entry}</span> `(table)` 다음 필드가 있는 테이블:
+
+  - <span class="help-syntax-keys">\<fs_type\></span> `(string)` - "file" 또는 "directory" 중 하나.
+
+  - <span class="help-syntax-keys">\<name\></span> `(string)` - 항목의 베이스 이름 (확장자 포함).
+
+  - <span class="help-syntax-keys">\<path\></span> `(string)` - 항목의 전체 경로.
+
+#### 반환값 {#minifiles.default_highlight-return}
+
+
+`(string)` 하이라이트 그룹 이름.

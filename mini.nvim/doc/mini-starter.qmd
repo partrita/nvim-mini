@@ -1,119 +1,96 @@
 ---
-title: "mini.starter documentation"
+title: "mini.starter 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_`mini.nvim`의 `main` 브랜치에서 생성됨_
 
-<a name="mini.starter" href="mini-starter.qmd#mini.starter"><b>mini.starter</b></a> Start screen
+<a name="mini.starter" href="mini-starter.qmd#mini.starter"><b>mini.starter</b></a> 시작 화면
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski
-
----
-
-### Module {#module .help-syntax-right-anchor}
-
-Displayed items are fully customizable both in terms of what they do and
-how they look (with reasonable defaults). Item selection can be done using
-prefix query with instant visual feedback.
-
-Key design ideas:
-
-- All available actions are defined inside items. Each item should have the
-  following info:
-
-    - <span class="help-syntax-keys">\<action\></span> - function or string for [vim.cmd()](https://neovim.io/doc/user/helptag.html?tag=vim.cmd\(\)) which is executed when
-      item is chosen. Empty string result in placeholder "inactive" item.
-
-    - <span class="help-syntax-keys">\<name\></span> - string which will be displayed and used for choosing.
-
-    - <span class="help-syntax-keys">\<section\></span> - string representing to which section item belongs.
-  There are pre-configured whole sections in [MiniStarter.sections](mini-starter.qmd#ministarter.sections).
-
-
-- Configure what items are displayed by supplying an array which can be
-  normalized to an array of items. Read about how supplied items are
-  normalized in [MiniStarter.refresh()](mini-starter.qmd#ministarter.refresh).
-
-
-- Modify the final look by supplying content hooks: functions which take
-  buffer content (see [MiniStarter.get\_content()](mini-starter.qmd#ministarter.get_content)) and identifier as input
-  while returning buffer content as output. There are pre-configured
-  content hook generators in [MiniStarter.gen\_hook](mini-starter.qmd#ministarter.gen_hook).
-
-
-- Choosing an item can be done in two ways:
-
-    - Type prefix query to filter item by matching its name (ignoring
-      case). Displayed information is updated after every typed character.
-      For every item its unique prefix is highlighted.
-
-    - Use Up/Down arrows and hit Enter.
-
-
-- Allow multiple simultaneously open Starter buffers.
-
-What is doesn't do:
-
-- It doesn't support fuzzy query for items. And probably will never do.
-
-#### Setup {#module-setup}
-
-
-This module needs a setup with `require('mini.starter').setup({})`
-(replace `{}` with your `config` table). It will create global Lua table
-`MiniStarter` which you can use for scripting or manually (with
-`:lua MiniStarter.*`).
-
-See [MiniStarter.config](mini-starter.qmd#ministarter.config) for `config` structure and default values. For
-some configuration examples (including one similar to 'vim-startify' and
-'dashboard-nvim'), see [MiniStarter-example-config](mini-starter.qmd#ministarter-example-config).
-
-You can override runtime config settings locally to buffer inside
-`vim.b.ministarter_config` which should have same structure as
-`MiniStarter.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
-Note: `vim.b.ministarter_config` is copied to Starter buffer from current
-buffer allowing full customization.
-
-To stop module from showing non-error feedback, set `config.silent = true`.
-
-#### Highlight groups {#module-highlightgroups}
-
-
-
-- `MiniStarterCurrent` - current item.
-
-- `MiniStarterFooter` - footer units.
-
-- `MiniStarterHeader` - header units.
-
-- `MiniStarterInactive` - inactive item.
-
-- `MiniStarterItem` - item name.
-
-- `MiniStarterItemBullet` - units from [MiniStarter.gen\_hook.adding\_bullet()](mini-starter.qmd#ministarter.gen_hook.adding_bullet).
-
-- `MiniStarterItemPrefix` - unique query for item.
-
-- `MiniStarterSection` - section units.
-
-- `MiniStarterQuery` - current query in active items.
-
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
-
-#### Disabling {#module-disabling}
-
-
-To disable core functionality, set `vim.g.ministarter_disable` (globally) or
-`vim.b.ministarter_disable` (for a buffer) to `true`. Considering high number
-of different scenarios and customization intentions, writing exact rules
-for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Example config {#ministarter-example-config .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-#### Similar to 'mhinz/vim-startify' {#ministarter-example-config-similartomhinzvim-startify}
+표시되는 항목들은 무엇을 수행하고 어떻게 보일지(합리적인 기본값 포함)를 완전히 커스터마이징할 수 있습니다. 항목 선택은 즉각적인 시각적 피드백과 함께 접두사 쿼리를 사용하여 수행할 수 있습니다.
+
+주요 디자인 아이디어:
+
+- 모든 사용 가능한 동작은 항목 내부에 정의됩니다. 각 항목은 다음 정보를 가져야 합니다:
+
+    - <span class="help-syntax-keys">\<action\></span> - 항목이 선택되었을 때 실행되는 함수 또는 [vim.cmd()](https://neovim.io/doc/user/helptag.html?tag=vim.cmd\(\))용 문자열입니다. 빈 문자열은 자리 표시자인 "비활성" 항목이 됩니다.
+
+    - <span class="help-syntax-keys">\<name\></span> - 표시되고 선택에 사용될 문자열입니다.
+
+    - <span class="help-syntax-keys">\<section\></span> - 항목이 속한 섹션을 나타내는 문자열입니다.
+  [MiniStarter.sections](mini-starter.qmd#ministarter.sections)에 미리 구성된 전체 섹션들이 있습니다.
+
+
+- 정규화된 항목 배열로 변환될 수 있는 배열을 제공하여 표시할 항목을 구성합니다. 제공된 항목이 어떻게 정규화되는지에 대해서는 [MiniStarter.refresh()](mini-starter.qmd#ministarter.refresh)를 참조하세요.
+
+
+- 콘텐츠 후크를 제공하여 최종 모양을 수정합니다. 콘텐츠 후크는 버퍼 콘텐츠([MiniStarter.get\_content()](mini-starter.qmd#ministarter.get_content) 참조)와 식별자를 입력으로 받아 버퍼 콘텐츠를 출력으로 반환하는 함수입니다. [MiniStarter.gen\_hook](mini-starter.qmd#ministarter.gen_hook)에 미리 구성된 콘텐츠 후크 생성기들이 있습니다.
+
+
+- 항목 선택은 두 가지 방법으로 수행할 수 있습니다:
+
+    - 접두사 쿼리를 입력하여 이름(대소문자 무시)이 일치하는 항목을 필터링합니다. 표시되는 정보는 각 문자가 입력될 때마다 업데이트됩니다. 모든 항목에 대해 고유한 접두사가 강조 표시됩니다.
+
+    - 위/아래 화살표를 사용하고 Enter 키를 누릅니다.
+
+
+- 여러 개의 Starter 버퍼를 동시에 열 수 있도록 허용합니다.
+
+수행하지 않는 것:
+
+- 항목에 대한 퍼지(fuzzy) 쿼리는 지원하지 않습니다. 그리고 앞으로도 지원하지 않을 것입니다.
+
+#### 설정 {#module-setup}
+
+
+이 모듈은 `require('mini.starter').setup({})`을 통한 설정이 필요합니다(`{}`를 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로(`:lua MiniStarter.*`를 통해) 사용할 수 있는 전역 Lua 테이블 `MiniStarter`를 생성합니다.
+
+`config` 구조와 기본값은 [MiniStarter.config](mini-starter.qmd#ministarter.config)를 참조하세요. 일부 구성 예시('vim-startify' 및 'dashboard-nvim'과 유사한 예시 포함)는 [MiniStarter-example-config](mini-starter.qmd#ministarter-example-config)를 참조하세요.
+
+런타임 설정은 `vim.b.ministarter_config`를 통해 버퍼 로컬로 재정의할 수 있으며, 이는 `MiniStarter.config`와 동일한 구조를 가져야 합니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
+참고: `vim.b.ministarter_config`는 현재 버퍼에서 Starter 버퍼로 복사되어 완전한 커스터마이징을 허용합니다.
+
+모듈이 에러가 아닌 피드백을 표시하지 않게 하려면 `config.silent = true`로 설정하세요.
+
+#### 하이라이트 그룹 {#module-highlightgroups}
+
+
+
+- `MiniStarterCurrent` - 현재 항목.
+
+- `MiniStarterFooter` - 푸터(footer) 단위.
+
+- `MiniStarterHeader` - 헤더(header) 단위.
+
+- `MiniStarterInactive` - 비활성 항목.
+
+- `MiniStarterItem` - 항목 이름.
+
+- `MiniStarterItemBullet` - [MiniStarter.gen\_hook.adding\_bullet()](mini-starter.qmd#ministarter.gen_hook.adding_bullet)의 단위.
+
+- `MiniStarterItemPrefix` - 항목의 고유한 쿼리.
+
+- `MiniStarterSection` - 섹션 단위.
+
+- `MiniStarterQuery` - 활성 항목의 현재 쿼리.
+
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
+
+#### 비활성화 {#module-disabling}
+
+
+핵심 기능을 비활성화하려면 `vim.g.ministarter_disable`(전역) 또는 `vim.b.ministarter_disable`(버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 커스터마이징 의도를 고려하여 모듈 기능을 비활성화하기 위한 정확한 규칙 작성은 사용자에게 맡겨집니다. 일반적인 레시피는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
+
+---
+
+### 구성 예시 {#ministarter-example-config .help-syntax-right-anchor}
+
+#### 'mhinz/vim-startify'와 유사함 {#ministarter-example-config-similartomhinzvim-startify}
 
 
 
@@ -125,7 +102,7 @@ for disabling module's functionality is left to user. See
       starter.sections.builtin_actions(),
       starter.sections.recent_files(10, false),
       starter.sections.recent_files(10, true),
-      -- Use this if you set up 'mini.sessions'
+      -- 'mini.sessions'를 설정한 경우 사용하세요
       starter.sections.sessions(5, true)
     },
     content_hooks = {
@@ -136,7 +113,7 @@ for disabling module's functionality is left to user. See
   })
   ```
 
-#### Similar to 'glepnir/dashboard-nvim' {#ministarter-example-config-similartoglepnirdashboard-nvim}
+#### 'glepnir/dashboard-nvim'과 유사함 {#ministarter-example-config-similartoglepnirdashboard-nvim}
 
 
 
@@ -153,7 +130,7 @@ for disabling module's functionality is left to user. See
   })
   ```
 
-#### Demo of capabilities {#ministarter-example-config-demoofcapabilities}
+#### 기능 데모 {#ministarter-example-config-demoofcapabilities}
 
 
 
@@ -189,14 +166,14 @@ for disabling module's functionality is left to user. See
     end))
 
     return function()
-      return 'Number of seconds since opening: ' .. n_seconds
+      return '열린 후 경과 시간(초): ' .. n_seconds
     end
   end)()
 
   local hook_top_pad_10 = function(content)
-    -- Pad from top
+    -- 상단 여백 추가
     for _ = 1, 10 do
-      -- Insert at start a line with single content unit
+      -- 시작 부분에 단일 콘텐츠 단위가 있는 라인 삽입
       table.insert(content, 1, { { type = 'empty', string = '' } })
     end
     return content
@@ -212,51 +189,46 @@ for disabling module's functionality is left to user. See
 
 ---
 
-### Lifecycle {#ministarter-lifecycle .help-syntax-right-anchor}
+### 라이프사이클 {#ministarter-lifecycle .help-syntax-right-anchor}
 
 
-- Open with [MiniStarter.open()](mini-starter.qmd#ministarter.open). It includes creating buffer with
-  appropriate options, mappings, behavior; call to [MiniStarter.refresh()](mini-starter.qmd#ministarter.refresh);
-  issue `MiniStarterOpened` [User](https://neovim.io/doc/user/helptag.html?tag=User) event.
+- [MiniStarter.open()](mini-starter.qmd#ministarter.open)으로 엽니다. 여기에는 적절한 옵션, 매핑, 동작을 가진 버퍼를 생성하고; [MiniStarter.refresh()](mini-starter.qmd#ministarter.refresh)를 호출하며; `MiniStarterOpened` [User](https://neovim.io/doc/user/helptag.html?tag=User) 이벤트를 발생시키는 과정이 포함됩니다.
 
-- Wait for user to choose an item. This is done using following logic:
+- 사용자가 항목을 선택할 때까지 기다립니다. 이는 다음 로직을 사용하여 수행됩니다:
 
-    - Typing any character from `MiniStarter.config.query_updaters` leads
-      to updating query. Read more in [MiniStarter.add\_to\_query()](mini-starter.qmd#ministarter.add_to_query).
+    - `MiniStarter.config.query_updaters`에 정의된 문자를 입력하면 쿼리가 업데이트됩니다. 자세한 내용은 [MiniStarter.add\_to\_query()](mini-starter.qmd#ministarter.add_to_query)를 참조하세요.
 
-    - <span class="help-syntax-keys">\<BS\></span> deletes latest character from query.
+    - <span class="help-syntax-keys">\<BS\></span> 키는 쿼리의 마지막 문자를 삭제합니다.
 
-    - <span class="help-syntax-keys">\<Down\></span>/<span class="help-syntax-keys">\<Up\></span>, <span class="help-syntax-keys">\<C-n\></span>/<span class="help-syntax-keys">\<C-p\></span>, <span class="help-syntax-keys">\<M-j\></span>/<span class="help-syntax-keys">\<M-k\></span> move current item.
+    - <span class="help-syntax-keys">\<Down\></span>/<span class="help-syntax-keys">\<Up\></span>, <span class="help-syntax-keys">\<C-n\></span>/<span class="help-syntax-keys">\<C-p\></span>, <span class="help-syntax-keys">\<M-j\></span>/<span class="help-syntax-keys">\<M-k\></span> 키는 현재 항목을 이동합니다.
 
-    - <span class="help-syntax-keys">\<CR\></span> executes action of current item.
+    - <span class="help-syntax-keys">\<CR\></span> 키는 현재 항목의 동작을 실행합니다.
 
-    - <span class="help-syntax-keys">\<C-c\></span> closes Starter buffer.
+    - <span class="help-syntax-keys">\<C-c\></span> 키는 Starter 버퍼를 닫습니다.
 
-- Evaluate current item when appropriate (after `<CR>` or when there is a
-  single item and `MiniStarter.config.evaluate_single` is `true`). This
-  executes item's `action`.
+- 적절한 경우( `<CR>` 키 입력 후 또는 항목이 하나만 있고 `MiniStarter.config.evaluate_single`이 `true`일 때) 현재 항목을 평가합니다. 이는 항목의 `action`을 실행합니다.
 
 ---
 
 ### setup() {#ministarter.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#ministarter.setup-parameters}
+#### 매개변수 {#ministarter.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniStarter.config](mini-starter.qmd#ministarter.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniStarter.config](mini-starter.qmd#ministarter.config)를 참조하세요.
 
-#### Usage {#ministarter.setup-usage}
+#### 사용법 {#ministarter.setup-usage}
 
 
 
   ```lua
-  require('mini.starter').setup() -- use default config
-  -- OR
-  require('mini.starter').setup({}) -- replace {} with your config table
+  require('mini.starter').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.starter').setup({}) -- {}를 사용자 설정 테이블로 교체
   ```
 
 ---
@@ -264,47 +236,47 @@ Module setup
 ### config {#ministarter.config .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.config`</p>
-#### Defaults {#ministarter.config-defaults}
+#### 기본값 {#ministarter.config-defaults}
 
 
 
   ```lua
   MiniStarter.config = {
-    -- Whether to open Starter buffer on VimEnter. Not opened if Neovim was
-    -- started with intent to show something else.
+    -- VimEnter 시 Starter 버퍼를 열지 여부. Neovim이 다른 것을 보여주려는
+    -- 의도로 시작된 경우에는 열리지 않습니다.
     autoopen = true,
 
-    -- Whether to evaluate action of single active item
+    -- 단일 활성 항목의 동작을 바로 평가할지 여부
     evaluate_single = false,
 
-    -- Items to be displayed. Should be an array with the following elements:
-    -- - Item: table with <action>, <name>, and <section> keys.
-    -- - Function: should return one of these three categories.
-    -- - Array: elements of these three types (i.e. item, array, function).
-    -- If `nil` (default), default items will be used (see |mini.starter|).
+    -- 표시할 항목들. 다음 요소들을 가진 배열이어야 합니다:
+    -- - 항목(Item): <action>, <name>, <section> 키를 가진 테이블.
+    -- - 함수: 이 세 가지 카테고리 중 하나를 반환해야 함.
+    -- - 배열: 이 세 가지 유형(항목, 배열, 함수)의 요소들.
+    -- `nil`(기본값)인 경우 기본 항목들이 사용됩니다(|mini.starter| 참조).
     items = nil,
 
-    -- Header to be displayed before items. Converted to single string via
-    -- `tostring` (use `\n` to display several lines). If function, it is
-    -- evaluated first. If `nil` (default), polite greeting will be used.
+    -- 항목 앞에 표시될 헤더. `tostring`을 통해 단일 문자열로 변환됩니다
+    -- (여러 줄을 표시하려면 `\n` 사용). 함수인 경우 먼저 평가됩니다.
+    -- `nil`(기본값)인 경우 정중한 인사말이 사용됩니다.
     header = nil,
 
-    -- Footer to be displayed after items. Converted to single string via
-    -- `tostring` (use `\n` to display several lines). If function, it is
-    -- evaluated first. If `nil` (default), default usage help will be shown.
+    -- 항목 뒤에 표시될 푸터. `tostring`을 통해 단일 문자열로 변환됩니다
+    -- (여러 줄을 표시하려면 `\n` 사용). 함수인 경우 먼저 평가됩니다.
+    -- `nil`(기본값)인 경우 기본 사용법 도움말이 표시됩니다.
     footer = nil,
 
-    -- Array  of functions to be applied consecutively to initial content.
-    -- Each function should take and return content for Starter buffer (see
-    -- |mini.starter| and |MiniStarter.get_content()| for more details).
+    -- 초기 콘텐츠에 순차적으로 적용될 함수 배열.
+    -- 각 함수는 Starter 버퍼용 콘텐츠를 인자로 받아 반환해야 합니다
+    -- (|mini.starter| 및 |MiniStarter.get_content()| 참조).
     content_hooks = nil,
 
-    -- Characters to update query. Each character will have special buffer
-    -- mapping overriding your global ones. Be careful to not add `:` as it
-    -- allows you to go into command mode.
+    -- 쿼리를 업데이트할 문자들. 각 문자는 전역 매핑을 재정의하는
+    -- 특별한 버퍼 매핑을 갖게 됩니다. 명령 모드로 들어갈 수 있게 하는
+    -- `:`를 추가하지 않도록 주의하세요.
     query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_-.',
 
-    -- Whether to disable showing non-error feedback
+    -- 에러가 아닌 피드백 표시를 비활성화할지 여부
     silent = false,
   }
   ```
@@ -314,26 +286,20 @@ Module setup
 ### open() {#ministarter.open .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.open`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Open Starter buffer
+Starter 버퍼 열기
 
 
-- Create buffer if necessary and move into it.
+- 필요한 경우 버퍼를 생성하고 해당 버퍼로 이동합니다.
 
-- Set buffer options. Note that settings are done with [:noautocmd](https://neovim.io/doc/user/helptag.html?tag=:noautocmd) to
-  achieve a massive speedup.
+- 버퍼 옵션을 설정합니다. 엄청난 속도 향상을 위해 설정은 [:noautocmd](https://neovim.io/doc/user/helptag.html?tag=:noautocmd)와 함께 수행됩니다.
 
-- Set buffer mappings. Besides basic mappings (described inside "Lifecycle
-  of Starter buffer" of [mini.starter](mini-starter.qmd#mini.starter)), map every character from
-  `MiniStarter.config.query_updaters` to add itself to query with
-  [MiniStarter.add\_to\_query()](mini-starter.qmd#ministarter.add_to_query).
+- 버퍼 매핑을 설정합니다. 기본 매핑([mini.starter](mini-starter.qmd#mini.starter)의 "Starter 버퍼의 라이프사이클"에 설명됨) 외에도, `MiniStarter.config.query_updaters`의 모든 문자를 [MiniStarter.add\_to\_query()](mini-starter.qmd#ministarter.add_to_query)를 통해 자신을 쿼리에 추가하도록 매핑합니다.
 
-- Populate buffer with [MiniStarter.refresh()](mini-starter.qmd#ministarter.refresh).
+- [MiniStarter.refresh()](mini-starter.qmd#ministarter.refresh)로 버퍼를 채웁니다.
 
-- Issue custom `MiniStarterOpened` event to allow acting upon opening
-  Starter buffer. Use it with
-  `autocmd User MiniStarterOpened <your command>`.
+- Starter 버퍼가 열릴 때 동작할 수 있도록 커스텀 `MiniStarterOpened` 이벤트를 발생시킵니다. `autocmd User MiniStarterOpened <your command>`와 같이 사용하세요.
 
-Note: to fully use it in autocommand, use [autocmd-nested](https://neovim.io/doc/user/helptag.html?tag=autocmd-nested). Example:
+참고: 자동 명령(autocommand)에서 완전히 사용하려면 [autocmd-nested](https://neovim.io/doc/user/helptag.html?tag=autocmd-nested)를 사용하세요. 예시:
 
   ```lua
   local starter_open = function() MiniStarter.open() end
@@ -341,518 +307,445 @@ Note: to fully use it in autocommand, use [autocmd-nested](https://neovim.io/doc
   vim.api.nvim_create_autocmd('TabNewEntered', au_opts)
   ```
 
-#### Parameters {#ministarter.open-parameters}
+#### 매개변수 {#ministarter.open-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Identifier of existing valid buffer (see [bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\))) to
-  open inside. Default: create a new one.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 열고자 하는 유효한 기존 버퍼의 식별자([bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\)) 참조). 기본값: 새로 생성합니다.
 
 ---
 
 ### refresh() {#ministarter.refresh .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.refresh`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Refresh Starter buffer
+Starter 버퍼 새로고침
 
 
-- Normalize `MiniStarter.config.items`:
+- `MiniStarter.config.items` 정규화:
 
-    - Flatten: recursively (in depth-first fashion) parse its elements. If
-      function is found, execute it and continue with parsing its output
-      (this allows deferring item collection up until it is actually
-      needed).  If proper item is found (table with fields `action`,
-      `name`, `section`), add it to output.
+    - 평탄화(Flatten): 요소를 재귀적으로(깊이 우선 방식) 파싱합니다. 함수가 발견되면 이를 실행하고 그 출력을 계속 파싱합니다(이는 실제로 필요할 때까지 항목 수집을 미룰 수 있게 해줍니다). 적절한 항목(`action`, `name`, `section` 필드를 가진 테이블)이 발견되면 출력에 추가합니다.
 
-    - Sort: order first by section and then by item id (both in order of
-      appearance).
+    - 정렬(Sort): 먼저 섹션별로 정렬한 다음 항목 ID별로 정렬합니다(둘 다 나타나는 순서대로).
 
-- Normalize `MiniStarter.config.header` and `MiniStarter.config.footer` to
-  be multiple lines by splitting at `\n`. If function - evaluate it first.
+- `MiniStarter.config.header` 및 `MiniStarter.config.footer`를 `\n`에서 분할하여 여러 줄로 정규화합니다. 함수인 경우 먼저 평가합니다.
 
-- Make initial buffer content (see [MiniStarter.get\_content()](mini-starter.qmd#ministarter.get_content) for a
-  description of what a buffer content is). It consist from content lines
-  with single content unit:
+- 초기 버퍼 콘텐츠를 생성합니다(버퍼 콘텐츠에 대한 설명은 [MiniStarter.get\_content()](mini-starter.qmd#ministarter.get_content) 참조). 이는 단일 콘텐츠 단위를 가진 콘텐츠 라인들로 구성됩니다:
 
-    - First lines contain strings of normalized header.
+    - 첫 번째 라인들은 정규화된 헤더의 문자열을 포함합니다.
 
-    - Body is for normalized items. Section names have own lines preceded
-      by empty line.
+    - 본문은 정규화된 항목들을 위한 것입니다. 섹션 이름은 빈 라인이 앞에 오는 자체 라인을 갖습니다.
 
-    - Last lines contain separate strings of normalized footer.
+    - 마지막 라인들은 정규화된 푸터의 개별 문자열을 포함합니다.
 
-- Sequentially apply hooks from `MiniStarter.config.content_hooks` to
-  content. All hooks are applied with `(content, buf_id)` signature. Output
-  of one hook serves as first argument to the next.
+- `MiniStarter.config.content_hooks`의 후크를 콘텐츠에 순차적으로 적용합니다. 모든 후크는 `(content, buf_id)` 시그니처로 적용됩니다. 한 후크의 출력이 다음 후크의 첫 번째 인자로 사용됩니다.
 
-- Gather final items from content with [MiniStarter.content\_to\_items()](mini-starter.qmd#ministarter.content_to_items).
+- [MiniStarter.content\_to\_items()](mini-starter.qmd#ministarter.content_to_items)를 사용하여 콘텐츠에서 최종 항목들을 수집합니다.
 
-- Convert content to buffer lines with [MiniStarter.content\_to\_lines()](mini-starter.qmd#ministarter.content_to_lines) and
-  add them to buffer.
+- [MiniStarter.content\_to\_lines()](mini-starter.qmd#ministarter.content_to_lines)를 사용하여 콘텐츠를 버퍼 라인으로 변환하고 버퍼에 추가합니다.
 
-- Add highlighting of content units.
+- 콘텐츠 단위의 하이라이트를 추가합니다.
 
-- Position cursor.
+- 커서 위치를 조정합니다.
 
-- Make current query. This results into some items being marked as
-  "inactive" and updating highlighting of current query on "active" items.
+- 현재 쿼리를 생성합니다. 이는 일부 항목을 "비활성"으로 표시하고 "활성" 항목에서 현재 쿼리의 하이라이트를 업데이트하게 됩니다.
 
-Note: this function is executed on every [VimResized](https://neovim.io/doc/user/helptag.html?tag=VimResized) to allow more
-responsive behavior.
+참고: 이 함수는 더 반응적인 동작을 위해 매번 [VimResized](https://neovim.io/doc/user/helptag.html?tag=VimResized) 시에 실행됩니다.
 
-#### Parameters {#ministarter.refresh-parameters}
+#### 매개변수 {#ministarter.refresh-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier of a valid Starter buffer.
-  Default: current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 유효한 Starter 버퍼의 버퍼 식별자. 기본값: 현재 버퍼.
 
 ---
 
 ### close() {#ministarter.close .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.close`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Close Starter buffer
+Starter 버퍼 닫기
 
-#### Parameters {#ministarter.close-parameters}
+#### 매개변수 {#ministarter.close-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier of a valid Starter buffer.
-  Default: current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 유효한 Starter 버퍼의 버퍼 식별자. 기본값: 현재 버퍼.
 
 ---
 
 ### sections {#ministarter.sections .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.sections`</p>
-Table of pre-configured sections
+미리 구성된 섹션 테이블
 
 ---
 
 ### sections.builtin_actions() {#ministarter.sections.builtin_actions .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.sections.builtin_actions`()</p>
-Section with builtin actions
+내장 동작이 포함된 섹션
 
-#### Return {#ministarter.sections.builtin_actions-return}
+#### 반환 {#ministarter.sections.builtin_actions-return}
 
 
-`(table)` Array of items.
+`(table)` 항목 배열.
 
 ---
 
 ### sections.sessions() {#ministarter.sections.sessions .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.sections.sessions`(<span class="help-syntax-special">{n}</span>, <span class="help-syntax-special">{recent}</span>)</p>
-Section with [mini.sessions](mini-sessions.qmd#mini.sessions) sessions
+[mini.sessions](mini-sessions.qmd#mini.sessions) 세션이 포함된 섹션
 
-Sessions are taken from [MiniSessions.detected](mini-sessions.qmd#minisessions.detected). Notes:
+세션은 [MiniSessions.detected](mini-sessions.qmd#minisessions.detected)에서 가져옵니다. 참고:
 
-- If it shows "'mini.sessions' is not set up", it means that you didn't
-  call `require('mini.sessions').setup()`.
+- "'mini.sessions' is not set up"이 표시된다면 `require('mini.sessions').setup()`을 호출하지 않았음을 의미합니다.
 
-- If it shows "There are no detected sessions in 'mini.sessions'", it means
-  that there are no sessions at the current sessions directory. Either
-  create session or supply different directory where session files are
-  stored (see [MiniSessions.setup()](mini-sessions.qmd#minisessions.setup)).
+- "There are no detected sessions in 'mini.sessions'"가 표시된다면 현재 세션 디렉토리에 세션이 없음을 의미합니다. 세션을 생성하거나 세션 파일이 저장된 다른 디렉토리를 제공하세요([MiniSessions.setup()](mini-sessions.qmd#minisessions.setup) 참조).
 
-- Local session (if detected) is always displayed first.
+- 로컬 세션(감지된 경우)은 항상 처음에 표시됩니다.
 
-#### Parameters {#ministarter.sections.sessions-parameters}
+#### 매개변수 {#ministarter.sections.sessions-parameters}
 
 
 
-<span class="help-syntax-special">{n}</span> `(number|nil)` Number of returned items. Default: 5.
+<span class="help-syntax-special">{n}</span> `(number|nil)` 반환할 항목 수. 기본값: 5.
 
-<span class="help-syntax-special">{recent}</span> `(boolean|nil)` Whether to use recent sessions (instead of
-  alphabetically by name). Default: true.
+<span class="help-syntax-special">{recent}</span> `(boolean|nil)` 최근 세션을 사용할지 여부(이름순 정렬 대신). 기본값: true.
 
-#### Return {#ministarter.sections.sessions-return}
+#### 반환 {#ministarter.sections.sessions-return}
 
 
-`(function)` Function which returns array of items.
+`(function)` 항목 배열을 반환하는 함수.
 
 ---
 
 ### sections.recent_files() {#ministarter.sections.recent_files .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.sections.recent_files`(<span class="help-syntax-special">{n}</span>, <span class="help-syntax-special">{current_dir}</span>, <span class="help-syntax-special">{show_path}</span>)</p>
-Section with most recently used files
+가장 최근에 사용한 파일이 포함된 섹션
 
-Files are taken from [v:oldfiles](https://neovim.io/doc/user/helptag.html?tag=v:oldfiles).
+파일은 [v:oldfiles](https://neovim.io/doc/user/helptag.html?tag=v:oldfiles)에서 가져옵니다.
 
-#### Parameters {#ministarter.sections.recent_files-parameters}
-
-
-
-<span class="help-syntax-special">{n}</span> `(number|nil)` Number of returned items. Default: 5.
-
-<span class="help-syntax-special">{current_dir}</span> `(boolean|nil)` Whether to return files only from current working
-  directory and its subdirectories. Default: `false`.
-
-<span class="help-syntax-special">{show_path}</span> `(boolean|function|nil)` Whether to append file name with its path.
-  If callable, will be called with full path and should return string to be
-  directly appended to file name. Default: `true`.
-
-#### Return {#ministarter.sections.recent_files-return}
+#### 매개변수 {#ministarter.sections.recent_files-parameters}
 
 
-`(function)` Function which returns array of items.
+
+<span class="help-syntax-special">{n}</span> `(number|nil)` 반환할 항목 수. 기본값: 5.
+
+<span class="help-syntax-special">{current_dir}</span> `(boolean|nil)` 현재 작업 디렉토리와 그 하위 디렉토리의 파일만 반환할지 여부. 기본값: `false`.
+
+<span class="help-syntax-special">{show_path}</span> `(boolean|function|nil)` 파일 이름에 경로를 추가할지 여부. 호출 가능한 경우 전체 경로와 함께 호출되며 파일 이름에 직접 추가될 문자열을 반환해야 합니다. 기본값: `true`.
+
+#### 반환 {#ministarter.sections.recent_files-return}
+
+
+`(function)` 항목 배열을 반환하는 함수.
 
 ---
 
 ### sections.pick() {#ministarter.sections.pick .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.sections.pick`()</p>
-Section with [mini.pick](mini-pick.qmd#mini.pick) pickers
+[mini.pick](mini-pick.qmd#mini.pick) 피커(picker)가 포함된 섹션
 
-Notes:
+참고:
 
-- All actions require 'mini.pick' module of 'mini.nvim'.
+- 모든 동작은 'mini.nvim'의 'mini.pick' 모듈이 필요합니다.
 
-- "Command history", "Explorer", and "Visited paths" items
-  require [mini.extra](mini-extra.qmd#mini.extra) module of 'mini.nvim'.
+- "명령 기록(Command history)", "탐색기(Explorer)", "방문한 경로(Visited paths)" 항목은 'mini.nvim'의 [mini.extra](mini-extra.qmd#mini.extra) 모듈이 필요합니다.
 
-- "Visited paths" items requires [mini.visits](mini-visits.qmd#mini.visits) module of 'mini.nvim'.
+- "방문한 경로" 항목은 'mini.nvim'의 [mini.visits](mini-visits.qmd#mini.visits) 모듈이 필요합니다.
 
-#### Return {#ministarter.sections.pick-return}
+#### 반환 {#ministarter.sections.pick-return}
 
 
-`(function)` Function which returns array of items.
+`(function)` 항목 배열을 반환하는 함수.
 
 ---
 
 ### sections.telescope() {#ministarter.sections.telescope .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.sections.telescope`()</p>
-Section with basic Telescope pickers relevant to start screen
+시작 화면과 관련된 기본적인 Telescope 피커가 포함된 섹션
 
-Notes:
+참고:
 
-- All actions require
-  [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim).
+- 모든 동작은 [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)이 필요합니다.
 
-- "Browser" item requires
-  [nvim-telescope/telescope-file-browser.nvim](https://github.com/nvim-telescope/telescope-file-browser.nvim).
+- "Browser" 항목은 [nvim-telescope/telescope-file-browser.nvim](https://github.com/nvim-telescope/telescope-file-browser.nvim)이 필요합니다.
 
-#### Return {#ministarter.sections.telescope-return}
+#### 반환 {#ministarter.sections.telescope-return}
 
 
-`(function)` Function which returns array of items.
+`(function)` 항목 배열을 반환하는 함수.
 
 ---
 
 ### gen_hook {#ministarter.gen_hook .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.gen_hook`</p>
-Table with pre-configured content hook generators
+미리 구성된 콘텐츠 후크 생성기 테이블
 
-Each element is a function which returns content hook. So to use them
-inside [MiniStarter.setup()](mini-starter.qmd#ministarter.setup), call them.
+각 요소는 콘텐츠 후크를 반환하는 함수입니다. 따라서 [MiniStarter.setup()](mini-starter.qmd#ministarter.setup) 내부에서 사용하려면 해당 함수를 호출해야 합니다.
 
 ---
 
 ### gen_hook.padding() {#ministarter.gen_hook.padding .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.gen_hook.padding`(<span class="help-syntax-special">{left}</span>, <span class="help-syntax-special">{top}</span>)</p>
-Hook generator for padding
+패딩을 위한 후크 생성기
 
-Output is a content hook which adds constant padding from left and top.
-This allows tweaking the screen position of buffer content.
+출력은 왼쪽과 상단에 일정한 패딩을 추가하는 콘텐츠 후크입니다. 이를 통해 버퍼 콘텐츠의 화면 위치를 미세 조정할 수 있습니다.
 
-#### Parameters {#ministarter.gen_hook.padding-parameters}
-
+#### 매개변수 {#ministarter.gen_hook.padding-parameters}
 
 
-<span class="help-syntax-special">{left}</span> `(number|nil)` Number of empty spaces to add to start of each content
-  line. Default: 0.
 
-<span class="help-syntax-special">{top}</span> `(number|nil)` Number of empty lines to add to start of content.
-  Default: 0.
+<span class="help-syntax-special">{left}</span> `(number|nil)` 각 콘텐츠 라인의 시작 부분에 추가할 빈 공간의 수. 기본값: 0.
 
-#### Return {#ministarter.gen_hook.padding-return}
+<span class="help-syntax-special">{top}</span> `(number|nil)` 콘텐츠 시작 부분에 추가할 빈 라인의 수. 기본값: 0.
+
+#### 반환 {#ministarter.gen_hook.padding-return}
 
 
-`(function)` Content hook.
+`(function)` 콘텐츠 후크.
 
 ---
 
 ### gen_hook.adding_bullet() {#ministarter.gen_hook.adding_bullet .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.gen_hook.adding_bullet`(<span class="help-syntax-special">{bullet}</span>, <span class="help-syntax-special">{place_cursor}</span>)</p>
-Hook generator for adding bullet to items
+항목에 불렛(bullet)을 추가하는 후크 생성기
 
-Output is a content hook which adds supplied string to be displayed to the
-left of item.
+출력은 항목의 왼쪽에 표시될 제공된 문자열을 추가하는 콘텐츠 후크입니다.
 
-#### Parameters {#ministarter.gen_hook.adding_bullet-parameters}
-
+#### 매개변수 {#ministarter.gen_hook.adding_bullet-parameters}
 
 
-<span class="help-syntax-special">{bullet}</span> `(string|nil)` String to be placed to the left of item name.
-  Default: "░ ".
 
-<span class="help-syntax-special">{place_cursor}</span> `(boolean|nil)` Whether to place cursor on the first character
-  of bullet when corresponding item becomes current. Default: true.
+<span class="help-syntax-special">{bullet}</span> `(string|nil)` 항목 이름 왼쪽에 배치할 문자열. 기본값: "░ ".
 
-#### Return {#ministarter.gen_hook.adding_bullet-return}
+<span class="help-syntax-special">{place_cursor}</span> `(boolean|nil)` 해당 항목이 현재 항목이 되었을 때 불렛의 첫 번째 문자에 커서를 위치시킬지 여부. 기본값: true.
+
+#### 반환 {#ministarter.gen_hook.adding_bullet-return}
 
 
-`(function)` Content hook.
+`(function)` 콘텐츠 후크.
 
 ---
 
 ### gen_hook.indexing() {#ministarter.gen_hook.indexing .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.gen_hook.indexing`(<span class="help-syntax-special">{grouping}</span>, <span class="help-syntax-special">{exclude_sections}</span>)</p>
-Hook generator for indexing items
+항목 인덱싱을 위한 후크 생성기
 
-Output is a content hook which adds unique index to the start of item's
-name. It results into shortening queries required to choose an item (at
-expense of clarity).
+출력은 항목 이름의 시작 부분에 고유한 인덱스를 추가하는 콘텐츠 후크입니다. 이는 항목 선택에 필요한 쿼리를 단축하는 결과를 가져옵니다(명확성은 떨어질 수 있음).
 
-#### Parameters {#ministarter.gen_hook.indexing-parameters}
+#### 매개변수 {#ministarter.gen_hook.indexing-parameters}
 
 
 
-<span class="help-syntax-special">{grouping}</span> `(string|nil)` One of "all" (number indexing across all sections) or
-  "section" (letter-number indexing within each section). Default: "all".
+<span class="help-syntax-special">{grouping}</span> `(string|nil)` "all"(모든 섹션에 걸쳐 숫자로 인덱싱) 또는 "section"(각 섹션 내에서 문자-숫자로 인덱싱) 중 하나. 기본값: "all".
 
-<span class="help-syntax-special">{exclude_sections}</span> `(table|nil)` Array of section names (values of `section`
-  element of item) for which index won't be added. Default: `{}`.
+<span class="help-syntax-special">{exclude_sections}</span> `(table|nil)` 인덱스가 추가되지 않을 섹션 이름(항목의 `section` 요소 값) 배열. 기본값: `{}`.
 
-#### Return {#ministarter.gen_hook.indexing-return}
+#### 반환 {#ministarter.gen_hook.indexing-return}
 
 
-`(function)` Content hook.
+`(function)` 콘텐츠 후크.
 
 ---
 
 ### gen_hook.aligning() {#ministarter.gen_hook.aligning .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.gen_hook.aligning`(<span class="help-syntax-special">{horizontal}</span>, <span class="help-syntax-special">{vertical}</span>)</p>
-Hook generator for aligning content
+콘텐츠 정렬을 위한 후크 생성기
 
-Output is a content hook which independently aligns content horizontally
-and vertically. Window width and height are taken from first window in current
-tabpage displaying the Starter buffer.
+출력은 콘텐츠를 가로 및 세로로 독립적으로 정렬하는 콘텐츠 후크입니다. 윈도우 너비와 높이는 Starter 버퍼를 표시하는 현재 탭페이지의 첫 번째 윈도우에서 가져옵니다.
 
-Basically, this computes left and top pads for [MiniStarter.gen\_hook.padding()](mini-starter.qmd#ministarter.gen_hook.padding)
-such that output lines would appear aligned in certain way.
+기본적으로 이는 출력 라인이 특정 방식으로 정렬되어 보이도록 [MiniStarter.gen\_hook.padding()](mini-starter.qmd#ministarter.gen_hook.padding)을 위한 왼쪽 및 상단 패딩을 계산합니다.
 
-#### Parameters {#ministarter.gen_hook.aligning-parameters}
+#### 매개변수 {#ministarter.gen_hook.aligning-parameters}
 
 
 
-<span class="help-syntax-special">{horizontal}</span> `(string|nil)` One of "left", "center", "right". Default: "left".
+<span class="help-syntax-special">{horizontal}</span> `(string|nil)` "left", "center", "right" 중 하나. 기본값: "left".
 
-<span class="help-syntax-special">{vertical}</span> `(string|nil)` One of "top", "center", "bottom". Default: "top".
+<span class="help-syntax-special">{vertical}</span> `(string|nil)` "top", "center", "bottom" 중 하나. 기본값: "top".
 
-#### Return {#ministarter.gen_hook.aligning-return}
+#### 반환 {#ministarter.gen_hook.aligning-return}
 
 
-`(function)` Content hook.
+`(function)` 콘텐츠 후크.
 
 ---
 
 ### get_content() {#ministarter.get_content .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.get_content`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Get content of Starter buffer
+Starter 버퍼의 콘텐츠 가져오기
 
-Generally, buffer content is a table in the form of "2d array" (or rather
-"2d list" because number of elements can differ):
+일반적으로 버퍼 콘텐츠는 "2차원 배열"(요소 수가 다를 수 있으므로 실제로는 "2차원 리스트") 형태의 테이블입니다:
 
-- Each element represents content line: an array with content units to be
-  displayed in one buffer line.
+- 각 요소는 하나의 버퍼 라인에 표시될 콘텐츠 단위 배열인 콘텐츠 라인을 나타냅니다.
 
-- Each content unit is a table with at least the following elements:
+- 각 콘텐츠 단위는 최소한 다음 요소를 포함하는 테이블입니다:
 
-    - "type" - string with type of content. Something like "item",
-      "section", "header", "footer", "empty", etc.
+    - "type" - 콘텐츠의 유형을 나타내는 문자열입니다. "item", "section", "header", "footer", "empty" 등.
 
-    - "string" - which string should be displayed. May be an empty string.
+    - "string" - 표시될 문자열입니다. 빈 문자열일 수 있습니다.
 
-    - "hl" - which highlighting should be applied to content string. May be
-      `nil` for no highlighting.
+    - "hl" - 콘텐츠 문자열에 적용될 하이라이트입니다. 하이라이트가 없는 경우 `nil`일 수 있습니다.
 
-See [MiniStarter.content\_to\_lines()](mini-starter.qmd#ministarter.content_to_lines) for converting content to buffer lines
-and [MiniStarter.content\_to\_items()](mini-starter.qmd#ministarter.content_to_items) - to list of parsed items.
+콘텐츠를 버퍼 라인으로 변환하려면 [MiniStarter.content\_to\_lines()](mini-starter.qmd#ministarter.content_to_lines)를, 파싱된 항목 리스트로 변환하려면 [MiniStarter.content\_to\_items()](mini-starter.qmd#ministarter.content_to_items)를 참조하세요.
 
-Notes:
+참고:
 
-- Content units with type "item" also have `item` element with all
-  information about an item it represents. Those elements are used directly
-  to create an array of items used for query.
+- 유형이 "item"인 콘텐츠 단위는 해당 단위가 나타내는 항목에 대한 모든 정보를 담은 `item` 요소도 갖습니다. 이러한 요소들은 쿼리에 사용될 항목 배열을 생성하는 데 직접 사용됩니다.
 
-#### Parameters {#ministarter.get_content-parameters}
+#### 매개변수 {#ministarter.get_content-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier of a valid Starter buffer.
-  Default: current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 유효한 Starter 버퍼의 버퍼 식별자. 기본값: 현재 버퍼.
 
 ---
 
 ### content_coords() {#ministarter.content_coords .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.content_coords`(<span class="help-syntax-special">{content}</span>, <span class="help-syntax-special">{predicate}</span>)</p>
-Helper to iterate through content
+콘텐츠를 순회하기 위한 헬퍼
 
-Basically, this traverses content "2d array" (in depth-first fashion; top
-to bottom, left to right) and returns "coordinates" of units for which
-`predicate` is true-ish.
+기본적으로 이는 콘텐츠 "2차원 배열"을 (깊이 우선 방식; 위에서 아래로, 왼쪽에서 오른쪽으로) 순회하며 `predicate`가 참인 단위의 "좌표(coordinates)"를 반환합니다.
 
-#### Parameters {#ministarter.content_coords-parameters}
+#### 매개변수 {#ministarter.content_coords-parameters}
 
 
 
-<span class="help-syntax-special">{content}</span> `(table|nil)` Content "2d array". Default: content of current buffer.
+<span class="help-syntax-special">{content}</span> `(table|nil)` 콘텐츠 "2차원 배열". 기본값: 현재 버퍼의 콘텐츠.
 
-<span class="help-syntax-special">{predicate}</span> `(function|string|nil)` Predictate to filter units. If it is:
+<span class="help-syntax-special">{predicate}</span> `(function|string|nil)` 단위를 필터링할 서술어. 다음과 같은 경우:
 
-   - Function, then it is evaluated with unit as input.
+   - 함수인 경우, 단위를 입력으로 평가합니다.
 
-   - String, then it checks unit to have this type (allows easy getting of
-     units with some type).
+   - 문자열인 경우, 단위가 해당 유형을 가졌는지 확인합니다(특정 유형의 단위를 쉽게 가져올 수 있게 함).
 
-   - `nil`, all units are kept.
+   - `nil`인 경우, 모든 단위가 유지됩니다.
 
-#### Return {#ministarter.content_coords-return}
+#### 반환 {#ministarter.content_coords-return}
 
 
-`(table)` Array of resulting units' coordinates. Each coordinate is a
-  table with <span class="help-syntax-keys">\<line\></span> and <span class="help-syntax-keys">\<unit\></span> keys. To retrieve actual unit from coordinate
-  `c`, use `content[c.line][c.unit]`.
+`(table)` 결과 단위들의 좌표 배열. 각 좌표는 <span class="help-syntax-keys">\<line\></span> 및 <span class="help-syntax-keys">\<unit\></span> 키를 가진 테이블입니다. 좌표 `c`에서 실제 단위를 가져오려면 `content[c.line][c.unit]`을 사용하세요.
 
 ---
 
 ### content_to_lines() {#ministarter.content_to_lines .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.content_to_lines`(<span class="help-syntax-special">{content}</span>)</p>
-Convert content to buffer lines
+콘텐츠를 버퍼 라인으로 변환
 
-One buffer line is made by concatenating `string` element of units within
-same content line.
+하나의 버퍼 라인은 동일한 콘텐츠 라인 내의 단위들의 `string` 요소를 연결하여 만들어집니다.
 
-#### Parameters {#ministarter.content_to_lines-parameters}
-
+#### 매개변수 {#ministarter.content_to_lines-parameters}
 
 
-<span class="help-syntax-special">{content}</span> `(table|nil)` Content "2d array". Default: content of current buffer.
 
-#### Return {#ministarter.content_to_lines-return}
+<span class="help-syntax-special">{content}</span> `(table|nil)` 콘텐츠 "2차원 배열". 기본값: 현재 버퍼의 콘텐츠.
+
+#### 반환 {#ministarter.content_to_lines-return}
 
 
-`(table)` Array of strings for each buffer line.
+`(table)` 각 버퍼 라인에 대한 문자열 배열.
 
 ---
 
 ### content_to_items() {#ministarter.content_to_items .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.content_to_items`(<span class="help-syntax-special">{content}</span>)</p>
-Convert content to items
+콘텐츠를 항목으로 변환
 
-Parse content (in depth-first fashion) and retrieve each item from `item`
-element of content units with type "item". This also:
+콘텐츠를 (깊이 우선 방식으로) 파싱하고 유형이 "item"인 콘텐츠 단위의 `item` 요소에서 각 항목을 가져옵니다. 또한:
 
-- Computes some helper information about how item will be actually
-  displayed (after [MiniStarter.content\_to\_lines()](mini-starter.qmd#ministarter.content_to_lines)) and minimum number of
-  prefix characters needed for a particular item to be queried single.
+- 항목이 실제로 어떻게 표시될지([MiniStarter.content\_to\_lines()](mini-starter.qmd#ministarter.content_to_lines) 이후)에 대한 일부 헬퍼 정보와 특정 항목이 단독으로 쿼리되는 데 필요한 최소 접두사 문자 수를 계산합니다.
 
-- Modifies item's `name` element taking it from corresponding `string`
-  element of content unit. This allows modifying item's `name` at the stage
-  of content hooks (like, for example, in [MiniStarter.gen\_hook.indexing()](mini-starter.qmd#ministarter.gen_hook.indexing)).
+- 콘텐츠 단위의 대응하는 `string` 요소를 가져와서 항목의 `name` 요소를 수정합니다. 이를 통해 콘텐츠 후크 단계(예: [MiniStarter.gen\_hook.indexing()](mini-starter.qmd#ministarter.gen_hook.indexing) 등)에서 항목의 `name`을 수정할 수 있습니다.
 
-#### Parameters {#ministarter.content_to_items-parameters}
+#### 매개변수 {#ministarter.content_to_items-parameters}
 
 
 
-<span class="help-syntax-special">{content}</span> `(table|nil)` Content "2d array". Default: content of current buffer.
+<span class="help-syntax-special">{content}</span> `(table|nil)` 콘텐츠 "2차원 배열". 기본값: 현재 버퍼의 콘텐츠.
 
-#### Return {#ministarter.content_to_items-return}
+#### 반환 {#ministarter.content_to_items-return}
 
 
-`(table)` Array of items.
+`(table)` 항목 배열.
 
 ---
 
 ### eval_current_item() {#ministarter.eval_current_item .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.eval_current_item`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Evaluate current item
+현재 항목 평가
 
-Note that it resets current query before evaluation, as it is rarely needed
-any more.
+평가 전에는 현재 쿼리가 더 이상 필요하지 않은 경우가 많으므로 쿼리를 초기화합니다.
 
-#### Parameters {#ministarter.eval_current_item-parameters}
-
+#### 매개변수 {#ministarter.eval_current_item-parameters}
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier of a valid Starter buffer.
-  Default: current buffer.
+
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 유효한 Starter 버퍼의 버퍼 식별자. 기본값: 현재 버퍼.
 
 ---
 
 ### update_current_item() {#ministarter.update_current_item .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.update_current_item`(<span class="help-syntax-special">{direction}</span>, <span class="help-syntax-special">{buf_id}</span>)</p>
-Update current item
+현재 항목 업데이트
 
-This makes next (with respect to `direction`) active item to be current.
+`direction`에 따라 다음 활성 항목을 현재 항목으로 만듭니다.
 
-#### Parameters {#ministarter.update_current_item-parameters}
+#### 매개변수 {#ministarter.update_current_item-parameters}
 
 
 
-<span class="help-syntax-special">{direction}</span> `(string)` One of "next" or "previous".
+<span class="help-syntax-special">{direction}</span> `(string)` "next" 또는 "previous" 중 하나.
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier of a valid Starter buffer.
-  Default: current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 유효한 Starter 버퍼의 버퍼 식별자. 기본값: 현재 버퍼.
 
 ---
 
 ### add_to_query() {#ministarter.add_to_query .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.add_to_query`(<span class="help-syntax-special">{char}</span>, <span class="help-syntax-special">{buf_id}</span>)</p>
-Add character to current query
+현재 쿼리에 문자 추가
 
 
-- Update current query by appending `char` to its end (only if it results
-  into at least one active item) or delete latest character if `char` is `nil`.
+- 현재 쿼리 끝에 `char`를 추가하여 업데이트하거나(최소 하나 이상의 활성 항목이 남는 경우에만), `char`가 `nil`인 경우 마지막 문자를 삭제합니다.
 
-- Recompute status of items: "active" if its name starts with new query,
-  "inactive" otherwise.
+- 항목의 상태를 다시 계산합니다: 이름이 새 쿼리로 시작하면 "활성", 그렇지 않으면 "비활성".
 
-- Update highlighting: whole strings for "inactive" items, current query
-  for "active" items.
+- 하이라이트 업데이트: "비활성" 항목은 전체 문자열, "활성" 항목은 현재 쿼리 부분을 업데이트합니다.
 
-#### Parameters {#ministarter.add_to_query-parameters}
+#### 매개변수 {#ministarter.add_to_query-parameters}
 
 
 
-<span class="help-syntax-special">{char}</span> `(string|nil)` Single character to be added to query. If `nil`, deletes
-  latest character from query.
+<span class="help-syntax-special">{char}</span> `(string|nil)` 쿼리에 추가할 단일 문자. `nil`인 경우 쿼리의 마지막 문자를 삭제합니다.
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier of a valid Starter buffer.
-  Default: current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 유효한 Starter 버퍼의 버퍼 식별자. 기본값: 현재 버퍼.
 
 ---
 
 ### set_query() {#ministarter.set_query .help-syntax-right-anchor}
 
 <p align="center">`MiniStarter.set_query`(<span class="help-syntax-special">{query}</span>, <span class="help-syntax-special">{buf_id}</span>)</p>
-Set current query
+현재 쿼리 설정
 
-#### Parameters {#ministarter.set_query-parameters}
+#### 매개변수 {#ministarter.set_query-parameters}
 
 
 
-<span class="help-syntax-special">{query}</span> `(string|nil)` Query to be set (only if it results into at least one
-  active item). Default: `nil` for setting query to empty string, which
-  essentially resets query.
+<span class="help-syntax-special">{query}</span> `(string|nil)` 설정할 쿼리(최소 하나 이상의 활성 항목이 남는 경우에만). 기본값: `nil`인 경우 쿼리를 빈 문자열로 설정하여 쿼리를 초기화합니다.
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier of a valid Starter buffer.
-  Default: current buffer.
-
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 유효한 Starter 버퍼의 버퍼 식별자. 기본값: 현재 버퍼.

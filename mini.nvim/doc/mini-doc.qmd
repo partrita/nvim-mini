@@ -1,218 +1,162 @@
 ---
-title: "mini.doc documentation"
+title: "mini.doc 문서"
 ---
 
 _Generated from the `main` branch of 'mini.nvim'_
 
-<a name="mini.doc" href="mini-doc.qmd#mini.doc"><b>mini.doc</b></a> Generate Neovim help files
+<a name="mini.doc" href="mini-doc.qmd#mini.doc"><b>mini.doc</b></a> Neovim 도움말 파일 생성
 
 MIT License Copyright (c) 2022 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Key design ideas:
+주요 설계 아이디어:
 
-- Keep documentation next to code by writing EmmyLua-like annotation
-  comments. They will be parsed as is, so formatting should follow built-in
-  guide in [help-writing](https://neovim.io/doc/user/helptag.html?tag=help-writing). However, custom hooks are allowed at many
-  generation stages for more granular management of output help file.
+- EmmyLua 스타일의 어노테이션 주석을 작성하여 코드 옆에 문서를 유지합니다. 주석은 있는 그대로 파싱되므로, 형식은 [help-writing](https://neovim.io/doc/user/helptag.html?tag=help-writing)의 내장 가이드를 따라야 합니다. 하지만 더 세밀한 출력 도움말 파일 관리를 위해 많은 생성 단계에서 사용자 정의 훅이 허용됩니다.
 
 
-- Generation is done by processing a set of ordered files line by line.
-  Each line can either be considered as a part of documentation block (if
-  it matches certain configurable pattern) or not (considered to be an
-  "afterline" of documentation block). See [MiniDoc.generate()](mini-doc.qmd#minidoc.generate) for more
-  details.
+- 생성은 정해진 순서의 파일 세트를 한 줄씩 처리하여 수행됩니다. 각 줄은 (특정 설정 가능한 패턴과 일치하는 경우) 문서화 블록의 일부로 간주되거나, 그렇지 않은 경우 문서화 블록의 "애프터라인(afterline)"으로 간주될 수 있습니다. 자세한 내용은 [MiniDoc.generate()](mini-doc.qmd#minidoc.generate)를 참조하세요.
 
 
-- Processing is done by using nested data structures (section, block, file,
-  doc) describing certain parts of help file. See [MiniDoc-data-structures](mini-doc.qmd#minidoc-data-structures)
-  for more details.
+- 도움말 파일의 특정 부분을 설명하는 중첩된 데이터 구조(섹션, 블록, 파일, 문서)를 사용하여 처리가 수행됩니다. 자세한 내용은 [MiniDoc-data-structures](mini-doc.qmd#minidoc-data-structures)를 참조하세요.
 
 
-- Project specific script can be written as plain Lua file with
-  configuratble path. See [MiniDoc.generate()](mini-doc.qmd#minidoc.generate) for more details.
+- 프로젝트별 스크립트는 설정 가능한 경로를 가진 일반 Lua 파일로 작성할 수 있습니다. 자세한 내용은 [MiniDoc.generate()](mini-doc.qmd#minidoc.generate)를 참조하세요.
 
-What it doesn't do:
+하지 않는 작업:
 
-- It doesn't support markdown or other markup language inside annotations.
+- 어노테이션 내부에서 마크다운이나 다른 마크업 언어를 지원하지 않습니다.
 
-- It doesn't use treesitter in favor of Lua string manipulation for basic
-  tasks (parsing annotations, formatting, auto-generating tags, etc.). This
-  is done to manage complexity and be dependency free.
+- 기본적인 작업(어노테이션 파싱, 포맷팅, 태그 자동 생성 등)을 위해 트리시터(treesitter) 대신 Lua 문자열 조작을 사용합니다. 이는 복잡성을 관리하고 의존성을 없애기 위함입니다.
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.doc').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniDoc`
-which you can use for scripting or manually (with `:lua MiniDoc.*`).
+이 모듈은 `require('mini.doc').setup({})`을 통한 설정이 필요합니다 (`{}`를 사용자 `config` 테이블로 대체). 그러면 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniDoc`이 생성됩니다 (예: `:lua MiniDoc.*`).
 
-See [MiniDoc.config](mini-doc.qmd#minidoc.config) for available config settings.
+사용 가능한 설정 옵션은 [MiniDoc.config](mini-doc.qmd#minidoc.config)를 참조하세요.
 
-You can override runtime config settings locally to buffer inside
-`vim.b.minidoc_config` which should have same structure as `MiniDoc.config`.
-See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+`MiniDoc.config`와 동일한 구조를 가진 `vim.b.minidoc_config`를 사용하여 버퍼별로 런타임 설정을 재정의할 수 있습니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
 
-To stop module from showing non-error feedback, set `config.silent = true`.
+모듈이 에러가 아닌 피드백을 표시하지 않게 하려면 `config.silent = true`로 설정하세요.
 
-#### Tips {#module-tips}
+#### 팁 {#module-tips}
 
 
 
-- Some settings tips that might make writing annotation comments easier:
+- 어노테이션 주석 작성을 더 쉽게 만들어 줄 수 있는 몇 가지 설정 팁:
 
-    - Set up appropriate 'comments' for `lua` file type to respect
-      EmmyLua-like's `---` comment leader. Value `:---,:--` seems to work.
+    - EmmyLua 스타일의 `---` 주석 리더를 존중하도록 `lua` 파일 타입에 적절한 'comments'를 설정하세요. `:---,:--` 값이 잘 작동하는 것 같습니다.
 
-    - Set up appropriate 'formatoptions' (see also [fo-table](https://neovim.io/doc/user/helptag.html?tag=fo-table)). Consider
-      adding `j`, `n`, `q`, and `r` flags.
+    - 적절한 'formatoptions'를 설정하세요 ([fo-table](https://neovim.io/doc/user/helptag.html?tag=fo-table) 참조). `j`, `n`, `q`, `r` 플래그 추가를 고려해 보세요.
 
-    - Set up appropriate 'formatlistpat' to help auto-formatting lists (if
-      `n` flag is added to 'formatoptions'). One suggestion (not entirely
-      ideal) is a value `^\s*[0-9\-\+\*]\+[\.\)]*\s\+`. This reads as 'at
-      least one special character (digit, `-`, `+`, `*`) possibly followed
-      by some punctuation (`.` or `)`) followed by at least one space is a
-      start of list item'.
+    - 목록 자동 포맷팅을 돕기 위해 적절한 'formatlistpat'을 설정하세요 ('formatoptions'에 `n` 플래그가 추가된 경우). 한 가지 제안(완벽하지는 않음)은 `^\s*[0-9\-\+\*]\+[\.\)]*\s\+` 값입니다. 이는 '적어도 하나의 특수 문자(숫자, `-`, `+`, `*`) 뒤에 문장 부호(`.` 또는 `)`)가 올 수도 있고, 그 뒤에 적어도 하나의 공백이 오면 목록 항목의 시작'으로 읽힙니다.
 
-- Probably one of the most reliable resources for what is considered to be
-  best practice when using this module is this whole plugin. Look at source
-  code for the reference.
+- 아마도 이 모듈을 사용할 때 가장 권장되는 관행에 대한 신뢰할 수 있는 리소스 중 하나는 이 플러그인 전체일 것입니다. 참고를 위해 소스 코드를 살펴보세요.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [tjdevries/tree-sitter-lua](https://github.com/tjdevries/tree-sitter-lua):
 
-    - Its key design is to use treesitter grammar to parse both Lua code
-      and annotation comments. This makes it not easy to install,
-      customize, and support.
+    - 주요 설계는 Lua 코드와 어노테이션 주석을 모두 파싱하기 위해 트리시터 문법을 사용하는 것입니다. 이로 인해 설치, 사용자 정의 및 지원이 쉽지 않습니다.
 
-    - It takes more care about automating output formatting (like auto
-      indentation and line width fit). This plugin leans more to manual
-      formatting with option to supply customized post-processing hooks.
+    - 출력 포맷팅 자동화(자동 들여쓰기 및 줄 너비 맞춤 등)에 더 많은 신경을 씁니다. 이 플러그인은 사용자 정의 후처리 훅을 제공하는 옵션과 함께 수동 포맷팅에 더 치중합니다.
 
 ---
 
-### Data structures {#minidoc-data-structures .help-syntax-right-anchor}
+### 데이터 구조 {#minidoc-data-structures .help-syntax-right-anchor}
 
-Data structures
+데이터 구조
 
-Data structures are basically arrays of other structures accompanied with
-some fields (keys with data values) and methods (keys with function
-values):
+데이터 구조는 기본적으로 일부 필드(데이터 값을 가진 키)와 메서드(함수 값을 가진 키)가 동반된 다른 구조들의 배열입니다:
 
-- `Section structure` is an array of string lines describing one aspect
-  (determined by section id like '@param', '@return', '@text') of an
-  annotation subject. All lines will be used directly in help file.
+- `섹션 구조 (Section structure)`는 어노테이션 주제의 한 측면('@param', '@return', '@text'와 같은 섹션 ID로 결정됨)을 설명하는 문자열 줄들의 배열입니다. 모든 줄은 도움말 파일에서 직접 사용됩니다.
 
-- `Block structure` is an array of sections describing one annotation
-  subject like function, table, concept.
+- `블록 구조 (Block structure)`는 함수, 테이블, 개념과 같은 하나의 어노테이션 주제를 설명하는 섹션들의 배열입니다.
 
-- `File structure` is an array of blocks describing certain file on disk.
-  Basically, file is split into consecutive blocks: annotation lines go
-  inside block, non-annotation - inside `block_afterlines` element of info.
+- `파일 구조 (File structure)`는 디스크의 특정 파일을 설명하는 블록들의 배열입니다. 기본적으로 파일은 연속된 블록으로 나뉩니다: 어노테이션 줄은 블록 내부로 들어가고, 비-어노테이션 줄은 정보의 `block_afterlines` 요소 내부로 들어갑니다.
 
-- `Doc structure` is an array of files describing a final help file. Each
-  string line from section (when traversed in depth-first fashion) goes
-  directly into output file.
+- `문서 구조 (Doc structure)`는 최종 도움말 파일을 설명하는 파일들의 배열입니다. 섹션의 각 문자열 줄은 (깊이 우선 방식으로 탐색될 때) 출력 파일로 직접 들어갑니다.
 
-All structures have these keys:
+모든 구조는 다음 키들을 가집니다:
 
-- Fields:
+- 필드:
 
-    - `info` - contains additional information about current structure.
-      For more details see next section.
+    - `info` - 현재 구조에 대한 추가 정보를 포함합니다. 자세한 내용은 다음 섹션을 참조하세요.
 
-    - `parent` - table of parent structure (if exists).
+    - `parent` - 부모 구조의 테이블입니다 (존재하는 경우).
 
-    - `parent_index` - index of this structure in its parent's array. Useful
-      for adding to parent another structure near current one.
+    - `parent_index` - 부모 배열에서 이 구조의 인덱스입니다. 부모의 현재 구조 근처에 다른 구조를 추가할 때 유용합니다.
 
-    - `type` - string with structure type (section, block, file, doc).
+    - `type` - 구조 타입(section, block, file, doc)을 나타내는 문자열입니다.
 
-- Methods (use them as `x:method(args)`):
+- 메서드 (`x:method(args)`와 같이 사용):
 
-    - `insert(self, [index,] child)` - insert `child` to `self` at position
-      `index` (optional; if not supplied, child will be appended to end).
-      Basically, a `table.insert()`, but adds `parent` and `parent_index`
-      fields to `child` while properly updating `self`.
+    - `insert(self, [index,] child)` - `self`의 `index` 위치에 `child`를 삽입합니다 (선택 사항; 제공되지 않으면 자식은 끝에 추가됨). 기본적으로 `table.insert()`와 같지만, `self`를 적절히 업데이트하면서 `child`에 `parent` 및 `parent_index` 필드를 추가합니다.
 
-    - `remove(self [,index])` - remove from `self` element at position
-      `index`. Basically, a `table.remove()`, but properly updates `self`.
+    - `remove(self [,index])` - `self`의 `index` 위치에서 요소를 제거합니다. 기본적으로 `table.remove()`와 같지만, `self`를 적절히 업데이트합니다.
 
-    - `has_descendant(self, predicate)` - whether there is a descendant
-      (structure or string) for which `predicate` returns `true`. In case of
-      success also returns the first such descendant as second value.
+    - `has_descendant(self, predicate)` - `predicate`가 `true`를 반환하는 자손(구조 또는 문자열)이 있는지 여부입니다. 성공할 경우 첫 번째 자손을 두 번째 값으로 반환합니다.
 
-    - `has_lines(self)` - whether structure has any lines (even empty ones)
-      to be put in output file. For section structures this is equivalent to
-      `#self`, but more useful for higher order structures.
+    - `has_lines(self)` - 구조에 출력 파일에 넣을 줄(빈 줄 포함)이 있는지 여부입니다. 섹션 구조의 경우 `#self`와 동일하지만, 더 높은 순서의 구조에 더 유용합니다.
 
-    - `clear_lines(self)` - remove all lines from structure. As a result,
-      this structure won't contribute to output help file.
+    - `clear_lines(self)` - 구조에서 모든 줄을 제거합니다. 결과적으로 이 구조는 출력 도움말 파일에 기여하지 않게 됩니다.
 
-Description of `info` fields per structure type:
+구조 타입별 `info` 필드 설명:
 
-- `Section`:
+- `섹션 (Section)`:
 
-    - `id` - captured section identifier. Can be empty string meaning no
-      identifier is captured.
+    - `id` - 캡처된 섹션 식별자입니다. 식별자가 캡처되지 않았음을 의미하는 빈 문자열일 수 있습니다.
 
-    - `line_begin` - line number inside file at which section begins (-1 if
-      not generated from file).
+    - `line_begin` - 섹션이 시작되는 파일 내부의 줄 번호입니다 (파일에서 생성되지 않은 경우 -1).
 
-    - `line_end` - line number inside file at which section ends (-1 if not
-      generated from file).
+    - `line_end` - 섹션이 끝나는 파일 내부의 줄 번호입니다 (파일에서 생성되지 않은 경우 -1).
 
-- `Block`:
+- `블록 (Block)`:
 
-    - `afterlines` - array of strings which were parsed from file after
-      this annotation block (up until the next block or end of file).
-      Useful for making automated decisions about what is being documented.
+    - `afterlines` - 이 어노테이션 블록 이후(다음 블록 또는 파일 끝까지) 파일에서 파싱된 문자열 배열입니다. 문서화되는 대상에 대해 자동화된 결정을 내리는 데 유용합니다.
 
-    - `line_begin` - line number inside file at which block begins  (-1 if
-      not generated from file).
+    - `line_begin` - 블록이 시작되는 파일 내부의 줄 번호입니다 (-1 if not generated from file).
 
-    - `line_end` - line number inside file at which block ends  (-1 if not
-      generated from file).
+    - `line_end` - 블록이 끝나는 파일 내부의 줄 번호입니다 (-1 if not generated from file).
 
-- `File`:
+- `파일 (File)`:
 
-    - `path` - absolute path to a file (`''` if not generated from file).
+    - `path` - 파일의 절대 경로입니다 (파일에서 생성되지 않은 경우 `''`).
 
-- `Doc`:
+- `문서 (Doc)`:
 
-    - `input` - array of input file paths (as in [MiniDoc.generate()](mini-doc.qmd#minidoc.generate)).
+    - `input` - 입력 파일 경로들의 배열입니다 ([MiniDoc.generate()](mini-doc.qmd#minidoc.generate)에서와 동일).
 
-    - `output` - output path (as in [MiniDoc.generate()](mini-doc.qmd#minidoc.generate)).
+    - `output` - 출력 경로입니다 ([MiniDoc.generate()](mini-doc.qmd#minidoc.generate)에서와 동일).
 
-    - `config` - configuration used (as in [MiniDoc.generate()](mini-doc.qmd#minidoc.generate)).
+    - `config` - 사용된 설정입니다 ([MiniDoc.generate()](mini-doc.qmd#minidoc.generate)에서와 동일).
 
 ---
 
 ### setup() {#minidoc.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniDoc.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minidoc.setup-parameters}
+#### 매개변수 {#minidoc.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniDoc.config](mini-doc.qmd#minidoc.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniDoc.config](mini-doc.qmd#minidoc.config)를 참조하세요.
 
-#### Usage {#minidoc.setup-usage}
+#### 사용법 {#minidoc.setup-usage}
 
 
 
   ```lua
-  require('mini.doc').setup() -- use default config
-  -- OR
-  require('mini.doc').setup({}) -- replace {} with your config table
+  require('mini.doc').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.doc').setup({}) -- {}를 사용자 설정 테이블로 대체
   ```
 
 ---
@@ -220,321 +164,238 @@ Module setup
 ### config {#minidoc.config .help-syntax-right-anchor}
 
 <p align="center">`MiniDoc.config`</p>
-#### Defaults {#minidoc.config-defaults}
+#### 기본값 {#minidoc.config-defaults}
 
 
 
   ```lua
   MiniDoc.config = {
-    -- Function which extracts part of line used to denote annotation.
-    -- For more information see 'Notes' in |MiniDoc.config|.
+    -- 어노테이션을 나타내는 데 사용되는 줄의 일부를 추출하는 함수.
+    -- 자세한 정보는 |MiniDoc.config|의 '참고'를 참조하세요.
     annotation_extractor = function(l) return string.find(l, '^%-%-%-(%S*) ?') end,
 
-    -- Identifier of block annotation lines until first captured identifier
+    -- 첫 번째 캡처된 식별자 이전의 블록 어노테이션 줄의 식별자
     default_section_id = '@text',
 
-    -- Hooks to be applied at certain stage of document life cycle. Should
-    -- modify its input in place (and not return new one).
+    -- 문서 수명 주기의 특정 단계에서 적용될 훅. 입력을 제자리에서(in place)
+    -- 수정해야 합니다 (새로운 것을 반환하지 않음).
     hooks = {
-      -- Applied to block before anything else
-      block_pre = --<function: infers header sections (tag and/or signature)>,
+      -- 다른 어떤 것보다 먼저 블록에 적용됨
+      block_pre = --<함수: 헤더 섹션(태그 및/또는 시그니처)을 유추함>,
 
-      -- Applied to section before anything else
-      section_pre = --<function: replaces current aliases>,
+      -- 다른 어떤 것보다 먼저 섹션에 적용됨
+      section_pre = --<함수: 현재 별칭(aliases)을 대체함>,
 
-      -- Applied if section has specified captured id
+      -- 섹션에 지정된 캡처된 ID가 있는 경우 적용됨
       sections = {
-        ['@alias'] = --<function: registers alias in MiniDoc.current.aliases>,
-        ['@class'] = --<function>,
-        ['@diagnostic'] = --<function: ignores any section content>,
-        -- For most typical usage see |MiniDoc.afterlines_to_code|
-        ['@eval'] = --<function: evaluates lines; replaces with their return>,
-        ['@field'] = --<function>,
-        ['@overload'] = --<function>,
-        ['@param'] = --<function>,
-        ['@private'] = --<function: registers block for removal>,
-        ['@return'] = --<function>,
-        ['@seealso'] = --<function>,
-        ['@signature'] = --<function: formats signature of documented object>,
-        ['@tag'] = --<function: turns its line in proper tag lines>,
-        ['@text'] = --<function: purposefully does nothing>,
-        ['@toc'] = --<function: clears all section lines>,
-        ['@toc_entry'] = --<function: registers lines for table of contents>,
-        ['@type'] = --<function>,
-        ['@usage'] = --<function>,
+        ['@alias'] = --<함수: MiniDoc.current.aliases에 별칭을 등록함>,
+        ['@class'] = --<함수>,
+        ['@diagnostic'] = --<함수: 섹션 내용을 무시함>,
+        -- 가장 일반적인 사용법은 |MiniDoc.afterlines_to_code|를 참조하세요
+        ['@eval'] = --<함수: 줄을 평가하고 그 반환값으로 대체함>,
+        ['@field'] = --<함수>,
+        ['@overload'] = --<함수>,
+        ['@param'] = --<함수>,
+        ['@private'] = --<함수: 제거할 블록을 등록함>,
+        ['@return'] = --<함수>,
+        ['@seealso'] = --<함수>,
+        ['@signature'] = --<함수: 문서화된 객체의 시그니처 형식을 맞춤>,
+        ['@tag'] = --<함수: 해당 줄을 적절한 태그 줄로 바꿈>,
+        ['@text'] = --<함수: 의도적으로 아무것도 하지 않음>,
+        ['@toc'] = --<함수: 모든 섹션 줄을 비움>,
+        ['@toc_entry'] = --<함수: 목차용 줄을 등록함>,
+        ['@type'] = --<함수>,
+        ['@usage'] = --<함수>,
       },
 
-      -- Applied to section after all previous steps
-      section_post = --<function: currently does nothing>,
+      -- 이전 모든 단계 이후에 섹션에 적용됨
+      section_post = --<함수: 현재 아무것도 하지 않음>,
 
-      -- Applied to block after all previous steps
-      block_post = --<function: does many things>,
+      -- 이전 모든 단계 이후에 블록에 적용됨
+      block_post = --<함수: 많은 작업을 수행함>,
 
-      -- Applied to file after all previous steps
-      file = --<function: adds separator>,
+      -- 이전 모든 단계 이후에 파일에 적용됨
+      file = --<함수: 구분 기호를 추가함>,
 
-      -- Applied to doc after all previous steps
-      doc = --<function: adds modeline>,
+      -- 이전 모든 단계 이후에 문서에 적용됨
+      doc = --<함수: 모델라인(modeline)을 추가함>,
 
-      -- Applied before output file is written. Takes lines array as argument.
-      write_pre = --<function: removes delimiters at the top>,
+      -- 출력 파일이 작성되기 전에 적용됨. 줄 배열을 인수로 받음.
+      write_pre = --<함수: 상단의 구분 기호를 제거함>,
 
-      -- Applied after output help file is written. Takes doc as argument.
-      write_post = --<function: various convenience actions>,
+      -- 출력 도움말 파일이 작성된 후에 적용됨. 문서를 인수로 받음.
+      write_post = --<함수: 다양한 편의 작업>,
     },
 
-    -- Path (relative to current directory) to script which handles project
-    -- specific help file generation (like custom input files, hooks, etc.).
+    -- 프로젝트별 도움말 파일 생성을 처리하는 스크립트의 경로
+    -- (현재 디렉토리 기준). (사용자 정의 입력 파일, 훅 등)
     script_path = 'scripts/minidoc.lua',
 
-    -- Whether to disable showing non-error feedback
+    -- 에러가 아닌 피드백 표시를 비활성화할지 여부
     silent = false,
   }
   ```
 
-#### Notes {#minidoc.config-notes}
+#### 참고 {#minidoc.config-notes}
 
 
 
-- `annotation_extractor` takes single string line as input. Output
-  describes what makes an input to be an annotation (if anything). It
-  should be similar to `string.find` with one capture group: start and end
-  of annotation indicator (whole part will be removed from help line) with
-  third value being string of section id (if input describes first line of
-  section; `nil` or empty string otherwise). Output should be `nil` if line
-  is not part of annotation.
-  Default value means that annotation line should:
+- `annotation_extractor`는 단일 문자열 줄을 입력으로 받습니다. 출력은 무엇이 입력을 어노테이션으로 만드는지(있다면) 설명합니다. 이는 하나의 캡처 그룹이 있는 `string.find`와 유사해야 합니다: 어노테이션 표시기의 시작과 끝(전체 부분이 도움말 줄에서 제거됨)이며, 세 번째 값은 섹션 ID 문자열입니다 (입력이 섹션의 첫 번째 줄을 설명하는 경우; 그렇지 않으면 `nil` 또는 빈 문자열). 줄이 어노테이션의 일부가 아닌 경우 출력은 `nil`이어야 합니다.
+  기본값은 어노테이션 줄이 다음과 같아야 함을 의미합니다:
 
-    - Start with `---` at first column.
+    - 첫 번째 열에서 `---`로 시작합니다.
 
-    - Any non-whitespace after `---` will be treated as new section id.
+    - `---` 이후의 모든 공백이 아닌 문자는 새로운 섹션 ID로 취급됩니다.
 
-    - Single whitespace at the start of main text will be ignored.
+    - 본문 텍스트 시작 부분의 단일 공백은 무시됩니다.
 
-- Hooks are expected to be functions. Their default values might do many
-  things which might change over time, so for more information please look
-  at source code. Some more information can be found in
-  [MiniDoc.default\_hooks](mini-doc.qmd#minidoc.default_hooks).
+- 훅은 함수여야 합니다. 기본값은 시간이 지남에 따라 변할 수 있는 많은 작업을 수행할 수 있으므로, 자세한 내용은 소스 코드를 살펴보세요. 더 많은 정보는 [MiniDoc.default\_hooks](mini-doc.qmd#minidoc.default_hooks)에서 찾을 수 있습니다.
 
 ---
 
 ### current {#minidoc.current .help-syntax-right-anchor}
 
 <p align="center">`MiniDoc.current`</p>
-Table with information about current state of auto-generation
+자동 생성의 현재 상태에 대한 정보가 담긴 테이블
 
-It is reset at the beginning and end of `MiniDoc.generate()`.
+`MiniDoc.generate()`의 시작과 끝에서 초기화됩니다.
 
-At least these keys are supported:
+적어도 다음 키들이 지원됩니다:
 
-- <span class="help-syntax-special">{aliases}</span> - table with keys being alias name and values - alias
-  description and single string (using `\n` to separate lines).
+- <span class="help-syntax-special">{aliases}</span> - 키는 별칭 이름이고 값은 별칭 설명과 단일 문자열(줄 구분을 위해 `\n` 사용)인 테이블입니다.
 
-- <span class="help-syntax-special">{eval_section}</span> - input section of `@eval` section hook. Can be used for
-  information about current block, etc.
+- <span class="help-syntax-special">{eval_section}</span> - `@eval` 섹션 훅의 입력 섹션입니다. 현재 블록 등에 대한 정보로 사용될 수 있습니다.
 
-- <span class="help-syntax-special">{toc}</span> - array with table of contents entries. Each entry is a whole
-  `@toc_entry` section.
+- <span class="help-syntax-special">{toc}</span> - 목차 항목이 포함된 배열입니다. 각 항목은 전체 `@toc_entry` 섹션입니다.
 
 ---
 
 ### default_hooks {#minidoc.default_hooks .help-syntax-right-anchor}
 
 <p align="center">`MiniDoc.default_hooks`</p>
-Default hooks
+기본 훅
 
-This is default value of `MiniDoc.config.hooks`. Use it if only a little
-tweak is needed.
+`MiniDoc.config.hooks`의 기본값입니다. 약간의 수정만 필요한 경우에 사용하세요.
 
-Some more insight about their behavior:
+동작에 대한 몇 가지 통찰:
 
-- Default inference of documented object metadata (tag and object signature
-  at the moment) is done in `block_pre`. Inference is based on string
-  pattern matching, so can lead to false results, although works in most
-  cases. It intentionally works only if first line after block has no
-  indentation and contains all necessary information to determine if
-  inference should happen.
+- 문서화된 객체 메타데이터(현재는 태그 및 객체 시그니처)의 기본 유추는 `block_pre`에서 수행됩니다. 유추는 문자열 패턴 매칭을 기반으로 하므로 잘못된 결과가 나올 수 있지만 대부분의 경우 잘 작동합니다. 의도적으로 블록 뒤의 첫 번째 줄에 들여쓰기가 없고 유추가 일어날지 결정하는 데 필요한 모든 정보가 포함된 경우에만 작동합니다.
 
-- Hooks for sections describing some "variable-like" object ('@class',
-  '@field', '@param') automatically enclose first word in '<span class="help-syntax-special">{}</span>'.
+- "변수와 유사한" 객체('@class', '@field', '@param')를 설명하는 섹션용 훅은 첫 번째 단어를 자동으로 '<span class="help-syntax-special">{}</span>'로 감쌉니다.
 
-- Hooks for sections which supposed to have "type-like" data ('@field',
-  '@param', '@return', '@type') automatically enclose *first found*
-  "type-like" word and its neighbor characters in '`(<type>)`' (expect
-  false positives). Algorithm is far from being 100% correct, but seems to
-  work with present allowed type annotation. For allowed types see
-  https://github.com/sumneko/lua-language-server/wiki/EmmyLua-Annotations#types-and-type
-  or, better yet, look in source code of this module.
+- "타입과 유사한" 데이터('@field', '@param', '@return', '@type')를 가져야 하는 섹션용 훅은 *가장 먼저 발견된* "타입과 유사한" 단어와 그 주변 문자를 자동으로 '`(<type>)`'로 감쌉니다 (잘못된 결과가 나올 수 있음). 알고리즘이 100% 정확하지는 않지만 현재 허용된 타입 어노테이션에서는 잘 작동하는 것 같습니다. 허용된 타입에 대해서는 https://github.com/sumneko/lua-language-server/wiki/EmmyLua-Annotations#types-and-type 을 참조하거나 소스 코드를 확인하세요.
 
-- Automated creation of table of contents (TOC) is done in the following way:
+- 목차(TOC)의 자동 생성은 다음과 같은 방식으로 수행됩니다:
 
-    - Put section with `@toc_entry` id in the annotation block. Section's
-      lines will be registered as TOC entry.
+    - 어노테이션 블록에 `@toc_entry` ID가 있는 섹션을 넣습니다. 섹션의 줄들이 목차 항목으로 등록됩니다.
 
-    - Put `@toc` section where you want to insert rendered table of
-      contents. TOC entries will be inserted on the left, references for
-      their respective tag section (only first, if present) on the right.
-      Render is done in default `doc` hook (because it should be done after
-      processing all files).
+    - 렌더링된 목차를 삽입하고 싶은 곳에 `@toc` 섹션을 넣습니다. 목차 항목은 왼쪽에 삽입되고, 각각의 태그 섹션(있는 경우 첫 번째만)에 대한 참조는 오른쪽에 삽입됩니다. 렌더링은 기본 `doc` 훅에서 수행됩니다 (모든 파일 처리가 끝난 후에 수행되어야 하기 때문입니다).
 
-- The `write_post` hook executes some actions convenient for iterative
-  annotations writing:
+- `write_post` 훅은 반복적인 어노테이션 작성을 위해 편리한 몇 가지 작업을 실행합니다:
 
-    - Generate `:helptags` for directory containing output file.
+    - 출력 파일을 포함하는 디렉토리에 대해 `:helptags`를 생성합니다.
 
-    - Silently reload buffer containing output file (if such exists).
+    - 출력 파일을 포함하는 버퍼를 자동으로 다시 로드합니다 (존재하는 경우).
 
-    - Display notification message about result.
+    - 결과에 대한 알림 메시지를 표시합니다.
 
 ---
 
 ### generate() {#minidoc.generate .help-syntax-right-anchor}
 
 <p align="center">`MiniDoc.generate`(<span class="help-syntax-special">{input}</span>, <span class="help-syntax-special">{output}</span>, <span class="help-syntax-special">{config}</span>)</p>
-Generate help file
+도움말 파일 생성
 
-#### Algorithm {#minidoc.generate-algorithm}
-
-
-
-- Main parameters for help generation are an array of input file paths and
-  path to output help file.
-
-- Parse all inputs:
-
-  - For each file, lines are processed top to bottom in order to create an
-    array of documentation blocks. Each line is tested whether it is an
-    annotation by applying `MiniDoc.config.annotation_extractor`: if
-    anything is extracted, it is considered to be an annotation. Annotation
-    line goes to "current block" after removing extracted annotation
-    indicator, otherwise - to afterlines of "current block".
-
-  - Each block's annotation lines are processed top to bottom. If line had
-    captured section id, it is a first line of "current section" (first
-    block lines are allowed to not specify section id; by default it is
-    `@text`). All subsequent lines without captured section id go into
-    "current section".
-
-- Apply structure hooks (they should modify its input in place, which is
-  possible due to 'table nature' of all inputs):
-
-    - Each block is processed by `MiniDoc.config.hooks.block_pre`. This is a
-      designated step for auto-generation of sections from described
-      annotation subject (like sections with id `@tag`, `@type`).
-
-    - Each section is processed by `MiniDoc.config.hooks.section_pre`.
-
-    - Each section is processed by corresponding
-      `MiniDoc.config.hooks.sections` function (table key equals to section
-      id). This is a step where most of formatting should happen (like
-      wrap first word of `@param` section with `{` and `}`, append empty
-      line to section, etc.).
-
-    - Each section is processed by `MiniDoc.config.hooks.section_post`.
-
-    - Each block is processed by `MiniDoc.config.hooks.block_post`. This is
-      a step for processing block after formatting is done (like add first
-      line with `----` delimiter).
-
-    - Each file is processed by `MiniDoc.config.hooks.file`. This is a step
-      for adding any file-related data (like add first line with `====`
-      delimiter).
-
-    - Doc is processed by `MiniDoc.config.hooks.doc`. This is a step for
-      adding any helpfile-related data (maybe like table of contents).
-
-- Collect all strings from sections in depth-first fashion (equivalent to
-  nested "for all files -> for all blocks -> for all sections -> for all
-  strings -> add string to output"). Strings can have `\n` character
-  indicating start of new line.
-
-- Modify collected strings with `MiniDoc.config.write_pre`. Takes strings
-  from previous step as input and should return array of strings.
-
-- Write modified strings to output file.
-
-- Execute `MiniDoc.config.write_post` hook. This is useful for showing some
-  feedback and making actions involving newly updated help file (like
-  generate tags, etc.).
-
-#### Project specific script {#minidoc.generate-projectspecificscript}
-
-
-If all arguments have default `nil` values, first there is an attempt to
-source project specific script. This is basically a
-`luafile <MiniDoc.config.script_path>` with current Lua runtime while caching
-and restoring current `MiniDoc.config`. Its successful execution stops any
-further generation actions while error means proceeding generation as if no
-script was found.
-
-Typical script content might include definition of custom hooks, input and
-output files with eventual call to `require('mini.doc').generate()` (with
-or without arguments).
-
-#### Parameters {#minidoc.generate-parameters}
+#### 알고리즘 {#minidoc.generate-algorithm}
 
 
 
-<span class="help-syntax-special">{input}</span> `(table|nil)` Array of file paths which will be processed in supplied
-  order. Default: all '.lua' files from current directory following by all
-  such files in these subdirectories: 'lua/', 'after/', 'colors/'. Note:
-  any 'init.lua' file is placed before other files from the same directory.
+- 도움말 생성을 위한 주요 매개변수는 입력 파일 경로들의 배열과 출력 도움말 파일 경로입니다.
 
-<span class="help-syntax-special">{output}</span> `(string|nil)` Path for output help file. Default:
-  `doc/<current_directory>.txt` (designed to be used for generating help
-  file for plugin).
+- 모든 입력을 파싱합니다:
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Configuration overriding parts of [MiniDoc.config](mini-doc.qmd#minidoc.config).
+  - 각 파일에 대해, 문서화 블록 배열을 생성하기 위해 줄들이 위에서 아래로 처리됩니다. 각 줄은 `MiniDoc.config.annotation_extractor`를 적용하여 어노테이션인지 테스트됩니다: 무언가 추출되면 어노테이션으로 간주됩니다. 어노테이션 줄은 추출된 어노테이션 표시기를 제거한 후 "현재 블록"으로 들어가고, 그렇지 않으면 "현재 블록"의 애프터라인(afterlines)으로 들어갑니다.
 
-#### Return {#minidoc.generate-return}
+  - 각 블록의 어노테이션 줄은 위에서 아래로 처리됩니다. 줄에 캡처된 섹션 ID가 있으면 "현재 섹션"의 첫 번째 줄입니다 (첫 번째 블록 줄은 섹션 ID를 지정하지 않을 수 있으며, 기본값은 `@text`입니다). 캡처된 섹션 ID가 없는 모든 후속 줄은 "현재 섹션"으로 들어갑니다.
+
+- 구조 훅을 적용합니다 (모든 입력의 '테이블 특성' 덕분에 입력을 제자리에서 수정해야 함):
+
+    - 각 블록은 `MiniDoc.config.hooks.block_pre`에 의해 처리됩니다. 이는 설명된 어노테이션 주제(ID가 `@tag`, `@type`인 섹션 등)로부터 섹션을 자동 생성하기 위한 지정된 단계입니다.
+
+    - 각 섹션은 `MiniDoc.config.hooks.section_pre`에 의해 처리됩니다.
+
+    - 각 섹션은 해당되는 `MiniDoc.config.hooks.sections` 함수에 의해 처리됩니다 (테이블 키는 섹션 ID와 같음). 이는 대부분의 포맷팅이 일어나야 하는 단계입니다 (`@param` 섹션의 첫 번째 단어를 `{`와 `}`로 감싸기, 섹션에 빈 줄 추가 등).
+
+    - 각 섹션은 `MiniDoc.config.hooks.section_post`에 의해 처리됩니다.
+
+    - 각 블록은 `MiniDoc.config.hooks.block_post`에 의해 처리됩니다. 이는 포맷팅이 완료된 후 블록을 처리하기 위한 단계입니다 (구분 기호 `----`가 있는 첫 번째 줄 추가 등).
+
+    - 각 파일은 `MiniDoc.config.hooks.file`에 의해 처리됩니다. 이는 파일 관련 데이터(구분 기호 `====`가 있는 첫 번째 줄 추가 등)를 추가하기 위한 단계입니다.
+
+    - 문서는 `MiniDoc.config.hooks.doc`에 의해 처리됩니다. 이는 도움말 파일 관련 데이터(목차 등)를 추가하기 위한 단계입니다.
+
+- 깊이 우선 방식으로 섹션의 모든 문자열을 수집합니다 (중첩된 "모든 파일 -> 모든 블록 -> 모든 섹션 -> 모든 문자열 -> 출력에 문자열 추가"와 동일). 문자열은 새로운 줄의 시작을 나타내는 `\n` 문자를 가질 수 있습니다.
+
+- 수집된 문자열을 `MiniDoc.config.write_pre`로 수정합니다. 이전 단계의 문자열을 입력으로 받고 문자열 배열을 반환해야 합니다.
+
+- 수정된 문자열을 출력 파일에 씁니다.
+
+- `MiniDoc.config.write_post` 훅을 실행합니다. 이는 피드백을 보여주거나 새로 업데이트된 도움말 파일과 관련된 작업(태그 생성 등)을 수행하는 데 유용합니다.
+
+#### 프로젝트별 스크립트 {#minidoc.generate-projectspecificscript}
 
 
-`(table)` Document structure which was generated and used for output
-  help file. In case `MiniDoc.config.script_path` was successfully used,
-  this is a return from the latest call of this function.
+모든 인수가 기본 `nil` 값인 경우, 먼저 프로젝트별 스크립트를 소싱하려는 시도가 있습니다. 이는 기본적으로 현재 `MiniDoc.config`를 캐싱하고 복원하면서 현재 Lua 런타임으로 `luafile <MiniDoc.config.script_path>`를 수행하는 것입니다. 성공적으로 실행되면 더 이상의 생성 작업이 중단되며, 에러가 발생하면 스크립트가 발견되지 않은 것처럼 생성을 진행합니다.
+
+전형적인 스크립트 내용에는 사용자 정의 훅 정의, 입력 및 출력 파일, 그리고 최종적인 `require('mini.doc').generate()` 호출(인수 포함 또는 미포함)이 포함될 수 있습니다.
+
+#### 매개변수 {#minidoc.generate-parameters}
+
+
+
+<span class="help-syntax-special">{input}</span> `(table|nil)` 제공된 순서대로 처리될 파일 경로들의 배열입니다. 기본값: 현재 디렉토리의 모든 '.lua' 파일과 'lua/', 'after/', 'colors/' 서브디렉토리의 모든 해당 파일들입니다. 참고: 모든 'init.lua' 파일은 동일한 디렉토리의 다른 파일보다 먼저 배치됩니다.
+
+<span class="help-syntax-special">{output}</span> `(string|nil)` 출력 도움말 파일의 경로입니다. 기본값: `doc/<current_directory>.txt` (플러그인용 도움말 파일 생성을 위해 설계됨).
+
+<span class="help-syntax-special">{config}</span> `(table|nil)` [MiniDoc.config](mini-doc.qmd#minidoc.config)의 일부를 재정의하는 설정입니다.
+
+#### 반환값 {#minidoc.generate-return}
+
+
+`(table)` 생성되어 출력 도움말 파일에 사용된 문서 구조입니다. `MiniDoc.config.script_path`가 성공적으로 사용된 경우, 이 함수의 마지막 호출로부터의 반환값입니다.
 
 ---
 
 ### afterlines_to_code() {#minidoc.afterlines_to_code .help-syntax-right-anchor}
 
 <p align="center">`MiniDoc.afterlines_to_code`(<span class="help-syntax-special">{struct}</span>)</p>
-Convert afterlines to code
+애프터라인을 코드로 변환
 
-This function is designed to be used together with `@eval` section to
-automate documentation of certain values (notably default values of a
-table). It processes afterlines based on certain directives and makes
-output look like a Lua code block.
+이 함수는 특정 값(특히 테이블의 기본값)의 문서화를 자동화하기 위해 `@eval` 섹션과 함께 사용하도록 설계되었습니다. 특정 지시문에 따라 애프터라인(afterlines)을 처리하고 출력을 Lua 코드 블록처럼 보이게 만듭니다.
 
-Most common usage is by adding the following section in your annotation:
+가장 일반적인 사용법은 어노테이션에 다음 섹션을 추가하는 것입니다:
 
   ```
   ---@eval return MiniDoc.afterlines_to_code(MiniDoc.current.eval_section)
   ```
 
-#### Directives {#minidoc.afterlines_to_code-directives}
+#### 지시문 (Directives) {#minidoc.afterlines_to_code-directives}
 
 
-Directives are special comments that are processed using Lua string pattern
-capabilities (so beware of false positives). Each directive should be put
-on its separate line. Supported directives:
+지시문은 Lua 문자열 패턴 기능을 사용하여 처리되는 특수 주석입니다 (따라서 잘못된 결과에 주의하세요). 각 지시문은 별도의 줄에 놓여야 합니다. 지원되는 지시문:
 
-- `--minidoc_afterlines_end` denotes a line at afterlines end. Only all
-  lines before it will be considered as afterlines. Useful if there is
-  extra code in afterlines which shouldn't be used.
+- `--minidoc_afterlines_end`는 애프터라인 끝 줄을 나타냅니다. 그 이전의 모든 줄만 애프터라인으로 간주됩니다. 사용해서는 안 되는 여분의 코드가 애프터라인에 있는 경우 유용합니다.
 
-- `--minidoc_replace_start <replacement>` and `--minidoc_replace_end`
-  denote lines between them which should be replaced with `<replacement>`.
-  Useful for manually changing what should be placed in output like in case
-  of replacing function body with something else.
+- `--minidoc_replace_start <replacement>` 및 `--minidoc_replace_end`는 그 사이의 줄들이 `<replacement>`로 대체되어야 함을 나타냅니다. 함수 본문을 다른 것으로 교체하는 경우와 같이 출력에 배치될 내용을 수동으로 변경하는 데 유용합니다.
 
-Here is an example. Suppose having these afterlines:
+다음은 예시입니다. 다음과 같은 애프터라인이 있다고 가정해 보겠습니다:
 
   ```lua
   --minidoc_replace_start {
   M.config = {
     --minidoc_replace_end
     param_one = 1,
-    --minidoc_replace_start param_fun = --<function>
+    --minidoc_replace_start param_fun = --<함수>
     param_fun = function(x)
       return x + 1
     end
@@ -545,25 +406,22 @@ Here is an example. Suppose having these afterlines:
   return M
   ```
 
-After adding `@eval` section those will be formatted as:
+`@eval` 섹션을 추가한 후에는 다음과 같이 형식이 지정됩니다:
 
   ```
   {
     param_one = 1,
-    param_fun = --<function>
+    param_fun = --<함수>
   }
   ```
 
-#### Parameters {#minidoc.afterlines_to_code-parameters}
+#### 매개변수 {#minidoc.afterlines_to_code-parameters}
 
 
 
-<span class="help-syntax-special">{struct}</span> `(table)` Block or section structure which after lines will be
-  converted to code.
+<span class="help-syntax-special">{struct}</span> `(table)` 애프터라인이 코드로 변환될 블록 또는 섹션 구조입니다.
 
-#### Return {#minidoc.afterlines_to_code-return}
+#### 반환값 {#minidoc.afterlines_to_code-return}
 
 
-`(string|nil)` Single string (using `\n` to separate lines) describing
-  afterlines as Lua code block in help file. If `nil`, input is not valid.
-
+`(string|nil)` 도움말 파일에서 애프터라인을 Lua 코드 블록으로 설명하는 단일 문자열(줄 구분을 위해 `\n` 사용)입니다. `nil`인 경우 입력이 유효하지 않습니다.

@@ -1,56 +1,56 @@
 ---
-title: "Release 0.13.0"
+title: "0.13.0 버전 출시"
 author: Evgeni Chasnovski
 date: 2024-06-13
 categories: [release, reddit]
-description: Two new modules, visible updates to 'mini.comment' and 'mini.statusline'
+description: 두 개의 새로운 모듈 추가, 'mini.comment' 및 'mini.statusline'의 주요 업데이트
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/1df0qzu/mininvim_release_0130_two_new_modules_visible/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/1df0qzu/mininvim_release_0130_two_new_modules_visible/)*
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-Today is the release day of [mini.nvim](https://github.com/nvim-mini/mini.nvim) version 0.13.0. It includes two new quite feature-rich modules coming out of beta-testing, some breaking features for existing modules, and a few small updates for other modules.
+오늘은 [mini.nvim](https://github.com/nvim-mini/mini.nvim) 0.13.0 버전이 출시되는 날입니다. 이번 릴리스에는 베타 테스트를 마친 풍부한 기능의 두 모듈, 기존 모듈의 주요 변경 사항, 그리고 다른 모듈들에 대한 몇 가지 소규모 업데이트가 포함되어 있습니다.
 
-This release marks the crossing of curiously aligned milestones. The 'mini.nvim' project now has:
-- 40+ modules.
-- 4000+ GitHub stars (thank you all for your support ❤️).
-- 4000+ test cases.
+이번 릴리스는 묘하게 일치하는 여러 이정표를 달성했습니다. 현재 'mini.nvim' 프로젝트는 다음과 같은 상태입니다:
+- 40개 이상의 모듈 보유.
+- GitHub 스타 4,000개 돌파 (지속적인 지원에 감사드립니다 ❤️).
+- 4,000개 이상의 테스트 케이스 보유.
 
-Here is a [full release description](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.13.0) if you are curious.
-
-------
-
-Two new modules coming out of beta-testing:
-
-- [mini.diff](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-diff.md) - module to interactively visualize difference between buffer text and its reference. This is basically a 'mini.nvim' version of 'lewis6991/gitsigns.nvim', but with more general design towards reference text (not only from Git index) and a bit different way to show inline difference (called "overlay").
-
-- [mini.git](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-git.md) - module for a tighter Git integration. Its primary goal is to track per buffer Git related data to be shown in statusline. However, it also includes two other big sets of features: `:Git` command for a more direct use of Git within current Neovim session and helper functions for a more interactive Git history exploration. It is **not intended** as 'tpope/vim-fugitive' or full featured Git client replacement.
+궁금하신 분들은 [전체 릴리스 설명](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.13.0)을 확인해 보세요.
 
 ------
 
-Two plugins got visible breaking updates:
+베타 테스트를 마치고 정식 출시된 두 개의 새로운 모듈:
 
-- 'mini.comment' now treats whitespace more coherently (updated during the preparation for its essentially [upstreaming to core](https://echasnovski.com/blog/2024-04-05-neovim-now-has-builtin-commenting.html)):
-    - Blank lines are ignored when deciding whether to comment or uncomment. In practice it means that region with commented and blank lines will be uncommented rather than commented.
-    - Whitespace in 'commentstring' is now treated more explicitly. With default config this is rarely noticeable, but might matter for people using `options.pad_comment_parts = false`.
+- [mini.diff](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-diff.md) - 버퍼 텍스트와 참조 간의 차이점을 대화형으로 시각화하는 모듈입니다. 기본적으로 'lewis6991/gitsigns.nvim'의 'mini.nvim' 버전이지만, 참조 텍스트(Git 인덱스뿐만 아니라)에 대해 더 일반적인 설계를 가졌으며 인라인 차이점을 보여주는 방식("오버레이")이 조금 다릅니다.
 
-- 'mini.statusline' got several big updates:
-    - The new 'mini.diff' and 'mini.git' modules now take precedence over 'lewis6991/gitsigns.nvim'. Meaning the latter now is not required for 'mini.statusline' to show its full potential.
-    - `section_diagnostics()` now does not depend on whether there is an LSP server attached to the buffer (which is more aligned with section's purpose).
-    - There are two new sections added and immediately are now used in default active statusline content: `section_diff()` and `section_lsp()`. For users with default 'mini.statusline' config this mostly means that diff is shown with extra icon and there is an indicator for the number of attached LSP servers.
+- [mini.git](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-git.md) - 더욱 긴밀한 Git 통합을 위한 모듈입니다. 주요 목표는 상태 표시줄에 표시할 버퍼별 Git 관련 데이터를 추적하는 것입니다. 하지만 두 가지 큰 기능 세트도 포함되어 있습니다: 현재 Neovim 세션 내에서 Git을 더 직접적으로 사용하기 위한 `:Git` 명령어와 더 대화형인 Git 기록 탐색을 위한 헬퍼 함수들입니다. 'tpope/vim-fugitive'나 모든 기능을 갖춘 Git 클라이언트를 **대체하기 위한 것은 아닙니다.**
 
 ------
 
-Several plugins got small-ish but useful updates:
+두 플러그인에 주요 변경 사항이 있었습니다:
 
-- 'mini.deps' now highlights commit messages which indicate breaking change in a conventional commit style (which 'mini.nvim' itself now uses and I am very happy with it).
-- 'mini.map' got `gen_integration.diff()` integration to highlight hunks from 'mini.diff'.
-- 'mini.tabline' got an option to format tab labels.
-- And more...
+- 'mini.comment'는 이제 공백을 더 일관되게 처리합니다 (기본적으로 [코어에 병합](https://echasnovski.com/blog/2024-04-05-neovim-now-has-builtin-commenting.html)하기 위한 준비 과정에서 업데이트됨):
+    - 주석 처리 여부를 결정할 때 빈 줄은 무시됩니다. 실제로는 주석 처리된 줄과 빈 줄이 섞인 영역을 다시 주석 처리하는 대신 주석을 해제한다는 의미입니다.
+    - 'commentstring'의 공백 처리가 더 명확해졌습니다. 기본 설정에서는 거의 눈에 띄지 않지만, `options.pad_comment_parts = false`를 사용하는 사용자에게는 중요할 수 있습니다.
+
+- 'mini.statusline'에 몇 가지 큰 업데이트가 있었습니다:
+    - 새로운 'mini.diff' 및 'mini.git' 모듈이 이제 'lewis6991/gitsigns.nvim'보다 우선순위를 갖습니다. 즉, 이제 'mini.statusline'의 잠재력을 최대한 발휘하기 위해 후자가 더 이상 필수적이지 않습니다.
+    - `section_diagnostics()`는 이제 버퍼에 LSP 서버가 연결되어 있는지 여부에 의존하지 않습니다 (섹션의 목적에 더 부합하는 동작임).
+    - 두 개의 새로운 섹션이 추가되어 기본 활성 상태 표시줄 콘텐츠에 즉시 사용됩니다: `section_diff()` 및 `section_lsp()`. 기본 'mini.statusline' 설정을 사용하는 사용자에게는 디프가 추가 아이콘과 함께 표시되고 연결된 LSP 서버 수를 나타내는 표시기가 생겼음을 의미합니다.
 
 ------
 
-Thanks for reading and showing interest in 'mini.nvim' project!
+여러 플러그인에 작지만 유용한 업데이트가 있었습니다:
 
-Hope to see you soon in the next module release (there are some **really** nice things planned)!
+- 'mini.deps'는 이제 관례적 커밋(conventional commit) 스타일에서 주요 변경 사항(breaking change)을 나타내는 커밋 메시지를 하이라이트합니다 ('mini.nvim' 자체도 이제 이 스타일을 사용하며 매우 만족하고 있습니다).
+- 'mini.map'에 'mini.diff'의 헝크를 하이라이트하기 위한 `gen_integration.diff()` 통합 기능이 추가되었습니다.
+- 'mini.tabline'에 탭 레이블 형식을 지정하는 옵션이 추가되었습니다.
+- 그 외 다수...
+
+------
+
+읽어주시고 'mini.nvim' 프로젝트에 관심을 가져주셔서 감사합니다!
+
+곧 다음 모듈 출시 소식으로 찾아뵙겠습니다 (**정말** 멋진 것들이 계획되어 있습니다)!

@@ -1,40 +1,40 @@
 ---
-title: "Announcing 'mini.map'"
+title: "'mini.map' 발표"
 author: Evgeni Chasnovski
 date: 2022-10-11
 categories: [announce, reddit]
-description: Window with buffer text overview, scrollbar, and highlights
+description: 버퍼 텍스트 개요, 스크롤바 및 하이라이트가 포함된 창
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/y1balh/minimap_window_with_buffer_text_overview/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/y1balh/minimap_window_with_buffer_text_overview/)*
 
 {{< video 2022-10-11-announce-mini-map/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am here to announce a [mini.map](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-map.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) for showing buffer text overview with scrollbar and highlights. It is shown in automatically updated full-height floating window stuck to either side (left or right).
+스크롤바와 하이라이트가 포함된 버퍼 텍스트 개요를 보여주는 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.map](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-map.md)을 발표합니다. 이 모듈은 양쪽(왼쪽 또는 오른쪽) 중 한 곳에 고정된, 자동으로 업데이트되는 전체 높이의 플로팅 창에 표시됩니다.
 
-Prior to writing this, I didn't use any "buffer overview" plugins. I accidentally happened to see a [wfxr/minimap.vim](https://github.com/wfxr/minimap.vim) plugin, which uses Rust dependency to render text overview. This made me really curious if I could implement similar functionality in Lua with at least comparable speed. Turned out, I could! Benchmarking 'mini.map' and 'wfxr/minimap.vim' for first map window opening on 'builtin.txt' help page (9338 lines) shows around 70-90 milliseconds of computation time. Both are much faster on smaller files, of course.
+이 모듈을 작성하기 전에는 "버퍼 개요" 플러그인을 사용하지 않았습니다. 우연히 텍스트 개요를 렌더링하기 위해 Rust 의존성을 사용하는 [wfxr/minimap.vim](https://github.com/wfxr/minimap.vim) 플러그인을 보게 되었습니다. 이로 인해 비슷한 기능을 적어도 비슷한 속도로 Lua에서 구현할 수 있을지 정말 궁금해졌습니다. 결과적으로 가능했습니다! 'builtin.txt' 도움말 페이지(9338행)에서 첫 번째 맵 창을 여는 데 걸리는 계산 시간을 벤치마킹한 결과 'mini.map'과 'wfxr/minimap.vim' 모두 약 70-90밀리초가 소요되었습니다. 물론 작은 파일에서는 둘 다 훨씬 더 빠릅니다.
 
-'mini.map' has the following features:
+'mini.map'은 다음과 같은 기능을 제공합니다:
 
-- Updates are **really fast** and **asynchronous** (non-blocking).
+- 업데이트가 **정말 빠르고** **비동기적**(비차단)입니다.
 
-- Show scrollbar next to map content. It represents current line and view (top and bottom visible lines). Can be the only thing shown, making map window a "pure scrollbar".
+- 맵 콘텐츠 옆에 스크롤바를 표시합니다. 이는 현재 행과 뷰(상단 및 하단 가시 행)를 나타냅니다. 스크롤바만 표시하도록 설정하여 맵 창을 "순수 스크롤바"로 만들 수도 있습니다.
 
-- Highlight map lines representing certain data in current buffer. This is done via extensible set of callables, called integrations. There are pre-built generators for common integrations:
-    - Builtin search.
-    - Builtin diagnostic.
-    - Git line status (requires [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)).
+- 현재 버퍼의 특정 데이터를 나타내는 맵 행을 하이라이트합니다. 이는 호출 가능한 객체들의 확장 가능한 집합인 '통합(integrations)'을 통해 수행됩니다. 일반적인 통합을 위해 미리 제작된 생성기들이 있습니다:
+    - 내장 검색.
+    - 내장 진단(Diagnostic).
+    - Git 행 상태 ([lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) 필요).
 
-- Focus on map window to quickly browse current (source) buffer. Moving inside map window updates cursor position in source window enabling fast and targeted buffer exploration. To focus back, hit `<CR>` to accept current explored position or `<Esc>` to go back to original position.
+- 맵 창에 포커스를 맞춰 현재(원본) 버퍼를 빠르게 탐색합니다. 맵 창 내부에서 이동하면 원본 창의 커서 위치가 업데이트되어 빠르고 정밀한 버퍼 탐색이 가능합니다. 다시 포커스를 돌리려면 `<CR>`을 눌러 현재 탐색 중인 위치를 승인하거나 `<Esc>`를 눌러 원래 위치로 돌아갑니다.
 
-- Customizable:
-    - Encoding symbols used to display binary information of different resolution (default is 3x2). There are pre-built generators for different basic character families and resolutions (block, dot, shade).
-    - Scrollbar symbols, separate for line and view. Can have any width (even zero, which virtually disables scrollbar).
-    - Integrations producing map line highlights.
-    - Window options: side (left/right), width, 'winblend', and more.
+- 커스터마이징 가능:
+    - 다양한 해상도의 바이너리 정보를 표시하는 데 사용되는 인코딩 심볼(기본값은 3x2). 다양한 기본 문자 제품군 및 해상도(block, dot, shade)를 위한 미리 제작된 생성기가 있습니다.
+    - 행과 뷰에 대해 별도로 설정 가능한 스크롤바 심볼. 임의의 너비를 가질 수 있습니다(너비를 0으로 설정하면 사실상 스크롤바가 비활성화됨).
+    - 맵 행 하이라이트를 생성하는 통합 기능.
+    - 창 옵션: 방향(왼쪽/오른쪽), 너비, 'winblend' 등.
 
-For more information, see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-map.txt). [Here](https://github.com/nvim-mini/mini.nvim/blob/48b924e4f3b37f62246873d237a4a89704d88948/doc/mini-map.txt#L93) is a comparison to other similar plugins.
+자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-map.txt)을 참조하세요. [여기](https://github.com/nvim-mini/mini.nvim/blob/48b924e4f3b37f62246873d237a4a89704d88948/doc/mini-map.txt#L93)에서 다른 유사한 플러그인들과의 비교를 볼 수 있습니다.
 
-Please, check it out and tell me what you think! Either here in comments or in dedicated [beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/140). Thanks!
+사용해 보시고 의견을 들려주세요! 여기 댓글이나 전용 [베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/140)를 통해 피드백을 주시면 감사하겠습니다. 감사합니다!

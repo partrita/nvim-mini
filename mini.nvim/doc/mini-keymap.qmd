@@ -1,126 +1,105 @@
 ---
-title: "mini.keymap documentation"
+title: "mini.keymap 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_`mini.nvim`의 `main` 브랜치에서 생성됨_
 
-<a name="mini.keymap" href="mini-keymap.qmd#mini.keymap"><b>mini.keymap</b></a> Special key mappings
+<a name="mini.keymap" href="mini-keymap.qmd#mini.keymap"><b>mini.keymap</b></a> 특수 키 매핑
 
-MIT License Copyright (c) 2025 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2025 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
-
-
-- Map keys to perform configurable multi-step actions: if condition for step
-  one is true - execute step one action, else check step two, and so on until
-  falling back to executing original keys. This is usually referred to as
-  "smart" keys (like "smart tab"). See [MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep).
-
-  There are many built-in steps targeted for Insert mode mappings of special
-  keys like <span class="help-syntax-keys">\<Tab\></span>, <span class="help-syntax-keys">\<S-Tab\></span>, <span class="help-syntax-keys">\<CR\></span>, and <span class="help-syntax-keys">\<BS\></span>:
-
-  - Navigate and accept [popupmenu-completion](https://neovim.io/doc/user/helptag.html?tag=popupmenu-completion). Useful for [mini.completion](mini-completion.qmd#mini.completion).
-
-  - Navigate and expand [mini.snippets](mini-snippets.qmd#mini.snippets).
-
-  - Execute <span class="help-syntax-keys">\<CR\></span> and <span class="help-syntax-keys">\<BS\></span> respecting [mini.pairs](mini-pairs.qmd#mini.pairs).
-
-  - Jump before/after current tree-sitter node.
-
-  - Jump before opening and after closing characters (brackets and quotes).
-
-  - Increase/decrease indent when cursor is inside of it.
-
-  - Delete all whitespace to the left ("hungry backspace").
-
-  - Navigate [vim.snippet](https://neovim.io/doc/user/helptag.html?tag=vim.snippet).
-
-  - Navigate and accept in [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) completion.
-
-  - Navigate and accept in [Saghen/blink.cmp](https://github.com/Saghen/blink.cmp) completion.
-
-  - Navigate and expand [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip) snippets.
-
-  - Execute <span class="help-syntax-keys">\<CR\></span> and <span class="help-syntax-keys">\<BS\></span> respecting [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs).
+기능:
 
 
-- Map keys as "combo": each key acts immediately plus execute extra action if
-  all are typed within configurable delay between each other.
-  See [MiniKeymap.map\_combo()](mini-keymap.qmd#minikeymap.map_combo). Some of the common use cases include:
+- 설정 가능한 다단계(multi-step) 동작을 수행하도록 키를 매핑합니다: 1단계 조건이 참이면 1단계 동작을 실행하고, 그렇지 않으면 2단계를 확인하는 방식으로 원래 키를 실행하는 폴백(fallback)까지 계속됩니다. 이는 보통 "스마트" 키(예: "스마트 탭")라고 불립니다. [MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep)을 참조하세요.
 
-    - Map insertable keys (like "jk", "kj") in Insert and Command-line mode
-      to exit into Normal mode.
+  <span class="help-syntax-keys">\<Tab\></span>, <span class="help-syntax-keys">\<S-Tab\></span>, <span class="help-syntax-keys">\<CR\></span>, <span class="help-syntax-keys">\<BS\></span>와 같은 특수 키의 입력 모드 매핑을 대상으로 하는 많은 내장 단계가 있습니다:
 
-    - Fight against bad habits of pressing the same navigation key by showing
-      a notification if there are too many of them pressed in a row.
+  - [팝업 메뉴 완성(popupmenu-completion)](https://neovim.io/doc/user/helptag.html?tag=popupmenu-completion) 탐색 및 수락. [mini.completion](mini-completion.qmd#mini.completion)에 유용합니다.
 
-Sources with more details:
+  - [mini.snippets](mini-snippets.qmd#mini.snippets) 탐색 및 확장.
 
-- [MiniKeymap-examples](mini-keymap.qmd#minikeymap-examples)
+  - [mini.pairs](mini-pairs.qmd#mini.pairs)를 준수하며 <span class="help-syntax-keys">\<CR\></span> 및 <span class="help-syntax-keys">\<BS\></span> 실행.
 
-#### Setup {#module-setup}
+  - 현재 tree-sitter 노드의 앞/뒤로 점프.
+
+  - 여는 문자 앞과 닫는 문자 뒤로 점프 (괄호 및 따옴표).
+
+  - 커서가 들여쓰기 내부에 있을 때 들여쓰기 증가/감소.
+
+  - 왼쪽의 모든 공백 삭제 ("hungry backspace").
+
+  - [vim.snippet](https://neovim.io/doc/user/helptag.html?tag=vim.snippet) 탐색.
+
+  - [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) 완성 탐색 및 수락.
+
+  - [Saghen/blink.cmp](https://github.com/Saghen/blink.cmp) 완성 탐색 및 수락.
+
+  - [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip) 스니펫 탐색 및 확장.
+
+  - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)를 준수하며 <span class="help-syntax-keys">\<CR\></span> 및 <span class="help-syntax-keys">\<BS\></span> 실행.
 
 
-This module doesn't need setup, but it can be done to improve usability.
-Setup with `require('mini.keymap').setup({})` (replace `{}` with your `config`
-table). It will create global Lua table `MiniKeymap` which you can use for
-scripting or manually (with `:lua MiniKeymap.*`).
+- 키를 "콤보(combo)"로 매핑합니다: 각 키는 즉시 작동하며, 설정된 지연 시간 내에 모든 키가 입력되면 추가 동작을 실행합니다.
+  [MiniKeymap.map\_combo()](mini-keymap.qmd#minikeymap.map_combo)를 참조하세요. 일반적인 사용 사례는 다음과 같습니다:
 
-See [MiniKeymap.config](mini-keymap.qmd#minikeymap.config) for `config` structure and default values.
+    - 입력(Insert) 및 명령줄(Command-line) 모드에서 입력 가능한 키(예: "jk", "kj")를 매핑하여 일반(Normal) 모드로 나갑니다.
 
-This module doesn't have runtime options, so using `vim.b.minikeymap_config`
-will have no effect here.
+    - 동일한 탐색 키를 반복해서 누르는 나쁜 습관을 고치기 위해, 연속으로 너무 많이 눌릴 경우 알림을 표시합니다.
 
-#### Comparisons {#module-comparisons}
+자세한 내용은 다음을 참조하세요:
+
+- [MiniKeymap 예시](mini-keymap.qmd#minikeymap-examples)
+
+#### 설정 {#module-setup}
+
+
+이 모듈은 설정이 필수는 아니지만, 사용성 향상을 위해 설정할 수 있습니다.
+`require('mini.keymap').setup({})`을 통해 설정하세요(`{}`를 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로(`:lua MiniKeymap.*`를 통해) 사용할 수 있는 전역 Lua 테이블 `MiniKeymap`을 생성합니다.
+
+`config` 구조와 기본값은 [MiniKeymap.config](mini-keymap.qmd#minikeymap.config)를 참조하세요.
+
+이 모듈은 런타임 옵션이 없으므로 `vim.b.minikeymap_config`를 사용해도 효과가 없습니다.
+
+#### 비교 {#module-comparisons}
 
 
 
 - [max397574/better-escape.nvim](https://github.com/max397574/better-escape.nvim):
 
-    - Mostly similar to [MiniKeymap.map\_combo()](mini-keymap.qmd#minikeymap.map_combo) with a different approach
-      to creating mappings.
+    - 매핑 생성 방식은 다르지만 [MiniKeymap.map\_combo()](mini-keymap.qmd#minikeymap.map_combo)와 거의 유사합니다.
 
-    - Mostly targeted for Insert mode mappings as pressed keys get removed
-      automatically after typed. This module allows more general cases while
-      requiring explicit removal of keys (usually via explicit `<BS><BS>`).
+    - 입력된 키가 자동으로 제거되므로 주로 입력 모드 매핑을 대상으로 합니다. 이 모듈은 키의 명시적 제거(주로 명시적인 `<BS><BS>`를 통해)를 요구하면서 더 일반적인 경우를 허용합니다.
 
 
 - [abecodes/tabout.nvim](https://github.com/abecodes/tabout.nvim):
 
-    - Similar general idea as in `'jump_{after,before}_tsnode'` steps
-      of [MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep).
+    - [MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep)의 `'jump_{after,before}_tsnode'` 단계와 일반적인 아이디어가 유사합니다.
 
-    - Works only with enabled tree-sitter parser. This module provides
-      fallback via 'jump_after_close' and 'jump_before_open' that work
-      without tree-sitter parser.
+    - tree-sitter 파서가 활성화된 경우에만 작동합니다. 이 모듈은 tree-sitter 파서 없이도 작동하는 'jump_after_close' 및 'jump_before_open'을 통해 폴백을 제공합니다.
 
-    - 'tabout.nvim' has finer control of how the tree-sitter node movement
-      is done, while this module has "jump outside of current node" behavior.
+    - 'tabout.nvim'은 tree-sitter 노드 이동 방식에 대해 더 세밀한 제어가 가능하지만, 이 모듈은 "현재 노드 밖으로 점프"하는 동작을 가집니다.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable acting in mappings, set `vim.g.minikeymap_disable` (globally) or
-`vim.b.minikeymap_disable` (for a buffer) to `true`. Considering high number
-of different scenarios and customization intentions, writing exact rules
-for disabling module's functionality is left to user.
-See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+매핑 동작을 비활성화하려면 `vim.g.minikeymap_disable`(전역) 또는 `vim.b.minikeymap_disable`(버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 커스터마이징 의도를 고려하여 모듈 기능을 비활성화하기 위한 정확한 규칙 작성은 사용자에게 맡겨집니다.
+일반적인 레시피는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
-### Examples {#minikeymap-examples .help-syntax-right-anchor}
+### 예시 {#minikeymap-examples .help-syntax-right-anchor}
 
-#### Multi-step {#minikeymap-examples-multi-step}
+#### 다단계 (Multi-step) {#minikeymap-examples-multi-step}
 
 
-See [MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep) for a general description of how multi-step
-mappings work and what built-in steps are available.
+다단계 매핑이 어떻게 작동하는지와 어떤 내장 단계가 사용 가능한지에 대한 일반적인 설명은 [MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep)을 참조하세요.
 
-Setup that works well with [mini.completion](mini-completion.qmd#mini.completion) and [mini.pairs](mini-pairs.qmd#mini.pairs):
+[mini.completion](mini-completion.qmd#mini.completion) 및 [mini.pairs](mini-pairs.qmd#mini.pairs)와 잘 작동하는 설정:
 
   ```lua
   local map_multistep = require('mini.keymap').map_multistep
@@ -130,7 +109,7 @@ Setup that works well with [mini.completion](mini-completion.qmd#mini.completion
   map_multistep('i', '<BS>',    { 'minipairs_bs' })
   ```
 
-Use <span class="help-syntax-keys">\<Tab\></span> / <span class="help-syntax-keys">\<S-Tab\></span> to also navigate and expand [mini.snippets](mini-snippets.qmd#mini.snippets):
+<span class="help-syntax-keys">\<Tab\></span> / <span class="help-syntax-keys">\<S-Tab\></span>을 사용하여 [mini.snippets](mini-snippets.qmd#mini.snippets)를 탐색하고 확장하도록 설정:
 
   ```lua
   local map_multistep = require('mini.keymap').map_multistep
@@ -142,12 +121,12 @@ Use <span class="help-syntax-keys">\<Tab\></span> / <span class="help-syntax-key
   map_multistep('i', '<S-Tab>', shifttab_steps)
   ```
 
-An extra smart <span class="help-syntax-keys">\<Tab\></span> and <span class="help-syntax-keys">\<S-Tab\></span>:
+추가적인 스마트 <span class="help-syntax-keys">\<Tab\></span> 및 <span class="help-syntax-keys">\<S-Tab\></span> 설정:
 
   ```lua
   local map_multistep = require('mini.keymap').map_multistep
 
-  -- NOTE: this will never insert tab, press <C-v><Tab> for that
+  -- 참고: 이는 탭을 입력하지 않습니다. 탭을 입력하려면 <C-v><Tab>을 누르세요.
   local tab_steps = {
     'minisnippets_next', 'minisnippets_expand', 'pmenu_next',
     'jump_after_tsnode', 'jump_after_close',
@@ -161,7 +140,7 @@ An extra smart <span class="help-syntax-keys">\<Tab\></span> and <span class="he
   map_multistep('i', '<S-Tab>', shifttab_steps)
   ```
 
-Navigation in active [vim.snippet](https://neovim.io/doc/user/helptag.html?tag=vim.snippet) session also requires mapping in [Select-mode](https://neovim.io/doc/user/helptag.html?tag=Select-mode):
+활성화된 [vim.snippet](https://neovim.io/doc/user/helptag.html?tag=vim.snippet) 세션에서의 탐색은 [선택 모드(Select-mode)](https://neovim.io/doc/user/helptag.html?tag=Select-mode) 매핑도 필요합니다:
 
   ```lua
   local map_multistep = require('mini.keymap').map_multistep
@@ -169,39 +148,36 @@ Navigation in active [vim.snippet](https://neovim.io/doc/user/helptag.html?tag=v
   map_multistep({ 'i', 's' }, '<S-Tab>', { 'vimsnippet_prev', 'pmenu_prev' })
   ```
 
-#### Combos {#minikeymap-examples-combos}
+#### 콤보 (Combos) {#minikeymap-examples-combos}
 
 
-See [MiniKeymap.map\_combo()](mini-keymap.qmd#minikeymap.map_combo) for a general description of what is a combo and
-more caveats about its usage.
+콤보가 무엇인지에 대한 일반적인 설명과 사용 시 주의 사항은 [MiniKeymap.map\_combo()](mini-keymap.qmd#minikeymap.map_combo)를 참조하세요.
 
-All combos require their left hand side keys to be typed relatively quickly.
-To adjust the delay between keys, add `{ delay = 500 }` (use custom value) as
-fourth argument.
+모든 콤보는 왼쪽 키들이 비교적 빠르게 입력되어야 합니다. 키 사이의 지연 시간을 조정하려면 네 번째 인자로 `{ delay = 500 }`(사용자 지정 값)을 추가하세요.
 
-##### "Better escape" to Normal mode {#minikeymap-examples-combos-betterescapetonormalmode}
+##### 일반 모드로 나가는 "Better escape" {#minikeymap-examples-combos-betterescapetonormalmode}
 
 
-Leave into [Normal-mode](https://neovim.io/doc/user/helptag.html?tag=Normal-mode) without having to reach for <span class="help-syntax-keys">\<Esc\></span> key:
+<span class="help-syntax-keys">\<Esc\></span> 키에 손을 뻗지 않고 [일반 모드(Normal-mode)](https://neovim.io/doc/user/helptag.html?tag=Normal-mode)로 나갑니다:
 
   ```lua
-  -- Support most common modes. This can also contain 't', but would
-  -- only mean to press `<Esc>` inside terminal.
+  -- 가장 일반적인 모드 지원. 터미널 내부에서 `<Esc>`를 누르는 것과
+  -- 같은 의미로 't'를 포함할 수도 있습니다.
   local mode = { 'i', 'c', 'x', 's' }
   require('mini.keymap').map_combo(mode, 'jk', '<BS><BS><Esc>')
 
-  -- To not have to worry about the order of keys, also map "kj"
+  -- 키 순서에 신경 쓰지 않으려면 "kj"도 매핑합니다.
   require('mini.keymap').map_combo(mode, 'kj', '<BS><BS><Esc>')
 
-  -- Escape into Normal mode from Terminal mode
+  -- 터미널 모드에서 일반 모드로 탈출
   require('mini.keymap').map_combo('t', 'jk', '<BS><BS><C-\\><C-n>')
   require('mini.keymap').map_combo('t', 'kj', '<BS><BS><C-\\><C-n>')
   ```
 
-##### Show bad navigation habits {#minikeymap-examples-combos-showbadnavigationhabits}
+##### 잘못된 탐색 습관 표시 {#minikeymap-examples-combos-showbadnavigationhabits}
 
 
-Show notification if there is too much movement by repeating same key:
+동일한 키를 반복하여 너무 많이 이동할 경우 알림을 표시합니다:
 
   ```lua
   local notify_many_keys = function(key)
@@ -215,33 +191,30 @@ Show notification if there is too much movement by repeating same key:
   notify_many_keys('l')
   ```
 
-##### Fix previous spelling mistake {#minikeymap-examples-combos-fixpreviousspellingmistake}
+##### 이전 오타 수정 {#minikeymap-examples-combos-fixpreviousspellingmistake}
 
 
-Fix previous spelling mistake (see [[s](https://neovim.io/doc/user/helptag.html?tag=[s) and [z=](https://neovim.io/doc/user/helptag.html?tag=z=)) without manually leaving
-Insert mode:
+수동으로 입력 모드를 나가지 않고 이전 오타를 수정합니다([[s](https://neovim.io/doc/user/helptag.html?tag=[s) 및 [z=](https://neovim.io/doc/user/helptag.html?tag=z=) 참조):
 
   ```lua
   local action = '<BS><BS><Esc>[s1z=gi<Right>'
   require('mini.keymap').map_combo('i', 'kk', action)
   ```
 
-##### Hide search highlighting {#minikeymap-examples-combos-hidesearchhighlighting}
+##### 검색 하이라이트 숨기기 {#minikeymap-examples-combos-hidesearchhighlighting}
 
 
-Use double <span class="help-syntax-keys">\<Esc\></span><span class="help-syntax-keys">\<Esc\></span> to execute [:nohlsearch](https://neovim.io/doc/user/helptag.html?tag=:nohlsearch). Although this can also be done
-with `nmap <Esc> <Cmd>nohl<CR>`, the combo approach also exists and can be used
-to free <span class="help-syntax-keys">\<Esc\></span> mapping in Normal mode for something else.
+<span class="help-syntax-keys">\<Esc\></span><span class="help-syntax-keys">\<Esc\></span>를 두 번 눌러 [:nohlsearch](https://neovim.io/doc/user/helptag.html?tag=:nohlsearch)를 실행합니다. `nmap <Esc> <Cmd>nohl<CR>`로도 가능하지만, 콤보 방식은 일반 모드에서 <span class="help-syntax-keys">\<Esc\></span> 매핑을 다른 용도로 사용할 수 있게 해줍니다.
 
   ```lua
   local action = function() vim.cmd('nohlsearch') end
   require('mini.keymap').map_combo({ 'n','i','x','c' }, '<Esc><Esc>', action)
   ```
 
-##### Buffer navigation {#minikeymap-examples-combos-buffernavigation}
+##### 버퍼 탐색 {#minikeymap-examples-combos-buffernavigation}
 
 
-Replace some movements with easier to type alternatives:
+일부 이동 명령을 더 입력하기 쉬운 대안으로 교체합니다:
 
   ```lua
   local map_combo = require('mini.keymap').map_combo
@@ -256,21 +229,21 @@ Replace some movements with easier to type alternatives:
 ### setup() {#minikeymap.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniKeymap.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minikeymap.setup-parameters}
+#### 매개변수 {#minikeymap.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniKeymap.config](mini-keymap.qmd#minikeymap.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniKeymap.config](mini-keymap.qmd#minikeymap.config)를 참조하세요.
 
-#### Usage {#minikeymap.setup-usage}
+#### 사용법 {#minikeymap.setup-usage}
 
 
 
   ```lua
-  require('mini.keymap').setup({}) -- replace {} with your config table
-                                   -- needs `keymap` field present
+  require('mini.keymap').setup({}) -- 사용자 설정 테이블로 교체
+                                   -- `keymap` 필드가 필요합니다
   ```
 
 ---
@@ -278,7 +251,7 @@ Module setup
 ### config {#minikeymap.config .help-syntax-right-anchor}
 
 <p align="center">`MiniKeymap.config`</p>
-#### Defaults {#minikeymap.config-defaults}
+#### 기본값 {#minikeymap.config-defaults}
 
 
 
@@ -291,148 +264,139 @@ Module setup
 ### map_multistep() {#minikeymap.map_multistep .help-syntax-right-anchor}
 
 <p align="center">`MiniKeymap.map_multistep`(<span class="help-syntax-special">{mode}</span>, <span class="help-syntax-special">{lhs}</span>, <span class="help-syntax-special">{steps}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Map multi-step action
+다단계 동작 매핑
 
-Mapping of a multi-step action is an expression mapping ([:map-expression](https://neovim.io/doc/user/helptag.html?tag=:map-expression)).
-Executing a multi-step action is essentially:
+다단계 동작 매핑은 표현식 매핑([:map-expression](https://neovim.io/doc/user/helptag.html?tag=:map-expression))입니다.
+다단계 동작을 실행하는 과정은 다음과 같습니다:
 
-- Check condition for step one. If `true` - execute step one action and stop.
+- 1단계 조건을 확인합니다. `true`인 경우 1단계 동작을 실행하고 중단합니다.
 
-- Check condition for step two, and so on.
+- 2단계 조건을 확인하는 식으로 계속 진행합니다.
 
-- If there is no more steps, fall back to returning mapped key.
+- 더 이상 단계가 없으면 매핑된 키를 반환하는 폴백을 수행합니다.
 
-For better user experience there are many built-in steps mostly designed
-to create Insert mode "smart" mappings of <span class="help-syntax-keys">\<Tab\></span>, <span class="help-syntax-keys">\<S-Tab\></span>, <span class="help-syntax-keys">\<CR\></span>, and <span class="help-syntax-keys">\<BS\></span>.
-Available built-in steps ("For key" is a suggestion, any can be used):
+더 나은 사용자 경험을 위해 <span class="help-syntax-keys">\<Tab\></span>, <span class="help-syntax-keys">\<S-Tab\></span>, <span class="help-syntax-keys">\<CR\></span>, <span class="help-syntax-keys">\<BS\></span>의 입력 모드 "스마트" 매핑을 위해 설계된 많은 내장 단계가 있습니다.
+사용 가능한 내장 단계 ("대상 키"는 제안이며 무엇이든 사용 가능):
 
 
  ```
  ┌─────────────────────┬────────────────┬──────────────────────────┬─────────┐
- │      Step name      │   Condition    │          Action          │ For key │
+ │      단계 이름      │      조건      │           동작           │ 대상 키 │
  ├─────────────────────┴────────────────┴──────────────────────────┴─────────┤
  ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ |ins-completion-menu| ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ pmenu_next          │ Pmenu visible  │ Select next (as <C-n>)   │ <Tab>   │
- │ pmenu_prev          │ Pmenu visible  │ Select prev (as <C-p>)   │ <S-Tab> │
- │ pmenu_accept        │ Item selected  │ Accept (as <C-y>)        │ <CR>    │
+ │ pmenu_next          │ 메뉴 표시 중   │ 다음 항목 선택 (<C-n>)   │ <Tab>   │
+ │ pmenu_prev          │ 메뉴 표시 중   │ 이전 항목 선택 (<C-p>)   │ <S-Tab> │
+ │ pmenu_accept        │ 항목 선택됨    │ 선택 수락 (<C-y>)        │ <CR>    │
  ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ |mini.snippets| ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ minisnippets_next   │ Session active │ Jump to next tabstop     │ <Tab>   │
- │ minisnippets_prev   │ Session active │ Jump to prev tabstop     │ <S-Tab> │
- │ minisnippets_expand │ Can expand     │ Expand snippet at cursor │ <Tab>   │
+ │ minisnippets_next   │ 세션 활성 중   │ 다음 탭스탑으로 점프     │ <Tab>   │
+ │ minisnippets_prev   │ 세션 활성 중   │ 이전 탭스탑으로 점프     │ <S-Tab> │
+ │ minisnippets_expand │ 확장 가능      │ 커서에서 스니펫 확장     │ <Tab>   │
  ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ |mini.pairs| ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ minipairs_cr        │ Module set up  │ <CR> respecting pairs    │ <CR>    │
- │ minipairs_bs        │ Module set up  │ <BS> respecting pairs    │ <BS>    │
- ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ Jump around in Insert mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ jump_after_tsnode   │ TS parser      │ Jump after node end      │ <Tab>   │
- │ jump_before_tsnode  │ TS parser      │ Jump before node start   │ <S-Tab> │
- │ jump_after_close    │ Insert mode    │ Jump after  )]}"'`       │ <Tab>   │
- │ jump_before_open    │ Insert mode    │ Jump before ([{"'`       │ <S-Tab> │
- ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ Work with whitespace ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ increase_indent     │ Is on indent   │ Increase indent          │ <Tab>   │
- │ decrease_indent     │ Is on indent   │ Decrease indent          │ <S-Tab> │
- │ hungry_bs           │ Space to left  │ Delete all space to left │ <BS>    │
+ │ minipairs_cr        │ 모듈 설정됨    │ 페어를 준수하는 <CR>     │ <CR>    │
+ │ minipairs_bs        │ 모듈 설정됨    │ 페어를 준수하는 <BS>     │ <BS>    │
+ ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 입력 모드에서 점프 이동 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
+ │ jump_after_tsnode   │ TS 파서 활성   │ 노드 끝 뒤로 점프        │ <Tab>   │
+ │ jump_before_tsnode  │ TS 파서 활성   │ 노드 시작 앞으로 점프    │ <S-Tab> │
+ │ jump_after_close    │ 입력 모드      │ )]}^"' 뒤로 점프         │ <Tab>   │
+ │ jump_before_open    │ 입력 모드      │ ([{"'` 앞으로 점프       │ <S-Tab> │
+ ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 공백 처리 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
+ │ increase_indent     │ 들여쓰기 위    │ 들여쓰기 증가            │ <Tab>   │
+ │ decrease_indent     │ 들여쓰기 위    │ 들여쓰기 감소            │ <S-Tab> │
+ │ hungry_bs           │ 왼쪽 공백 존재 │ 왼쪽의 모든 공백 삭제    │ <BS>    │
  ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ |vim.snippet| ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ vimsnippet_next     │ Session active │ Jump to next tabstop     │ <Tab>   │
- │ vimsnippet_prev     │ Session active │ Jump to prev tabstop     │ <S-Tab> │
+ │ vimsnippet_next     │ 세션 활성 중   │ 다음 탭스탑으로 점프     │ <Tab>   │
+ │ vimsnippet_prev     │ 세션 활성 중   │ 이전 탭스탑으로 점프     │ <S-Tab> │
  ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 'hrsh7th/nvim-cmp' ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ cmp_next            │ Menu visible   │ Select next item         │ <Tab>   │
- │ cmp_prev            │ Menu visible   │ Select prev item         │ <S-Tab> │
- │ cmp_accept          │ Item selected  │ Accept selected item     │ <CR>    │
+ │ cmp_next            │ 메뉴 표시 중   │ 다음 항목 선택           │ <Tab>   │
+ │ cmp_prev            │ 메뉴 표시 중   │ 이전 항목 선택           │ <S-Tab> │
+ │ cmp_accept          │ 항목 선택됨    │ 선택된 항목 수락         │ <CR>    │
  ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 'Saghen/blink.cmp' ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ blink_next          │ Menu visible   │ Select next item         │ <Tab>   │
- │ blink_prev          │ Menu visible   │ Select prev item         │ <S-Tab> │
- │ blink_accept        │ Item selected  │ Accept selected item     │ <CR>    │
+ │ blink_next          │ 메뉴 표시 중   │ 다음 항목 선택           │ <Tab>   │
+ │ blink_prev          │ 메뉴 표시 중   │ 이전 항목 선택           │ <S-Tab> │
+ │ blink_accept        │ 항목 선택됨    │ 선택된 항목 수락         │ <CR>    │
  ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 'L3MON4D3/LuaSnip' ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ luasnip_next        │ Session active │ Jump to next tabstop     │ <Tab>   │
- │ luasnip_prev        │ Session active │ Jump to prev tabstop     │ <S-Tab> │
- │ luasnip_expand      │ Can expand     │ Expand snippet at cursor │ <Tab>   │
+ │ luasnip_next        │ 세션 활성 중   │ 다음 탭스탑으로 점프     │ <Tab>   │
+ │ luasnip_prev        │ 세션 활성 중   │ 이전 탭스탑으로 점프     │ <S-Tab> │
+ │ luasnip_expand      │ 확장 가능      │ 커서에서 스니펫 확장     │ <Tab>   │
  ├┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 'windwp/nvim-autopairs' ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┤
- │ nvimautopairs_cr    │ Module present │ <CR> respecting pairs    │ <CR>    │
- │ nvimautopairs_bs    │ Module present │ <BS> respecting pairs    │ <BS>    │
+ │ nvimautopairs_cr    │ 모듈 존재      │ 페어를 준수하는 <CR>     │ <CR>    │
+ │ nvimautopairs_bs    │ 모듈 존재      │ 페어를 준수하는 <BS>     │ <BS>    │
  └─────────────────────┴────────────────┴──────────────────────────┴─────────┘
  ```
 
-Notes:
+참고:
 
-- Executing action has limitations of [:map-expression](https://neovim.io/doc/user/helptag.html?tag=:map-expression) (like not allowed text
-  or buffer changes, etc.). To execute complex lua code, use [vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\))
-  inside action, return the code as string in [:map-cmd](https://neovim.io/doc/user/helptag.html?tag=:map-cmd) format, or return
-  a function to be later executed. See usage examples.
+- 동작 실행은 표현식 매핑([:map-expression](https://neovim.io/doc/user/helptag.html?tag=:map-expression))의 제한사항(텍스트나 버퍼 변경 불허 등)을 갖습니다. 복잡한 lua 코드를 실행하려면 동작 내부에서 [vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\))을 사용하거나, [:map-cmd](https://neovim.io/doc/user/helptag.html?tag=:map-cmd) 형식의 문자열로 코드를 반환하거나, 나중에 실행될 함수를 반환하세요. 사용 예시를 참조하세요.
 
 
-- Some mapped keys (like <span class="help-syntax-keys">\<Tab\></span>, <span class="help-syntax-keys">\<CR\></span>) might require disabling smart presets
-  in plugins (like 'nvim-cmp', 'blink-cmp', 'nvim-autopairs').
+- 일부 매핑된 키(예: <span class="help-syntax-keys">\<Tab\></span>, <span class="help-syntax-keys">\<CR\></span>)는 플러그인('nvim-cmp', 'blink-cmp', 'nvim-autopairs' 등)에서 스마트 프리셋을 비활성화해야 할 수도 있습니다.
 
-#### Parameters {#minikeymap.map_multistep-parameters}
+#### 매개변수 {#minikeymap.map_multistep-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string|table)` Same as for [vim.keymap.set()](https://neovim.io/doc/user/helptag.html?tag=vim.keymap.set\(\)).
+<span class="help-syntax-special">{mode}</span> `(string|table)` [vim.keymap.set()](https://neovim.io/doc/user/helptag.html?tag=vim.keymap.set\(\))과 동일.
 
-<span class="help-syntax-special">{lhs}</span> `(string)` Same as for [vim.keymap.set()](https://neovim.io/doc/user/helptag.html?tag=vim.keymap.set\(\)).
+<span class="help-syntax-special">{lhs}</span> `(string)` [vim.keymap.set()](https://neovim.io/doc/user/helptag.html?tag=vim.keymap.set\(\))과 동일.
 
-<span class="help-syntax-special">{steps}</span> `(table)` Array of steps. Each step can be a string with the name
-  of built-in step or a table with two callable methods (will be called
-  without arguments):
+<span class="help-syntax-special">{steps}</span> `(table)` 단계 배열. 각 단계는 내장 단계 이름의 문자열이거나, 두 개의 호출 가능한 메서드(인자 없이 호출됨)를 가진 테이블일 수 있습니다:
 
-  - <span class="help-syntax-keys">\<condition\></span> - return `true` if the action should be executed.
+  - <span class="help-syntax-keys">\<condition\></span> - 동작이 실행되어야 하면 `true`를 반환합니다.
 
-  - <span class="help-syntax-keys">\<action\></span> - action to be executed if <span class="help-syntax-keys">\<condition\></span> returns `true`.
-    For more flexibility, it can also return a value which can be:
+  - <span class="help-syntax-keys">\<action\></span> - <span class="help-syntax-keys">\<condition\></span>이 `true`를 반환할 때 실행될 동작.
+    유연성을 위해 다음과 같은 값을 반환할 수 있습니다:
 
-      - String - will be returned as expression output. Can be something like
-        `"<Tab>"` (treat as <span class="help-syntax-keys">\<Tab\></span> key) or `"<Cmd>lua vim.notify('Hello')<CR>"`.
-        Should not escape keycodes (i.e. return "<span class="help-syntax-keys">\<Tab\></span>" and not "\t").
-        To undo already done escape, use [keytrans()](https://neovim.io/doc/user/helptag.html?tag=keytrans\(\)).
+      - 문자열 - 표현식 출력으로 반환됩니다. `"<Tab>"`(<span class="help-syntax-keys">\<Tab\></span> 키로 처리) 또는 `"<Cmd>lua vim.notify('Hello')<CR>"`과 같은 것일 수 있습니다.
+        키코드를 이스케이프하지 않아야 합니다(즉, "\t"가 아닌 "<span class="help-syntax-keys">\<Tab\></span>"을 반환).
+        이미 이스케이프된 것을 되돌리려면 [keytrans()](https://neovim.io/doc/user/helptag.html?tag=keytrans\(\))를 사용하세요.
 
-      - Function - will be executed as if `"<Cmd>lua f()<CR>"`, but does not
-        need to create a global function for that.
+      - 함수 - `"<Cmd>lua f()<CR>"`인 것처럼 실행되지만 이를 위해 전역 함수를 생성할 필요는 없습니다.
 
-      - `false` - do not stop going through steps.
+      - `false` - 단계를 계속 진행합니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Same as for [vim.keymap.set()](https://neovim.io/doc/user/helptag.html?tag=vim.keymap.set\(\)).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [vim.keymap.set()](https://neovim.io/doc/user/helptag.html?tag=vim.keymap.set\(\))과 동일.
 
-#### Usage {#minikeymap.map_multistep-usage}
+#### 사용법 {#minikeymap.map_multistep-usage}
 
 
-See [MiniKeymap-examples](mini-keymap.qmd#minikeymap-examples) for practical examples.
+실제 예시는 [MiniKeymap 예시](mini-keymap.qmd#minikeymap-examples)를 참조하세요.
 
-Some illustrative examples:
+예시 설명:
 
   ```lua
   _G.log = {}
   local steps = {}
   steps[1] = {
     condition = function() table.insert(_G.log, 'C1'); return _G.cond1 end,
-    -- Compute and return keys. Will be emulated as pressed.
+    -- 키를 계산하여 반환합니다. 키가 눌린 것처럼 에뮬레이션됩니다.
     action = function() table.insert(_G.log, 'A1'); return 'hello' end,
   }
 
   steps[2] = {
     condition = function() table.insert(_G.log, 'C2'); return _G.cond2 end,
-    -- Perform action immediately, return `false` to keep asking other steps
+    -- 동작을 즉시 수행하고, 다른 단계를 계속 확인하도록 `false` 반환
     action = function() table.insert(_G.log, 'A2'); return false end,
   }
 
   steps[3] = {
     condition = function() table.insert(_G.log, 'C3'); return _G.cond3 end,
-    -- Perform action later (to overcom expression mapping limitations)
+    -- 표현식 매핑의 제한을 피하기 위해 나중에 동작 수행
     action = function()
       table.insert(_G.log, 'A3_1')
       return function() table.insert(_G.log, 'A3_2') end
     end,
   }
 
-  -- Make Insert mode <Tab> mapping
+  -- 입력 모드 <Tab> 매핑 생성
   require('mini.keymap').map_multistep('i', '<Tab>', steps)
 
-  -- Pressing <Tab> inserts fallback `\t`; logs C1+C2+C3
+  -- <Tab>을 누르면 폴백 `\t`가 삽입됨; 로그 C1+C2+C3
   _G.cond1, _G.cond2, _G.cond3 = false, false, false
 
-  -- Pressing <Tab> inserts `hello`; logs C1+A1
+  -- <Tab>을 누르면 `hello`가 삽입됨; 로그 C1+A1
   _G.cond1, _G.cond2, _G.cond3 = true, false, false
 
-  -- Pressing <Tab> inserts nothing; logs C1+C2+A2+C3+A3_1+A3_2
+  -- <Tab>을 누르면 아무것도 삽입되지 않음; 로그 C1+C2+A2+C3+A3_1+A3_2
   _G.cond1, _G.cond2, _G.cond3 = false, true, true
   ```
 
@@ -441,56 +405,53 @@ Some illustrative examples:
 ### gen_step {#minikeymap.gen_step .help-syntax-right-anchor}
 
 <p align="center">`MiniKeymap.gen_step`</p>
-Generate step for multi-step mappings
+다단계 매핑을 위한 단계 생성
 
-This is a table with function elements. Call to actually get a step.
+함수 요소가 포함된 테이블입니다. 호출하여 실제 단계를 가져옵니다.
 
 ---
 
 ### gen_step.search_pattern() {#minikeymap.gen_step.search_pattern .help-syntax-right-anchor}
 
 <p align="center">`MiniKeymap.gen_step.search_pattern`(<span class="help-syntax-special">{pattern}</span>, <span class="help-syntax-special">{flags}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Search pattern step
+패턴 검색 단계
 
-Use [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\)) to jump to pattern match. Possibly adjust final position to
-be just to the right of the match (useful in Insert mode).
+[search()](https://neovim.io/doc/user/helptag.html?tag=search\(\))를 사용하여 패턴 일치 항목으로 점프합니다. 최종 위치를 일치 항목 바로 오른쪽으로 조정할 수 있습니다(입력 모드에서 유용함).
 
-#### Parameters {#minikeymap.gen_step.search_pattern-parameters}
-
+#### 매개변수 {#minikeymap.gen_step.search_pattern-parameters}
 
 
-<span class="help-syntax-special">{pattern}</span> `(string)` Same as for [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\)).
 
-<span class="help-syntax-special">{flags}</span> `(string|nil)` Same as for [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\)).
+<span class="help-syntax-special">{pattern}</span> `(string)` [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\))과 동일.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{flags}</span> `(string|nil)` [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\))과 동일.
 
-  - <span class="help-syntax-keys">\<side\></span> `(string)` - one of `"before"` (default) or `"after"`.
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<stopline\></span> `(number|function)` - forwarded to [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\)) (as number or
-    as function's output after calling it before every search).
+  - <span class="help-syntax-keys">\<side\></span> `(string)` - `"before"` (기본값) 또는 `"after"` 중 하나.
 
-  - <span class="help-syntax-keys">\<timeout\></span> `(number)` - forwarded to [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\)).
+  - <span class="help-syntax-keys">\<stopline\></span> `(number|function)` - [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\))에 전달됨 (숫자 또는 매 검색 전 호출될 함수의 출력값).
 
-  - <span class="help-syntax-keys">\<skip\></span> `(string|function)` - forwarded to [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\)).
+  - <span class="help-syntax-keys">\<timeout\></span> `(number)` - [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\))에 전달됨.
 
-#### Return {#minikeymap.gen_step.search_pattern-return}
+  - <span class="help-syntax-keys">\<skip\></span> `(string|function)` - [search()](https://neovim.io/doc/user/helptag.html?tag=search\(\))에 전달됨.
 
-
-`(table)` Step which searches pattern.
-
-#### Usage {#minikeymap.gen_step.search_pattern-usage}
+#### 반환 {#minikeymap.gen_step.search_pattern-return}
 
 
-Built-in [MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep) steps "jump_after_close" and
-"jump_before_open" use this, but only in Insert mode.
+`(table)` 패턴을 검색하는 단계.
 
-Steps that jump before/after all consecutive brackets in several modes:
+#### 사용법 {#minikeymap.gen_step.search_pattern-usage}
+
+
+[MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep)의 내장 단계인 "jump_after_close" 및 "jump_before_open"이 이를 사용하지만 입력 모드에서만 사용됩니다.
+
+여러 모드에서 연속된 모든 괄호의 앞/뒤로 점프하는 단계:
 
   ```lua
   local keymap = require('mini.keymap')
   local tab_step_insert = keymap.gen_step.search_pattern(
-    -- Need to use 'c' flag and 'after' side for robust "chaining"
+    -- 견고한 "체이닝"을 위해 'c' 플래그와 'after' 사이드를 사용해야 함
     [=[[)\]}]\+]=], 'ceW', { side = 'after' }
   )
   keymap.map_multistep('i', '<Tab>', { tab_step_insert })
@@ -506,83 +467,59 @@ Steps that jump before/after all consecutive brackets in several modes:
 ### map_combo() {#minikeymap.map_combo .help-syntax-right-anchor}
 
 <p align="center">`MiniKeymap.map_combo`(<span class="help-syntax-special">{mode}</span>, <span class="help-syntax-special">{lhs}</span>, <span class="help-syntax-special">{action}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Map combo post action
+콤보 후속 동작 매핑
 
-Create a combo: sequence of keys where each acts immediately plus execute
-an extra action if all are typed within configurable delay between each other.
+콤보 생성: 각 키가 즉시 작동하면서 설정된 지연 시간 내에 모든 키가 순차적으로 입력될 경우 추가 동작을 실행하는 키 시퀀스입니다.
 
-Example for Insert mode "better escape" `jk` combo with `<BS><BS><Esc>` action:
+입력 모드 "better escape" `jk` 콤보와 `<BS><BS><Esc>` 동작 예시:
 
-- Press `j`. It is visible immediately without any side effects.
+- `j`를 누릅니다. 부작용 없이 즉시 표시됩니다.
 
-- Quickly (no more than default 200 ms after) press `k`. This triggers the
-  action which is equivalent to typing <span class="help-syntax-keys">\<BS\></span><span class="help-syntax-keys">\<BS\></span> (delete already present `jk`)
-  and <span class="help-syntax-keys">\<Esc\></span> to exit into Normal mode.
+- 빠르게 (기본값인 200ms 이내에) `k`를 누릅니다. 그러면 이미 입력된 `jk`를 삭제하고(<span class="help-syntax-keys">\<BS\></span><span class="help-syntax-keys">\<BS\></span>) 일반 모드로 나가는(<span class="help-syntax-keys">\<Esc\></span>) 것과 동일한 동작이 트리거됩니다.
 
-Notes:
+참고:
 
-- IMPORTANT! Combo is not a regular mapping but a separate key tracking
-  with [vim.on\_key()](https://neovim.io/doc/user/helptag.html?tag=vim.on_key\(\)). This is important as combos will not be visible and
-  can not be managed as regular mappings. Instead each combo is associated
-  with a dedicated [namespace](https://neovim.io/doc/user/helptag.html?tag=namespace) (named for human readability). However, it is not
-  really expected to manage them on the fly after they are created.
+- 중요! 콤보는 일반 매핑이 아니라 [vim.on\_key()](https://neovim.io/doc/user/helptag.html?tag=vim.on_key\(\))를 통한 별도의 키 추적입니다. 이는 콤보가 보이지 않으며 일반 매핑처럼 관리할 수 없음을 의미하므로 중요합니다. 대신 각 콤보는 전용 [네임스페이스(namespace)](https://neovim.io/doc/user/helptag.html?tag=namespace) (가독성을 위해 명명됨)와 연결됩니다. 하지만 생성 후 즉석에서 관리할 일은 거의 없습니다.
 
 
-- String action is executed with [nvim\_input()](https://neovim.io/doc/user/helptag.html?tag=nvim_input\(\)), i.e. emulated keys will
-  respect custom mappings.
+- 문자열 동작은 [nvim\_input()](https://neovim.io/doc/user/helptag.html?tag=nvim_input\(\))으로 실행되므로 에뮬레이션된 키들은 사용자 정의 매핑을 준수합니다.
 
 
-- Different combos are tracked and act independent of each other. For example,
-  if there are combos for `jjk` and `jk` keys, fast typing `jjk` will execute both.
+- 서로 다른 콤보는 독립적으로 추적되고 작동합니다. 예를 들어 `jjk`와 `jk` 콤보가 모두 있는 경우, 빠르게 `jjk`를 입력하면 둘 다 실행됩니다.
 
 
-- Neovim>=0.11 is recommended due to [vim.on\_key()](https://neovim.io/doc/user/helptag.html?tag=vim.on_key\(\)) improvement to allow
-  watching for keys as they are typed and not as if coming from mappings.
-  For example, this matters when creating a `jk` combo for Visual mode while
-  also having `xnoremap j gj` style of remaps. On Neovim<0.11 the fix is to
-  use `gjgk` as combo's left hand side.
+- 매핑이 아닌 실제 입력된 키를 감시할 수 있게 개선된 [vim.on\_key()](https://neovim.io/doc/user/helptag.html?tag=vim.on_key\(\))가 있는 Neovim>=0.11을 권장합니다. 예를 들어 비주얼 모드에서 `xnoremap j gj` 스타일의 리맵이 있는 상태에서 `jk` 콤보를 만들 때 중요합니다. Neovim<0.11에서의 해결책은 `gjgk`를 콤보의 왼쪽 키로 사용하는 것입니다.
 
 
-- Each combo adds very small but non-zero overhead on each keystroke.
-  Usually about 1-3 microseconds (i.e. 0.001-0.003 ms), which should be
-  fast enough for most setups. For a "normal, real world" coding session
-  with a total of ~20000 keystrokes it results in extra ~40ms of overhead
-  for a single created combo. Create many combos with caution.
+- 각 콤보는 키 입력마다 매우 적지만 0이 아닌 오버헤드를 추가합니다. 보통 약 1-3 마이크로초(즉, 0.001-0.003ms)로, 대부분의 설정에서 충분히 빠를 것입니다. 총 ~20000번의 키 입력이 발생하는 "일반적인 실제" 코딩 세션에서 하나의 콤보는 약 40ms의 추가 오버헤드를 발생시킵니다. 콤보를 많이 생성할 때는 주의하세요.
 
-#### Parameters {#minikeymap.map_combo-parameters}
+#### 매개변수 {#minikeymap.map_combo-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string|table)` String or array of string mode id (like "n", "i", etc.).
-  Array of several modes is more performant than several single mode combos.
+<span class="help-syntax-special">{mode}</span> `(string|table)` 모드 ID ("n", "i" 등)의 문자열 또는 배열. 여러 모드 배열이 여러 개의 단일 모드 콤보보다 성능이 좋습니다.
 
-<span class="help-syntax-special">{lhs}</span> `(string|table)` String with tracked key sequence or an array of
-  tracked keys (one element - one key).
+<span class="help-syntax-special">{lhs}</span> `(string|table)` 추적할 키 시퀀스 문자열 또는 추적할 키들의 배열 (한 요소가 한 키).
 
-<span class="help-syntax-special">{action}</span> `(string|function)` Action to perform after key sequence is detected.
-  If string, treated as keys and emulated with [nvim\_input()](https://neovim.io/doc/user/helptag.html?tag=nvim_input\(\)).
-  If function, executed in [vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\)). Can return string keys which will
-  be emulated.
+<span class="help-syntax-special">{action}</span> `(string|function)` 키 시퀀스가 감지된 후 수행할 동작. 문자열인 경우 키로 처리되어 [nvim\_input()](https://neovim.io/doc/user/helptag.html?tag=nvim_input\(\))으로 에뮬레이션됩니다. 함수인 경우 [vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\))에서 실행됩니다. 에뮬레이션될 문자열 키를 반환할 수 있습니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<delay\></span> `(number)` - delay in milliseconds within which keys should be
-    pressed to detect a key sequence. Default: 200.
+  - <span class="help-syntax-keys">\<delay\></span> `(number)` - 키 시퀀스를 감지하기 위해 키들이 눌려야 하는 지연 시간(밀리초). 기본값: 200.
 
-#### Usage {#minikeymap.map_combo-usage}
+#### 사용법 {#minikeymap.map_combo-usage}
 
 
-See [MiniKeymap-examples](mini-keymap.qmd#minikeymap-examples) for practical examples.
+실제 예시는 [MiniKeymap 예시](mini-keymap.qmd#minikeymap-examples)를 참조하세요.
 
-Some illustrative examples:
+예시 설명:
 
   ```lua
   local map_combo = require('mini.keymap').map_combo
 
-  -- In Insert mode pressing `x` followed by `x` within 1 second logs 'A'
-  -- and emulates extra pressing of `yy`
+  -- 입력 모드에서 `x`를 누른 뒤 1초 내에 `x`를 누르면 'A'를 로그에 남기고
+  -- `yy`를 추가로 누른 것처럼 에뮬레이션합니다
   _G.log = {}
   local action = function() table.insert(_G.log, 'A'); return 'yy' end
   map_combo('i', 'xx', action, { delay = 1000 })
   ```
-

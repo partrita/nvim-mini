@@ -1,36 +1,36 @@
 ---
-title: "Updates of 'mini.files': bookmarks"
+title: "'mini.files' 업데이트: 북마크"
 author: Evgeni Chasnovski
 date: 2024-09-03
 categories: [update, reddit]
-description: Also better file manipulation, prettier confirmation info, and more
+description: 더 나은 파일 조작, 더 깔끔한 확인 정보 창 등 다양한 기능이 개선되었습니다.
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/1f7zrjt/minifiles_updates_bookmarks_better_file/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/1f7zrjt/minifiles_updates_bookmarks_better_file/)*
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-TL;DR: here is a [full list of changes since last release](https://github.com/nvim-mini/mini.nvim/blob/main/CHANGELOG.md#minifiles). I'd be grateful if you could test them and give your feedback before the next 'mini.nvim' release.
+요약: 여기 [지난 릴리스 이후의 전체 변경 사항 목록](https://github.com/nvim-mini/mini.nvim/blob/main/CHANGELOG.md#minifiles)이 있습니다. 다음 'mini.nvim' 출시 전에 이 기능들을 테스트해 보시고 피견을 주시면 감사하겠습니다.
 
 ------
 
-During the current version iteration of ['mini.nvim'](https://github.com/nvim-mini/mini.nvim/) I decided to spread my attention to already existing modules for overall maintenance and backlog cleanup. 'mini.files' got the most attention among those, so I'd like to ask its users to test new changes before the next 'mini.nvim' release. The full list of changes is at the beginning of the post, but here are important highlights of recent activity:
+이번 ['mini.nvim'](https://github.com/nvim-mini/mini.nvim/) 버전 업데이트 과정에서 저는 기존 모듈들의 전반적인 유지보수와 백로그 정리에 집중하기로 했습니다. 그중에서도 'mini.files'에 가장 많은 공을 들였기에, 다음 'mini.nvim' 출시 전에 사용자분들께서 새로운 변경 사항들을 테스트해 주시길 부탁드립니다. 전체 변경 목록은 게시물 시작 부분에 있지만, 최근 활동의 주요 하이라이트는 다음과 같습니다:
 
-- 'mini.files' now implements bookmarks, which act similar to built-in marks:
-    - `m<char>` sets directory path of focused window as bookmark with id `<char>`.
-    - `'<char>` makes bookmark path focused.
-    - `set_bookmark()` can set custom bookmarks from script. Here is [an example](https://github.com/nvim-mini/mini.nvim/blob/eb0f557a5797cfe9c720ed84a71582c22bccb4f8/doc/mini-files.txt#L521).
+- 'mini.files'에 내장 마크(mark)와 유사하게 작동하는 북마크 기능이 구현되었습니다:
+    - `m<char>`: 포커스된 창의 디렉토리 경로를 ID가 `<char>`인 북마크로 설정합니다.
+    - `'<char>`: 해당 북마크 경로로 포커스를 이동합니다.
+    - `set_bookmark()`: 스크립트를 통해 커스텀 북마크를 설정할 수 있습니다. 여기 [사용 예시](https://github.com/nvim-mini/mini.nvim/blob/eb0f557a5797cfe9c720ed84a71582c22bccb4f8/doc/mini-files.txt#L521)가 있습니다.
 
-    The main motivation for this was that move/copy files across different directories was tricky without quick way to switch between them. Now they are a single `'a` / `'b` away from each other (needs conscious decision of creating them, though).
+    이 기능을 만든 주요 동기는 서로 다른 디렉토리 간에 파일을 이동하거나 복사할 때 빠르게 전환할 수 있는 방법이 없어 번거로웠기 때문입니다. 이제 `'a`나 `'b`만으로 두 디렉토리를 오갈 수 있습니다 (물론 북마크를 먼저 생성해야 한다는 점은 잊지 마세요).
 
-- Complex cases of file manipulation (like delete 'file-a' and copy 'file-b' as 'file-a' in a single synchronization) are now properly resolved. It is not 100% full proof (intentionally), so I'd still suggest splitting tasks into independent steps.
+- 한 번의 동기화로 'file-a'를 삭제하고 'file-b'를 'file-a'로 복사하는 것과 같은 복잡한 파일 조작 케이스가 이제 제대로 해결됩니다. 100% 완벽한 것은 아니므로 (의도적으로), 여전히 작업을 독립적인 단계로 나누어 수행하는 것을 권장합니다.
 
-- Confirmation info now uses relative paths inside action description as much as possible. It is also now intentionally aligned.
+- 확인 정보(confirmation info) 창에서 작업 설명에 가능한 한 상대 경로를 사용합니다. 또한 가독성을 위해 의도적으로 텍스트 정렬을 맞췄습니다.
 
-- `get_target_window()` is now soft deprecated (works for now, but will be removed after the next 'mini.nvim' release) in favor of a `get_explorer_state().target_window`. This was an oversight because I didn't want to fix the whole `explorer` data structure (and later realised that I didn't have to). Sorry about that.
+- `get_target_window()`는 `get_explorer_state().target_window`를 위해 이제 소프트웨어적으로 사용이 중단(soft deprecated)되었습니다. 현재는 작동하지만 다음 'mini.nvim' 출시 후에는 제거될 예정입니다. 이는 제가 전체 `explorer` 데이터 구조를 수정하고 싶지 않아 발생한 실수였습니다 (나중에 그럴 필요가 없었다는 것을 깨달았습니다). 불편을 드려 죄송합니다.
 
-You can leave your feedback/issues/suggestions here, create a [question](https://github.com/nvim-mini/mini.nvim/discussions/categories/q-a) (if it wasn't [already asked before](https://github.com/nvim-mini/mini.nvim/discussions/categories/q-a?discussions_q=is%3Aclose+category%3AQ%26A+label%3Amini.files)), or create an issue (if it wasn't already create before).
+피드백, 이슈, 제안 사항은 여기에 남겨주시거나, [질문](https://github.com/nvim-mini/mini.nvim/discussions/categories/q-a)을 생성해 주세요 (이미 [이전에 질문된 것](https://github.com/nvim-mini/mini.nvim/discussions/categories/q-a?discussions_q=is%3Aclose+category%3AQ%26A+label%3Amini.files)이 있는지 먼저 확인 부탁드립니다). 이슈가 아직 생성되지 않았다면 이슈를 만드셔도 좋습니다.
 
-Thanks!
+감사합니다!
 
-**Edit**: if you are curious to read about my journey to implementing bookmarks, [this issue](https://github.com/nvim-mini/mini.nvim/issues/928) contains some thought process for possible future reference.
+**추가**: 북마크 구현 과정이 궁금하시다면, [이 이슈](https://github.com/nvim-mini/mini.nvim/issues/928)에 향후 참고할 만한 고민의 흔적들이 담겨 있습니다.

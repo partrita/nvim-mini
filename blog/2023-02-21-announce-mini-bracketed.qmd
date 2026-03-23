@@ -1,55 +1,55 @@
 ---
-title: "Announcing 'mini.bracketed'"
+title: "'mini.bracketed' 발표"
 author: Evgeni Chasnovski
 date: 2023-02-21
 categories: [announce, reddit]
-description: Go forward/backward with square brackets (like 'tpope/vim-unimpaired' but in configurable Lua and with *much more targets*)
+description: 대괄호를 이용한 전진/후진 ('tpope/vim-unimpaired'와 유사하지만 설정 가능한 Lua로 구현되었으며 *훨씬 더 많은 대상* 지원)
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/118511i/minibracketed_go_forwardbackward_with_square/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/118511i/minibracketed_go_forwardbackward_with_square/)*
 
 {{< video 2023-02-21-announce-mini-bracketed/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-Let me present you [mini.bracketed](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-bracketed.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) for going forward/backward with square brackets. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.bracketed).
+대괄호를 사용하여 앞/뒤로 이동하기 위한 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.bracketed](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-bracketed.md)를 소개합니다. [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.bracketed)를 통해서도 설치할 수 있습니다.
 
-Initially I planned to make a Neovim take on 'tpope/vim-unimpaired' as a part of [mini.basics](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-basics.md) module, but got a bit carried away with features. General idea is to have `[` / `]` mappings (along with Lua functions) which iterate to next/previous/first/last element of certain kind. Judging by experience, mastering this type of mappings leads to a huge productivity boost (or at least feels like it :) ).
+처음에는 [mini.basics](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-basics.md) 모듈의 일부로 'tpope/vim-unimpaired'의 Neovim 버전을 만들 계획이었으나, 기능을 추가하다 보니 조금 멀리 오게 되었습니다. 기본 아이디어는 특정 종류의 다음/이전/처음/마지막 요소로 이동하는 `[` / `]` 매핑(Lua 함수와 함께)을 갖는 것입니다. 경험에 비추어 볼 때, 이러한 유형의 매핑을 마스터하면 생산성이 크게 향상됩니다 (또는 적어도 그렇게 느껴집니다 :) ).
 
-Main features:
+주요 기능:
 
-- Configurable Lua functions to go forward/backward to a certain target. Each function can be customized with direction, number of times, whether to wrap on edges, etc.
+- 특정 대상으로 앞/뒤로 이동하는 설정 가능한 Lua 함수를 제공합니다. 각 함수는 방향, 횟수, 끝에서 되돌아올지(wrap) 여부 등을 커스터마이징할 수 있습니다.
 
-- Mappings using square brackets. They are created using configurable target suffix and can be selectively disabled.
+- 대괄호를 사용하는 매핑을 제공합니다. 이들은 설정 가능한 대상 접미사를 사용하여 생성되며 선택적으로 비활성화할 수 있습니다.
 
-- Supported targets (for more information see help for corresponding Lua function):
+- 지원되는 대상 (자세한 정보는 해당 Lua 함수에 대한 도움말 참조):
 
-    | Target       | Mappings            | Lua function                                                                                                   |
+    | 대상       | 매핑            | Lua 함수                                                                                                   |
     |--------------|---------------------|----------------------------------------------------------------------------------------------------------------|
-    | Buffer       | `[B` `[b` `]b` `]B` | [`MiniBracketed.buffer()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L197)     |
-    | Comment      | `[C` `[c` `]c` `]C` | [`MiniBracketed.comment()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L212)    |
-    | Conflict     | `[X` `[x` `]x` `]X` | [`MiniBracketed.conflict()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L231)   |
-    | Diagnostic   | `[D` `[d` `]d` `]D` | [`MiniBracketed.diagnostic()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L254) |
-    | File on disk | `[F` `[f` `]f` `]F` | [`MiniBracketed.file()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L283)       |
-    | Indent       | `[I` `[i` `]i` `]I` | [`MiniBracketed.indent()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L301)     |
-    | Jump         | `[J` `[j` `]j` `]J` | [`MiniBracketed.jump()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L326)       |
-    | Location     | `[L` `[l` `]l` `]L` | [`MiniBracketed.location()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L344)   |
-    | Old files    | `[O` `[o` `]o` `]O` | [`MiniBracketed.oldfile()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L361)    |
-    | Quickfix     | `[Q` `[q` `]q` `]Q` | [`MiniBracketed.quickfix()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L384)   |
+    | 버퍼       | `[B` `[b` `]b` `]B` | [`MiniBracketed.buffer()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L197)     |
+    | 주석      | `[C` `[c` `]c` `]C` | [`MiniBracketed.comment()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L212)    |
+    | 충돌     | `[X` `[x` `]x` `]X` | [`MiniBracketed.conflict()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L231)   |
+    | 진단   | `[D` `[d` `]d` `]D` | [`MiniBracketed.diagnostic()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L254) |
+    | 디스크 파일 | `[F` `[f` `]f` `]F` | [`MiniBracketed.file()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L283)       |
+    | 들여쓰기       | `[I` `[i` `]i` `]I` | [`MiniBracketed.indent()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L301)     |
+    | 점프         | `[J` `[j` `]j` `]J` | [`MiniBracketed.jump()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L326)       |
+    | 위치     | `[L` `[l` `]l` `]L` | [`MiniBracketed.location()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L344)   |
+    | 최근 파일    | `[O` `[o` `]o` `]O` | [`MiniBracketed.oldfile()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L361)    |
+    | 퀵픽(Quickfix)     | `[Q` `[q` `]q` `]Q` | [`MiniBracketed.quickfix()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L384)   |
     | Tree-sitter  | `[T` `[t` `]t` `]T` | [`MiniBracketed.treesitter()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L401) |
-    | Undo states  | `[U` `[u` `]u` `]U` | [`MiniBracketed.undo()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L424)       |
-    | Window       | `[W` `[w` `]w` `]W` | [`MiniBracketed.window()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L491)     |
-    | Yank         | `[Y` `[y` `]y` `]Y` | [`MiniBracketed.yank()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L508)       |
+    | 실행 취소 상태  | `[U` `[u` `]u` `]U` | [`MiniBracketed.undo()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L424)       |
+    | 창       | `[W` `[w` `]w` `]W` | [`MiniBracketed.window()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L491)     |
+    | 얀크(Yank)         | `[Y` `[y` `]y` `]Y` | [`MiniBracketed.yank()`](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt#L508)       |
 
-For more information, see [help file](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt).
+자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/91f7a680fe5765b68456ab6e7b910d478da083b9/doc/mini-bracketed.txt)을 참조하세요.
 
-Besides some obvious ones (buffer, location, quickfix, window, etc.), I am especially excited about the following targets:
+몇몇 당연한 대상들(버퍼, 위치, 퀵픽, 창 등) 외에도 저는 특히 다음과 같은 대상들에 흥미를 느끼고 있습니다:
 
-- `oldfile` - old files from previous and current sessions ordered by recency.
-- `treesitter` -  move to start/end of current node and its parents.
-- `undo`  - undo to the previous visited undo state; see demo.
-- `yank` - replace previous paste region with yank history, a.k.a. yank-ring targets.
+- `oldfile` - 이전 및 현재 세션에서 최근 사용 순서대로 정렬된 파일들.
+- `treesitter` - 현재 노드 및 그 부모 노드의 시작/끝으로 이동.
+- `undo` - 이전에 방문한 실행 취소 상태로 되돌리기 (데모 참조).
+- `yank` - 이전 붙여넣기 영역을 얀크 기록으로 교체(일명 yank-ring).
 
-Please, check it out and tell me what you think! Either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/235).
+사용해 보시고 의견을 들려주세요! 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/235)를 통해 피드백을 주시면 감사하겠습니다.
 
-Thanks!
+감사합니다!

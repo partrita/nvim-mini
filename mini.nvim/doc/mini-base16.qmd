@@ -1,33 +1,29 @@
 ---
-title: "mini.base16 documentation"
+title: "mini.base16 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 'main' 브랜치에서 생성됨 _
 
-<a name="mini.base16" href="mini-base16.qmd#mini.base16"><b>mini.base16</b></a> Base16 colorscheme creation
+<a name="mini.base16" href="mini-base16.qmd#mini.base16"><b>mini.base16</b></a> Base16 색상 구성표 생성
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Fast implementation of [chriskempson/base16](https://github.com/chriskempson/base16)
-color scheme (with Copyright (C) 2012 Chris Kempson) adapted for modern Neovim
-Lua plugins. Extra features:
+현대적인 Neovim Lua 플러그인에 맞게 조정된 [chriskempson/base16](https://github.com/chriskempson/base16) 색상 구성표(Copyright (C) 2012 Chris Kempson)의 빠른 구현입니다. 추가 기능:
 
-- Configurable automatic support of cterm colors (see [highlight-cterm](https://neovim.io/doc/user/helptag.html?tag=highlight-cterm)).
+- 구성 가능한 cterm 색상 자동 지원 ([highlight-cterm](https://neovim.io/doc/user/helptag.html?tag=highlight-cterm) 참고).
 
-- Opinionated palette generator based only on background and foreground
-  colors.
+- 배경 및 전경 색상만을 기반으로 한 독자적인 팔레트 생성기.
 
-Supported highlight groups:
+지원되는 하이라이트 그룹:
 
-- Built-in Neovim LSP and diagnostic.
+- 내장 Neovim LSP 및 진단.
 
 
-- Plugins (either with explicit definition or by verification that default
-  highlighting works appropriately):
+- 플러그인 (명시적 정의 또는 기본 하이라이트가 적절히 작동하는지 확인을 통해):
 
     - [nvim-mini/mini.nvim](https://nvim-mini.org/mini.nvim)
 
@@ -105,20 +101,16 @@ Supported highlight groups:
 
     - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.base16').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table
-`MiniBase16` which you can use for scripting or manually (with
-`:lua MiniBase16.*`).
+이 모듈은 `require('mini.base16').setup({})`으로 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 스크립팅이나 수동으로 (`:lua MiniBase16.*`) 사용할 수 있는 전역 Lua 테이블 `MiniBase16`이 생성됩니다.
 
-See [MiniBase16.config](mini-base16.qmd#minibase16.config) for `config` structure and default values.
+`config` 구조와 기본값은 [MiniBase16.config](mini-base16.qmd#minibase16.config)를 참고하세요.
 
-This module doesn't have runtime options, so using `vim.b.minibase16_config`
-will have no effect here.
+이 모듈은 런타임 옵션이 없으므로 `vim.b.minibase16_config`를 사용해도 효과가 없습니다.
 
-Example:
+예시:
 
   ```lua
   require('mini.base16').setup({
@@ -148,50 +140,45 @@ Example:
   })
   ```
 
-#### Notes {#module-notes}
+#### 참고 {#module-notes}
 
 
-1. This is used to create some of plugin's color schemes
-   (see [MiniBase16-color-schemes](mini-base16.qmd#minibase16-color-schemes)).
-2. Using `setup()` doesn't actually create a [:colorscheme](https://neovim.io/doc/user/helptag.html?tag=:colorscheme). It basically
-   creates a coordinated set of [highlight-groups](https://neovim.io/doc/user/helptag.html?tag=highlight-groups). To create your own theme:
+1. 이것은 플러그인의 일부 색상 구성표를 생성하는 데 사용됩니다
+   ([MiniBase16-color-schemes](mini-base16.qmd#minibase16-color-schemes) 참고).
+2. `setup()`을 사용한다고 해서 실제로 [:colorscheme](https://neovim.io/doc/user/helptag.html?tag=:colorscheme)이 생성되지는 않습니다. 기본적으로 조율된 [highlight-groups](https://neovim.io/doc/user/helptag.html?tag=highlight-groups) 세트를 생성합니다. 자신만의 테마를 만들려면:
 
-    - Put "myscheme.lua" file (name after your chosen theme name) inside
-      any "colors" directory reachable from 'runtimepath' ("colors" inside
-      your Neovim config directory is usually enough).
+    - "runtimepath"에서 접근 가능한 "colors" 디렉토리(보통 Neovim 설정 디렉토리 내부의 "colors"면 충분함) 안에 "myscheme.lua"(선택한 테마 이름으로 명명) 파일을 넣으세요.
 
-    - Inside "myscheme.lua" call `require('mini.base16').setup()` with your
-      palette and only after that set [g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name) to "myscheme".
+    - "myscheme.lua" 내부에서 팔레트와 함께 `require('mini.base16').setup()`을 호출한 다음 [g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name)을 "myscheme"으로 설정하세요.
 
 ---
 
-### Color schemes {#minibase16-color-schemes .help-syntax-right-anchor}
+### 색상 구성표 {#minibase16-color-schemes .help-syntax-right-anchor}
 
-#### Base16 colorschemes {#minibase16-color-schemes-base16colorschemes}
+#### Base16 색상 구성표 {#minibase16-color-schemes-base16colorschemes}
 
 
-This module comes with several pre-built color schemes. Each of them is
-a [mini.base16](mini-base16.qmd#mini.base16) theme created with faster version of the following Lua code:
+이 모듈에는 몇 가지 사전 빌드된 색상 구성표가 포함되어 있습니다. 각각은 다음 Lua 코드의 더 빠른 버전으로 생성된 [mini.base16](mini-base16.qmd#mini.base16) 테마입니다:
 
   ```lua
   require('mini.base16').setup({ palette = palette, use_cterm = true })
   ```
 
-Activate them as regular [:colorscheme](https://neovim.io/doc/user/helptag.html?tag=:colorscheme) (for example, `:colorscheme minischeme`).
+일반적인 [:colorscheme](https://neovim.io/doc/user/helptag.html?tag=:colorscheme)으로 활성화하세요 (예: `:colorscheme minischeme`).
 
 ##### minischeme {#minibase16-color-schemes-base16colorschemes-minischeme}
 
 
 <a name="minischeme" href="mini-base16.qmd#minischeme"><b>minischeme</b></a>
 
-Blue and yellow main colors with high contrast and saturation palette.
-Palettes are:
+높은 대비와 채도 팔레트를 가진 파란색과 노란색 주 색상입니다.
+팔레트는 다음과 같습니다:
 
   ```lua
-  -- For dark 'background':
+  -- 어두운 'background'용:
   MiniBase16.mini_palette('#112641', '#e2e98f', 75)
 
-  -- For light 'background':
+  -- 밝은 'background'용:
   MiniBase16.mini_palette('#e2e5ca', '#002a83', 75)
   ```
 
@@ -200,14 +187,14 @@ Palettes are:
 
 <a name="minicyan" href="mini-base16.qmd#minicyan"><b>minicyan</b></a>
 
-Cyan and grey main colors with moderate contrast and saturation palette.
-Palettes are:
+중간 정도의 대비와 채도 팔레트를 가진 청록색과 회색 주 색상입니다.
+팔레트는 다음과 같습니다:
 
   ```lua
-  -- For dark 'background':
+  -- 어두운 'background'용:
   MiniBase16.mini_palette('#0A2A2A', '#D0D0D0', 50)
 
-  -- For light 'background':
+  -- 밝은 'background'용:
   MiniBase16.mini_palette('#C0D2D2', '#262626', 80)
   ```
 
@@ -216,36 +203,29 @@ Palettes are:
 ### setup() {#minibase16.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniBase16.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-Setup is done by applying base16 palette to enable colorscheme. Highlight
-groups make an extended set from original
-[base16-vim](https://github.com/chriskempson/base16-vim/) plugin. It is a
-good idea to have `config.palette` respect the original [styling
-principles](https://github.com/chriskempson/base16/blob/master/styling.md).
+설정은 색상 구성표를 활성화하기 위해 base16 팔레트를 적용하여 수행됩니다. 하이라이트 그룹은 원래 [base16-vim](https://github.com/chriskempson/base16-vim/) 플러그인의 확장 세트입니다. `config.palette`가 원래 [스타일링 원칙](https://github.com/chriskempson/base16/blob/master/styling.md)을 준수하도록 하는 것이 좋습니다.
 
-By default only 'gui highlighting' (see [highlight-gui](https://neovim.io/doc/user/helptag.html?tag=highlight-gui) and
-['termguicolors'](https://neovim.io/doc/user/helptag.html?tag='termguicolors')) is supported. To support 'cterm highlighting' (see
-[highlight-cterm](https://neovim.io/doc/user/helptag.html?tag=highlight-cterm)) supply `config.use_cterm` argument in one of the formats:
+기본적으로 'gui 하이라이팅' ([highlight-gui](https://neovim.io/doc/user/helptag.html?tag=highlight-gui) 및 ['termguicolors'](https://neovim.io/doc/user/helptag.html?tag='termguicolors') 참고)만 지원됩니다. 'cterm 하이라이팅' ([highlight-cterm](https://neovim.io/doc/user/helptag.html?tag=highlight-cterm) 참고)을 지원하려면 다음 형식 중 하나로 `config.use_cterm` 인수를 제공하세요:
 
-- `true` to auto-generate from `palette` (as closest colors).
+- `true`로 설정하면 `palette`에서 자동으로 생성 (가장 가까운 색상으로).
 
-- Table with similar structure to `palette` but having terminal colors
-  (integers from 0 to 255) instead of hex strings.
+- `palette`와 유사한 구조를 갖지만 hex 문자열 대신 터미널 색상(0에서 255 사이의 정수)을 갖는 테이블.
 
-#### Parameters {#minibase16.setup-parameters}
+#### 매개변수 {#minibase16.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table)` Module config table. See [MiniBase16.config](mini-base16.qmd#minibase16.config).
+<span class="help-syntax-special">{config}</span> `(table)` 모듈 설정 테이블. [MiniBase16.config](mini-base16.qmd#minibase16.config)를 참고하세요.
 
-#### Usage {#minibase16.setup-usage}
+#### 사용법 {#minibase16.setup-usage}
 
 
 
   ```lua
-  require('mini.base16').setup({}) -- replace {} with your config table
-                                   -- needs `palette` field present
+  require('mini.base16').setup({}) -- {}를 설정 테이블로 교체하세요
+                                   -- `palette` 필드가 있어야 합니다
   ```
 
 ---
@@ -253,40 +233,37 @@ By default only 'gui highlighting' (see [highlight-gui](https://neovim.io/doc/us
 ### config {#minibase16.config .help-syntax-right-anchor}
 
 <p align="center">`MiniBase16.config`</p>
-#### Defaults {#minibase16.config-defaults}
+#### 기본값 {#minibase16.config-defaults}
 
 
 
   ```lua
   MiniBase16.config = {
-    -- Table with names from `base00` to `base0F` and values being strings of
-    -- HEX colors with format "#RRGGBB". NOTE: this should be explicitly
-    -- supplied in `setup()`.
+    -- base00에서 base0F까지의 이름과 "#RRGGBB" 형식의 HEX 색상 문자열 값을
+    -- 갖는 테이블입니다. 참고: 이것은 setup()에서 명시적으로 제공되어야 합니다.
     palette = nil,
 
-    -- Whether to support cterm colors. Can be boolean, `nil` (same as
-    -- `false`), or table with cterm colors. See `setup()` documentation for
-    -- more information.
+    -- cterm 색상을 지원할지 여부입니다. 불리언, `nil` (false와 동일)
+    -- 또는 cterm 색상이 포함된 테이블일 수 있습니다. 자세한 내용은
+    -- setup() 문서를 참고하세요.
     use_cterm = nil,
 
-    -- Plugin integrations. Use `default = false` to disable all integrations.
-    -- Also can be set per plugin (see |MiniBase16.config|).
+    -- 플러그인 통합입니다. 모든 통합을 비활성화하려면 `default = false`를
+    -- 사용하세요. 플러그인별로 설정할 수도 있습니다 (|MiniBase16.config| 참고).
     plugins = { default = true },
   }
   ```
 
-#### Plugin integrations {#minibase16.config-pluginintegrations}
+#### 플러그인 통합 {#minibase16.config-pluginintegrations}
 
 
-`config.plugins` defines for which supported plugins highlight groups will
-be created. Limiting number of integrations slightly decreases startup time.
-It is a table with boolean (`true`/`false`) values which are applied as follows:
+`config.plugins`는 지원되는 어떤 플러그인에 대해 하이라이트 그룹을 생성할지 정의합니다. 통합 수를 제한하면 시작 시간이 약간 단축됩니다. 다음과 같이 적용되는 불리언 (`true`/`false`) 값을 갖는 테이블입니다:
 
-- If plugin name (as listed in [mini.base16](mini-base16.qmd#mini.base16)) has entry, it is used.
+- 플러그인 이름([mini.base16](mini-base16.qmd#mini.base16)에 나열된 대로)에 항목이 있으면 해당 항목이 사용됩니다.
 
-- Otherwise `config.plugins.default` is used.
+- 그렇지 않으면 `config.plugins.default`가 사용됩니다.
 
-Example which will load only "mini.nvim" integration:
+"mini.nvim" 통합만 로드하는 예시:
 
   ```lua
   require('mini.base16').setup({
@@ -303,74 +280,50 @@ Example which will load only "mini.nvim" integration:
 ### mini_palette() {#minibase16.mini_palette .help-syntax-right-anchor}
 
 <p align="center">`MiniBase16.mini_palette`(<span class="help-syntax-special">{background}</span>, <span class="help-syntax-special">{foreground}</span>, <span class="help-syntax-special">{accent_chroma}</span>)</p>
-Create 'mini' palette
+'mini' 팔레트 생성
 
-Create base16 palette based on the HEX (string '#RRGGBB') colors of main
-background and foreground with optional setting of accent chroma (see
-details).
+기본 배경 및 전경의 HEX (문자열 '#RRGGBB') 색상을 기반으로 base16 팔레트를 생성하며, 선택적으로 강조 채도(상세 내용 참고)를 설정할 수 있습니다.
 
-#### Algorithm design {#minibase16.mini_palette-algorithmdesign}
+#### 알고리즘 설계 {#minibase16.mini_palette-algorithmdesign}
 
 
 
-- Main operating color space is
-  [CIELCh(uv)](https://en.wikipedia.org/wiki/CIELUV#Cylindrical_representation_(CIELCh))
-  which is a cylindrical representation of a perceptually uniform CIELUV
-  color space. It defines color by three values: lightness L (values from 0
-  to 100), chroma (positive values), and hue (circular values from 0 to 360
-  degrees). Useful converting tool: https://www.easyrgb.com/en/convert.php
+- 주요 작동 색 공간은 지각적으로 균일한 CIELUV 색 공간의 원통형 표현인
+  [CIELCh(uv)](https://en.wikipedia.org/wiki/CIELUV#Cylindrical_representation_(CIELCh))입니다.
+  밝기 L(0에서 100까지의 값), 채도(양수 값), 색조(0에서 360도까지의 원형 값)의 세 가지 값으로 색상을 정의합니다.
+  유용한 변환 도구: https://www.easyrgb.com/en/convert.php
 
-- There are four important lightness values: background, foreground, focus
-  (around the middle of background and foreground, leaning towards
-  foreground), and edge (extreme lightness closest to foreground).
+- 네 가지 중요한 밝기 값이 있습니다: 배경, 전경, 초점(배경과 전경의 중간 정도이며 전경에 가깝음), 가장자리(전경에 가장 가까운 극한의 밝기).
 
-- First four colors have the same chroma and hue as `background` but
-  lightness progresses from background towards focus.
+- 처음 네 가지 색상은 `background`와 동일한 채도 및 색조를 갖지만 밝기는 배경에서 초점으로 진행됩니다.
 
-- Second four colors have the same chroma and hue as `foreground` but
-  lightness progresses from foreground towards edge in such a way that
-  'base05' color is main foreground color.
+- 다음 네 가지 색상은 `foreground`와 동일한 채도 및 색조를 갖지만 밝기는 'base05' 색상이 주요 전경색이 되도록 전경에서 가장자리로 진행됩니다.
 
-- The rest eight colors are accent colors which are created in pairs
+- 나머지 8가지 색상은 쌍으로 생성되는 강조 색상입니다.
 
-    - Each pair has same hue from set of hues 'most different' to
-      background and foreground hues (if respective chorma is positive).
+    - 각 쌍은 배경 및 전경 색조(각 채도가 양수인 경우)와 '가장 다른' 색조 세트에서 동일한 색조를 갖습니다.
 
-    - All colors have the same chroma equal to `accent_chroma` (if not
-      provided, chroma of foreground is used, as they will appear next
-      to each other). Note: this means that in case of low foreground
-      chroma, it is a good idea to set `accent_chroma` manually.
-      Values from 30 (low chorma) to 80 (high chroma) are common.
+    - 모든 색상은 `accent_chroma`와 동일한 채도를 갖습니다 (제공되지 않으면 전경의 채도가 사용됩니다. 서로 옆에 나타나기 때문입니다). 참고: 이는 전경 채도가 낮은 경우 `accent_chroma`를 수동으로 설정하는 것이 좋음을 의미합니다. 30(낮은 채도)에서 80(높은 채도) 사이의 값이 일반적입니다.
 
-    - Within pair there is base lightness (equal to foreground
-      lightness) and alternative (equal to focus lightness). Base
-      lightness goes to colors which will be used more frequently in
-      code: base08 (variables), base0B (strings), base0D (functions),
-      base0E (keywords).
-  How exactly accent colors are mapped to base16 palette is a result of
-  trial and error. One rule of thumb was: colors within one hue pair should
-  be more often seen next to each other. This is because it is easier to
-  distinguish them and seems to be more visually appealing. That is why
-  `base0D` and `base0F` have same hues because they usually represent
-  functions and delimiter (brackets included).
+    - 쌍 내부에는 기본 밝기(전경 밝기와 동일)와 대체 밝기(초점 밝기와 동일)가 있습니다. 기본 밝기는 코드에서 더 자주 사용되는 색상으로 이동합니다: base08 (변수), base0B (문자열), base0D (함수), base0E (키워드).
+  강조 색상이 base16 팔레트에 정확히 어떻게 매핑되는지는 시행착오의 결과입니다. 한 가지 경험 법칙은 다음과 같습니다: 한 색조 쌍 내의 색상은 서로 옆에서 더 자주 보여야 합니다. 이는 색상을 구별하기 더 쉽고 시각적으로 더 매력적으로 보이기 때문입니다. 그렇기 때문에 `base0D`와 `base0F`는 보통 함수와 구분 기호(괄호 포함)를 나타내므로 동일한 색조를 갖습니다.
 
-#### Parameters {#minibase16.mini_palette-parameters}
+#### 매개변수 {#minibase16.mini_palette-parameters}
 
 
 
-<span class="help-syntax-special">{background}</span> `(string)` Background HEX color (formatted as `#RRGGBB`).
+<span class="help-syntax-special">{background}</span> `(string)` 배경 HEX 색상 (`#RRGGBB` 형식).
 
-<span class="help-syntax-special">{foreground}</span> `(string)` Foreground HEX color (formatted as `#RRGGBB`).
+<span class="help-syntax-special">{foreground}</span> `(string)` 전경 HEX 색상 (`#RRGGBB` 형식).
 
-<span class="help-syntax-special">{accent_chroma}</span> `(number)` Optional positive number (usually between 0
-  and 100). Default: chroma of foreground color.
+<span class="help-syntax-special">{accent_chroma}</span> `(number)` 선택적인 양수 (보통 0에서 100 사이). 기본값: 전경색의 채도.
 
-#### Return {#minibase16.mini_palette-return}
+#### 반환값 {#minibase16.mini_palette-return}
 
 
-`(table)` Table with base16 palette.
+`(table)` base16 팔레트가 포함된 테이블.
 
-#### Usage {#minibase16.mini_palette-usage}
+#### 사용법 {#minibase16.mini_palette-usage}
 
 
 
@@ -384,19 +337,17 @@ details).
 ### rgb_palette_to_cterm_palette() {#minibase16.rgb_palette_to_cterm_palette .help-syntax-right-anchor}
 
 <p align="center">`MiniBase16.rgb_palette_to_cterm_palette`(<span class="help-syntax-special">{palette}</span>)</p>
-Converts palette with RGB colors to terminal colors
+RGB 색상의 팔레트를 터미널 색상으로 변환
 
-Useful for caching `use_cterm` variable to increase speed.
+속도를 높이기 위해 `use_cterm` 변수를 캐싱하는 데 유용합니다.
 
-#### Parameters {#minibase16.rgb_palette_to_cterm_palette-parameters}
-
-
-
-<span class="help-syntax-special">{palette}</span> `(table)` Table with base16 palette (same as in
-  `MiniBase16.config.palette`).
-
-#### Return {#minibase16.rgb_palette_to_cterm_palette-return}
+#### 매개변수 {#minibase16.rgb_palette_to_cterm_palette-parameters}
 
 
-`(table)` Table with base16 palette using [highlight-cterm](https://neovim.io/doc/user/helptag.html?tag=highlight-cterm).
 
+<span class="help-syntax-special">{palette}</span> `(table)` base16 팔레트 테이블 (`MiniBase16.config.palette`와 동일).
+
+#### 반환값 {#minibase16.rgb_palette_to_cterm_palette-return}
+
+
+`(table)` [highlight-cterm](https://neovim.io/doc/user/helptag.html?tag=highlight-cterm)을 사용하는 base16 팔레트 테이블.

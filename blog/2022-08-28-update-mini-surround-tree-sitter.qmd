@@ -1,27 +1,27 @@
 ---
-title: "Updates of 'mini.surround': tree-sitter support and more"
+title: "'mini.surround' 업데이트: tree-sitter 지원 및 기타"
 author: Evgeni Chasnovski
 date: 2022-08-28
 categories: [update, reddit]
-description: Tree-sitter support, "last"/"next" extended mappings, aliases, and more
+description: tree-sitter 지원, "last"/"next" 확장 매핑, 별칭 등
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/wzpzei/minisurround_new_features_treesitter_support/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/wzpzei/minisurround_new_features_treesitter_support/)*
 
 {{< video 2022-08-28-update-mini-surround-tree-sitter/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am happy to announce new features of ['mini.surround'](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-surround.md) - module of ['mini.nvim'](https://github.com/nvim-mini/mini.nvim) for surrounding actions (add, delete, replace, find, highlight surrounding characters). All actions are dot-repeatable out of the box and operate on highly customizable set of surrounding identifiers. By default it defines mappings with common `s` prefix (`sa` for add, `sd` for delete, `sr` for replace, `sf` for find, `sh` for highlight), but setup similar to 'tpope/vim-surround' is, of course, [also possible](https://github.com/nvim-mini/mini.nvim/blob/085baefa6aca44526be621b15e7b688f996c2daf/doc/mini.txt#L5516-L5544).
+주변 텍스트(surround) 작업(추가, 삭제, 교체, 찾기, 하이라이트)을 위한 ['mini.nvim'](https://github.com/nvim-mini/mini.nvim)의 모듈인 ['mini.surround'](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-surround.md)의 새로운 기능을 발표하게 되어 기쁩니다. 모든 작업은 기본적으로 점 반복(dot-repeatable)이 가능하며 고도로 커스터마이징 가능한 주변 텍스트 식별자 집합에서 작동합니다. 기본적으로 일반적인 `s` 접두사를 사용하는 매핑(`sa` 추가, `sd` 삭제, `sr` 교체, `sf` 찾기, `sh` 하이라이트)을 정의하지만, 'tpope/vim-surround'와 유사한 설정도 물론 [가능합니다](https://github.com/nvim-mini/mini.nvim/blob/085baefa6aca44526be621b15e7b688f996c2daf/doc/mini.txt#L5516-L5544).
 
-This update was prompted after the [release of 'mini.ai'](2022-07-28-announce-mini-ai.qmd) which can create custom textobjects. Its initial implementation was based on 'mini.surround' but in the process it got transformed into much more powerful design (at cost of some code and documentation complexity). Ironically, 'mini.surround' is now updated to share as much with 'mini.ai' as possible, which provides more integrated experience.
+이번 업데이트는 커스텀 텍스트 객체를 생성할 수 있는 ['mini.ai'의 릴리스](2022-07-28-announce-mini-ai.qmd) 이후에 진행되었습니다. 'mini.ai'의 초기 구현은 'mini.surround'를 기반으로 했지만, 개발 과정에서 훨씬 더 강력한 디자인으로 변모했습니다 (코드와 문서의 복잡성이 다소 증가하는 대가로 말이죠). 아이러니하게도, 이제 'mini.surround'는 'mini.ai'와 가능한 한 많은 부분을 공유하도록 업데이트되어 더욱 통합된 경험을 제공합니다.
 
-New features:
+새로운 기능:
 
-- **New surrounding specification format for updated, more powerful search logic**. This allows creating more flexible surroundings based on Lua patterns and functions. This also enables creating aliases (like new builtin `b` for brackets and `q`for quotes). **This is a breaking change for those who defined custom input surroundings**. Previous format will work until next release and transition to new one [is pretty straightforward](https://github.com/nvim-mini/mini.nvim/blob/085baefa6aca44526be621b15e7b688f996c2daf/doc/mini.txt#L5411-L5420).
-- **Tree-sitter support**. Thanks to new specification format you can now use tree-sitter based surroundings. More information is in the [help file](https://github.com/nvim-mini/mini.nvim/blob/085baefa6aca44526be621b15e7b688f996c2daf/doc/mini.txt#L5727-L5826). Note, that for full experience with function call surrounding, better update 'nvim-treesitter/nvim-treesitter-textobjects' to at least include changes from [this PR](https://github.com/nvim-treesitter/nvim-treesitter-textobjects/pull/250) (merged around 3 days ago).
-- **"Last"/"next" extended mappings**. With the same idea as in 'mini.ai', you can now use mappings with special suffixes (`l` for "last", `n` for "next") to operate on previous or next surrounding. This can be done for actions involving searching surrounding (delete, replace, find, highlight) but proved to be especially useful for finding next surrounding (as shown in demo).
-- **Support of `v:count` for input surrounding**. Now, for example, you can type `2sdf` to delete second (based on search method) function call.
-- For 'tpope/vim-surround' lovers, **open bracket identifiers (`(`, `[`, `{`, `<`) now include padding**: for input it will use all edge whitespace, for output - single space.
+- **업데이트된 강력한 검색 로직을 위한 새로운 주변 텍스트 사양 형식**. 이를 통해 Lua 패턴과 함수를 기반으로 더 유연한 주변 텍스트를 생성할 수 있습니다. 또한 별칭(새로운 내장 `b` 괄호 및 `q` 따옴표 등)을 생성할 수 있습니다. **이는 커스텀 입력 주변 텍스트를 정의한 사용자에게는 파괴적 변경 사항(breaking change)입니다**. 이전 형식은 다음 릴리스까지 작동하며, 새로운 형식으로의 전환은 [매우 간단합니다](https://github.com/nvim-mini/mini.nvim/blob/085baefa6aca44526be621b15e7b688f996c2daf/doc/mini.txt#L5411-L5420).
+- **tree-sitter 지원**. 새로운 사양 형식 덕분에 이제 tree-sitter 기반의 주변 텍스트를 사용할 수 있습니다. 자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/085baefa6aca44526be621b15e7b688f996c2daf/doc/mini.txt#L5727-L5826)을 참조하세요. 함수 호출 주변 텍스트의 완전한 경험을 위해서는 'nvim-treesitter/nvim-treesitter-textobjects'를 최소한 약 3일 전에 머지된 [이 PR](https://github.com/nvim-treesitter/nvim-treesitter-textobjects/pull/250)의 변경 사항이 포함된 버전으로 업데이트하는 것이 좋습니다.
+- **"Last"/"next" 확장 매핑**. 'mini.ai'와 동일한 아이디어로, 이제 특별한 접미사(`l` - "last", `n` - "next")가 있는 매핑을 사용하여 이전 또는 다음 주변 텍스트에 대해 작업할 수 있습니다. 이는 주변 텍스트 검색과 관련된 작업(삭제, 교체, 찾기, 하이라이트)에서 가능하며, 특히 데모에서 보여준 것처럼 다음 주변 텍스트를 찾는 데 매우 유용합니다.
+- **입력 주변 텍스트에 대한 `v:count` 지원**. 이제 예를 들어 `2sdf`를 입력하여 (검색 방식에 따라) 두 번째 함수 호출을 삭제할 수 있습니다.
+- 'tpope/vim-surround' 애호가들을 위해, **열린 괄호 식별자(`(`, `[`, `{`, `<`)에 이제 패딩이 포함됩니다**: 입력 시에는 모든 가장자리 공백을 사용하고, 출력 시에는 단일 공백을 사용합니다.
 
-Check it out and tell me what you think. Thanks!
+확인해 보시고 의견을 들려주세요. 감사합니다!

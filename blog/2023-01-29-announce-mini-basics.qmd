@@ -1,31 +1,31 @@
 ---
-title: "Announcing 'mini.basics'"
+title: "'mini.basics' 발표"
 author: Evgeni Chasnovski
 date: 2023-01-29
 categories: [announce, reddit]
-description: Common configuration presets for options/mappings/autocommands
+description: 옵션/매핑/자동 명령을 위한 일반적인 설정 프리셋
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/10o5sjm/minibasics_common_configuration_presets_for/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/10o5sjm/minibasics_common_configuration_presets_for/)*
 
 {{< video 2023-01-29-announce-mini-basics/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-It is me again, posting this time about [mini.basics](https://github.com/nvim-mini/mini.nvim/blob/basics/readmes/mini-basics.md) - a module of [mini.nvim](https://github.com/nvim-mini/mini.nvim/tree/main) with common configuration presets for options, mappings, and autocommands. You can also install from a [standalone Git repository](https://github.com/nvim-mini/mini.basics).
+이번에도 제가 찾아왔습니다. 이번에는 옵션, 매핑, 자동 명령(autocommand)을 위한 일반적인 설정 프리셋이 포함된 [mini.nvim](https://github.com/nvim-mini/mini.nvim/tree/main)의 모듈인 [mini.basics](https://github.com/nvim-mini/mini.nvim/blob/basics/readmes/mini-basics.md)에 대해 포스팅합니다. [독립형 Git 저장소](https://github.com/nvim-mini/mini.basics)에서도 설치할 수 있습니다.
 
-A while back I did a public Neovim options survey ([here are the results](https://echasnovski.com/blog/2022-12-08-results-of-neovim-builtin-options-survey.html)). One of the goals was to gather a commonly used option values to create a "crowd-sourced" moderate version of [tpope/vim-sensible](https://github.com/tpope/vim-sensible). Well, this is it.
+얼마 전에 저는 공개 Neovim 옵션 설문조사를 실시했습니다 ([결과는 여기](https://echasnovski.com/blog/2022-12-08-results-of-neovim-builtin-options-survey.html)). 그 목표 중 하나는 [tpope/vim-sensible](https://github.com/tpope/vim-sensible)의 "크라우드 소싱"된 적절한 버전을 만들기 위해 일반적으로 사용되는 옵션값들을 수집하는 것이었습니다. 바로 이것이 그 결과물입니다.
 
-It has the following features:
+다음과 같은 기능을 제공합니다:
 
-- **Presets for common options** (like 'termguicolors', 'number', 'ignorecase', etc.). It will only change option if it wasn't manually set before. For more info see [this portion of help file](https://github.com/nvim-mini/mini.nvim/blob/41940bbdb2a030ed0ddce0f2b1b4083ad5055c4e/doc/mini-basics.txt#L109) and/or [this part of source code](https://github.com/nvim-mini/mini.nvim/blob/main/lua/mini/basics.lua#L405).
-- **Presets for common mappings** (like `j`/`k` to move by visible lines, `<C-s>` to save, toggle common options, and **much more**). For more info see [this portion of help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-basics.txt#L190) and/or [this part of source code](https://github.com/nvim-mini/mini.nvim/blob/main/lua/mini/basics.lua#L513).
-- **Presets for common autocommands** (like highlight on yank, start Insert mode when opening terminal, etc.). For more info see [this portion of help file](https://github.com/nvim-mini/mini.nvim/blob/41940bbdb2a030ed0ddce0f2b1b4083ad5055c4e/doc/mini-basics.txt#L301) and/or [this part of source code](https://github.com/nvim-mini/mini.nvim/blob/main/lua/mini/basics.lua#L639).
+- **일반적인 옵션을 위한 프리셋** ('termguicolors', 'number', 'ignorecase' 등). 이전에 수동으로 설정되지 않은 경우에만 옵션을 변경합니다. 자세한 내용은 [도움말 파일의 이 부분](https://github.com/nvim-mini/mini.nvim/blob/41940bbdb2a030ed0ddce0f2b1b4083ad5055c4e/doc/mini-basics.txt#L109) 및/또라 [소스 코드의 이 부분](https://github.com/nvim-mini/mini.nvim/blob/main/lua/mini/basics.lua#L405)을 참조하세요.
+- **일반적인 매핑을 위한 프리셋** 가시 행 단위로 이동하기 위한 `j`/`k`, 저장하기 위한 `<C-s>`, 일반 옵션 토글 및 **그 외 다수**. 자세한 내용은 [도움말 파일의 이 부분](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-basics.txt#L190) 및/또는 [소스 코드의 이 부분](https://github.com/nvim-mini/mini.nvim/blob/main/lua/mini/basics.lua#L513)을 참조하세요.
+- **일반적인 자동 명령을 위한 프리셋** (얀크(yank) 시 하이라이트, 터미널을 열 때 인서트 모드 시작 등). 자세한 내용은 [도움말 파일의 이 부분](https://github.com/nvim-mini/mini.nvim/blob/41940bbdb2a030ed0ddce0f2b1b4083ad5055c4e/doc/mini-basics.txt#L301) 및/또는 [소스 코드의 이 부분](https://github.com/nvim-mini/mini.nvim/blob/main/lua/mini/basics.lua#L639)을 참조하세요.
 
-Main goal of 'mini.basics' is to provide a relatively easier way for new-ish Neovim users to have a better "works out of the box" experience while having documented relevant options/mappings/autocommands to study. But more seasoned users almost surely will find something useful. Browsing source code and copying only some options/mappings/autocommands is ok, of course.
+'mini.basics'의 주된 목표는 초보 Neovim 사용자들에게 더 나은 "기본 설정" 경험을 제공하는 동시에, 공부할 수 있는 관련 옵션/매핑/자동 명령에 대한 문서를 제공하는 것입니다. 하지만 숙련된 사용자들도 거의 확실히 유용한 것을 발견할 수 있을 것입니다. 소스 코드를 훑어보고 일부 옵션/매핑/자동 명령만 복사해 가는 것도 물론 괜찮습니다.
 
-Amusingly, development of this "basic" module led to creation of two other "less basic" modules: [mini.move](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-move.md) (here is a [the announcement](2023-01-15-announce-mini-move.qmd)) and one more that needs polishing. Initially I planned to incorporate most of [tpope/vim-unimpaired](https://github.com/tpope/vim-unimpaired) in 'mini.basics', but decided to use here only option toggling mappings (with default `\` prefix; can be configured); "next/previous" functionality will be in separate module. Stay tuned!
+흥미롭게도, 이 "기본(basic)" 모듈의 개발은 다른 두 가지 "덜 기본적인" 모듈의 탄생으로 이어졌습니다: [mini.move](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-move.md) ([발표 게시물](2023-01-15-announce-mini-move.qmd))와 아직 다듬는 과정에 있는 또 다른 모듈입니다. 처음에는 [tpope/vim-unimpaired](https://github.com/tpope/vim-unimpaired)의 대부분을 'mini.basics'에 통합할 계획이었으나, 여기서는 옵션 토글 매핑(기본 `\` 접두사 사용, 설정 가능)만 사용하기로 결정했습니다. "다음/이전(next/previous)" 기능은 별도의 모듈에 포함될 예정입니다. 기대해 주세요!
 
-Please, check it out and tell me what you think! Either here in comments or in dedicated [beta-testing](https://github.com/nvim-mini/mini.nvim/issues/209) issue.
+사용해 보시고 의견을 들려주세요! 여기 댓글이나 전용 [베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/209)를 통해 피드백을 주시면 감사하겠습니다.
 
-Thanks!
+감사합니다!

@@ -1,84 +1,65 @@
 ---
-title: "mini.pairs documentation"
+title: "mini.pairs 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_이 문서는 'mini.nvim'의 `main` 브랜치에서 생성되었습니다._
 
-<a name="mini.pairs" href="mini-pairs.qmd#mini.pairs"><b>mini.pairs</b></a> Autopairs
+<a name="mini.pairs" href="mini-pairs.qmd#mini.pairs"><b>mini.pairs</b></a> 자동 페어(Autopairs)
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Functionality to work with two "paired" characters conditional on cursor's
-  neighborhood (character to its left and character to its right).
-
-
-- Usage should be through making appropriate mappings using [MiniPairs.map()](mini-pairs.qmd#minipairs.map)
-  or in [MiniPairs.setup()](mini-pairs.qmd#minipairs.setup) (for global mapping), [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf) (for
-  buffer mapping).
+- 커서의 인접 문자(왼쪽 문자 및 오른쪽 문자)에 따라 "쌍을 이루는" 두 문자로 작업하는 기능입니다.
 
 
-- Pairs get automatically registered for special <span class="help-syntax-keys">\<BS\></span> (all configured modes)
-  and <span class="help-syntax-keys">\<CR\></span> (only Insert mode) mappings. Pressing the key inside pair will
-  delete whole pair and insert extra blank line inside pair respectively.
-  Note: these mappings are autocreated if they do not override existing ones.
-
-What it doesn't do:
-
-- Provide smart behavior, like based on bracket balance. The default behavior
-  is to almost always perform an action (insert pair, jump over). Manually
-  press [i\_CTRL-V](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-V) before a character to explicitly insert it (and only it).
+- 사용은 [MiniPairs.map()](mini-pairs.qmd#minipairs.map)이나 [MiniPairs.setup()](mini-pairs.qmd#minipairs.setup) (전역 매핑용), [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf) (버퍼 매핑용)을 사용하여 적절한 매핑을 만들어야 합니다.
 
 
-- It doesn't support multiple characters as "open" and "close" symbols. Use
-  snippets for that.
+- 페어는 특별한 <span class="help-syntax-keys">\<BS\></span> (모든 구성된 모드) 및 <span class="help-syntax-keys">\<CR\></span> (입력 모드 전용) 매핑에 대해 자동으로 등록됩니다. 페어 내부에서 키를 누르면 페어 전체를 삭제하거나 페어 내부에 추가 빈 줄을 각각 삽입합니다.
+  참고: 이러한 매핑은 기존 매핑을 재정의하지 않는 경우 자동으로 생성됩니다.
+
+하지 않는 것:
+
+- 괄호 균형 등에 기반한 스마트한 동작은 제공하지 않습니다. 기본 동작은 거의 항상 동작(페어 삽입, 점프)을 수행하는 것입니다. 문자를 명시적으로 삽입(해당 문자만 삽입)하려면 문자 앞에서 수동으로 [i\_CTRL-V](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-V)를 누르세요.
 
 
-- It doesn't support dependency on filetype. Use [i\_CTRL-V](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-V) to insert
-  single symbol or `autocmd` command or 'after/ftplugin' approach to:
-
-    - `:lua MiniPairs.map_buf(0, 'i', <*>, <pair_info>)` - make new mapping
-      for '<span class="help-syntax-keys">\<*\></span>' in current buffer.
-
-    - `:lua MiniPairs.unmap_buf(0, 'i', <*>, <pair>)` - unmap key `<*>` while
-      unregistering `<pair>` pair in current buffer. Note: this reverts
-      mapping done by [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf). If mapping was done with
-      [MiniPairs.map()](mini-pairs.qmd#minipairs.map), unmap for buffer in usual Neovim manner:
-      `inoremap <buffer> <*> <*>` (this maps `<*>` key to do the same it
-      does by default).
-
-    - Disable module for buffer (see 'Disabling' section).
-
-#### Setup {#module-setup}
+- "열기" 및 "닫기" 기호로 여러 문자를 사용하는 것은 지원하지 않습니다. 이를 위해서는 스니펫(snippets)을 사용하세요.
 
 
-This module needs a setup with `require('mini.pairs').setup({})`
-(replace `{}` with your `config` table). It will create global Lua table
-`MiniPairs` which you can use for scripting or manually (with
-`:lua MiniPairs.*`).
+- 파일 타입에 따른 의존성을 지원하지 않습니다. 단일 기호를 삽입하려면 [i\_CTRL-V](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-V)를 사용하거나, `autocmd` 명령 또는 'after/ftplugin' 방식을 사용하여 다음과 같이 하세요:
 
-See [MiniPairs.config](mini-pairs.qmd#minipairs.config) for `config` structure and default values.
+    - `:lua MiniPairs.map_buf(0, 'i', <*>, <pair_info>)` - 현재 버퍼에서 '<span class="help-syntax-keys">\<*\></span>'에 대한 새 매핑을 만듭니다.
 
-This module doesn't have runtime options, so using `vim.b.minipairs_config`
-will have no effect here.
+    - `:lua MiniPairs.unmap_buf(0, 'i', <*>, <pair>)` - 현재 버퍼에서 `<pair>` 페어를 등록 해제하면서 키 `<*>`의 매핑을 해제합니다. 참고: 이는 [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf)에 의한 매핑을 되돌립니다. 매핑이 [MiniPairs.map()](mini-pairs.qmd#minipairs.map)으로 수행된 경우, 일반적인 Neovim 방식인 `inoremap <buffer> <*> <*>`로 버퍼에 대해 매핑을 해제하세요 (이는 `<*>` 키가 기본적으로 수행하는 작업을 수행하도록 매핑합니다).
 
-#### Example mappings {#module-examplemappings}
+    - 버퍼에 대해 모듈을 비활성화합니다 ('비활성화' 섹션 참조).
+
+#### 설정 {#module-setup}
+
+
+이 모듈은 `require('mini.pairs').setup({})`으로 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniPairs`를 생성합니다 (예: `:lua MiniPairs.*`).
+
+`config` 구조와 기본값은 [MiniPairs.config](mini-pairs.qmd#minipairs.config)를 참조하세요.
+
+이 모듈은 런타임 옵션이 없으므로 `vim.b.minipairs_config`를 사용하는 것은 효과가 없습니다.
+
+#### 매핑 예시 {#module-examplemappings}
 
 
 
   ```lua
-  -- Register quotes inside `config` of `MiniPairs.setup()`
+  -- `MiniPairs.setup()`의 `config` 내부에서 따옴표 등록
   mappings = {
     ['"'] = { register = { cr = true } },
     ["'"] = { register = { cr = true } },
   }
 
-  -- Insert `<>` pair if `<` is typed at line start, don't register for <CR>
+  -- 줄 시작 부분에 `<`를 입력하면 `<>` 페어 삽입, <CR>은 등록하지 않음
   local lt_opts = {
     action = 'open',
     pair = '<>',
@@ -90,7 +71,7 @@ will have no effect here.
   local gt_opts = { action = 'close', pair = '<>', register = { cr = false } }
   MiniPairs.map('i', '>', gt_opts)
 
-  -- Create symmetrical `$$` pair only in Tex files
+  -- Tex 파일에서만 대칭형 `$$` 페어 생성
   local map_tex = function()
     MiniPairs.map_buf(0, 'i', '$', { action = 'closeopen', pair = '$$' })
   end
@@ -100,55 +81,48 @@ will have no effect here.
   )
   ```
 
-#### Notes {#module-notes}
+#### 참고 {#module-notes}
 
 
 
-- Make sure to make proper mapping of <span class="help-syntax-keys">\<CR\></span> in order to support completion
-  plugin of your choice:
+- 선택한 완료(completion) 플러그인을 지원하려면 <span class="help-syntax-keys">\<CR\></span>의 적절한 매핑을 수행해야 합니다:
 
-    - For [mini.completion](mini-completion.qmd#mini.completion) see 'Helpful key mappings' section.
+    - [mini.completion](mini-completion.qmd#mini.completion)에 대해서는 '도움이 되는 키 매핑' 섹션을 참조하세요.
 
-    - For current implementation of "hrsh7th/nvim-cmp" there is no need to
-      make custom mapping. You can use default setup, which will confirm
-      completion selection if popup is visible and expand pair otherwise.
+    - "hrsh7th/nvim-cmp"의 현재 구현에서는 커스텀 매핑을 만들 필요가 없습니다. 기본 설정을 사용하면 팝업이 보이는 경우 완료 선택을 확인하고, 그렇지 않은 경우 페어를 확장합니다.
 
-- Having mapping in terminal mode can conflict with:
+- 터미널 모드에서 매핑이 있으면 다음과 충돌할 수 있습니다:
 
-    - Autopairing capabilities of interpretators (`ipython`, `radian`).
+    - 인터프리터(`ipython`, `radian`)의 자동 페어링 기능.
 
-    - Vim mode of terminal itself.
+    - 터미널 자체의 Vim 모드.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable, set `vim.g.minipairs_disable` (globally) or `vim.b.minipairs_disable`
-(for a buffer) to `true`. Considering high number of different scenarios
-and customization intentions, writing exact rules for disabling module's
-functionality is left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common
-recipes.
+비활성화하려면 `vim.g.minipairs_disable` (전역) 또는 `vim.b.minipairs_disable` (버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 레시피는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
 ### setup() {#minipairs.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minipairs.setup-parameters}
+#### 매개변수 {#minipairs.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniPairs.config](mini-pairs.qmd#minipairs.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniPairs.config](mini-pairs.qmd#minipairs.config)를 참조하세요.
 
-#### Usage {#minipairs.setup-usage}
+#### 사용법 {#minipairs.setup-usage}
 
 
 
   ```lua
-  require('mini.pairs').setup() -- use default config
-  -- OR
-  require('mini.pairs').setup({}) -- replace {} with your config table
+  require('mini.pairs').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.pairs').setup({}) -- {}를 설정 테이블로 교체
   ```
 
 ---
@@ -156,23 +130,23 @@ Module setup
 ### config {#minipairs.config .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.config`</p>
-#### Defaults {#minipairs.config-defaults}
+#### 기본값 {#minipairs.config-defaults}
 
 
 
   ```lua
   MiniPairs.config = {
-    -- In which modes mappings from this `config` should be created
+    -- 이 `config`의 매핑이 생성될 모드
     modes = { insert = true, command = false, terminal = false },
 
-    -- Global mappings. Each right hand side should be a pair information, a
-    -- table with at least these fields (see more in |MiniPairs.map()|):
-    -- - <action> - one of "open", "close", "closeopen".
-    -- - <pair> - two character string for pair to be used.
-    -- By default pair is not inserted after `\`, quotes are not recognized by
-    -- <CR>, `'` does not insert the pair after a letter.
-    -- Only parts of tables can be tweaked (others will use these defaults).
-    -- Supply `false` instead of table to not map particular key.
+    -- 전역 매핑. 각 우측항(right hand side)은 페어 정보여야 합니다.
+    -- 최소한 다음 필드가 있는 테이블입니다 (|MiniPairs.map()|에서 자세히 확인):
+    -- - <action> - "open", "close", "closeopen" 중 하나.
+    -- - <pair> - 사용될 두 문자로 된 페어 문자열.
+    -- 기본적으로 페어는 `\` 뒤에 삽입되지 않으며, 따옴표는 <CR>에 의해 인식되지 않고,
+    -- `'`는 문자 뒤에 페어를 삽입하지 않습니다.
+    -- 테이블의 일부만 조정할 수 있습니다 (다른 부분은 기본값을 사용함).
+    -- 특정 키를 매핑하지 않으려면 테이블 대신 `false`를 제공하세요.
     mappings = {
       ['('] = { action = 'open', pair = '()', neigh_pattern = '^[^\\]' },
       ['['] = { action = 'open', pair = '[]', neigh_pattern = '^[^\\]' },
@@ -194,227 +168,203 @@ Module setup
 ### map() {#minipairs.map .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.map`(<span class="help-syntax-special">{mode}</span>, <span class="help-syntax-special">{lhs}</span>, <span class="help-syntax-special">{pair_info}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Make global mapping
+전역 매핑 만들기
 
-This is a wrapper for [nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\)) but instead of right hand side of
-mapping (as string) it expects table with pair information.
+이는 [nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\))의 래퍼이지만 매핑의 우측항(문자열) 대신 페어 정보가 있는 테이블을 예상합니다.
 
-Using this function instead of [nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\)) allows automatic
-registration of pairs which will be recognized by <span class="help-syntax-keys">\<BS\></span> and <span class="help-syntax-keys">\<CR\></span>.
-It also infers mapping description from `pair_info`.
+[nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\)) 대신 이 함수를 사용하면 <span class="help-syntax-keys">\<BS\></span> 및 <span class="help-syntax-keys">\<CR\></span>에 의해 인식될 페어를 자동으로 등록할 수 있습니다.
+또한 `pair_info`에서 매핑 설명을 유추합니다.
 
-#### Parameters {#minipairs.map-parameters}
+#### 매개변수 {#minipairs.map-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string)` `mode` for [nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\)).
+<span class="help-syntax-special">{mode}</span> `(string)` [nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\))용 `mode`.
 
-<span class="help-syntax-special">{lhs}</span> `(string)` `lhs` for [nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\)).
+<span class="help-syntax-special">{lhs}</span> `(string)` [nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\))용 `lhs`.
 
-<span class="help-syntax-special">{pair_info}</span> `(table)` Table with pair information. Fields:
+<span class="help-syntax-special">{pair_info}</span> `(table)` 페어 정보가 있는 테이블. 필드:
 
-  - <span class="help-syntax-keys">\<action\></span> - one of "open" for [MiniPairs.open()](mini-pairs.qmd#minipairs.open),
-    "close" for [MiniPairs.close()](mini-pairs.qmd#minipairs.close), or "closeopen" for [MiniPairs.closeopen()](mini-pairs.qmd#minipairs.closeopen).
+  - <span class="help-syntax-keys">\<action\></span> - [MiniPairs.open()](mini-pairs.qmd#minipairs.open)용 "open",
+    [MiniPairs.close()](mini-pairs.qmd#minipairs.close)용 "close", 또는 [MiniPairs.closeopen()](mini-pairs.qmd#minipairs.closeopen)용 "closeopen" 중 하나.
 
-  - <span class="help-syntax-keys">\<pair\></span> - two character string to be passed to an action function.
-    Can contain multibyte characters.
+  - <span class="help-syntax-keys">\<pair\></span> - 액션 함수에 전달될 두 문자열 페어.
+    멀티바이트 문자를 포함할 수 있습니다.
 
-  - <span class="help-syntax-keys">\<neigh_pattern\></span> - optional neighborhood pattern to be passed to an action
-    function. Will be matched against two character neighborhood (might
-    contain multibyte characters).
-    Default: `'..'` (no restriction from neighborhood).
+  - <span class="help-syntax-keys">\<neigh_pattern\></span> - 액션 함수에 전달될 선택적 인접 패턴. 두 문자로 된 인접 문자와 일치하게 됩니다 (멀티바이트 문자를 포함할 수 있음).
+    기본값: `'..'` (인접 문자에 의한 제한 없음).
 
-  - <span class="help-syntax-keys">\<register\></span> - optional table with information about whether this pair will
-    be recognized by <span class="help-syntax-keys">\<BS\></span> (in [MiniPairs.bs()](mini-pairs.qmd#minipairs.bs)) and/or <span class="help-syntax-keys">\<CR\></span> (in [MiniPairs.cr()](mini-pairs.qmd#minipairs.cr)).
-    Should have boolean fields <span class="help-syntax-keys">\<bs\></span> and <span class="help-syntax-keys">\<cr\></span> (both `true` by default).
+  - <span class="help-syntax-keys">\<register\></span> - 이 페어가 [MiniPairs.bs()](mini-pairs.qmd#minipairs.bs)에서 <span class="help-syntax-keys">\<BS\></span> 및/또는 [MiniPairs.cr()](mini-pairs.qmd#minipairs.cr)에서 <span class="help-syntax-keys">\<CR\></span>에 의해 인식될지에 대한 정보가 포함된 선택적 테이블.
+    불리언 필드 <span class="help-syntax-keys">\<bs\></span> 및 <span class="help-syntax-keys">\<cr\></span>을 가져야 합니다 (둘 다 기본값은 `true`).
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Optional table `opts` for [nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\)). Elements
-  `expr` and `noremap` won't be recognized (`true` by default).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [nvim\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap\(\))용 선택적 테이블 `opts`. 요소 `expr` 및 `noremap`은 인식되지 않습니다 (기본적으로 `true`).
 
 ---
 
 ### map_buf() {#minipairs.map_buf .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.map_buf`(<span class="help-syntax-special">{buffer}</span>, <span class="help-syntax-special">{mode}</span>, <span class="help-syntax-special">{lhs}</span>, <span class="help-syntax-special">{pair_info}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Make buffer mapping
+버퍼 매핑 만들기
 
-This is a wrapper for [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\)) but instead of string right
-hand side of mapping it expects table with pair information similar to one
-in [MiniPairs.map()](mini-pairs.qmd#minipairs.map).
+이는 [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\))의 래퍼이지만 매핑의 문자열 우측항 대신 [MiniPairs.map()](mini-pairs.qmd#minipairs.map)과 유사한 페어 정보 테이블을 예상합니다.
 
-Using this function instead of [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\)) allows automatic
-registration of pairs which will be recognized by <span class="help-syntax-keys">\<BS\></span> and <span class="help-syntax-keys">\<CR\></span>.
-It also infers mapping description from `pair_info`.
+[nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\)) 대신 이 함수를 사용하면 <span class="help-syntax-keys">\<BS\></span> 및 <span class="help-syntax-keys">\<CR\></span>에 의해 인식될 페어를 자동으로 등록할 수 있습니다.
+또한 `pair_info`에서 매핑 설명을 유추합니다.
 
-#### Parameters {#minipairs.map_buf-parameters}
+#### 매개변수 {#minipairs.map_buf-parameters}
 
 
 
-<span class="help-syntax-special">{buffer}</span> `(number)` `buffer` for [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\)).
+<span class="help-syntax-special">{buffer}</span> `(number)` [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\))용 `buffer`.
 
-<span class="help-syntax-special">{mode}</span> `(string)` `mode` for [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\)).
+<span class="help-syntax-special">{mode}</span> `(string)` [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\))용 `mode`.
 
-<span class="help-syntax-special">{lhs}</span> `(string)` `lhs` for [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\)).
+<span class="help-syntax-special">{lhs}</span> `(string)` [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\))용 `lhs`.
 
-<span class="help-syntax-special">{pair_info}</span> `(table)` Table with pair information.
+<span class="help-syntax-special">{pair_info}</span> `(table)` 페어 정보가 있는 테이블.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Optional table `opts` for [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\)).
-  Elements `expr` and `noremap` won't be recognized (`true` by default).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [nvim\_buf\_set\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_keymap\(\))용 선택적 테이블 `opts`.
+  요소 `expr` 및 `noremap`은 인식되지 않습니다 (기본적으로 `true`).
 
 ---
 
 ### unmap() {#minipairs.unmap .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.unmap`(<span class="help-syntax-special">{mode}</span>, <span class="help-syntax-special">{lhs}</span>, <span class="help-syntax-special">{pair}</span>)</p>
-Remove global mapping
+전역 매핑 삭제
 
-A wrapper for [nvim\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_del_keymap\(\)) which registers supplied `pair`.
+제공된 `pair`를 등록 해제하는 [nvim\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_del_keymap\(\))의 래퍼입니다.
 
-#### Parameters {#minipairs.unmap-parameters}
+#### 매개변수 {#minipairs.unmap-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string)` `mode` for [nvim\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_del_keymap\(\)).
+<span class="help-syntax-special">{mode}</span> `(string)` [nvim\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_del_keymap\(\))용 `mode`.
 
-<span class="help-syntax-special">{lhs}</span> `(string)` `lhs` for [nvim\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_del_keymap\(\)).
+<span class="help-syntax-special">{lhs}</span> `(string)` [nvim\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_del_keymap\(\))용 `lhs`.
 
-<span class="help-syntax-special">{pair}</span> `(string)` Pair which should be unregistered from both <span class="help-syntax-keys">\<BS\></span> and <span class="help-syntax-keys">\<CR\></span>.
-  Should be explicitly supplied to avoid confusion.
-  Supply `''` to not unregister pair.
+<span class="help-syntax-special">{pair}</span> `(string)` <span class="help-syntax-keys">\<BS\></span> 및 <span class="help-syntax-keys">\<CR\></span> 모두에서 등록 해제되어야 하는 페어.
+  혼동을 피하기 위해 명시적으로 제공되어야 합니다.
+  페어를 등록 해제하지 않으려면 `''`을 제공하세요.
 
 ---
 
 ### unmap_buf() {#minipairs.unmap_buf .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.unmap_buf`(<span class="help-syntax-special">{buffer}</span>, <span class="help-syntax-special">{mode}</span>, <span class="help-syntax-special">{lhs}</span>, <span class="help-syntax-special">{pair}</span>)</p>
-Remove buffer mapping
+버퍼 매핑 삭제
 
-Wrapper for [nvim\_buf\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_del_keymap\(\)) which also unregisters supplied `pair`.
+제공된 `pair`를 등록 해제하는 [nvim\_buf\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_del_keymap\(\))의 래퍼입니다.
 
-Note: this only reverts mapping done by [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf). If mapping was
-done with [MiniPairs.map()](mini-pairs.qmd#minipairs.map), revert to default behavior for buffer:
+참고: 이는 [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf)에 의한 매핑만 되돌립니다. 매핑이 [MiniPairs.map()](mini-pairs.qmd#minipairs.map)으로 수행된 경우, 버퍼에 대해 기본 동작으로 되돌립니다:
 
   ```lua
-  -- Map `X` key to do the same it does by default
+  -- `X` 키가 기본적으로 수행하는 작업을 수행하도록 매핑
   vim.keymap.set('i', 'X', 'X', { buffer = true })
   ```
 
-#### Parameters {#minipairs.unmap_buf-parameters}
+#### 매개변수 {#minipairs.unmap_buf-parameters}
 
 
 
-<span class="help-syntax-special">{buffer}</span> `(number)` `buffer` for [nvim\_buf\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_del_keymap\(\)).
+<span class="help-syntax-special">{buffer}</span> `(number)` [nvim\_buf\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_del_keymap\(\))용 `buffer`.
 
-<span class="help-syntax-special">{mode}</span> `(string)` `mode` for [nvim\_buf\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_del_keymap\(\)).
+<span class="help-syntax-special">{mode}</span> `(string)` [nvim\_buf\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_del_keymap\(\))용 `mode`.
 
-<span class="help-syntax-special">{lhs}</span> `(string)` `lhs` for [nvim\_buf\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_del_keymap\(\)).
+<span class="help-syntax-special">{lhs}</span> `(string)` [nvim\_buf\_del\_keymap()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_del_keymap\(\))용 `lhs`.
 
-<span class="help-syntax-special">{pair}</span> `(string)` Pair which should be unregistered from both <span class="help-syntax-keys">\<BS\></span> and <span class="help-syntax-keys">\<CR\></span>.
-  Should be explicitly supplied to avoid confusion.
-  Supply `''` to not unregister pair.
+<span class="help-syntax-special">{pair}</span> `(string)` <span class="help-syntax-keys">\<BS\></span> 및 <span class="help-syntax-keys">\<CR\></span> 모두에서 등록 해제되어야 하는 페어.
+  혼동을 피하기 위해 명시적으로 제공되어야 합니다.
+  페어를 등록 해제하지 않으려면 `''`을 제공하세요.
 
 ---
 
 ### open() {#minipairs.open .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.open`(<span class="help-syntax-special">{pair}</span>, <span class="help-syntax-special">{neigh_pattern}</span>)</p>
-Process "open" symbols
+"열기" 기호 처리
 
-Used as [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) mapping for "open" symbols in asymmetric pair ('(', '[',
-etc.). If neighborhood doesn't match supplied pattern, function results
-into "open" symbol. Otherwise, it pastes whole pair and moves inside pair
-with [<span class="help-syntax-keys">\<Left\></span>](https://neovim.io/doc/user/helptag.html?tag=<Left>).
+비대칭 페어('(', '[' 등)의 "열기" 기호에 대한 [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) 매핑으로 사용됩니다. 인접 문자가 제공된 패턴과 일치하지 않으면 함수는 "열기" 기호가 됩니다. 일치하면 전체 페어를 붙여넣고 [<span class="help-syntax-keys">\<Left\></span>](https://neovim.io/doc/user/helptag.html?tag=<Left>)를 사용하여 페어 내부로 이동합니다.
 
-Used inside [MiniPairs.map()](mini-pairs.qmd#minipairs.map) and [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf) for an actual mapping.
+실제 매핑을 위해 [MiniPairs.map()](mini-pairs.qmd#minipairs.map) 및 [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf) 내부에서 사용됩니다.
 
-#### Parameters {#minipairs.open-parameters}
+#### 매개변수 {#minipairs.open-parameters}
 
 
 
-<span class="help-syntax-special">{pair}</span> `(string)` String with two characters representing pair.
+<span class="help-syntax-special">{pair}</span> `(string)` 페어를 나타내는 두 문자 문자열.
 
-<span class="help-syntax-special">{neigh_pattern}</span> `(string|nil)` Pattern for two neighborhood characters.
-  Character "\r" indicates line start, "\n" - line end.
+<span class="help-syntax-special">{neigh_pattern}</span> `(string|nil)` 두 인접 문자에 대한 패턴.
+  문자 "\r"은 줄 시작을, "\n"은 줄 끝을 나타냅니다.
 
-#### Return {#minipairs.open-return}
+#### 반환 {#minipairs.open-return}
 
 
-`(string)` Keys performing "open" action.
+`(string)` "열기" 동작을 수행하는 키.
 
 ---
 
 ### close() {#minipairs.close .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.close`(<span class="help-syntax-special">{pair}</span>, <span class="help-syntax-special">{neigh_pattern}</span>)</p>
-Process "close" symbols
+"닫기" 기호 처리
 
-Used as [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) mapping for "close" symbols in asymmetric pair (')',
-']', etc.). If neighborhood doesn't match supplied pattern, function
-results into "close" symbol. Otherwise it jumps over symbol to the right of
-cursor (with [<span class="help-syntax-keys">\<Right\></span>](https://neovim.io/doc/user/helptag.html?tag=<Right>)) if it is equal to "close" one and inserts it
-otherwise.
+비대칭 페어(')', ']' 등)의 "닫기" 기호에 대한 [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) 매핑으로 사용됩니다. 인접 문자가 제공된 패턴과 일치하지 않으면 함수는 "닫기" 기호가 됩니다. 일치하면 커서 오른쪽의 기호가 "닫기" 기호와 같으면 해당 기호를 넘어 점프하고([<span class="help-syntax-keys">\<Right\></span>](https://neovim.io/doc/user/helptag.html?tag=<Right>) 사용), 그렇지 않으면 삽입합니다.
 
-Used inside [MiniPairs.map()](mini-pairs.qmd#minipairs.map) and [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf) for an actual mapping.
+실제 매핑을 위해 [MiniPairs.map()](mini-pairs.qmd#minipairs.map) 및 [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf) 내부에서 사용됩니다.
 
-#### Parameters {#minipairs.close-parameters}
+#### 매개변수 {#minipairs.close-parameters}
 
 
 
-<span class="help-syntax-special">{pair}</span> `(string)` String with two characters representing pair.
+<span class="help-syntax-special">{pair}</span> `(string)` 페어를 나타내는 두 문자 문자열.
 
-<span class="help-syntax-special">{neigh_pattern}</span> `(string|nil)` Pattern for two neighborhood characters.
-  Character "\r" indicates line start, "\n" - line end.
+<span class="help-syntax-special">{neigh_pattern}</span> `(string|nil)` 두 인접 문자에 대한 패턴.
+  문자 "\r"은 줄 시작을, "\n"은 줄 끝을 나타냅니다.
 
-#### Return {#minipairs.close-return}
+#### 반환 {#minipairs.close-return}
 
 
-`(string)` Keys performing "close" action.
+`(string)` "닫기" 동작을 수행하는 키.
 
 ---
 
 ### closeopen() {#minipairs.closeopen .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.closeopen`(<span class="help-syntax-special">{pair}</span>, <span class="help-syntax-special">{neigh_pattern}</span>)</p>
-Process "closeopen" symbols
+"closeopen" 기호 처리
 
-Used as [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) mapping for 'symmetrical' symbols (like " and ')
-It tries to perform 'closeopen action': move over right character
-(with [<span class="help-syntax-keys">\<Right\></span>](https://neovim.io/doc/user/helptag.html?tag=<Right>)) if it is equal to second character from pair or
-conditionally paste pair otherwise (with [MiniPairs.open()](mini-pairs.qmd#minipairs.open)).
+" 및 '와 같은 '대칭형' 기호에 대한 [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) 매핑으로 사용됩니다.
+오른쪽 문자가 페어의 두 번째 문자와 같으면 해당 문자 너머로 이동하거나([<span class="help-syntax-keys">\<Right\></span>](https://neovim.io/doc/user/helptag.html?tag=<Right>) 사용), 그렇지 않으면 조건부로 페어를 붙여넣는([MiniPairs.open()](mini-pairs.qmd#minipairs.open) 사용) 'closeopen 동작'을 시도합니다.
 
-Used inside [MiniPairs.map()](mini-pairs.qmd#minipairs.map) and [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf) for an actual mapping.
+실제 매핑을 위해 [MiniPairs.map()](mini-pairs.qmd#minipairs.map) 및 [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf) 내부에서 사용됩니다.
 
-#### Parameters {#minipairs.closeopen-parameters}
+#### 매개변수 {#minipairs.closeopen-parameters}
 
 
 
-<span class="help-syntax-special">{pair}</span> `(string)` String with two characters representing pair.
+<span class="help-syntax-special">{pair}</span> `(string)` 페어를 나타내는 두 문자 문자열.
 
-<span class="help-syntax-special">{neigh_pattern}</span> `(string|nil)` Pattern for two neighborhood characters.
-  Character "\r" indicates line start, "\n" - line end.
+<span class="help-syntax-special">{neigh_pattern}</span> `(string|nil)` 두 인접 문자에 대한 패턴.
+  문자 "\r"은 줄 시작을, "\n"은 줄 끝을 나타냅니다.
 
-#### Return {#minipairs.closeopen-return}
+#### 반환 {#minipairs.closeopen-return}
 
 
-`(string)` Keys performing "closeopen" action.
+`(string)` "closeopen" 동작을 수행하는 키.
 
 ---
 
 ### bs() {#minipairs.bs .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.bs`(<span class="help-syntax-special">{key}</span>)</p>
-Process [<span class="help-syntax-keys">\<BS\></span>](https://neovim.io/doc/user/helptag.html?tag=<BS>)
+[<span class="help-syntax-keys">\<BS\></span>](https://neovim.io/doc/user/helptag.html?tag=<BS>) 처리
 
-Used as [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) mapping for <span class="help-syntax-keys">\<BS\></span> in Insert mode. It removes whole pair
-(via executing <span class="help-syntax-keys">\<Del\></span> after input key) if neighborhood is equal to a whole
-pair recognized for current buffer. Pair is recognized for current buffer
-if it is registered for global or current buffer mapping. Pair is
-registered as a result of calling [MiniPairs.map()](mini-pairs.qmd#minipairs.map) or [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf).
+입력 모드에서 <span class="help-syntax-keys">\<BS\></span>에 대한 [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) 매핑으로 사용됩니다. 인접 문자가 현재 버퍼에 대해 인식된 전체 페어와 같으면 페어 전체를 삭제합니다(입력 키 뒤에 <span class="help-syntax-keys">\<Del\></span> 실행을 통해). 페어는 전역 또는 현재 버퍼 매핑에 등록되어 있는 경우 현재 버퍼에 대해 인식됩니다. 페어는 [MiniPairs.map()](mini-pairs.qmd#minipairs.map) 또는 [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf)를 호출한 결과로 등록됩니다.
 
-Mapped by default inside [MiniPairs.setup()](mini-pairs.qmd#minipairs.setup).
+[MiniPairs.setup()](mini-pairs.qmd#minipairs.setup) 내부에서 기본적으로 매핑됩니다.
 
-This can be used to modify other Insert mode keys to respect neighborhood
-pair. Examples:
+이는 다른 입력 모드 키를 수정하여 인접 페어를 존중하도록 하는 데 사용될 수 있습니다. 예시:
 
   ```lua
   local map_bs = function(lhs, rhs)
@@ -426,43 +376,37 @@ pair. Examples:
   map_bs('<C-u>', 'v:lua.MiniPairs.bs("\21")')
   ```
 
-#### Parameters {#minipairs.bs-parameters}
+#### 매개변수 {#minipairs.bs-parameters}
 
 
 
-<span class="help-syntax-special">{key}</span> `(string|nil)` Key to use. Default: `'<BS>'`.
+<span class="help-syntax-special">{key}</span> `(string|nil)` 사용할 키. 기본값: `'<BS>'`.
 
-#### Return {#minipairs.bs-return}
+#### 반환 {#minipairs.bs-return}
 
 
-`(string)` Keys performing "backspace" action.
+`(string)` "백스페이스" 동작을 수행하는 키.
 
 ---
 
 ### cr() {#minipairs.cr .help-syntax-right-anchor}
 
 <p align="center">`MiniPairs.cr`(<span class="help-syntax-special">{key}</span>)</p>
-Process [i\_<span class="help-syntax-keys">\<CR\></span>](https://neovim.io/doc/user/helptag.html?tag=i_<CR>)
+[i\_<span class="help-syntax-keys">\<CR\></span>](https://neovim.io/doc/user/helptag.html?tag=i_<CR>) 처리
 
-Used as [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) mapping for <span class="help-syntax-keys">\<CR\></span> in insert mode. It puts "close"
-symbol on next line (via `<CR><C-o>O`) if neighborhood is equal to a whole
-pair recognized for current buffer. Pair is recognized for current buffer
-if it is registered for global or current buffer mapping. Pair is
-registered as a result of calling [MiniPairs.map()](mini-pairs.qmd#minipairs.map) or [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf).
+입력 모드에서 <span class="help-syntax-keys">\<CR\></span>에 대한 [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) 매핑으로 사용됩니다. 인접 문자가 현재 버퍼에 대해 인식된 전체 페어와 같으면 "닫기" 기호를 다음 줄에 놓습니다(`<CR><C-o>O` 사용). 페어는 전역 또는 현재 버퍼 매핑에 등록되어 있는 경우 현재 버퍼에 대해 인식됩니다. 페어는 [MiniPairs.map()](mini-pairs.qmd#minipairs.map) 또는 [MiniPairs.map\_buf()](mini-pairs.qmd#minipairs.map_buf)를 호출한 결과로 등록됩니다.
 
-Note: some relevant mode changing events are temporarily ignored
-(with ['eventignore'](https://neovim.io/doc/user/helptag.html?tag='eventignore')) to counter effect of using [i\_CTRL-O](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-O).
+참고: [i\_CTRL-O](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-O) 사용 효과에 대응하기 위해 일부 관련 모드 변경 이벤트는 일시적으로 무시됩니다 (['eventignore'](https://neovim.io/doc/user/helptag.html?tag='eventignore') 사용).
 
-Mapped by default inside [MiniPairs.setup()](mini-pairs.qmd#minipairs.setup).
+[MiniPairs.setup()](mini-pairs.qmd#minipairs.setup) 내부에서 기본적으로 매핑됩니다.
 
-#### Parameters {#minipairs.cr-parameters}
+#### 매개변수 {#minipairs.cr-parameters}
 
 
 
-<span class="help-syntax-special">{key}</span> `(string|nil)` Key to use. Default: `'<CR>'`.
+<span class="help-syntax-special">{key}</span> `(string|nil)` 사용할 키. 기본값: `'<CR>'`.
 
-#### Return {#minipairs.cr-return}
+#### 반환 {#minipairs.cr-return}
 
 
-`(string)` Keys performing "new line" action.
-
+`(string)` "새 줄" 동작을 수행하는 키.

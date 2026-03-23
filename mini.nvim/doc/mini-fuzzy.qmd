@@ -1,23 +1,23 @@
 ---
-title: "mini.fuzzy documentation"
+title: "mini.fuzzy 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_`mini.nvim`의 `main` 브랜치에서 생성됨_
 
-<a name="mini.fuzzy" href="mini-fuzzy.qmd#mini.fuzzy"><b>mini.fuzzy</b></a> Fuzzy matching
+<a name="mini.fuzzy" href="mini-fuzzy.qmd#mini.fuzzy"><b>mini.fuzzy</b></a> 퍼지 매칭
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Minimal and fast fuzzy matching algorithm which prioritizes match width.
+- 매치 너비를 우선시하는 최소한의 빠른 퍼지 매칭 알고리즘.
 
 
-- Functions to for common fuzzy matching operations:
+- 일반적인 퍼지 매칭 작업을 위한 함수:
 
     - [MiniFuzzy.match()](mini-fuzzy.qmd#minifuzzy.match).
 
@@ -26,93 +26,73 @@ Features:
     - [MiniFuzzy.process\_lsp\_items()](mini-fuzzy.qmd#minifuzzy.process_lsp_items).
 
 
-- Generator of sorter ([MiniFuzzy.get\_telescope\_sorter()](mini-fuzzy.qmd#minifuzzy.get_telescope_sorter)) for
-  [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+- [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)을 위한 소터 생성기 ([MiniFuzzy.get\_telescope\_sorter()](mini-fuzzy.qmd#minifuzzy.get_telescope_sorter))
 
-#### Setup {#module-setup}
-
-
-This module doesn't need setup, but it can be done to improve usability.
-Setup with `require('mini.fuzzy').setup({})` (replace `{}` with your
-`config` table). It will create global Lua table `MiniFuzzy` which you can
-use for scripting or manually (with `:lua MiniFuzzy.*`).
-
-See [MiniFuzzy.config](mini-fuzzy.qmd#minifuzzy.config) for `config` structure and default values.
-
-You can override runtime config settings locally to buffer inside
-`vim.b.minifuzzy_config` which should have same structure as
-`MiniFuzzy.config`.
-See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
-
-#### Notes {#module-notes}
+#### 설정 {#module-setup}
 
 
-1. Currently there is no explicit design to work with multibyte symbols,
-   but simple examples should work.
-2. Smart case is used: case insensitive if input word (which is usually a
-   user input) is all lower case. Case sensitive otherwise.
+이 모듈은 설정이 필요하지 않지만, 사용성을 높이기 위해 설정할 수 있습니다.
+`require('mini.fuzzy').setup({})`으로 설정하세요 (`{}`를 `config` 테이블로 교체하세요). 그러면 스크립팅이나 수동으로(`:lua MiniFuzzy.*` 사용) 사용할 수 있는 전역 Lua 테이블 `MiniFuzzy`가 생성됩니다.
+
+`config` 구조 및 기본값은 [MiniFuzzy.config](mini-fuzzy.qmd#minifuzzy.config)를 참조하세요.
+
+`MiniFuzzy.config`와 동일한 구조를 가져야 하는 `vim.b.minifuzzy_config` 내부 버퍼에 로컬로 런타임 설정 설정을 재정의할 수 있습니다.
+자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
+
+#### 참고 사항 {#module-notes}
+
+
+1. 현재 멀티바이트 기호와 작동하도록 명시적으로 설계되지 않았지만, 간단한 예시는 작동할 것입니다.
+2. 스마트 케이스(Smart case)가 사용됩니다: 입력 단어(보통 사용자 입력)가 모두 소문자인 경우 대소문자를 구분하지 않습니다. 그렇지 않으면 대소문자를 구분합니다.
 
 ---
 
-### Algorithm {#minifuzzy-algorithm .help-syntax-right-anchor}
+### 알고리즘 {#minifuzzy-algorithm .help-syntax-right-anchor}
 
-General design uses only width of found match and index of first letter
-match. No special characters or positions (like in fzy and fzf) are used.
+일반적인 설계는 발견된 매치의 너비와 첫 번째 글자 매치의 인덱스만 사용합니다. 특수 문자나 위치(fzy 및 fzf와 같은)는 사용되지 않습니다.
 
-Given non-empty input `word` and target `candidate`:
+비어 있지 않은 입력 `word`와 대상 `candidate`가 주어지면:
 
-- The goal is to find matching between `word`'s letters and letters in
-  `candidate` which minimizes certain score. It is assumed that order of
-  letters in `word` and those matched in `candidate` should be the same.
+- 목표는 특정 점수를 최소화하는 `word`의 글자와 `candidate`의 글자 간의 매칭을 찾는 것입니다. `word`에서의 글자 순서와 `candidate`에서 매칭된 글자의 순서는 동일해야 한다고 가정합니다.
 
 
-- Matching is represented by matched positions: an array `positions` of
-  integers with length equal to number of letters in `word`. The following
-  should be always true in case of a match: `candidate`'s letter at index
-  `positions[i]` is letters[i]` for all valid `i`.
+- 매칭은 매칭된 위치로 표시됩니다: `word`의 글자 수와 동일한 길이를 가진 정수 배열 `positions`. 매칭되는 경우 항상 다음이 참이어야 합니다: 모든 유효한 `i`에 대해 `candidate`의 `positions[i]` 인덱스에 있는 글자는 `word`의 `i`번째 글자입니다.
 
 
-- Matched positions are evaluated based only on two features: their width
-  (number of indexes between first and last positions) and first match
-  (index of first letter match). There is a global setting `cutoff` for
-  which all feature values greater than it can be considered "equally bad".
+- 매칭된 위치는 두 가지 특징에 기반하여 평가됩니다: 너비(첫 번째와 마지막 위치 사이의 인덱스 수)와 첫 번째 매치(첫 번째 글자 매치의 인덱스). 전역 설정 `cutoff`가 있으며, 이보다 큰 모든 특징 값은 "동일하게 나쁜" 것으로 간주될 수 있습니다.
 
 
-- Score of matched positions is computed with following explicit formula:
-  `cutoff * min(width, cutoff) + min(first, cutoff)`. It is designed to be
-  equivalent to first comparing widths (lower is better) and then comparing
-  first match (lower is better). For example, if `word = 'time'`:
+- 매칭된 위치의 점수는 다음과 같은 명시적 공식으로 계산됩니다:
+  `cutoff * min(width, cutoff) + min(first, cutoff)`. 이는 너비를 먼저 비교(낮을수록 좋음)한 다음 첫 번째 매치를 비교(낮을수록 좋음)하는 것과 동일하도록 설계되었습니다. 예를 들어, `word = 'time'`인 경우:
 
-    - '_time' (width 4) will have a better match than 't_ime' (width 5).
+    - '_time' (너비 4)은 't_ime' (너비 5)보다 더 나은 매치입니다.
 
-    - 'time_a' (width 4, first 1) will have a better match than 'a_time'
-      (width 4, first 3).
+    - 'time_a' (너비 4, 첫 번째 1)는 'a_time' (너비 4, 첫 번째 3)보다 더 나은 매치입니다.
 
 
-- Final matched positions are those which minimize score among all possible
-  matched positions of `word` and `candidate`.
+- 최종 매칭된 위치는 `word`와 `candidate`의 가능한 모든 매칭된 위치 중에서 점수를 최소화하는 위치입니다.
 
 ---
 
 ### setup() {#minifuzzy.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniFuzzy.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minifuzzy.setup-parameters}
+#### 매개변수 {#minifuzzy.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniFuzzy.config](mini-fuzzy.qmd#minifuzzy.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 구성 테이블. [MiniFuzzy.config](mini-fuzzy.qmd#minifuzzy.config)를 참조하세요.
 
-#### Usage {#minifuzzy.setup-usage}
+#### 사용법 {#minifuzzy.setup-usage}
 
 
 
   ```lua
-  require('mini.fuzzy').setup() -- use default config
-  -- OR
-  require('mini.fuzzy').setup({}) -- replace {} with your config table
+  require('mini.fuzzy').setup() -- 기본 구성 사용
+  -- 또는
+  require('mini.fuzzy').setup({}) -- {}를 사용자 구성 테이블로 교체
   ```
 
 ---
@@ -120,14 +100,14 @@ Module setup
 ### config {#minifuzzy.config .help-syntax-right-anchor}
 
 <p align="center">`MiniFuzzy.config`</p>
-#### Defaults {#minifuzzy.config-defaults}
+#### 기본값 {#minifuzzy.config-defaults}
 
 
 
   ```lua
   MiniFuzzy.config = {
-    -- Maximum allowed value of match features (width and first match). All
-    -- feature values greater than cutoff can be considered "equally bad".
+    -- 매칭 기능(너비 및 첫 번째 매치)의 최대 허용 값.
+    -- cutoff보다 큰 모든 특징 값은 "동일하게 나쁜" 것으로 간주될 수 있습니다.
     cutoff = 100,
   }
   ```
@@ -137,91 +117,86 @@ Module setup
 ### match() {#minifuzzy.match .help-syntax-right-anchor}
 
 <p align="center">`MiniFuzzy.match`(<span class="help-syntax-special">{word}</span>, <span class="help-syntax-special">{candidate}</span>)</p>
-Compute match data
+매치 데이터 계산
 
-#### Parameters {#minifuzzy.match-parameters}
-
-
-
-<span class="help-syntax-special">{word}</span> `(string)` Input word (usually user input).
-
-<span class="help-syntax-special">{candidate}</span> `(string)` Target word (usually with which matching is done).
-
-#### Return {#minifuzzy.match-return}
+#### 매개변수 {#minifuzzy.match-parameters}
 
 
-`(table)` Matching information:
 
-  - <span class="help-syntax-keys">\<positions\></span> `(table|nil)` - array with letter indexes inside `candidate`
-    which matched to corresponding letters in `word`. It is empty array if
-    `word` is empty string and `nil` if no match.
+<span class="help-syntax-special">{word}</span> `(string)` 입력 단어 (보통 사용자 입력).
 
-  - <span class="help-syntax-keys">\<score\></span> `number` - positive number representing how good the match is
-    (lower is better). It is `-1` if no match or word is empty string.
+<span class="help-syntax-special">{candidate}</span> `(string)` 대상 단어 (보통 매칭이 수행되는 단어).
+
+#### 반환값 {#minifuzzy.match-return}
+
+
+`(table)` 매칭 정보:
+
+  - <span class="help-syntax-keys">\<positions\></span> `(table|nil)` - `candidate` 내부에서 `word`의 해당 글자와 매칭된 글자 인덱스 배열. `word`가 빈 문자열이면 빈 배열이고 매치가 없으면 `nil`입니다.
+
+  - <span class="help-syntax-keys">\<score\></span> `number` - 매치가 얼마나 좋은지 나타내는 양수 (낮을수록 좋음). 매치가 없거나 단어가 빈 문자열이면 `-1`입니다.
 
 ---
 
 ### filtersort() {#minifuzzy.filtersort .help-syntax-right-anchor}
 
 <p align="center">`MiniFuzzy.filtersort`(<span class="help-syntax-special">{word}</span>, <span class="help-syntax-special">{candidate_array}</span>)</p>
-Filter string array
+문자열 배열 필터링
 
 
-- Keep only input elements which match `word`.
+- `word`와 일치하는 입력 요소만 유지합니다.
 
-- Sort from best to worst matches (based on score and index in original
-  array, both lower is better).
+- 가장 좋은 매치부터 가장 나쁜 매치 순으로 정렬합니다 (점수와 원래 배열의 인덱스를 기준으로 하며, 둘 다 낮을수록 좋습니다).
 
-#### Parameters {#minifuzzy.filtersort-parameters}
-
+#### 매개변수 {#minifuzzy.filtersort-parameters}
 
 
-<span class="help-syntax-special">{word}</span> `(string)` String which will be searched.
 
-<span class="help-syntax-special">{candidate_array}</span> `(table)` Lua array of strings inside which word will be
-  searched.
+<span class="help-syntax-special">{word}</span> `(string)` 검색할 문자열.
 
-#### Return {#minifuzzy.filtersort-return}
+<span class="help-syntax-special">{candidate_array}</span> `(table)` 단어를 검색할 문자열의 Lua 배열.
+
+#### 반환값 {#minifuzzy.filtersort-return}
 
 
-`(...)` Arrays of matched candidates and their indexes in original input.
+`(...)` 매칭된 후보 배열과 원래 입력에서의 인덱스 배열.
 
 ---
 
 ### process_lsp_items() {#minifuzzy.process_lsp_items .help-syntax-right-anchor}
 
 <p align="center">`MiniFuzzy.process_lsp_items`(<span class="help-syntax-special">{items}</span>, <span class="help-syntax-special">{base}</span>)</p>
-Fuzzy matching for `lsp_completion.process_items` of [MiniCompletion.config](mini-completion.qmd#minicompletion.config)
+[MiniCompletion.config](mini-completion.qmd#minicompletion.config)의 `lsp_completion.process_items`를 위한 퍼지 매칭
 
-#### Parameters {#minifuzzy.process_lsp_items-parameters}
-
-
-
-<span class="help-syntax-special">{items}</span> `(table)` Array with LSP 'textDocument/completion' response items.
-
-<span class="help-syntax-special">{base}</span> `(string)` Word to complete.
-
-#### Return {#minifuzzy.process_lsp_items-return}
+#### 매개변수 {#minifuzzy.process_lsp_items-parameters}
 
 
-`(table)` Array of items with text (`filterText` or `label`) fuzzy matching `base`.
+
+<span class="help-syntax-special">{items}</span> `(table)` LSP 'textDocument/completion' 응답 항목이 포함된 배열.
+
+<span class="help-syntax-special">{base}</span> `(string)` 완성할 단어.
+
+#### 반환값 {#minifuzzy.process_lsp_items-return}
+
+
+`(table)` `base`와 퍼지 매칭되는 텍스트(`filterText` 또는 `label`)가 있는 항목 배열.
 
 ---
 
 ### get_telescope_sorter() {#minifuzzy.get_telescope_sorter .help-syntax-right-anchor}
 
 <p align="center">`MiniFuzzy.get_telescope_sorter`(<span class="help-syntax-special">{opts}</span>)</p>
-Custom getter for `telescope.nvim` sorter
+`telescope.nvim` 소터를 위한 사용자 정의 게터
 
-Designed as a value for file and generic sorter of 'telescope.nvim'.
+'telescope.nvim'의 파일 및 일반 소터 값으로 설계되었습니다.
 
-#### Parameters {#minifuzzy.get_telescope_sorter-parameters}
+#### 매개변수 {#minifuzzy.get_telescope_sorter-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options (currently not used).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션 (현재 사용되지 않음).
 
-#### Usage {#minifuzzy.get_telescope_sorter-usage}
+#### 사용법 {#minifuzzy.get_telescope_sorter-usage}
 
 
 
@@ -232,4 +207,3 @@ Designed as a value for file and generic sorter of 'telescope.nvim'.
     }
   })
   ```
-

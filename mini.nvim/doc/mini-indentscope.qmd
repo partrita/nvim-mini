@@ -1,153 +1,110 @@
 ---
-title: "mini.indentscope documentation"
+title: "mini.indentscope 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_mini.nvim의 'main' 브랜치에서 생성됨_
 
-<a name="mini.indentscope" href="mini-indentscope.qmd#mini.indentscope"><b>mini.indentscope</b></a> Visualize and work with indent scope
+<a name="mini.indentscope" href="mini-indentscope.qmd#mini.indentscope"><b>mini.indentscope</b></a> 들여쓰기 범위 시각화 및 작업
 
-MIT License Copyright (c) 2022 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2022 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Indent scope (or just "scope") is a maximum set of consecutive lines which
-contains certain reference line (cursor line by default) and every member
-has indent not less than certain reference indent ("indent at cursor" by
-default: minimum between cursor column and indent of cursor line).
+들여쓰기 범위(또는 간단히 "범위(scope)")는 특정 참조 라인(기본적으로 커서 라인)을 포함하고, 모든 멤버가 특정 참조 들여쓰기(기본적으로 "커서에서의 들여쓰기": 커서 열과 커서 라인의 들여쓰기 중 최소값) 이상의 들여쓰기를 갖는 최대 연속 라인 세트입니다.
 
-Features:
+주요 기능:
 
-- Visualize scope with animated vertical line. It is very fast and done
-  automatically in a non-blocking way (other operations can be performed,
-  like moving cursor). You can customize debounce delay and animation rule.
+- 애니메이션 수직선으로 범위를 시각화합니다. 매우 빠르며 논-블로킹(non-blocking) 방식으로 자동으로 수행됩니다 (커서 이동과 같은 다른 작업을 수행할 수 있음). 디바운스(debounce) 지연 시간과 애니메이션 규칙을 사용자 정의할 수 있습니다.
 
 
-- Customization of scope computation options can be done on global level
-  (in [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config)), for a certain buffer (using
-  `vim.b.miniindentscope_config` buffer variable), or within a call (using
-  `opts` variable in [MiniIndentscope.get\_scope()](mini-indentscope.qmd#miniindentscope.get_scope)).
+- 범위 계산 옵션의 사용자 정의는 전역 레벨([MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config)), 특정 버퍼(`vim.b.miniindentscope_config` 버퍼 변수 사용), 또는 호출 내([MiniIndentscope.get\_scope()](mini-indentscope.qmd#miniindentscope.get_scope)의 `opts` 변수 사용)에서 수행할 수 있습니다.
 
 
-- Customizable notion of a border: which adjacent lines with strictly lower
-  indent are recognized as such. This is useful for a certain filetypes
-  (for example, Python or plain text).
+- 테두리(border)에 대한 사용자 정의 가능한 개념: 들여쓰기가 엄격하게 낮은 인접 라인 중 어느 라인을 테두리로 인식할지 결정합니다. 이는 특정 파일 유형(예: Python 또는 일반 텍스트)에 유용합니다.
 
 
-- Customizable way of line to be considered "border first". This is useful
-  if you want to place cursor on function header and get scope of its body.
+- 라인을 "테두리 우선(border first)"으로 간주하는 사용자 정의 가능한 방법. 함수 헤더에 커서를 놓고 그 본문의 범위를 가져오고 싶을 때 유용합니다.
 
 
-- There are textobjects and motions to operate on scope. Support [count](https://neovim.io/doc/user/helptag.html?tag=count)
-  and dot-repeat (in operator pending mode).
+- 범위에서 작동하는 텍스트 오브젝트(textobjects)와 동작(motions)을 제공합니다. [개수(count)](https://neovim.io/doc/user/helptag.html?tag=count)와 점 반복(operator pending 모드에서)을 지원합니다.
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.indentscope').setup({})`
-(replace `{}` with your `config` table). It will create global Lua table
-`MiniIndentscope` which you can use for scripting or manually (with `:lua
-MiniIndentscope.*`).
+이 모듈은 `require('mini.indentscope').setup({})`으로 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 스크립팅이나 수동으로 사용할 수 있는 글로벌 Lua 테이블 `MiniIndentscope`를 생성합니다 (`:lua MiniIndentscope.*` 사용).
 
-See [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config) for available config settings.
+사용 가능한 구성 설정은 [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config)를 참조하세요.
 
-You can override runtime config settings locally to buffer inside
-`vim.b.miniindentscope_config` which should have same structure as
-`MiniIndentscope.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more
-details.
+런타임 구성 설정을 `vim.b.miniindentscope_config` 내부의 버퍼에 로컬로 재정의할 수 있으며, 이는 `MiniIndentscope.config`와 동일한 구조여야 합니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim):
 
-    - Its main functionality is about showing static guides of indent levels.
+    - 주요 기능은 들여쓰기 레벨의 정적 가이드를 표시하는 것입니다.
 
-    - Implementation of 'mini.indentscope' is similar to
-      'indent-blankline.nvim' (using [extmarks](https://neovim.io/doc/user/helptag.html?tag=extmarks) on first column to be shown
-      even on blank lines). They can be used simultaneously, but it will
-      lead to one of the visualizations being on top (hiding) of another.
+    - 'mini.indentscope'의 구현은 'indent-blankline.nvim'과 유사합니다 (빈 라인에서도 표시되도록 첫 번째 열에 [extmarks](https://neovim.io/doc/user/helptag.html?tag=extmarks)를 사용함). 동시에 사용할 수 있지만, 시각화 중 하나가 다른 하나 위에 표시(가려짐)될 수 있습니다.
 
-#### Highlight groups {#module-highlightgroups}
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
 
-- `MiniIndentscopeSymbol` - symbol showing on every line of scope if its
-  indent is multiple of 'shiftwidth'.
+- `MiniIndentscopeSymbol` - 들여쓰기가 'shiftwidth'의 배수인 경우 범위의 모든 라인에 표시되는 심볼.
 
-- `MiniIndentscopeSymbolOff` - symbol showing on every line of scope if its
-  indent is not multiple of 'shiftwidth'.
-  Default: links to `MiniIndentscopeSymbol`.
+- `MiniIndentscopeSymbolOff` - 들여쓰기가 'shiftwidth'의 배수가 아닌 경우 범위의 모든 라인에 표시되는 심볼. 기본값: `MiniIndentscopeSymbol`에 링크됨.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable autodrawing, set `vim.g.miniindentscope_disable` (globally) or
-`vim.b.miniindentscope_disable` (for a buffer) to `true`. Considering high
-number of different scenarios and customization intentions, writing exact
-rules for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+자동 그리기를 비활성화하려면 `vim.g.miniindentscope_disable`(전역) 또는 `vim.b.miniindentscope_disable`(버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 레시피는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
-### Drawing {#miniindentscope-drawing .help-syntax-right-anchor}
+### 그리기 {#miniindentscope-drawing .help-syntax-right-anchor}
 
-Draw of scope indicator is done as iterative animation. It has the
-following design:
+범위 지표 그리기는 반복적인 애니메이션으로 수행됩니다. 다음과 같은 설계로 되어 있습니다:
 
-- Draw indicator on origin line (where cursor is at) immediately. Indicator
-  is visualized as `MiniIndentscope.config.symbol` placed to the right of
-  scope's border indent. This creates a line from top to bottom scope edges.
+- 오리진 라인(커서가 있는 곳)에 지표를 즉시 그립니다. 지표는 범위의 테두리 들여쓰기 오른쪽에 배치된 `MiniIndentscope.config.symbol`로 시각화됩니다. 이는 상단에서 하단 범위 가장자리까지의 선을 만듭니다.
 
-- Draw upward and downward concurrently per one line. Progression by one
-  line in both direction is considered to be one step of animation.
+- 한 라인당 위쪽과 아래쪽으로 동시에 그립니다. 양방향으로 한 라인씩 진행되는 것을 애니메이션의 한 단계(step)로 간주합니다.
 
-- Before each step wait certain amount of time, which is decided by
-  "animation function". It takes next and total step numbers (both are one
-  or bigger) and returns number of milliseconds to wait before drawing next
-  step. Comparing to a more popular "easing functions" in animation (input:
-  duration since animation start; output: percent of animation done), it is
-  a discrete inverse version of its derivative. Such interface proved to be
-  more appropriate for kind of task at hand.
+- 각 단계 전에 "애니메이션 함수"에 의해 결정된 일정 시간 동안 기다립니다. 이 함수는 다음 및 전체 단계 번호(둘 다 1 이상)를 가져와 다음 단계를 그리기 전까지 기다릴 밀리초를 반환합니다. 애니메이션에서 더 일반적인 "이징 함수(easing functions)"(입력: 애니메이션 시작 후 경과 시간, 출력: 완료된 애니메이션 비율)와 비교할 때, 이는 파생된 이산 역버전입니다. 이러한 인터페이스는 당면한 작업 종류에 더 적절한 것으로 입증되었습니다.
 
-#### Special cases {#miniindentscope-drawing-specialcases}
+#### 특별한 경우 {#miniindentscope-drawing-specialcases}
 
 
 
-- When scope to be drawn intersects (same indent, ranges overlap) currently
-  visible one (at process or finished drawing), drawing is done immediately
-  without animation. With most common example being typing new text, this
-  feels more natural.
+- 그려질 범위가 현재 보이는 범위(그리는 중이거나 완료된 범위)와 교차(동일한 들여쓰기, 범위 겹침)하는 경우, 애니메이션 없이 즉시 그리기가 수행됩니다. 가장 흔한 예인 새 텍스트 입력의 경우, 이것이 더 자연스럽게 느껴집니다.
 
-- Scope for the whole buffer is not drawn as it is isually redundant.
-  Technically, it can be thought as drawn at column 0 (because border
-  indent is -1) which is not visible.
+- 버퍼 전체의 범위는 일반적으로 불필요하므로 그리지 않습니다. 기술적으로는 (테두리 들여쓰기가 -1이므로) 보이지 않는 0번 열에 그려진 것으로 생각할 수 있습니다.
 
 ---
 
 ### setup() {#miniindentscope.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#miniindentscope.setup-parameters}
+#### 매개변수 {#miniindentscope.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 구성 테이블. [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config)를 참조하세요.
 
-#### Usage {#miniindentscope.setup-usage}
+#### 사용법 {#miniindentscope.setup-usage}
 
 
 
   ```lua
-  require('mini.indentscope').setup() -- use default config
-  -- OR
-  require('mini.indentscope').setup({}) -- replace {} with your config table
+  require('mini.indentscope').setup() -- 기본 구성 사용
+  -- 또는
+  require('mini.indentscope').setup({}) -- {}를 사용자 구성 테이블로 교체
   ```
 
 ---
@@ -155,78 +112,74 @@ Module setup
 ### config {#miniindentscope.config .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.config`</p>
-#### Defaults {#miniindentscope.config-defaults}
+#### 기본값 {#miniindentscope.config-defaults}
 
 
 
   ```lua
   MiniIndentscope.config = {
-    -- Draw options
+    -- 그리기 옵션
     draw = {
-      -- Delay (in ms) between event and start of drawing scope indicator
+      -- 이벤트와 범위 지표 그리기 시작 사이의 지연 시간 (ms)
       delay = 100,
 
-      -- Animation rule for scope's first drawing. A function which, given
-      -- next and total step numbers, returns wait time (in ms). See
-      -- |MiniIndentscope.gen_animation| for builtin options. To disable
-      -- animation, use `require('mini.indentscope').gen_animation.none()`.
-      animation = --<function: implements constant 20ms between steps>,
+      -- 범위의 첫 번째 그리기에 대한 애니메이션 규칙.
+      -- 다음 및 전체 단계 번호가 주어지면 대기 시간(ms)을 반환하는 함수입니다.
+      -- 내장 옵션은 |MiniIndentscope.gen_animation|을 참조하세요.
+      -- 애니메이션을 비활성화하려면 `require('mini.indentscope').gen_animation.none()`을 사용하세요.
+      animation = --<function: 단계 사이의 상수를 20ms로 구현함>,
 
-      -- Whether to auto draw scope: return `true` to draw, `false` otherwise.
-      -- Default draws only fully computed scope (see `options.n_lines`).
+      -- 범위 자동 그리기 여부: 그리려면 `true`, 그렇지 않으면 `false` 반환.
+      -- 기본값은 완전히 계산된 범위만 그립니다 (`options.n_lines` 참조).
       predicate = function(scope) return not scope.body.is_incomplete end,
 
-      -- Symbol priority. Increase to display on top of more symbols.
+      -- 심볼 우선순위. 더 많은 심볼 위에 표시하려면 높이세요.
       priority = 2,
     },
 
-    -- Module mappings. Use `''` (empty string) to disable one.
+    -- 모듈 매핑. 비활성화하려면 `''` (빈 문자열)을 사용하세요.
     mappings = {
-      -- Textobjects
+      -- 텍스트 오브젝트
       object_scope = 'ii',
       object_scope_with_border = 'ai',
 
-      -- Motions (jump to respective border line; if not present - body line)
+      -- 동작 (해당 테두리 라인으로 점프; 없는 경우 본문 라인)
       goto_top = '[i',
       goto_bottom = ']i',
     },
 
-    -- Options which control scope computation
+    -- 범위 계산을 제어하는 옵션
     options = {
-      -- Type of scope's border: which line(s) with smaller indent to
-      -- categorize as border. Can be one of: 'both', 'top', 'bottom', 'none'.
+      -- 범위의 테두리 유형: 더 작은 들여쓰기를 가진 어느 라인을 테두리로 분류할지 결정합니다.
+      -- 'both', 'top', 'bottom', 'none' 중 하나일 수 있습니다.
       border = 'both',
 
-      -- Whether to use cursor column when computing reference indent.
-      -- Useful to see incremental scopes with horizontal cursor movements.
+      -- 참조 들여쓰기를 계산할 때 커서 열을 사용할지 여부.
+      -- 가로 커서 이동에 따른 점진적인 범위를 보는 데 유용합니다.
       indent_at_cursor = true,
 
-      -- Maximum number of lines above or below within which scope is computed
+      -- 범위가 계산되는 상하 최대 라인 수
       n_lines = 10000,
 
-      -- Whether to first check input line to be a border of adjacent scope.
-      -- Use it if you want to place cursor on function header to get scope of
-      -- its body.
+      -- 입력 라인이 인접한 범위의 테두리인지 먼저 확인할지 여부.
+      -- 함수 헤더에 커서를 놓고 그 본문의 범위를 가져오고 싶을 때 사용하세요.
       try_as_border = false,
     },
 
-    -- Which character to use for drawing scope indicator
+    -- 범위 지표를 그리는 데 사용할 문자
     symbol = '╎',
   }
   ```
 
-#### Options {#miniindentscope.config-options}
+#### 옵션 {#miniindentscope.config-options}
 
 
-##### Border {#miniindentscope.config-options-border}
+##### 테두리 {#miniindentscope.config-options-border}
 
 
-Field `border` controls which line(s) with smaller indent to categorize
-as border. This matters for textobjects and motions.
-It also controls how empty lines are treated: they are included in scope
-only if followed by a border. Another way of looking at it is that indent
-of blank line is computed based on value of `border` option.
-Here is an illustration of how `border` works in presence of empty lines:
+`border` 필드는 더 작은 들여쓰기를 가진 어느 라인을 테두리로 분류할지 제어합니다. 이는 텍스트 오브젝트와 동작에 중요합니다.
+또한 빈 라인이 처리되는 방식도 제어합니다: 테두리가 뒤따르는 경우에만 범위에 포함됩니다. 이를 보는 또 다른 방법은 빈 라인의 들여쓰기가 `border` 옵션 값에 따라 계산된다는 것입니다.
+다음은 빈 라인이 있을 때 `border`가 어떻게 작동하는지에 대한 그림입니다:
 
   ```
                              |both|bottom|top|none|
@@ -237,417 +190,332 @@ Here is an illustration of how `border` works in presence of empty lines:
   5|  end                    | 2  |  2   | 2 | 2  |
   ```
 
-Numbers inside a table are indent values of a line computed with certain
-value of `border`. So, for example, a scope with reference line 3 and
-right-most column has body range depending on value of `border` option:
+테이블 내부의 숫자는 특정 `border` 값으로 계산된 라인의 들여쓰기 값입니다. 따라서 예를 들어 참조 라인 3과 가장 오른쪽 열을 가진 범위는 `border` 옵션 값에 따라 본문 범위가 달라집니다:
 
-- `border` is "both":   range is 2-4, border is 1 and 5 with indent 2.
+- `border`가 "both"인 경우: 범위는 2-4, 테두리는 1과 5(들여쓰기 2)입니다.
 
-- `border` is "top":    range is 2-3, border is 1 with indent 0.
+- `border`가 "top"인 경우: 범위는 2-3, 테두리는 1(들여쓰기 0)입니다.
 
-- `border` is "bottom": range is 3-4, border is 5 with indent 0.
+- `border`가 "bottom"인 경우: 범위는 3-4, 테두리는 5(들여쓰기 0)입니다.
 
-- `border` is "none":   range is 3-3, border is empty with indent `nil`.
+- `border`가 "none"인 경우: 범위는 3-3, 테두리는 비어 있음(들여쓰기 `nil`)입니다.
 
-##### Indent at cursor {#miniindentscope.config-options-indentatcursor}
+##### 커서에서의 들여쓰기 {#miniindentscope.config-options-indentatcursor}
 
 
-Field `indent_at_cursor` controls if cursor position should affect computation
-of scope. If `true`, reference indent is a minimum of reference line's indent
-and cursor column. In main example, here how scope's body range differs
-depending on cursor column and `indent_at_cursor` value (assuming cursor is
-on line 3 and it is whole buffer):
+`indent_at_cursor` 필드는 커서 위치가 범위 계산에 영향을 미쳐야 하는지 제어합니다. `true`인 경우 참조 들여쓰기는 참조 라인의 들여쓰기와 커서 열 중 최소값입니다. 주요 예시에서 커서 열과 `indent_at_cursor` 값에 따라 범위의 본문 범위가 어떻게 달라지는지는 다음과 같습니다 (커서가 3행에 있고 버퍼 전체라고 가정):
 
   ```
-  Column\Option true|false
-     1 and 2    2-5 | 2-4
-   3 and more   2-4 | 2-4
+  열\옵션     true|false
+   1 및 2    2-5 | 2-4
+  3 및 그 이상 2-4 | 2-4
   ```
 
-##### Number of lines {#miniindentscope.config-options-numberoflines}
+##### 라인 수 {#miniindentscope.config-options-numberoflines}
 
 
-Field `n_lines` defines [MiniIndentscope.get\_scope()](mini-indentscope.qmd#miniindentscope.get_scope) behavior for how many
-lines above/below to check before iteration is stopped. Scope that reached
-computation limit has <span class="help-syntax-keys">\<is_incomplete\></span> field set to `true`. It will also not
-be auto drawn with default `config.draw.predicate`.
+`n_lines` 필드는 반복이 중지되기 전까지 위/아래로 몇 라인을 확인할지에 대한 [MiniIndentscope.get\_scope()](mini-indentscope.qmd#miniindentscope.get_scope) 동작을 정의합니다. 계산 제한에 도달한 범위는 <span class="help-syntax-keys">\<is_incomplete\></span> 필드가 `true`로 설정됩니다. 또한 기본 `config.draw.predicate`로 자동 그려지지 않습니다.
 
-Lower values will result in better overall performance in exchange for more
-frequent incomplete scope computation. Set to `math.huge` for no restriction.
+값이 낮을수록 전체적인 성능은 좋아지지만 불완전한 범위 계산이 더 자주 발생합니다. 제한을 두지 않으려면 `math.huge`로 설정하세요.
 
-##### Try as border {#miniindentscope.config-options-tryasborder}
+##### 테두리로 시도 {#miniindentscope.config-options-tryasborder}
 
 
-Field `try_as_border` controls how to act when input line can be recognized
-as a border of some neighbor indent scope. In main example, when input line
-is 1 and can be recognized as border for inner scope, value `try_as_border=true`
-means that inner scope will be returned. Similar, for input line 5 inner scope
-will be returned if it is recognized as border.
+`try_as_border` 필드는 입력 라인이 일부 인접한 들여쓰기 범위의 테두리로 인식될 수 있을 때 어떻게 행동할지 제어합니다. 주요 예시에서 입력 라인이 1이고 내부 범위의 테두리로 인식될 수 있을 때, `try_as_border=true` 값은 내부 범위가 반환됨을 의미합니다. 마찬가지로 입력 라인 5가 테두리로 인식되면 내부 범위가 반환됩니다.
 
 ---
 
 ### get_scope() {#miniindentscope.get_scope .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.get_scope`(<span class="help-syntax-special">{line}</span>, <span class="help-syntax-special">{col}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Compute indent scope
+들여쓰기 범위 계산
 
-Indent scope (or just "scope") is a maximum set of consecutive lines which
-contains certain reference line (cursor line by default) and every member
-has indent not less than certain reference indent ("indent at column" by
-default). Here "indent at column" means minimum between input column value
-and indent of reference line. When using cursor column, this allows for a
-useful interactive view of nested indent scopes by making horizontal
-movements within line.
+들여쓰기 범위(또는 간단히 "범위")는 특정 참조 라인(기본적으로 커서 라인)을 포함하고, 모든 멤버가 특정 참조 들여쓰기(기본적으로 "열에서의 들여쓰기") 이상의 들여쓰기를 갖는 최대 연속 라인 세트입니다. 여기서 "열에서의 들여쓰기"는 입력 열 값과 참조 라인의 들여쓰기 중 최소값을 의미합니다. 커서 열을 사용할 때, 이는 라인 내에서 가로 이동을 함으로써 중첩된 들여쓰기 범위에 대한 유용한 대화형 뷰를 가능하게 합니다.
 
-Options controlling actual computation is taken from these places in order:
+실제 계산을 제어하는 옵션은 다음 순서대로 가져옵니다:
 
-- Argument `opts`. Use it to ensure independence from other sources.
+- 인수 `opts`. 다른 소스로부터의 독립성을 보장하기 위해 사용하세요.
 
-- Buffer local variable `vim.b.miniindentscope_config` (`options` field).
-  Useful to define local behavior (for example, for a certain filetype).
+- 버퍼 로컬 변수 `vim.b.miniindentscope_config` (`options` 필드). 로컬 동작을 정의하는 데 유용합니다 (예: 특정 파일 유형의 경우).
 
-- Global options from [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config).
+- [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config)의 전역 옵션.
 
-#### Algorithm overview {#miniindentscope.get_scope-algorithmoverview}
+#### 알고리즘 개요 {#miniindentscope.get_scope-algorithmoverview}
 
 
 
-- Compute reference "indent at column". Reference line is an input `line`
-  which might be modified to one of its neighbors if `try_as_border` option
-  is `true`: if it can be viewed as border of some neighbor scope, it will.
+- 참조 "열에서의 들여쓰기"를 계산합니다. 참조 라인은 입력 `line`이며, `try_as_border` 옵션이 `true`인 경우 인접한 라인 중 하나로 수정될 수 있습니다 (인접한 범위의 테두리로 보일 수 있는 경우 그렇게 됩니다).
 
-- Process upwards and downwards from reference line searching for line with
-  indent strictly less than reference one. This is like casting rays up and
-  down from reference line and reference indent until meeting "a wall"
-  (character to the right of indent or buffer edge). Latest line before
-  meeting a wall is a respective end of scope body. It always exists because
-  reference line is a such one.
-  Casting ray is forced to stop if it goes over `opts.n_lines` lines.
+- 참조 라인에서 위쪽과 아래쪽으로 진행하며 참조 들여쓰기보다 엄격하게 작은 들여쓰기를 가진 라인을 검색합니다. 이는 "벽"(들여쓰기 오른쪽 문자 또는 버퍼 가장자리)을 만날 때까지 참조 라인과 참조 들여쓰기에서 위아래로 광선을 쏘는 것과 같습니다. 벽을 만나기 전의 마지막 라인이 각각의 범위 본문의 끝입니다. 참조 라인이 그러한 라인이므로 항상 존재합니다. 광선 쏘기는 `opts.n_lines` 라인을 넘어가면 강제로 중지됩니다.
 
-- Based on top and bottom lines with strictly lower indent, construct
-  scopes's border. The way it is computed is decided based on `border`
-  option (see [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config) for more information).
+- 엄격하게 낮은 들여쓰기를 가진 상단 및 하단 라인을 기반으로 범위의 테두리를 구성합니다. 계산 방식은 `border` 옵션에 따라 결정됩니다 (자세한 내용은 [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config) 참조).
 
-- Compute border indent as maximum indent of border lines (or reference
-  indent minus one in case of no border). This is used during drawing
-  visual indicator.
+- 테두리 라인의 최대 들여쓰기(테두리가 없는 경우 참조 들여쓰기 마이너스 1)로 테두리 들여쓰기를 계산합니다. 이는 시각적 지표를 그리는 동안 사용됩니다.
 
-#### Indent computation {#miniindentscope.get_scope-indentcomputation}
+#### 들여쓰기 계산 {#miniindentscope.get_scope-indentcomputation}
 
 
-For every line indent is intended to be computed unambiguously:
+모든 라인에 대해 들여쓰기가 명확하게 계산되도록 되어 있습니다:
 
-- For "normal" lines indent is an output of [indent()](https://neovim.io/doc/user/helptag.html?tag=indent\(\)).
+- "일반" 라인의 들여쓰기는 [indent()](https://neovim.io/doc/user/helptag.html?tag=indent\(\))의 출력입니다.
 
-- Indent is `-1` for imaginary lines 0 and past last line.
+- 가상의 0번 라인과 마지막 라인 이후의 들여쓰기는 `-1`입니다.
 
-- For blank and empty lines indent is computed based on previous
-  ([prevnonblank()](https://neovim.io/doc/user/helptag.html?tag=prevnonblank\(\))) and next ([nextnonblank()](https://neovim.io/doc/user/helptag.html?tag=nextnonblank\(\))) non-blank lines. The way
-  it is computed is decided based on `border` in order to not include blank
-  lines at edge of scope's body if there is no border there. See
-  [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config) for a details example.
+- 빈 라인과 공백 라인의 들여쓰기는 이전([prevnonblank()](https://neovim.io/doc/user/helptag.html?tag=prevnonblank\(\))) 및 다음([nextnonblank()](https://neovim.io/doc/user/helptag.html?tag=nextnonblank\(\))) 비공백 라인을 기반으로 계산됩니다. 계산 방식은 테두리가 없는 경우 범위 본문의 가장자리에 빈 라인을 포함하지 않기 위해 `border`를 기반으로 결정됩니다. 자세한 예시는 [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config)를 참조하세요.
 
-#### Parameters {#miniindentscope.get_scope-parameters}
+#### 매개변수 {#miniindentscope.get_scope-parameters}
 
 
 
-<span class="help-syntax-special">{line}</span> `(number|nil)` Input line number (starts from 1). Can be modified to a
-  neighbor if `try_as_border` is `true`. Default: cursor line.
+<span class="help-syntax-special">{line}</span> `(number|nil)` 입력 라인 번호 (1부터 시작). `try_as_border`가 `true`인 경우 인접한 라인으로 수정될 수 있습니다. 기본값: 커서 라인.
 
-<span class="help-syntax-special">{col}</span> `(number|nil)` Column number (starts from 1). Default: if
-  `indent_at_cursor` option is `true` - cursor column from `curswant` of
-  [getcurpos()](https://neovim.io/doc/user/helptag.html?tag=getcurpos\(\)) (allows for more natural behavior on empty lines);
-  `math.huge` otherwise in order to not incorporate cursor in computation.
+<span class="help-syntax-special">{col}</span> `(number|nil)` 열 번호 (1부터 시작). 기본값: `indent_at_cursor` 옵션이 `true`인 경우 [getcurpos()](https://neovim.io/doc/user/helptag.html?tag=getcurpos\(\))의 `curswant`에서 가져온 커서 열 (빈 라인에서 더 자연스러운 동작을 가능하게 함), 그렇지 않으면 계산에 커서를 포함하지 않기 위해 `math.huge`.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options to override global or buffer local ones (see
-  [MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config)).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 전역 또는 버퍼 로컬 옵션을 재정의할 옵션 ([MiniIndentscope.config](mini-indentscope.qmd#miniindentscope.config) 참조).
 
-#### Return {#miniindentscope.get_scope-return}
+#### 반환 {#miniindentscope.get_scope-return}
 
 
-`(table)` Table with scope information:
+`(table)` 범위 정보가 포함된 테이블:
 
-  - <span class="help-syntax-keys">\<body\></span> - table with <span class="help-syntax-keys">\<top\></span> (top line of scope, inclusive), <span class="help-syntax-keys">\<bottom\></span>
-    (bottom line of scope, inclusive), and <span class="help-syntax-keys">\<indent\></span> (minimum indent within
-    scope) keys. Line numbers start at 1. Can also have <span class="help-syntax-keys">\<is_incomplete\></span> key
-    set to `true` if computation was stopped due to `opts.n_lines` restriction.
+  - <span class="help-syntax-keys">\<body\></span> - <span class="help-syntax-keys">\<top\></span> (범위의 상단 라인, 포함), <span class="help-syntax-keys">\<bottom\></span> (범위의 하단 라인, 포함), 그리고 <span class="help-syntax-keys">\<indent\></span> (범위 내의 최소 들여쓰기) 키가 포함된 테이블. 라인 번호는 1부터 시작합니다. `opts.n_lines` 제한으로 인해 계산이 중지된 경우 `true`로 설정된 <span class="help-syntax-keys">\<is_incomplete\></span> 키를 가질 수도 있습니다.
 
-  - <span class="help-syntax-keys">\<border\></span> - table with <span class="help-syntax-keys">\<top\></span> (line of top border, might be `nil`),
-    <span class="help-syntax-keys">\<bottom\></span> (line of bottom border, might be `nil`), and <span class="help-syntax-keys">\<indent\></span> (indent
-    of border) keys. Line numbers start at 1.
+  - <span class="help-syntax-keys">\<border\></span> - <span class="help-syntax-keys">\<top\></span> (상단 테두리 라인, `nil`일 수 있음), <span class="help-syntax-keys">\<bottom\></span> (하단 테두리 라인, `nil`일 수 있음), 그리고 <span class="help-syntax-keys">\<indent\></span> (테두리의 들여쓰기) 키가 포함된 테이블. 라인 번호는 1부터 시작합니다.
 
-  - <span class="help-syntax-keys">\<buf_id\></span> - identifier of current buffer.
+  - <span class="help-syntax-keys">\<buf_id\></span> - 현재 버퍼의 식별자.
 
-  - <span class="help-syntax-keys">\<reference\></span> - table with <span class="help-syntax-keys">\<line\></span> (reference line), <span class="help-syntax-keys">\<column\></span> (reference
-    column), and <span class="help-syntax-keys">\<indent\></span> ("indent at column") keys.
+  - <span class="help-syntax-keys">\<reference\></span> - <span class="help-syntax-keys">\<line\></span> (참조 라인), <span class="help-syntax-keys">\<column\></span> (참조 열), 그리고 <span class="help-syntax-keys">\<indent\></span> ("열에서의 들여쓰기") 키가 포함된 테이블.
 
 ---
 
 ### draw() {#miniindentscope.draw .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.draw`(<span class="help-syntax-special">{scope}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Draw scope manually
+수동으로 범위 그리기
 
-Scope is visualized as a vertical line within scope's body range at column
-equal to border indent plus one (or body indent if border is absent).
-Numbering starts from one.
+범위는 범위 본문 범위 내에서 테두리 들여쓰기 더하기 1(또는 테두리가 없는 경우 본문 들여쓰기)과 같은 열에 수직선으로 시각화됩니다. 번호 매기기는 1부터 시작합니다.
 
-#### Parameters {#miniindentscope.draw-parameters}
+#### 매개변수 {#miniindentscope.draw-parameters}
 
 
 
-<span class="help-syntax-special">{scope}</span> `(table|nil)` Scope. Default: output of [MiniIndentscope.get\_scope()](mini-indentscope.qmd#miniindentscope.get_scope)
-  with default arguments.
+<span class="help-syntax-special">{scope}</span> `(table|nil)` 범위. 기본값: 기본 인수를 사용한 [MiniIndentscope.get\_scope()](mini-indentscope.qmd#miniindentscope.get_scope)의 출력.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Currently supported:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 현재 지원되는 항목:
 
-   - <span class="help-syntax-keys">\<animation_fun\></span> - animation function for drawing. See
-     [MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing) and [MiniIndentscope.gen\_animation](mini-indentscope.qmd#miniindentscope.gen_animation).
+   - <span class="help-syntax-keys">\<animation_fun\></span> - 그리기를 위한 애니메이션 함수. [MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing) 및 [MiniIndentscope.gen\_animation](mini-indentscope.qmd#miniindentscope.gen_animation)을 참조하세요.
 
-   - <span class="help-syntax-keys">\<priority\></span> - priority number for visualization. See `priority` option
-     for [nvim\_buf\_set\_extmark()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_extmark\(\)).
+   - <span class="help-syntax-keys">\<priority\></span> - 시각화를 위한 우선순위 번호. [nvim\_buf\_set\_extmark()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_extmark\(\))의 `priority` 옵션을 참조하세요.
 
 ---
 
 ### undraw() {#miniindentscope.undraw .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.undraw`()</p>
-Undraw currently visible scope manually
+현재 표시된 범위를 수동으로 지우기
 
 ---
 
 ### gen_animation {#miniindentscope.gen_animation .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.gen_animation`</p>
-Generate builtin animation function
+내장 애니메이션 함수 생성
 
-This is a builtin source to generate animation function for usage in
-`MiniIndentscope.config.draw.animation`. Most of them are variations of
-common easing functions, which provide certain type of progression for
-revealing scope visual indicator.
+이것은 `MiniIndentscope.config.draw.animation`에서 사용할 애니메이션 함수를 생성하는 내장 소스입니다. 대부분은 범위 시각적 지표를 표시하기 위해 특정 유형의 진행을 제공하는 일반적인 이징 함수의 변형입니다.
 
-Each field corresponds to one family of progression which can be customized
-further by supplying appropriate arguments.
+각 필드는 적절한 인수를 제공하여 추가로 사용자 정의할 수 있는 하나의 진행 패밀리에 해당합니다.
 
-Examples:
+예시:
 
-- Don't use animation: `MiniIndentscope.gen_animation.none()`
+- 애니메이션 사용 안 함: `MiniIndentscope.gen_animation.none()`
 
-- Use quadratic "out" easing with total duration of 1000 ms:
+- 총 지속 시간이 1000ms인 이차(quadratic) "out" 이징 사용:
 
   ```lua
   gen_animation.quadratic({ easing = 'out', duration = 1000, unit = 'total' })
   ```
 
-#### See also {#miniindentscope.gen_animation-seealso}
+#### 참고 항목 {#miniindentscope.gen_animation-seealso}
 
 
-[MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing) for more information about how drawing is done.
+그리기가 어떻게 수행되는지에 대한 자세한 내용은 [MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing)을 참조하세요.
 
 ---
 
 ### gen_animation.none() {#miniindentscope.gen_animation.none .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.gen_animation.none`()</p>
-Generate no animation
+애니메이션 생성 안 함
 
-Show indicator immediately. Same as animation function always returning 0.
+지표를 즉시 표시합니다. 항상 0을 반환하는 애니메이션 함수와 동일합니다.
 
 ---
 
 ### gen_animation.linear() {#miniindentscope.gen_animation.linear .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.gen_animation.linear`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate linear progression
+선형 진행 생성
 
-#### Parameters {#miniindentscope.gen_animation.linear-parameters}
-
-
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options that control progression. Possible keys:
-
-  - <span class="help-syntax-keys">\<easing\></span> `(string)` - a subtype of progression. One of "in"
-    (accelerating from zero speed), "out" (decelerating to zero speed),
-    "in-out" (default; accelerating halfway, decelerating after).
-
-  - <span class="help-syntax-keys">\<duration\></span> `(number)` - duration (in ms) of a unit. Default: 20.
-
-  - <span class="help-syntax-keys">\<unit\></span> `(string)` - which unit's duration `opts.duration` controls. One
-    of "step" (default; ensures average duration of step to be `opts.duration`)
-    or "total" (ensures fixed total duration regardless of scope's range).
-
-#### Return {#miniindentscope.gen_animation.linear-return}
+#### 매개변수 {#miniindentscope.gen_animation.linear-parameters}
 
 
-`(function)` Animation function (see [MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing)).
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 진행을 제어하는 옵션. 가능한 키:
+
+  - <span class="help-syntax-keys">\<easing\></span> `(string)` - 진행의 하위 유형. "in"(속도 0에서 가속), "out"(속도 0으로 감속), "in-out"(기본값; 절반까지 가속, 그 후 감속) 중 하나.
+
+  - <span class="help-syntax-keys">\<duration\></span> `(number)` - 단위의 지속 시간 (ms). 기본값: 20.
+
+  - <span class="help-syntax-keys">\<unit\></span> `(string)` - `opts.duration`이 제어하는 단위의 지속 시간. "step"(기본값; 단계의 평균 지속 시간이 `opts.duration`이 되도록 보장) 또는 "total"(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.
+
+#### 반환 {#miniindentscope.gen_animation.linear-return}
+
+
+`(function)` 애니메이션 함수 ([MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing) 참조).
 
 ---
 
 ### gen_animation.quadratic() {#miniindentscope.gen_animation.quadratic .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.gen_animation.quadratic`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate quadratic progression
+이차 진행 생성
 
-#### Parameters {#miniindentscope.gen_animation.quadratic-parameters}
-
-
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options that control progression. Possible keys:
-
-  - <span class="help-syntax-keys">\<easing\></span> `(string)` - a subtype of progression. One of "in"
-    (accelerating from zero speed), "out" (decelerating to zero speed),
-    "in-out" (default; accelerating halfway, decelerating after).
-
-  - <span class="help-syntax-keys">\<duration\></span> `(number)` - duration (in ms) of a unit. Default: 20.
-
-  - <span class="help-syntax-keys">\<unit\></span> `(string)` - which unit's duration `opts.duration` controls. One
-    of "step" (default; ensures average duration of step to be `opts.duration`)
-    or "total" (ensures fixed total duration regardless of scope's range).
-
-#### Return {#miniindentscope.gen_animation.quadratic-return}
+#### 매개변수 {#miniindentscope.gen_animation.quadratic-parameters}
 
 
-`(function)` Animation function (see [MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing)).
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 진행을 제어하는 옵션. 가능한 키:
+
+  - <span class="help-syntax-keys">\<easing\></span> `(string)` - 진행의 하위 유형. "in"(속도 0에서 가속), "out"(속도 0으로 감속), "in-out"(기본값; 절반까지 가속, 그 후 감속) 중 하나.
+
+  - <span class="help-syntax-keys">\<duration\></span> `(number)` - 단위의 지속 시간 (ms). 기본값: 20.
+
+  - <span class="help-syntax-keys">\<unit\></span> `(string)` - `opts.duration`이 제어하는 단위의 지속 시간. "step"(기본값; 단계의 평균 지속 시간이 `opts.duration`이 되도록 보장) 또는 "total"(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.
+
+#### 반환 {#miniindentscope.gen_animation.quadratic-return}
+
+
+`(function)` 애니메이션 함수 ([MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing) 참조).
 
 ---
 
 ### gen_animation.cubic() {#miniindentscope.gen_animation.cubic .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.gen_animation.cubic`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate cubic progression
+삼차 진행 생성
 
-#### Parameters {#miniindentscope.gen_animation.cubic-parameters}
-
-
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options that control progression. Possible keys:
-
-  - <span class="help-syntax-keys">\<easing\></span> `(string)` - a subtype of progression. One of "in"
-    (accelerating from zero speed), "out" (decelerating to zero speed),
-    "in-out" (default; accelerating halfway, decelerating after).
-
-  - <span class="help-syntax-keys">\<duration\></span> `(number)` - duration (in ms) of a unit. Default: 20.
-
-  - <span class="help-syntax-keys">\<unit\></span> `(string)` - which unit's duration `opts.duration` controls. One
-    of "step" (default; ensures average duration of step to be `opts.duration`)
-    or "total" (ensures fixed total duration regardless of scope's range).
-
-#### Return {#miniindentscope.gen_animation.cubic-return}
+#### 매개변수 {#miniindentscope.gen_animation.cubic-parameters}
 
 
-`(function)` Animation function (see [MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing)).
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 진행을 제어하는 옵션. 가능한 키:
+
+  - <span class="help-syntax-keys">\<easing\></span> `(string)` - 진행의 하위 유형. "in"(속도 0에서 가속), "out"(속도 0으로 감속), "in-out"(기본값; 절반까지 가속, 그 후 감속) 중 하나.
+
+  - <span class="help-syntax-keys">\<duration\></span> `(number)` - 단위의 지속 시간 (ms). 기본값: 20.
+
+  - <span class="help-syntax-keys">\<unit\></span> `(string)` - `opts.duration`이 제어하는 단위의 지속 시간. "step"(기본값; 단계의 평균 지속 시간이 `opts.duration`이 되도록 보장) 또는 "total"(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.
+
+#### 반환 {#miniindentscope.gen_animation.cubic-return}
+
+
+`(function)` 애니메이션 함수 ([MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing) 참조).
 
 ---
 
 ### gen_animation.quartic() {#miniindentscope.gen_animation.quartic .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.gen_animation.quartic`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate quartic progression
+사차 진행 생성
 
-#### Parameters {#miniindentscope.gen_animation.quartic-parameters}
-
-
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options that control progression. Possible keys:
-
-  - <span class="help-syntax-keys">\<easing\></span> `(string)` - a subtype of progression. One of "in"
-    (accelerating from zero speed), "out" (decelerating to zero speed),
-    "in-out" (default; accelerating halfway, decelerating after).
-
-  - <span class="help-syntax-keys">\<duration\></span> `(number)` - duration (in ms) of a unit. Default: 20.
-
-  - <span class="help-syntax-keys">\<unit\></span> `(string)` - which unit's duration `opts.duration` controls. One
-    of "step" (default; ensures average duration of step to be `opts.duration`)
-    or "total" (ensures fixed total duration regardless of scope's range).
-
-#### Return {#miniindentscope.gen_animation.quartic-return}
+#### 매개변수 {#miniindentscope.gen_animation.quartic-parameters}
 
 
-`(function)` Animation function (see [MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing)).
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 진행을 제어하는 옵션. 가능한 키:
+
+  - <span class="help-syntax-keys">\<easing\></span> `(string)` - 진행의 하위 유형. "in"(속도 0에서 가속), "out"(속도 0으로 감속), "in-out"(기본값; 절반까지 가속, 그 후 감속) 중 하나.
+
+  - <span class="help-syntax-keys">\<duration\></span> `(number)` - 단위의 지속 시간 (ms). 기본값: 20.
+
+  - <span class="help-syntax-keys">\<unit\></span> `(string)` - `opts.duration`이 제어하는 단위의 지속 시간. "step"(기본값; 단계의 평균 지속 시간이 `opts.duration`이 되도록 보장) 또는 "total"(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.
+
+#### 반환 {#miniindentscope.gen_animation.quartic-return}
+
+
+`(function)` 애니메이션 함수 ([MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing) 참조).
 
 ---
 
 ### gen_animation.exponential() {#miniindentscope.gen_animation.exponential .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.gen_animation.exponential`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate exponential progression
+지수 진행 생성
 
-#### Parameters {#miniindentscope.gen_animation.exponential-parameters}
-
-
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options that control progression. Possible keys:
-
-  - <span class="help-syntax-keys">\<easing\></span> `(string)` - a subtype of progression. One of "in"
-    (accelerating from zero speed), "out" (decelerating to zero speed),
-    "in-out" (default; accelerating halfway, decelerating after).
-
-  - <span class="help-syntax-keys">\<duration\></span> `(number)` - duration (in ms) of a unit. Default: 20.
-
-  - <span class="help-syntax-keys">\<unit\></span> `(string)` - which unit's duration `opts.duration` controls. One
-    of "step" (default; ensures average duration of step to be `opts.duration`)
-    or "total" (ensures fixed total duration regardless of scope's range).
-
-#### Return {#miniindentscope.gen_animation.exponential-return}
+#### 매개변수 {#miniindentscope.gen_animation.exponential-parameters}
 
 
-`(function)` Animation function (see [MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing)).
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 진행을 제어하는 옵션. 가능한 키:
+
+  - <span class="help-syntax-keys">\<easing\></span> `(string)` - 진행의 하위 유형. "in"(속도 0에서 가속), "out"(속도 0으로 감속), "in-out"(기본값; 절반까지 가속, 그 후 감속) 중 하나.
+
+  - <span class="help-syntax-keys">\<duration\></span> `(number)` - 단위의 지속 시간 (ms). 기본값: 20.
+
+  - <span class="help-syntax-keys">\<unit\></span> `(string)` - `opts.duration`이 제어하는 단위의 지속 시간. "step"(기본값; 단계의 평균 지속 시간이 `opts.duration`이 되도록 보장) 또는 "total"(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.
+
+#### 반환 {#miniindentscope.gen_animation.exponential-return}
+
+
+`(function)` 애니메이션 함수 ([MiniIndentscope-drawing](mini-indentscope.qmd#miniindentscope-drawing) 참조).
 
 ---
 
 ### move_cursor() {#miniindentscope.move_cursor .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.move_cursor`(<span class="help-syntax-special">{side}</span>, <span class="help-syntax-special">{use_border}</span>, <span class="help-syntax-special">{scope}</span>)</p>
-Move cursor within scope
+범위 내에서 커서 이동
 
-Cursor is placed on a first non-blank character of target line.
+커서는 대상 라인의 첫 번째 비공백 문자에 배치됩니다.
 
-#### Parameters {#miniindentscope.move_cursor-parameters}
+#### 매개변수 {#miniindentscope.move_cursor-parameters}
 
 
 
-<span class="help-syntax-special">{side}</span> `(string)` One of "top" or "bottom".
+<span class="help-syntax-special">{side}</span> `(string)` "top" 또는 "bottom" 중 하나.
 
-<span class="help-syntax-special">{use_border}</span> `(boolean|nil)` Whether to move to border or within scope's body.
-  If particular border is absent, body is used.
+<span class="help-syntax-special">{use_border}</span> `(boolean|nil)` 테두리로 이동할지 아니면 범위 본문 내로 이동할지 여부. 특정 테두리가 없으면 본문이 사용됩니다.
 
-<span class="help-syntax-special">{scope}</span> `(table|nil)` Scope to use. Default: output of [MiniIndentscope.get\_scope()](mini-indentscope.qmd#miniindentscope.get_scope).
+<span class="help-syntax-special">{scope}</span> `(table|nil)` 사용할 범위. 기본값: [MiniIndentscope.get\_scope()](mini-indentscope.qmd#miniindentscope.get_scope)의 출력.
 
 ---
 
 ### operator() {#miniindentscope.operator .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.operator`(<span class="help-syntax-special">{side}</span>, <span class="help-syntax-special">{add_to_jumplist}</span>)</p>
-Function for motion mappings
+동작 매핑용 함수
 
-Move to a certain side of border. Respects [count](https://neovim.io/doc/user/helptag.html?tag=count) and dot-repeat (in
-operator-pending mode). Doesn't move cursor for scope that is not shown
-(drawing indent less that zero).
+테두리의 특정 사이드로 이동합니다. [개수(count)](https://neovim.io/doc/user/helptag.html?tag=count)와 점 반복(operator-pending 모드에서)을 존중합니다. 표시되지 않는 범위(그리기 들여쓰기가 0보다 작은 경우)에 대해서는 커서를 이동하지 않습니다.
 
-#### Parameters {#miniindentscope.operator-parameters}
+#### 매개변수 {#miniindentscope.operator-parameters}
 
 
 
-<span class="help-syntax-special">{side}</span> `(string)` One of "top" or "bottom".
+<span class="help-syntax-special">{side}</span> `(string)` "top" 또는 "bottom" 중 하나.
 
-<span class="help-syntax-special">{add_to_jumplist}</span> `(boolean|nil)` Whether to add movement to jump list. It is
-  `true` only for Normal mode mappings.
+<span class="help-syntax-special">{add_to_jumplist}</span> `(boolean|nil)` 점프 목록에 이동을 추가할지 여부. Normal 모드 매핑에 대해서만 `true`입니다.
 
 ---
 
 ### textobject() {#miniindentscope.textobject .help-syntax-right-anchor}
 
 <p align="center">`MiniIndentscope.textobject`(<span class="help-syntax-special">{use_border}</span>)</p>
-Function for textobject mappings
+텍스트 오브젝트 매핑용 함수
 
-Respects [count](https://neovim.io/doc/user/helptag.html?tag=count) and dot-repeat (in operator-pending mode). Doesn't work
-for scope that is not shown (drawing indent less that zero).
+[개수(count)](https://neovim.io/doc/user/helptag.html?tag=count)와 점 반복(operator-pending 모드에서)을 존중합니다. 표시되지 않는 범위(그리기 들여쓰기가 0보다 작은 경우)에 대해서는 작동하지 않습니다.
 
-#### Parameters {#miniindentscope.textobject-parameters}
-
+#### 매개변수 {#miniindentscope.textobject-parameters}
 
 
-<span class="help-syntax-special">{use_border}</span> `(boolean|nil)` Whether to include border in textobject. When
-  `true` and `try_as_border` option is `false`, allows "chaining" calls for
-  incremental selection.
 
+<span class="help-syntax-special">{use_border}</span> `(boolean|nil)` 텍스트 오브젝트에 테두리를 포함할지 여부. `true`이고 `try_as_border` 옵션이 `false`인 경우, 점진적 선택을 위한 "체이닝(chaining)" 호출을 허용합니다.

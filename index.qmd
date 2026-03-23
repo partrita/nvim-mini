@@ -4,27 +4,27 @@ about:
   template: trestles
   image: assets/logo-mini.png
   image-shape: rectangle
-  image-alt: "Word \"MINI\" written in 3x5 pixel font; \"MI\" over \"NI\""
+  image-alt: "3x5 픽셀 글꼴로 쓰여진 \"MINI\" 단어; \"MI\"가 \"NI\" 위에 있음"
 format:
   html:
     include-in-header:
       - text: "<style> .quarto-title > h1.title { display: none } </style>"
 ---
 
-<!-- Make it monospace to align bold letters and stand out-->
+<!-- 굵은 글자를 정렬하고 돋보이게 하기 위해 고정폭 글꼴 사용 -->
 <span style="font-size:2em; font-family:monospace">
-  <!-- Add style of bold letters the same as in logo to show that this is backronym -->
+  <!-- 로고와 동일하게 굵은 글자 스타일을 추가하여 이것이 백로님(backronym)임을 보여줌 -->
   <b style="background:#00182a; color:#b3daf9">M</b>odular <b style="background:#00182a; color:#b3daf9">I</b>ndependent<br>
   <b style="background:#00182a; color:#d9d8aa">N</b>eovim&nbsp; <b style="background:#00182a; color:#d9d8aa">I</b>mprovements
 </span>
 
 - <p style="font-size:1.5em"><b><a href="mini.nvim/index.html">mini.nvim</a></b></p>
-    - [Modules](mini.nvim/index.md#modules)
-    - [Documentation](mini.nvim/doc/mini-nvim.qmd)
-    - [Change log](mini.nvim/CHANGELOG.md)
+    - [모듈](mini.nvim/index.md#modules)
+    - [문서](mini.nvim/doc/mini-nvim.qmd)
+    - [변경 이력](mini.nvim/CHANGELOG.md)
 
 - <p style="font-size:1.5em"><b><a href="MiniMax/index.html">MiniMax</a></b></p>
-    - [Configs](MiniMax/configs)
-    - [Change log](MiniMax/CHANGELOG.md)
+    - [설정](MiniMax/configs)
+    - [변경 이력](MiniMax/CHANGELOG.md)
 
-- <p style="font-size:1.5em"><b><a href="blog/index.html">Blog</a></b></p>
+- <p style="font-size:1.5em"><b><a href="blog/index.html">블로그</a></b></p>

@@ -1,93 +1,81 @@
 ---
-title: "mini.comment documentation"
+title: "mini.comment 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_이 문서는 'mini.nvim'의 `main` 브랜치에서 생성되었습니다._
 
-<a name="mini.comment" href="mini-comment.qmd#mini.comment"><b>mini.comment</b></a> Comment lines
+<a name="mini.comment" href="mini-comment.qmd#mini.comment"><b>mini.comment</b></a> 줄 주석 달기
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Commenting in Normal mode respects [count](https://neovim.io/doc/user/helptag.html?tag=count) and is dot-repeatable.
-
-
-- Comment structure by default is inferred from 'commentstring': either
-  from current buffer or from locally active tree-sitter language.
-  It can be customized via `options.custom_commentstring`
-  (see [MiniComment.config](mini-comment.qmd#minicomment.config) for details).
+- 일반 모드에서의 주석 달기는 [count](https://neovim.io/doc/user/helptag.html?tag=count)를 존중하며 점 반복(dot-repeatable)이 가능합니다.
 
 
-- Allows custom hooks before and after successful commenting.
+- 기본적으로 주석 구조는 'commentstring'에서 유추됩니다: 현재 버퍼 또는 로컬로 활성화된 트리시터(tree-sitter) 언어에서 가져옵니다.
+  `options.custom_commentstring`을 통해 사용자 정의할 수 있습니다
+  (자세한 내용은 [MiniComment.config](mini-comment.qmd#minicomment.config)를 참조하세요).
 
 
-- Configurable options for some nuanced behavior.
-
-What it doesn't do:
-
-- Block and sub-line comments. This will only support per-line commenting.
+- 주석 처리가 성공하기 전후에 커스텀 훅(hook)을 허용합니다.
 
 
-- Handle indentation with mixed tab and space.
+- 미묘한 동작에 대해 구성 가능한 옵션을 제공합니다.
+
+하지 않는 것:
+
+- 블록 및 줄 일부 주석. 줄 단위 주석만 지원합니다.
 
 
-- Preserve trailing whitespace in empty lines.
-
-Notes:
-
-- To use tree-sitter aware commenting, global value of 'commentstring'
-  should be `''` (empty string). This is the default value, so make sure to
-  not set it manually to a different value.
-
-#### Setup {#module-setup}
+- 탭과 공백이 섞인 들여쓰기 처리.
 
 
-This module needs a setup with `require('mini.comment').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table
-`MiniComment` which you can use for scripting or manually (with
-`:lua MiniComment.*`).
+- 빈 줄의 후행 공백 유지.
 
-See [MiniComment.config](mini-comment.qmd#minicomment.config) for `config` structure and default values.
+참고:
 
-You can override runtime config settings locally to buffer inside
-`vim.b.minicomment_config` which should have same structure as
-`MiniComment.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+- 트리시터 인식 주석 처리를 사용하려면 'commentstring'의 전역 값이 `''`(빈 문자열)이어야 합니다. 이는 기본값이므로 수동으로 다른 값으로 설정하지 않도록 주의하세요.
 
-#### Disabling {#module-disabling}
+#### 설정 {#module-setup}
 
 
-To disable core functionality, set `vim.g.minicomment_disable` (globally) or
-`vim.b.minicomment_disable` (for a buffer) to `true`. Considering high number
-of different scenarios and customization intentions, writing exact rules
-for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+이 모듈은 `require('mini.comment').setup({})`으로 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniComment`를 생성합니다 (예: `:lua MiniComment.*`).
+
+`config` 구조와 기본값은 [MiniComment.config](mini-comment.qmd#minicomment.config)를 참조하세요.
+
+`MiniComment.config`와 동일한 구조를 가져야 하는 `vim.b.minicomment_config`를 통해 버퍼 로컬에서 런타임 설정 설정을 재정의할 수 있습니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
+
+#### 비활성화 {#module-disabling}
+
+
+핵심 기능을 비활성화하려면 `vim.g.minicomment_disable` (전역) 또는 `vim.b.minicomment_disable` (버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 레시피는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
 ### setup() {#minicomment.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniComment.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minicomment.setup-parameters}
+#### 매개변수 {#minicomment.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniComment.config](mini-comment.qmd#minicomment.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniComment.config](mini-comment.qmd#minicomment.config)를 참조하세요.
 
-#### Usage {#minicomment.setup-usage}
+#### 사용법 {#minicomment.setup-usage}
 
 
 
   ```lua
-  require('mini.comment').setup() -- use default config
-  -- OR
-  require('mini.comment').setup({}) -- replace {} with your config table
+  require('mini.comment').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.comment').setup({}) -- {}를 설정 테이블로 교체
   ```
 
 ---
@@ -95,74 +83,68 @@ Module setup
 ### config {#minicomment.config .help-syntax-right-anchor}
 
 <p align="center">`MiniComment.config`</p>
-#### Defaults {#minicomment.config-defaults}
+#### 기본값 {#minicomment.config-defaults}
 
 
 
   ```lua
   MiniComment.config = {
-    -- Options which control module behavior
+    -- 모듈 동작을 제어하는 옵션
     options = {
-      -- Function to compute custom 'commentstring' (optional)
+      -- 커스텀 'commentstring'을 계산하는 함수 (선택 사항)
       custom_commentstring = nil,
 
-      -- Whether to ignore blank lines in actions and textobject
+      -- 동작 및 텍스트 오브젝트에서 빈 줄을 무시할지 여부
       ignore_blank_line = false,
 
-      -- Whether to recognize as comment only lines without indent
+      -- 들여쓰기가 없는 줄만 주석으로 인식할지 여부
       start_of_line = false,
 
-      -- Whether to force single space inner padding for comment parts
+      -- 주석 부분에 대해 단일 공백 내부 패딩을 강제할지 여부
       pad_comment_parts = true,
     },
 
-    -- Module mappings. Use `''` (empty string) to disable one.
+    -- 모듈 매핑. 비활성화하려면 `''`(빈 문자열)을 사용하세요.
     mappings = {
-      -- Toggle comment (like `gcip` - comment inner paragraph) for both
-      -- Normal and Visual modes
+      -- 일반 및 비주얼 모드 모두에서 주석 토글 (예: `gcip` - 내부 단락 주석)
       comment = 'gc',
 
-      -- Toggle comment on current line
+      -- 현재 줄의 주석 토글
       comment_line = 'gcc',
 
-      -- Toggle comment on visual selection
+      -- 선택 영역의 주석 토글
       comment_visual = 'gc',
 
-      -- Define 'comment' textobject (like `dgc` - delete whole comment block)
-      -- Works also in Visual mode if mapping differs from `comment_visual`
+      -- '주석' 텍스트 오브젝트 정의 (예: `dgc` - 전체 주석 블록 삭제)
+      -- 매핑이 `comment_visual`과 다른 경우 비주얼 모드에서도 작동합니다.
       textobject = 'gc',
     },
 
-    -- Hook functions to be executed at certain stage of commenting
+    -- 주석 처리의 특정 단계에서 실행될 훅 함수
     hooks = {
-      -- Before successful commenting. Does nothing by default.
+      -- 성공적인 주석 처리 전. 기본적으로 아무 작업도 하지 않습니다.
       pre = function() end,
-      -- After successful commenting. Does nothing by default.
+      -- 성공적인 주석 처리 후. 기본적으로 아무 작업도 하지 않습니다.
       post = function() end,
     },
   }
   ```
 
-#### Options {#minicomment.config-options}
+#### 옵션 {#minicomment.config-options}
 
 
-##### Custom commentstring {#minicomment.config-options-customcommentstring}
+##### 커스텀 commentstring {#minicomment.config-options-customcommentstring}
 
 
-`options.custom_commentstring` can be a function customizing 'commentstring'
-option used to infer comment structure. It is called once before every
-commenting action with the following arguments:
+`options.custom_commentstring`은 주석 구조를 유추하는 데 사용되는 'commentstring' 옵션을 사용자 정의하는 함수일 수 있습니다. 모든 주석 동작 전에 다음 인수와 함께 한 번 호출됩니다:
 
-- `ref_position` - position at which to compute 'commentstring' (might be
-  relevant for a text with locally different commenting rules). Its structure
-  is the same as `opts.ref_position` in [MiniComment.toggle\_lines()](mini-comment.qmd#minicomment.toggle_lines).
+- `ref_position` - 'commentstring'을 계산할 위치 (로컬로 다른 주석 규칙이 있는 텍스트의 경우 관련이 있을 수 있음). 구조는 [MiniComment.toggle\_lines()](mini-comment.qmd#minicomment.toggle_lines)의 `opts.ref_position`과 동일합니다.
 
-Its output should be a valid 'commentstring' (string containing `%s`).
+출력은 유효한 'commentstring'(`%s`를 포함하는 문자열)이어야 합니다.
 
-If not set or the output is `nil`, [MiniComment.get\_commentstring()](mini-comment.qmd#minicomment.get_commentstring) is used.
+설정되지 않았거나 출력이 `nil`인 경우 [MiniComment.get\_commentstring()](mini-comment.qmd#minicomment.get_commentstring)이 사용됩니다.
 
-For example, this option can be used to always use buffer 'commentstring'
-even in case of present active tree-sitter parser:
+예를 들어, 이 옵션은 활성 트리시터 파서가 있는 경우에도 항상 버퍼의 'commentstring'을 사용하는 데 사용할 수 있습니다:
 
   ```lua
   require('mini.comment').setup({
@@ -172,131 +154,110 @@ even in case of present active tree-sitter parser:
   })
   ```
 
-#### Hooks {#minicomment.config-hooks}
+#### 훅 {#minicomment.config-hooks}
 
 
-`hooks.pre` and `hooks.post` functions are executed before and after successful
-commenting action (toggle or computing textobject). They will be called
-with a single table argument which has the following fields:
+`hooks.pre` 및 `hooks.post` 함수는 성공적인 주석 작업(토글 또는 텍스트 오브젝트 계산) 전후에 실행됩니다. 다음 필드를 가진 단일 테이블 인수와 함께 호출됩니다:
 
-- <span class="help-syntax-keys">\<action\></span> `(string)` - action name. One of "toggle" (when actual toggle
-  direction is yet unknown), "comment", "uncomment", "textobject".
+- <span class="help-syntax-keys">\<action\></span> `(string)` - 작업 이름. "toggle" (실제 토글 방향을 아직 모를 때), "comment", "uncomment", "textobject" 중 하나.
 
-- <span class="help-syntax-keys">\<line_start\></span> `(number|nil)` - action start line. Can be absent if yet unknown.
+- <span class="help-syntax-keys">\<line_start\></span> `(number|nil)` - 작업 시작 줄. 아직 모르는 경우 없을 수 있습니다.
 
-- <span class="help-syntax-keys">\<line_end\></span> `(number|nil)` - action end line. Can be absent if yet unknown.
+- <span class="help-syntax-keys">\<line_end\></span> `(number|nil)` - 작업 종료 줄. 아직 모르는 경우 없을 수 있습니다.
 
-- <span class="help-syntax-keys">\<ref_position\></span> `(table|nil)` - reference position.
+- <span class="help-syntax-keys">\<ref_position\></span> `(table|nil)` - 참조 위치.
 
-Notes:
+참고:
 
-- Changing 'commentstring' in `hooks.pre` is allowed and will take effect.
+- `hooks.pre`에서 'commentstring'을 변경하는 것이 허용되며 적용됩니다.
 
-- If hook returns `false`, any further action is terminated.
+- 훅이 `false`를 반환하면 추가 작업이 중단됩니다.
 
 ---
 
 ### operator() {#minicomment.operator .help-syntax-right-anchor}
 
 <p align="center">`MiniComment.operator`(<span class="help-syntax-special">{mode}</span>)</p>
-Main function to be mapped
+매핑될 메인 함수
 
-It is meant to be used in expression mappings (see [:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>)) to enable
-dot-repeatability and commenting on range. There is no need to do this
-manually, everything is done inside [MiniComment.setup()](mini-comment.qmd#minicomment.setup).
+점 반복 및 범위에 대한 주석 처리를 가능하게 하기 위해 표현식 매핑([:map-<span class="help-syntax-keys">\<expr\></span>](https://neovim.io/doc/user/helptag.html?tag=:map-<expr>) 참조)에서 사용하도록 의도되었습니다. 이를 수동으로 할 필요는 없으며, 모든 작업은 [MiniComment.setup()](mini-comment.qmd#minicomment.setup) 내부에서 수행됩니다.
 
-It has a somewhat unintuitive logic (because of how expression mapping with
-dot-repeatability works): it should be called without arguments inside
-expression mapping and with argument when action should be performed.
+다소 직관적이지 않은 로직을 가지고 있습니다 (점 반복이 있는 표현식 매핑이 작동하는 방식 때문): 표현식 매핑 내부에서는 인수 없이 호출되어야 하며, 작업을 수행해야 할 때는 인수와 함께 호출되어야 합니다.
 
-#### Parameters {#minicomment.operator-parameters}
+#### 매개변수 {#minicomment.operator-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string|nil)` Optional string with 'operatorfunc' mode (see [g@](https://neovim.io/doc/user/helptag.html?tag=g@)).
+<span class="help-syntax-special">{mode}</span> `(string|nil)` 'operatorfunc' 모드가 포함된 선택적 문자열 ([g@](https://neovim.io/doc/user/helptag.html?tag=g@) 참조).
 
-#### Return {#minicomment.operator-return}
+#### 반환 {#minicomment.operator-return}
 
 
-`(string|nil)` 'g@' if called without argument, '' otherwise (but after
-  performing action).
+`(string|nil)` 인수 없이 호출된 경우 'g@', 그렇지 않은 경우 '' (단, 작업 수행 후).
 
 ---
 
 ### toggle_lines() {#minicomment.toggle_lines .help-syntax-right-anchor}
 
 <p align="center">`MiniComment.toggle_lines`(<span class="help-syntax-special">{line_start}</span>, <span class="help-syntax-special">{line_end}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Toggle comments between two line numbers
+두 줄 번호 사이의 주석 토글
 
-It uncomments if lines are comment (every line is a comment or blank) and
-comments otherwise. It respects indentation and doesn't insert trailing
-whitespace. Toggle commenting not in visual mode is also dot-repeatable
-and respects [count](https://neovim.io/doc/user/helptag.html?tag=count).
+줄이 주석인 경우(모든 줄이 주석이거나 빈 줄임) 주석을 해제하고, 그렇지 않으면 주석을 답니다. 들여쓰기를 존중하며 후행 공백을 삽입하지 않습니다. 비주얼 모드가 아닌 상태에서의 주석 토글은 점 반복이 가능하며 [count](https://neovim.io/doc/user/helptag.html?tag=count)를 존중합니다.
 
-#### Notes {#minicomment.toggle_lines-notes}
+#### 참고 {#minicomment.toggle_lines-notes}
 
 
 
-- Comment structure is inferred from buffer's 'commentstring' option or
-  local language of tree-sitter parser (if active).
+- 주석 구조는 버퍼의 'commentstring' 옵션 또는 트리시터 파서의 로컬 언어(활성 상태인 경우)에서 유추됩니다.
 
 
-- Call to this function will remove all [extmarks](https://neovim.io/doc/user/helptag.html?tag=extmarks) from target range.
+- 이 함수를 호출하면 대상 범위에서 모든 [extmarks](https://neovim.io/doc/user/helptag.html?tag=extmarks)가 제거됩니다.
 
-#### Parameters {#minicomment.toggle_lines-parameters}
+#### 매개변수 {#minicomment.toggle_lines-parameters}
 
 
 
-<span class="help-syntax-special">{line_start}</span> `(number)` Start line number (inclusive from 1 to number of lines).
+<span class="help-syntax-special">{line_start}</span> `(number)` 시작 줄 번호 (1부터 총 줄 수까지 포함).
 
-<span class="help-syntax-special">{line_end}</span> `(number)` End line number (inclusive from 1 to number of lines).
+<span class="help-syntax-special">{line_end}</span> `(number)` 종료 줄 번호 (1부터 총 줄 수까지 포함).
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<ref_position\></span> `(table)` - A two-value array with `{ row, col }` (both
-    starting at 1) of reference position at which 'commentstring' value
-    will be computed. Default: `{ line_start, 1 }`.
+  - <span class="help-syntax-keys">\<ref_position\></span> `(table)` - 'commentstring' 값이 계산될 참조 위치의 `{ row, col }` (둘 다 1부터 시작)이 포함된 두 값 배열. 기본값: `{ line_start, 1 }`.
 
 ---
 
 ### textobject() {#minicomment.textobject .help-syntax-right-anchor}
 
 <p align="center">`MiniComment.textobject`()</p>
-Select comment textobject
+주석 텍스트 오브젝트 선택
 
-This selects all commented lines adjacent to cursor line. If `ignore_blank_line`
-option is enabled (see [MiniComment.config](mini-comment.qmd#minicomment.config)), blank lines between commented
-lines are treated as part of textobject.
-Designed to be used with operator mode mappings (see [mapmode-o](https://neovim.io/doc/user/helptag.html?tag=mapmode-o)).
+커서 줄에 인접한 모든 주석 처리된 줄을 선택합니다. `ignore_blank_line` 옵션이 활성화된 경우 ([MiniComment.config](mini-comment.qmd#minicomment.config) 참조), 주석 처리된 줄 사이의 빈 줄도 텍스트 오브젝트의 일부로 취급됩니다.
+오퍼레이터 모드 매핑([mapmode-o](https://neovim.io/doc/user/helptag.html?tag=mapmode-o) 참조)과 함께 사용하도록 설계되었습니다.
 
 ---
 
 ### get_commentstring() {#minicomment.get_commentstring .help-syntax-right-anchor}
 
 <p align="center">`MiniComment.get_commentstring`(<span class="help-syntax-special">{ref_position}</span>)</p>
-Get 'commentstring'
+'commentstring' 가져오기
 
-This function represents default approach of computing relevant
-'commentstring' option in current buffer. Used to infer comment structure.
+이 함수는 현재 버퍼에서 관련 'commentstring' 옵션을 계산하는 기본 방식을 나타냅니다. 주석 구조를 유추하는 데 사용됩니다.
 
-It has the following logic:
+다음과 같은 로직을 가집니다:
 
-- If there is an active tree-sitter parser, try to get 'commentstring' from
-  the local language at `ref_position`.
+- 활성 트리시터 파서가 있는 경우, `ref_position`의 로컬 언어에서 'commentstring'을 가져오려고 시도합니다.
 
 
-- If first step is not successful, use buffer's 'commentstring' directly.
+- 첫 번째 단계가 성공하지 못하면 버퍼의 'commentstring'을 직접 사용합니다.
 
-#### Parameters {#minicomment.get_commentstring-parameters}
+#### 매개변수 {#minicomment.get_commentstring-parameters}
 
 
 
-<span class="help-syntax-special">{ref_position}</span> `(table)` Reference position inside current buffer at which
-  to compute 'commentstring'. Same structure as `opts.ref_position`
-  in [MiniComment.toggle\_lines()](mini-comment.qmd#minicomment.toggle_lines).
+<span class="help-syntax-special">{ref_position}</span> `(table)` 'commentstring'을 계산할 현재 버퍼 내부의 참조 위치. [MiniComment.toggle\_lines()](mini-comment.qmd#minicomment.toggle_lines)의 `opts.ref_position`과 동일한 구조입니다.
 
-#### Return {#minicomment.get_commentstring-return}
+#### 반환 {#minicomment.get_commentstring-return}
 
 
-`(string)` Relevant value of 'commentstring'.
-
+`(string)` 'commentstring'의 관련 값.

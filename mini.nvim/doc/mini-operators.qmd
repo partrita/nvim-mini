@@ -1,206 +1,176 @@
 ---
-title: "mini.operators documentation"
+title: "mini.operators 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_'mini.nvim'의 `main` 브랜치에서 생성됨_
 
-<a name="mini.operators" href="mini-operators.qmd#mini.operators"><b>mini.operators</b></a> Text edit operators
+<a name="mini.operators" href="mini-operators.qmd#mini.operators"><b>mini.operators</b></a> 텍스트 편집 오퍼레이터
 
-MIT License Copyright (c) 2023 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Operators:
+- 오퍼레이터:
 
-    - Evaluate text and replace with output.
+    - 텍스트를 평가(evaluate)하고 그 출력으로 교체합니다.
 
-    - Exchange text regions.
+    - 텍스트 영역을 교환(exchange)합니다.
 
-    - Multiply (duplicate) text.
+    - 텍스트를 배가(multiply, 복제)합니다.
 
-    - Replace text with register.
+    - 레지스터의 내용으로 텍스트를 교체(replace)합니다.
 
-    - Sort text.
-
-
-- Automated configurable mappings to operate on textobject, line, selection.
-  Can be disabled in favor of more control with [MiniOperators.make\_mappings()](mini-operators.qmd#minioperators.make_mappings).
+    - 텍스트를 정렬(sort)합니다.
 
 
-- All operators support [[count]](https://neovim.io/doc/user/helptag.html?tag=[count]) and dot-repeat.
-
-See [MiniOperators-overview](mini-operators.qmd#minioperators-overview) and [MiniOperators.config](mini-operators.qmd#minioperators.config) for more details.
-
-#### Setup {#module-setup}
+- 텍스트 오브젝트, 줄, 선택 영역에 대해 작동하도록 구성 가능한 자동 매핑을 제공합니다.
+  [MiniOperators.make\_mappings()](mini-operators.qmd#minioperators.make_mappings)를 사용하여 더 세밀하게 제어하거나 비활성화할 수 있습니다.
 
 
-This module needs a setup with `require('mini.operators').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniOperators`
-which you can use for scripting or manually (with `:lua MiniOperators.*`).
+- 모든 오퍼레이터는 [[count]](https://neovim.io/doc/user/helptag.html?tag=[count])와 점 반복(dot-repeat)을 지원합니다.
 
-See [MiniOperators.config](mini-operators.qmd#minioperators.config) for available config settings.
+자세한 내용은 [MiniOperators-overview](mini-operators.qmd#minioperators-overview) 및 [MiniOperators.config](mini-operators.qmd#minioperators.config)를 참조하세요.
 
-You can override runtime config settings (but not `config.mappings`) locally
-to buffer inside `vim.b.minioperators_config` which should have same structure
-as `MiniOperators.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+#### 설정 {#module-setup}
 
-#### Comparisons {#module-comparisons}
+
+이 모듈은 `require('mini.operators').setup({})`으로 설정이 필요합니다 (`{}`를 사용자 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniOperators`를 생성합니다 (`:lua MiniOperators.*`로 사용 가능).
+
+사용 가능한 설정은 [MiniOperators.config](mini-operators.qmd#minioperators.config)를 참조하세요.
+
+런타임 설정(`config.mappings` 제외)을 `vim.b.minioperators_config`를 사용하여 버퍼별로 재정의할 수 있으며, 이는 `MiniOperators.config`와 동일한 구조여야 합니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
+
+#### 비교 {#module-comparisons}
 
 
 
 - [gbprod/substitute.nvim](https://github.com/gbprod/substitute.nvim):
 
-    - Has "replace" and "exchange" variants, but not others from this module.
+    - "replace" 및 "exchange" 변형을 제공하지만, 이 모듈의 다른 기능은 제공하지 않습니다.
 
-    - Has "replace/substitute" over range functionality, while this module
-      does not by design (it is similar to [:s](https://neovim.io/doc/user/helptag.html?tag=:s) functionality while not
-      offering significantly lower mental complexity).
+    - 범위에 대한 "replace/substitute" 기능을 제공하지만, 이 모듈은 설계상 이를 제공하지 않습니다 (이는 [:s](https://neovim.io/doc/user/helptag.html?tag=:s) 기능과 유사하면서도 정신적 복잡성을 크게 낮추지 않기 때문입니다).
 
-    - "Replace" highlights pasted text, while in this module it doesn't.
+    - "Replace"는 붙여넣은 텍스트를 강조하지만, 이 모듈은 그렇지 않습니다.
 
-    - "Exchange" doesn't work across buffers, while in this module it does.
+    - "Exchange"는 버퍼 간에 작동하지 않지만, 이 모듈은 작동합니다.
 
 
 - [svermeulen/vim-subversive](https://github.com/svermeulen/vim-subversive):
 
-    - Main inspiration for "replace" functionality, so they are mostly similar
-      for this operator.
+    - "replace" 기능의 주요 영감이 되었으므로 이 오퍼레이터에 대해서는 대부분 유사합니다.
 
-    - Has "replace/substitute" over range functionality, while this module
-      does not by design.
+    - 범위에 대한 "replace/substitute" 기능을 제공하지만, 이 모듈은 설계상 이를 제공하지 않습니다.
 
 
 - [tommcdo/vim-exchange](https://github.com/tommcdo/vim-exchange):
 
-    - Main inspiration for "exchange" functionality, so they are mostly
-      similar for this operator.
+    - "exchange" 기능의 주요 영감이 되었으므로 이 오퍼레이터에 대해서는 대부분 유사합니다.
 
-    - Doesn't work across buffers, while this module does.
+    - 버퍼 간에 작동하지 않지만, 이 모듈은 작동합니다.
 
 
 - [christoomey/vim-sort-motion](https://github.com/christoomey/vim-sort-motion):
 
-    - Uses [:sort](https://neovim.io/doc/user/helptag.html?tag=:sort) for linewise sorting, while this module uses consistent
-      sorting algorithm (by default, see [MiniOperators.default\_sort\_func()](mini-operators.qmd#minioperators.default_sort_func)).
+    - 줄 단위 정렬에 [:sort](https://neovim.io/doc/user/helptag.html?tag=:sort)를 사용하는 반면, 이 모듈은 일관된 정렬 알고리즘을 사용합니다 (기본값은 [MiniOperators.default\_sort\_func()](mini-operators.qmd#minioperators.default_sort_func) 참조).
 
-    - Sorting algorithm can't be customized, while this module allows this
-      (see `sort.func` in [MiniOperators.config](mini-operators.qmd#minioperators.config)).
+    - 정렬 알고리즘을 사용자 정의할 수 없지만, 이 모듈은 가능합니다 ([MiniOperators.config](mini-operators.qmd#minioperators.config)의 `sort.func` 참조).
 
-    - For charwise region uses only commas as separators, while this module
-      can also separate by semicolon or whitespace (by default,
-      see [MiniOperators.default\_sort\_func()](mini-operators.qmd#minioperators.default_sort_func)).
+    - 문자 단위 영역에 대해 쉼표만 구분자로 사용하지만, 이 모듈은 세미콜론이나 공백으로도 구분할 수 있습니다 (기본값은 [MiniOperators.default\_sort\_func()](mini-operators.qmd#minioperators.default_sort_func) 참조).
 
-#### Highlight groups {#module-highlightgroups}
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
 
-- `MiniOperatorsExchangeFrom` - first region to exchange.
+- `MiniOperatorsExchangeFrom` - 교환할 첫 번째 영역.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable main functionality, set `vim.g.minioperators_disable` (globally) or
-`vim.b.minioperators_disable` (for a buffer) to `true`. Considering high number
-of different scenarios and customization intentions, writing exact rules
-for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+주요 기능을 비활성화하려면 `vim.g.minioperators_disable`(전역) 또는 `vim.b.minioperators_disable`(버퍼별)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 방법은 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
-### Overview {#minioperators-overview .help-syntax-right-anchor}
+### 개요 {#minioperators-overview .help-syntax-right-anchor}
 
-Operator defines an action that will be performed on a textobject, motion,
-or visual selection (similar to [d](https://neovim.io/doc/user/helptag.html?tag=d), [c](https://neovim.io/doc/user/helptag.html?tag=c), etc.). When makes sense, it can also
-respect supplied register (like "replace" operator).
+오퍼레이터는 ([d](https://neovim.io/doc/user/helptag.html?tag=d), [c](https://neovim.io/doc/user/helptag.html?tag=c) 등과 유사하게) 텍스트 오브젝트, 모션 또는 비주얼 선택 영역에 대해 수행될 동작을 정의합니다. 필요한 경우 제공된 레지스터도 존중할 수 있습니다 ("replace" 오퍼레이터와 같이).
 
-This module implements each operator in a separate dedicated function
-(like [MiniOperators.replace()](mini-operators.qmd#minioperators.replace) for "replace" operator). Each such function
-takes `mode` as argument and acts depending on it:
+이 모듈은 각 오퍼레이터를 별도의 전용 함수로 구현합니다 (예: "replace" 오퍼레이터의 경우 [MiniOperators.replace()](mini-operators.qmd#minioperators.replace)). 각 함수는 `mode`를 인수로 받아 그에 따라 동작합니다.
 
 
-- If `mode` is `nil` (or not explicitly supplied), it sets ['operatorfunc'](https://neovim.io/doc/user/helptag.html?tag='operatorfunc')
-  to this dedicated function and returns `g@` assuming being called from
-  expression mapping. See [:map-operator](https://neovim.io/doc/user/helptag.html?tag=:map-operator) and [:map-expression](https://neovim.io/doc/user/helptag.html?tag=:map-expression) for more details.
+- `mode`가 `nil`인 경우(또는 명시적으로 제공되지 않은 경우), ['operatorfunc'](https://neovim.io/doc/user/helptag.html?tag='operatorfunc')를 이 전용 함수로 설정하고 표현식 매핑에서 호출된 것으로 가정하여 `g@`를 반환합니다. 자세한 내용은 [:map-operator](https://neovim.io/doc/user/helptag.html?tag=:map-operator) 및 [:map-expression](https://neovim.io/doc/user/helptag.html?tag=:map-expression)을 참조하세요.
 
 
-- If `mode` is "char", "line", or "block", it acts as `operatorfunc` and performs
-  action for region between [`[](https://neovim.io/doc/user/helptag.html?tag=`[) and |`]| marks.
+- `mode`가 "char", "line" 또는 "block"인 경우, `operatorfunc`로 동작하며 [`[](https://neovim.io/doc/user/helptag.html?tag=`[) 및 |`]| 마크 사이의 영역에 대해 동작을 수행합니다.
 
 
-- If `mode` is "visual", it performs action for region between [`<](https://neovim.io/doc/user/helptag.html?tag=`<) and |`>| marks.
+- `mode`가 "visual"인 경우, [`<](https://neovim.io/doc/user/helptag.html?tag=`<) 및 |`>| 마크 사이의 영역에 대해 동작을 수행합니다.
 
-For more details about specific operator, see help for its function:
+특정 오퍼레이터에 대한 자세한 내용은 해당 함수 도움말을 참조하세요.
 
 
-- Evaluate: [MiniOperators.evaluate()](mini-operators.qmd#minioperators.evaluate)
+- 평가 (Evaluate): [MiniOperators.evaluate()](mini-operators.qmd#minioperators.evaluate)
 
-- Exchange: [MiniOperators.exchange()](mini-operators.qmd#minioperators.exchange)
+- 교환 (Exchange): [MiniOperators.exchange()](mini-operators.qmd#minioperators.exchange)
 
-- Multiply: [MiniOperators.multiply()](mini-operators.qmd#minioperators.multiply)
+- 배가 (Multiply): [MiniOperators.multiply()](mini-operators.qmd#minioperators.multiply)
 
-- Replace:  [MiniOperators.replace()](mini-operators.qmd#minioperators.replace)
+- 교체 (Replace):  [MiniOperators.replace()](mini-operators.qmd#minioperators.replace)
 
-- Sort:     [MiniOperators.sort()](mini-operators.qmd#minioperators.sort)
+- 정렬 (Sort):     [MiniOperators.sort()](mini-operators.qmd#minioperators.sort)
 
-#### Mappings {#minioperators-overview-mappings}
+#### 매핑 {#minioperators-overview-mappings}
 
 
 <a name="minioperators-mappings" href="mini-operators.qmd#minioperators-mappings"><b>MiniOperators-mappings</b></a>
 
-All operators are automatically mapped during [MiniOperators.setup()](mini-operators.qmd#minioperators.setup) execution.
-Mappings keys are deduced from `prefix` field of corresponding `config` entry.
-All built-in conflicting mappings are removed (like [gra](https://neovim.io/doc/user/helptag.html?tag=gra), [grn](https://neovim.io/doc/user/helptag.html?tag=grn) in Neovim>=0.11).
-Both [gx](https://neovim.io/doc/user/helptag.html?tag=gx) and [v\_gx](https://neovim.io/doc/user/helptag.html?tag=v_gx) are remapped to `gX` (if that is not already taken).
+모든 오퍼레이터는 [MiniOperators.setup()](mini-operators.qmd#minioperators.setup) 실행 중에 자동으로 매핑됩니다. 매핑 키는 해당 `config` 항목의 `prefix` 필드에서 유추됩니다. 모든 내장 충돌 매핑은 제거됩니다 (Neovim>=0.11의 [gra](https://neovim.io/doc/user/helptag.html?tag=gra), [grn](https://neovim.io/doc/user/helptag.html?tag=grn) 등). [gx](https://neovim.io/doc/user/helptag.html?tag=gx) 및 [v\_gx](https://neovim.io/doc/user/helptag.html?tag=v_gx)는 모두 `gX`로 재매핑됩니다 (이미 사용 중이 아닌 경우).
 
-For each operator the following mappings are created:
+각 오퍼레이터에 대해 다음 매핑이 생성됩니다.
 
 
-- In Normal mode to operate on textobject. Uses `prefix` directly.
+- 일반 모드에서 텍스트 오브젝트에 대해 작동. `prefix`를 직접 사용합니다.
 
-- In Normal mode to operate on line. Appends to `prefix` the last character.
-  This aligns with [operator-doubled](https://neovim.io/doc/user/helptag.html?tag=operator-doubled) and established patterns for operators
-  with more than two characters, like [guu](https://neovim.io/doc/user/helptag.html?tag=guu), [gUU](https://neovim.io/doc/user/helptag.html?tag=gUU), etc.
+- 일반 모드에서 줄에 대해 작동. `prefix`에 마지막 문자를 추가합니다. 이는 [operator-doubled](https://neovim.io/doc/user/helptag.html?tag=operator-doubled) 및 [guu](https://neovim.io/doc/user/helptag.html?tag=guu), [gUU](https://neovim.io/doc/user/helptag.html?tag=gUU)와 같이 세 글자 이상의 오퍼레이터에 대해 확립된 패턴과 일치합니다.
 
-- In Visual mode to operate on visual selection. Uses `prefix` directly.
+- 비주얼 모드에서 비주얼 선택 영역에 대해 작동. `prefix`를 직접 사용합니다.
 
-Example of default mappings for "replace":
+"replace"의 기본 매핑 예시:
 
-- `gr` in Normal mode for operating on textobject.
-  Example of usage: `griw` replaces "inner word" with default register.
+- 일반 모드에서 텍스트 오브젝트에 작동하는 `gr`.
+  사용 예: `griw`는 "inner word"를 기본 레지스터로 교체합니다.
 
-- `grr` in Normal mode for operating on line.
-  Example of usage: `grr` replaces current line.
+- 일반 모드에서 줄에 작동하는 `grr`.
+  사용 예: `grr`은 현재 줄을 교체합니다.
 
-- `gr` in Visual mode for operating on visual selection.
-  Example of usage: `viw` selects "inner word" and `gr` replaces it.
+- 비주얼 모드에서 비주얼 선택 영역에 작동하는 `gr`.
+  사용 예: `viw`로 "inner word"를 선택하고 `gr`로 교체합니다.
 
-There are two suggested ways to customize mappings:
+매핑을 사용자 정의하는 두 가지 제안된 방법:
 
 
-- Change `prefix` in [MiniOperators.setup()](mini-operators.qmd#minioperators.setup) call. For example, doing
+- [MiniOperators.setup()](mini-operators.qmd#minioperators.setup) 호출 시 `prefix`를 변경합니다. 예를 들어, 다음과 같이 하면:
 
     ```lua
     require('mini.operators').setup({ replace = { prefix = 'cr' } })
     ```
 
-  will make mappings for `cr` / `crr` / `cr` instead of `gr` / `grr` / `gr`.
+  매핑이 `gr` / `grr` / `gr` 대신 `cr` / `crr` / `cr`이 됩니다.
 
 
-- Disable automated mapping creation by supplying empty string as prefix and
-  use [MiniOperators.make\_mappings()](mini-operators.qmd#minioperators.make_mappings) directly. For example:
+- 접두사로 빈 문자열을 제공하여 자동 매핑 생성을 비활성화하고 [MiniOperators.make\_mappings()](mini-operators.qmd#minioperators.make_mappings)를 직접 사용합니다. 예를 들어:
 
     ```lua
-    -- Disable automated creation of "replace"
+    -- "replace"의 자동 생성 비활성화
     local operators = require('mini.operators')
     operators.setup({ replace = { prefix = '' } })
 
-    -- Make custom mappings
+    -- 사용자 정의 매핑 만들기
     operators.make_mappings(
       'replace',
       { textobject = 'cr', line = 'crr', selection = 'cr' }
@@ -212,22 +182,22 @@ There are two suggested ways to customize mappings:
 ### setup() {#minioperators.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minioperators.setup-parameters}
+#### 매개변수 {#minioperators.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniOperators.config](mini-operators.qmd#minioperators.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniOperators.config](mini-operators.qmd#minioperators.config)를 참조하세요.
 
-#### Usage {#minioperators.setup-usage}
+#### 사용법 {#minioperators.setup-usage}
 
 
 
   ```lua
-  require('mini.operators').setup() -- use default config
-  -- OR
-  require('mini.operators').setup({}) -- replace {} with your config table
+  require('mini.operators').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.operators').setup({}) -- {}를 사용자 설정 테이블로 교체
   ```
 
 ---
@@ -235,133 +205,114 @@ Module setup
 ### config {#minioperators.config .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.config`</p>
-#### Defaults {#minioperators.config-defaults}
+#### 기본값 {#minioperators.config-defaults}
 
 
 
   ```lua
   MiniOperators.config = {
-    -- Each entry configures one operator.
-    -- `prefix` defines keys mapped during `setup()`: in Normal mode
-    -- to operate on textobject and line, in Visual - on selection.
+    -- 각 항목은 하나의 오퍼레이터를 설정합니다.
+    -- `prefix`는 `setup()` 중에 매핑되는 키를 정의합니다.
+    -- 일반 모드에서는 텍스트 오브젝트와 줄에 대해, 비주얼 모드에서는 선택 영역에 대해 작동합니다.
 
-    -- Evaluate text and replace with output
+    -- 텍스트를 평가하고 그 출력으로 교체
     evaluate = {
       prefix = 'g=',
 
-      -- Function which does the evaluation
+      -- 평가를 수행하는 함수
       func = nil,
     },
 
-    -- Exchange text regions
+    -- 텍스트 영역 교환
     exchange = {
-      -- NOTE: Default `gx` is remapped to `gX`
+      -- 참고: 기본 `gx`는 `gX`로 재매핑됩니다.
       prefix = 'gx',
 
-      -- Whether to reindent new text to match previous indent
+      -- 새 텍스트를 이전 들여쓰기에 맞게 다시 들여쓸지 여부
       reindent_linewise = true,
     },
 
-    -- Multiply (duplicate) text
+    -- 텍스트 배가 (복제)
     multiply = {
       prefix = 'gm',
 
-      -- Function which can modify text before multiplying
+      -- 복제 전 텍스트를 수정할 수 있는 함수
       func = nil,
     },
 
-    -- Replace text with register
+    -- 레지스터의 내용으로 텍스트 교체
     replace = {
-      -- NOTE: Default `gr*` LSP mappings are removed
+      -- 참고: 기본 `gr*` LSP 매핑은 제거됩니다.
       prefix = 'gr',
 
-      -- Whether to reindent new text to match previous indent
+      -- 새 텍스트를 이전 들여쓰기에 맞게 다시 들여쓸지 여부
       reindent_linewise = true,
     },
 
-    -- Sort text
+    -- 텍스트 정렬
     sort = {
       prefix = 'gs',
 
-      -- Function which does the sort
+      -- 정렬을 수행하는 함수
       func = nil,
     }
   }
   ```
 
-#### Evaluate {#minioperators.config-evaluate}
+#### 평가 (Evaluate) {#minioperators.config-evaluate}
 
 
-`evaluate.prefix` is a string used to automatically infer operator mappings keys
-during [MiniOperators.setup()](mini-operators.qmd#minioperators.setup). See [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings).
+`evaluate.prefix`는 [MiniOperators.setup()](mini-operators.qmd#minioperators.setup) 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings)를 참조하세요.
 
-`evaluate.func` is a function used to actually evaluate text region.
-If `nil` (default), [MiniOperators.default\_evaluate\_func()](mini-operators.qmd#minioperators.default_evaluate_func) is used.
+`evaluate.func`는 텍스트 영역을 실제로 평가하는 데 사용되는 함수입니다. `nil`(기본값)인 경우 [MiniOperators.default\_evaluate\_func()](mini-operators.qmd#minioperators.default_evaluate_func)가 사용됩니다.
 
-This function will take content table representing selected text as input
-and should return array of lines as output (each item per line).
-Content table has fields `lines`, array of region lines, and `submode`,
-one of `v`, `V`, `\22` (escaped `<C-v>`) for charwise, linewise, and blockwise.
+이 함수는 선택된 텍스트를 나타내는 콘텐츠 테이블을 입력으로 받고, 출력으로 줄 배열(한 항목당 한 줄)을 반환해야 합니다. 콘텐츠 테이블에는 영역 줄들의 배열인 `lines`와 문자 단위, 줄 단위, 블록 단위에 따라 `v`, `V`, `\22`(이스케이프된 `<C-v>`) 중 하나인 `submode` 필드가 있습니다.
 
-To customize evaluation per language, set `evaluate.func` in buffer-local
-config (`vim.b.minioperators_config`; see [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)).
+언어별로 평가를 사용자 정의하려면 버퍼별 설정(`vim.b.minioperators_config`)에서 `evaluate.func`를 설정하세요. [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
 
-#### Exchange {#minioperators.config-exchange}
+#### 교환 (Exchange) {#minioperators.config-exchange}
 
 
-`exchange.prefix` is a string used to automatically infer operator mappings keys
-during [MiniOperators.setup()](mini-operators.qmd#minioperators.setup). See [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings).
+`exchange.prefix`는 [MiniOperators.setup()](mini-operators.qmd#minioperators.setup) 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings)를 참조하세요.
 
-Note: default value "gx" overrides [gx](https://neovim.io/doc/user/helptag.html?tag=gx) / [v\_gx](https://neovim.io/doc/user/helptag.html?tag=v_gx). Instead they are remapped
-to `gX` (if that is not already taken). To keep using `gx` with built-in
-feature (open URL at cursor) choose different `config.prefix`.
+참고: 기본값 "gx"는 [gx](https://neovim.io/doc/user/helptag.html?tag=gx) / [v\_gx](https://neovim.io/doc/user/helptag.html?tag=v_gx)를 덮어씁니다. 대신 이들은 `gX`로 재매핑됩니다 (이미 사용 중이 아닌 경우). 내장 기능(커서 위치의 URL 열기)과 함께 `gx`를 계속 사용하려면 다른 `config.prefix`를 선택하세요.
 
-`exchange.reindent_linewise` is a boolean indicating whether newly put linewise
-text should preserve indent of replaced text. In other words, if `false`,
-regions are exchanged preserving their indents; if `true` - without them.
+`exchange.reindent_linewise`는 새로 놓인 줄 단위 텍스트가 교체된 텍스트의 들여쓰기를 유지해야 하는지 여부를 나타내는 불리언 값입니다. 즉, `false`인 경우 영역들이 들여쓰기를 유지한 채 교환되고, `true`인 경우 그렇지 않습니다.
 
-#### Multiply {#minioperators.config-multiply}
+#### 배가 (Multiply) {#minioperators.config-multiply}
 
 
-`multiply.prefix` is a string used to automatically infer operator mappings keys
-during [MiniOperators.setup()](mini-operators.qmd#minioperators.setup). See [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings).
+`multiply.prefix`는 [MiniOperators.setup()](mini-operators.qmd#minioperators.setup) 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings)를 참조하세요.
 
-`multiply.func` is a function used to optionally update multiplied text.
-If `nil` (default), text used as is.
+`multiply.func`는 선택적으로 복제된 텍스트를 업데이트하는 데 사용되는 함수입니다. `nil`(기본값)인 경우 텍스트가 그대로 사용됩니다.
 
-Takes content table as input (see "Evaluate" section) and should return
-array of lines as output.
+콘텐츠 테이블을 입력으로 받고( "Evaluate" 섹션 참조), 출력으로 줄 배열을 반환해야 합니다.
 
-#### Replace {#minioperators.config-replace}
+#### 교체 (Replace) {#minioperators.config-replace}
 
 
-`replace.prefix` is a string used to automatically infer operator mappings keys
-during [MiniOperators.setup()](mini-operators.qmd#minioperators.setup). See [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings).
+`replace.prefix`는 [MiniOperators.setup()](mini-operators.qmd#minioperators.setup) 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings)를 참조하세요.
 
-`replace.reindent_linewise` is a boolean indicating whether newly put linewise
-text should preserve indent of replaced text.
+`replace.reindent_linewise`는 새로 놓인 줄 단위 텍스트가 교체된 텍스트의 들여쓰기를 유지해야 하는지 여부를 나타내는 불리언 값입니다.
 
-#### Sort {#minioperators.config-sort}
+#### 정렬 (Sort) {#minioperators.config-sort}
 
 
-`sort.prefix` is a string used to automatically infer operator mappings keys
-during [MiniOperators.setup()](mini-operators.qmd#minioperators.setup). See [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings).
+`sort.prefix`는 [MiniOperators.setup()](mini-operators.qmd#minioperators.setup) 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. [MiniOperators-mappings](mini-operators.qmd#minioperators-mappings)를 참조하세요.
 
-`sort.func` is a function used to actually sort text region.
-If `nil` (default), [MiniOperators.default\_sort\_func()](mini-operators.qmd#minioperators.default_sort_func) is used.
+`sort.func`는 텍스트 영역을 실제로 정렬하는 데 사용되는 함수입니다. `nil`(기본값)인 경우 [MiniOperators.default\_sort\_func()](mini-operators.qmd#minioperators.default_sort_func)가 사용됩니다.
 
-Takes content table as input (see "Evaluate" section) and should return
-array of lines as output.
+콘텐츠 테이블을 입력으로 받고( "Evaluate" 섹션 참조), 출력으로 줄 배열을 반환해야 합니다.
 
-Example of `sort.func` which asks user for custom delimiter for charwise region:
+문자 단위 영역에 대해 사용자에게 사용자 정의 구분자를 묻는 `sort.func` 예시:
 
   ```lua
   local sort_func = function(content)
     local opts = {}
     if content.submode == 'v' then
-      -- Ask for delimiter to be treated as is (not as Lua pattern)
-      local delimiter = vim.fn.input('Sort delimiter: ')
-      -- Treat surrounding whitespace as part of split
+      -- 구분자를 있는 그대로(Lua 패턴이 아님) 처리하도록 요청
+      local delimiter = vim.fn.input('정렬 구분자: ')
+      -- 주변 공백을 분할의 일부로 처리
       opts.split_patterns = { '%s*' .. vim.pesc(delimiter) .. '%s*' }
     end
     return MiniOperators.default_sort_func(content, opts)
@@ -375,164 +326,144 @@ Example of `sort.func` which asks user for custom delimiter for charwise region:
 ### evaluate() {#minioperators.evaluate .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.evaluate`(<span class="help-syntax-special">{mode}</span>)</p>
-Evaluate text and replace with output
+텍스트를 평가하고 그 출력으로 교체
 
-It replaces the region with the output of `config.evaluate.func`.
-By default it is [MiniOperators.default\_evaluate\_func()](mini-operators.qmd#minioperators.default_evaluate_func) which evaluates
-text as Lua code depending on the region submode.
+영역을 `config.evaluate.func`의 출력으로 교체합니다. 기본적으로는 영역 서브모드에 따라 텍스트를 Lua 코드로 평가하는 [MiniOperators.default\_evaluate\_func()](mini-operators.qmd#minioperators.default_evaluate_func)입니다.
 
-#### Parameters {#minioperators.evaluate-parameters}
+#### 매개변수 {#minioperators.evaluate-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string|nil)` One of `nil`, `'char'`, `'line'`, `'block'`, `'visual'`.
+<span class="help-syntax-special">{mode}</span> `(string|nil)` `nil`, `'char'`, `'line'`, `'block'`, `'visual'` 중 하나.
 
 ---
 
 ### exchange() {#minioperators.exchange .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.exchange`(<span class="help-syntax-special">{mode}</span>)</p>
-Exchange text regions
+텍스트 영역 교환
 
-Has two-step logic:
+2단계 로직을 갖습니다.
 
-- First call remembers the region as the one to be exchanged and highlights it
-  with `MiniOperatorsExchangeFrom` highlight group.
+- 첫 번째 호출은 영역을 교환할 영역으로 기억하고 `MiniOperatorsExchangeFrom` 하이라이트 그룹으로 강조합니다.
 
-- Second call performs the exchange. Basically, a two substeps action:
-  "yank both regions" and replace each one with another.
+- 두 번째 호출은 교환을 수행합니다. 기본적으로 "두 영역 모두 얀크(yank)"하고 각각을 서로 교체하는 두 단계의 동작입니다.
 
-Notes:
+참고:
 
-- Use `<C-c>` to stop exchanging after the first step.
+- 첫 번째 단계 후 교환을 중지하려면 `<C-c>`를 사용하세요.
 
 
-- Exchanged regions can have different (char,line,block)-wise submodes.
+- 교환되는 영역은 서로 다른 (문자, 줄, 블록) 단위 서브모드를 가질 수 있습니다.
 
 
-- Works with most cases of intersecting regions, but not officially supported.
+- 대부분의 겹치는 영역 사례에서 작동하지만, 공식적으로 지원되지는 않습니다.
 
-#### Parameters {#minioperators.exchange-parameters}
+#### 매개변수 {#minioperators.exchange-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string|nil)` One of `nil`, `'char'`, `'line'`, `'block'`, `'visual'`.
+<span class="help-syntax-special">{mode}</span> `(string|nil)` `nil`, `'char'`, `'line'`, `'block'`, `'visual'` 중 하나.
 
 ---
 
 ### multiply() {#minioperators.multiply .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.multiply`(<span class="help-syntax-special">{mode}</span>)</p>
-Multiply (duplicate) text
+텍스트 배가 (복제)
 
-Copies a region (without affecting registers) and puts it directly after.
+영역을 (레지스터에 영향을 주지 않고) 복사하여 바로 뒤에 놓습니다.
 
-Notes:
+참고:
 
-- Supports two types of [[count]](https://neovim.io/doc/user/helptag.html?tag=[count]): `[count1]gm[count2][textobject]` with default
-  `config.multiply.prefix` makes `[count1]` copies of region defined by
-  `[count2][textobject]`. Example: `2gm3aw` - 2 copies of `3aw`.
+- 두 가지 유형의 [[count]](https://neovim.io/doc/user/helptag.html?tag=[count])를 지원합니다. 기본 `config.multiply.prefix`를 사용하는 `[count1]gm[count2][textobject]`는 `[count2][textobject]`에 의해 정의된 영역의 `[count1]`개 복사본을 만듭니다. 예: `2gm3aw` - `3aw`의 복사본 2개.
 
 
-- [[count]](https://neovim.io/doc/user/helptag.html?tag=[count]) for "line" mapping (`gmm` by default) is treated as `[count1]` from
-  previous note.
+- "line" 매핑(기본적으로 `gmm`)에 대한 [[count]](https://neovim.io/doc/user/helptag.html?tag=[count])는 이전 참고의 `[count1]`으로 처리됩니다.
 
 
-- Advantages of using this instead of "yank" + "paste":
+- "얀크(yank)" + "붙여넣기(paste)" 대신 이것을 사용하는 장점:
 
-   - Doesn't modify any register, while separate steps need some register to
-     hold multiplied text.
+   - 어떤 레지스터도 수정하지 않는 반면, 별도의 단계는 복제된 텍스트를 보관할 레지스터가 필요합니다.
 
-   - In most cases separate steps would be "yank" + "move cursor" + "paste",
-     while "multiply" makes it at once.
+   - 대부분의 경우 별도의 단계는 "얀크" + "커서 이동" + "붙여넣기"가 되겠지만, "multiply"는 이를 한 번에 수행합니다.
 
-#### Parameters {#minioperators.multiply-parameters}
+#### 매개변수 {#minioperators.multiply-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string|nil)` One of `nil`, `'char'`, `'line'`, `'block'`, `'visual'`.
+<span class="help-syntax-special">{mode}</span> `(string|nil)` `nil`, `'char'`, `'line'`, `'block'`, `'visual'` 중 하나.
 
 ---
 
 ### replace() {#minioperators.replace .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.replace`(<span class="help-syntax-special">{mode}</span>)</p>
-Replace text with register
+레지스터의 내용으로 텍스트 교체
 
-Notes:
+참고:
 
-- Supports two types of [[count]](https://neovim.io/doc/user/helptag.html?tag=[count]): `[count1]gr[count2][textobject]` with default
-  `config.replace.prefix` puts `[count1]` contents of register over region defined
-  by `[count2][textobject]`. Example: `2gr3aw` - 2 register contents over `3aw`.
+- 두 가지 유형의 [[count]](https://neovim.io/doc/user/helptag.html?tag=[count])를 지원합니다. 기본 `config.replace.prefix`를 사용하는 `[count1]gr[count2][textobject]`는 `[count2][textobject]`에 의해 정의된 영역 위에 레지스터 내용을 `[count1]`개 놓습니다. 예: `2gr3aw` - `3aw` 위에 레지스터 내용 2개.
 
 
-- [[count]](https://neovim.io/doc/user/helptag.html?tag=[count]) for "line" mapping (`grr` by default) is treated as `[count1]` from
-  previous note.
+- "line" 매핑(기본적으로 `grr`)에 대한 [[count]](https://neovim.io/doc/user/helptag.html?tag=[count])는 이전 참고의 `[count1]`으로 처리됩니다.
 
 
-- Advantages of using this instead of "visually select" + "paste with [v\_P](https://neovim.io/doc/user/helptag.html?tag=v_P)":
+- "비주얼 선택" + "[v\_P](https://neovim.io/doc/user/helptag.html?tag=v_P)로 붙여넣기" 대신 이것을 사용하는 장점:
 
-   - As operator it is dot-repeatable which has cumulative gain in case of
-     multiple replacing is needed.
+   - 오퍼레이터로서 점 반복이 가능하므로 여러 번 교체해야 하는 경우 누적 이득이 있습니다.
 
-   - Can automatically reindent.
+   - 자동으로 들여쓰기를 다시 조정할 수 있습니다.
 
-#### Parameters {#minioperators.replace-parameters}
+#### 매개변수 {#minioperators.replace-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string|nil)` One of `nil`, `'char'`, `'line'`, `'block'`, `'visual'`.
+<span class="help-syntax-special">{mode}</span> `(string|nil)` `nil`, `'char'`, `'line'`, `'block'`, `'visual'` 중 하나.
 
 ---
 
 ### sort() {#minioperators.sort .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.sort`(<span class="help-syntax-special">{mode}</span>)</p>
-Sort text
+텍스트 정렬
 
-It replaces the region with the output of `config.sort.func`.
-By default it is [MiniOperators.default\_sort\_func()](mini-operators.qmd#minioperators.default_sort_func) which sorts the text
-depending on submode.
+영역을 `config.sort.func`의 출력으로 교체합니다. 기본적으로는 서브모드에 따라 텍스트를 정렬하는 [MiniOperators.default\_sort\_func()](mini-operators.qmd#minioperators.default_sort_func)입니다.
 
-Notes:
+참고:
 
-- "line" mapping is charwise (as there is not much sense in sorting
-  linewise a single line). This also results into no [[count]](https://neovim.io/doc/user/helptag.html?tag=[count]) support.
+- "line" 매핑은 문자 단위입니다 (한 줄을 줄 단위로 정렬하는 것은 별 의미가 없기 때문입니다). 이로 인해 [[count]](https://neovim.io/doc/user/helptag.html?tag=[count])도 지원되지 않습니다.
 
-#### Parameters {#minioperators.sort-parameters}
+#### 매개변수 {#minioperators.sort-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string|nil)` One of `nil`, `'char'`, `'line'`, `'block'`, `'visual'`.
+<span class="help-syntax-special">{mode}</span> `(string|nil)` `nil`, `'char'`, `'line'`, `'block'`, `'visual'` 중 하나.
 
 ---
 
 ### make_mappings() {#minioperators.make_mappings .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.make_mappings`(<span class="help-syntax-special">{operator_name}</span>, <span class="help-syntax-special">{lhs_tbl}</span>)</p>
-Make operator mappings
+오퍼레이터 매핑 만들기
 
-#### Parameters {#minioperators.make_mappings-parameters}
+#### 매개변수 {#minioperators.make_mappings-parameters}
 
 
 
-<span class="help-syntax-special">{operator_name}</span> `(string)` Name of existing operator from this module.
+<span class="help-syntax-special">{operator_name}</span> `(string)` 이 모듈의 기존 오퍼레이터 이름.
 
-<span class="help-syntax-special">{lhs_tbl}</span> `(table)` Table with mappings keys. Should have these fields:
+<span class="help-syntax-special">{lhs_tbl}</span> `(table)` 매핑 키 테이블. 다음 필드들이 있어야 합니다.
 
-  - <span class="help-syntax-keys">\<textobject\></span> `(string)` - Normal mode mapping to operate on textobject.
+  - <span class="help-syntax-keys">\<textobject\></span> `(string)` - 텍스트 오브젝트에 대해 작동하는 일반 모드 매핑.
 
-  - <span class="help-syntax-keys">\<line\></span> `(string)` - Normal mode mapping to operate on line.
-    Usually an alias for textobject mapping followed by [\_](https://neovim.io/doc/user/helptag.html?tag=_).
-    For "sort" it operates charwise on whole line without left and right
-    whitespace (as there is not much sense in sorting linewise a single line).
+  - <span class="help-syntax-keys">\<line\></span> `(string)` - 줄에 대해 작동하는 일반 모드 매핑. 보통 텍스트 오브젝트 매핑 뒤에 [\_](https://neovim.io/doc/user/helptag.html?tag=_)가 붙는 별칭입니다. "sort"의 경우 줄 전체에 대해 좌우 공백 없이 문자 단위로 작동합니다 (한 줄을 줄 단위로 정렬하는 것은 의미가 없기 때문입니다).
 
-  - <span class="help-syntax-keys">\<selection\></span> `(string)` - Visual mode mapping to operate on selection.
+  - <span class="help-syntax-keys">\<selection\></span> `(string)` - 선택 영역에 대해 작동하는 비주얼 모드 매핑.
 
-  Supply empty string to not create particular mapping. Note: creating `line`
-  mapping needs `textobject` mapping to be set.
+  특정 매핑을 만들지 않으려면 빈 문자열을 제공하세요. 참고: `line` 매핑을 만들려면 `textobject` 매핑이 설정되어 있어야 합니다.
 
-#### Usage {#minioperators.make_mappings-usage}
+#### 사용법 {#minioperators.make_mappings-usage}
 
 
 
@@ -548,82 +479,67 @@ Make operator mappings
 ### default_evaluate_func() {#minioperators.default_evaluate_func .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.default_evaluate_func`(<span class="help-syntax-special">{content}</span>)</p>
-Default evaluate function
+기본 평가 함수
 
-Evaluate text as Lua code and return object from last line (like if last
-line is prepended with `return` if it is not already).
+텍스트를 Lua 코드로 평가하고 마지막 줄의 객체를 반환합니다 (마지막 줄에 `return`이 없는 경우 앞에 붙인 것과 같습니다).
 
-Behavior depends on region submode:
-
-
-- For charwise and linewise regions, text evaluated as is.
+동작은 영역 서브모드에 따라 달라집니다.
 
 
-- For blockwise region, lines are evaluated per line using only first lines
-  of outputs. This allows separate execution of lines in order to provide
-  something different compared to linewise region.
+- 문자 단위 및 줄 단위 영역의 경우, 텍스트가 그대로 평가됩니다.
 
-#### Parameters {#minioperators.default_evaluate_func-parameters}
+
+- 블록 단위 영역의 경우, 줄별로 평가되며 출력의 첫 번째 줄만 사용합니다. 이를 통해 줄 단위 영역과 비교하여 다른 동작을 줄 수 있도록 줄별 실행이 가능합니다.
+
+#### 매개변수 {#minioperators.default_evaluate_func-parameters}
 
 
 
-<span class="help-syntax-special">{content}</span> `(table)` Table with the following fields:
+<span class="help-syntax-special">{content}</span> `(table)` 다음 필드를 포함하는 테이블.
 
-  - <span class="help-syntax-keys">\<lines\></span> `(table)` - array with content lines.
+  - <span class="help-syntax-keys">\<lines\></span> `(table)` - 콘텐츠 줄 배열.
 
-  - <span class="help-syntax-keys">\<submode\></span> `(string)` - region submode. One of `'v'`, `'V'`, `'<C-v>'` (escaped).
+  - <span class="help-syntax-keys">\<submode\></span> `(string)` - 영역 서브모드. `'v'`, `'V'`, `'<C-v>'`(이스케이프됨) 중 하나.
 
 ---
 
 ### default_sort_func() {#minioperators.default_sort_func .help-syntax-right-anchor}
 
 <p align="center">`MiniOperators.default_sort_func`(<span class="help-syntax-special">{content}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Default sort function
+기본 정렬 함수
 
-Sort text based on region submode:
-
-
-- For charwise region, split by separator pattern, sort parts, merge back
-  with separators. Actual pattern is inferred based on the array of patterns
-  from `opts.split_patterns`: whichever element is present in the text is
-  used, preferring the earlier one if several are present.
-  Example: sorting "c, b; a" line with default `opts.split_patterns` results
-  into "b; a, c" as it is split only by comma.
+영역 서브모드에 따라 텍스트를 정렬합니다.
 
 
-- For linewise and blockwise regions sort lines as is.
-
-Notes:
-
-- Sort is done with [table.sort()](https://neovim.io/doc/user/helptag.html?tag=table.sort\(\)) on an array of lines, which doesn't treat
-  whitespace or digits specially. Use [:sort](https://neovim.io/doc/user/helptag.html?tag=:sort) for more complicated tasks.
+- 문자 단위 영역의 경우, 구분자 패턴으로 분할하고 각 부분을 정렬한 후 구분자와 함께 다시 합칩니다. 실제 패턴은 `opts.split_patterns` 배열의 패턴을 기반으로 유추됩니다. 텍스트에 존재하는 요소 중 가장 먼저 나타나는 패턴을 우선적으로 사용합니다.
+  예: 기본 `opts.split_patterns`로 "c, b; a" 줄을 정렬하면 쉼표로만 분할되므로 "b; a, c"가 됩니다.
 
 
-- Pattern is allowed to be an empty string in which case split results into
-  all characters as parts.
+- 줄 단위 및 블록 단위 영역의 경우 줄을 있는 그대로 정렬합니다.
+
+참고:
+
+- 정렬은 줄 배열에 대해 [table.sort()](https://neovim.io/doc/user/helptag.html?tag=table.sort\(\))로 수행되며, 공백이나 숫자를 특별하게 처리하지 않습니다. 더 복잡한 작업에는 [:sort](https://neovim.io/doc/user/helptag.html?tag=:sort)를 사용하세요.
 
 
-- Pad pattern in `split_patterns` with `%s*` to include whitespace into separator.
-  Example: line "b _ a" with "_" pattern will be sorted as " a_b " (because
-  it is split as "b ", "_", " a" ) while with "%s_%s" pattern it results
-  into "a _ b" (split as "b", " _ ", "a").
+- 패턴은 빈 문자열일 수 있으며, 이 경우 모든 문자를 부분으로 분할합니다.
 
-#### Parameters {#minioperators.default_sort_func-parameters}
+
+- `split_patterns`의 패턴에 `%s*`를 추가하여 구분자에 공백을 포함시키세요.
+  예: "_" 패턴을 사용한 "b _ a" 줄은 " a_b "(각 부분이 "b ", "_", " a"로 분할되기 때문)로 정렬되는 반면, "%s_%s" 패턴을 사용하면 "a _ b"("b", " _ ", "a"로 분할됨)가 됩니다.
+
+#### 매개변수 {#minioperators.default_sort_func-parameters}
 
 
 
-<span class="help-syntax-special">{content}</span> `(table)` Table with the following fields:
+<span class="help-syntax-special">{content}</span> `(table)` 다음 필드를 포함하는 테이블.
 
-  - <span class="help-syntax-keys">\<lines\></span> `(table)` - array with content lines.
+  - <span class="help-syntax-keys">\<lines\></span> `(table)` - 콘텐츠 줄 배열.
 
-  - <span class="help-syntax-keys">\<submode\></span> `(string)` - region submode. One of `'v'`, `'V'`, `'<C-v>'` (escaped).
+  - <span class="help-syntax-keys">\<submode\></span> `(string)` - 영역 서브모드. `'v'`, `'V'`, `'<C-v>'`(이스케이프됨) 중 하나.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<compare_fun\></span> `(function)` - compare function compatible with [table.sort()](https://neovim.io/doc/user/helptag.html?tag=table.sort\(\)).
-    Default: direct compare with `<`.
+  - <span class="help-syntax-keys">\<compare_fun\></span> `(function)` - [table.sort()](https://neovim.io/doc/user/helptag.html?tag=table.sort\(\))와 호환되는 비교 함수. 기본값: `<`를 사용한 직접 비교.
 
-  - <span class="help-syntax-keys">\<split_patterns\></span> `(table)` - array of split Lua patterns to be used for
-    charwise submode. Order is important.
-    Default: `{ '%s*,%s*', '%s*;%s*', '%s+', '' }`.
-
+  - <span class="help-syntax-keys">\<split_patterns\></span> `(table)` - 문자 단위 서브모드에 사용될 분할 Lua 패턴 배열. 순서가 중요합니다. 기본값: `{ '%s*,%s*', '%s*;%s*', '%s+', '' }`.

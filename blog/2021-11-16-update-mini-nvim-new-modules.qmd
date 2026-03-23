@@ -1,29 +1,29 @@
 ---
-title: "Updates of 'mini.nvim'"
+title: "'mini.nvim' 업데이트"
 author: Evgeni Chasnovski
 date: 2021-11-16
 categories: [update, reddit]
-description: Version 0.1.0; call for beta-testing new modules ('sessions', 'starter', 'jump') before 0.2.0
+description: 버전 0.1.0; 0.2.0 이전의 새로운 모듈('sessions', 'starter', 'jump') 베타 테스트 요청
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/qve1eu/updates_of_mininvim_version_010_call_for/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/qve1eu/updates_of_mininvim_version_010_call_for/)*
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-This is a post about updates to my [mini.nvim](https://github.com/nvim-mini/mini.nvim) plugin with some changes after [previous post](2021-10-13-announce-mini-nvim.qmd).
+이것은 [이전 게시물](2021-10-13-announce-mini-nvim.qmd) 이후의 몇 가지 변경 사항과 함께 저의 [mini.nvim](https://github.com/nvim-mini/mini.nvim) 플러그인 업데이트에 관한 글입니다.
 
-I decided to adopt two branch approach with `main` (default) having latest development version of plugin and `stable` updating only upon releases after public beta-testing. After reacting to a handful of useful feedback there was a [0.1.0](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.1.0) release. Before making 0.2.0 I need your help in beta-testing some big updates (*especially if you use Windows*). Their general design is mostly stable, but I would like to hear your feedback about undesired behavior (a.k.a bugs), naming (are configuration and function names intuitive), default values (are they convenient), and documentation (is it clear enough).
+저는 최신 개발 버전의 플러그인을 담은 `main` (기본) 브랜치와 공개 베타 테스트 후 릴리스 시에만 업데이트되는 `stable` 브랜치를 사용하는 두 브랜치 방식을 채택하기로 결정했습니다. 유용한 피드백을 반영한 후 [0.1.0](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.1.0) 릴리스가 있었습니다. 0.2.0을 만들기 전에 몇 가지 큰 업데이트의 베타 테스트에 여러분의 도움이 필요합니다 (*특히 윈도우를 사용하신다면 더욱 그렇습니다*). 일반적인 디자인은 대부분 안정적이지만, 원치 않는 동작(즉, 버그), 명칭(설정 및 함수 이름이 직관적인지), 기본값(편리한지), 문서(충분히 명확한지)에 대한 여러분의 피드백을 듣고 싶습니다.
 
-New modules:
+새로운 모듈:
 
-- [`mini.sessions`](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-sessions.md) is a module for session management (read, write, delete) which works using builtin `mksession`. It was heavily inspired by 'vim-startify' and should work out of the box with sessions created by it (only provide path to where it stored them). Names of main functions are different from 'vim-startify' on purpose as I think they are more appropriate when it comes to managing session files.
-- [`mini.starter`](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-starter.md) is a minimal, fast, and flexible start screen which I am *really excited about*. Displayed items are fully customizable both in terms of what they do and how they look (with reasonable defaults). Item selection can be done using prefix query with instant visual feedback. Has example configurations similar to 'vim-startify' and 'dashboard-nvim'. I also made some [benchmarks](https://github.com/nvim-mini/mini.nvim/blob/main/benchmarks/starter/startup-summary.md) testing its effect on overall startup time (along with alternative plugins).
-- [`mini.jump`](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-jump.md) is a module for smarter jumping to a single character (something like [clever-f.vim](https://github.com/rhysd/clever-f.vim)). Initial idea and implementation by [Adam Blažek](https://github.com/xigoi).
+- [`mini.sessions`](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-sessions.md)는 내장된 `mksession`을 사용하여 작동하는 세션 관리(읽기, 쓰기, 삭제) 모듈입니다. 'vim-startify'에서 영감을 받았으며, 해당 플러그인에서 생성된 세션과 함께 바로 작동할 것입니다 (저장된 경로만 제공하면 됩니다). 주요 함수의 이름은 세션 파일을 관리하는 데 더 적절하다고 생각하여 'vim-startify'와 의도적으로 다르게 정했습니다.
+- [`mini.starter`](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-starter.md)는 제가 *정말로 기대하고 있는* 최소한의, 빠르고 유연한 시작 화면입니다. 표시되는 항목은 기능과 외관 모두에서 완전히 커스터마이징 가능합니다 (합리적인 기본값 제공). 항목 선택은 즉각적인 시각적 피드백과 함께 접두사 쿼리를 사용하여 수행할 수 있습니다. 'vim-startify' 및 'dashboard-nvim'과 유사한 예시 설정이 있습니다. 또한 전체 시작 시간에 미치는 영향을 테스트한 몇 가지 [벤치마크](https://github.com/nvim-mini/mini.nvim/blob/main/benchmarks/starter/startup-summary.md)도 만들었습니다 (다른 대안 플러그인들과 함께).
+- [`mini.jump`](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-jump.md)는 단일 문자로 더 똑똑하게 점프하기 위한 모듈입니다 ([clever-f.vim](https://github.com/rhysd/clever-f.vim)과 유사함). [Adam Blažek](https://github.com/xigoi)이 처음 아이디어를 내고 구현했습니다.
 
-Existing modules:
+기존 모듈:
 
-- [`mini.pairs`](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-pairs.md) got an update for a more user-friendly custom mappings. Now they can be done inside `setup()` call and can be automatically registered for `<BS>` and `<CR>` keys.
+- [`mini.pairs`](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-pairs.md)가 더 사용자 친화적인 커스텀 매핑을 위해 업데이트되었습니다. 이제 `setup()` 호출 내에서 매핑을 수행할 수 있으며 `<BS>` 및 `<CR>` 키에 대해 자동으로 등록될 수 있습니다.
 
-Feel free to drop your feedback in comments here or in dedicated GitHub issues ([sessions](https://github.com/nvim-mini/mini.nvim/issues/13), [starter](https://github.com/nvim-mini/mini.nvim/issues/14), [jump](https://github.com/nvim-mini/mini.nvim/issues/15)). If you end up adopting new modules right away, please keep in mind that there might be a slight turbulence as a result of this public beta-testing (which I hope will stop after 0.2.0 release planned in a couple of weeks).
+여기에 댓글을 남기거나 전용 GitHub 이슈([sessions](https://github.com/nvim-mini/mini.nvim/issues/13), [starter](https://github.com/nvim-mini/mini.nvim/issues/14), [jump](https://github.com/nvim-mini/mini.nvim/issues/15))를 통해 피드백을 자유롭게 남겨주세요. 새로운 모듈을 바로 채택하신다면, 이번 공개 베타 테스트의 결과로 약간의 변화가 있을 수 있음을 유의해 주시기 바랍니다 (2주 후에 예정된 0.2.0 릴리스 이후에는 안정될 것으로 기대합니다).
 
-Thanks!
+감사합니다!

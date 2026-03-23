@@ -1,45 +1,45 @@
 ---
-title: "Updates of 'mini.surround': custom surroundings"
+title: "'mini.surround' 업데이트: 사용자 정의 주변 텍스트"
 author: Evgeni Chasnovski
 date: 2022-04-20
 categories: [update, reddit]
-description: New features like custom surroundings and search method
+description: 사용자 정의 주변 텍스트 및 검색 방식과 같은 새로운 기능
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/u7v9ex/minisurround_new_features_custom_surroundings_and/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/u7v9ex/minisurround_new_features_custom_surroundings_and/)*
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I would like to share with you two new features of ['mini.surround'](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-surround.md), which is one of the many modules of my ['mini.nvim'](https://github.com/nvim-mini/mini.nvim) plugin. It is a module for working with text surrounding (think Lua implementation of 'tpope/vim-surround' or 'machakann/vim-sandwich' but with additional features). It supports add, delete, replace, find, and highlight surrounding. All of this is dot-repeatable and has extra builtin surroundings: 'function call', 'tag' and 'interactive' (prompts user to enter parts). And now it also has two big new features.
+저의 [mini.nvim](https://github.com/nvim-mini/mini.nvim) 플러그인의 여러 모듈 중 하나인 [mini.surround](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-surround.md)의 두 가지 새로운 기능을 공유하고자 합니다. 이것은 텍스트 주변(surround) 작업을 위한 모듈입니다 ('tpope/vim-surround' 또는 'machakann/vim-sandwich'의 Lua 구현체에 추가 기능이 더해진 것이라고 생각하시면 됩니다). 주변 텍스트 추가, 삭제, 교체, 찾기, 하이라이트를 지원합니다. 이 모든 기능은 dot-repeatable(점 반복 가능)이며 '함수 호출', '태그', '대화형'(사용자에게 입력을 요청)과 같은 추가 내장 주변 텍스트 기능을 제공합니다. 그리고 이제 두 가지 큰 새로운 기능이 추가되었습니다.
 
-## Custom surroundings
+## 사용자 정의 주변 텍스트 (Custom surroundings)
 
-You can define your own or modify existing surrounding with `config.custom_surroundings`. This way user can extend setup to meet their needs, like adding brackets with spaces, custom surrounding for Latex command or Lua long brackets (`[[...]]`), etc. Here is an example:
+`config.custom_surroundings`를 사용하여 자신만의 주변 텍스트를 정의하거나 기존의 것을 수정할 수 있습니다. 이를 통해 공백이 포함된 괄호를 추가하거나 Latex 명령이나 Lua 긴 괄호(`[[...]]`)를 위한 커스텀 주변 텍스트를 추가하는 등 사용자의 요구에 맞게 설정을 확장할 수 있습니다. 다음은 예시입니다:
 
 ```lua
 require('mini.surround').setup({
   custom_surroundings = {
-    -- Lua long brackets
+    -- Lua 긴 괄호
     s = {
-      -- Configuration for "input" (like for delete) is done with Lua patterns
+      -- "입력"(삭제와 같은 작업)에 대한 설정은 Lua 패턴으로 수행됩니다
       input = { find = '%[%[.-%]%]', extract = '^(..).*(..)$' },
-      -- Configuration for "output" (like for add) is done with plain text
+      -- "출력"(추가와 같은 작업)에 대한 설정은 일반 텍스트로 수행됩니다
       output = { left = '[[', right = ']]' },
     },
-    -- Use `(` to insert with spaces, `)` will still add without them
+    -- 공백과 함께 삽입하려면 `(`를 사용하고, `)`는 여전히 공백 없이 추가합니다
     ['('] = { output = { left = '( ', right = ' )' } },
   },
 })
 ```
 
-So now, for example, typing `sds` (`sd` - 'surround delete', `s` - identifier of custom surrounding) will search for Lua's long bracket and delete it. See [documentation](https://github.com/nvim-mini/mini.nvim/blob/8134370549e73a5a72d24ffc7ea6a881cf4502ad/doc/mini.txt#L3795) for more information.
+이제 예를 들어 `sds`(`sd` - 'surround delete', `s` - 커스텀 주변 텍스트 식별자)를 입력하면 Lua의 긴 괄호를 찾아 삭제합니다. 자세한 내용은 [문서](https://github.com/nvim-mini/mini.nvim/blob/8134370549e73a5a72d24ffc7ea6a881cf4502ad/doc/mini.txt#L3795)를 참조하세요.
 
-## Search method
+## 검색 방식 (Search method)
 
-Before this feature, 'mini.surround' searched only for "covering" surrounding: left part is before cursor, right part - after. Now this behavior is customizable with `config.search_method` option. So, for example, with its value `'cover_or_next'` you can type `sd)` in the beginning of line `aaa (bbb)` and it will edit like `aaa bbb`. Available methods are a more or less simplified version of how 'wellle/targets.vim' does it. See [documentation](https://github.com/nvim-mini/mini.nvim/blob/8134370549e73a5a72d24ffc7ea6a881cf4502ad/doc/mini.txt#L3880) for more information.
+이 기능 전까지 'mini.surround'는 커서가 왼쪽 파트와 오른쪽 파트 사이에 있는 "감싸는(covering)" 주변 텍스트만 검색했습니다. 이제 이 동작은 `config.search_method` 옵션으로 사용자 정의할 수 있습니다. 예를 들어 값을 `'cover_or_next'`로 설정하면 `aaa (bbb)` 행의 시작 부분에서 `sd)`를 입력하여 `aaa bbb`와 같이 편집할 수 있습니다. 사용 가능한 방식은 'wellle/targets.vim'의 방식을 다소 단순화한 버전입니다. 자세한 내용은 [문서](https://github.com/nvim-mini/mini.nvim/blob/8134370549e73a5a72d24ffc7ea6a881cf4502ad/doc/mini.txt#L3880)를 참조하세요.
 
 ---
 
-Both of these features were long overdue, but I didn't want to interfere with code much as there are many edge cases. Now that I've pulled myself together and written automated tests, it feels much safer to do so.
+이 두 기능은 오래전에 추가되었어야 했지만, 많은 예외 케이스가 있어 코드를 건드리는 것이 조심스러웠습니다. 이제 마음을 다잡고 자동화된 테스트를 작성했으므로 훨씬 안전하게 진행할 수 있게 되었습니다.
 
-Please, try this out and tell me what you think!
+이 기능을 사용해 보시고 의견을 들려주세요!

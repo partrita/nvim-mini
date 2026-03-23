@@ -1,55 +1,55 @@
 ---
-title: "Announcing 'mini.deps'"
+title: "'mini.deps' 발표"
 author: Evgeni Chasnovski
 date: 2024-02-11
 categories: [announce, reddit]
-description: Plugin manager with minimal yet sufficient user experience
+description: 최소한의 구성으로 충분한 사용자 경험을 제공하는 플러그인 관리자
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/1aodopi/minideps_a_plugin_manager_with_minimal_yet/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/1aodopi/minideps_a_plugin_manager_with_minimal_yet/)*
 
 {{< video 2024-02-11-announce-mini-deps/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am happy to share with you a release of [mini.deps](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) which acts as a plugin manager to install and manage other plugins. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.deps).
-
-------
-
-This was one of the toughest modules to write as of yet. Although overall goal of managing plugins seems more or less straightforward, actually designing the balance between simplicity and usability has proved to be not as trivial. I ended up redesigning the overall approach three times. Combined with slow iteration process of simulating plugin updates, not trivial testing, and some real life issues, this took waaaay longer than I would've liked. Despite all this, it is now fully designed, implemented, tested, and documented.
-
-Overall, it uses Git and built-in packages to install, update, clean, and snapshot plugins. It is far less feature-rich than ['folke/lazy.nvim'](https://github.com/folke/lazy.nvim) and slightly more user-friendly than ['savq/paq-nvim'](https://github.com/savq/paq-nvim). In my opinion it ended up somewhere near ['junegunn/vim-plug'](https://github.com/junegunn/vim-plug) when talking about user experience.
+다른 플러그인을 설치하고 관리하는 플러그인 관리자 역할을 하는 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.deps](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md)의 출시 소식을 전하게 되어 기쁩니다. 이 모듈은 [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.deps)를 통해서도 설치할 수 있습니다.
 
 ------
 
-Features:
+이 모듈은 지금까지 작성한 모듈 중 가장 까다로운 것 중 하나였습니다. 플러그인을 관리한다는 전반적인 목표는 비교적 명확해 보이지만, 단순함과 사용성 사이의 균형을 설계하는 것은 생각보다 쉽지 않았습니다. 결국 전반적인 접근 방식을 세 번이나 다시 설계해야 했습니다. 플러그인 업데이트 시뮬레이션의 느린 반복 과정, 복잡한 테스트, 그리고 몇 가지 개인적인 사정이 겹쳐 예상보다 훨씬 오랜 시간이 걸렸습니다. 이러한 우여곡절 끝에 마침내 설계, 구현, 테스트 및 문서화가 완료되었습니다.
 
-- Manage plugins utilizing Git and built-in packages with these actions:
-    - Add plugin to current session, download if absent.
-    - Update with/without confirm, with/without parallel download of new data.
-    - Delete unused plugins with/without confirm.
-    - Get / set / save / load snapshot.
+전반적으로 Git과 내장 패키지 기능을 사용하여 플러그인을 설치, 업데이트, 제거 및 스냅샷을 생성합니다. ['folke/lazy.nvim'](https://github.com/folke/lazy.nvim)보다는 기능이 훨씬 적지만, ['savq/paq-nvim'](https://github.com/savq/paq-nvim)보다는 약간 더 사용자 친화적입니다. 사용자 경험 측면에서는 ['junegunn/vim-plug'](https://github.com/junegunn/vim-plug)와 비슷한 수준이라고 생각합니다.
 
-- Minimal yet flexible plugin specification:
-    - Plugin source.
-    - Name of target plugin directory.
-    - Checkout target: branch, commit, tag, etc.
-    - Monitor branch to track updates without checking out.
-    - Dependencies to be set up prior to the target plugin.
-    - Hooks to call before/after plugin is created/changed.
+------
 
-- Helpers implementing two-stage startup: `now()` and `later()`.
+주요 기능:
 
-For slightly more details, see [overview in README](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md#overview).
+- Git 및 내장 패키지를 활용한 플러그인 관리:
+    - 현재 세션에 플러그인 추가 (없으면 다운로드).
+    - 확인 여부 및 병렬 다운로드 여부를 선택하여 업데이트.
+    - 확인 여부를 선택하여 사용하지 않는 플러그인 삭제.
+    - 스냅샷 가져오기 / 설정 / 저장 / 로드.
 
-For even more information, see these tags in help file:
+- 작지만 유연한 플러그인 사양:
+    - 플러그인 소스.
+    - 대상 플러그인 디렉토리 이름.
+    - 체크아웃 대상: 브랜치, 커밋, 태그 등.
+    - 체크아웃 없이 업데이트를 추적하기 위한 브랜치 모니터링.
+    - 대상 플러그인 전에 설정되어야 할 의존성.
+    - 플러그인 생성/변경 전후에 호출할 훅(hook).
+
+- 2단계 시작(startup)을 구현하는 헬퍼: `now()` 및 `later()`.
+
+더 자세한 내용은 [README의 개요](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md#overview)를 참조하세요.
+
+추가 정보는 도움말 파일의 다음 태그를 참조하세요:
 - [`*MiniDeps-plugin-specification*`](https://github.com/nvim-mini/mini.nvim/blob/490dd84b69008f75bcd5e593b7a92b06832d5b16/doc/mini-deps.txt#L240)
 - [`*MiniDeps-commands*`](https://github.com/nvim-mini/mini.nvim/blob/490dd84b69008f75bcd5e593b7a92b06832d5b16/doc/mini-deps.txt#L286)
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/689).
+한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/689)에 남겨주시면 감사하겠습니다.
 
-I do want to point out that it is a good idea to first try this without affecting your main config. Here is one example with [two quick steps of how to do this](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md#overview).
+메인 설정에 영향을 주지 않고 먼저 테스트해 보는 것을 권장합니다. [두 가지 간단한 단계로 테스트하는 방법](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md#overview)을 확인해 보세요.
 
-Thanks!
+감사합니다!

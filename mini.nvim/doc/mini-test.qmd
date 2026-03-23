@@ -1,215 +1,171 @@
 ---
-title: "mini.test documentation"
+title: "mini.test 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 `main` 브랜치에서 생성됨 _
 
-<a name="mini.test" href="mini-test.qmd#mini.test"><b>mini.test</b></a> Test Neovim plugins
+<a name="mini.test" href="mini-test.qmd#mini.test"><b>mini.test</b></a> Neovim 플러그인 테스트
 
-MIT License Copyright (c) 2022 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2022 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Test action is defined as a named callable entry of a table.
+- 테스트 동작은 테이블의 이름이 있는 호출 가능한 엔트리로 정의됩니다.
 
 
-- Helper for creating child Neovim process which is designed to be used in
-  tests (including taking and verifying screenshots). See
-  [MiniTest.new\_child\_neovim()](mini-test.qmd#minitest.new_child_neovim) and [MiniTest.expect.reference\_screenshot()](mini-test.qmd#minitest.expect.reference_screenshot).
+- 테스트에서 사용하도록 설계된 자식 Neovim 프로세스를 생성하기 위한 헬퍼입니다 (스크린샷 촬영 및 검증 포함).
+  [MiniTest.new\_child\_neovim()](mini-test.qmd#minitest.new_child_neovim) 및 [MiniTest.expect.reference\_screenshot()](mini-test.qmd#minitest.expect.reference_screenshot)를 참조하세요.
 
 
-- Hierarchical organization of tests with custom hooks, parametrization,
-  and user data. See [MiniTest.new\_set()](mini-test.qmd#minitest.new_set).
+- 커스텀 훅, 매개변수화 및 사용자 데이터를 사용한 테스트의 계층적 구조화.
+  [MiniTest.new\_set()](mini-test.qmd#minitest.new_set)을 참조하세요.
 
 
-- Emulation of [lunarmodules/busted](https://github.com/lunarmodules/busted)
-  interface (`describe`, `it`, etc.).
+- [lunarmodules/busted](https://github.com/lunarmodules/busted) 인터페이스 (`describe`, `it` 등) 에뮬레이션.
 
 
-- Predefined small yet usable set of expectations (`assert`-like functions).
-  See [MiniTest.expect](mini-test.qmd#minitest.expect).
+- 미리 정의된 작지만 유용한 기대치 (`assert`와 유사한 함수) 세트.
+  [MiniTest.expect](mini-test.qmd#minitest.expect)를 참조하세요.
 
 
-- Customizable definition of what files should be tested.
+- 어떤 파일을 테스트해야 하는지에 대한 커스터마이징 가능한 정의.
 
 
-- Test case filtering. There are predefined wrappers for testing a file
-  ([MiniTest.run\_file()](mini-test.qmd#minitest.run_file)) and case at a location like current cursor position
-  ([MiniTest.run\_at\_location()](mini-test.qmd#minitest.run_at_location)).
+- 테스트 케이스 필터링. 파일 테스트를 위한 미리 정의된 래퍼([MiniTest.run\_file()](mini-test.qmd#minitest.run_file))와 현재 커서 위치와 같은 위치에서의 케이스 테스트([MiniTest.run\_at\_location()](mini-test.qmd#minitest.run_at_location))가 있습니다.
 
 
-- Customizable reporter of output results. There are two predefined ones:
+- 커스터마이징 가능한 출력 결과 리포터. 두 가지 미리 정의된 리포터가 있습니다:
 
-    - [MiniTest.gen\_reporter.buffer()](mini-test.qmd#minitest.gen_reporter.buffer) for interactive usage.
+    - 대화형 사용을 위한 [MiniTest.gen\_reporter.buffer()](mini-test.qmd#minitest.gen_reporter.buffer).
 
-    - [MiniTest.gen\_reporter.stdout()](mini-test.qmd#minitest.gen_reporter.stdout) for headless Neovim.
+    - 헤드리스 Neovim을 위한 [MiniTest.gen\_reporter.stdout()](mini-test.qmd#minitest.gen_reporter.stdout).
 
 
-- Customizable project specific testing script.
+- 커스터마이징 가능한 프로젝트별 테스트 스크립트.
 
 
-- Works on Unix (Linux, MacOS, etc.) and Windows.
+- Unix (Linux, MacOS 등) 및 Windows에서 작동합니다.
 
-What it doesn't support:
+지원하지 않는 기능:
 
-- Parallel execution. Due to idea of limiting implementation complexity.
+- 병렬 실행. 구현 복잡성을 제한하기 위함입니다.
 
 
-- Mocks, stubs, etc. Use child Neovim process and manually override what is
-  needed. Reset child process it afterwards.
+- Mock, stub 등. 자식 Neovim 프로세스를 사용하고 필요한 것을 수동으로 재정의하세요. 그 후 자식 프로세스를 재설정하세요.
 
 
-- "Overly specific" expectations. Tests for (no) equality and (absence of)
-  errors usually cover most of the needs. Adding new expectations is a
-  subject to weighing its usefulness against additional implementation
-  complexity. Use [MiniTest.new\_expectation()](mini-test.qmd#minitest.new_expectation) to create custom ones.
+- "지나치게 구체적인" 기대치. (비)동등성 및 에러 (부재)에 대한 테스트는 대개 대부분의 요구 사항을 충족합니다. 새로운 기대치를 추가하는 것은 추가적인 구현 복잡성에 비해 유용성이 얼마나 큰지 따져봐야 합니다. 커스텀 기대치를 만들려면 [MiniTest.new\_expectation()](mini-test.qmd#minitest.new_expectation)을 사용하세요.
 
-For more information see:
+자세한 내용은 다음을 참조하세요:
 
-- 'TESTING.md' file for a hands-on introduction based on examples.
+- 예제 기반의 실무 소개는 'TESTING.md' 파일을 참조하세요.
 
 
-- Code of this plugin's tests. Consider it to be an example of intended
-  way to use 'mini.test' for test organization and creation.
+- 이 플러그인의 테스트 코드를 참조하세요. 'mini.test'를 사용하여 테스트를 조직하고 생성하는 의도된 방식의 예제로 간주하세요.
 
-#### Workflow {#module-workflow}
+#### 워크플로우 {#module-workflow}
 
 
 
-- Organize tests in separate files. Each test file should return a test set
-  (explicitly or implicitly by using "busted" style functions).
+- 테스트를 별도의 파일로 조직합니다. 각 테스트 파일은 (명시적으로 또는 "busted" 스타일 함수를 사용하여 암시적으로) 테스트 세트를 반환해야 합니다.
 
 
-- Write test actions as callable entries of test set. Use child process
-  inside test actions (see [MiniTest.new\_child\_neovim()](mini-test.qmd#minitest.new_child_neovim)) and builtin
-  expectations (see [MiniTest.expect](mini-test.qmd#minitest.expect)).
+- 테스트 동작을 테스트 세트의 호출 가능한 엔트리로 작성합니다. 테스트 동작 내부에서 자식 프로세스([MiniTest.new\_child\_neovim()](mini-test.qmd#minitest.new_child_neovim) 참조)와 내장 기대치([MiniTest.expect](mini-test.qmd#minitest.expect) 참조)를 사용합니다.
 
 
-- Run tests. This does two steps:
+- 테스트를 실행합니다. 이는 두 단계로 이루어집니다:
 
-    - Collect. This creates single hierarchical test set, flattens into
-      array of test cases (see [MiniTest-test-case](mini-test.qmd#minitest-test-case)) while expanding with
-      parametrization, and possibly filters them.
+    - 수집(Collect). 이는 단일 계층적 테스트 세트를 생성하고, 매개변수화로 확장하면서 테스트 케이스 배열([MiniTest-test-case](mini-test.qmd#minitest-test-case) 참조)로 평탄화하고, 필터링할 수도 있습니다.
 
-    - Execute. This safely calls hooks and main test actions in specified
-      order while allowing reporting progress in asynchronous fashion.
-      Detected errors means test case fail; otherwise - pass.
+    - 실행(Execute). 이는 비동기 방식으로 진행 상황을 보고할 수 있도록 허용하면서 지정된 순서대로 훅과 메인 테스트 동작을 안전하게 호출합니다. 에러가 감지되면 테스트 케이스 실패를 의미하며, 그렇지 않으면 성공입니다.
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.test').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniTest`
-which you can use for scripting or manually (with `:lua MiniTest.*`).
+이 모듈은 `require('mini.test').setup({})` 호출을 통한 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로 (`:lua MiniTest.*`를 사용하여) 사용할 수 있는 전역 Lua 테이블 `MiniTest`를 생성합니다.
 
-See [MiniTest.config](mini-test.qmd#minitest.config) for available config settings.
+사용 가능한 설정 옵션은 [MiniTest.config](mini-test.qmd#minitest.config)를 참조하세요.
 
-You can override runtime config settings locally to buffer inside
-`vim.b.minitest_config` which should have same structure as `MiniTest.config`.
-See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+`MiniTest.config`와 동일한 구조를 가져야 하는 `vim.b.minitest_config`를 사용하여 버퍼별로 런타임 설정을 로컬에서 재정의할 수 있습니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
 
-To stop module from showing non-error feedback, set `config.silent = true`.
+모듈이 에러가 아닌 피드백을 표시하지 않게 하려면 `config.silent = true`로 설정하세요.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
-- Testing infrastructure from
-  [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim):
+- [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)의 테스트 인프라:
 
-    - Executes each file in separate headless Neovim process with customizable
-      'init.vim' file. While 'mini.test' executes everything in current
-      Neovim process encouraging writing tests with help of manually
-      managed child Neovim process (see [MiniTest.new\_child\_neovim()](mini-test.qmd#minitest.new_child_neovim)).
+    - 커스터마이징 가능한 'init.vim' 파일을 사용하여 각 파일을 별도의 헤드리스 Neovim 프로세스에서 실행합니다. 반면 'mini.test'는 현재 Neovim 프로세스에서 모든 것을 실행하며, 수동으로 관리되는 자식 Neovim 프로세스([MiniTest.new\_child\_neovim()](mini-test.qmd#minitest.new_child_neovim) 참조)를 사용하여 테스트를 작성하도록 권장합니다.
 
-    - Tests are expected to be written with embedded simplified versions of
-      'lunarmodules/busted' and 'lunarmodules/luassert'. While 'mini.test'
-      uses concepts of test set (see [MiniTest.new\_set()](mini-test.qmd#minitest.new_set)) and test case
-      (see [MiniTest-test-case](mini-test.qmd#minitest-test-case)). It also can emulate bigger part of
-      "busted" framework.
+    - 테스트는 'lunarmodules/busted' 및 'lunarmodules/luassert'의 간소화된 내장 버전을 사용하여 작성될 것으로 예상됩니다. 반면 'mini.test'는 테스트 세트([MiniTest.new\_set()](mini-test.qmd#minitest.new_set) 참조)와 테스트 케이스([MiniTest-test-case](mini-test.qmd#minitest-test-case) 참조)의 개념을 사용합니다. 또한 "busted" 프레임워크의 더 큰 부분을 에뮬레이션할 수 있습니다.
 
-    - Has single way of reporting progress (shows result after every case
-      without summary). While 'mini.test' can have customized reporters
-      with defaults for interactive and headless usage (provide more
-      compact and user-friendly summaries).
+    - 진행 상황을 보고하는 단일 방식(요약 없이 매 케이스 후 결과 표시)만 있습니다. 반면 'mini.test'는 대화형 및 헤드리스 사용을 위한 기본값이 있는 커스터마이징된 리포터를 가질 수 있습니다 (더 작고 사용자 친화적인 요약을 제공합니다).
 
-    - Allows parallel execution, while 'mini.test' does not.
+    - 병렬 실행을 허용하지만, 'mini.test'는 허용하지 않습니다.
 
-    - Allows making mocks, stubs, and spies, while 'mini.test' does not in
-      favor of manually overwriting functionality in child Neovim process.
+    - Mock, stub, spy 생성을 허용하지만, 'mini.test'는 자식 Neovim 프로세스에서 기능을 수동으로 재정의하는 방식을 선호하여 허용하지 않습니다.
 
-Although 'mini.test' supports emulation of "busted style" testing, it will
-be more stable to use its designed approach of defining tests (with
-`MiniTest.new_set()` and explicit table fields). Couple of reasons:
+'mini.test'는 "busted 스타일" 테스트 에뮬레이션을 지원하지만, 설계된 테스트 정의 방식(`MiniTest.new_set()` 및 명시적 테이블 필드 사용)을 사용하는 것이 더 안정적입니다. 몇 가지 이유:
 
-- "Busted" syntax doesn't support full capabilities offered by 'mini.test'.
-  Mainly it is about parametrization and supplying user data to test sets.
+- "Busted" 구문은 'mini.test'가 제공하는 모든 기능을 지원하지 않습니다. 주로 매개변수화 및 테스트 세트에 사용자 데이터 제공에 관한 것입니다.
 
-- It is an emulation, not full support. So some subtle things might not
-  work the way you expect.
+- 이는 에뮬레이션이지 완전한 지원이 아닙니다. 따라서 일부 미묘한 부분이 예상대로 작동하지 않을 수 있습니다.
 
-Some hints for converting from 'plenary.nvim' tests to 'mini.test':
+'plenary.nvim' 테스트를 'mini.test'로 변환하기 위한 몇 가지 힌트:
 
-- Rename files from "*_spec.lua" to "test_*.lua" and put them in
-  "tests" directory.
+- 파일 이름을 "*_spec.lua"에서 "test_*.lua"로 변경하고 "tests" 디렉토리에 넣습니다.
 
-- Replace `assert` calls with 'mini.test' expectations. See [MiniTest.expect](mini-test.qmd#minitest.expect).
+- `assert` 호출을 'mini.test' 기대치로 교체합니다. [MiniTest.expect](mini-test.qmd#minitest.expect)를 참조하세요.
 
-- Create main test set `T = MiniTest.new_set()` and eventually return it.
+- 메인 테스트 세트 `T = MiniTest.new_set()`을 생성하고 최종적으로 반환합니다.
 
-- Make new sets ([MiniTest.new\_set()](mini-test.qmd#minitest.new_set)) from `describe` blocks. Convert
-  `before_each()` and `after_each` to `pre_case` and `post_case` hooks.
+- `describe` 블록에서 새로운 세트([MiniTest.new\_set()](mini-test.qmd#minitest.new_set))를 만듭니다. `before_each()` 및 `after_each`를 `pre_case` 및 `post_case` 훅으로 변환합니다.
 
-- Make test cases from `it` blocks.
+- `it` 블록에서 테스트 케이스를 만듭니다.
 
-#### Highlight groups {#module-highlightgroups}
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
 
-- `MiniTestEmphasis` - emphasis highlighting. By default it is a bold text.
+- `MiniTestEmphasis` - 강조 하이라이팅. 기본적으로 굵은 텍스트입니다.
 
-- `MiniTestFail` - highlighting of failed cases. By default it is a bold
-  text with `vim.g.terminal_color_1` color (red).
+- `MiniTestFail` - 실패한 케이스의 하이라이팅. 기본적으로 `vim.g.terminal_color_1` 색상(빨간색)의 굵은 텍스트입니다.
 
-- `MiniTestPass` - highlighting of passed cases. By default it is a bold
-  text with `vim.g.terminal_color_2` color (green).
+- `MiniTestPass` - 통과한 케이스의 하이라이팅. 기본적으로 `vim.g.terminal_color_2` 색상(초록색)의 굵은 텍스트입니다.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable, set `vim.g.minitest_disable` (globally) or `vim.b.minitest_disable`
-(for a buffer) to `true`. Considering high number of different scenarios
-and customization intentions, writing exact rules for disabling module's
-functionality is left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common
-recipes.
+비활성화하려면 `vim.g.minitest_disable`(전역) 또는 `vim.b.minitest_disable`(버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 커스터마이징 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙을 작성하는 것은 사용자의 몫으로 남겨둡니다. 일반적인 레시피는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
 ### setup() {#minitest.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minitest.setup-parameters}
+#### 매개변수 {#minitest.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniTest.config](mini-test.qmd#minitest.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniTest.config](mini-test.qmd#minitest.config)를 참조하세요.
 
-#### Usage {#minitest.setup-usage}
+#### 사용법 {#minitest.setup-usage}
 
 
 
   ```lua
-  require('mini.test').setup() -- use default config
-  -- OR
-  require('mini.test').setup({}) -- replace {} with your config table
+  require('mini.test').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.test').setup({}) -- {}를 설정 테이블로 교체
   ```
 
 ---
@@ -217,42 +173,41 @@ Module setup
 ### config {#minitest.config .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.config`</p>
-#### Defaults {#minitest.config-defaults}
+#### 기본값 {#minitest.config-defaults}
 
 
 
   ```lua
   MiniTest.config = {
-    -- Options for collection of test cases. See `:h MiniTest.collect()`.
+    -- 테스트 케이스 수집을 위한 옵션. `:h MiniTest.collect()` 참조.
     collect = {
-      -- Temporarily emulate functions from 'busted' testing framework
-      -- (`describe`, `it`, `before_each`, `after_each`, and more)
+      -- 'busted' 테스트 프레임워크의 함수를 일시적으로 에뮬레이션
+      -- (`describe`, `it`, `before_each`, `after_each` 등)
       emulate_busted = true,
 
-      -- Function returning array of file paths to be collected.
-      -- Default: all Lua files in 'tests' directory starting with 'test_'.
+      -- 수집할 파일 경로 배열을 반환하는 함수.
+      -- 기본값: 'tests' 디렉토리에서 'test_'로 시작하는 모든 Lua 파일.
       find_files = function()
         return vim.fn.globpath('tests', '**/test_*.lua', true, true)
       end,
 
-      -- Predicate function indicating if test case should be executed
+      -- 테스트 케이스 실행 여부를 나타내는 서술어 함수
       filter_cases = function(case) return true end,
     },
 
-    -- Options for execution of test cases. See `:h MiniTest.execute()`.
+    -- 테스트 케이스 실행을 위한 옵션. `:h MiniTest.execute()` 참조.
     execute = {
-      -- Table with callable fields `start()`, `update()`, and `finish()`
+      -- 호출 가능한 필드 `start()`, `update()`, `finish()`를 가진 테이블
       reporter = nil,
 
-      -- Whether to stop execution after first error
+      -- 첫 번째 에러 발생 시 실행을 중지할지 여부
       stop_on_error = false,
     },
 
-    -- Path (relative to current directory) to script which handles project
-    -- specific test running
+    -- 프로젝트별 테스트 실행을 처리하는 스크립트 경로(현재 디렉토리 기준 상대 경로)
     script_path = 'scripts/minitest.lua',
 
-    -- Whether to disable showing non-error feedback
+    -- 에러가 아닌 피드백 표시를 비활성화할지 여부
     silent = false,
   }
   ```
@@ -262,116 +217,89 @@ Module setup
 ### current {#minitest.current .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.current`</p>
-Table with information about current state of test execution
+테스트 실행의 현재 상태에 대한 정보가 담긴 테이블
 
-Use it to examine result of [MiniTest.execute()](mini-test.qmd#minitest.execute). It is reset at the
-beginning of every call.
+[MiniTest.execute()](mini-test.qmd#minitest.execute)의 결과를 검사하는 데 사용하세요. 매 호출 시작 시 초기화됩니다.
 
-At least these keys are supported:
+최소한 다음 키들이 지원됩니다:
 
-- <span class="help-syntax-keys">\<all_cases\></span> - array with all cases being currently executed. Basically,
-  an input of `MiniTest.execute()`.
+- <span class="help-syntax-keys">\<all_cases\></span> - 현재 실행 중인 모든 케이스의 배열. 기본적으로 `MiniTest.execute()`의 입력값입니다.
 
-- <span class="help-syntax-keys">\<case\></span> - currently executed test case. See [MiniTest-test-case](mini-test.qmd#minitest-test-case). Use it
-  to customize execution output (like adding custom notes, etc).
+- <span class="help-syntax-keys">\<case\></span> - 현재 실행 중인 테스트 케이스. [MiniTest-test-case](mini-test.qmd#minitest-test-case)를 참조하세요. 실행 출력(커스텀 노트 추가 등)을 커스터마이징하는 데 사용하세요.
 
 ---
 
 ### new_set() {#minitest.new_set .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.new_set`(<span class="help-syntax-special">{opts}</span>, <span class="help-syntax-special">{tbl}</span>)</p>
-Create test set
+테스트 세트 생성
 
-Test set is one of the two fundamental data structures. It is a table that
-defines hierarchical test organization as opposed to sequential
-organization with [MiniTest-test-case](mini-test.qmd#minitest-test-case).
+테스트 세트는 두 가지 기본 데이터 구조 중 하나입니다. 이는 [MiniTest-test-case](mini-test.qmd#minitest-test-case)를 통한 순차적 조직과 반대되는 계층적 테스트 조직을 정의하는 테이블입니다.
 
-All its elements are one of three categories:
+모든 요소는 다음 세 가지 카테고리 중 하나에 속합니다:
 
-- A callable (object that can be called; function or table with `__call`
-  metatble entry) is considered to define a test action. It will be called
-  with "current arguments" (result of all nested `parametrize` values, read
-  further). If it throws error, test has failed.
+- 호출 가능한 객체(함수 또는 `__call` 메타테이블 엔트리가 있는 테이블)는 테스트 동작을 정의하는 것으로 간주됩니다. 이는 "현재 인자"(중첩된 모든 `parametrize` 값의 결과, 후술함)와 함께 호출됩니다. 에러가 발생하면 테스트가 실패한 것입니다.
 
-- A test set (output of this function) defines nested structure. Its
-  options during collection (see [MiniTest.collect()](mini-test.qmd#minitest.collect)) will be extended
-  with options of this (parent) test set.
+- 테스트 세트(이 함수의 출력)는 중첩된 구조를 정의합니다. 수집 중 옵션([MiniTest.collect()](mini-test.qmd#minitest.collect) 참조)은 이(부모) 테스트 세트의 옵션으로 확장됩니다.
 
-- Any other elements are considered helpers and don't directly participate
-  in test structure.
+- 그 외의 요소는 헬퍼로 간주되며 테스트 구조에 직접 참여하지 않습니다.
 
-Set options allow customization of test collection and execution (more
-details in `opts` description):
+세트 옵션을 통해 테스트 수집 및 실행을 커스터마이징할 수 있습니다 (`opts` 설명에 더 자세한 내용이 있습니다):
 
-- `hooks` - table with elements that will be called without arguments at
-  predefined stages of test execution.
+- `hooks` - 테스트 실행의 미리 정의된 단계에서 인자 없이 호출될 요소가 있는 테이블입니다.
 
-- `parametrize` - array defining different arguments with which main test
-  actions will be called. Any non-trivial parametrization will lead to
-  every element (even nested) be "multiplied" and processed with every
-  element of `parametrize`. This allows handling many different combination
-  of tests with little effort.
+- `parametrize` - 메인 테스트 동작이 호출될 다양한 인자를 정의하는 배열입니다. 사소하지 않은 매개변수화는 모든 요소(중첩된 것 포함)가 `parametrize`의 모든 요소에 대해 "복제"되어 처리되도록 합니다. 이를 통해 적은 노력으로 다양한 테스트 조합을 처리할 수 있습니다.
 
-- `data` - table with user data that will be forwarded to cases. Primary
-  objective is to be used for customized case filtering.
+- `data` - 케이스로 전달될 사용자 데이터가 담긴 테이블입니다. 주요 목적은 커스터마이징된 케이스 필터링에 사용되는 것입니다.
 
-Notes:
+참고:
 
-- Preferred way of adding elements is by using syntax `T[name] = element`.
-  This way order of added elements will be preserved. Any other way won't
-  guarantee any order.
+- 요소를 추가하는 기본 방식은 `T[name] = element` 구문을 사용하는 것입니다. 이 방식을 사용하면 추가된 요소의 순서가 보존됩니다. 다른 방식은 순서를 보장하지 않습니다.
 
-- Supplied options `opts` are stored in `opts` field of metatable
-  (`getmetatable(set).opts`).
+- 제공된 옵션 `opts`는 메타테이블의 `opts` 필드(`getmetatable(set).opts`)에 저장됩니다.
 
-#### Parameters {#minitest.new_set-parameters}
+#### 매개변수 {#minitest.new_set-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Allowed options:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 허용되는 옵션:
 
-  - <span class="help-syntax-keys">\<hooks\></span> - table with fields:
+  - <span class="help-syntax-keys">\<hooks\></span> - 다음 필드를 가진 테이블:
 
-      - <span class="help-syntax-keys">\<pre_once\></span> - executed before first filtered node.
+      - <span class="help-syntax-keys">\<pre_once\></span> - 필터링된 첫 번째 노드 전에 실행됩니다.
 
-      - <span class="help-syntax-keys">\<pre_case\></span> - executed before each case (even nested).
+      - <span class="help-syntax-keys">\<pre_case\></span> - 각 케이스(중첩된 케이스 포함) 전에 실행됩니다.
 
-      - <span class="help-syntax-keys">\<post_case\></span> - executed after each case (even nested).
+      - <span class="help-syntax-keys">\<post_case\></span> - 각 케이스(중첩된 케이스 포함) 후에 실행됩니다.
 
-      - <span class="help-syntax-keys">\<post_once\></span> - executed after last filtered node.
+      - <span class="help-syntax-keys">\<post_once\></span> - 필터링된 마지막 노드 후에 실행됩니다.
 
-  - <span class="help-syntax-keys">\<parametrize\></span> - array where each element is itself an array of
-    parameters to be appended to "current parameters" of callable fields.
-    Note: don't use plain `{}` as it is equivalent to "parametrization into
-    zero cases", so no cases will be collected from this set. Calling test
-    actions with no parameters is equivalent to `{{}}` or not supplying
-    `parametrize` option at all.
+  - <span class="help-syntax-keys">\<parametrize\></span> - 각 요소 자체가 호출 가능한 필드의 "현재 매개변수"에 추가될 매개변수 배열인 배열입니다.
+    참고: `{}`는 "매개변수화 결과 케이스 0개"와 동일하므로 평범한 `{}`를 사용하지 마세요. 이 세트에서는 어떤 케이스도 수집되지 않습니다. 매개변수 없이 테스트 동작을 호출하는 것은 `{{}}`를 사용하거나 `parametrize` 옵션을 아예 제공하지 않는 것과 동일합니다.
 
-  - <span class="help-syntax-keys">\<data\></span> - user data to be forwarded to cases. Can be used for a more
-    granular filtering.
+  - <span class="help-syntax-keys">\<data\></span> - 케이스로 전달될 사용자 데이터입니다. 더 세밀한 필터링에 사용될 수 있습니다.
 
-  - <span class="help-syntax-keys">\<n_retry\></span> - number of times to retry each case until success.
-    Default: 1.
+  - <span class="help-syntax-keys">\<n_retry\></span> - 성공할 때까지 각 케이스를 재시도할 횟수입니다.
+    기본값: 1.
 
-<span class="help-syntax-special">{tbl}</span> `(table|nil)` Initial test items (possibly nested). Will be executed
-  without any guarantees on order.
+<span class="help-syntax-special">{tbl}</span> `(table|nil)` 초기 테스트 항목(중첩 가능). 순서에 대한 보장 없이 실행됩니다.
 
-#### Return {#minitest.new_set-return}
+#### 반환 {#minitest.new_set-return}
 
 
-`(table)` A single test set.
+`(table)` 단일 테스트 세트.
 
-#### Usage {#minitest.new_set-usage}
+#### 사용법 {#minitest.new_set-usage}
 
 
 
   ```lua
-  -- Use with defaults
+  -- 기본값 사용
   T = MiniTest.new_set()
   T['works'] = function() MiniTest.expect.equality(1, 1) end
 
-  -- Use with custom options. This will result into two actual cases: first
-  -- will pass, second - fail after two attempts.
+  -- 커스텀 옵션 사용. 이는 실제 두 개의 케이스로 결과가 나옵니다: 첫 번째는
+  -- 통과하고, 두 번째는 두 번의 시도 후 실패합니다.
   T['nested'] = MiniTest.new_set({
     hooks = { pre_case = function() _G.x = 1 end },
     parametrize = { { 1 }, { 2 } },
@@ -383,335 +311,286 @@ Notes:
 
 ---
 
-### Test case {#minitest-test-case .help-syntax-right-anchor}
+### 테스트 케이스 {#minitest-test-case .help-syntax-right-anchor}
 
-Test case
+테스트 케이스
 
-An item of sequential test organization, as opposed to hierarchical with
-test set (see [MiniTest.new\_set()](mini-test.qmd#minitest.new_set)). It is created as result of test
-collection with [MiniTest.collect()](mini-test.qmd#minitest.collect) to represent all necessary information
-of test execution.
+테스트 세트를 통한 계층적 조직(참조 [MiniTest.new\_set()](mini-test.qmd#minitest.new_set))과 반대되는 순차적 테스트 조직의 항목입니다. 테스트 실행의 모든 필요한 정보를 나타내기 위해 [MiniTest.collect()](mini-test.qmd#minitest.collect)를 통한 테스트 수집 결과로 생성됩니다.
 
-Execution of test case goes by the following rules:
+테스트 케이스 실행은 다음 규칙을 따릅니다:
 
-- Call functions in order:
+- 다음 순서로 함수를 호출합니다:
 
-    - All elements of `hooks.pre` from first to last without arguments.
+    - `hooks.pre`의 모든 요소를 첫 번째부터 마지막까지 인자 없이 호출합니다.
 
-    - Field `test` with arguments unpacked from `args`. If execution fails,
-      retry it (along with hooks that come from `pre_case` and `post_case`)
-      at most `n_retry` times until first success (if any).
+    - `args`에서 언팩된 인자와 함께 `test` 필드를 호출합니다. 실행이 실패하면, 첫 번째 성공할 때까지(성공한다면) 최대 `n_retry` 번 재시도합니다 (`pre_case` 및 `post_case`에서 오는 훅과 함께).
 
-    - All elements of `hooks.post` from first to last without arguments.
+    - `hooks.post`의 모든 요소를 첫 번째부터 마지막까지 인자 없이 호출합니다.
 
-- Error in any call gets appended to `exec.fails`, meaning error in any
-  hook will lead to test fail.
+- 모든 호출에서의 에러는 `exec.fails`에 추가됩니다. 즉, 어떤 훅에서의 에러도 테스트 실패로 이어집니다.
 
-- State (`exec.state`) is changed before every call and after last call.
+- 상태(`exec.state`)는 매 호출 전과 마지막 호출 후에 변경됩니다.
 
-#### Class {#minitest-test-case-class}
+#### 클래스 {#minitest-test-case-class}
 
 
 
 <span class="help-syntax-special">{Test-case}</span>
 
-#### Fields {#minitest-test-case-fields}
+#### 필드 {#minitest-test-case-fields}
 
 
 
-<span class="help-syntax-special">{args}</span> `(table)` Array of arguments with which `test` will be called.
+<span class="help-syntax-special">{args}</span> `(table)` `test` 호출 시 사용될 인자 배열입니다.
 
-<span class="help-syntax-special">{data}</span> `(table)` User data: all fields of `opts.data` from nested test sets.
+<span class="help-syntax-special">{data}</span> `(table)` 사용자 데이터: 중첩된 테스트 세트의 `opts.data`의 모든 필드입니다.
 
-<span class="help-syntax-special">{desc}</span> `(table)` Description: array of fields from nested test sets.
+<span class="help-syntax-special">{desc}</span> `(table)` 설명: 중첩된 테스트 세트의 필드 배열입니다.
 
-<span class="help-syntax-special">{exec}</span> `(table|nil)` Information about test case execution. Value of `nil` means
-  that this particular case was not (yet) executed. Has following fields:
+<span class="help-syntax-special">{exec}</span> `(table|nil)` 테스트 케이스 실행에 대한 정보입니다. `nil` 값은 이 특정 케이스가 아직 실행되지 않았음을 의미합니다. 다음 필드를 가집니다:
 
-  - <span class="help-syntax-keys">\<fails\></span> - array of strings with failing information.
+  - <span class="help-syntax-keys">\<fails\></span> - 실패 정보가 담긴 문자열 배열입니다.
 
-  - <span class="help-syntax-keys">\<notes\></span> - array of strings with non-failing information.
+  - <span class="help-syntax-keys">\<notes\></span> - 실패하지 않은 정보가 담긴 문자열 배열입니다.
 
-  - <span class="help-syntax-keys">\<state\></span> - state of test execution. One of:
+  - <span class="help-syntax-keys">\<state\></span> - 테스트 실행 상태입니다. 다음 중 하나입니다:
 
-      - 'Executing <name of what is being executed>' (during execution).
+      - 'Executing <실행 중인 항목 이름>' (실행 중).
 
-      - 'Pass' (no fails, no notes).
+      - 'Pass' (실패 없음, 노트 없음).
 
-      - 'Pass with notes' (no fails, some notes).
+      - 'Pass with notes' (실패 없음, 일부 노트 있음).
 
-      - 'Fail' (some fails, no notes).
+      - 'Fail' (일부 실패, 노트 없음).
 
-      - 'Fail with notes' (some fails, some notes).
+      - 'Fail with notes' (일부 실패, 일부 노트 있음).
 
-<span class="help-syntax-special">{hooks}</span> `(table)` Hooks to be executed as part of test case. Has fields:
+<span class="help-syntax-special">{hooks}</span> `(table)` 테스트 케이스의 일부로 실행될 훅입니다. 다음 필드를 가집니다:
 
-  - <span class="help-syntax-keys">\<pre\></span> and <span class="help-syntax-keys">\<post\></span> - arrays of functions to be consecutively executed
-    before and after every execution of `test`.
+  - <span class="help-syntax-keys">\<pre\></span> 및 <span class="help-syntax-keys">\<post\></span> - `test`가 실행될 때마다 전후에 연속적으로 실행될 함수 배열입니다.
 
-  - <span class="help-syntax-keys">\<pre_source\></span> and <span class="help-syntax-keys">\<post_source\></span> - arrays of strings with sources of
-    corresponding elements in <span class="help-syntax-keys">\<pre\></span> and <span class="help-syntax-keys">\<post\></span> arrays. Source is one of
-    `"once"` (for `pre_once` and `post_once` hooks) and
-    `"case"` (for `pre_case` and `post_case` hooks).
+  - <span class="help-syntax-keys">\<pre_source\></span> 및 <span class="help-syntax-keys">\<post_source\></span> - <span class="help-syntax-keys">\<pre\></span> 및 <span class="help-syntax-keys">\<post\></span> 배열의 해당 요소의 소스가 담긴 문자열 배열입니다. 소스는 `"once"` (`pre_once` 및 `post_once` 훅용) 와 `"case"` (`pre_case` 및 `post_case` 훅용) 중 하나입니다.
 
-<span class="help-syntax-special">{test}</span> `(function|table)` Main callable object representing test action.
+<span class="help-syntax-special">{test}</span> `(function|table)` 테스트 동작을 나타내는 메인 호출 가능 객체입니다.
 
 ---
 
 ### skip() {#minitest.skip .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.skip`(<span class="help-syntax-special">{msg}</span>)</p>
-Skip the rest of current case
+현재 케이스의 나머지 부분 건너뛰기
 
-Notes:
+참고:
 
-- When called inside test case, stops execution while adding message to notes.
+- 테스트 케이스 내부에서 호출되면, 노트에 메시지를 추가하면서 실행을 중지합니다.
 
-- When called inside `pre_case` hook, registers skip at the start of its
-  test case. Calling in other hooks has no effect.
+- `pre_case` 훅 내부에서 호출되면, 해당 테스트 케이스 시작 시 건너뛰기를 등록합니다. 다른 훅에서 호출하는 것은 효과가 없습니다.
 
-- Currently implemented as a specially handled type of error.
+- 현재 특별하게 처리되는 에러 유형으로 구현되어 있습니다.
 
-#### Parameters {#minitest.skip-parameters}
-
+#### 매개변수 {#minitest.skip-parameters}
 
 
-<span class="help-syntax-special">{msg}</span> `(string|nil)` Message to be added to current case notes.
+
+<span class="help-syntax-special">{msg}</span> `(string|nil)` 현재 케이스 노트에 추가할 메시지입니다.
 
 ---
 
 ### add_note() {#minitest.add_note .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.add_note`(<span class="help-syntax-special">{msg}</span>)</p>
-Add note to currently executed test case
+현재 실행 중인 테스트 케이스에 노트 추가
 
-Appends `msg` to `exec.notes` field of `case` in [MiniTest.current](mini-test.qmd#minitest.current).
+[MiniTest.current](mini-test.qmd#minitest.current)에 있는 `case`의 `exec.notes` 필드에 `msg`를 추가합니다.
 
-#### Parameters {#minitest.add_note-parameters}
+#### 매개변수 {#minitest.add_note-parameters}
 
 
 
-<span class="help-syntax-special">{msg}</span> `(string)` Note to add.
+<span class="help-syntax-special">{msg}</span> `(string)` 추가할 노트입니다.
 
 ---
 
 ### finally() {#minitest.finally .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.finally`(<span class="help-syntax-special">{f}</span>)</p>
-Register callable execution after current callable
+현재 호출 가능 객체 이후에 호출 가능 객체 실행 등록
 
-Can be used several times inside hooks and main test callable of test case.
+훅 및 테스트 케이스의 메인 테스트 호출 가능 객체 내부에서 여러 번 사용될 수 있습니다.
 
-#### Parameters {#minitest.finally-parameters}
+#### 매개변수 {#minitest.finally-parameters}
 
 
 
-<span class="help-syntax-special">{f}</span> `(function|table)` Callable to be executed after current callable is
-  finished executing (regardless of whether it ended with error or not).
+<span class="help-syntax-special">{f}</span> `(function|table)` 현재 호출 가능 객체 실행이 끝난 후 (에러 발생 여부와 상관없이) 실행될 호출 가능 객체입니다.
 
 ---
 
 ### run() {#minitest.run .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.run`(<span class="help-syntax-special">{opts}</span>)</p>
-Run tests
+테스트 실행
 
 
-- Try executing project specific script at path `opts.script_path`. If
-  successful (no errors), then stop.
+- `opts.script_path` 경로에 있는 프로젝트별 스크립트 실행을 시도합니다. 성공하면(에러 없으면) 중지합니다.
 
-- Collect cases with [MiniTest.collect()](mini-test.qmd#minitest.collect) and `opts.collect`.
+- [MiniTest.collect()](mini-test.qmd#minitest.collect) 및 `opts.collect`를 사용하여 케이스를 수집합니다.
 
-- Execute collected cases with [MiniTest.execute()](mini-test.qmd#minitest.execute) and `opts.execute`.
+- [MiniTest.execute()](mini-test.qmd#minitest.execute) 및 `opts.execute`를 사용하여 수집된 케이스를 실행합니다.
 
-#### Parameters {#minitest.run-parameters}
-
+#### 매개변수 {#minitest.run-parameters}
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options with structure similar to [MiniTest.config](mini-test.qmd#minitest.config).
-  Absent values are inferred from there.
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [MiniTest.config](mini-test.qmd#minitest.config)와 유사한 구조의 옵션입니다. 없는 값은 거기서 추론됩니다.
 
 ---
 
 ### run_file() {#minitest.run_file .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.run_file`(<span class="help-syntax-special">{file}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Run specific test file
+특정 테스트 파일 실행
 
-Basically a [MiniTest.run()](mini-test.qmd#minitest.run) wrapper with custom `collect.find_files` option.
+기본적으로 커스텀 `collect.find_files` 옵션이 있는 [MiniTest.run()](mini-test.qmd#minitest.run) 래퍼입니다.
 
-#### Parameters {#minitest.run_file-parameters}
+#### 매개변수 {#minitest.run_file-parameters}
 
 
 
-<span class="help-syntax-special">{file}</span> `(string|nil)` Path to test file. By default a path of current buffer.
+<span class="help-syntax-special">{file}</span> `(string|nil)` 테스트 파일 경로입니다. 기본적으로 현재 버퍼의 경로입니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options for [MiniTest.run()](mini-test.qmd#minitest.run).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [MiniTest.run()](mini-test.qmd#minitest.run)을 위한 옵션입니다.
 
 ---
 
 ### run_at_location() {#minitest.run_at_location .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.run_at_location`(<span class="help-syntax-special">{location}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Run case(s) covering location
+위치를 포함하는 케이스 실행
 
-Try filtering case(s) covering location, meaning that definition of its
-main `test` action (as taken from builtin `debug.getinfo`) is located in
-specified file and covers specified line. Note that it can result in
-multiple cases if they come from parametrized test set (see `parametrize`
-option in [MiniTest.new\_set()](mini-test.qmd#minitest.new_set)).
+위치를 포함하는 케이스를 필터링합니다. 즉, 메인 `test` 동작의 정의(내장 `debug.getinfo`에서 가져옴)가 지정된 파일에 있고 지정된 라인을 포함함을 의미합니다. 매개변수화된 테스트 세트([MiniTest.new\_set()](mini-test.qmd#minitest.new_set)의 `parametrize` 옵션 참조)에서 오는 경우 여러 케이스가 생성될 수 있습니다.
 
-Basically a [MiniTest.run()](mini-test.qmd#minitest.run) wrapper with custom `collect.find_files` option.
+기본적으로 커스텀 `collect.find_files` 옵션이 있는 [MiniTest.run()](mini-test.qmd#minitest.run) 래퍼입니다.
 
-#### Parameters {#minitest.run_at_location-parameters}
+#### 매개변수 {#minitest.run_at_location-parameters}
 
 
 
-<span class="help-syntax-special">{location}</span> `(table|nil)` Table with fields <span class="help-syntax-keys">\<file\></span> (path to file) and <span class="help-syntax-keys">\<line\></span>
-  (line number in that file). Default is taken from current cursor position.
+<span class="help-syntax-special">{location}</span> `(table|nil)` <span class="help-syntax-keys">\<file\></span> (파일 경로) 및 <span class="help-syntax-keys">\<line\></span> (해당 파일의 라인 번호) 필드를 가진 테이블입니다. 기본값은 현재 커서 위치에서 가져옵니다.
 
 ---
 
 ### collect() {#minitest.collect .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.collect`(<span class="help-syntax-special">{opts}</span>)</p>
-Collect test cases
+테스트 케이스 수집
 
-Overview of collection process:
+수집 프로세스 개요:
 
-- If `opts.emulate_busted` is `true`, temporary make special global
-  functions (removed at the end of collection). They can be used inside
-  test files to create hierarchical structure of test cases.
+- `opts.emulate_busted`가 `true`이면, 특별한 전역 함수를 일시적으로 만듭니다 (수집이 끝나면 제거됨). 이들은 테스트 파일 내부에서 테스트 케이스의 계층 구조를 생성하는 데 사용될 수 있습니다.
 
-- Source each file from array output of `opts.find_files`. It should output
-  a test set (see [MiniTest.new\_set()](mini-test.qmd#minitest.new_set)) or `nil` (if "busted" style is used;
-  test set is created implicitly).
+- `opts.find_files`의 배열 출력에서 각 파일을 소싱합니다. 이는 테스트 세트([MiniTest.new\_set()](mini-test.qmd#minitest.new_set) 참조)를 출력하거나, ("busted" 스타일이 사용되는 경우) `nil`을 출력해야 합니다 (테스트 세트는 암시적으로 생성됨).
 
-- Combine all test sets into single set with fields equal to its file path.
+- 모든 테스트 세트를 파일 경로와 동일한 필드를 가진 단일 세트로 결합합니다.
 
-- Convert from hierarchical test configuration to sequential: from single
-  test set to array of test cases (see [MiniTest-test-case](mini-test.qmd#minitest-test-case)). Conversion is
-  done in the form of "for every table element do: for every `parametrize`
-  element do: ...". Details:
+- 계층적 테스트 구성에서 순차적 구성으로 변환합니다: 단일 테스트 세트에서 테스트 케이스([MiniTest-test-case](mini-test.qmd#minitest-test-case) 참조) 배열로 변환합니다. 변환은 "모든 테이블 요소에 대해: 모든 `parametrize` 요소에 대해: ..." 형식으로 수행됩니다. 세부 사항:
 
-    - If element is a callable, construct test case with it being main
-      `test` action. Description is appended with key of element in current
-      test set table. Hooks, arguments, and data are taken from "current
-      nested" ones. Add case to output array.
+    - 요소가 호출 가능한 객체이면, 이를 메인 `test` 동작으로 하여 테스트 케이스를 구성합니다. 설명(Description)은 현재 테스트 세트 테이블에 있는 요소의 키와 함께 추가됩니다. 훅, 인자 및 데이터는 "현재 중첩된" 것들로부터 가져옵니다. 케이스를 출력 배열에 추가합니다.
 
-    - If element is a test set, process it in similar, recursive fashion.
-      The "current nested" information is expanded:
+    - 요소가 테스트 세트이면, 유사한 재귀적 방식으로 처리합니다. "현재 중첩된" 정보가 확장됩니다:
 
-        - `args` is extended with "current element" from `parametrize`.
+        - `args`는 `parametrize`의 "현재 요소"로 확장됩니다.
 
-        - `desc` is appended with element key.
+        - `desc`는 요소 키와 함께 추가됩니다.
 
-        - `hooks` are appended to their appropriate places. `*_case` hooks
-          will be inserted closer to all child cases than hooks from parent
-          test sets: `pre_case` at end, `post_case` at start.
+        - `hooks`는 적절한 위치에 추가됩니다. `*_case` 훅은 부모 테스트 세트의 훅보다 모든 자식 케이스에 더 가깝게 삽입됩니다: `pre_case`는 끝에, `post_case`는 시작에 삽입됩니다.
 
-        - `data` is extended via [vim.tbl\_deep\_extend()](https://neovim.io/doc/user/helptag.html?tag=vim.tbl_deep_extend\(\)).
+        - `data`는 [vim.tbl\_deep\_extend()](https://neovim.io/doc/user/helptag.html?tag=vim.tbl_deep_extend\(\))를 통해 확장됩니다.
 
-    - Any other element is not processed.
+    - 그 외의 다른 요소는 처리되지 않습니다.
 
-- Filter array with `opts.filter_cases`. Note that input case doesn't contain
-  all hooks, as `*_once` hooks will be added after filtration.
+- `opts.filter_cases`로 배열을 필터링합니다. 입력 케이스에는 모든 훅이 포함되어 있지 않으며, `*_once` 훅은 필터링 후에 추가됩니다.
 
-- Add `*_once` hooks to appropriate cases.
+- 적절한 케이스에 `*_once` 훅을 추가합니다.
 
-#### Parameters {#minitest.collect-parameters}
+#### 매개변수 {#minitest.collect-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options controlling case collection. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 케이스 수집을 제어하는 옵션입니다. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<emulate_busted\></span> - whether to emulate 'lunarmodules/busted' interface.
-    It emulates these global functions: `describe`, `it`, `setup`, `teardown`,
-<p align="center">`before_each`, `after_each`. Use [MiniTest.skip()](mini-test.qmd#minitest.skip) instead of `pending()`</p>
-    and [MiniTest.finally()](mini-test.qmd#minitest.finally) instead of `finally`.
+  - <span class="help-syntax-keys">\<emulate_busted\></span> - 'lunarmodules/busted' 인터페이스를 에뮬레이션할지 여부입니다.
+    이 전역 함수들을 에뮬레이션합니다: `describe`, `it`, `setup`, `teardown`,
+<p align="center">`before_each`, `after_each`. `pending()` 대신 [MiniTest.skip()](mini-test.qmd#minitest.skip)을 사용하고,</p>
+    `finally` 대신 [MiniTest.finally()](mini-test.qmd#minitest.finally)를 사용하세요.
 
-  - <span class="help-syntax-keys">\<find_files\></span> - function which when called without arguments returns
-    array with file paths. Each file should be a Lua file returning single
-    test set or `nil`.
+  - <span class="help-syntax-keys">\<find_files\></span> - 인자 없이 호출될 때 파일 경로 배열을 반환하는 함수입니다. 각 파일은 단일 테스트 세트 또는 `nil`을 반환하는 Lua 파일이어야 합니다.
 
-  - <span class="help-syntax-keys">\<filter_cases\></span> - function which when called with single test case
-    (see [MiniTest-test-case](mini-test.qmd#minitest-test-case)) returns `false` if this case should be filtered
-    out; `true` otherwise.
+  - <span class="help-syntax-keys">\<filter_cases\></span> - 단일 테스트 케이스([MiniTest-test-case](mini-test.qmd#minitest-test-case) 참조)와 함께 호출될 때 이 케이스를 필터링해야 하면 `false`, 그렇지 않으면 `true`를 반환하는 함수입니다.
 
-#### Return {#minitest.collect-return}
+#### 반환 {#minitest.collect-return}
 
 
-`(table)` Array of test cases ready to be used by [MiniTest.execute()](mini-test.qmd#minitest.execute).
+`(table)` [MiniTest.execute()](mini-test.qmd#minitest.execute)에서 사용할 준비가 된 테스트 케이스 배열입니다.
 
 ---
 
 ### execute() {#minitest.execute .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.execute`(<span class="help-syntax-special">{cases}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Execute array of test cases
+테스트 케이스 배열 실행
 
-Overview of execution process:
+실행 프로세스 개요:
 
-- Reset `all_cases` in [MiniTest.current](mini-test.qmd#minitest.current) with `cases` input.
+- `cases` 입력으로 [MiniTest.current](mini-test.qmd#minitest.current)의 `all_cases`를 초기화합니다.
 
-- Call `reporter.start(cases)` (if present).
+- `reporter.start(cases)`를 호출합니다 (존재하는 경우).
 
-- Execute each case in natural array order (aligned with their integer
-  keys). Set `MiniTest.current.case` to currently executed case. Detailed
-  test case execution is described in [MiniTest-test-case](mini-test.qmd#minitest-test-case). After any state
-  change (including case retry attempts), call `reporter.update(case_num)`
-  (if present), where `case_num` is an integer key of current test case.
+- 각 케이스를 자연스러운 배열 순서(정수 키와 정렬됨)로 실행합니다. `MiniTest.current.case`를 현재 실행 중인 케이스로 설정합니다. 자세한 테스트 케이스 실행은 [MiniTest-test-case](mini-test.qmd#minitest-test-case)에 설명되어 있습니다. 상태 변경(케이스 재시도 시도 포함) 후에는 `reporter.update(case_num)`을 호출합니다 (존재하는 경우). 여기서 `case_num`은 현재 테스트 케이스의 정수 키입니다.
 
-- Call `reporter.finish()` (if present).
+- `reporter.finish()`를 호출합니다 (존재하는 경우).
 
-Notes:
+참고:
 
-- Execution is done in asynchronous fashion with scheduling. This allows
-  making meaningful progress report during execution.
+- 실행은 스케줄링을 통한 비동기 방식으로 수행됩니다. 이를 통해 실행 중에 의미 있는 진행 상황 보고를 할 수 있습니다.
 
-- This function doesn't return anything. Instead, it updates `cases` in
-  place with proper `exec` field. Use `all_cases` at [MiniTest.current](mini-test.qmd#minitest.current) to
-  look at execution result.
+- 이 함수는 아무것도 반환하지 않습니다. 대신, 적절한 `exec` 필드로 `cases`를 즉석에서 업데이트합니다. 실행 결과를 보려면 [MiniTest.current](mini-test.qmd#minitest.current)의 `all_cases`를 사용하세요.
 
-#### Parameters {#minitest.execute-parameters}
+#### 매개변수 {#minitest.execute-parameters}
 
 
 
-<span class="help-syntax-special">{cases}</span> `(table)` Array of test cases (see [MiniTest-test-case](mini-test.qmd#minitest-test-case)).
+<span class="help-syntax-special">{cases}</span> `(table)` 테스트 케이스 배열입니다 ([MiniTest-test-case](mini-test.qmd#minitest-test-case) 참조).
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options controlling case collection. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 케이스 수집을 제어하는 옵션입니다. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<reporter\></span> - table with possible callable fields `start`, `update`,
-    `finish`. Default: [MiniTest.gen\_reporter.buffer()](mini-test.qmd#minitest.gen_reporter.buffer) in interactive
-    usage and [MiniTest.gen\_reporter.stdout()](mini-test.qmd#minitest.gen_reporter.stdout) in headless usage.
+  - <span class="help-syntax-keys">\<reporter\></span> - 호출 가능한 필드 `start`, `update`, `finish`를 가질 수 있는 테이블입니다. 기본값: 대화형 사용 시 [MiniTest.gen\_reporter.buffer()](mini-test.qmd#minitest.gen_reporter.buffer), 헤드리스 사용 시 [MiniTest.gen\_reporter.stdout()](mini-test.qmd#minitest.gen_reporter.stdout).
 
-  - <span class="help-syntax-keys">\<stop_on_error\></span> - whether to stop execution (see [MiniTest.stop()](mini-test.qmd#minitest.stop))
-    after first error. Default: `false`.
+  - <span class="help-syntax-keys">\<stop_on_error\></span> - 첫 번째 에러 발생 후 실행을 중지할지 여부입니다([MiniTest.stop()](mini-test.qmd#minitest.stop) 참조). 기본값: `false`.
 
 ---
 
 ### stop() {#minitest.stop .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.stop`(<span class="help-syntax-special">{opts}</span>)</p>
-Stop test execution
+테스트 실행 중지
 
-#### Parameters {#minitest.stop-parameters}
+#### 매개변수 {#minitest.stop-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options with fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 다음 필드를 가진 옵션입니다:
 
-  - <span class="help-syntax-keys">\<close_all_child_neovim\></span> - whether to close all child neovim processes
-    created with [MiniTest.new\_child\_neovim()](mini-test.qmd#minitest.new_child_neovim). Default: `true`.
+  - <span class="help-syntax-keys">\<close_all_child_neovim\></span> - [MiniTest.new\_child\_neovim()](mini-test.qmd#minitest.new_child_neovim)으로 생성된 모든 자식 neovim 프로세스를 닫을지 여부입니다. 기본값: `true`.
 
 ---
 
 ### is_executing() {#minitest.is_executing .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.is_executing`()</p>
-Check if tests are being executed
+테스트가 실행 중인지 확인
 
-#### Return {#minitest.is_executing-return}
+#### 반환 {#minitest.is_executing-return}
 
 
 `(boolean)`
@@ -721,25 +600,24 @@ Check if tests are being executed
 ### expect {#minitest.expect .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.expect`</p>
-Table with expectation functions
+기대치 함수가 담긴 테이블
 
-Each function has the following behavior:
+각 함수는 다음과 같이 동작합니다:
 
-- Silently returns `true` if expectation is fulfilled.
+- 기대치가 충족되면 조용히 `true`를 반환합니다.
 
-- Throws an informative error with information helpful for debugging.
-  Allows customizable fail reason to provide more context.
+- 디버깅에 도움이 되는 정보와 함께 유익한 에러를 발생시킵니다. 더 많은 컨텍스트를 제공하기 위해 커스터마이징 가능한 실패 원인을 허용합니다.
 
-Mostly designed to be used within 'mini.test' framework.
+주로 'mini.test' 프레임워크 내에서 사용되도록 설계되었습니다.
 
-#### Usage {#minitest.expect-usage}
+#### 사용법 {#minitest.expect-usage}
 
 
 
   ```lua
   local x = 1 + 1
-  MiniTest.expect.equality(x, 2) -- passes
-  MiniTest.expect.equality(x, 1, { fail_reason = 'Not equal' }) -- fails
+  MiniTest.expect.equality(x, 2) -- 통과
+  MiniTest.expect.equality(x, 1, { fail_reason = 'Not equal' }) -- 실패
   ```
 
 ---
@@ -747,178 +625,147 @@ Mostly designed to be used within 'mini.test' framework.
 ### expect.equality() {#minitest.expect.equality .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.expect.equality`(<span class="help-syntax-special">{left}</span>, <span class="help-syntax-special">{right}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Expect equality of two objects
+두 객체의 동등성 기대
 
-Equality is tested via [vim.deep\_equal()](https://neovim.io/doc/user/helptag.html?tag=vim.deep_equal\(\)). It also tries to compute more
-detailed cause for equality (for easier spotting the difference):
+동등성은 [vim.deep\_equal()](https://neovim.io/doc/user/helptag.html?tag=vim.deep_equal\(\))을 통해 테스트됩니다. 또한 (차이점을 더 쉽게 찾을 수 있도록) 동등성에 대한 더 자세한 원인 계산을 시도합니다:
 
-- If they have different types.
+- 타입이 다른 경우.
 
-- For strings if they have different length or if some character is different.
+- 문자열의 경우 길이가 다르거나 어떤 문자가 다른 경우.
 
-- For tables it shows a "key branch" at which values are different along with
-  the actual values. A single difference is shown, there might be more.
-  For not nested tables key branch is just a key. If the difference is inside
-  nested tables, the key branch shows a "path through nested tables" to
-  a different value. Examples:
+- 테이블의 경우 값이 다른 "키 브랜치(key branch)"를 실제 값과 함께 표시합니다. 단일 차이점만 표시되며, 더 많을 수 있습니다. 중첩되지 않은 테이블의 경우 키 브랜치는 그냥 키입니다. 차이점이 중첩된 테이블 내부에 있는 경우, 키 브랜치는 다른 값으로 가는 "중첩된 테이블을 통한 경로"를 보여줍니다. 예:
 
     ```lua
     local eq = MiniTest.expect.equality
-    eq({ 1, 2 }, { 1, 3 })         -- Key branch is `2`
-    eq({ 1, { 2 } }, { 1, 'c' })   -- Key branch is `2` ('c' is not a table)
-    eq({ 1, { 2 } }, { 1, { 3 } }) -- Key branch is `2->1`
+    eq({ 1, 2 }, { 1, 3 })         -- 키 브랜치는 `2`입니다.
+    eq({ 1, { 2 } }, { 1, 'c' })   -- 키 브랜치는 `2`입니다. ('c'는 테이블이 아님)
+    eq({ 1, { 2 } }, { 1, { 3 } }) -- 키 브랜치는 `2->1`입니다.
 
-    -- Key branch is either `1->1->"a"` or `1->1->"b"`
+    -- 키 브랜치는 `1->1->"a"` 또는 `1->1->"b"` 중 하나입니다.
     eq({ { { a = 1 } } }, { { { b = 2 } } })
     ```
 
-#### Parameters {#minitest.expect.equality-parameters}
+#### 매개변수 {#minitest.expect.equality-parameters}
 
 
 
-<span class="help-syntax-special">{left}</span> `(any)` First object.
+<span class="help-syntax-special">{left}</span> `(any)` 첫 번째 객체입니다.
 
-<span class="help-syntax-special">{right}</span> `(any)` Second object.
+<span class="help-syntax-special">{right}</span> `(any)` 두 번째 객체입니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션입니다. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - reason for failing expectation.
-    a function is called with expectation input and should return a string.
-    Default: `nil` for default reason like "Failed expectation for ...".
+  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - 기대 실패 원인입니다. 함수는 기대 입력과 함께 호출되며 문자열을 반환해야 합니다. 기본값: "Failed expectation for ..."와 같은 기본 원인을 위해 `nil`.
 
 ---
 
 ### expect.no_equality() {#minitest.expect.no_equality .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.expect.no_equality`(<span class="help-syntax-special">{left}</span>, <span class="help-syntax-special">{right}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Expect no equality of two objects
+두 객체의 비동등성 기대
 
-Equality is tested via [vim.deep\_equal()](https://neovim.io/doc/user/helptag.html?tag=vim.deep_equal\(\)).
+동등성은 [vim.deep\_equal()](https://neovim.io/doc/user/helptag.html?tag=vim.deep_equal\(\))을 통해 테스트됩니다.
 
-#### Parameters {#minitest.expect.no_equality-parameters}
+#### 매개변수 {#minitest.expect.no_equality-parameters}
 
 
 
-<span class="help-syntax-special">{left}</span> `(any)` First object.
+<span class="help-syntax-special">{left}</span> `(any)` 첫 번째 객체입니다.
 
-<span class="help-syntax-special">{right}</span> `(any)` Second object.
+<span class="help-syntax-special">{right}</span> `(any)` 두 번째 객체입니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션입니다. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - reason for failing expectation.
-    a function is called with expectation input and should return a string.
-    Default: `nil` for default reason like "Failed expectation for ...".
+  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - 기대 실패 원인입니다. 함수는 기대 입력과 함께 호출되며 문자열을 반환해야 합니다. 기본값: "Failed expectation for ..."와 같은 기본 원인을 위해 `nil`.
 
 ---
 
 ### expect.error() {#minitest.expect.error .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.expect.error`(<span class="help-syntax-special">{f}</span>, <span class="help-syntax-special">{pattern}</span>, <span class="help-syntax-special">{opts}</span>, <span class="help-syntax-special">{...}</span>)</p>
-Expect function call to raise error
+함수 호출 시 에러 발생 기대
 
-#### Parameters {#minitest.expect.error-parameters}
+#### 매개변수 {#minitest.expect.error-parameters}
 
 
 
-<span class="help-syntax-special">{f}</span> `(function)` Function to be tested for raising error.
+<span class="help-syntax-special">{f}</span> `(function)` 에러 발생 여부를 테스트할 함수입니다.
 
-<span class="help-syntax-special">{pattern}</span> `(string|nil)` Pattern which error message should match.
-  Use `nil` or empty string to not test for pattern matching.
+<span class="help-syntax-special">{pattern}</span> `(string|nil)` 에러 메시지가 일치해야 하는 패턴입니다. 패턴 매칭을 테스트하지 않으려면 `nil`이나 빈 문자열을 사용하세요.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션입니다. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - reason for failing expectation.
-    a function is called with expectation input and should return a string.
-    Default: `nil` for default reason like "Failed expectation for ...".
+  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - 기대 실패 원인입니다. 함수는 기대 입력과 함께 호출되며 문자열을 반환해야 합니다. 기본값: "Failed expectation for ..."와 같은 기본 원인을 위해 `nil`.
 
 ---
 
 ### expect.no_error() {#minitest.expect.no_error .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.expect.no_error`(<span class="help-syntax-special">{f}</span>, <span class="help-syntax-special">{opts}</span>, <span class="help-syntax-special">{...}</span>)</p>
-Expect function call to not raise error
+함수 호출 시 에러 미발생 기대
 
-#### Parameters {#minitest.expect.no_error-parameters}
+#### 매개변수 {#minitest.expect.no_error-parameters}
 
 
 
-<span class="help-syntax-special">{f}</span> `(function)` Function to be tested for not raising error.
+<span class="help-syntax-special">{f}</span> `(function)` 에러가 발생하지 않는지 테스트할 함수입니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션입니다. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - reason for failing expectation.
-    a function is called with expectation input and should return a string.
-    Default: `nil` for default reason like "Failed expectation for ...".
+  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - 기대 실패 원인입니다. 함수는 기대 입력과 함께 호출되며 문자열을 반환해야 합니다. 기본값: "Failed expectation for ..."와 같은 기본 원인을 위해 `nil`.
 
 ---
 
 ### expect.reference_screenshot() {#minitest.expect.reference_screenshot .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.expect.reference_screenshot`(<span class="help-syntax-special">{screenshot}</span>, <span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Expect equality to reference screenshot
+레퍼런스 스크린샷과의 동등성 기대
 
-#### Parameters {#minitest.expect.reference_screenshot-parameters}
+#### 매개변수 {#minitest.expect.reference_screenshot-parameters}
 
 
 
-<span class="help-syntax-special">{screenshot}</span> `(table|nil)` Array with screenshot information. Usually an output
-  of `child.get_screenshot()` (see [MiniTest-child-neovim-get\_screenshot()](mini-test.qmd#minitest-child-neovim-get_screenshot)).
-  If `nil`, expectation passed.
+<span class="help-syntax-special">{screenshot}</span> `(table|nil)` 스크린샷 정보가 담긴 배열입니다. 대개 `child.get_screenshot()`의 출력값입니다 ([MiniTest-child-neovim-get\_screenshot()](mini-test.qmd#minitest-child-neovim-get_screenshot) 참조). `nil`이면 기대치를 통과합니다.
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` Path to reference screenshot. If `nil`, constructed
-  automatically in directory `opts.directory` from current case info and
-  total number of times it was called inside current case. If there is no
-  file at `path`, it is created with content of `screenshot`.
+<span class="help-syntax-special">{path}</span> `(string|nil)` 레퍼런스 스크린샷 경로입니다. `nil`이면, 현재 케이스 정보와 현재 케이스 내부에서 호출된 총 횟수로부터 `opts.directory` 디렉토리에 자동으로 생성됩니다. `path`에 파일이 없으면, `screenshot` 내용으로 생성됩니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션:
 
-  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - whether to forcefully create reference screenshot.
-    Temporary useful during test writing. Default: `false`.
+  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - 레퍼런스 스크린샷을 강제로 생성할지 여부입니다. 테스트 작성 중에 일시적으로 유용합니다. 기본값: `false`.
 
-  - <span class="help-syntax-keys">\<ignore_text\></span> `(boolean|table)` - whether to ignore all or some text lines.
-    If `true` - ignore all, if number array - ignore text of those lines,
-    if `false` - do not ignore any. Default: `false`.
+  - <span class="help-syntax-keys">\<ignore_text\></span> `(boolean|table)` - 모든 텍스트 라인 또는 일부 텍스트 라인을 무시할지 여부입니다. `true`면 모두 무시하고, 숫자 배열이면 해당 라인의 텍스트를 무시하고, `false`면 아무것도 무시하지 않습니다. 기본값: `false`.
 
-  - <span class="help-syntax-keys">\<ignore_attr\></span> `(boolean|table)` - whether to ignore all or some attr lines.
-    If `true` - ignore all, if number array - ignore attr of those lines,
-    if `false` - do not ignore any. Default: `false`.
+  - <span class="help-syntax-keys">\<ignore_attr\></span> `(boolean|table)` - 모든 속성(attr) 라인 또는 일부 속성 라인을 무시할지 여부입니다. `true`면 모두 무시하고, 숫자 배열이면 해당 라인의 속성을 무시하고, `false`면 아무것도 무시하지 않습니다. 기본값: `false`.
 
-  - <span class="help-syntax-keys">\<directory\></span> `(string)` - directory where automatically constructed `path`
-    is located. Default: "tests/screenshots".
+  - <span class="help-syntax-keys">\<directory\></span> `(string)` - 자동으로 생성된 `path`가 위치할 디렉토리입니다. 기본값: "tests/screenshots".
 
-  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - reason for failing expectation.
-    a function is called with expectation input and should return a string.
-    Default: `nil` for default reason like "Failed expectation for ...".
+  - <span class="help-syntax-keys">\<fail_reason\></span> `(string|function)` - 기대 실패 원인입니다. 함수는 기대 입력과 함께 호출되며 문자열을 반환해야 합니다. 기본값: "Failed expectation for ..."와 같은 기본 원인을 위해 `nil`.
 
 ---
 
 ### new_expectation() {#minitest.new_expectation .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.new_expectation`(<span class="help-syntax-special">{subject}</span>, <span class="help-syntax-special">{predicate}</span>, <span class="help-syntax-special">{fail_context}</span>)</p>
-Create new expectation function
+새로운 기대치 함수 생성
 
-Helper for writing custom functions with behavior similar to other methods
-of [MiniTest.expect](mini-test.qmd#minitest.expect).
+[MiniTest.expect](mini-test.qmd#minitest.expect)의 다른 메서드와 유사한 동작을 가진 커스텀 함수 작성을 위한 헬퍼입니다.
 
-#### Parameters {#minitest.new_expectation-parameters}
-
+#### 매개변수 {#minitest.new_expectation-parameters}
 
 
-<span class="help-syntax-special">{subject}</span> `(string|function|table)` Subject of expectation. If callable,
-  called with expectation input arguments to produce string value.
 
-<span class="help-syntax-special">{predicate}</span> `(function|table)` Predicate callable. Called with expectation
-  input arguments. Output `false` or `nil` means failed expectation.
+<span class="help-syntax-special">{subject}</span> `(string|function|table)` 기대 대상입니다. 호출 가능한 객체인 경우, 문자열 값을 생성하기 위해 기대 입력 인자와 함께 호출됩니다.
 
-<span class="help-syntax-special">{fail_context}</span> `(string|function|table)` Information about fail. If callable,
-  called with expectation input arguments to produce string value.
+<span class="help-syntax-special">{predicate}</span> `(function|table)` 서술어 호출 가능 객체입니다. 기대 입력 인자와 함께 호출됩니다. 출력 `false` 또는 `nil`은 기대 실패를 의미합니다.
 
-#### Return {#minitest.new_expectation-return}
+<span class="help-syntax-special">{fail_context}</span> `(string|function|table)` 실패에 대한 정보입니다. 호출 가능한 객체인 경우, 문자열 값을 생성하기 위해 기대 입력 인자와 함께 호출됩니다.
+
+#### 반환 {#minitest.new_expectation-return}
 
 
-`(function)` Expectation function.
+`(function)` 기대치 함수.
 
-#### Usage {#minitest.new_expectation-usage}
+#### 사용법 {#minitest.new_expectation-usage}
 
 
 
@@ -935,316 +782,264 @@ of [MiniTest.expect](mini-test.qmd#minitest.expect).
 ### gen_reporter {#minitest.gen_reporter .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.gen_reporter`</p>
-Table with pre-configured report generators
+미리 구성된 리포트 생성기가 담긴 테이블
 
-Each element is a function which returns reporter - table with callable
-`start`, `update`, and `finish` fields.
+각 요소는 리포터(호출 가능한 `start`, `update`, `finish` 필드를 가진 테이블)를 반환하는 함수입니다.
 
 ---
 
 ### gen_reporter.buffer() {#minitest.gen_reporter.buffer .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.gen_reporter.buffer`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate buffer reporter
+버퍼 리포터 생성
 
-This is a default choice for interactive (not headless) usage. Opens a window
-with dedicated non-terminal buffer and updates it with throttled redraws.
+이는 대화형(헤드리스가 아님) 사용을 위한 기본 선택입니다. 전용 비터미널 버퍼가 있는 창을 열고 스로틀된 다시 그리기를 통해 업데이트합니다.
 
-Opened buffer has the following helpful Normal mode mappings:
+열린 버퍼에는 다음과 같은 유용한 Normal 모드 매핑이 있습니다:
 
-- `<Esc>` - stop test execution if executing (see [MiniTest.is\_executing()](mini-test.qmd#minitest.is_executing)
-  and [MiniTest.stop()](mini-test.qmd#minitest.stop)). Close window otherwise.
+- `<Esc>` - 실행 중이면 테스트 실행을 중지합니다 ([MiniTest.is\_executing()](mini-test.qmd#minitest.is_executing) 및 [MiniTest.stop()](mini-test.qmd#minitest.stop) 참조). 그렇지 않으면 창을 닫습니다.
 
-- `q` - same as `<Esc>` for convenience and compatibility.
+- `q` - 편의성 및 호환성을 위해 `<Esc>`와 동일합니다.
 
-General idea:
+일반적인 아이디어:
 
-- Group cases by concatenating first `opts.group_depth` elements of case
-  description (`desc` field). Groups by collected files if using default values.
+- 케이스 설명(`desc` 필드)의 첫 `opts.group_depth` 요소를 연결하여 케이스를 그룹화합니다. 기본값을 사용하면 수집된 파일별로 그룹화됩니다.
 
-- In `start()` show some stats to know how much is scheduled to be executed.
+- `start()`에서 얼마나 많은 실행이 예정되어 있는지 알 수 있도록 일부 통계를 보여줍니다.
 
-- In `update()` show symbolic overview of current group and state of current
-  case. Each symbol represents one case and its state:
+- `update()`에서 현재 그룹의 기호 개요와 현재 케이스의 상태를 보여줍니다. 각 기호는 하나의 케이스와 그 상태를 나타냅니다:
 
-    - `?` - case didn't finish executing.
+    - `?` - 케이스 실행이 끝나지 않음.
 
-    - `o` - pass.
+    - `o` - 통과.
 
-    - `O` - pass with notes.
+    - `O` - 노트와 함께 통과.
 
-    - `x` - fail.
+    - `x` - 실패.
 
-    - `X` - fail with notes.
+    - `X` - 노트와 함께 실패.
 
-- In `finish()` show all fails and notes ordered by case.
+- `finish()`에서 케이스별로 정렬된 모든 실패와 노트를 보여줍니다.
 
-#### Parameters {#minitest.gen_reporter.buffer-parameters}
+#### 매개변수 {#minitest.gen_reporter.buffer-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Table with options. Used fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션이 담긴 테이블입니다. 사용된 필드:
 
-  - <span class="help-syntax-keys">\<group_depth\></span> - number of first elements of case description (can be zero)
-    used for grouping. Higher values mean higher granularity of output.
-    Default: 1.
+  - <span class="help-syntax-keys">\<group_depth\></span> - 그룹화에 사용되는 케이스 설명의 첫 요소 개수(0일 수 있음)입니다. 값이 높을수록 출력의 입도가 높아집니다. 기본값: 1.
 
-  - <span class="help-syntax-keys">\<throttle_delay\></span> - minimum number of milliseconds to wait between
-    redrawing. Reduces screen flickering but not amount of computations.
-    Default: 10.
+  - <span class="help-syntax-keys">\<throttle_delay\></span> - 다시 그리기 사이의 최소 대기 시간(밀리초)입니다. 화면 깜빡임을 줄이지만 계산량은 줄이지 않습니다. 기본값: 10.
 
-  - <span class="help-syntax-keys">\<window\></span> - definition of window to open. Can take one of the forms:
+  - <span class="help-syntax-keys">\<window\></span> - 열 창의 정의입니다. 다음 형태 중 하나를 취할 수 있습니다:
 
-      - Callable. It is called expecting output to be target window id
-        (current window is used if output is `nil`). Use this to open in
-        "normal" window (like `function() vim.cmd('vsplit') end`).
+      - 호출 가능 객체. 출력이 대상 창 ID일 것으로 기대하고 호출됩니다 (출력이 `nil`이면 현재 창이 사용됨). 이를 사용하여 "일반" 창에서 엽니다 (`function() vim.cmd('vsplit') end`와 같이).
 
-      - Table. Used as `config` argument in [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\)).
-    Default: table for centered floating window.
+      - 테이블. [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\))의 `config` 인자로 사용됩니다.
+    기본값: 중앙에 위치한 플로팅 창을 위한 테이블입니다.
 
 ---
 
 ### gen_reporter.stdout() {#minitest.gen_reporter.stdout .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.gen_reporter.stdout`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate stdout reporter
+stdout 리포터 생성
 
-This is a default choice for headless usage. Writes to `stdout`. Uses
-coloring ANSI escape sequences to make pretty and informative output
-(should work in most modern terminals and continuous integration providers).
+이는 헤드리스 사용을 위한 기본 선택입니다. `stdout`에 씁니다. 예쁘고 유익한 출력을 만들기 위해 컬러링 ANSI 이스케이프 시퀀스를 사용합니다 (대부분의 현대적 터미널과 지속적 통합 공급자에서 작동해야 함).
 
-It has same general idea as [MiniTest.gen\_reporter.buffer()](mini-test.qmd#minitest.gen_reporter.buffer) with slightly
-less output (it doesn't overwrite previous text) to overcome typical
-terminal limitations.
+일반적인 아이디어는 [MiniTest.gen\_reporter.buffer()](mini-test.qmd#minitest.gen_reporter.buffer)와 같지만, 일반적인 터미널의 한계를 극복하기 위해 출력이 약간 더 적습니다 (이전 텍스트를 덮어쓰지 않음).
 
-#### Parameters {#minitest.gen_reporter.stdout-parameters}
+#### 매개변수 {#minitest.gen_reporter.stdout-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Table with options. Used fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션이 담긴 테이블입니다. 사용된 필드:
 
-  - <span class="help-syntax-keys">\<group_depth\></span> - number of first elements of case description (can be zero)
-    used for grouping. Higher values mean higher granularity of output.
-    Default: 1.
+  - <span class="help-syntax-keys">\<group_depth\></span> - 그룹화에 사용되는 케이스 설명의 첫 요소 개수(0일 수 있음)입니다. 값이 높을수록 출력의 입도가 높아집니다. 기본값: 1.
 
-  - <span class="help-syntax-keys">\<quit_on_finish\></span> - whether to quit after finishing test execution.
-    Default: `true`.
+  - <span class="help-syntax-keys">\<quit_on_finish\></span> - 테스트 실행 완료 후 종료할지 여부입니다. 기본값: `true`.
 
 ---
 
 ### new_child_neovim() {#minitest.new_child_neovim .help-syntax-right-anchor}
 
 <p align="center">`MiniTest.new_child_neovim`()</p>
-Create child Neovim process
+자식 Neovim 프로세스 생성
 
-This creates an object designed to be a fundamental piece of 'mini.test'
-methodology. It can start/stop/restart a separate (child) Neovim process
-(headless, but fully functioning) together with convenience helpers to
-interact with it through [RPC](https://neovim.io/doc/user/helptag.html?tag=RPC) messages.
+이는 'mini.test' 방법론의 핵심 조각으로 설계된 객체를 생성합니다. [RPC](https://neovim.io/doc/user/helptag.html?tag=RPC) 메시지를 통해 상호작용하기 위한 편의성 헬퍼와 함께 별도의 (자식) Neovim 프로세스(헤드리스지만 완전히 기능함)를 시작/중지/재시작할 수 있습니다.
 
-For more information see [MiniTest-child-neovim](mini-test.qmd#minitest-child-neovim).
+자세한 내용은 [MiniTest-child-neovim](mini-test.qmd#minitest-child-neovim)을 참조하세요.
 
-#### Return {#minitest.new_child_neovim-return}
+#### 반환 {#minitest.new_child_neovim-return}
 
 
-`(MiniTest.child)` Object of [MiniTest-child-neovim](mini-test.qmd#minitest-child-neovim).
+`(MiniTest.child)` [MiniTest-child-neovim](mini-test.qmd#minitest-child-neovim) 객체입니다.
 
-#### Usage {#minitest.new_child_neovim-usage}
+#### 사용법 {#minitest.new_child_neovim-usage}
 
 
 
   ```lua
-  -- Initiate
+  -- 초기화
   local child = MiniTest.new_child_neovim()
   child.start()
 
-  -- Use API functions
+  -- API 함수 사용
   child.api.nvim_buf_set_lines(0, 0, -1, true, { 'Line inside child Neovim' })
 
-  -- Execute Lua code, Vimscript commands, etc.
+  -- Lua 코드, Vim스크립트 명령어 등 실행
   child.lua('_G.n = 0')
   child.cmd('au CursorMoved * lua _G.n = _G.n + 1')
   child.type_keys('l')
-  print(child.lua_get('_G.n')) -- Should be 1
+  print(child.lua_get('_G.n')) -- 1이어야 함
 
-  -- Use other `vim.xxx` Lua wrappers (executed inside child process)
+  -- 다른 `vim.xxx` Lua 래퍼 사용 (자식 프로세스 내부에서 실행됨)
   vim.b.aaa = 'current process'
   child.b.aaa = 'child process'
-  print(child.lua_get('vim.b.aaa')) -- Should be 'child process'
+  print(child.lua_get('vim.b.aaa')) -- 'child process'여야 함
 
-  -- Always stop process after it is not needed
+  -- 프로세스가 더 이상 필요하지 않으면 항상 중지
   child.stop()
   ```
 
 ---
 
-### Child neovim {#minitest-child-neovim .help-syntax-right-anchor}
+### 자식 neovim {#minitest-child-neovim .help-syntax-right-anchor}
 
-Child class
+자식 클래스
 
-It offers a great set of tools to write reliable and reproducible tests by
-allowing to use fresh process in any test action. Interaction with it is done
-through [RPC](https://neovim.io/doc/user/helptag.html?tag=RPC) protocol.
+어떤 테스트 동작에서도 신선한 프로세스를 사용할 수 있게 함으로써 신뢰할 수 있고 재현 가능한 테스트를 작성하기 위한 훌륭한 도구 세트를 제공합니다. 상호작용은 [RPC](https://neovim.io/doc/user/helptag.html?tag=RPC) 프로토콜을 통해 이루어집니다.
 
-Although quite flexible, at the moment it has certain limitations:
+매우 유연하지만, 현재 몇 가지 제한 사항이 있습니다:
 
-- Doesn't allow using functions or userdata for child's both inputs and
-  outputs. Usual solution is to move computations from current Neovim process
-  to child process. Use `child.lua()` and `child.lua_get()` for that.
+- 자식의 입력과 출력 모두에 함수나 사용자 데이터(userdata)를 사용하는 것을 허용하지 않습니다. 일반적인 해결책은 계산을 현재 Neovim 프로세스에서 자식 프로세스로 옮기는 것입니다. 이를 위해 `child.lua()`와 `child.lua_get()`을 사용하세요.
 
-- When writing tests, it is common to end up with "hanging" process: it
-  stops executing without any output. Most of the time it is because Neovim
-  process is "blocked", i.e. it waits for user input and won't return from
-  other call (like `child.api.nvim_exec_lua()`). Common causes are active
-  [hit-enter-prompt](https://neovim.io/doc/user/helptag.html?tag=hit-enter-prompt) (increase prompt height to a bigger value) or
-  Operator-pending mode (exit it). To mitigate this experience, most helpers
-  will throw an error if its immediate execution will lead to hanging state.
-  Also in case of hanging state try `child.api_notify` instead of `child.api`.
+- 테스트를 작성할 때 "중단(hanging)" 프로세스로 끝나는 경우가 흔합니다: 출력 없이 실행이 멈춥니다. 대부분의 경우 Neovim 프로세스가 "차단(blocked)"되었기 때문입니다. 즉, 사용자 입력을 기다리고 있으며 다른 호출(예: `child.api.nvim_exec_lua()`)에서 반환되지 않습니다. 일반적인 원인은 활성화된 [hit-enter-prompt](https://neovim.io/doc/user/helptag.html?tag=hit-enter-prompt) (프롬프트 높이를 더 큰 값으로 늘리세요) 또는 Operator-pending 모드 (종료하세요) 입니다. 이러한 경험을 완화하기 위해 대부분의 헬퍼는 즉각적인 실행이 중단 상태로 이어질 경우 에러를 발생시킵니다. 또한 중단 상태인 경우 `child.api` 대신 `child.api_notify`를 시도해 보세요.
 
-Notes:
+참고:
 
-- An important type of field is a "redirection table". It acts as a
-  convenience wrapper for corresponding `vim.*` table. Can be used both to
-  return and set values. Examples:
+- 중요한 필드 유형은 "리디렉션 테이블"입니다. 이는 해당 `vim.*` 테이블에 대한 편의성 래퍼 역할을 합니다. 값을 반환하거나 설정하는 데 모두 사용될 수 있습니다. 예:
 
-    - `child.api.nvim_buf_line_count(0)` will execute
-      `vim.api.nvim_buf_line_count(0)` inside child process and return its
-      output to current process.
+    - `child.api.nvim_buf_line_count(0)`는 자식 프로세스 내부에서 `vim.api.nvim_buf_line_count(0)`를 실행하고 그 출력을 현재 프로세스로 반환합니다.
 
-    - `child.bo.filetype = 'lua'` will execute `vim.bo.filetype = 'lua'`
-      inside child process.
-  They still have same limitations listed above, so are not perfect. In
-  case of a doubt, use `child.lua()`.
+    - `child.bo.filetype = 'lua'`는 자식 프로세스 내부에서 `vim.bo.filetype = 'lua'`를 실행합니다.
+  이들은 여전히 위에서 나열한 것과 동일한 제한 사항을 가지고 있으므로 완벽하지 않습니다. 의심스러운 경우에는 `child.lua()`를 사용하세요.
 
-- Almost all methods use [vim.rpcrequest()](https://neovim.io/doc/user/helptag.html?tag=vim.rpcrequest\(\)) (i.e. wait for call to finish and
-  then return value). See for `*_notify` variant to use [vim.rpcnotify()](https://neovim.io/doc/user/helptag.html?tag=vim.rpcnotify\(\)).
+- 거의 모든 메서드는 [vim.rpcrequest()](https://neovim.io/doc/user/helptag.html?tag=vim.rpcrequest\(\))를 사용합니다 (즉, 호출이 완료될 때까지 기다린 다음 값을 반환합니다). [vim.rpcnotify()](https://neovim.io/doc/user/helptag.html?tag=vim.rpcnotify\(\))를 사용하려면 `*_notify` 변형을 확인하세요.
 
-- All fields and methods should be called with `.`, not `:`.
+- 모든 필드와 메서드는 `:`가 아니라 `.`으로 호출해야 합니다.
 
-#### Class {#minitest-child-neovim-class}
+#### 클래스 {#minitest-child-neovim-class}
 
 
 
 <span class="help-syntax-special">{MiniTest.child}</span>
 
-#### Fields {#minitest-child-neovim-fields}
+#### 필드 {#minitest-child-neovim-fields}
 
 
 
-<span class="help-syntax-special">{start}</span> `(function)` Start child process. See [MiniTest-child-neovim-start()](mini-test.qmd#minitest-child-neovim-start).
+<span class="help-syntax-special">{start}</span> `(function)` 자식 프로세스를 시작합니다. [MiniTest-child-neovim-start()](mini-test.qmd#minitest-child-neovim-start)를 참조하세요.
 
-<span class="help-syntax-special">{stop}</span> `(function)` Stop current child process.
+<span class="help-syntax-special">{stop}</span> `(function)` 현재 자식 프로세스를 중지합니다.
 
-<span class="help-syntax-special">{restart}</span> `(function)` Restart child process: stop if running and then
-  start a new one. Takes same arguments as `child.start()` but uses values
-  from most recent `start()` call as defaults.
+<span class="help-syntax-special">{restart}</span> `(function)` 자식 프로세스 재시작: 실행 중이면 중지한 다음 새 프로세스를 시작합니다. `child.start()`와 동일한 인자를 받지만 가장 최근의 `start()` 호출 값을 기본값으로 사용합니다.
 
 
-<span class="help-syntax-special">{type_keys}</span> `(function)` Emulate typing keys.
-  See [MiniTest-child-neovim-type\_keys()](mini-test.qmd#minitest-child-neovim-type_keys). Doesn't check for blocked state.
+<span class="help-syntax-special">{type_keys}</span> `(function)` 키 입력을 에뮬레이션합니다. [MiniTest-child-neovim-type\_keys()](mini-test.qmd#minitest-child-neovim-type_keys)를 참조하세요. 차단 상태를 확인하지 않습니다.
 
 
-<span class="help-syntax-special">{cmd}</span> `(function)` Execute Vimscript code from a string.
-  A wrapper for [nvim\_exec()](https://neovim.io/doc/user/helptag.html?tag=nvim_exec\(\)) without capturing output.
+<span class="help-syntax-special">{cmd}</span> `(function)` 문자열에서 Vim스크립트 코드를 실행합니다. 출력을 캡처하지 않는 [nvim\_exec()](https://neovim.io/doc/user/helptag.html?tag=nvim_exec\(\)) 래퍼입니다.
 
-<span class="help-syntax-special">{cmd_capture}</span> `(function)` Execute Vimscript code from a string and
-  capture output. A wrapper for [nvim\_exec()](https://neovim.io/doc/user/helptag.html?tag=nvim_exec\(\)) with capturing output.
+<span class="help-syntax-special">{cmd_capture}</span> `(function)` 문자열에서 Vim스크립트 코드를 실행하고 출력을 캡처합니다. 출력을 캡처하는 [nvim\_exec()](https://neovim.io/doc/user/helptag.html?tag=nvim_exec\(\)) 래퍼입니다.
 
 
-<span class="help-syntax-special">{lua}</span> `(function)` Execute Lua code. A wrapper for [nvim\_exec\_lua()](https://neovim.io/doc/user/helptag.html?tag=nvim_exec_lua\(\)).
+<span class="help-syntax-special">{lua}</span> `(function)` Lua 코드를 실행합니다. [nvim\_exec\_lua()](https://neovim.io/doc/user/helptag.html?tag=nvim_exec_lua\(\)) 래퍼입니다.
 
-<span class="help-syntax-special">{lua_notify}</span> `(function)` Execute Lua code without waiting for output.
+<span class="help-syntax-special">{lua_notify}</span> `(function)` 출력을 기다리지 않고 Lua 코드를 실행합니다.
 
-<span class="help-syntax-special">{lua_get}</span> `(function)` Execute Lua code and return result. A wrapper
-  for [nvim\_exec\_lua()](https://neovim.io/doc/user/helptag.html?tag=nvim_exec_lua\(\)) but prepends string code with `return`.
+<span class="help-syntax-special">{lua_get}</span> `(function)` Lua 코드를 실행하고 결과를 반환합니다. [nvim\_exec\_lua()](https://neovim.io/doc/user/helptag.html?tag=nvim_exec_lua\(\)) 래퍼이지만 문자열 코드 앞에 `return`을 추가합니다.
 
-<span class="help-syntax-special">{lua_func}</span> `(function)` Execute Lua function and return it's result.
-  Function will be called with all extra parameters (second one and later).
-  Note: usage of upvalues (data from outside function scope) is not allowed.
+<span class="help-syntax-special">{lua_func}</span> `(function)` Lua 함수를 실행하고 그 결과를 반환합니다. 함수는 모든 추가 매개변수(두 번째 매개변수 이후)와 함께 호출됩니다. 참고: upvalue(함수 스코프 외부의 데이터) 사용은 허용되지 않습니다.
 
 
-<span class="help-syntax-special">{is_blocked}</span> `(function)` Check whether child process is blocked.
+<span class="help-syntax-special">{is_blocked}</span> `(function)` 자식 프로세스가 차단되었는지 확인합니다.
 
-<span class="help-syntax-special">{is_running}</span> `(function)` Check whether child process is currently running.
-
-
-<span class="help-syntax-special">{ensure_normal_mode}</span> `(function)` Ensure normal mode.
-
-<span class="help-syntax-special">{get_screenshot}</span> `(function)` Returns table with two "2d arrays" of single
-  characters representing what is displayed on screen and how it looks.
-  Has `opts` table argument for optional configuratnion.
+<span class="help-syntax-special">{is_running}</span> `(function)` 자식 프로세스가 현재 실행 중인지 확인합니다.
 
 
-<span class="help-syntax-special">{job}</span> `(table|nil)` Information about current job. If `nil`, child is not running.
+<span class="help-syntax-special">{ensure_normal_mode}</span> `(function)` 노멀 모드를 보장합니다.
+
+<span class="help-syntax-special">{get_screenshot}</span> `(function)` 화면에 표시되는 내용과 모양을 나타내는 단일 문자의 두 가지 "2D 배열"이 담긴 테이블을 반환합니다. 선택적 구성을 위한 `opts` 테이블 인자가 있습니다.
 
 
-<span class="help-syntax-special">{api}</span> `(table)` Redirection table for `vim.api`. Doesn't check for blocked state.
-
-<span class="help-syntax-special">{api_notify}</span> `(table)` Same as `api`, but uses [vim.rpcnotify()](https://neovim.io/doc/user/helptag.html?tag=vim.rpcnotify\(\)).
+<span class="help-syntax-special">{job}</span> `(table|nil)` 현재 작업에 대한 정보입니다. `nil`이면 자식이 실행 중이지 않습니다.
 
 
-<span class="help-syntax-special">{diagnostic}</span> `(table)` Redirection table for [vim.diagnostic](https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic).
+<span class="help-syntax-special">{api}</span> `(table)` `vim.api`용 리디렉션 테이블입니다. 차단 상태를 확인하지 않습니다.
 
-<span class="help-syntax-special">{fn}</span> `(table)` Redirection table for [vim.fn](https://neovim.io/doc/user/helptag.html?tag=vim.fn).
-
-<span class="help-syntax-special">{highlight}</span> `(table)` Redirection table for [vim.highlight](https://neovim.io/doc/user/helptag.html?tag=vim.highlight).
-
-<span class="help-syntax-special">{hl}</span> `(table)` Redirection table for [vim.hl](https://neovim.io/doc/user/helptag.html?tag=vim.hl).
-
-<span class="help-syntax-special">{json}</span> `(table)` Redirection table for `vim.json`.
-
-<span class="help-syntax-special">{loop}</span> `(table)` Redirection table for [vim.loop](https://neovim.io/doc/user/helptag.html?tag=vim.loop).
-
-<span class="help-syntax-special">{lsp}</span> `(table)` Redirection table for `vim.lsp` ([lsp-core](https://neovim.io/doc/user/helptag.html?tag=lsp-core)).
-
-<span class="help-syntax-special">{mpack}</span> `(table)` Redirection table for [vim.mpack](https://neovim.io/doc/user/helptag.html?tag=vim.mpack).
-
-<span class="help-syntax-special">{spell}</span> `(table)` Redirection table for [vim.spell](https://neovim.io/doc/user/helptag.html?tag=vim.spell).
-
-<span class="help-syntax-special">{treesitter}</span> `(table)` Redirection table for `vim.treesitter` ([lua-treesitter-core](https://neovim.io/doc/user/helptag.html?tag=lua-treesitter-core)).
-
-<span class="help-syntax-special">{ui}</span> `(table)` Redirection table for [vim.ui](https://neovim.io/doc/user/helptag.html?tag=vim.ui). Currently of no
-  use because it requires sending function through RPC, which is impossible
-  at the moment.
-
-<span class="help-syntax-special">{fs}</span> `(table)` Redirection table for [vim.fs](https://neovim.io/doc/user/helptag.html?tag=vim.fs).
+<span class="help-syntax-special">{api_notify}</span> `(table)` `api`와 동일하지만 [vim.rpcnotify()](https://neovim.io/doc/user/helptag.html?tag=vim.rpcnotify\(\))를 사용합니다.
 
 
-<span class="help-syntax-special">{g}</span> `(table)` Redirection table for [vim.g](https://neovim.io/doc/user/helptag.html?tag=vim.g).
+<span class="help-syntax-special">{diagnostic}</span> `(table)` [vim.diagnostic](https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic)용 리디렉션 테이블입니다.
 
-<span class="help-syntax-special">{b}</span> `(table)` Redirection table for [vim.b](https://neovim.io/doc/user/helptag.html?tag=vim.b).
+<span class="help-syntax-special">{fn}</span> `(table)` [vim.fn](https://neovim.io/doc/user/helptag.html?tag=vim.fn)용 리디렉션 테이블입니다.
 
-<span class="help-syntax-special">{w}</span> `(table)` Redirection table for [vim.w](https://neovim.io/doc/user/helptag.html?tag=vim.w).
+<span class="help-syntax-special">{highlight}</span> `(table)` [vim.highlight](https://neovim.io/doc/user/helptag.html?tag=vim.highlight)용 리디렉션 테이블입니다.
 
-<span class="help-syntax-special">{t}</span> `(table)` Redirection table for [vim.t](https://neovim.io/doc/user/helptag.html?tag=vim.t).
+<span class="help-syntax-special">{hl}</span> `(table)` [vim.hl](https://neovim.io/doc/user/helptag.html?tag=vim.hl)용 리디렉션 테이블입니다.
 
-<span class="help-syntax-special">{v}</span> `(table)` Redirection table for [vim.v](https://neovim.io/doc/user/helptag.html?tag=vim.v).
+<span class="help-syntax-special">{json}</span> `(table)` `vim.json`용 리디렉션 테이블입니다.
 
-<span class="help-syntax-special">{env}</span> `(table)` Redirection table for [vim.env](https://neovim.io/doc/user/helptag.html?tag=vim.env).
+<span class="help-syntax-special">{loop}</span> `(table)` [vim.loop](https://neovim.io/doc/user/helptag.html?tag=vim.loop)용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{lsp}</span> `(table)` `vim.lsp` ([lsp-core](https://neovim.io/doc/user/helptag.html?tag=lsp-core))용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{mpack}</span> `(table)` [vim.mpack](https://neovim.io/doc/user/helptag.html?tag=vim.mpack)용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{spell}</span> `(table)` [vim.spell](https://neovim.io/doc/user/helptag.html?tag=vim.spell)용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{treesitter}</span> `(table)` `vim.treesitter` ([lua-treesitter-core](https://neovim.io/doc/user/helptag.html?tag=lua-treesitter-core))용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{ui}</span> `(table)` [vim.ui](https://neovim.io/doc/user/helptag.html?tag=vim.ui)용 리디렉션 테이블입니다. 현재 RPC를 통해 함수를 보내야 하므로 사용할 수 없으며, 이는 현재로서는 불가능합니다.
+
+<span class="help-syntax-special">{fs}</span> `(table)` [vim.fs](https://neovim.io/doc/user/helptag.html?tag=vim.fs)용 리디렉션 테이블입니다.
 
 
-<span class="help-syntax-special">{o}</span> `(table)` Redirection table for [vim.o](https://neovim.io/doc/user/helptag.html?tag=vim.o).
+<span class="help-syntax-special">{g}</span> `(table)` [vim.g](https://neovim.io/doc/user/helptag.html?tag=vim.g)용 리디렉션 테이블입니다.
 
-<span class="help-syntax-special">{go}</span> `(table)` Redirection table for [vim.go](https://neovim.io/doc/user/helptag.html?tag=vim.go).
+<span class="help-syntax-special">{b}</span> `(table)` [vim.b](https://neovim.io/doc/user/helptag.html?tag=vim.b)용 리디렉션 테이블입니다.
 
-<span class="help-syntax-special">{bo}</span> `(table)` Redirection table for [vim.bo](https://neovim.io/doc/user/helptag.html?tag=vim.bo).
+<span class="help-syntax-special">{w}</span> `(table)` [vim.w](https://neovim.io/doc/user/helptag.html?tag=vim.w)용 리디렉션 테이블입니다.
 
-<span class="help-syntax-special">{wo}</span> `(table)` Redirection table for [vim.wo](https://neovim.io/doc/user/helptag.html?tag=vim.wo).
+<span class="help-syntax-special">{t}</span> `(table)` [vim.t](https://neovim.io/doc/user/helptag.html?tag=vim.t)용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{v}</span> `(table)` [vim.v](https://neovim.io/doc/user/helptag.html?tag=vim.v)용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{env}</span> `(table)` [vim.env](https://neovim.io/doc/user/helptag.html?tag=vim.env)용 리디렉션 테이블입니다.
+
+
+<span class="help-syntax-special">{o}</span> `(table)` [vim.o](https://neovim.io/doc/user/helptag.html?tag=vim.o)용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{go}</span> `(table)` [vim.go](https://neovim.io/doc/user/helptag.html?tag=vim.go)용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{bo}</span> `(table)` [vim.bo](https://neovim.io/doc/user/helptag.html?tag=vim.bo)용 리디렉션 테이블입니다.
+
+<span class="help-syntax-special">{wo}</span> `(table)` [vim.wo](https://neovim.io/doc/user/helptag.html?tag=vim.wo)용 리디렉션 테이블입니다.
 
 ---
 
-### Child neovim start() {#minitest-child-neovim-start .help-syntax-right-anchor}
+### 자식 neovim start() {#minitest-child-neovim-start .help-syntax-right-anchor}
 
 <p align="center">`child.start`(<span class="help-syntax-special">{args}</span>, <span class="help-syntax-special">{opts}</span>)</p>
 
-Start child process and connect to it. Won't work if child is already running.
+자식 프로세스를 시작하고 연결합니다. 자식이 이미 실행 중이면 작동하지 않습니다.
 
-#### Parameters {#minitest-child-neovim-start-parameters}
+#### 매개변수 {#minitest-child-neovim-start-parameters}
 
 
 
-<span class="help-syntax-special">{args}</span> `(table)` Array with arguments for executable. Will be prepended with
-  the following default arguments (see [startup-options](https://neovim.io/doc/user/helptag.html?tag=startup-options)):
+<span class="help-syntax-special">{args}</span> `(table)` 실행 파일을 위한 인자 배열입니다. 다음 기본 인자들이 앞에 추가됩니다 ([startup-options](https://neovim.io/doc/user/helptag.html?tag=startup-options) 참조):
 
   ```lua
   { '--clean', '-n', '--listen', <some address>,
@@ -1252,126 +1047,108 @@ Start child process and connect to it. Won't work if child is already running.
   ```
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션:
 
-  - <span class="help-syntax-keys">\<nvim_executable\></span> - name of Neovim executable. Default: [v:progpath](https://neovim.io/doc/user/helptag.html?tag=v:progpath).
+  - <span class="help-syntax-keys">\<nvim_executable\></span> - Neovim 실행 파일 이름입니다. 기본값: [v:progpath](https://neovim.io/doc/user/helptag.html?tag=v:progpath).
 
-  - <span class="help-syntax-keys">\<connection_timeout\></span> - stop trying to connect after this amount of
-    milliseconds. Default: 5000.
+  - <span class="help-syntax-keys">\<connection_timeout\></span> - 이 밀리초가 지나면 연결 시도를 중단합니다. 기본값: 5000.
 
-#### Usage {#minitest-child-neovim-start-usage}
+#### 사용법 {#minitest-child-neovim-start-usage}
 
 
 
   ```lua
   child = MiniTest.new_child_neovim()
 
-  -- Start default clean Neovim instance
+  -- 기본 clean Neovim 인스턴스 시작
   child.start()
 
-  -- Start with custom 'init.lua' file
+  -- 커스텀 'init.lua' 파일과 함께 시작
   child.start({ '-u', 'scripts/minimal_init.lua' })
   ```
 
 ---
 
-### Child neovim type_keys() {#minitest-child-neovim-type_keys .help-syntax-right-anchor}
+### 자식 neovim type_keys() {#minitest-child-neovim-type_keys .help-syntax-right-anchor}
 
 <p align="center">`child.type_keys`(<span class="help-syntax-special">{wait}</span>, <span class="help-syntax-special">{...}</span>)</p>
 
-Basically a wrapper for [nvim\_input()](https://neovim.io/doc/user/helptag.html?tag=nvim_input\(\)) applied inside child process.
-Differences:
+기본적으로 자식 프로세스 내부에서 적용되는 [nvim\_input()](https://neovim.io/doc/user/helptag.html?tag=nvim_input\(\))용 래퍼입니다.
+차이점:
 
-- Can wait after each group of characters.
+- 각 문자 그룹 후에 대기할 수 있습니다.
 
-- Raises error if typing keys resulted into error in child process (i.e. its
-  [v:errmsg](https://neovim.io/doc/user/helptag.html?tag=v:errmsg) was updated).
+- 키 입력 결과 자식 프로세스에서 에러가 발생한 경우 ([v:errmsg](https://neovim.io/doc/user/helptag.html?tag=v:errmsg)가 업데이트된 경우) 에러를 발생시킵니다.
 
-- Key '<' as separate entry may not be escaped as '<span class="help-syntax-keys">\<LT\></span>'.
+- 별도 엔트리로서의 키 '<'는 '<span class="help-syntax-keys">\<LT\></span>'로 이스케이프할 필요가 없을 수도 있습니다.
 
-#### Parameters {#minitest-child-neovim-type_keys-parameters}
-
+#### 매개변수 {#minitest-child-neovim-type_keys-parameters}
 
 
-<span class="help-syntax-special">{wait}</span> `(number|nil)` Number of milliseconds to wait after each entry. May be
-  omitted, in which case no waiting is done.
 
-<span class="help-syntax-special">{...}</span> `(string|table<number,string>)` Separate entries for [nvim\_input()](https://neovim.io/doc/user/helptag.html?tag=nvim_input\(\)),
-  after which `wait` will be applied. Can be either string or array of strings.
+<span class="help-syntax-special">{wait}</span> `(number|nil)` 각 엔트리 후 대기할 시간(밀리초)입니다. 생략될 수 있으며, 이 경우 대기하지 않습니다.
 
-#### Usage {#minitest-child-neovim-type_keys-usage}
+<span class="help-syntax-special">{...}</span> `(string|table<number,string>)` [nvim\_input()](https://neovim.io/doc/user/helptag.html?tag=nvim_input\(\))을 위한 별도 엔트리들이며, 이후 `wait`가 적용됩니다. 문자열이나 문자열 배열일 수 있습니다.
+
+#### 사용법 {#minitest-child-neovim-type_keys-usage}
 
 
 
   ```lua
-  -- All of these type keys 'c', 'a', 'w'
+  -- 이 모든 것들은 'c', 'a', 'w' 키를 입력합니다.
   child.type_keys('caw')
   child.type_keys('c', 'a', 'w')
   child.type_keys('c', { 'a', 'w' })
 
-  -- Waits 5 ms after `c` and after 'w'
+  -- `c` 이후와 'w' 이후에 5ms 대기합니다.
   child.type_keys(5, 'c', { 'a', 'w' })
 
-  -- Special keys can also be used
+  -- 특수 키도 사용될 수 있습니다.
   child.type_keys('i', 'Hello world', '<Esc>')
   ```
 
 ---
 
-### Child neovim get_screenshot() {#minitest-child-neovim-get_screenshot .help-syntax-right-anchor}
+### 자식 neovim get_screenshot() {#minitest-child-neovim-get_screenshot .help-syntax-right-anchor}
 
 <p align="center">`child.get_screenshot`(<span class="help-syntax-special">{opts}</span>)</p>
 
-Compute what is displayed on (default TUI) screen and how it is displayed.
-This basically calls [screenstring()](https://neovim.io/doc/user/helptag.html?tag=screenstring\(\)) and [screenattr()](https://neovim.io/doc/user/helptag.html?tag=screenattr\(\)) for every visible
-cell (row from 1 to 'lines', column from 1 to 'columns').
+(기본 TUI) 화면에 표시되는 내용과 표시되는 방식을 계산합니다.
+이는 기본적으로 모든 보이는 셀(1부터 'lines'까지의 행, 1부터 'columns'까지의 열)에 대해 [screenstring()](https://neovim.io/doc/user/helptag.html?tag=screenstring\(\)) 및 [screenattr()](https://neovim.io/doc/user/helptag.html?tag=screenattr\(\))을 호출합니다.
 
-Notes:
+참고:
 
-- To make output more portable and visually useful, outputs of
-  `screenattr()` are coded with single character symbols. Those are taken from
-  94 characters (ASCII codes between 33 and 126), so there will be duplicates
-  in case of more than 94 different ways text is displayed on screen.
+- 출력을 더 이식성 있고 시각적으로 유용하게 만들기 위해, `screenattr()`의 출력은 단일 문자 기호로 코딩됩니다. 이들은 94개 문자(33에서 126 사이의 ASCII 코드)에서 가져오므로, 텍스트가 표시되는 방식이 94가지보다 많으면 중복이 발생할 수 있습니다.
 
-#### Parameters {#minitest-child-neovim-get_screenshot-parameters}
+#### 매개변수 {#minitest-child-neovim-get_screenshot-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possieble fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<redraw\></span> `(boolean)` - whether to call [:redraw](https://neovim.io/doc/user/helptag.html?tag=:redraw) prior to computing
-    screenshot. Default: `true`.
+  - <span class="help-syntax-keys">\<redraw\></span> `(boolean)` - 스크린샷을 계산하기 전에 [:redraw](https://neovim.io/doc/user/helptag.html?tag=:redraw)를 호출할지 여부입니다. 기본값: `true`.
 
-#### Return {#minitest-child-neovim-get_screenshot-return}
+#### 반환 {#minitest-child-neovim-get_screenshot-return}
 
 
-`(table|nil)` Screenshot table with the following fields:
+`(table|nil)` 다음 필드를 가진 스크린샷 테이블입니다:
 
-  - <span class="help-syntax-keys">\<text\></span> - "2d array" (row-column) of single characters displayed at
-    particular cells.
+  - <span class="help-syntax-keys">\<text\></span> - 특정 셀에 표시되는 단일 문자의 "2D 배열"(행-열)입니다.
 
-  - <span class="help-syntax-keys">\<attr\></span> - "2d array" (row-column) of symbols representing how text is
-    displayed (basically, "coded" appearance/highlighting). They should be
-    used only in relation to each other: same/different symbols for two
-    cells mean same/different visual appearance. Note: there will be false
-    positives if there are more than 94 different attribute values.
-  It also can be used with `tostring()` to convert to single string (used
-  for writing to reference file). It results into two visual parts
-  (separated by empty line), for `text` and `attr`. Each part has "ruler"
-  above content and line numbers for each line.
-  Returns `nil` if couldn't get a reasonable screenshot.
+  - <span class="help-syntax-keys">\<attr\></span> - 텍스트가 표시되는 방식(기본적으로 "코딩된" 외관/하이라이팅)을 나타내는 기호의 "2D 배열"(행-열)입니다. 이들은 서로 간의 관계에서만 사용되어야 합니다: 두 셀에 대해 동일한/다른 기호는 동일한/다른 시각적 외관을 의미합니다. 참고: 속성 값이 94개보다 많으면 위양성(false positive)이 발생할 수 있습니다.
+  또한 단일 문자열로 변환하기 위해 `tostring()`과 함께 사용될 수 있습니다 (레퍼런스 파일 작성에 사용됨). 이는 `text`와 `attr`에 대해 (빈 라인으로 구분된) 두 개의 시각적 부분으로 결과가 나옵니다. 각 부분은 내용 위에 "룰러(ruler)"가 있고 각 라인에 라인 번호가 있습니다.
+  적절한 스크린샷을 가져올 수 없으면 `nil`을 반환합니다.
 
-#### Usage {#minitest-child-neovim-get_screenshot-usage}
+#### 사용법 {#minitest-child-neovim-get_screenshot-usage}
 
 
 
   ```lua
   local screenshot = child.get_screenshot()
 
-  -- Show character displayed row=3 and column=4
+  -- row=3, column=4에 표시된 문자 표시
   print(screenshot.text[3][4])
 
-  -- Convert to string
+  -- 문자열로 변환
   tostring(screenshot)
   ```
-

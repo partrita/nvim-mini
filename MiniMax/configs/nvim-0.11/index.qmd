@@ -1,61 +1,61 @@
 ---
-title: "MiniMax config `nvim-0.11`"
+title: "MiniMax 설정 `nvim-0.11`"
 ---
 
-_Generated from the `main` branch of 'MiniMax'_
+_ 'MiniMax'의 `main` 브랜치에서 생성됨 _
 
-### MiniMax config `nvim-0.11`
+### MiniMax 설정 `nvim-0.11`
 
 #### init.lua {#init.lua}
 
-<details><summary>Code</summary>
+<details><summary>코드</summary>
 
 ```lua
 -- ┌────────────────────┐
--- │ Welcome to MiniMax │
+-- │ MiniMax에 오신 것을 환영합니다 │
 -- └────────────────────┘
 --
--- This is a config designed to mostly use MINI. It provides out of the box
--- a stable, polished, and feature rich Neovim experience. Its structure:
+-- 이 설정은 주로 MINI를 사용하도록 설계되었습니다. 별도의 설정 없이도
+-- 안정적이고 세련되며 기능이 풍부한 Neovim 경험을 제공합니다. 구조:
 --
--- ├ init.lua          Initial (this) file executed during startup
--- ├ plugin/           Files automatically sourced during startup
--- ├── 10_options.lua  Built-in Neovim behavior
--- ├── 20_keymaps.lua  Custom mappings
--- ├── 30_mini.lua     MINI configuration
--- ├── 40_plugins.lua  Plugins outside of MINI
--- ├ snippets/         User defined snippets (has demo file)
--- ├ after/            Files to override behavior added by plugins
--- ├── ftplugin/       Files for filetype behavior (has demo file)
--- ├── lsp/            Language server configurations (has demo file)
--- ├── snippets/       Higher priority snippet files (has demo file)
+-- ├ init.lua          시작 시 실행되는 초기 파일(현재 파일)
+-- ├ plugin/           시작 시 자동으로 로드되는 파일들
+-- ├── 10_options.lua  기본 Neovim 동작
+-- ├── 20_keymaps.lua  사용자 정의 매핑
+-- ├── 30_mini.lua     MINI 설정
+-- ├── 40_plugins.lua  MINI 외의 플러그인
+-- ├ snippets/         사용자 정의 스니펫 (데모 파일 포함)
+-- ├ after/            플러그인에 의해 추가된 동작을 덮어쓰는 파일들
+-- ├── ftplugin/       파일 유형별 동작 (데모 파일 포함)
+-- ├── lsp/            언어 서버 설정 (데모 파일 포함)
+-- ├── snippets/       높은 우선순위의 스니펫 파일 (데모 파일 포함)
 --
--- Config files are meant to be read, preferably inside a Neovim instance running
--- this config and opened at its root. This will help you better understand your
--- setup. Start with this file. Any order is possible, prefer the one listed above.
--- Ways of navigating your config:
--- - `<Space>` + `e` + (one of) `iokmp` - edit 'init.lua' or 'plugin/' files.
--- - Inside config directory: `<Space>ff` (picker) or `<Space>ed` (explorer)
--- - Navigate existing buffers with `[b`, `]b`, or `<Space>fb`.
+-- 설정 파일은 가급적 이 설정이 실행 중인 Neovim 인스턴스에서 루트 디렉토리를 열어
+-- 읽는 것을 권장합니다. 이를 통해 설정을 더 잘 이해할 수 있습니다.
+-- 이 파일부터 시작하세요. 순서는 상관없지만 위에 나열된 순서를 권장합니다.
+-- 설정 탐색 방법:
+-- - `<Space>` + `e` + `iokmp` 중 하나 - 'init.lua' 또는 'plugin/' 파일 편집.
+-- - 설정 디렉토리 내부: `<Space>ff` (선택기) 또는 `<Space>ed` (탐색기)
+-- - `[b`, `]b` 또는 `<Space>fb`로 기존 버퍼 탐색.
 --
--- Config files are also meant to be customized. Initially it is a baseline of
--- a working config based on MINI. Modify it to make it yours. Some approaches:
--- - Modify already existing files in a way that keeps them consistent.
--- - Add new files in a way that keeps config consistent.
---   Usually inside 'plugin/' or 'after/'.
+-- 설정 파일은 사용자 정의가 가능하도록 설계되었습니다. 초기에는 MINI 기반의
+-- 작동하는 기준 설정입니다. 이를 수정하여 자신만의 설정을 만드세요. 몇 가지 방법:
+-- - 기존 파일을 일관성을 유지하면서 수정합니다.
+-- - 일관성을 유지하면서 새로운 파일을 추가합니다.
+--   보통 'plugin/' 또는 'after/' 내부에 추가합니다.
 --
--- Documentation comments like this can be found throughout the config.
--- Common conventions:
+-- 설정 전반에 걸쳐 이와 같은 문서화 주석을 찾을 수 있습니다.
+-- 공통 관례:
 --
--- - See `:h key-notation` for key notation used.
--- - `:h xxx` means "documentation of helptag xxx". Either type text directly
---   followed by Enter or type `<Space>fh` to open a helptag fuzzy picker.
--- - "Type `<Space>fh`" means "press <Space>, followed by f, followed by h".
---   Unless said otherwise, it assumes that Normal mode is current.
--- - "See 'path/to/file'" means see open file at described path and read it.
--- - `:SomeCommand ...` or `:lua ...` means execute mentioned command.
+-- - 사용된 키 표기법은 `:h key-notation`을 참조하세요.
+-- - `:h xxx`는 "도움말 태그 xxx의 문서"를 의미합니다. 텍스트를 직접 입력하고
+--   Enter를 누르거나 `<Space>fh`를 입력하여 도움말 태그 퍼지 선택기를 엽니다.
+-- - "`<Space>fh` 입력"은 "<Space>를 누르고 f를 누른 다음 h를 누름"을 의미합니다.
+--   별도의 언급이 없는 한 노멀 모드라고 가정합니다.
+-- - "'path/to/file' 참조"는 해당 경로의 파일을 열고 읽는 것을 의미합니다.
+-- - `:SomeCommand ...` 또는 `:lua ...`는 해당 명령을 실행하는 것을 의미합니다.
 
--- Bootstrap 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
+-- 'mini.nvim'을 'mini.deps'에서 관리할 수 있도록 수동으로 부트스트랩합니다.
 local mini_path = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
   vim.cmd('echo "Installing `mini.nvim`" | redraw')
@@ -66,27 +66,27 @@ if not vim.loop.fs_stat(mini_path) then
   vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
--- Plugin manager. Set up immediately for `now()`/`later()` helpers.
--- Example usage:
--- - `MiniDeps.add('...')` - use inside config to add a plugin
--- - `:DepsUpdate` - update all plugins
--- - `:DepsSnapSave` - save a snapshot of currently active plugins
+-- 플러그인 매니저. `now()`/`later()` 헬퍼를 위해 즉시 설정합니다.
+-- 사용 예:
+-- - `MiniDeps.add('...')` - 설정 내부에서 플러그인 추가
+-- - `:DepsUpdate` - 모든 플러그인 업데이트
+-- - `:DepsSnapSave` - 현재 활성화된 플러그인의 스냅샷 저장
 --
--- See also:
--- - `:h MiniDeps-overview` - how to use it
--- - `:h MiniDeps-commands` - all available commands
--- - 'plugin/30_mini.lua' - more details about 'mini.nvim' in general
+-- 참조:
+-- - `:h MiniDeps-overview` - 사용 방법
+-- - `:h MiniDeps-commands` - 사용 가능한 모든 명령
+-- - 'plugin/30_mini.lua' - 'mini.nvim' 일반에 대한 자세한 내용
 require('mini.deps').setup()
 
--- Define config table to be able to pass data between scripts
--- It is a global variable which can be use both as `_G.Config` and `Config`
+-- 스크립트 간에 데이터를 전달할 수 있도록 설정 테이블을 정의합니다.
+-- `_G.Config` 및 `Config`로 모두 사용할 수 있는 전역 변수입니다.
 _G.Config = {}
 
--- Define custom autocommand group and helper to create an autocommand.
--- Autocommands are Neovim's way to define actions that are executed on events
--- (like creating a buffer, setting an option, etc.).
+-- 사용자 정의 자동 명령 그룹 및 자동 명령을 생성하는 헬퍼를 정의합니다.
+-- 자동 명령은 이벤트(버퍼 생성, 옵션 설정 등) 발생 시 실행되는 동작을
+-- 정의하는 Neovim의 방식입니다.
 --
--- See also:
+-- 참조:
 -- - `:h autocommand`
 -- - `:h nvim_create_augroup()`
 -- - `:h nvim_create_autocmd()`
@@ -96,8 +96,8 @@ Config.new_autocmd = function(event, pattern, callback, desc)
   vim.api.nvim_create_autocmd(event, opts)
 end
 
--- Some plugins and 'mini.nvim' modules only need setup during startup if Neovim
--- is started like `nvim -- path/to/file`, otherwise delaying setup is fine
+-- 일부 플러그인 및 'mini.nvim' 모듈은 Neovim이 `nvim -- path/to/file`과 같이
+-- 시작된 경우에만 시작 중에 설정이 필요하며, 그렇지 않으면 설정을 지연시켜도 괜찮습니다.
 Config.now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
 ```
 
@@ -105,133 +105,132 @@ Config.now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
 
 #### plugin/10_options.lua {#plugin-10_options.lua}
 
-<details><summary>Code</summary>
+<details><summary>코드</summary>
 
 ```lua
 -- ┌──────────────────────────┐
--- │ Built-in Neovim behavior │
+-- │ 내장 Neovim 동작 │
 -- └──────────────────────────┘
 --
--- This file defines Neovim's built-in behavior. The goal is to improve overall
--- usability in a way that works best with MINI.
+-- 이 파일은 Neovim의 내장 동작을 정의합니다. 목표는 MINI와 가장 잘 작동하는
+-- 방식으로 전반적인 사용성을 개선하는 것입니다.
 --
--- Here `vim.o.xxx = value` sets default value of option `xxx` to `value`.
--- See `:h 'xxx'` (replace `xxx` with actual option name).
+-- 여기서 `vim.o.xxx = value`는 옵션 `xxx`의 기본값을 `value`로 설정합니다.
+-- `:h 'xxx'`를 참조하세요(`xxx`를 실제 옵션 이름으로 바꿈).
 --
--- Option values can be customized on a per buffer or window basis.
--- See 'after/ftplugin/' for common example.
+-- 옵션 값은 버퍼나 창별로 사용자 정의할 수 있습니다.
+-- 공통 예시는 'after/ftplugin/'을 참조하세요.
 --
--- Notes:
--- - Some options (like `:h 'exrc'`) need to be set before this file is sourced.
---   Set them directly at the bottom of the 'init.lua' file.
+-- 참고:
+-- - 일부 옵션(예: `:h 'exrc'`)은 이 파일이 소스되기 전에 설정해야 합니다.
+--   'init.lua' 파일 하단에 직접 설정하세요.
 
 -- stylua: ignore start
--- The next part (until `-- stylua: ignore end`) is aligned manually for easier
--- reading. Consider preserving this or remove `-- stylua` lines to autoformat.
+-- 다음 부분(`-- stylua: ignore end`까지)은 더 쉬운 읽기를 위해 수동으로 정렬되었습니다.
+-- 이를 유지하거나 `-- stylua` 라인을 제거하여 자동 서식을 사용하세요.
 
--- General ====================================================================
-vim.g.mapleader = ' ' -- Use `<Space>` as <Leader> key
+-- 일반 ====================================================================
+vim.g.mapleader = ' ' -- `<Space>`를 <Leader> 키로 사용
 
-vim.o.mouse       = 'a'            -- Enable mouse
-vim.o.mousescroll = 'ver:25,hor:6' -- Customize mouse scroll
-vim.o.switchbuf   = 'usetab'       -- Use already opened buffers when switching
-vim.o.undofile    = true           -- Enable persistent undo
+vim.o.mouse       = 'a'            -- 마우스 활성화
+vim.o.mousescroll = 'ver:25,hor:6' -- 마우스 스크롤 사용자 정의
+vim.o.switchbuf   = 'usetab'       -- 전환 시 이미 열린 버퍼 사용
+vim.o.undofile    = true           -- 영구 실행 취소 활성화
 
-vim.o.shada = "'100,<50,s10,:1000,/100,@100,h" -- Limit ShaDa file (for startup)
+vim.o.shada = "'100,<50,s10,:1000,/100,@100,h" -- ShaDa 파일 제한 (시작 시)
 
--- Enable all filetype plugins and syntax (if not enabled, for better startup)
+-- 모든 파일 유형 플러그인 및 구문 활성화 (활성화되지 않은 경우, 더 빠른 시작을 위해)
 vim.cmd('filetype plugin indent on')
 if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
 
 -- UI =========================================================================
-vim.o.breakindent    = true       -- Indent wrapped lines to match line start
-vim.o.breakindentopt = 'list:-1'  -- Add padding for lists (if 'wrap' is set)
-vim.o.colorcolumn    = '+1'       -- Draw column on the right of maximum width
-vim.o.cursorline     = true       -- Enable current line highlighting
-vim.o.linebreak      = true       -- Wrap lines at 'breakat' (if 'wrap' is set)
-vim.o.list           = true       -- Show helpful text indicators
-vim.o.number         = true       -- Show line numbers
-vim.o.pumheight      = 10         -- Make popup menu smaller
-vim.o.ruler          = false      -- Don't show cursor coordinates
-vim.o.shortmess      = 'CFOSWaco' -- Disable some built-in completion messages
-vim.o.showmode       = false      -- Don't show mode in command line
-vim.o.signcolumn     = 'yes'      -- Always show signcolumn (less flicker)
-vim.o.splitbelow     = true       -- Horizontal splits will be below
-vim.o.splitkeep      = 'screen'   -- Reduce scroll during window split
-vim.o.splitright     = true       -- Vertical splits will be to the right
-vim.o.winborder      = 'single'   -- Use border in floating windows
-vim.o.wrap           = false      -- Don't visually wrap lines (toggle with \w)
+vim.o.breakindent    = true       -- 줄 바꿈된 줄을 시작 부분에 맞춰 들여쓰기
+vim.o.breakindentopt = 'list:-1'  -- 목록에 패딩 추가 ('wrap'이 설정된 경우)
+vim.o.colorcolumn    = '+1'       -- 최대 너비 오른쪽에 열 그리기
+vim.o.cursorline     = true       -- 현재 줄 하이라이트 활성화
+vim.o.linebreak      = true       -- 'breakat'에서 줄 바꿈 ('wrap'이 설정된 경우)
+vim.o.list           = true       -- 유용한 텍스트 표시기 표시
+vim.o.number         = true       -- 줄 번호 표시
+vim.o.pumheight      = 10         -- 팝업 메뉴를 작게 만들기
+vim.o.ruler          = false      -- 커서 좌표 표시 안 함
+vim.o.shortmess      = 'CFOSWaco' -- 일부 내장 자동 완성 메시지 비활성화
+vim.o.showmode       = false      -- 명령줄에 모드 표시 안 함
+vim.o.signcolumn     = 'yes'      -- 항상 사인 칼럼 표시 (깜빡임 감소)
+vim.o.splitbelow     = true       -- 가로 분할은 아래에
+vim.o.splitkeep      = 'screen'   -- 창 분할 시 스크롤 감소
+vim.o.splitright     = true       -- 세로 분할은 오른쪽에
+vim.o.winborder      = 'single'   -- 플로팅 창에 테두리 사용
+vim.o.wrap           = false      -- 줄을 시각적으로 줄 바꿈하지 않음 (\w로 토글)
 
-vim.o.cursorlineopt  = 'screenline,number' -- Show cursor line per screen line
+vim.o.cursorlineopt  = 'screenline,number' -- 화면 줄당 커서 줄 표시
 
--- Special UI symbols. More is set via 'mini.basics' later.
+-- 특수 UI 기호. 나중에 'mini.basics'를 통해 더 많이 설정됩니다.
 vim.o.fillchars = 'eob: ,fold:╌'
 vim.o.listchars = 'extends:…,nbsp:␣,precedes:…,tab:> '
 
--- Folds (see `:h fold-commands`, `:h zM`, `:h zR`, `:h zA`, `:h zj`)
-vim.o.foldlevel   = 10       -- Fold nothing by default; set to 0 or 1 to fold
-vim.o.foldmethod  = 'indent' -- Fold based on indent level
-vim.o.foldnestmax = 10       -- Limit number of fold levels
-vim.o.foldtext    = ''       -- Show text under fold with its highlighting
+-- 접기 (접기 명령은 `:h fold-commands`, `:h zM`, `:h zR`, `:h zA`, `:h zj` 참조)
+vim.o.foldlevel   = 10       -- 기본적으로 아무것도 접지 않음; 접으려면 0 또는 1로 설정
+vim.o.foldmethod  = 'indent' -- 들여쓰기 수준에 따라 접기
+vim.o.foldnestmax = 10       -- 접기 수준 수 제한
+vim.o.foldtext    = ''       -- 접힌 아래 텍스트를 하이라이트와 함께 표시
 
--- Editing ====================================================================
-vim.o.autoindent    = true    -- Use auto indent
-vim.o.expandtab     = true    -- Convert tabs to spaces
-vim.o.formatoptions = 'rqnl1j'-- Improve comment editing
-vim.o.ignorecase    = true    -- Ignore case during search
-vim.o.incsearch     = true    -- Show search matches while typing
-vim.o.infercase     = true    -- Infer case in built-in completion
-vim.o.shiftwidth    = 2       -- Use this number of spaces for indentation
-vim.o.smartcase     = true    -- Respect case if search pattern has upper case
-vim.o.smartindent   = true    -- Make indenting smart
-vim.o.spelloptions  = 'camel' -- Treat camelCase word parts as separate words
-vim.o.tabstop       = 2       -- Show tab as this number of spaces
-vim.o.virtualedit   = 'block' -- Allow going past end of line in blockwise mode
+-- 편집 ====================================================================
+vim.o.autoindent    = true    -- 자동 들여쓰기 사용
+vim.o.expandtab     = true    -- 탭을 공백으로 변환
+vim.o.formatoptions = 'rqnl1j'-- 주석 편집 개선
+vim.o.ignorecase    = true    -- 검색 시 대소문자 무시
+vim.o.incsearch     = true    -- 입력하는 동안 검색 결과 표시
+vim.o.infercase     = true    -- 내장 자동 완성에서 대소문자 유추
+vim.o.shiftwidth    = 2       -- 들여쓰기에 이 공백 수 사용
+vim.o.smartcase     = true    -- 검색 패턴에 대문자가 있는 경우 대소문자 존중
+vim.o.smartindent   = true    -- 스마트한 들여쓰기
+vim.o.spelloptions  = 'camel' -- camelCase 단어 부분을 별도의 단어로 취급
+vim.o.tabstop       = 2       -- 탭을 이 공백 수로 표시
+vim.o.virtualedit   = 'block' -- 블록 모드에서 줄 끝을 지나갈 수 있도록 허용
 
-vim.o.iskeyword = '@,48-57,_,192-255,-' -- Treat dash as `word` textobject part
+vim.o.iskeyword = '@,48-57,_,192-255,-' -- 대시를 `word` 텍스트 오브젝트 부분으로 취급
 
--- Pattern for a start of numbered list (used in `gw`). This reads as
--- "Start of list item is: at least one special character (digit, -, +, *)
--- possibly followed by punctuation (. or `)`) followed by at least one space".
+-- 번호가 매겨진 목록의 시작 패턴 (`gw`에서 사용됨). 다음과 같이 읽힙니다.
+-- "목록 항목의 시작은: 적어도 하나의 특수 문자 (숫자, -, +, *)
+-- 뒤에 구두점 (. 또는 `)`)이 올 수 있고, 그 뒤에 적어도 하나의 공백이 옴".
 vim.o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 
--- Built-in completion
-vim.o.complete    = '.,w,b,kspell'                  -- Use less sources
-vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
+-- 내장 자동 완성
+vim.o.complete    = '.,w,b,kspell'                  -- 더 적은 소스 사용
+vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- 사용자 정의 동작 사용
 
--- Autocommands ===============================================================
+-- 자동 명령 ===============================================================
 
--- Don't auto-wrap comments and don't insert comment leader after hitting 'o'.
--- Do on `FileType` to always override these changes from filetype plugins.
+-- 주석을 자동으로 줄 바꿈하지 않고 'o'를 누른 후 주석 리더를 삽입하지 않습니다.
+-- 파일 유형 플러그인의 이러한 변경 사항을 항상 덮어쓰기 위해 `FileType`에서 수행합니다.
 local f = function() vim.cmd('setlocal formatoptions-=c formatoptions-=o') end
-Config.new_autocmd('FileType', nil, f, "Proper 'formatoptions'")
+Config.new_autocmd('FileType', nil, f, "적절한 'formatoptions'")
 
--- There are other autocommands created by 'mini.basics'. See 'plugin/30_mini.lua'.
+-- 'mini.basics'에 의해 생성된 다른 자동 명령이 있습니다. 'plugin/30_mini.lua'를 참조하세요.
 
--- Diagnostics ================================================================
+-- 진단 ================================================================
 
--- Neovim has built-in support for showing diagnostic messages. This configures
--- a more conservative display while still being useful.
--- See `:h vim.diagnostic` and `:h vim.diagnostic.config()`.
+-- Neovim은 진단 메시지 표시를 내장 지원합니다. 유용하면서도 보수적인 표시를 구성합니다.
+-- `:h vim.diagnostic` 및 `:h vim.diagnostic.config()`를 참조하세요.
 local diagnostic_opts = {
-  -- Show signs on top of any other sign, but only for warnings and errors
+  -- 다른 기호 위에 기호를 표시하지만 경고 및 오류에 대해서만 표시합니다.
   signs = { priority = 9999, severity = { min = 'WARN', max = 'ERROR' } },
 
-  -- Show all diagnostics as underline (for their messages type `<Leader>ld`)
+  -- 모든 진단을 밑줄로 표시합니다 (메시지를 보려면 `<Leader>ld` 입력).
   underline = { severity = { min = 'HINT', max = 'ERROR' } },
 
-  -- Show more details immediately for errors on the current line
+  -- 현재 줄의 오류에 대해 즉시 더 자세한 정보를 표시합니다.
   virtual_lines = false,
   virtual_text = {
     current_line = true,
     severity = { min = 'ERROR', max = 'ERROR' },
   },
 
-  -- Don't update diagnostics when typing
+  -- 입력할 때 진단을 업데이트하지 않음
   update_in_insert = false,
 }
 
--- Use `later()` to avoid sourcing `vim.diagnostic` on startup
+-- 시작 시 `vim.diagnostic`을 로드하지 않도록 `later()`를 사용합니다.
 MiniDeps.later(function() vim.diagnostic.config(diagnostic_opts) end)
 -- stylua: ignore end
 ```
@@ -240,81 +239,81 @@ MiniDeps.later(function() vim.diagnostic.config(diagnostic_opts) end)
 
 #### plugin/20_keymaps.lua {#plugin-20_keymaps.lua}
 
-<details><summary>Code</summary>
+<details><summary>코드</summary>
 
 ```lua
 -- ┌─────────────────┐
--- │ Custom mappings │
+-- │ 사용자 정의 매핑 │
 -- └─────────────────┘
 --
--- This file contains definitions of custom general and Leader mappings.
+-- 이 파일에는 사용자 정의 일반 및 리더(Leader) 매핑 정의가 포함되어 있습니다.
 
--- General mappings ===========================================================
+-- 일반 매핑 ===========================================================
 
--- Use this section to add custom general mappings. See `:h vim.keymap.set()`.
+-- 사용자 정의 일반 매핑을 추가하려면 이 섹션을 사용하세요. `:h vim.keymap.set()`을 참조하세요.
 
--- An example helper to create a Normal mode mapping
+-- 노멀 모드 매핑을 생성하는 예시 헬퍼
 local nmap = function(lhs, rhs, desc)
-  -- See `:h vim.keymap.set()`
+  -- `:h vim.keymap.set()` 참조
   vim.keymap.set('n', lhs, rhs, { desc = desc })
 end
 
--- Paste linewise before/after current line
--- Usage: `yiw` to yank a word and `]p` to put it on the next line.
-nmap('[p', '<Cmd>exe "put! " . v:register<CR>', 'Paste Above')
-nmap(']p', '<Cmd>exe "put "  . v:register<CR>', 'Paste Below')
+-- 현재 줄 앞/뒤에 줄 단위로 붙여넣기
+-- 사용법: `yiw`로 단어를 복사하고 `]p`로 다음 줄에 붙여넣습니다.
+nmap('[p', '<Cmd>exe "put! " . v:register<CR>', '위에 붙여넣기')
+nmap(']p', '<Cmd>exe "put "  . v:register<CR>', '아래에 붙여넣기')
 
--- Many general mappings are created by 'mini.basics'. See 'plugin/30_mini.lua'
+-- 많은 일반 매핑이 'mini.basics'에 의해 생성됩니다. 'plugin/30_mini.lua'를 참조하세요.
 
 -- stylua: ignore start
--- The next part (until `-- stylua: ignore end`) is aligned manually for easier
--- reading. Consider preserving this or remove `-- stylua` lines to autoformat.
+-- 다음 부분(`-- stylua: ignore end`까지)은 더 쉬운 읽기를 위해 수동으로 정렬되었습니다.
+-- 이를 유지하거나 `-- stylua` 라인을 제거하여 자동 서식을 사용하세요.
 
--- Leader mappings ============================================================
+-- 리더(Leader) 매핑 ============================================================
 
--- Neovim has the concept of a Leader key (see `:h <Leader>`). It is a configurable
--- key that is primarily used for "workflow" mappings (opposed to text editing).
--- Like "open file explorer", "create scratch buffer", "pick from buffers".
+-- Neovim에는 리더 키 개념이 있습니다 (`:h <Leader>` 참조). 주로 "워크플로우"
+-- 매핑(텍스트 편집과 반대)에 사용되는 설정 가능한 키입니다.
+-- 예: "파일 탐색기 열기", "스크래치 버퍼 생성", "버퍼에서 선택".
 --
--- In 'plugin/10_options.lua' <Leader> is set to <Space>, i.e. press <Space>
--- whenever there is a suggestion to press <Leader>.
+-- 'plugin/10_options.lua'에서 <Leader>는 <Space>로 설정되어 있습니다. 즉,
+-- <Leader>를 누르라는 제안이 있을 때마다 <Space>를 누르세요.
 --
--- This config uses a "two key Leader mappings" approach: first key describes
--- semantic group, second key executes an action. Both keys are usually chosen
--- to create some kind of mnemonic.
--- Example: `<Leader>f` groups "find" type of actions; `<Leader>ff` - find files.
--- Use this section to add Leader mappings in a structural manner.
+-- 이 설정은 "두 개의 키 리더 매핑" 방식을 사용합니다. 첫 번째 키는 의미론적
+-- 그룹을 나타내고 두 번째 키는 동작을 실행합니다. 두 키는 보통 기억하기 쉬운
+-- 방식으로 선택됩니다.
+-- 예: `<Leader>f`는 "찾기(find)" 유형의 동작을 그룹화합니다. `<Leader>ff`는 파일 찾기입니다.
+-- 이 섹션을 사용하여 구조적인 방식으로 리더 매핑을 추가하세요.
 --
--- Usually if there are global and local kinds of actions, lowercase second key
--- denotes global and uppercase - local.
--- Example: `<Leader>fs` / `<Leader>fS` - find workspace/document LSP symbols.
+-- 일반적으로 전역 및 로컬 동작이 있는 경우 소문자 두 번째 키는 전역을,
+-- 대문자는 로컬을 나타냅니다.
+-- 예: `<Leader>fs` / `<Leader>fS` - 작업 공간/문서 LSP 심볼 찾기.
 --
--- Many of the mappings use 'mini.nvim' modules set up in 'plugin/30_mini.lua'.
+-- 많은 매핑이 'plugin/30_mini.lua'에서 설정된 'mini.nvim' 모듈을 사용합니다.
 
--- Create a global table with information about Leader groups in certain modes.
--- This is used to provide 'mini.clue' with extra clues.
--- Add an entry if you create a new group.
+-- 특정 모드의 리더 그룹에 대한 정보를 포함하는 전역 테이블을 생성합니다.
+-- 이는 'mini.clue'에 추가 단서를 제공하는 데 사용됩니다.
+-- 새로운 그룹을 생성하면 항목을 추가하세요.
 Config.leader_group_clues = {
-  { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
-  { mode = 'n', keys = '<Leader>e', desc = '+Explore/Edit' },
-  { mode = 'n', keys = '<Leader>f', desc = '+Find' },
+  { mode = 'n', keys = '<Leader>b', desc = '+버퍼' },
+  { mode = 'n', keys = '<Leader>e', desc = '+탐색/편집' },
+  { mode = 'n', keys = '<Leader>f', desc = '+찾기' },
   { mode = 'n', keys = '<Leader>g', desc = '+Git' },
-  { mode = 'n', keys = '<Leader>l', desc = '+Language' },
-  { mode = 'n', keys = '<Leader>m', desc = '+Map' },
-  { mode = 'n', keys = '<Leader>o', desc = '+Other' },
-  { mode = 'n', keys = '<Leader>s', desc = '+Session' },
-  { mode = 'n', keys = '<Leader>t', desc = '+Terminal' },
-  { mode = 'n', keys = '<Leader>v', desc = '+Visits' },
+  { mode = 'n', keys = '<Leader>l', desc = '+언어' },
+  { mode = 'n', keys = '<Leader>m', desc = '+맵' },
+  { mode = 'n', keys = '<Leader>o', desc = '+기타' },
+  { mode = 'n', keys = '<Leader>s', desc = '+세션' },
+  { mode = 'n', keys = '<Leader>t', desc = '+터미널' },
+  { mode = 'n', keys = '<Leader>v', desc = '+방문' },
 
   { mode = 'x', keys = '<Leader>g', desc = '+Git' },
-  { mode = 'x', keys = '<Leader>l', desc = '+Language' },
+  { mode = 'x', keys = '<Leader>l', desc = '+언어' },
 }
 
--- Helpers for a more concise `<Leader>` mappings.
--- Most of the mappings use `<Cmd>...<CR>` string as a right hand side (RHS) in
--- an attempt to be more concise yet descriptive. See `:h <Cmd>`.
--- This approach also doesn't require the underlying commands/functions to exist
--- during mapping creation: a "lazy loading" approach to improve startup time.
+-- 더 간결한 `<Leader>` 매핑을 위한 헬퍼.
+-- 대부분의 매핑은 간결하면서도 설명적인 방식으로 우변(RHS)에 `<Cmd>...<CR>` 문자열을 사용합니다.
+-- `:h <Cmd>`를 참조하세요.
+-- 이 방식은 매핑 생성 중에 기본 명령/함수가 존재할 필요가 없습니다. 시작 시간을
+-- 개선하기 위한 "지연 로딩" 방식입니다.
 local nmap_leader = function(suffix, rhs, desc)
   vim.keymap.set('n', '<Leader>' .. suffix, rhs, { desc = desc })
 end
@@ -322,26 +321,26 @@ local xmap_leader = function(suffix, rhs, desc)
   vim.keymap.set('x', '<Leader>' .. suffix, rhs, { desc = desc })
 end
 
--- b is for 'Buffer'. Common usage:
--- - `<Leader>bs` - create scratch (temporary) buffer
--- - `<Leader>ba` - navigate to the alternative buffer
--- - `<Leader>bw` - wipeout (fully delete) current buffer
+-- b는 '버퍼(Buffer)'용입니다. 일반적인 사용법:
+-- - `<Leader>bs` - 스크래치(임시) 버퍼 생성
+-- - `<Leader>ba` - 이전(대체) 버퍼로 이동
+-- - `<Leader>bw` - 현재 버퍼 초기화 (완전 삭제)
 local new_scratch_buffer = function()
   vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
 end
 
-nmap_leader('ba', '<Cmd>b#<CR>',                                 'Alternate')
-nmap_leader('bd', '<Cmd>lua MiniBufremove.delete()<CR>',         'Delete')
-nmap_leader('bD', '<Cmd>lua MiniBufremove.delete(0, true)<CR>',  'Delete!')
-nmap_leader('bs', new_scratch_buffer,                            'Scratch')
-nmap_leader('bw', '<Cmd>lua MiniBufremove.wipeout()<CR>',        'Wipeout')
-nmap_leader('bW', '<Cmd>lua MiniBufremove.wipeout(0, true)<CR>', 'Wipeout!')
+nmap_leader('ba', '<Cmd>b#<CR>',                                 '이전 버퍼')
+nmap_leader('bd', '<Cmd>lua MiniBufremove.delete()<CR>',         '삭제')
+nmap_leader('bD', '<Cmd>lua MiniBufremove.delete(0, true)<CR>',  '삭제!')
+nmap_leader('bs', new_scratch_buffer,                            '스크래치')
+nmap_leader('bw', '<Cmd>lua MiniBufremove.wipeout()<CR>',        '초기화')
+nmap_leader('bW', '<Cmd>lua MiniBufremove.wipeout(0, true)<CR>', '초기화!')
 
--- e is for 'Explore' and 'Edit'. Common usage:
--- - `<Leader>ed` - open explorer at current working directory
--- - `<Leader>ef` - open directory of current file (needs to be present on disk)
--- - `<Leader>ei` - edit 'init.lua'
--- - All mappings that use `edit_plugin_file` - edit 'plugin/' config files
+-- e는 '탐색(Explore)' 및 '편집(Edit)'용입니다. 일반적인 사용법:
+-- - `<Leader>ed` - 현재 작업 디렉토리에서 탐색기 열기
+-- - `<Leader>ef` - 현재 파일의 디렉토리 열기 (디스크에 있어야 함)
+-- - `<Leader>ei` - 'init.lua' 편집
+-- - `edit_plugin_file`을 사용하는 모든 매핑 - 'plugin/' 설정 파일 편집
 local edit_plugin_file = function(filename)
   return string.format('<Cmd>edit %s/plugin/%s<CR>', vim.fn.stdpath('config'), filename)
 end
@@ -353,128 +352,128 @@ local explore_locations = function()
   vim.cmd(vim.fn.getloclist(0, { winid = true }).winid ~= 0 and 'lclose' or 'lopen')
 end
 
-nmap_leader('ed', '<Cmd>lua MiniFiles.open()<CR>',          'Directory')
-nmap_leader('ef', explore_at_file,                          'File directory')
+nmap_leader('ed', '<Cmd>lua MiniFiles.open()<CR>',          '디렉토리')
+nmap_leader('ef', explore_at_file,                          '파일 디렉토리')
 nmap_leader('ei', '<Cmd>edit $MYVIMRC<CR>',                 'init.lua')
-nmap_leader('ek', edit_plugin_file('20_keymaps.lua'),       'Keymaps config')
-nmap_leader('em', edit_plugin_file('30_mini.lua'),          'MINI config')
-nmap_leader('en', '<Cmd>lua MiniNotify.show_history()<CR>', 'Notifications')
-nmap_leader('eo', edit_plugin_file('10_options.lua'),       'Options config')
-nmap_leader('ep', edit_plugin_file('40_plugins.lua'),       'Plugins config')
-nmap_leader('eq', explore_quickfix,                         'Quickfix list')
-nmap_leader('eQ', explore_locations,                        'Location list')
+nmap_leader('ek', edit_plugin_file('20_keymaps.lua'),       '키매핑 설정')
+nmap_leader('em', edit_plugin_file('30_mini.lua'),          'MINI 설정')
+nmap_leader('en', '<Cmd>lua MiniNotify.show_history()<CR>', '알림')
+nmap_leader('eo', edit_plugin_file('10_options.lua'),       '옵션 설정')
+nmap_leader('ep', edit_plugin_file('40_plugins.lua'),       '플러그인 설정')
+nmap_leader('eq', explore_quickfix,                         'Quickfix 목록')
+nmap_leader('eQ', explore_locations,                        'Location 목록')
 
--- f is for 'Fuzzy Find'. Common usage:
--- - `<Leader>ff` - find files; for best performance requires `ripgrep`
--- - `<Leader>fg` - find inside files; requires `ripgrep`
--- - `<Leader>fh` - find help tag
--- - `<Leader>fr` - resume latest picker
--- - `<Leader>fv` - all visited paths; requires 'mini.visits'
+-- f는 '퍼지 찾기(Fuzzy Find)'용입니다. 일반적인 사용법:
+-- - `<Leader>ff` - 파일 찾기; 최상의 성능을 위해 `ripgrep` 필요
+-- - `<Leader>fg` - 파일 내부 찾기; `ripgrep` 필요
+-- - `<Leader>fh` - 도움말 태그 찾기
+-- - `<Leader>fr` - 최신 선택기 다시 시작
+-- - `<Leader>fv` - 모든 방문한 경로; 'mini.visits' 필요
 --
--- All these use 'mini.pick'. See `:h MiniPick-overview` for an overview.
+-- 이 모든 것은 'mini.pick'을 사용합니다. 개요는 `:h MiniPick-overview`를 참조하세요.
 local pick_added_hunks_buf = '<Cmd>Pick git_hunks path="%" scope="staged"<CR>'
 local pick_workspace_symbols_live = '<Cmd>Pick lsp scope="workspace_symbol_live"<CR>'
 
-nmap_leader('f/', '<Cmd>Pick history scope="/"<CR>',            '"/" history')
-nmap_leader('f:', '<Cmd>Pick history scope=":"<CR>',            '":" history')
-nmap_leader('fa', '<Cmd>Pick git_hunks scope="staged"<CR>',     'Added hunks (all)')
-nmap_leader('fA', pick_added_hunks_buf,                         'Added hunks (buf)')
-nmap_leader('fb', '<Cmd>Pick buffers<CR>',                      'Buffers')
-nmap_leader('fc', '<Cmd>Pick git_commits<CR>',                  'Commits (all)')
-nmap_leader('fC', '<Cmd>Pick git_commits path="%"<CR>',         'Commits (buf)')
-nmap_leader('fd', '<Cmd>Pick diagnostic scope="all"<CR>',       'Diagnostic workspace')
-nmap_leader('fD', '<Cmd>Pick diagnostic scope="current"<CR>',   'Diagnostic buffer')
-nmap_leader('ff', '<Cmd>Pick files<CR>',                        'Files')
-nmap_leader('fg', '<Cmd>Pick grep_live<CR>',                    'Grep live')
-nmap_leader('fG', '<Cmd>Pick grep pattern="<cword>"<CR>',       'Grep current word')
-nmap_leader('fh', '<Cmd>Pick help<CR>',                         'Help tags')
-nmap_leader('fH', '<Cmd>Pick hl_groups<CR>',                    'Highlight groups')
-nmap_leader('fl', '<Cmd>Pick buf_lines scope="all"<CR>',        'Lines (all)')
-nmap_leader('fL', '<Cmd>Pick buf_lines scope="current"<CR>',    'Lines (buf)')
-nmap_leader('fm', '<Cmd>Pick git_hunks<CR>',                    'Modified hunks (all)')
-nmap_leader('fM', '<Cmd>Pick git_hunks path="%"<CR>',           'Modified hunks (buf)')
-nmap_leader('fr', '<Cmd>Pick resume<CR>',                       'Resume')
-nmap_leader('fR', '<Cmd>Pick lsp scope="references"<CR>',       'References (LSP)')
-nmap_leader('fs', pick_workspace_symbols_live,                  'Symbols workspace (live)')
-nmap_leader('fS', '<Cmd>Pick lsp scope="document_symbol"<CR>',  'Symbols document')
-nmap_leader('fv', '<Cmd>Pick visit_paths cwd=""<CR>',           'Visit paths (all)')
-nmap_leader('fV', '<Cmd>Pick visit_paths<CR>',                  'Visit paths (cwd)')
+nmap_leader('f/', '<Cmd>Pick history scope="/"<CR>',            '"/" 기록')
+nmap_leader('f:', '<Cmd>Pick history scope=":"<CR>',            '":" 기록')
+nmap_leader('fa', '<Cmd>Pick git_hunks scope="staged"<CR>',     '추가된 헝크 (전체)')
+nmap_leader('fA', pick_added_hunks_buf,                         '추가된 헝크 (버퍼)')
+nmap_leader('fb', '<Cmd>Pick buffers<CR>',                      '버퍼')
+nmap_leader('fc', '<Cmd>Pick git_commits<CR>',                  '커밋 (전체)')
+nmap_leader('fC', '<Cmd>Pick git_commits path="%"<CR>',         '커밋 (버퍼)')
+nmap_leader('fd', '<Cmd>Pick diagnostic scope="all"<CR>',       '진단 작업 공간')
+nmap_leader('fD', '<Cmd>Pick diagnostic scope="current"<CR>',   '진단 버퍼')
+nmap_leader('ff', '<Cmd>Pick files<CR>',                        '파일')
+nmap_leader('fg', '<Cmd>Pick grep_live<CR>',                    'Grep 라이브')
+nmap_leader('fG', '<Cmd>Pick grep pattern="<cword>"<CR>',       'Grep 현재 단어')
+nmap_leader('fh', '<Cmd>Pick help<CR>',                         '도움말 태그')
+nmap_leader('fH', '<Cmd>Pick hl_groups<CR>',                    '하이라이트 그룹')
+nmap_leader('fl', '<Cmd>Pick buf_lines scope="all"<CR>',        '줄 (전체)')
+nmap_leader('fL', '<Cmd>Pick buf_lines scope="current"<CR>',    '줄 (버퍼)')
+nmap_leader('fm', '<Cmd>Pick git_hunks<CR>',                    '수정된 헝크 (전체)')
+nmap_leader('fM', '<Cmd>Pick git_hunks path="%"<CR>',           '수정된 헝크 (버퍼)')
+nmap_leader('fr', '<Cmd>Pick resume<CR>',                       '다시 시작')
+nmap_leader('fR', '<Cmd>Pick lsp scope="references"<CR>',       '참조 (LSP)')
+nmap_leader('fs', pick_workspace_symbols_live,                  '심볼 작업 공간 (라이브)')
+nmap_leader('fS', '<Cmd>Pick lsp scope="document_symbol"<CR>',  '심볼 문서')
+nmap_leader('fv', '<Cmd>Pick visit_paths cwd=""<CR>',           '방문 경로 (전체)')
+nmap_leader('fV', '<Cmd>Pick visit_paths<CR>',                  '방문 경로 (작업 디렉토리)')
 
--- g is for 'Git'. Common usage:
--- - `<Leader>gs` - show information at cursor
--- - `<Leader>go` - toggle 'mini.diff' overlay to show in-buffer unstaged changes
--- - `<Leader>gd` - show unstaged changes as a patch in separate tabpage
--- - `<Leader>gL` - show Git log of current file
+-- g는 'Git'용입니다. 일반적인 사용법:
+-- - `<Leader>gs` - 커서 위치의 정보 표시
+-- - `<Leader>go` - 버퍼 내 미스테이징된 변경 사항을 표시하기 위해 'mini.diff' 오버레이 토글
+-- - `<Leader>gd` - 미스테이징된 변경 사항을 별도의 탭 페이지에서 패치로 표시
+-- - `<Leader>gL` - 현재 파일의 Git 로그 표시
 local git_log_cmd = [[Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order]]
 local git_log_buf_cmd = git_log_cmd .. ' --follow -- %'
 
-nmap_leader('ga', '<Cmd>Git diff --cached<CR>',             'Added diff')
-nmap_leader('gA', '<Cmd>Git diff --cached -- %<CR>',        'Added diff buffer')
-nmap_leader('gc', '<Cmd>Git commit<CR>',                    'Commit')
-nmap_leader('gC', '<Cmd>Git commit --amend<CR>',            'Commit amend')
-nmap_leader('gd', '<Cmd>Git diff<CR>',                      'Diff')
-nmap_leader('gD', '<Cmd>Git diff -- %<CR>',                 'Diff buffer')
-nmap_leader('gl', '<Cmd>' .. git_log_cmd .. '<CR>',         'Log')
-nmap_leader('gL', '<Cmd>' .. git_log_buf_cmd .. '<CR>',     'Log buffer')
-nmap_leader('go', '<Cmd>lua MiniDiff.toggle_overlay()<CR>', 'Toggle overlay')
-nmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>',  'Show at cursor')
+nmap_leader('ga', '<Cmd>Git diff --cached<CR>',             '추가된 디프(Diff)')
+nmap_leader('gA', '<Cmd>Git diff --cached -- %<CR>',        '추가된 디프 버퍼')
+nmap_leader('gc', '<Cmd>Git commit<CR>',                    '커밋')
+nmap_leader('gC', '<Cmd>Git commit --amend<CR>',            '커밋 수정(Amend)')
+nmap_leader('gd', '<Cmd>Git diff<CR>',                      '디프')
+nmap_leader('gD', '<Cmd>Git diff -- %<CR>',                 '디프 버퍼')
+nmap_leader('gl', '<Cmd>' .. git_log_cmd .. '<CR>',         '로그')
+nmap_leader('gL', '<Cmd>' .. git_log_buf_cmd .. '<CR>',     '로그 버퍼')
+nmap_leader('go', '<Cmd>lua MiniDiff.toggle_overlay()<CR>', '오버레이 토글')
+nmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>',  '커서 위치 표시')
 
-xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at selection')
+xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', '선택 범위 표시')
 
--- l is for 'Language'. Common usage:
--- - `<Leader>ld` - show more diagnostic details in a floating window
--- - `<Leader>lr` - perform rename via LSP
--- - `<Leader>ls` - navigate to source definition of symbol under cursor
+-- l은 '언어(Language)'용입니다. 일반적인 사용법:
+-- - `<Leader>ld` - 플로팅 창에 더 자세한 진단 정보 표시
+-- - `<Leader>lr` - LSP를 통한 이름 변경 수행
+-- - `<Leader>ls` - 커서 아래 심볼의 소스 정의로 이동
 --
--- NOTE: most LSP mappings represent a more structured way of replacing built-in
--- LSP mappings (like `:h gra` and others). This is needed because `gr` is mapped
--- by an "replace" operator in 'mini.operators' (which is more commonly used).
-nmap_leader('la', '<Cmd>lua vim.lsp.buf.code_action()<CR>',     'Actions')
-nmap_leader('ld', '<Cmd>lua vim.diagnostic.open_float()<CR>',   'Diagnostic popup')
-nmap_leader('lf', '<Cmd>lua require("conform").format()<CR>',   'Format')
-nmap_leader('li', '<Cmd>lua vim.lsp.buf.implementation()<CR>',  'Implementation')
-nmap_leader('lh', '<Cmd>lua vim.lsp.buf.hover()<CR>',           'Hover')
-nmap_leader('lr', '<Cmd>lua vim.lsp.buf.rename()<CR>',          'Rename')
-nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>',      'References')
-nmap_leader('ls', '<Cmd>lua vim.lsp.buf.definition()<CR>',      'Source definition')
-nmap_leader('lt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type definition')
+-- 참고: 대부분의 LSP 매핑은 내장 LSP 매핑(예: `:h gra` 등)을 대체하는 더 구조적인 방식을
+-- 나타냅니다. 이는 'mini.operators'의 "바꾸기(replace)" 연산자에 의해 `gr`이 매핑되기
+-- 때문입니다 (이것이 더 흔히 사용됩니다).
+nmap_leader('la', '<Cmd>lua vim.lsp.buf.code_action()<CR>',     '동작(Actions)')
+nmap_leader('ld', '<Cmd>lua vim.diagnostic.open_float()<CR>',   '진단 팝업')
+nmap_leader('lf', '<Cmd>lua require("conform").format()<CR>',   '포맷')
+nmap_leader('li', '<Cmd>lua vim.lsp.buf.implementation()<CR>',  '구현')
+nmap_leader('lh', '<Cmd>lua vim.lsp.buf.hover()<CR>',           '호버')
+nmap_leader('lr', '<Cmd>lua vim.lsp.buf.rename()<CR>',          '이름 변경')
+nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>',      '참조')
+nmap_leader('ls', '<Cmd>lua vim.lsp.buf.definition()<CR>',      '소스 정의')
+nmap_leader('lt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', '유형 정의')
 
-xmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', 'Format selection')
+xmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', '선택 범위 포맷')
 
--- m is for 'Map'. Common usage:
--- - `<Leader>mt` - toggle map from 'mini.map' (closed by default)
--- - `<Leader>mf` - focus on the map for fast navigation
--- - `<Leader>ms` - change map's side (if it covers something underneath)
-nmap_leader('mf', '<Cmd>lua MiniMap.toggle_focus()<CR>', 'Focus (toggle)')
-nmap_leader('mr', '<Cmd>lua MiniMap.refresh()<CR>',      'Refresh')
-nmap_leader('ms', '<Cmd>lua MiniMap.toggle_side()<CR>',  'Side (toggle)')
-nmap_leader('mt', '<Cmd>lua MiniMap.toggle()<CR>',       'Toggle')
+-- m은 '맵(Map)'용입니다. 일반적인 사용법:
+-- - `<Leader>mt` - 'mini.map'에서 맵 토글 (기본적으로 닫혀 있음)
+-- - `<Leader>mf` - 빠른 탐색을 위해 맵에 포커스
+-- - `<Leader>ms` - 맵의 위치 변경 (아래 무언가를 가리는 경우)
+nmap_leader('mf', '<Cmd>lua MiniMap.toggle_focus()<CR>', '포커스 토글')
+nmap_leader('mr', '<Cmd>lua MiniMap.refresh()<CR>',      '새로고침')
+nmap_leader('ms', '<Cmd>lua MiniMap.toggle_side()<CR>',  '위치 토글')
+nmap_leader('mt', '<Cmd>lua MiniMap.toggle()<CR>',       '토글')
 
--- o is for 'Other'. Common usage:
--- - `<Leader>oz` - toggle between "zoomed" and regular view of current buffer
-nmap_leader('or', '<Cmd>lua MiniMisc.resize_window()<CR>', 'Resize to default width')
-nmap_leader('ot', '<Cmd>lua MiniTrailspace.trim()<CR>',    'Trim trailspace')
-nmap_leader('oz', '<Cmd>lua MiniMisc.zoom()<CR>',          'Zoom toggle')
+-- o는 '기타(Other)'용입니다. 일반적인 사용법:
+-- - `<Leader>oz` - 현재 버퍼의 "확대" 뷰와 일반 뷰 사이를 토글
+nmap_leader('or', '<Cmd>lua MiniMisc.resize_window()<CR>', '기본 너비로 조정')
+nmap_leader('ot', '<Cmd>lua MiniTrailspace.trim()<CR>',    '트레일스페이스 정리')
+nmap_leader('oz', '<Cmd>lua MiniMisc.zoom()<CR>',          '확대 토글')
 
--- s is for 'Session'. Common usage:
--- - `<Leader>sn` - start new session
--- - `<Leader>sr` - read previously started session
--- - `<Leader>sd` - delete previously started session
-local session_new = 'MiniSessions.write(vim.fn.input("Session name: "))'
+-- s는 '세션(Session)'용입니다. 일반적인 사용법:
+-- - `<Leader>sn` - 새로운 세션 시작
+-- - `<Leader>sr` - 이전에 시작된 세션 읽기
+-- - `<Leader>sd` - 이전에 시작된 세션 삭제
+local session_new = 'MiniSessions.write(vim.fn.input("세션 이름: "))'
 
-nmap_leader('sd', '<Cmd>lua MiniSessions.select("delete")<CR>', 'Delete')
-nmap_leader('sn', '<Cmd>lua ' .. session_new .. '<CR>',         'New')
-nmap_leader('sr', '<Cmd>lua MiniSessions.select("read")<CR>',   'Read')
-nmap_leader('sw', '<Cmd>lua MiniSessions.write()<CR>',          'Write current')
+nmap_leader('sd', '<Cmd>lua MiniSessions.select("delete")<CR>', '삭제')
+nmap_leader('sn', '<Cmd>lua ' .. session_new .. '<CR>',         '신규')
+nmap_leader('sr', '<Cmd>lua MiniSessions.select("read")<CR>',   '읽기')
+nmap_leader('sw', '<Cmd>lua MiniSessions.write()<CR>',          '현재 세션 저장')
 
--- t is for 'Terminal'
-nmap_leader('tT', '<Cmd>horizontal term<CR>', 'Terminal (horizontal)')
-nmap_leader('tt', '<Cmd>vertical term<CR>',   'Terminal (vertical)')
+-- t는 '터미널(Terminal)'용입니다.
+nmap_leader('tT', '<Cmd>horizontal term<CR>', '터미널 (가로)')
+nmap_leader('tt', '<Cmd>vertical term<CR>',   '터미널 (세로)')
 
--- v is for 'Visits'. Common usage:
--- - `<Leader>vv` - add    "core" label to current file.
--- - `<Leader>vV` - remove "core" label to current file.
--- - `<Leader>vc` - pick among all files with "core" label.
+-- v는 '방문(Visits)'용입니다. 일반적인 사용법:
+-- - `<Leader>vv` - 현재 파일에 "core" 레이블 추가.
+-- - `<Leader>vV` - 현재 파일에서 "core" 레이블 제거.
+-- - `<Leader>vc` - "core" 레이블이 있는 모든 파일 중에서 선택.
 local make_pick_core = function(cwd, desc)
   return function()
     local sort_latest = MiniVisits.gen_sort.default({ recency_weight = 1 })
@@ -483,12 +482,12 @@ local make_pick_core = function(cwd, desc)
   end
 end
 
-nmap_leader('vc', make_pick_core('',  'Core visits (all)'),       'Core visits (all)')
-nmap_leader('vC', make_pick_core(nil, 'Core visits (cwd)'),       'Core visits (cwd)')
-nmap_leader('vv', '<Cmd>lua MiniVisits.add_label("core")<CR>',    'Add "core" label')
-nmap_leader('vV', '<Cmd>lua MiniVisits.remove_label("core")<CR>', 'Remove "core" label')
-nmap_leader('vl', '<Cmd>lua MiniVisits.add_label()<CR>',          'Add label')
-nmap_leader('vL', '<Cmd>lua MiniVisits.remove_label()<CR>',       'Remove label')
+nmap_leader('vc', make_pick_core('',  '핵심 방문 (전체)'),       '핵심 방문 (전체)')
+nmap_leader('vC', make_pick_core(nil, '핵심 방문 (작업 디렉토리)'), '핵심 방문 (작업 디렉토리)')
+nmap_leader('vv', '<Cmd>lua MiniVisits.add_label("core")<CR>',    '"core" 레이블 추가')
+nmap_leader('vV', '<Cmd>lua MiniVisits.remove_label("core")<CR>', '"core" 레이블 제거')
+nmap_leader('vl', '<Cmd>lua MiniVisits.add_label()<CR>',          '레이블 추가')
+nmap_leader('vL', '<Cmd>lua MiniVisits.remove_label()<CR>',       '레이블 제거')
 -- stylua: ignore end
 ```
 
@@ -496,82 +495,81 @@ nmap_leader('vL', '<Cmd>lua MiniVisits.remove_label()<CR>',       'Remove label'
 
 #### plugin/30_mini.lua {#plugin-30_mini.lua}
 
-<details><summary>Code</summary>
+<details><summary>코드</summary>
 
 ```lua
 -- ┌────────────────────┐
--- │ MINI configuration │
+-- │ MINI 설정 │
 -- └────────────────────┘
 --
--- This file contains configuration of the MINI parts of the config.
--- It contains only configs for the 'mini.nvim' plugin (installed in 'init.lua').
+-- 이 파일에는 설정의 MINI 부분에 대한 구성이 포함되어 있습니다.
+-- 'init.lua'에 설치된 'mini.nvim' 플러그인에 대한 설정만 포함되어 있습니다.
 --
--- 'mini.nvim' is a library of modules. Each is enabled independently via
--- `require('mini.xxx').setup()` convention. It creates all intended side effects:
--- mappings, autocommands, highlight groups, etc. It also creates a global
--- `MiniXxx` table that can be later used to access module's features.
+-- 'mini.nvim'은 모듈 라이브러리입니다. 각각 `require('mini.xxx').setup()`
+-- 관례를 통해 독립적으로 활성화됩니다. 매핑, 자동 명령, 하이라이트 그룹 등
+-- 의도한 모든 부수 효과를 생성합니다. 또한 나중에 모듈의 기능에 액세스하는 데
+-- 사용할 수 있는 전역 `MiniXxx` 테이블을 생성합니다.
 --
--- Every module's `setup()` function accepts an optional `config` table to
--- adjust its behavior. See the structure of this table at `:h MiniXxx.config`.
+-- 모든 모듈의 `setup()` 함수는 동작을 조정하기 위해 선택적인 `config` 테이블을
+-- 허용합니다. 이 테이블의 구조는 `:h MiniXxx.config`를 참조하세요.
 --
--- See `:h mini.nvim-general-principles` for more general principles.
+-- 보다 일반적인 원칙은 `:h mini.nvim-general-principles`를 참조하세요.
 --
--- Here each module's `setup()` has a brief explanation of what the module is for,
--- its usage examples (uses Leader mappings from 'plugin/20_keymaps.lua'), and
--- possible directions for more info.
--- For more info about a module see its help page (`:h mini.xxx` for 'mini.xxx').
+-- 여기에서 각 모듈의 `setup()`에는 모듈의 용도, 사용 예시('plugin/20_keymaps.lua'의
+-- 리더 매핑 사용) 및 더 많은 정보에 대한 지침이 간략하게 설명되어 있습니다.
+-- 모듈에 대한 자세한 내용은 해당 도움말 페이지('mini.xxx'의 경우 `:h mini.xxx`)를 참조하세요.
 
--- To minimize the time until first screen draw, modules are enabled in two steps:
--- - Step one enables everything that is needed for first draw with `now()`.
---   Sometimes needed only if Neovim is started as `nvim -- path/to/file`.
--- - Everything else is delayed until the first draw with `later()`.
+-- 첫 화면 그리기까지 시간을 최소화하기 위해 모듈은 두 단계로 활성화됩니다.
+-- - 첫 번째 단계는 `now()`를 사용하여 첫 번째 그리기에 필요한 모든 것을 활성화합니다.
+--   Neovim이 `nvim -- path/to/file`과 같이 시작된 경우에만 필요한 경우도 있습니다.
+-- - 그 외 모든 것은 `later()`를 사용하여 첫 번째 그리기 이후까지 지연됩니다.
 local now, later = MiniDeps.now, MiniDeps.later
 local now_if_args = Config.now_if_args
 
--- Step one ===================================================================
--- Enable 'miniwinter' color scheme. It comes with 'mini.nvim' and uses 'mini.hues'.
+-- 1단계 ===================================================================
+-- 'miniwinter' 컬러 스킴을 활성화합니다. 'mini.nvim'과 함께 제공되며 'mini.hues'를 사용합니다.
 --
--- See also:
--- - `:h mini.nvim-color-schemes` - list of other color schemes
--- - `:h MiniHues-examples` - how to define highlighting with 'mini.hues'
--- - 'plugin/40_plugins.lua' honorable mentions - other good color schemes
+-- 참조:
+-- - `:h mini.nvim-color-schemes` - 다른 컬러 스킴 목록
+-- - `:h MiniHues-examples` - 'mini.hues'로 하이라이트를 정의하는 방법
+-- - 'plugin/40_plugins.lua' 명예의 전당 - 다른 좋은 컬러 스킴들
 now(function() vim.cmd('colorscheme miniwinter') end)
 
--- You can try these other 'mini.hues'-based color schemes (uncomment with `gcc`):
+-- 다음과 같은 다른 'mini.hues' 기반 컬러 스킴을 시도해 볼 수 있습니다 (`gcc`로 주석 해제):
 -- now(function() vim.cmd('colorscheme minispring') end)
 -- now(function() vim.cmd('colorscheme minisummer') end)
 -- now(function() vim.cmd('colorscheme miniautumn') end)
 -- now(function() vim.cmd('colorscheme randomhue') end)
 
--- Common configuration presets. Example usage:
--- - `<C-s>` in Insert mode - save and go to Normal mode
--- - `go` / `gO` - insert empty line before/after in Normal mode
--- - `gy` / `gp` - copy / paste from system clipboard
--- - `\` + key - toggle common options. Like `\h` toggles highlighting search.
--- - `<C-hjkl>` (four combos) - navigate between windows.
--- - `<M-hjkl>` in Insert/Command mode - navigate in that mode.
+-- 공통 설정 사전 정의. 사용 예:
+-- - Insert 모드에서 `<C-s>` - 저장하고 노멀 모드로 이동
+-- - `go` / `gO` - 노멀 모드에서 이전/이후에 빈 줄 삽입
+-- - `gy` / `gp` - 시스템 클립보드에서 복사 / 붙여넣기
+-- - `\` + 키 - 공통 옵션 토글. 예: `\h`는 하이라이트 검색을 토글합니다.
+-- - `<C-hjkl>` (4개 조합) - 창 사이 탐색.
+-- - Insert/Command 모드에서 `<M-hjkl>` - 해당 모드에서 탐색.
 --
--- See also:
--- - `:h MiniBasics.config.options` - list of adjusted options
--- - `:h MiniBasics.config.mappings` - list of created mappings
--- - `:h MiniBasics.config.autocommands` - list of created autocommands
+-- 참조:
+-- - `:h MiniBasics.config.options` - 조정된 옵션 목록
+-- - `:h MiniBasics.config.mappings` - 생성된 매핑 목록
+-- - `:h MiniBasics.config.autocommands` - 생성된 자동 명령 목록
 now(function()
   require('mini.basics').setup({
-    -- Manage options in 'plugin/10_options.lua' for didactic purposes
+    -- 학습 목적으로 'plugin/10_options.lua'에서 옵션을 관리합니다.
     options = { basic = false },
     mappings = {
-      -- Create `<C-hjkl>` mappings for window navigation
+      -- 창 탐색을 위한 `<C-hjkl>` 매핑 생성
       windows = true,
-      -- Create `<M-hjkl>` mappings for navigation in Insert and Command modes
+      -- Insert 및 Command 모드에서 탐색을 위한 `<M-hjkl>` 매핑 생성
       move_with_alt = true,
     },
   })
 end)
 
--- Icon provider. Usually no need to use manually. It is used by plugins like
--- 'mini.pick', 'mini.files', 'mini.statusline', and others.
+-- 아이콘 제공자. 일반적으로 수동으로 사용할 필요는 없습니다.
+-- 'mini.pick', 'mini.files', 'mini.statusline' 및 기타 플러그인에서 사용됩니다.
 now(function()
-  -- Set up to not prefer extension-based icon for some extensions
+  -- 일부 확장자에 대해 확장자 기반 아이콘을 선호하지 않도록 설정
   local ext3_blocklist = { scm = true, txt = true, yml = true }
   local ext4_blocklist = { json = true, yaml = true }
   require('mini.icons').setup({
@@ -580,499 +578,487 @@ now(function()
     end,
   })
 
-  -- Mock 'nvim-tree/nvim-web-devicons' for plugins without 'mini.icons' support.
-  -- Not needed for 'mini.nvim' or MiniMax, but might be useful for others.
+  -- 'mini.icons'를 지원하지 않는 플러그인을 위해 'nvim-tree/nvim-web-devicons'를 모방합니다.
+  -- 'mini.nvim'이나 MiniMax에는 필요하지 않지만 다른 플러그인에는 유용할 수 있습니다.
   later(MiniIcons.mock_nvim_web_devicons)
 
-  -- Add LSP kind icons. Useful for 'mini.completion'.
+  -- LSP 종류 아이콘을 추가합니다. 'mini.completion'에 유용합니다.
   later(MiniIcons.tweak_lsp_kind)
 end)
 
--- Notifications provider. Shows all kinds of notifications in the upper right
--- corner (by default). Example usage:
--- - `:h vim.notify()` - show notification (hides automatically)
--- - `<Leader>en` - show notification history
+-- 알림 제공자. 모든 종류의 알림을 (기본적으로) 우측 상단 모서리에 표시합니다.
+-- 사용 예:
+-- - `:h vim.notify()` - 알림 표시 (자동으로 사라짐)
+-- - `<Leader>en` - 알림 기록 표시
 --
--- See also:
--- - `:h MiniNotify.config` for some of common configuration examples.
+-- 참조:
+-- - 공통 설정 예시는 `:h MiniNotify.config`를 참조하세요.
 now(function() require('mini.notify').setup() end)
 
--- Session management. A thin wrapper around `:h mksession` that consistently
--- manages session files. Example usage:
--- - `<Leader>sn` - start new session
--- - `<Leader>sr` - read previously started session
--- - `<Leader>sd` - delete previously started session
+-- 세션 관리. 세션 파일을 일관되게 관리하는 `:h mksession`의 얇은 래퍼입니다.
+-- 사용 예:
+-- - `<Leader>sn` - 새로운 세션 시작
+-- - `<Leader>sr` - 이전에 시작된 세션 읽기
+-- - `<Leader>sd` - 이전에 시작된 세션 삭제
 now(function() require('mini.sessions').setup() end)
 
--- Start screen. This is what is shown when you open Neovim like `nvim`.
--- Example usage:
--- - Type prefix keys to limit available candidates
--- - Navigate down/up with `<C-n>` and `<C-p>`
--- - Press `<CR>` to select an entry
+-- 시작 화면. `nvim`과 같이 Neovim을 열 때 표시되는 화면입니다.
+-- 사용 예:
+-- - 접두사 키를 입력하여 사용 가능한 후보 제한
+-- - `<C-n>` 및 `<C-p>`로 아래/위 탐색
+-- - `<CR>`을 눌러 항목 선택
 --
--- See also:
--- - `:h MiniStarter-example-config` - non-default config examples
--- - `:h MiniStarter-lifecycle` - how to work with Starter buffer
+-- 참조:
+-- - `:h MiniStarter-example-config` - 기본값이 아닌 설정 예시
+-- - `:h MiniStarter-lifecycle` - Starter 버퍼 작업 방법
 now(function() require('mini.starter').setup() end)
 
--- Statusline. Sets `:h 'statusline'` to show more info in a line below window.
--- Example usage:
--- - Left most section indicates current mode (text + highlighting).
--- - Second from left section shows "developer info": Git, diff, diagnostics, LSP.
--- - Center section shows the name of displayed buffer.
--- - Second to right section shows more buffer info.
--- - Right most section shows current cursor coordinates and search results.
+-- 상태 라인. 창 아래 라인에 더 많은 정보를 표시하도록 `:h 'statusline'`을 설정합니다.
+-- 사용 예:
+-- - 가장 왼쪽 섹션은 현재 모드(텍스트 + 하이라이트)를 나타냅니다.
+-- - 왼쪽에서 두 번째 섹션은 "개발자 정보"인 Git, 디프(diff), 진단, LSP를 표시합니다.
+-- - 중앙 섹션은 표시된 버퍼의 이름을 표시합니다.
+-- - 오른쪽에서 두 번째 섹션은 더 많은 버퍼 정보를 표시합니다.
+-- - 가장 오른쪽 섹션은 현재 커서 좌표와 검색 결과를 표시합니다.
 --
--- See also:
--- - `:h MiniStatusline-example-content` - example of default content. Use it to
---   configure a custom statusline by setting `config.content.active` function.
+-- 참조:
+-- - `:h MiniStatusline-example-content` - 기본 콘텐츠 예시.
+--   `config.content.active` 함수를 설정하여 사용자 정의 상태 라인을 구성하는 데 사용하세요.
 now(function() require('mini.statusline').setup() end)
 
--- Tabline. Sets `:h 'tabline'` to show all listed buffers in a line at the top.
--- Buffers are ordered as they were created. Navigate with `[b` and `]b`.
+-- 탭 라인. 상단 라인에 나열된 모든 버퍼를 표시하도록 `:h 'tabline'`을 설정합니다.
+-- 버퍼는 생성된 순서대로 정렬됩니다. `[b` 및 `]b`로 탐색하세요.
 now(function() require('mini.tabline').setup() end)
 
--- Step one or two ============================================================
--- Load now if Neovim is started like `nvim -- path/to/file`, otherwise - later.
--- This ensures a correct behavior for files opened during startup.
+-- 1단계 또는 2단계 ============================================================
+-- Neovim이 `nvim -- path/to/file`과 같이 시작되면 지금 로드하고, 그렇지 않으면 나중에 로드합니다.
+-- 이는 시작 중에 열린 파일에 대해 올바른 동작을 보장합니다.
 
--- Completion and signature help. Implements async "two stage" autocompletion:
--- - Based on attached LSP servers that support completion.
--- - Fallback (based on built-in keyword completion) if there is no LSP candidates.
+-- 자동 완성 및 시그니처 도움말. 비동기 "2단계" 자동 완성을 구현합니다.
+-- - 자동 완성 기능을 지원하는 연결된 LSP 서버 기반.
+-- - LSP 후보가 없는 경우 폴백 (내장 키워드 자동 완성 기반).
 --
--- Example usage in Insert mode with attached LSP:
--- - Start typing text that should be recognized by LSP (like variable name).
--- - After 100ms a popup menu with candidates appears.
--- - Press `<Tab>` / `<S-Tab>` to navigate down/up the list. These are set up
---   in 'mini.keymap'. You can also use `<C-n>` / `<C-p>`.
--- - During navigation there is an info window to the right showing extra info
---   that the LSP server can provide about the candidate. It appears after the
---   candidate stays selected for 100ms. Use `<C-f>` / `<C-b>` to scroll it.
--- - Navigating to an entry also changes buffer text. If you are happy with it,
---   keep typing after it. To discard completion completely, press `<C-e>`.
--- - After pressing special trigger(s), usually `(`, a window appears that shows
---   the signature of the current function/method. It gets updated as you type
---   showing the currently active parameter.
+-- LSP가 연결된 Insert 모드 사용 예:
+-- - LSP가 인식해야 하는 텍스트(예: 변수 이름)를 입력하기 시작합니다.
+-- - 100ms 후 후보가 있는 팝업 메뉴가 나타납니다.
+-- - `<Tab>` / `<S-Tab>`을 눌러 목록을 아래/위로 탐색합니다. 이는 'mini.keymap'에서 설정됩니다.
+--   `<C-n>` / `<C-p>`를 사용할 수도 있습니다.
+-- - 탐색 중에 LSP 서버가 후보에 대해 제공할 수 있는 추가 정보를 보여주는 정보 창이 오른쪽에 나타납니다.
+--   후보가 100ms 동안 선택된 상태로 유지된 후에 나타납니다. `<C-f>` / `<C-b>`를 사용하여 스크롤하세요.
+-- - 항목으로 탐색하면 버퍼 텍스트도 변경됩니다. 만족스러우면 그 뒤에 계속 입력하세요.
+--   자동 완성을 완전히 취소하려면 `<C-e>`를 누르세요.
+-- - 특수 트리거(보통 `(`)를 누른 후 현재 함수/메서드의 시그니처를 보여주는 창이 나타납니다.
+--   입력할 때 업데이트되어 현재 활성화된 매개변수를 보여줍니다.
 --
--- Example usage in Insert mode without an attached LSP or in places not
--- supported by the LSP (like comments):
--- - Start typing a word that is present in current or opened buffers.
--- - After 100ms popup menu with candidates appears.
--- - Navigate with `<Tab>` / `<S-Tab>` or `<C-n>` / `<C-p>`. This also updates
---   buffer text. If happy with choice, keep typing. Stop with `<C-e>`.
+-- 연결된 LSP가 없거나 LSP가 지원하지 않는 위치(예: 주석)의 Insert 모드 사용 예:
+-- - 현재 또는 열린 버퍼에 있는 단어를 입력하기 시작합니다.
+-- - 100ms 후 후보가 있는 팝업 메뉴가 나타납니다.
+-- - `<Tab>` / `<S-Tab>` 또는 `<C-n>` / `<C-p>`로 탐색합니다. 버퍼 텍스트도 업데이트됩니다.
+--   선택이 만족스러우면 계속 입력하세요. `<C-e>`로 중단합니다.
 --
--- It also works with snippet candidates provided by LSP server. Best experience
--- when paired with 'mini.snippets' (which is set up in this file).
+-- LSP 서버에서 제공하는 스니펫 후보와도 작동합니다. 'mini.snippets'(이 파일에서 설정됨)와
+-- 함께 사용할 때 최상의 경험을 제공합니다.
 now_if_args(function()
-  -- Customize post-processing of LSP responses for a better user experience.
-  -- Don't show 'Text' suggestions (usually noisy) and show snippets last.
+  -- 더 나은 사용자 경험을 위해 LSP 응답의 후처리를 사용자 정의합니다.
+  -- 'Text' 제안(보통 시끄러움)을 표시하지 않고 스니펫을 마지막에 표시합니다.
   local process_items_opts = { kind_priority = { Text = -1, Snippet = 99 } }
   local process_items = function(items, base)
     return MiniCompletion.default_process_items(items, base, process_items_opts)
   end
   require('mini.completion').setup({
     lsp_completion = {
-      -- Without this config autocompletion is set up through `:h 'completefunc'`.
-      -- Although not needed, setting up through `:h 'omnifunc'` is cleaner
-      -- (sets up only when needed) and makes it possible to use `<C-u>`.
+      -- 이 설정이 없으면 자동 완성은 `:h 'completefunc'`를 통해 설정됩니다.
+      -- 필요하지는 않지만 `:h 'omnifunc'`를 통해 설정하는 것이 더 깔끔하며
+      -- (필요할 때만 설정됨) `<C-u>`를 사용할 수 있게 합니다.
       source_func = 'omnifunc',
       auto_setup = false,
       process_items = process_items,
     },
   })
 
-  -- Set 'omnifunc' for LSP completion only when needed.
+  -- 필요할 때만 LSP 자동 완성을 위해 'omnifunc'를 설정합니다.
   local on_attach = function(ev)
     vim.bo[ev.buf].omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
   end
   Config.new_autocmd('LspAttach', nil, on_attach, "Set 'omnifunc'")
 
-  -- Advertise to servers that Neovim now supports certain set of completion and
-  -- signature features through 'mini.completion'.
+  -- Neovim이 이제 'mini.completion'을 통해 특정 자동 완성 및 시그니처 기능을
+  -- 지원함을 서버에 알립니다.
   vim.lsp.config('*', { capabilities = MiniCompletion.get_lsp_capabilities() })
 end)
 
--- Navigate and manipulate file system
+-- 파일 시스템 탐색 및 조작
 --
--- Navigation is done using column view (Miller columns) to display nested
--- directories, they are displayed in floating windows in top left corner.
+-- 탐색은 중첩된 디렉토리를 표시하기 위해 칼럼 뷰(Miller 칼럼)를 사용하여 수행되며,
+-- 좌측 상단의 플로팅 창에 표시됩니다.
 --
--- Manipulate files and directories by editing text as regular buffers.
+-- 텍스트를 일반 버퍼처럼 편집하여 파일과 디렉토리를 조작합니다.
 --
--- Example usage:
--- - `<Leader>ed` - open current working directory
--- - `<Leader>ef` - open directory of current file (needs to be present on disk)
+-- 사용 예:
+-- - `<Leader>ed` - 현재 작업 디렉토리 열기
+-- - `<Leader>ef` - 현재 파일의 디렉토리 열기 (디스크에 있어야 함)
 --
--- Basic navigation:
--- - `l` - go in entry at cursor: navigate into directory or open file
--- - `h` - go out of focused directory
--- - Navigate window as any regular buffer
--- - Press `g?` inside explorer to see more mappings
+-- 기본 탐색:
+-- - `l` - 커서의 항목으로 진입: 디렉토리로 이동하거나 파일 열기
+-- - `h` - 포커스된 디렉토리 밖으로 이동
+-- - 일반 버퍼처럼 창 탐색
+-- - 탐색기 내부에서 `g?`를 눌러 더 많은 매핑 확인
 --
--- Basic manipulation:
--- - After any following action, press `=` in Normal mode to synchronize, read
---   carefully about actions, press `y` or `<CR>` to confirm
--- - New entry: press `o` and type its name; end with `/` to create directory
--- - Rename: press `C` and type new name
--- - Delete: type `dd`
--- - Move/copy: type `dd`/`yy`, navigate to target directory, press `p`
+-- 기본 조작:
+-- - 다음 동작 후 노멀 모드에서 `=`를 눌러 동기화하고, 동작에 대해 주의 깊게 읽은 후
+--   `y` 또는 `<CR>`을 눌러 확정합니다.
+-- - 신규 항목: `o`를 누르고 이름을 입력합니다. 디렉토리를 생성하려면 `/`로 끝냅니다.
+-- - 이름 변경: `C`를 누르고 새 이름을 입력합니다.
+-- - 삭제: `dd` 입력
+-- - 이동/복사: `dd`/`yy`를 입력하고 대상 디렉토리로 이동한 후 `p`를 누릅니다.
 --
--- See also:
--- - `:h MiniFiles-navigation` - more details about how to navigate
--- - `:h MiniFiles-manipulation` - more details about how to manipulate
--- - `:h MiniFiles-examples` - examples of common setups
+-- 참조:
+-- - `:h MiniFiles-navigation` - 탐색 방법에 대한 자세한 내용
+-- - `:h MiniFiles-manipulation` - 조작 방법에 대한 자세한 내용
+-- - `:h MiniFiles-examples` - 일반적인 설정 예시
 now_if_args(function()
-  -- Enable directory/file preview
+  -- 디렉토리/파일 미리보기 활성화
   require('mini.files').setup({ windows = { preview = true } })
 
-  -- Add common bookmarks for every explorer. Example usage inside explorer:
-  -- - `'c` to navigate into your config directory
-  -- - `g?` to see available bookmarks
+  -- 모든 탐색기에 대해 공통 북마크를 추가합니다. 탐색기 내부 사용 예:
+  -- - `'c`를 눌러 설정 디렉토리로 이동
+  -- - `g?`를 눌러 사용 가능한 북마크 확인
   local add_marks = function()
-    MiniFiles.set_bookmark('c', vim.fn.stdpath('config'), { desc = 'Config' })
+    MiniFiles.set_bookmark('c', vim.fn.stdpath('config'), { desc = '설정' })
     local minideps_plugins = vim.fn.stdpath('data') .. '/site/pack/deps/opt'
-    MiniFiles.set_bookmark('p', minideps_plugins, { desc = 'Plugins' })
-    MiniFiles.set_bookmark('w', vim.fn.getcwd, { desc = 'Working directory' })
+    MiniFiles.set_bookmark('p', minideps_plugins, { desc = '플러그인' })
+    MiniFiles.set_bookmark('w', vim.fn.getcwd, { desc = '작업 디렉토리' })
   end
-  Config.new_autocmd('User', 'MiniFilesExplorerOpen', add_marks, 'Add bookmarks')
+  Config.new_autocmd('User', 'MiniFilesExplorerOpen', add_marks, '북마크 추가')
 end)
 
--- Miscellaneous small but useful functions. Example usage:
--- - `<Leader>oz` - toggle between "zoomed" and regular view of current buffer
--- - `<Leader>or` - resize window to its "editable width"
--- - `:lua put_text(vim.lsp.get_clients())` - put output of a function below
---   cursor in current buffer. Useful for a detailed exploration.
--- - `:lua put(MiniMisc.stat_summary(MiniMisc.bench_time(f, 100)))` - run
---   function `f` 100 times and report statistical summary of execution times
+-- 작지만 유용한 기타 함수들. 사용 예:
+-- - `<Leader>oz` - 현재 버퍼의 "확대" 뷰와 일반 뷰 사이를 토글
+-- - `<Leader>or` - 창을 "편집 가능한 너비"로 조정
+-- - `:lua put_text(vim.lsp.get_clients())` - 함수 출력을 현재 버퍼 커서 아래에
+--   넣습니다. 상세한 탐색에 유용합니다.
+-- - `:lua put(MiniMisc.stat_summary(MiniMisc.bench_time(f, 100)))` - 함수 `f`를
+--   100번 실행하고 실행 시간의 통계 요약을 보고합니다.
 now_if_args(function()
-  -- Makes `:h MiniMisc.put()` and `:h MiniMisc.put_text()` public
+  -- `:h MiniMisc.put()` 및 `:h MiniMisc.put_text()`를 공개합니다.
   require('mini.misc').setup()
 
-  -- Change current working directory based on the current file path. It
-  -- searches up the file tree until the first root marker ('.git' or 'Makefile')
-  -- and sets their parent directory as a current directory.
-  -- This is helpful when simultaneously dealing with files from several projects.
+  -- 현재 파일 경로를 기반으로 현재 작업 디렉토리를 변경합니다. 파일 트리 위로
+  -- 첫 번째 루트 마커('.git' 또는 'Makefile')를 검색하여 해당 부모 디렉토리를
+  -- 현재 디렉토리로 설정합니다.
+  -- 이는 여러 프로젝트의 파일을 동시에 다룰 때 도움이 됩니다.
   MiniMisc.setup_auto_root()
 
-  -- Restore latest cursor position on file open
+  -- 파일 열기 시 최신 커서 위치 복원
   MiniMisc.setup_restore_cursor()
 
-  -- Synchronize terminal emulator background with Neovim's background to remove
-  -- possibly different color padding around Neovim instance
+  -- Neovim 인스턴스 주변에 다른 색상의 패딩이 생기지 않도록 터미널 에뮬레이터
+  -- 배경을 Neovim 배경과 동기화합니다.
   MiniMisc.setup_termbg_sync()
 end)
 
--- Step two ===================================================================
+-- 2단계 ===================================================================
 
--- Extra 'mini.nvim' functionality.
+-- 추가적인 'mini.nvim' 기능.
 --
--- See also:
--- - `:h MiniExtra.pickers` - pickers. Most are mapped in `<Leader>f` group.
---   Calling `setup()` makes 'mini.pick' respect 'mini.extra' pickers.
--- - `:h MiniExtra.gen_ai_spec` - 'mini.ai' textobject specifications
--- - `:h MiniExtra.gen_highlighter` - 'mini.hipatterns' highlighters
+-- 참조:
+-- - `:h MiniExtra.pickers` - 선택기(pickers). 대부분 `<Leader>f` 그룹에 매핑됩니다.
+--   `setup()`을 호출하면 'mini.pick'이 'mini.extra' 선택기를 존중하게 됩니다.
+-- - `:h MiniExtra.gen_ai_spec` - 'mini.ai' 텍스트 오브젝트 사양
+-- - `:h MiniExtra.gen_highlighter` - 'mini.hipatterns' 하이라이터
 later(function() require('mini.extra').setup() end)
 
--- Extend and create a/i textobjects, like `:h a(`, `:h a'`, and more).
--- Contains not only `a` and `i` type of textobjects, but also their "next" and
--- "last" variants that will explicitly search for textobjects after and before
--- cursor. Example usage:
--- - `ci)` - *c*hange *i*inside parenthesis (`)`)
--- - `di(` - *d*elete *i*inside padded parenthesis (`(`)
--- - `yaq` - *y*ank *a*round *q*uote (any of "", '', or ``)
--- - `vif` - *v*isually select *i*inside *f*unction call
--- - `cina` - *c*hange *i*nside *n*ext *a*rgument
--- - `valaala` - *v*isually select *a*round *l*ast (i.e. previous) *a*rgument
---   and then again reselect *a*round new *l*ast *a*rgument
+-- a/i 텍스트 오브젝트 확장 및 생성 (예: `:h a(`, `:h a'` 등).
+-- `a` 및 `i` 유형의 텍스트 오브젝트뿐만 아니라 커서 앞뒤의 텍스트 오브젝트를
+-- 명시적으로 검색하는 "다음(next)" 및 "이전(last)" 변형도 포함합니다. 사용 예:
+-- - `ci)` - 괄호(`)`) *안쪽* 변경(*c*hange *i*nside)
+-- - `di(` - 패딩된 괄호(`(`) *안쪽* 삭제(*d*elete *i*nside)
+-- - `yaq` - 따옴표(*q*uote, "", '', `` 중 하나) *둘레* 복사(*y*ank *a*round)
+-- - `vif` - 함수 호출 *안쪽* 비주얼 선택(*v*isually select *i*nside)
+-- - `cina` - *다음* 인자(*n*ext *a*rgument) *안쪽* 변경(*c*hange *i*nside)
+-- - `valaala` - *이전* 인자(*l*ast *a*rgument) *둘레* 비주얼 선택(*v*isually select *a*round) 후
+--   새로운 *이전* 인자 *둘레*를 다시 선택
 --
--- See also:
--- - `:h text-objects` - general info about what textobjects are
--- - `:h MiniAi-builtin-textobjects` - list of all supported textobjects
--- - `:h MiniAi-textobject-specification` - examples of custom textobjects
+-- 참조:
+-- - `:h text-objects` - 텍스트 오브젝트에 대한 일반 정보
+-- - `:h MiniAi-builtin-textobjects` - 지원되는 모든 텍스트 오브젝트 목록
+-- - `:h MiniAi-textobject-specification` - 사용자 정의 텍스트 오브젝트 예시
 later(function()
   local ai = require('mini.ai')
   ai.setup({
-    -- 'mini.ai' can be extended with custom textobjects
+    -- 'mini.ai'는 사용자 정의 텍스트 오브젝트로 확장될 수 있습니다.
     custom_textobjects = {
-      -- Make `aB` / `iB` act on around/inside whole *b*uffer
+      -- `aB` / `iB`가 버퍼(*b*uffer) 전체에 대해 작동하도록 합니다.
       B = MiniExtra.gen_ai_spec.buffer(),
-      -- For more complicated textobjects that require structural awareness,
-      -- use tree-sitter. This example makes `aF`/`iF` mean around/inside function
-      -- definition (not call). See `:h MiniAi.gen_spec.treesitter()` for details.
+      -- 구조적 인식이 필요한 더 복잡한 텍스트 오브젝트의 경우 tree-sitter를 사용하세요.
+      -- 이 예시는 `aF`/`iF`를 (호출이 아닌) 함수 정의 둘레/안쪽을 의미하게 합니다.
+      -- 자세한 내용은 `:h MiniAi.gen_spec.treesitter()`를 참조하세요.
       F = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
     },
 
-    -- 'mini.ai' by default mostly mimics built-in search behavior: first try
-    -- to find textobject covering cursor, then try to find to the right.
-    -- Although this works in most cases, some are confusing. It is more robust to
-    -- always try to search only covering textobject and explicitly ask to search
-    -- for next (`an`/`in`) or last (`al`/`il`).
-    -- Try this. If you don't like it - delete next line and this comment.
+    -- 'mini.ai'는 기본적으로 내장 검색 동작을 거의 모방합니다: 먼저 커서를 덮는
+    -- 텍스트 오브젝트를 찾으려고 시도한 다음 오른쪽에서 찾으려고 시도합니다.
+    -- 대부분의 경우 잘 작동하지만 일부는 혼란스러울 수 있습니다. 항상 덮는
+    -- 텍스트 오브젝트만 검색하려고 시도하고 다음(`an`/`in`) 또는 이전(`al`/`il`)을
+    -- 명시적으로 요청하는 것이 더 강력합니다.
+    -- 이를 시도해 보세요. 마음에 들지 않으면 다음 줄과 이 주석을 삭제하세요.
     search_method = 'cover',
   })
 end)
 
--- Align text interactively. Example usage:
--- - `gaip,` - `ga` (align operator) *i*nside *p*aragraph by comma
--- - `gAip` - start interactive alignment on the paragraph. Choose how to
---   split, justify, and merge string parts. Press `<CR>` to make it permanent,
---   press `<Esc>` to go back to initial state.
+-- 텍스트 대화형 정렬. 사용 예:
+-- - `gaip,` - 콤마(`,`)를 기준으로 문단(*i*nside *p*aragraph) 정렬(`ga` 연산자)
+-- - `gAip` - 문단에 대해 대화형 정렬을 시작합니다. 문자열 부분을 어떻게 분할,
+--   정렬 및 병합할지 선택하세요. 영구적으로 적용하려면 `<CR>`을 누르고,
+--   초기 상태로 돌아가려면 `<Esc>`를 누르세요.
 --
--- See also:
--- - `:h MiniAlign-example` - hands-on list of examples to practice aligning
--- - `:h MiniAlign.gen_step` - list of support step customizations
--- - `:h MiniAlign-algorithm` - how alignment is done on algorithmic level
+-- 참조:
+-- - `:h MiniAlign-example` - 정렬 연습을 위한 실습 목록
+-- - `:h MiniAlign.gen_step` - 지원되는 단계 사용자 정의 목록
+-- - `:h MiniAlign-algorithm` - 알고리즘 수준에서 정렬이 수행되는 방식
 later(function() require('mini.align').setup() end)
 
--- Animate common Neovim actions. Like cursor movement, scroll, window resize,
--- window open, window close. Animations are done based on Neovim events and
--- don't require custom mappings.
+-- 공통 Neovim 동작 애니메이션. 커서 이동, 스크롤, 창 크기 조정, 창 열기,
+-- 창 닫기 등. 애니메이션은 Neovim 이벤트를 기반으로 수행되며 별도의 매핑이
+-- 필요하지 않습니다.
 --
--- It is not enabled by default because its effects are a matter of taste.
--- Also scroll and resize have some unwanted side effects (see `:h mini.animate`).
--- Uncomment next line (use `gcc`) to enable.
+-- 취향의 문제이므로 기본적으로 활성화되지 않습니다.
+-- 또한 스크롤 및 크기 조정에는 원치 않는 부수 효과가 있을 수 있습니다 (`:h mini.animate` 참조).
+-- 활성화하려면 다음 줄의 주석을 해제(`gcc` 사용)하세요.
 -- later(function() require('mini.animate').setup() end)
 
--- Go forward/backward with square brackets. Implements consistent sets of mappings
--- for selected targets (like buffers, diagnostic, quickfix list entries, etc.).
--- Example usage:
--- - `]b` - go to next buffer
--- - `[j` - go to previous jump inside current buffer
--- - `[Q` - go to first entry of quickfix list
--- - `]X` - go to last conflict marker in a buffer
+-- 대괄호로 앞/뒤 이동. 선택된 대상(버퍼, 진단, quickfix 목록 항목 등)에 대해
+-- 일관된 매핑 세트를 구현합니다. 사용 예:
+-- - `]b` - 다음 버퍼로 이동
+-- - `[j` - 현재 버퍼 내부의 이전 점프로 이동
+-- - `[Q` - quickfix 목록의 첫 번째 항목으로 이동
+-- - `]X` - 버퍼의 마지막 충돌 마커로 이동
 --
--- See also:
--- - `:h MiniBracketed` - overall mapping design and list of targets
+-- 참조:
+-- - `:h MiniBracketed` - 전반적인 매핑 설계 및 대상 목록
 later(function() require('mini.bracketed').setup() end)
 
--- Remove buffers. Opened files occupy space in tabline and buffer picker.
--- When not needed, they can be removed. Example usage:
--- - `<Leader>bw` - completely wipeout current buffer (see `:h :bwipeout`)
--- - `<Leader>bW` - completely wipeout current buffer even if it has changes
--- - `<Leader>bd` - delete current buffer (see `:h :bdelete`)
+-- 버퍼 제거. 열린 파일은 탭 라인과 버퍼 선택기에서 공간을 차지합니다.
+-- 필요하지 않을 때 제거할 수 있습니다. 사용 예:
+-- - `<Leader>bw` - 현재 버퍼를 완전히 초기화 (wipeout) (`:h :bwipeout` 참조)
+-- - `<Leader>bW` - 변경 사항이 있더라도 현재 버퍼를 완전히 초기화
+-- - `<Leader>bd` - 현재 버퍼 삭제 (`:h :bdelete` 참조)
 later(function() require('mini.bufremove').setup() end)
 
--- Show next key clues in a bottom right window. Requires explicit opt-in for
--- keys that act as clue trigger. Example usage:
--- - Press `<Leader>` and wait for 1 second. A window with information about
---   next available keys should appear.
--- - Press one of the listed keys. Window updates immediately to show information
---   about new next available keys. You can press `<BS>` to go back in key sequence.
--- - Press keys until they resolve into some mapping.
+-- 우측 하단 창에 다음 키 단서 표시. 단서 트리거로 작동하는 키에 대해 명시적인
+-- 동의가 필요합니다. 사용 예:
+-- - `<Leader>`를 누르고 1초 동안 기다립니다. 다음 사용 가능한 키에 대한 정보가
+--   포함된 창이 나타나야 합니다.
+-- - 나열된 키 중 하나를 누릅니다. 창이 즉시 업데이트되어 새로운 다음 사용 가능한
+--   키에 대한 정보를 표시합니다. `<BS>`를 눌러 키 시퀀스에서 뒤로 돌아갈 수 있습니다.
+-- - 매핑으로 해석될 때까지 키를 누릅니다.
 --
--- Note: it is designed to work in buffers for normal files. It doesn't work in
--- special buffers (like for 'mini.starter' or 'mini.files') to not conflict
--- with its local mappings.
+-- 참고: 일반 파일용 버퍼에서 작동하도록 설계되었습니다. 로컬 매핑과 충돌하지 않도록
+-- 특수 버퍼('mini.starter' 또는 'mini.files' 등)에서는 작동하지 않습니다.
 --
--- See also:
--- - `:h MiniClue-examples` - examples of common setups
--- - `:h MiniClue.ensure_buf_triggers()` - use it to enable triggers in buffer
--- - `:h MiniClue.set_mapping_desc()` - change mapping description not from config
+-- 참조:
+-- - `:h MiniClue-examples` - 일반적인 설정 예시
+-- - `:h MiniClue.ensure_buf_triggers()` - 버퍼에서 트리거를 활성화하는 데 사용
+-- - `:h MiniClue.set_mapping_desc()` - 설정이 아닌 곳에서 매핑 설명을 변경
 later(function()
   local miniclue = require('mini.clue')
   -- stylua: ignore
   miniclue.setup({
-    -- Define which clues to show. By default shows only clues for custom mappings
-    -- (uses `desc` field from the mapping; takes precedence over custom clue).
+    -- 표시할 단서를 정의합니다. 기본적으로 사용자 정의 매핑에 대한 단서만 표시합니다
+    -- (매핑의 `desc` 필드를 사용하며, 사용자 정의 단서보다 우선합니다).
     clues = {
-      -- This is defined in 'plugin/20_keymaps.lua' with Leader group descriptions
+      -- 이는 'plugin/20_keymaps.lua'에서 리더 그룹 설명과 함께 정의됩니다.
       Config.leader_group_clues,
       miniclue.gen_clues.builtin_completion(),
       miniclue.gen_clues.g(),
       miniclue.gen_clues.marks(),
       miniclue.gen_clues.registers(),
       miniclue.gen_clues.square_brackets(),
-      -- This creates a submode for window resize mappings. Try the following:
-      -- - Press `<C-w>s` to make a window split.
-      -- - Press `<C-w>+` to increase height. Clue window still shows clues as if
-      --   `<C-w>` is pressed again. Keep pressing just `+` to increase height.
-      --   Try pressing `-` to decrease height.
-      -- - Stop submode either by `<Esc>` or by any key that is not in submode.
+      -- 이는 창 크기 조정 매핑을 위한 서브 모드를 생성합니다. 다음을 시도해 보세요:
+      -- - `<C-w>s`를 눌러 창을 분할합니다.
+      -- - `<C-w>+`를 눌러 높이를 높입니다. 단서 창은 `<C-w>`가 다시 눌린 것처럼
+      --   여전히 단서를 표시합니다. 높이를 높이려면 `+`만 계속 누르세요.
+      --   높이를 낮추려면 `-`를 눌러 보세요.
+      -- - `<Esc>`를 누르거나 서브 모드에 없는 키를 눌러 서브 모드를 종료합니다.
       miniclue.gen_clues.windows({ submode_resize = true }),
       miniclue.gen_clues.z(),
     },
-    -- Explicitly opt-in for set of common keys to trigger clue window
+    -- 단서 창을 트리거할 일반적인 키 세트를 명시적으로 선택합니다.
     triggers = {
-      { mode = { 'n', 'x' }, keys = '<Leader>' }, -- Leader triggers
+      { mode = { 'n', 'x' }, keys = '<Leader>' }, -- 리더(Leader) 트리거
       { mode =   'n',        keys = '\\' },       -- mini.basics
       { mode = { 'n', 'x' }, keys = '[' },        -- mini.bracketed
       { mode = { 'n', 'x' }, keys = ']' },
-      { mode =   'i',        keys = '<C-x>' },    -- Built-in completion
-      { mode = { 'n', 'x' }, keys = 'g' },        -- `g` key
-      { mode = { 'n', 'x' }, keys = "'" },        -- Marks
+      { mode =   'i',        keys = '<C-x>' },    -- 내장 자동 완성
+      { mode = { 'n', 'x' }, keys = 'g' },        -- `g` 키
+      { mode = { 'n', 'x' }, keys = "'" },        -- 마크(Marks)
       { mode = { 'n', 'x' }, keys = '`' },
-      { mode = { 'n', 'x' }, keys = '"' },        -- Registers
+      { mode = { 'n', 'x' }, keys = '"' },        -- 레지스터(Registers)
       { mode = { 'i', 'c' }, keys = '<C-r>' },
-      { mode =   'n',        keys = '<C-w>' },    -- Window commands
-      { mode = { 'n', 'x' }, keys = 's' },        -- `s` key (mini.surround, etc.)
-      { mode = { 'n', 'x' }, keys = 'z' },        -- `z` key
+      { mode =   'n',        keys = '<C-w>' },    -- 창 명령
+      { mode = { 'n', 'x' }, keys = 's' },        -- `s` 키 (mini.surround 등)
+      { mode = { 'n', 'x' }, keys = 'z' },        -- `z` 키
     },
   })
 end)
 
--- Command line tweaks. Improves command line editing with:
--- - Autocompletion. Basically an automated `:h cmdline-completion`.
--- - Autocorrection of words as-you-type. Like `:W`->`:w`, `:lau`->`:lua`, etc.
--- - Autopeek command range (like line number at the start) as-you-type.
+-- 명령줄 수정. 다음 기능을 통해 명령줄 편집을 개선합니다.
+-- - 자동 완성. 기본적으로 자동화된 `:h cmdline-completion`입니다.
+-- - 입력 중 단어 자동 수정. `:W`->`:w`, `:lau`->`:lua` 등.
+-- - 입력 중 명령 범위(시작 부분의 줄 번호 등) 자동 엿보기(peek).
 later(function() require('mini.cmdline').setup() end)
 
--- Tweak and save any color scheme. Contains utility functions to work with
--- color spaces and color schemes. Example usage:
--- - `:Colorscheme default` - switch with animation to the default color scheme
+-- 컬러 스킴 조정 및 저장. 색 공간 및 컬러 스킴 작업을 위한 유틸리티 함수가
+-- 포함되어 있습니다. 사용 예:
+-- - `:Colorscheme default` - 애니메이션과 함께 기본 컬러 스킴으로 전환
 --
--- See also:
--- - `:h MiniColors.interactive()` - interactively tweak color scheme
--- - `:h MiniColors-recipes` - common recipes to use during interactive tweaking
--- - `:h MiniColors.convert()` - convert between color spaces
--- - `:h MiniColors-color-spaces` - list of supported color sapces
+-- 참조:
+-- - `:h MiniColors.interactive()` - 대화형으로 컬러 스킴 조정
+-- - `:h MiniColors-recipes` - 대화형 조정 중에 사용할 공통 레시피
+-- - `:h MiniColors.convert()` - 색 공간 간 변환
+-- - `:h MiniColors-color-spaces` - 지원되는 색 공간 목록
 --
--- It is not enabled by default because it is not really needed on a daily basis.
--- Uncomment next line (use `gcc`) to enable.
+-- 매일 필요한 것은 아니므로 기본적으로 활성화되지 않습니다.
+-- 활성화하려면 다음 줄의 주석을 해제(`gcc` 사용)하세요.
 -- later(function() require('mini.colors').setup() end)
 
--- Comment lines. Provides functionality to work with commented lines.
--- Uses `:h 'commentstring'` option to infer comment structure.
--- Example usage:
--- - `gcip` - toggle comment (`gc`) *i*inside *p*aragraph
--- - `vapgc` - *v*isually select *a*round *p*aragraph and toggle comment (`gc`)
--- - `gcgc` - uncomment (`gc`, operator) comment block at cursor (`gc`, textobject)
+-- 줄 주석 처리. 주석 처리된 줄과 작업할 수 있는 기능을 제공합니다.
+-- `:h 'commentstring'` 옵션을 사용하여 주석 구조를 유추합니다.
+-- 사용 예:
+-- - `gcip` - 문단(*i*nside *p*aragraph) 주석 토글(`gc`)
+-- - `vapgc` - 문단(*a*round *p*aragraph)을 비주얼 선택하고 주석 토글(`gc`)
+-- - `gcgc` - 커서의 주석 블록(`gc` 텍스트 오브젝트) 주석 해제(`gc` 연산자)
 --
--- The built-in `:h commenting` is based on 'mini.comment'. Yet this module is
--- still enabled as it provides more customization opportunities.
+-- 내장 `:h commenting`은 'mini.comment'를 기반으로 합니다. 하지만 이 모듈은
+-- 더 많은 사용자 정의 기회를 제공하므로 여전히 활성화되어 있습니다.
 later(function() require('mini.comment').setup() end)
 
--- Autohighlight word under cursor with a customizable delay.
--- Word boundaries are defined based on `:h 'iskeyword'` option.
+-- 사용자 정의 가능한 지연 시간으로 커서 아래 단어를 자동 하이라이트합니다.
+-- 단어 경계는 `:h 'iskeyword'` 옵션을 기반으로 정의됩니다.
 --
--- It is not enabled by default because its effects are a matter of taste.
--- Uncomment next line (use `gcc`) to enable.
+-- 취향의 문제이므로 기본적으로 활성화되지 않습니다.
+-- 활성화하려면 다음 줄의 주석을 해제(`gcc` 사용)하세요.
 -- later(function() require('mini.cursorword').setup() end)
 
--- Work with diff hunks that represent the difference between the buffer text and
--- some reference text set by a source. Default source uses text from Git index.
--- Also provides summary info used in developer section of 'mini.statusline'.
--- Example usage:
--- - `ghip` - apply hunks (`gh`) within *i*nside *p*aragraph
--- - `gHG` - reset hunks (`gH`) from cursor until end of buffer (`G`)
--- - `ghgh` - apply (`gh`) hunk at cursor (`gh`)
--- - `gHgh` - reset (`gH`) hunk at cursor (`gh`)
--- - `<Leader>go` - toggle overlay
+-- 버퍼 텍스트와 소스에서 설정한 참조 텍스트 간의 차이를 나타내는 디프 헝크와 작업합니다.
+-- 기본 소스는 Git 인덱스의 텍스트를 사용합니다.
+-- 또한 'mini.statusline'의 개발자 섹션에서 사용되는 요약 정보를 제공합니다.
+-- 사용 예:
+-- - `ghip` - 문단(*i*nside *p*aragraph) 내에 헝크 적용(`gh`)
+-- - `gHG` - 커서부터 버퍼 끝(`G`)까지 헝크 리셋(`gH`)
+-- - `ghgh` - 커서 위치의 헝크(`gh`) 적용(`gh`)
+-- - `gHgh` - 커서 위치의 헝크(`gh`) 리셋(`gH`)
+-- - `<Leader>go` - 오버레이 토글
 --
--- See also:
--- - `:h MiniDiff-overview` - overview of how module works
--- - `:h MiniDiff-diff-summary` - available summary information
--- - `:h MiniDiff.gen_source` - available built-in sources
+-- 참조:
+-- - `:h MiniDiff-overview` - 모듈 작동 방식 개요
+-- - `:h MiniDiff-diff-summary` - 사용 가능한 요약 정보
+-- - `:h MiniDiff.gen_source` - 사용 가능한 내장 소스
 later(function() require('mini.diff').setup() end)
 
--- Git integration for more straightforward Git actions based on Neovim's state.
--- It is not meant as a fully featured Git client, only to provide helpers that
--- integrate better with Neovim. Example usage:
--- - `<Leader>gs` - show information at cursor
--- - `<Leader>gd` - show unstaged changes as a patch in separate tabpage
--- - `<Leader>gL` - show Git log of current file
--- - `:Git help git` - show output of `git help git` inside Neovim
+-- Neovim의 상태를 기반으로 보다 간단한 Git 동작을 위한 Git 통합입니다.
+-- 완전한 기능을 갖춘 Git 클라이언트가 아니라 Neovim과 더 잘 통합되는 헬퍼를
+-- 제공하기 위한 것입니다. 사용 예:
+-- - `<Leader>gs` - 커서 위치의 정보 표시
+-- - `<Leader>gd` - 미스테이징된 변경 사항을 별도의 탭 페이지에서 패치로 표시
+-- - `<Leader>gL` - 현재 파일의 Git 로그 표시
+-- - `:Git help git` - Neovim 내부에서 `git help git` 출력 표시
 --
--- See also:
--- - `:h MiniGit-examples` - examples of common setups
--- - `:h :Git` - more details about `:Git` user command
--- - `:h MiniGit.show_at_cursor()` - what information at cursor is shown
+-- 참조:
+-- - `:h MiniGit-examples` - 일반적인 설정 예시
+-- - `:h :Git` - `:Git` 사용자 명령에 대한 자세한 내용
+-- - `:h MiniGit.show_at_cursor()` - 커서 위치에서 어떤 정보가 표시되는지
 later(function() require('mini.git').setup() end)
 
--- Highlight patterns in text. Like `TODO`/`NOTE` or color hex codes.
--- Example usage:
--- - `:Pick hipatterns` - pick among all highlighted patterns
+-- 텍스트의 패턴을 하이라이트합니다. `TODO`/`NOTE` 또는 색상 헥스 코드 등.
+-- 사용 예:
+-- - `:Pick hipatterns` - 하이라이트된 모든 패턴 중에서 선택
 --
--- See also:
--- - `:h MiniHipatterns-examples` - examples of common setups
+-- 참조:
+-- - `:h MiniHipatterns-examples` - 일반적인 설정 예시
 later(function()
   local hipatterns = require('mini.hipatterns')
   local hi_words = MiniExtra.gen_highlighter.words
   hipatterns.setup({
     highlighters = {
-      -- Highlight a fixed set of common words. Will be highlighted in any place,
-      -- not like "only in comments".
+      -- 고정된 공통 단어 세트를 하이라이트합니다. "주석 내에서만"이 아니라 모든 위치에서 하이라이트됩니다.
       fixme = hi_words({ 'FIXME', 'Fixme', 'fixme' }, 'MiniHipatternsFixme'),
       hack = hi_words({ 'HACK', 'Hack', 'hack' }, 'MiniHipatternsHack'),
       todo = hi_words({ 'TODO', 'Todo', 'todo' }, 'MiniHipatternsTodo'),
       note = hi_words({ 'NOTE', 'Note', 'note' }, 'MiniHipatternsNote'),
 
-      -- Highlight hex color string (#aabbcc) with that color as a background
+      -- 헥스 색상 문자열(#aabbcc)을 해당 색상을 배경으로 하이라이트합니다.
       hex_color = hipatterns.gen_highlighter.hex_color(),
     },
   })
 end)
 
--- Visualize and work with indent scope. It visualizes indent scope "at cursor"
--- with animated vertical line. Provides relevant motions and textobjects.
--- Example usage:
--- - `cii` - *c*hange *i*nside *i*ndent scope
--- - `Vaiai` - *V*isually select *a*round *i*ndent scope and then again
---   reselect *a*round new *i*indent scope
--- - `[i` / `]i` - navigate to scope's top / bottom
+-- 들여쓰기 범위를 시각화하고 작업합니다. 애니메이션 수직선으로 "커서 위치의"
+-- 들여쓰기 범위를 시각화합니다. 관련 동작 및 텍스트 오브젝트를 제공합니다.
+-- 사용 예:
+-- - `cii` - 들여쓰기 범위(*i*ndent scope) *안쪽* 변경(*c*hange *i*nside)
+-- - `Vaiai` - 들여쓰기 범위 *둘레*를 비주얼 선택하고 다시 새로운 들여쓰기 범위 *둘레*를 선택
+-- - `[i` / `]i` - 범위의 상단 / 하단으로 이동
 --
--- See also:
--- - `:h MiniIndentscope.gen_animation` - available animation rules
+-- 참조:
+-- - `:h MiniIndentscope.gen_animation` - 사용 가능한 애니메이션 규칙
 later(function() require('mini.indentscope').setup() end)
 
--- Jump to next/previous single character. It implements "smarter `fFtT` keys"
--- (see `:h f`) that work across multiple lines, start "jumping mode", and
--- highlight all target matches. Example usage:
--- - `fxff` - move *f*orward onto next character "x", then next, and next again
--- - `dt)` - *d*elete *t*ill next closing parenthesis (`)`)
+-- 다음/이전 단일 문자로 점프합니다. "더 스마트한 `fFtT` 키"(`:h f` 참조)를
+-- 구현하여 여러 줄에 걸쳐 작동하고, "점프 모드"를 시작하며, 모든 대상 일치 항목을 하이라이트합니다.
+-- 사용 예:
+-- - `fxff` - 다음 문자 "x"로 이동하고, 그다음, 또 그다음으로 이동
+-- - `dt)` - 다음 닫는 괄호(`)`) 전까지 삭제(*d*elete *t*ill)
 later(function() require('mini.jump').setup() end)
 
--- Jump within visible lines to pre-defined spots via iterative label filtering.
--- Spots are computed by a configurable spotter function. Example usage:
--- - Lock eyes on desired location to jump
--- - `<CR>` - start jumping; this shows character labels over target spots
--- - Type character that appears over desired location; number of target spots
---   should be reduced
--- - Keep typing labels until target spot is unique to perform the jump
+-- 반복적인 레이블 필터링을 통해 표시되는 줄 내의 사전 정의된 지점으로 점프합니다.
+-- 지점은 설정 가능한 spotter 함수에 의해 계산됩니다. 사용 예:
+-- - 점프할 위치에 시선을 고정합니다.
+-- - `<CR>` - 점프 시작. 대상 지점 위에 문자 레이블이 표시됩니다.
+-- - 원하는 위치 위에 나타나는 문자를 입력합니다. 대상 지점 수가 줄어듭니다.
+-- - 대상 지점이 고유해질 때까지 레이블을 계속 입력하여 점프를 수행합니다.
 --
--- See also:
--- - `:h MiniJump2d.gen_spotter` - list of available spotters
+-- 참조:
+-- - `:h MiniJump2d.gen_spotter` - 사용 가능한 spotter 목록
 later(function() require('mini.jump2d').setup() end)
 
--- Special key mappings. Provides helpers to map:
--- - Multi-step actions. Apply action 1 if condition is met; else apply
---   action 2 if condition is met; etc.
--- - Combos. Sequence of keys where each acts immediately plus execute extra
---   action if all are typed fast enough. Useful for Insert mode mappings to not
---   introduce delay when typing mapping keys without intention to execute action.
+-- 특수 키 매핑. 다음을 매핑하기 위한 헬퍼를 제공합니다.
+-- - 다단계 동작. 조건이 충족되면 동작 1을 적용하고, 그렇지 않고 조건이 충족되면 동작 2를 적용하는 식입니다.
+-- - 콤보. 각 키가 즉시 작동하는 키 시퀀스이며, 모든 키가 충분히 빨리 입력된 경우 추가 동작을 실행합니다.
+--   동작 실행 의도 없이 매핑 키를 입력할 때 지연을 방지하기 위해 Insert 모드 매핑에 유용합니다.
 --
--- See also:
--- - `:h MiniKeymap-examples` - examples of common setups
--- - `:h MiniKeymap.map_multistep()` - map multi-step action
--- - `:h MiniKeymap.map_combo()` - map combo
+-- 참조:
+-- - `:h MiniKeymap-examples` - 일반적인 설정 예시
+-- - `:h MiniKeymap.map_multistep()` - 다단계 동작 매핑
+-- - `:h MiniKeymap.map_combo()` - 콤보 매핑
 later(function()
   require('mini.keymap').setup()
-  -- Navigate 'mini.completion' menu with `<Tab>` /  `<S-Tab>`
+  -- `<Tab>` / `<S-Tab>`으로 'mini.completion' 메뉴 탐색
   MiniKeymap.map_multistep('i', '<Tab>', { 'pmenu_next' })
   MiniKeymap.map_multistep('i', '<S-Tab>', { 'pmenu_prev' })
-  -- On `<CR>` try to accept current completion item, fall back to accounting
-  -- for pairs from 'mini.pairs'
+  -- `<CR>`에서 현재 자동 완성 항목 수락을 시도하고, 'mini.pairs'의 쌍 처리를 고려하도록 폴백
   MiniKeymap.map_multistep('i', '<CR>', { 'pmenu_accept', 'minipairs_cr' })
-  -- On `<BS>` just try to account for pairs from 'mini.pairs'
+  -- `<BS>`에서 'mini.pairs'의 쌍 처리를 고려하도록 시도
   MiniKeymap.map_multistep('i', '<BS>', { 'minipairs_bs' })
 end)
 
--- Window with text overview. It is displayed on the right hand side. Can be used
--- for quick overview and navigation. Hidden by default. Example usage:
--- - `<Leader>mt` - toggle map window
--- - `<Leader>mf` - focus on the map for fast navigation
--- - `<Leader>ms` - change map's side (if it covers something underneath)
+-- 텍스트 개요가 있는 창. 오른쪽에 표시됩니다. 빠른 개요 및 탐색에 사용할 수 있습니다.
+-- 기본적으로 숨겨져 있습니다. 사용 예:
+-- - `<Leader>mt` - 맵 창 토글
+-- - `<Leader>mf` - 빠른 탐색을 위해 맵에 포커스
+-- - `<Leader>ms` - 맵의 위치 변경 (아래 무언가를 가리는 경우)
 --
--- See also:
--- - `:h MiniMap.gen_encode_symbols` - list of symbols to use for text encoding
--- - `:h MiniMap.gen_integration` - list of integrations to show in the map
+-- 참조:
+-- - `:h MiniMap.gen_encode_symbols` - 텍스트 인코딩에 사용할 심볼 목록
+-- - `:h MiniMap.gen_integration` - 맵에 표시할 통합 목록
 --
--- NOTE: Might introduce lag on very big buffers (10000+ lines)
+-- 참고: 매우 큰 버퍼(10,000줄 이상)에서는 지연이 발생할 수 있습니다.
 later(function()
   local map = require('mini.map')
   map.setup({
-    -- Use Braille dots to encode text
+    -- 텍스트 인코딩을 위해 점자(Braille) 점 사용
     symbols = { encode = map.gen_encode_symbols.dot('4x2') },
-    -- Show built-in search matches, 'mini.diff' hunks, and diagnostic entries
+    -- 내장 검색 결과, 'mini.diff' 헝크 및 진단 항목 표시
     integrations = {
       map.gen_integration.builtin_search(),
       map.gen_integration.diff(),
@@ -1080,148 +1066,138 @@ later(function()
     },
   })
 
-  -- Map built-in navigation characters to force map refresh
+  -- 맵 새로고침을 강제하도록 내장 탐색 문자를 매핑합니다.
   for _, key in ipairs({ 'n', 'N', '*', '#' }) do
     local rhs = key
-      -- Also open enough folds when jumping to the next match
+      -- 다음 일치 항목으로 점프할 때 충분히 접기 해제
       .. 'zv'
       .. '<Cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<CR>'
     vim.keymap.set('n', key, rhs)
   end
 end)
 
--- Move any selection in any direction. Example usage in Normal mode:
--- - `<M-j>`/`<M-k>` - move current line down / up
--- - `<M-h>`/`<M-l>` - decrease / increase indent of current line
+-- 선택 영역을 모든 방향으로 이동합니다. 노멀 모드 사용 예:
+-- - `<M-j>`/`<M-k>` - 현재 줄을 아래 / 위로 이동
+-- - `<M-h>`/`<M-l>` - 현재 줄의 들여쓰기 감소 / 증가
 --
--- Example usage in Visual mode:
--- - `<M-h>`/`<M-j>`/`<M-k>`/`<M-l>` - move selection left/down/up/right
+-- 비주얼 모드 사용 예:
+-- - `<M-h>`/`<M-j>`/`<M-k>`/`<M-l>` - 선택 영역을 왼쪽/아래/위/오른쪽으로 이동
 later(function() require('mini.move').setup() end)
 
--- Text edit operators. All operators have mappings for:
--- - Regular operator (waits for motion/textobject to use)
--- - Current line action (repeat second character of operator to activate)
--- - Act on visual selection (type operator in Visual mode)
+-- 텍스트 편집 연산자. 모든 연산자에는 다음에 대한 매핑이 있습니다.
+-- - 일반 연산자 (사용할 동작/텍스트 오브젝트 대기)
+-- - 현재 줄 동작 (연산자의 두 번째 문자를 반복하여 활성화)
+-- - 비주얼 선택 영역에 대해 동작 (비주얼 모드에서 연산자 입력)
 --
--- Example usage:
--- - `griw` - replace (`gr`) *i*inside *w*ord
--- - `gmm` - multiple/duplicate (`gm`) current line (extra `m`)
--- - `vipgs` - *v*isually select *i*nside *p*aragraph and sort it (`gs`)
--- - `gxiww.` - exchange (`gx`) *i*nside *w*ord with next word (`w` to navigate
---   to it and `.` to repeat exchange operator)
--- - `g==` - execute current line as Lua code and replace with its output.
---   For example, typing `g==` over line `vim.lsp.get_clients()` shows
---   information about all available LSP clients.
+-- 사용 예:
+-- - `griw` - 단어(*i*nside *w*ord) 바꾸기(*r*eplace, `gr`)
+-- - `gmm` - 현재 줄 다중화/복제(`gm`, 추가 `m`)
+-- - `vipgs` - 문단(*i*nside *p*aragraph)을 비주얼 선택하고 정렬(`gs`)
+-- - `gxiww.` - 단어(*i*nside *w*ord)를 다음 단어(`w`로 이동 후 `.`으로 교체 연산자 반복)와 교체(`gx`)
+-- - `g==` - 현재 줄을 Lua 코드로 실행하고 그 출력으로 교체합니다.
+--   예를 들어, `vim.lsp.get_clients()` 줄에서 `g==`를 입력하면 사용 가능한 모든 LSP 클라이언트에 대한 정보를 보여줍니다.
 --
--- See also:
--- - `:h MiniOperators-mappings` - overview of how mappings are created
--- - `:h MiniOperators-overview` - overview of present operators
+-- 참조:
+-- - `:h MiniOperators-mappings` - 매핑 생성 방법 개요
+-- - `:h MiniOperators-overview` - 현재 연산자 개요
 later(function()
   require('mini.operators').setup()
 
-  -- Create mappings for swapping adjacent arguments. Notes:
-  -- - Relies on `a` argument textobject from 'mini.ai'.
-  -- - It is not 100% reliable, but mostly works.
-  -- - It overrides `:h (` and `:h )`.
-  -- Explanation: `gx`-`ia`-`gx`-`ila` <=> exchange current and last argument
-  -- Usage: when on `a` in `(aa, bb)` press `)` followed by `(`.
-  vim.keymap.set('n', '(', 'gxiagxila', { remap = true, desc = 'Swap arg left' })
-  vim.keymap.set('n', ')', 'gxiagxina', { remap = true, desc = 'Swap arg right' })
+  -- 인접한 인자를 바꾸기 위한 매핑을 생성합니다. 참고:
+  -- - 'mini.ai'의 `a` 인자 텍스트 오브젝트에 의존합니다.
+  -- - 100% 신뢰할 수는 없지만 대부분 작동합니다.
+  -- - `:h (` 및 `:h )`를 덮어씁니다.
+  -- 설명: `gx`-`ia`-`gx`-`ila` <=> 현재 인자와 마지막(이전) 인자 교체
+  -- 사용법: `(aa, bb)`에서 `a` 위에 있을 때 `)`에 이어 `(`를 누릅니다.
+  vim.keymap.set('n', '(', 'gxiagxila', { remap = true, desc = '인자 왼쪽과 바꾸기' })
+  vim.keymap.set('n', ')', 'gxiagxina', { remap = true, desc = '인자 오른쪽과 바꾸기' })
 end)
 
--- Autopairs functionality. Insert pair when typing opening character and go over
--- right character if it is already to cursor's right. Also provides mappings for
--- `<CR>` and `<BS>` to perform extra actions when inside pair.
--- Example usage in Insert mode:
--- - `(` - insert "()" and put cursor between them
--- - `)` when there is ")" to the right - jump over ")" without inserting new one
--- - `<C-v>(` - always insert a single "(" literally. This is useful since
---   'mini.pairs' doesn't provide particularly smart behavior, like auto balancing
+-- 자동 쌍(Autopairs) 기능. 여는 문자를 입력할 때 쌍을 삽입하고 오른쪽 문자가 이미
+-- 커서 오른쪽에 있는 경우 그 위로 이동합니다. 또한 쌍 내부에 있을 때 추가 동작을
+-- 수행하기 위해 `<CR>` 및 `<BS>`에 대한 매핑을 제공합니다.
+-- Insert 모드 사용 예:
+-- - `(` - "()"를 삽입하고 그 사이에 커서를 둡니다.
+-- - 오른쪽에 ")"가 있을 때 `)` - 새로운 것을 삽입하지 않고 ")" 위로 점프합니다.
+-- - `<C-v>(` - 항상 단일 "("를 글자 그대로 삽입합니다. 'mini.pairs'는 자동 균형 맞추기 등
+--   특별히 스마트한 동작을 제공하지 않으므로 유용합니다.
 later(function()
-  -- Create pairs not only in Insert, but also in Command line mode
+  -- Insert 모드뿐만 아니라 명령줄 모드에서도 쌍을 생성합니다.
   require('mini.pairs').setup({ modes = { command = true } })
 end)
 
--- Pick anything with single window layout and fast matching. This is one of
--- the main usability improvements as it powers a lot of "find things quickly"
--- workflows. How to use a picker:
--- - Start picker, usually with `:Pick <picker-name>` command. Like `:Pick files`.
---   It shows a single window in the bottom left corner filled with possible items
---   to choose from. Current item has special full line highlighting.
---   At the top there is a current query used to filter+sort items.
--- - Type characters (appear at top) to narrow down items. There is fuzzy matching:
---   characters may not match one-by-one, but they should be in correct order.
--- - Navigate down/up with `<C-n>`/`<C-p>`.
--- - Press `<Tab>` to show item's preview. `<Tab>` again goes back to items.
--- - Press `<S-Tab>` to show picker's info. `<S-Tab>` again goes back to items.
--- - Press `<CR>` to choose an item. The exact action depends on the picker: `files`
---   picker opens a selected file, `help` picker opens help page on selected tag.
---   To close picker without choosing an item, press `<Esc>`.
+-- 단일 창 레이아웃과 빠른 매칭으로 무엇이든 선택(Pick)합니다. "무언가를 빨리 찾기"
+-- 워크플로우를 강화하므로 주요 사용성 개선 사항 중 하나입니다. 선택기 사용 방법:
+-- - 일반적으로 `:Pick <picker-name>` 명령으로 선택기를 시작합니다. 예: `:Pick files`.
+--   좌측 하단에 선택할 수 있는 가능한 항목으로 가득 찬 단일 창이 나타납니다.
+--   현재 항목에는 특수한 전체 줄 하이라이트가 있습니다.
+--   상단에는 항목을 필터링+정렬하는 데 사용되는 현재 쿼리가 있습니다.
+-- - 문자를 입력(상단에 나타남)하여 항목을 좁힙니다. 퍼지 매칭이 적용됩니다: 문자가
+--   일대일로 일치하지 않을 수 있지만 올바른 순서여야 합니다.
+-- - `<C-n>`/`<C-p>`로 아래/위 탐색합니다.
+-- - `<Tab>`을 눌러 항목의 미리보기를 표시합니다. 다시 `<Tab>`을 누르면 항목으로 돌아갑니다.
+-- - `<S-Tab>`을 눌러 선택기의 정보를 표시합니다. 다시 `<S-Tab>`을 누르면 항목으로 돌아갑니다.
+-- - `<CR>`을 눌러 항목을 선택합니다. 정확한 동작은 선택기에 따라 다릅니다: `files` 선택기는
+--   선택한 파일을 열고, `help` 선택기는 선택한 태그에 대한 도움말 페이지를 엽니다.
+--   항목을 선택하지 않고 선택기를 닫으려면 `<Esc>`를 누르세요.
 --
--- Example usage:
--- - `<Leader>ff` - *f*ind *f*iles; for best performance requires `ripgrep`
--- - `<Leader>fg` - *f*ind inside files (a.k.a. "to *g*rep"); requires `ripgrep`
--- - `<Leader>fh` - *f*ind *h*elp tag
--- - `<Leader>fr` - *r*esume latest picker
--- - `:h vim.ui.select()` - implemented with 'mini.pick'
+-- 사용 예:
+-- - `<Leader>ff` - 파일 찾기(*f*ind *f*iles); 최상의 성능을 위해 `ripgrep` 필요
+-- - `<Leader>fg` - 파일 내부 찾기(일명 "to *g*rep"); `ripgrep` 필요
+-- - `<Leader>fh` - 도움말 태그 찾기(*f*ind *h*elp tag)
+-- - `<Leader>fr` - 최신 선택기 다시 시작(*r*esume)
+-- - `:h vim.ui.select()` - 'mini.pick'으로 구현됨
 --
--- See also:
--- - `:h MiniPick-overview` - overview of picker functionality
--- - `:h MiniPick-examples` - examples of common setups
--- - `:h MiniPick.builtin` and `:h MiniExtra.pickers` - available pickers;
---   Execute one either with Lua function, `:Pick <picker-name>` command, or
---   one of `<Leader>f` mappings defined in 'plugin/20_keymaps.lua'
+-- 참조:
+-- - `:h MiniPick-overview` - 선택기 기능 개요
+-- - `:h MiniPick-examples` - 일반적인 설정 예시
+-- - `:h MiniPick.builtin` 및 `:h MiniExtra.pickers` - 사용 가능한 선택기;
+--   Lua 함수, `:Pick <picker-name>` 명령 또는 'plugin/20_keymaps.lua'에 정의된
+--   `<Leader>f` 매핑 중 하나로 실행합니다.
 later(function() require('mini.pick').setup() end)
 
--- Manage and expand snippets (templates for a frequently used text).
--- Typical workflow is to type snippet's (configurable) prefix and expand it
--- into a snippet session.
+-- 스니펫(자주 사용되는 텍스트의 템플릿)을 관리하고 확장합니다. 전형적인 워크플로우는
+-- 스니펫의 (설정 가능한) 접두사를 입력하고 스니펫 세션으로 확장하는 것입니다.
 --
--- How to manage snippets:
--- - 'mini.snippets' itself doesn't come with preconfigured snippets. Instead there
---   is a flexible system of how snippets are prepared before expanding.
---   They can come from pre-defined path on disk, 'snippets/' directories inside
---   config or plugins, defined inside `setup()` call directly.
--- - This config, however, does come with snippet configuration:
---     - 'snippets/global.json' is a file with global snippets that will be
---       available in any buffer
---     - 'after/snippets/lua.json' defines personal snippets for Lua language
---     - 'friendly-snippets' plugin configured in 'plugin/40_plugins.lua' provides
---       a collection of language snippets
+-- 스니펫 관리 방법:
+-- - 'mini.snippets' 자체는 사전 구성된 스니펫과 함께 제공되지 않습니다. 대신 스니펫이
+--   확장되기 전에 준비되는 방식에 대한 유연한 시스템이 있습니다.
+--   디스크의 사전 정의된 경로, 설정 또는 플러그인 내부의 'snippets/' 디렉토리에서
+--   가져올 수 있으며, `setup()` 호출 내부에서 직접 정의할 수도 있습니다.
+-- - 그러나 이 설정은 스니펫 구성과 함께 제공됩니다.
+--     - 'snippets/global.json'은 모든 버퍼에서 사용할 수 있는 전역 스니펫 파일입니다.
+--     - 'after/snippets/lua.json'은 Lua 언어를 위한 개인 스니펫을 정의합니다.
+--     - 'plugin/40_plugins.lua'에 구성된 'friendly-snippets' 플러그인은 언어 스니펫 컬렉션을 제공합니다.
 --
--- How to expand a snippet in Insert mode:
--- - If you know snippet's prefix, type it as a word and press `<C-j>`. Snippet's
---   body should be inserted instead of the prefix.
--- - If you don't remember snippet's prefix, type only part of it (or none at all)
---   and press `<C-j>`. It should show picker with all snippets that have prefixes
---   matching typed characters (or all snippets if none was typed).
---   Choose one and its body should be inserted instead of previously typed text.
+-- Insert 모드에서 스니펫 확장 방법:
+-- - 스니펫의 접두사를 알고 있다면 단어로 입력하고 `<C-j>`를 누릅니다. 접두사 대신
+--   스니펫의 본문이 삽입되어야 합니다.
+-- - 스니펫의 접두사가 기억나지 않는다면 일부만 입력하거나 아예 입력하지 않고 `<C-j>`를 누릅니다.
+--   입력한 문자와 일치하는 접두사가 있는 모든 스니펫(입력하지 않은 경우 모든 스니펫)이
+--   있는 선택기가 표시되어야 합니다. 하나를 선택하면 이전에 입력한 텍스트 대신 본문이 삽입됩니다.
 --
--- How to navigate during snippet session:
--- - Snippets can contain tabstops - places for user to interactively adjust text.
---   Each tabstop is highlighted depending on session progression - whether tabstop
---   is current, was or was not visited. If tabstop doesn't yet have text, it is
---   visualized with special "ghost" inline text: • and ∎ by default.
--- - Type necessary text at current tabstop and navigate to next/previous one
---   by pressing `<C-l>` / `<C-h>`.
--- - Repeat previous step until you reach special final tabstop, usually denoted
---   by ∎ symbol. If you spotted a mistake in an earlier tabstop, navigate to it
---   and return back to the final tabstop.
--- - To end a snippet session when at final tabstop, keep typing or go into
---   Normal mode. To force end snippet session, press `<C-c>`.
+-- 스니펫 세션 중 탐색 방법:
+-- - 스니펫에는 탭스탑(사용자가 대화형으로 텍스트를 조정할 수 있는 위치)이 포함될 수 있습니다.
+--   각 탭스탑은 세션 진행 상황(탭스탑이 현재인지, 방문했는지 또는 방문하지 않았는지)에 따라
+--   하이라이트됩니다. 탭스탑에 아직 텍스트가 없으면 특수 "고스트" 인라인 텍스트(기본값: • 및 ∎)로 시각화됩니다.
+-- - 현재 탭스탑에 필요한 텍스트를 입력하고 `<C-l>` / `<C-h>`를 눌러 다음/이전 탭스탑으로 탐색합니다.
+-- - 보통 ∎ 기호로 표시되는 최종 탭스탑에 도달할 때까지 이전 단계를 반복합니다.
+--   이전 탭스탑에서 실수를 발견하면 해당 탭스탑으로 이동한 후 다시 최종 탭스탑으로 돌아옵니다.
+-- - 최종 탭스탑에 있을 때 스니펫 세션을 종료하려면 계속 입력하거나 노멀 모드로 이동합니다.
+--   스니펫 세션을 강제로 종료하려면 `<C-c>`를 누르세요.
 --
--- See also:
--- - `:h MiniSnippets-overview` - overview of how module works
--- - `:h MiniSnippets-examples` - examples of common setups
--- - `:h MiniSnippets-session` - details about snippet session
--- - `:h MiniSnippets.gen_loader` - list of available loaders
+-- 참조:
+-- - `:h MiniSnippets-overview` - 모듈 작동 방식 개요
+-- - `:h MiniSnippets-examples` - 일반적인 설정 예시
+-- - `:h MiniSnippets-session` - 스니펫 세션에 대한 자세한 내용
+-- - `:h MiniSnippets.gen_loader` - 사용 가능한 로더 목록
 later(function()
-  -- Define language patterns to work better with 'friendly-snippets'
+  -- 'friendly-snippets'와 더 잘 작동하도록 언어 패턴 정의
   local latex_patterns = { 'latex/**/*.json', '**/latex.json' }
   local lang_patterns = {
     tex = latex_patterns,
     plaintex = latex_patterns,
-    -- Recognize special injected language of markdown tree-sitter parser
+    -- markdown tree-sitter 파서의 특수 주입된 언어 인식
     markdown_inline = { 'markdown.json' },
   }
 
@@ -1229,148 +1205,143 @@ later(function()
   local config_path = vim.fn.stdpath('config')
   snippets.setup({
     snippets = {
-      -- Always load 'snippets/global.json' from config directory
+      -- 항상 설정 디렉토리에서 'snippets/global.json' 로드
       snippets.gen_loader.from_file(config_path .. '/snippets/global.json'),
-      -- Load from 'snippets/' directory of plugins, like 'friendly-snippets'
+      -- 'friendly-snippets'와 같은 플러그인의 'snippets/' 디렉토리에서 로드
       snippets.gen_loader.from_lang({ lang_patterns = lang_patterns }),
     },
   })
 
-  -- By default snippets available at cursor are not shown as candidates in
-  -- 'mini.completion' menu. This requires a dedicated in-process LSP server
-  -- that will provide them. To have that, uncomment next line (use `gcc`).
+  -- 기본적으로 커서에서 사용 가능한 스니펫은 'mini.completion' 메뉴에 후보로 표시되지 않습니다.
+  -- 이를 위해서는 스니펫을 제공할 전용 프로세스 내 LSP 서버가 필요합니다.
+  -- 사용하려면 다음 줄의 주석을 해제(`gcc` 사용)하세요.
   -- MiniSnippets.start_lsp_server()
 end)
 
--- Split and join arguments (regions inside brackets between allowed separators).
--- It uses Lua patterns to find arguments, which means it works in comments and
--- strings but can be not as accurate as tree-sitter based solutions.
--- Each action can be configured with hooks (like add/remove trailing comma).
--- Example usage:
--- - `gS` - toggle between joined (all in one line) and split (each on a separate
---   line and indented) arguments. It is dot-repeatable (see `:h .`).
+-- 인자(허용된 구분 기호 사이의 대괄호 내부 영역) 분할 및 결합.
+-- 인자를 찾기 위해 Lua 패턴을 사용하므로 주석 및 문자열 내에서도 작동하지만
+-- tree-sitter 기반 솔루션만큼 정확하지는 않을 수 있습니다.
+-- 각 동작은 훅(예: 후행 콤마 추가/제거)으로 구성할 수 있습니다.
+-- 사용 예:
+-- - `gS` - 결합된 인자(모두 한 줄)와 분할된 인자(각각 별도의 줄에 들여쓰기됨) 사이를 토글합니다.
+--   점 반복이 가능합니다 (`:h .` 참조).
 --
--- See also:
--- - `:h MiniSplitjoin.gen_hook` - list of available hooks
+-- 참조:
+-- - `:h MiniSplitjoin.gen_hook` - 사용 가능한 훅 목록
 later(function() require('mini.splitjoin').setup() end)
 
--- Surround actions: add/delete/replace/find/highlight. Working with surroundings
--- is surprisingly common: surround word with quotes, replace `)` with `]`, etc.
--- This module comes with many built-in surroundings, each identified by a single
--- character. It searches only for surrounding that covers cursor and comes with
--- a special "next" / "last" versions of actions to search forward or backward
--- (just like 'mini.ai'). All text editing actions are dot-repeatable (see `:h .`).
+-- 둘러싸기(Surround) 동작: 추가/삭제/교체/찾기/하이라이트. 따옴표로 단어를 둘러싸거나
+-- `)`를 `]`로 바꾸는 등 둘러싸기 작업은 매우 흔합니다. 이 모듈은 각각 단일 문자로
+-- 식별되는 많은 내장 둘러싸기를 제공합니다. 커서를 덮는 둘러싸기만 검색하며,
+-- 앞이나 뒤를 검색하기 위한 특별한 "다음(next)" / "이전(last)" 버전의 동작('mini.ai'와 동일)을
+-- 제공합니다. 모든 텍스트 편집 동작은 점 반복이 가능합니다 (`:h .` 참조).
 --
--- Example usage (this may feel intimidating at first, but after practice it
--- becomes second nature during text editing):
--- - `saiw)` - *s*urround *a*dd for *i*nside *w*ord parenthesis (`)`)
--- - `sdf`   - *s*urround *d*elete *f*unction call (like `f(var)` -> `var`)
--- - `srb[`  - *s*urround *r*eplace *b*racket (any of [], (), {}) with padded `[`
--- - `sf*`   - *s*urround *f*ind right part of `*` pair (like bold in markdown)
--- - `shf`   - *s*urround *h*ighlight current *f*unction call
--- - `srn{{` - *s*urround *r*eplace *n*ext curly bracket `{` with padded `{`
--- - `sdl'`  - *s*urround *d*elete *l*ast quote pair (`'`)
--- - `vaWsa<Space>` - *v*isually select *a*round *W*ORD and *s*urround *a*dd
---                    spaces (`<Space>`)
+-- 사용 예 (처음에는 어렵게 느껴질 수 있지만, 연습 후에는 텍스트 편집 중에 자연스럽게 사용하게 됩니다):
+-- - `saiw)` - 단어(*i*nside *w*ord) *안쪽*에 괄호(`)`) 둘러싸기 추가(*s*urround *a*dd)
+-- - `sdf`   - 함수 호출 둘러싸기 삭제 (예: `f(var)` -> `var`)
+-- - `srb[`  - 브래킷(bracket, [], (), {} 중 하나)을 패딩된 `[`로 교체(*s*urround *r*eplace)
+-- - `sf*`   - `*` 쌍(예: 마크다운의 굵게)의 오른쪽 부분을 찾기(*s*urround *f*ind)
+-- - `shf`   - 현재 함수 호출 하이라이트(*s*urround *h*ighlight)
+-- - `srn{{` - *다음*(next) 중괄호 `{`를 패딩된 `{`로 교체
+-- - `sdl'`  - *이전*(last) 따옴표 쌍(`'`) 삭제
+-- - `vaWsa<Space>` - 대문자 단어(*W*ORD) *둘레*를 비주얼 선택하고 공백(`<Space>`) 둘러싸기 추가
 --
--- See also:
--- - `:h MiniSurround-builtin-surroundings` - list of all supported surroundings
--- - `:h MiniSurround-surrounding-specification` - examples of custom surroundings
--- - `:h MiniSurround-vim-surround-config` - alternative set of action mappings
+-- 참조:
+-- - `:h MiniSurround-builtin-surroundings` - 지원되는 모든 둘러싸기 목록
+-- - `:h MiniSurround-surrounding-specification` - 사용자 정의 둘러싸기 예시
+-- - `:h MiniSurround-vim-surround-config` - 대체 동작 매핑 세트
 later(function() require('mini.surround').setup() end)
 
--- Highlight and remove trailspace. Temporarily stops highlighting in Insert mode
--- to reduce noise when typing. Example usage:
--- - `<Leader>ot` - trim all trailing whitespace in a buffer
+-- 트레일스페이스(줄 끝 공백) 하이라이트 및 제거. 입력 시 노이즈를 줄이기 위해
+-- Insert 모드에서는 일시적으로 하이라이트를 중단합니다. 사용 예:
+-- - `<Leader>ot` - 버퍼의 모든 후행 공백 정리
 later(function() require('mini.trailspace').setup() end)
 
--- Track and reuse file system visits. Every file/directory visit is persistently
--- tracked on disk to later reuse: show in special frecency order, etc. It also
--- supports adding labels to visited paths to quickly navigate between them.
--- Example usage:
--- - `<Leader>fv` - find across all visits
--- - `<Leader>vv` / `<Leader>vV` - add/remove special "core" label to current file
--- - `<Leader>vc` / `<Leader>vC` - show files with "core" label; all or added within
---   current working directory
+-- 파일 시스템 방문을 추적하고 재사용합니다. 모든 파일/디렉토리 방문은 나중에
+-- 재사용하기 위해 디스크에 영구적으로 추적됩니다 (특수 frecency 순서로 표시 등).
+-- 또한 방문한 경로에 레이블을 추가하여 빠르게 탐색할 수 있도록 지원합니다.
+-- 사용 예:
+-- - `<Leader>fv` - 모든 방문 기록에서 찾기
+-- - `<Leader>vv` / `<Leader>vV` - 현재 파일에 특수 "core" 레이블 추가/제거
+-- - `<Leader>vc` / `<Leader>vC` - "core" 레이블이 있는 파일 표시. 전체 또는 현재 작업 디렉토리 내 추가됨.
 --
--- See also:
--- - `:h MiniVisits-overview` - overview of how module works
--- - `:h MiniVisits-examples` - examples of common setups
+-- 참조:
+-- - `:h MiniVisits-overview` - 모듈 작동 방식 개요
+-- - `:h MiniVisits-examples` - 일반적인 설정 예시
 later(function() require('mini.visits').setup() end)
 
--- Not mentioned here, but can be useful:
--- - 'mini.doc' - needed only for plugin developers.
--- - 'mini.fuzzy' - not really needed on a daily basis.
--- - 'mini.test' - needed only for plugin developers.
+-- 여기 언급되지는 않았지만 유용할 수 있는 것들:
+-- - 'mini.doc' - 플러그인 개발자에게만 필요합니다.
+-- - 'mini.fuzzy' - 매일 필요한 것은 아닙니다.
+-- - 'mini.test' - 플러그인 개발자에게만 필요합니다.
 ```
 
 </details>
 
 #### plugin/40_plugins.lua {#plugin-40_plugins.lua}
 
-<details><summary>Code</summary>
+<details><summary>코드</summary>
 
 ```lua
 -- ┌─────────────────────────┐
--- │ Plugins outside of MINI │
+-- │ MINI 이외의 플러그인 │
 -- └─────────────────────────┘
 --
--- This file contains installation and configuration of plugins outside of MINI.
--- They significantly improve user experience in a way not yet possible with MINI.
--- These are mostly plugins that provide programming language specific behavior.
+-- 이 파일에는 MINI 이외의 플러그인 설치 및 설정이 포함되어 있습니다.
+-- 아직 MINI로 가능하지 않은 방식으로 사용자 경험을 크게 개선합니다.
+-- 이들은 주로 프로그래밍 언어별 동작을 제공하는 플러그인들입니다.
 --
--- Use this file to install and configure other such plugins.
+-- 이 파일을 사용하여 다른 플러그인을 설치하고 설정하세요.
 
--- Make concise helpers for installing/adding plugins in two stages
+-- 두 단계로 플러그인을 설치/추가하기 위한 간결한 헬퍼 생성
 local add, later = MiniDeps.add, MiniDeps.later
 local now_if_args = Config.now_if_args
 
 -- Tree-sitter ================================================================
 
--- Tree-sitter is a tool for fast incremental parsing. It converts text into
--- a hierarchical structure (called tree) that can be used to implement advanced
--- and/or more precise actions: syntax highlighting, textobjects, indent, etc.
+-- Tree-sitter는 빠른 점진적 파싱을 위한 도구입니다. 텍스트를 계층 구조(트리라고 함)로
+-- 변환하여 구문 하이라이트, 텍스트 오브젝트, 들여쓰기 등 고급 및/또는 더 정밀한
+-- 동작을 구현하는 데 사용할 수 있습니다.
 --
--- Tree-sitter support is built into Neovim (see `:h treesitter`). However, it
--- requires two extra pieces that don't come with Neovim directly:
--- - Language parsers: programs that convert text into trees. Some are built-in
---   (like for Lua), 'nvim-treesitter' provides many others.
---   NOTE: It requires third party software to build and install parsers.
---   See the link for more info in "Requirements" section of the MiniMax README.
--- - Query files: definitions of how to extract information from trees in
---   a useful manner (see `:h treesitter-query`). 'nvim-treesitter' also provides
---   these, while 'nvim-treesitter-textobjects' provides the ones for Neovim
---   textobjects (see `:h text-objects`, `:h MiniAi.gen_spec.treesitter()`).
+-- Tree-sitter 지원은 Neovim에 내장되어 있습니다 (`:h treesitter` 참조). 하지만
+-- Neovim과 함께 직접 제공되지 않는 두 가지 추가 요소가 필요합니다.
+-- - 언어 파서: 텍스트를 트리로 변환하는 프로그램. 일부는 내장되어 있으며(예: Lua),
+--   'nvim-treesitter'는 다른 많은 파서를 제공합니다.
+--   참고: 파서를 빌드하고 설치하려면 타사 소프트웨어가 필요합니다.
+--   자세한 정보는 MiniMax README의 "Requirements" 섹션 링크를 참조하세요.
+-- - 쿼리 파일: 유용한 방식으로 트리에서 정보를 추출하는 방법에 대한 정의
+--   (`:h treesitter-query` 참조). 'nvim-treesitter'도 이를 제공하며,
+--   'nvim-treesitter-textobjects'는 Neovim 텍스트 오브젝트를 위한 쿼리를
+--   제공합니다 (`:h text-objects`, `:h MiniAi.gen_spec.treesitter()` 참조).
 --
--- Add these plugins now if file (and not 'mini.starter') is shown after startup.
+-- 시작 후 파일('mini.starter' 아님)이 표시되면 지금 이 플러그인들을 추가합니다.
 --
--- Troubleshooting:
--- - Run `:checkhealth vim.treesitter nvim-treesitter` to see potential issues.
--- - In case of errors related to queries for Neovim bundled parsers (like `lua`,
---   `vimdoc`, `markdown`, etc.), manually install them via 'nvim-treesitter'
---   with `:TSInstall <language>`. Be sure to have necessary system dependencies
---   (see MiniMax README section for software requirements).
+-- 문제 해결:
+-- - `:checkhealth vim.treesitter nvim-treesitter`를 실행하여 잠재적인 문제를 확인하세요.
+-- - Neovim 번들 파서(예: `lua`, `vimdoc`, `markdown` 등)에 대한 쿼리와 관련된 오류가
+--   발생하는 경우, `:TSInstall <language>`를 통해 'nvim-treesitter'로 수동으로 설치하세요.
+--   필요한 시스템 종속성이 있는지 확인하세요 (MiniMax README의 소프트웨어 요구 사항 섹션 참조).
 now_if_args(function()
   add({
     source = 'nvim-treesitter/nvim-treesitter',
-    -- Update tree-sitter parser after plugin is updated
+    -- 플러그인이 업데이트된 후 tree-sitter 파서를 업데이트하는 훅
     hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
   })
   add('nvim-treesitter/nvim-treesitter-textobjects')
 
-  -- Define languages which will have parsers installed and auto enabled
-  -- After changing this, restart Neovim once to install necessary parsers. Wait
-  -- for the installation to finish before opening a file for added language(s).
+  -- 파서가 설치되고 자동으로 활성화될 언어 정의
+  -- 이를 변경한 후 Neovim을 한 번 재시작하여 필요한 파서를 설치하세요. 추가된
+  -- 언어에 대한 파일을 열기 전에 설치가 완료될 때까지 기다리세요.
   local languages = {
-    -- These are already pre-installed with Neovim. Used as an example.
+    -- 이들은 이미 Neovim과 함께 사전 설치되어 있습니다. 예시로 사용되었습니다.
     'lua',
     'vimdoc',
     'markdown',
-    -- Add here more languages with which you want to use tree-sitter
-    -- To see available languages:
-    -- - Execute `:=require('nvim-treesitter').get_available()`
-    -- - Visit 'SUPPORTED_LANGUAGES.md' file at
-    --   https://github.com/nvim-treesitter/nvim-treesitter
+    -- 여기에 tree-sitter를 사용하려는 언어를 추가하세요.
+    -- 사용 가능한 언어를 보려면:
+    -- - `:=require('nvim-treesitter').get_available()` 실행
+    -- - https://github.com/nvim-treesitter/nvim-treesitter의
+    --   'SUPPORTED_LANGUAGES.md' 파일 방문
   }
   local isnt_installed = function(lang)
     return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
@@ -1378,7 +1349,7 @@ now_if_args(function()
   local to_install = vim.tbl_filter(isnt_installed, languages)
   if #to_install > 0 then require('nvim-treesitter').install(to_install) end
 
-  -- Enable tree-sitter after opening a file for a target language
+  -- 대상 언어에 대한 파일을 연 후 tree-sitter 활성화
   local filetypes = {}
   for _, lang in ipairs(languages) do
     for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
@@ -1386,98 +1357,97 @@ now_if_args(function()
     end
   end
   local ts_start = function(ev) vim.treesitter.start(ev.buf) end
-  Config.new_autocmd('FileType', filetypes, ts_start, 'Start tree-sitter')
+  Config.new_autocmd('FileType', filetypes, ts_start, 'tree-sitter 시작')
 end)
 
--- Language servers ===========================================================
+-- 언어 서버 (Language servers) ===========================================================
 
--- Language Server Protocol (LSP) is a set of conventions that power creation of
--- language specific tools. It requires two parts:
--- - Server - program that performs language specific computations.
--- - Client - program that asks server for computations and shows results.
+-- LSP (Language Server Protocol)는 언어별 도구 제작을 지원하는 일련의 관례입니다.
+-- 두 부분이 필요합니다.
+-- - 서버 - 언어별 계산을 수행하는 프로그램.
+-- - 클라이언트 - 서버에 계산을 요청하고 결과를 보여주는 프로그램.
 --
--- Here Neovim itself is a client (see `:h vim.lsp`). Language servers need to
--- be installed separately based on your OS, CLI tools, and preferences.
--- See note about 'mason.nvim' at the bottom of the file.
+-- 여기서 Neovim 자체가 클라이언트입니다 (`:h vim.lsp` 참조). 언어 서버는
+-- OS, CLI 도구 및 선호도에 따라 별도로 설치해야 합니다.
+-- 파일 하단의 'mason.nvim'에 대한 참고 사항을 참조하세요.
 --
--- Neovim's team collects commonly used configurations for most language servers
--- inside 'neovim/nvim-lspconfig' plugin.
+-- Neovim 팀은 대부분의 언어 서버에 대해 일반적으로 사용되는 구성을
+-- 'neovim/nvim-lspconfig' 플러그인 내에 수집합니다.
 --
--- Add it now if file (and not 'mini.starter') is shown after startup.
+-- 시작 후 파일('mini.starter' 아님)이 표시되면 지금 추가합니다.
 now_if_args(function()
   add('neovim/nvim-lspconfig')
 
-  -- Use `:h vim.lsp.enable()` to automatically enable language server based on
-  -- the rules provided by 'nvim-lspconfig'.
-  -- Use `:h vim.lsp.config()` or 'after/lsp/' directory to configure servers.
-  -- Uncomment and tweak the following `vim.lsp.enable()` call to enable servers.
+  -- 'nvim-lspconfig'에서 제공하는 규칙에 따라 언어 서버를 자동으로 활성화하려면
+  -- `:h vim.lsp.enable()`을 사용하세요.
+  -- 서버를 구성하려면 `:h vim.lsp.config()` 또는 'after/lsp/' 디렉토리를 사용하세요.
+  -- 서버를 활성화하려면 다음 `vim.lsp.enable()` 호출을 주석 해제하고 수정하세요.
   -- vim.lsp.enable({
-  --   -- For example, if `lua-language-server` is installed, use `'lua_ls'` entry
+  --   -- 예를 들어 `lua-language-server`가 설치된 경우 `'lua_ls'` 항목 사용
   -- })
 end)
 
--- Formatting =================================================================
+-- 포맷팅 (Formatting) =================================================================
 
--- Programs dedicated to text formatting (a.k.a. formatters) are very useful.
--- Neovim has built-in tools for text formatting (see `:h gq` and `:h 'formatprg'`).
--- They can be used to configure external programs, but it might become tedious.
+-- 텍스트 포맷팅 전용 프로그램(일명 포맷터)은 매우 유용합니다.
+-- Neovim은 텍스트 포맷팅을 위한 내장 도구를 갖추고 있습니다 (`:h gq` 및 `:h 'formatprg'`).
+-- 이를 사용하여 외부 프로그램을 구성할 수 있지만 번거로울 수 있습니다.
 --
--- The 'stevearc/conform.nvim' plugin is a good and maintained solution for easier
--- formatting setup.
+-- 'stevearc/conform.nvim' 플러그인은 보다 쉬운 포맷팅 설정을 위한 훌륭하고 유지 관리되는 솔루션입니다.
 later(function()
   add('stevearc/conform.nvim')
 
-  -- See also:
+  -- 참조:
   -- - `:h Conform`
   -- - `:h conform-options`
   -- - `:h conform-formatters`
   require('conform').setup({
     default_format_opts = {
-      -- Allow formatting from LSP server if no dedicated formatter is available
+      -- 전용 포맷터를 사용할 수 없는 경우 LSP 서버의 포맷팅 허용
       lsp_format = 'fallback',
     },
-    -- Map of filetype to formatters
-    -- Make sure that necessary CLI tool is available
+    -- 파일 유형과 포맷터 매핑
+    -- 필요한 CLI 도구를 사용할 수 있는지 확인하세요.
     -- formatters_by_ft = { lua = { 'stylua' } },
   })
 end)
 
--- Snippets ===================================================================
+-- 스니펫 (Snippets) ===================================================================
 
--- Although 'mini.snippets' provides functionality to manage snippet files, it
--- deliberately doesn't come with those.
+-- 'mini.snippets'는 스니펫 파일 관리 기능을 제공하지만 의도적으로 스니펫 자체는
+-- 제공하지 않습니다.
 --
--- The 'rafamadriz/friendly-snippets' is currently the largest collection of
--- snippet files. They are organized in 'snippets/' directory (mostly) per language.
--- 'mini.snippets' is designed to work with it as seamlessly as possible.
--- See `:h MiniSnippets.gen_loader.from_lang()`.
+-- 'rafamadriz/friendly-snippets'는 현재 가장 큰 스니펫 파일 모음입니다.
+-- 주로 언어별로 'snippets/' 디렉토리에 구성되어 있습니다.
+-- 'mini.snippets'는 이와 최대한 원활하게 작동하도록 설계되었습니다.
+-- `:h MiniSnippets.gen_loader.from_lang()`을 참조하세요.
 later(function() add('rafamadriz/friendly-snippets') end)
 
--- Honorable mentions =========================================================
+-- 명예의 전당 (Honorable mentions) =========================================================
 
--- 'mason-org/mason.nvim' (a.k.a. "Mason") is a great tool (package manager) for
--- installing external language servers, formatters, and linters. It provides
--- a unified interface for installing, updating, and deleting such programs.
+-- 'mason-org/mason.nvim'(일명 "Mason")은 외부 언어 서버, 포맷터 및 린터를 설치하기 위한
+-- 훌륭한 도구(패키지 매니저)입니다. 이러한 프로그램을 설치, 업데이트 및 삭제하기 위한
+-- 통합 인터페이스를 제공합니다.
 --
--- The caveat is that these programs will be set up to be mostly used inside Neovim.
--- If you need them to work elsewhere, consider using other package managers.
+-- 주의할 점은 이러한 프로그램들이 주로 Neovim 내부에서 사용되도록 설정된다는 것입니다.
+-- 다른 곳에서 작동해야 한다면 다른 패키지 매니저 사용을 고려하세요.
 --
--- You can use it like so:
+-- 다음과 같이 사용할 수 있습니다.
 -- now_if_args(function()
 --   add('mason-org/mason.nvim')
 --   require('mason').setup()
 -- end)
 
--- Beautiful, usable, well maintained color schemes outside of 'mini.nvim' and
--- have full support of its highlight groups. Use if you don't like 'miniwinter'
--- enabled in 'plugin/30_mini.lua' or other suggested 'mini.hues' based ones.
+-- 'mini.nvim' 이외의 아름답고 사용하기 쉬우며 잘 관리되는 컬러 스킴들로,
+-- 해당 하이라이트 그룹을 완벽하게 지원합니다. 'plugin/30_mini.lua'에서 활성화된
+-- 'miniwinter'나 다른 제안된 'mini.hues' 기반 컬러 스킴이 마음에 들지 않으면 사용하세요.
 -- MiniDeps.now(function()
---   -- Install only those that you need
+--   -- 필요한 것만 설치하세요.
 --   add('sainnhe/everforest')
 --   add('Shatur/neovim-ayu')
 --   add('ellisonleao/gruvbox.nvim')
 --
---   -- Enable only one
+--   -- 하나만 활성화하세요.
 --   vim.cmd('color everforest')
 -- end)
 ```
@@ -1486,24 +1456,24 @@ later(function() add('rafamadriz/friendly-snippets') end)
 
 #### snippets/global.json {#snippets-global.json}
 
-<details><summary>Code</summary>
+<details><summary>코드</summary>
 
 ```json
 {
   "Current datetime": {
     "prefix": "cdtm",
     "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
-    "description": "Insert current datetime (YYYY-mm-dd HH:MM:SS)"
+    "description": "현재 날짜 및 시간 삽입 (YYYY-mm-dd HH:MM:SS)"
   },
   "Current date": {
     "prefix": "cdate",
     "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
-    "description": "Insert current date (YYYY-mm-dd)"
+    "description": "현재 날짜 삽입 (YYYY-mm-dd)"
   },
   "Current time": {
     "prefix": "ctime",
     "body": "$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
-    "description": "Insert current time (HH:MM:SS)"
+    "description": "현재 시간 삽입 (HH:MM:SS)"
   }
 }
 ```
@@ -1512,46 +1482,45 @@ later(function() add('rafamadriz/friendly-snippets') end)
 
 #### after/ftplugin/markdown.lua {#after-ftplugin-markdown.lua}
 
-<details><summary>Code</summary>
+<details><summary>코드</summary>
 
 ```lua
 -- ┌─────────────────────────┐
--- │ Filetype config example │
+-- │ 파일 유형 설정 예시 │
 -- └─────────────────────────┘
 --
--- This is an example of a configuration that will apply only to a particular
--- filetype, which is the same as file's basename ('markdown' in this example;
--- which is for '*.md' files).
+-- 이는 파일의 기본 이름(이 예시에서는 'markdown'; '*.md' 파일용)과 동일한
+-- 특정 파일 유형에만 적용되는 설정의 예입니다.
 --
--- It can contain any code which will be usually executed when the file is opened
--- (strictly speaking, on every 'filetype' option value change to target value).
--- Usually it needs to define buffer/window local options and variables.
--- So instead of `vim.o` to set options, use `vim.bo` for buffer-local options and
--- `vim.cmd('setlocal ...')` for window-local options (currently more robust).
+-- 파일이 열릴 때(엄밀히 말하면 대상 값으로 'filetype' 옵션 값이 변경될 때마다)
+-- 실행될 모든 코드를 포함할 수 있습니다.
+-- 일반적으로 버퍼/창 로컬 옵션 및 변수를 정의해야 합니다.
+-- 따라서 옵션을 설정할 때 `vim.o` 대신 버퍼 로컬 옵션에는 `vim.bo`를 사용하고,
+-- 창 로컬 옵션에는 `vim.cmd('setlocal ...')`를 사용하세요(현재 더 강력함).
 --
--- This is also a good place to set buffer-local 'mini.nvim' variables.
--- See `:h mini.nvim-buffer-local-config` and `:h mini.nvim-disabling-recipes`.
+-- 또한 버퍼 로컬 'mini.nvim' 변수를 설정하기에 좋은 곳입니다.
+-- `:h mini.nvim-buffer-local-config` 및 `:h mini.nvim-disabling-recipes`를 참조하세요.
 
--- Enable spelling and wrap for window
+-- 창에 대해 맞춤법 검사 및 줄 바꿈 활성화
 vim.cmd('setlocal spell wrap')
 
--- Fold with tree-sitter
+-- tree-sitter로 접기
 vim.cmd('setlocal foldmethod=expr foldexpr=v:lua.vim.treesitter.foldexpr()')
 
--- Disable built-in `gO` mapping in favor of 'mini.basics'
+-- 'mini.basics'를 위해 내장 `gO` 매핑 비활성화
 vim.keymap.del('n', 'gO', { buffer = 0 })
 
--- Set markdown-specific surrounding in 'mini.surround'
+-- 'mini.surround'에서 마크다운 전용 둘러싸기 설정
 vim.b.minisurround_config = {
   custom_surroundings = {
-    -- Markdown link. Common usage:
-    -- `saiwL` + [type/paste link] + <CR> - add link
-    -- `sdL` - delete link
-    -- `srLL` + [type/paste link] + <CR> - replace link
+    -- 마크다운 링크. 일반적인 사용법:
+    -- `saiwL` + [링크 입력/붙여넣기] + <CR> - 링크 추가
+    -- `sdL` - 링크 삭제
+    -- `srLL` + [링크 입력/붙여넣기] + <CR> - 링크 교체
     L = {
       input = { '%[().-()%]%(.-%)' },
       output = function()
-        local link = require('mini.surround').user_input('Link: ')
+        local link = require('mini.surround').user_input('링크: ')
         return { left = '[', right = '](' .. link .. ')' }
       end,
     },
@@ -1563,39 +1532,39 @@ vim.b.minisurround_config = {
 
 #### after/lsp/lua_ls.lua {#after-lsp-lua_ls.lua}
 
-<details><summary>Code</summary>
+<details><summary>코드</summary>
 
 ```lua
 -- ┌────────────────────┐
--- │ LSP config example │
+-- │ LSP 설정 예시 │
 -- └────────────────────┘
 --
--- This file contains configuration of 'lua_ls' language server.
--- Source: https://github.com/LuaLS/lua-language-server
+-- 이 파일에는 'lua_ls' 언어 서버 설정이 포함되어 있습니다.
+-- 소스: https://github.com/LuaLS/lua-language-server
 --
--- It is used by `:h vim.lsp.enable()` and `:h vim.lsp.config()`.
--- See `:h vim.lsp.Config` and `:h vim.lsp.ClientConfig` for all available fields.
+-- `:h vim.lsp.enable()` 및 `:h vim.lsp.config()`에서 사용됩니다.
+-- 사용 가능한 모든 필드는 `:h vim.lsp.Config` 및 `:h vim.lsp.ClientConfig`를 참조하세요.
 --
--- This config is designed for Lua's activity around Neovim. It provides only
--- basic config and can be further improved.
+-- 이 설정은 Neovim 관련 Lua 활동을 위해 설계되었습니다. 기본적인 설정만 제공하며
+-- 더 개선될 수 있습니다.
 return {
   on_attach = function(client, buf_id)
-    -- Reduce very long list of triggers for better 'mini.completion' experience
+    -- 더 나은 'mini.completion' 경험을 위해 매우 긴 트리거 목록을 줄입니다.
     client.server_capabilities.completionProvider.triggerCharacters =
       { '.', ':', '#', '(' }
 
-    -- Use this function to define buffer-local mappings and behavior that depend
-    -- on attached client or only makes sense if there is language server attached.
+    -- 이 함수를 사용하여 연결된 클라이언트에 의존하거나 언어 서버가 연결된 경우에만
+    -- 의미가 있는 버퍼 로컬 매핑 및 동작을 정의합니다.
   end,
-  -- LuaLS Structure of these settings comes from LuaLS, not Neovim
+  -- LuaLS 이러한 설정 구조는 Neovim이 아닌 LuaLS에서 제공됩니다.
   settings = {
     Lua = {
-      -- Define runtime properties. Use 'LuaJIT', as it is built into Neovim.
+      -- 런타임 속성을 정의합니다. Neovim에 내장된 'LuaJIT'를 사용합니다.
       runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
       workspace = {
-        -- Don't analyze code from submodules
+        -- 서브 모듈의 코드는 분석하지 않음
         ignoreSubmodules = true,
-        -- Add Neovim's methods for easier code writing
+        -- 더 쉬운 코드 작성을 위해 Neovim의 메서드 추가
         library = { vim.env.VIMRUNTIME },
       },
     },
@@ -1607,7 +1576,7 @@ return {
 
 #### after/snippets/lua.json {#after-snippets-lua.json}
 
-<details><summary>Code</summary>
+<details><summary>코드</summary>
 
 ```json
 {

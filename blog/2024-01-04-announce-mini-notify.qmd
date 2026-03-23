@@ -1,41 +1,41 @@
 ---
-title: "Announcing 'mini.notify'"
+title: "'mini.notify' 발표"
 author: Evgeni Chasnovski
 date: 2024-01-04
 categories: [announce, reddit]
-description: Show notifications. A `vim.notify()` maker plus automated LSP progress notifications
+description: 알림을 표시합니다. `vim.notify()` 생성기 및 자동화된 LSP 진행 상황 알림 기능을 제공합니다.
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/18ye17d/mininotify_show_notifications_a_vimnotify_maker/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/18ye17d/mininotify_show_notifications_a_vimnotify_maker/)*
 
 {{< video 2024-01-04-announce-mini-notify/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-Please join me in welcoming 2024 with announce of [mini.notify](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-notify.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) with functionality to show one or more highlighted notifications in a floating window. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.notify).
-
-------
-
-I personally didn't use fancy notifications before 'mini.notify' but it was on my TODO list. Recently it occurred to me that a demo of at least one upcoming module will look more interesting if several notifications can be shown at once. Thus I decided to move this new functionality up in list and here we are.
+플로팅 창에 하나 이상의 하이라이트된 알림을 표시하는 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.notify](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-notify.md)와 함께 2024년을 맞이해 주세요. 이 모듈은 [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.notify)를 통해서도 설치할 수 있습니다.
 
 ------
 
-Features:
-
-- Show one or more highlighted notifications in a single floating window.
-
-- Manage notifications (add, update, remove, clear).
-
-- `vim.notify()` wrapper generator (see [MiniNotify.make_notify()](https://github.com/nvim-mini/mini.nvim/blob/a118a964c94543c06d8b1f2f7542535dd2e19d36/doc/mini-notify.txt#L204)).
-
-- Automated show of LSP progress report.
-
-- Track history which can be accessed with `MiniNotify.get_all()` and shown with `MiniNotify.show_history()`.
-
-For full documentation see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-notify.txt).
+저는 개인적으로 'mini.notify' 전에는 화려한 알림 기능을 사용하지 않았지만, 제 할 일 목록(TODO list)에는 항상 있었습니다. 최근에 곧 출시될 적어도 하나의 모듈 데모에서 여러 알림을 동시에 보여줄 수 있다면 더 흥미로울 것 같다는 생각이 들었습니다. 그래서 이 기능을 목록 상단으로 옮기기로 결정했고, 이렇게 공개하게 되었습니다.
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/640).
+주요 기능:
 
-Thanks!
+- 단일 플로팅 창에 하나 이상의 하이라이트된 알림을 표시합니다.
+
+- 알림 관리 (추가, 업데이트, 제거, 지우기).
+
+- `vim.notify()` 래퍼 생성기 ([MiniNotify.make_notify()](https://github.com/nvim-mini/mini.nvim/blob/a118a964c94543c06d8b1f2f7542535dd2e19d36/doc/mini-notify.txt#L204) 참조).
+
+- 자동화된 LSP 진행 상황 보고 표시.
+
+- `MiniNotify.get_all()`로 접근하고 `MiniNotify.show_history()`로 표시할 수 있는 알림 기록 추적.
+
+전체 문서는 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-notify.txt)을 참조하세요.
+
+------
+
+한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/640)에 남겨주시면 감사하겠습니다.
+
+감사합니다!

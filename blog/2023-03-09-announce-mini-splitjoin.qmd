@@ -1,49 +1,49 @@
 ---
-title: "Announcing 'mini.splitjoin'"
+title: "'mini.splitjoin' 발표"
 author: Evgeni Chasnovski
 date: 2023-03-09
 categories: [announce, reddit]
-description: Split and join arguments
+description: 인수(argument) 분리 및 결합
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/11mtm3m/minisplitjoin_split_and_join_arguments/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/11mtm3m/minisplitjoin_split_and_join_arguments/)*
 
 {{< video 2023-03-09-announce-mini-splitjoin/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I would like to announce the release of [mini.splitjoin](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-splitjoin.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) to split and join arguments. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.splitjoin).
+인수(argument)를 분리하고 결합하기 위한 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.splitjoin](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-splitjoin.md)의 출시를 발표합니다. [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.splitjoin)를 통해서도 설치할 수 있습니다.
 
-Main features:
+주요 기능:
 
-- Mappings and Lua functions that modify arguments (regions inside brackets between allowed separators) under cursor.
+- 커서 아래의 인수(허용된 구분 기호 사이의 괄호 안 영역)를 수정하는 매핑과 Lua 함수를 제공합니다.
 
-  Supported actions:
-    - Toggle - split if arguments are on single line, join otherwise. Main supported function of the module.
-    - Split - make every argument separator be on end of separate line.
-    - Join - make all arguments be on single line.
+  지원되는 동작:
+    - 토글(Toggle) - 인수가 한 줄에 있으면 분리하고, 그렇지 않으면 결합합니다. 이 모듈의 핵심 기능입니다.
+    - 분리(Split) - 각 인수 구분 기호를 별도의 행 끝에 오도록 만듭니다.
+    - 결합(Join) - 모든 인수를 한 줄에 오도록 만듭니다.
 
-- Mappings are dot-repeatable in Normal mode and work in Visual mode.
+- 매핑은 노멀 모드에서 점 반복(dot-repeatable)이 가능하며 비주얼 모드에서도 작동합니다.
 
-- Customizable argument detection (see `MiniSplitjoin.config.detect` in help file):
-    - Which brackets can contain arguments.
-    - Which strings can separate arguments.
-    - Which regions exclude when looking for separators (like inside nested brackets or quotes).
+- 커스터마이징 가능한 인수 감지 (도움말 파일의 `MiniSplitjoin.config.detect` 참조):
+    - 인수를 포함할 수 있는 괄호의 종류.
+    - 인수를 구분할 수 있는 문자열.
+    - 구분 기호를 찾을 때 제외할 영역 (중첩된 괄호나 따옴표 내부 등).
 
-- Customizable pre and post hooks for both split and join.
+- 분리 및 결합 작업 전후에 실행되는 커스터마이징 가능한 훅(pre/post hooks).
 
-- Works inside comments by using modified notion of indent.
+- 수정된 들여쓰기 개념을 사용하여 주석 내부에서도 작동합니다.
 
-- Provides low-level Lua functions for split and join at positions.
+- 특정 위치에서 분리 및 결합을 수행하기 위한 저수준 Lua 함수를 제공합니다.
 
-Notes:
+참고:
 
-- Search for arguments is done using Lua patterns (regex-like approach). Certain amount of false positives is to be expected.
+- 인수 검색은 Lua 패턴(정규식과 유사한 방식)을 사용하여 수행됩니다. 어느 정도의 오탐지(false positives)가 발생할 수 있습니다.
 
-- This module is mostly designed around `MiniSplitjoin.toggle()`. If initial split positions are on different lines, join first and then split.
+- 이 모듈은 주로 `MiniSplitjoin.toggle()`을 중심으로 설계되었습니다. 초기 분리 위치가 서로 다른 행에 있는 경우, 먼저 결합한 다음 분리하세요.
 
-For more information, see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-splitjoin.txt).
+자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-splitjoin.txt)을 참조하세요.
 
-Please, check it out and tell me what you think! Either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/260).
+사용해 보시고 의견을 들려주세요! 여기 댓글이나 전용 [베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/260)를 통해 피드백을 주시면 감사하겠습니다.
 
-Thanks!
+감사합니다!

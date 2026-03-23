@@ -1,53 +1,53 @@
 ---
-title: "Announcing 'mini.extra'"
+title: "'mini.extra' 발표"
 author: Evgeni Chasnovski
 date: 2023-11-02
 categories: [announce, reddit]
-description: Extra 'mini.nvim' functionality. Many pickers for 'mini.pick', textobjects for 'mini.ai', and more
+description: 'mini.nvim'의 추가 기능입니다. 'mini.pick'을 위한 다양한 피커, 'mini.ai'를 위한 텍스트 오브젝트 등을 포함합니다.
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/17m65jn/miniextra_extra_mininvim_functionality_many/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/17m65jn/miniextra_extra_mininvim_functionality_many/)*
 
 {{< video 2023-11-02-announce-mini-extra/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-Today I would like to tell you about the release of [mini.extra](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-extra.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim). It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.extra).
+오늘은 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈인 [mini.extra](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-extra.md)의 출시 소식을 전해드리고자 합니다. 이 모듈은 [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.extra)를 통해서도 설치할 수 있습니다.
 
-Here is a [link to the video demo](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-extra.md#demo).
-
-------
-
-This is basically meant as a collection of functionality which is not essential enough for other 'mini.nvim' modules to include directly.
-
-Right now it mostly consists from many (20, to be exact) pre-built pickers for [mini.pick](2023-10-13-announce-mini-pick.qmd) plus some 'mini.ai' textobjects and 'mini.hipatterns' highlighters. But there might be more functionality and for other modules in the future.
+여기 [데모 영상 링크](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-extra.md#demo)가 있습니다.
 
 ------
 
-Features:
+이 모듈은 기본적으로 다른 'mini.nvim' 모듈에 직접 포함하기에는 필수적이지 않은 기능들을 모아놓은 컬렉션입니다.
 
-- Various pickers for 'mini.pick':
-    - Built-in diagnostic (`*MiniExtra.pickers.diagnostic()*`).
-    - File explorer (`*MiniExtra.pickers.explorer()*`).
-    - Git branches/commits/files/hunks (`*MiniExtra.pickers.git_hunks()*`, etc.).
-    - Command/search/input history (`*MiniExtra.pickers.history()*`).
-    - LSP references/symbols/etc. (`*MiniExtra.pickers.lsp()*`).
-    - Treesitter nodes (`*MiniExtra.pickers.treesitter()*`).
-    - **And much more**.
-
-    See [`*MiniExtra.pickers*` help tag](https://github.com/nvim-mini/mini.nvim/blob/eaf0e040362fa0c20db1a7f0cccda9099b6b0362/doc/mini-extra.txt#L209) for more.
-
-- Various textobject specifications for 'mini.ai'. See [`*MiniExtra.gen_ai_spec*` help tag](https://github.com/nvim-mini/mini.nvim/blob/eaf0e040362fa0c20db1a7f0cccda9099b6b0362/doc/mini-extra.txt#L73).
-
-- Various highlighters for 'mini.hipatterns'. See [`*MiniExtra.gen_highlighter*` help tag](https://github.com/nvim-mini/mini.nvim/blob/eaf0e040362fa0c20db1a7f0cccda9099b6b0362/doc/mini-extra.txt#L175).
-
-Notes:
-- This module requires only those 'mini.nvim' modules which are needed for a particular functionality: 'mini.pick' for pickers, etc.
-
-For full documentation see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-extra.txt).
+현재는 주로 [mini.pick](2023-10-13-announce-mini-pick.qmd)을 위해 미리 빌드된 다양한(정확히 20개) 피커와 몇 가지 'mini.ai' 텍스트 오브젝트 및 'mini.hipatterns' 하이라이터로 구성되어 있습니다. 하지만 앞으로 다른 모듈을 위한 더 많은 기능이 추가될 수도 있습니다.
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/550).
+주요 기능:
 
-Thanks!
+- 'mini.pick'을 위한 다양한 피커:
+    - 내장 진단 도구 (`*MiniExtra.pickers.diagnostic()*`).
+    - 파일 탐색기 (`*MiniExtra.pickers.explorer()*`).
+    - Git 브랜치/커밋/파일/헝크(hunk) (`*MiniExtra.pickers.git_hunks()*` 등).
+    - 명령어/검색/입력 기록 (`*MiniExtra.pickers.history()*`).
+    - LSP 참조/심볼 등 (`*MiniExtra.pickers.lsp()*`).
+    - Treesitter 노드 (`*MiniExtra.pickers.treesitter()*`).
+    - **그 외 다수**.
+
+    자세한 내용은 [`*MiniExtra.pickers*` 도움말 태그](https://github.com/nvim-mini/mini.nvim/blob/eaf0e040362fa0c20db1a7f0cccda9099b6b0362/doc/mini-extra.txt#L209)를 참조하세요.
+
+- 'mini.ai'를 위한 다양한 텍스트 오브젝트 사양. [`*MiniExtra.gen_ai_spec*` 도움말 태그](https://github.com/nvim-mini/mini.nvim/blob/eaf0e040362fa0c20db1a7f0cccda9099b6b0362/doc/mini-extra.txt#L73)를 참조하세요.
+
+- 'mini.hipatterns'를 위한 다양한 하이라이터. [`*MiniExtra.gen_highlighter*` 도움말 태그](https://github.com/nvim-mini/mini.nvim/blob/eaf0e040362fa0c20db1a7f0cccda9099b6b0362/doc/mini-extra.txt#L175)를 참조하세요.
+
+참고:
+- 이 모듈은 특정 기능에 필요한 'mini.nvim' 모듈(예: 피커의 경우 'mini.pick')만 요구합니다.
+
+전체 문서는 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-extra.txt)을 참조하세요.
+
+------
+
+한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/550)에 남겨주시면 감사하겠습니다.
+
+감사합니다!

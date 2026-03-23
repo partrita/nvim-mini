@@ -1,97 +1,84 @@
 ---
-title: "mini.misc documentation"
+title: "mini.misc 문서"
 ---
 
 _Generated from the `main` branch of 'mini.nvim'_
 
-<a name="mini.misc" href="mini-misc.qmd#mini.misc"><b>mini.misc</b></a> Miscellaneous functions
+<a name="mini.misc" href="mini-misc.qmd#mini.misc"><b>mini.misc</b></a> 기타 함수들
 
 MIT License Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features the following functions:
+다음과 같은 기능들을 제공합니다:
 
-- [MiniMisc.bench\_time()](mini-misc.qmd#minimisc.bench_time) to benchmark function execution time.
-  Useful in combination with `stat_summary()`.
-
-
-- [MiniMisc.log\_add()](mini-misc.qmd#minimisc.log_add), [MiniMisc.log\_show()](mini-misc.qmd#minimisc.log_show) and other helper functions to work
-  with a special in-memory log array. Useful when debugging Lua code.
+- [MiniMisc.bench\_time()](mini-misc.qmd#minimisc.bench_time) - 함수 실행 시간을 벤치마킹합니다. `stat_summary()`와 함께 사용하면 유용합니다.
 
 
-- [MiniMisc.put()](mini-misc.qmd#minimisc.put) and [MiniMisc.put\_text()](mini-misc.qmd#minimisc.put_text) to pretty print its arguments
-  into command line and current buffer respectively.
+- [MiniMisc.log\_add()](mini-misc.qmd#minimisc.log_add), [MiniMisc.log\_show()](mini-misc.qmd#minimisc.log_show) 및 기타 헬퍼 함수 - 특별한 인메모리 로그 배열 작업을 위해 사용합니다. Lua 코드 디버깅 시 유용합니다.
 
 
-- [MiniMisc.resize\_window()](mini-misc.qmd#minimisc.resize_window) to resize current window to its editable width.
+- [MiniMisc.put()](mini-misc.qmd#minimisc.put) 및 [MiniMisc.put\_text()](mini-misc.qmd#minimisc.put_text) - 인수를 각각 명령줄과 현재 버퍼에 보기 좋게 출력합니다.
 
 
-- [MiniMisc.safely()](mini-misc.qmd#minimisc.safely) to execute a function on a condition and warn on error.
-  Useful to organize [init.lua](https://neovim.io/doc/user/helptag.html?tag=init.lua) in fail-safe sections with simple lazy loading.
+- [MiniMisc.resize\_window()](mini-misc.qmd#minimisc.resize_window) - 현재 창을 편집 가능한 너비로 조정합니다.
 
 
-- [MiniMisc.setup\_auto\_root()](mini-misc.qmd#minimisc.setup_auto_root) to set up automated change of current directory.
+- [MiniMisc.safely()](mini-misc.qmd#minimisc.safely) - 조건에 따라 함수를 실행하고 에러 발생 시 경고를 표시합니다. 간단한 지연 로딩을 사용하여 [init.lua](https://neovim.io/doc/user/helptag.html?tag=init.lua)를 안전한 섹션으로 구성하는 데 유용합니다.
 
 
-- [MiniMisc.setup\_termbg\_sync()](mini-misc.qmd#minimisc.setup_termbg_sync) to set up terminal background synchronization
-  (removes possible "frame" around current Neovim instance).
+- [MiniMisc.setup\_auto\_root()](mini-misc.qmd#minimisc.setup_auto_root) - 현재 디렉토리 자동 변경을 설정합니다.
 
 
-- [MiniMisc.setup\_restore\_cursor()](mini-misc.qmd#minimisc.setup_restore_cursor) to set up automated restoration of
-  cursor position on file reopen.
+- [MiniMisc.setup\_termbg\_sync()](mini-misc.qmd#minimisc.setup_termbg_sync) - 터미널 배경색 동기화를 설정합니다 (현재 Neovim 인스턴스 주변의 발생 가능한 "프레임"을 제거함).
 
 
-- [MiniMisc.stat\_summary()](mini-misc.qmd#minimisc.stat_summary) to compute summary statistics of numerical array.
-  Useful in combination with `bench_time()`.
+- [MiniMisc.setup\_restore\_cursor()](mini-misc.qmd#minimisc.setup_restore_cursor) - 파일 다시 열기 시 커서 위치 자동 복원을 설정합니다.
 
 
-- [MiniMisc.tbl\_head()](mini-misc.qmd#minimisc.tbl_head) and [MiniMisc.tbl\_tail()](mini-misc.qmd#minimisc.tbl_tail) to return "first" and "last"
-  elements of table.
+- [MiniMisc.stat\_summary()](mini-misc.qmd#minimisc.stat_summary) - 숫자 배열의 통계 요약을 계산합니다. `bench_time()`과 함께 사용하면 유용합니다.
 
 
-- [MiniMisc.zoom()](mini-misc.qmd#minimisc.zoom) to zoom in and out of a buffer, making it full screen
-  in a floating window.
+- [MiniMisc.tbl\_head()](mini-misc.qmd#minimisc.tbl_head) 및 [MiniMisc.tbl\_tail()](mini-misc.qmd#minimisc.tbl_tail) - 테이블의 "처음" 및 "마지막" 요소를 반환합니다.
 
 
-- And more.
-
-#### Setup {#module-setup}
+- [MiniMisc.zoom()](mini-misc.qmd#minimisc.zoom) - 버퍼를 확대/축소하여 플로팅 창에서 전체 화면으로 만듭니다.
 
 
-This module doesn't need setup, but it can be done to improve usability.
-Setup with `require('mini.misc').setup({})` (replace `{}` with your
-`config` table). It will create global Lua table `MiniMisc` which you can
-use for scripting or manually (with `:lua MiniMisc.*`).
+- 기타 여러 기능.
 
-See [MiniMisc.config](mini-misc.qmd#minimisc.config) for `config` structure and default values.
+#### 설정 {#module-setup}
 
-This module doesn't have runtime options, so using `vim.b.minimisc_config`
-will have no effect here.
+
+이 모듈은 설정이 필수는 아니지만, 사용 편의성을 위해 설정할 수 있습니다. `require('mini.misc').setup({})`을 통해 설정하세요 (`{}`를 사용자 `config` 테이블로 대체). 그러면 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniMisc`가 생성됩니다 (예: `:lua MiniMisc.*`).
+
+`config` 구조 및 기본값은 [MiniMisc.config](mini-misc.qmd#minimisc.config)를 참조하세요.
+
+이 모듈은 런타임 옵션이 없으므로 `vim.b.minimisc_config`를 사용해도 아무런 효과가 없습니다.
 
 ---
 
 ### setup() {#minimisc.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minimisc.setup-parameters}
+#### 매개변수 {#minimisc.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniMisc.config](mini-misc.qmd#minimisc.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniMisc.config](mini-misc.qmd#minimisc.config)를 참조하세요.
 
-#### Usage {#minimisc.setup-usage}
+#### 사용법 {#minimisc.setup-usage}
 
 
 
   ```lua
-  require('mini.misc').setup() -- use default config
-  -- OR
-  require('mini.misc').setup({}) -- replace {} with your config table
+  require('mini.misc').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.misc').setup({}) -- {}를 사용자 설정 테이블로 대체
   ```
 
 ---
@@ -99,13 +86,13 @@ Module setup
 ### config {#minimisc.config .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.config`</p>
-#### Defaults {#minimisc.config-defaults}
+#### 기본값 {#minimisc.config-defaults}
 
 
 
   ```lua
   MiniMisc.config = {
-    -- Array of fields to make global (to be used as independent variables)
+    -- 전역으로 만들 필드 배열 (독립 변수로 사용됨)
     make_global = { 'put', 'put_text' },
   }
   ```
@@ -115,242 +102,225 @@ Module setup
 ### bench_time() {#minimisc.bench_time .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.bench_time`(<span class="help-syntax-special">{f}</span>, <span class="help-syntax-special">{n}</span>, <span class="help-syntax-special">{...}</span>)</p>
-Execute `f` several times and time how long it took
+`f`를 여러 번 실행하고 소요 시간을 측정합니다.
 
-#### Parameters {#minimisc.bench_time-parameters}
-
-
-
-<span class="help-syntax-special">{f}</span> `(function)` Function which execution to benchmark.
-
-<span class="help-syntax-special">{n}</span> `(number|nil)` Number of times to execute `f(...)`. Default: 1.
-
-<span class="help-syntax-special">{...}</span> `(any)` Arguments when calling `f`.
-
-#### Return {#minimisc.bench_time-return}
+#### 매개변수 {#minimisc.bench_time-parameters}
 
 
-`(...)` Table with durations (in seconds; up to nanoseconds) and
-  output of (last) function execution.
+
+<span class="help-syntax-special">{f}</span> `(function)` 벤치마킹할 실행 함수.
+
+<span class="help-syntax-special">{n}</span> `(number|nil)` `f(...)`를 실행할 횟수. 기본값: 1.
+
+<span class="help-syntax-special">{...}</span> `(any)` `f` 호출 시의 인수들.
+
+#### 반환값 {#minimisc.bench_time-return}
+
+
+`(...)` 소요 시간(초 단위; 나노초까지)과 (마지막) 함수 실행 결과가 담긴 테이블.
 
 ---
 
 ### get_gutter_width() {#minimisc.get_gutter_width .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.get_gutter_width`(<span class="help-syntax-special">{win_id}</span>)</p>
-Compute width of gutter (info column on the left of the window)
+거터(창 왼쪽의 정보 열)의 너비를 계산합니다.
 
-#### Parameters {#minimisc.get_gutter_width-parameters}
+#### 매개변수 {#minimisc.get_gutter_width-parameters}
 
 
 
-<span class="help-syntax-special">{win_id}</span> `(number|nil)` Window identifier (see [win\_getid()](https://neovim.io/doc/user/helptag.html?tag=win_getid\(\))) for which gutter
-  width is computed. Default: 0 for current.
+<span class="help-syntax-special">{win_id}</span> `(number|nil)` 거터 너비를 계산할 창 식별자 ([win\_getid()](https://neovim.io/doc/user/helptag.html?tag=win_getid\(\)) 참조). 기본값: 0 (현재 창).
 
 ---
 
 ### log_add() {#minimisc.log_add .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.log_add`(<span class="help-syntax-special">{desc}</span>, <span class="help-syntax-special">{state}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Add an entry to the in-memory log array
+인메모리 로그 배열에 항목을 추가합니다.
 
-Useful when trying to debug a Lua code (like Neovim config or plugin).
-Use this instead of ad-hoc `print()` statements.
+Lua 코드(Neovim 설정 또는 플러그인 등)를 디버깅할 때 유용합니다. 임시 `print()` 문 대신 이것을 사용하세요.
 
-Each entry is a table with the following fields:
+각 항목은 다음 필드를 가진 테이블입니다:
 
-- <span class="help-syntax-keys">\<desc\></span> `(any)` - entry description. Usually a string describing a place
-  in the code.
+- <span class="help-syntax-keys">\<desc\></span> `(any)` - 항목 설명. 보통 코드 내의 위치를 설명하는 문자열입니다.
 
-- <span class="help-syntax-keys">\<state\></span> `(any)` - data about current state. Usually a table.
+- <span class="help-syntax-keys">\<state\></span> `(any)` - 현재 상태에 대한 데이터. 보통 테이블입니다.
 
-- <span class="help-syntax-keys">\<timestamp\></span> `(number)` - a timestamp of when the entry was added. A number of
-  milliseconds since the in-memory log was initiated (after [MiniMisc.setup()](mini-misc.qmd#minimisc.setup)
-  or [MiniMisc.log\_clear()](mini-misc.qmd#minimisc.log_clear)). Useful during profiling.
+- <span class="help-syntax-keys">\<timestamp\></span> `(number)` - 항목이 추가된 타임스탬프. 인메모리 로그가 시작된([MiniMisc.setup()](mini-misc.qmd#minimisc.setup) 또는 [MiniMisc.log\_clear()](mini-misc.qmd#minimisc.log_clear) 이후) 후의 밀리초 단위 시간입니다. 프로파일링 중에 유용합니다.
 
-#### Parameters {#minimisc.log_add-parameters}
+#### 매개변수 {#minimisc.log_add-parameters}
 
 
 
-<span class="help-syntax-special">{desc}</span> `(any)` Entry description.
+<span class="help-syntax-special">{desc}</span> `(any)` 항목 설명.
 
-<span class="help-syntax-special">{state}</span> `(any)` Data about current state.
+<span class="help-syntax-special">{state}</span> `(any)` 현재 상태에 대한 데이터.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<deepcopy\></span> - (boolean) Whether to apply [vim.deepcopy](https://neovim.io/doc/user/helptag.html?tag=vim.deepcopy) to the <span class="help-syntax-special">{state}</span>.
-    Usually helpful to record the exact state during code execution and avoid
-    side effects of tables being changed in-place. Default `true`.
+  - <span class="help-syntax-keys">\<deepcopy\></span> - (boolean) <span class="help-syntax-special">{state}</span>에 [vim.deepcopy](https://neovim.io/doc/user/helptag.html?tag=vim.deepcopy)를 적용할지 여부. 보통 코드 실행 중 정확한 상태를 기록하고 테이블이 제자리에서 수정되어 발생하는 부작용을 피하는 데 도움이 됩니다. 기본값 `true`.
 
-#### Usage {#minimisc.log_add-usage}
+#### 사용법 {#minimisc.log_add-usage}
 
 
 
   ```lua
   local t = { a = 1 }
-  MiniMisc.log_add('before', { t = t }) -- Will show `t = { a = 1 }` state
+  MiniMisc.log_add('before', { t = t }) -- `t = { a = 1 }` 상태를 보여줌
   t.a = t.a + 1
-  MiniMisc.log_add('after', { t = t })  -- Will show `t = { a = 2 }` state
+  MiniMisc.log_add('after', { t = t })  -- `t = { a = 2 }` 상태를 보여줌
 
-  -- Use `:lua MiniMisc.log_show()` or `:=MiniMisc.log_get()` to see the log
+  -- 로그를 보려면 `:lua MiniMisc.log_show()` 또는 `:=MiniMisc.log_get()`을 사용하세요.
   ```
 
-#### See also {#minimisc.log_add-seealso}
+#### 참고 {#minimisc.log_add-seealso}
 
 
 
-- [MiniMisc.log\_get()](mini-misc.qmd#minimisc.log_get) to get log array
+- [MiniMisc.log\_get()](mini-misc.qmd#minimisc.log_get) - 로그 배열 가져오기
 
-- [MiniMisc.log\_show()](mini-misc.qmd#minimisc.log_show) to show log array in the dedicated buffer
+- [MiniMisc.log\_show()](mini-misc.qmd#minimisc.log_show) - 전용 버퍼에 로그 배열 표시
 
-- [MiniMisc.log\_clear()](mini-misc.qmd#minimisc.log_clear) to clear the log array
+- [MiniMisc.log\_clear()](mini-misc.qmd#minimisc.log_clear) - 로그 배열 비우기
 
 ---
 
 ### log_get() {#minimisc.log_get .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.log_get`()</p>
-Get log array
+로그 배열 가져오기
 
-#### Return {#minimisc.log_get-return}
-
-
-`(table[])` Log array. Returned as is, without [vim.deepcopy()](https://neovim.io/doc/user/helptag.html?tag=vim.deepcopy\(\)).
-
-#### See also {#minimisc.log_get-seealso}
+#### 반환값 {#minimisc.log_get-return}
 
 
+`(table[])` 로그 배열. [vim.deepcopy()](https://neovim.io/doc/user/helptag.html?tag=vim.deepcopy\(\)) 없이 있는 그대로 반환됩니다.
 
-- [MiniMisc.log\_add()](mini-misc.qmd#minimisc.log_add) to add to the log array
+#### 참고 {#minimisc.log_get-seealso}
+
+
+
+- [MiniMisc.log\_add()](mini-misc.qmd#minimisc.log_add) - 로그 배열에 추가
 
 ---
 
 ### log_show() {#minimisc.log_show .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.log_show`()</p>
-Show log array in a scratch buffer
+스크래치(scratch) 버퍼에 로그 배열 표시
 
-#### See also {#minimisc.log_show-seealso}
+#### 참고 {#minimisc.log_show-seealso}
 
 
 
-- [MiniMisc.log\_add()](mini-misc.qmd#minimisc.log_add) to add to the log array
+- [MiniMisc.log\_add()](mini-misc.qmd#minimisc.log_add) - 로그 배열에 추가
 
 ---
 
 ### log_clear() {#minimisc.log_clear .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.log_clear`()</p>
-Clear log array
+로그 배열 비우기
 
-This also sets a new starting point for entry timestamps.
+이는 또한 항목 타임스탬프를 위한 새로운 시작 지점을 설정합니다.
 
-#### See also {#minimisc.log_clear-seealso}
+#### 참고 {#minimisc.log_clear-seealso}
 
 
 
-- [MiniMisc.log\_add()](mini-misc.qmd#minimisc.log_add) to add to the log array
+- [MiniMisc.log\_add()](mini-misc.qmd#minimisc.log_add) - 로그 배열에 추가
 
 ---
 
 ### put() {#minimisc.put .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.put`(<span class="help-syntax-special">{...}</span>)</p>
-Print Lua objects in command line
+Lua 객체를 명령줄에 출력
 
-#### Parameters {#minimisc.put-parameters}
+#### 매개변수 {#minimisc.put-parameters}
 
 
 
-<span class="help-syntax-special">{...}</span> `(any)` Any number of objects to be printed each on separate line.
+<span class="help-syntax-special">{...}</span> `(any)` 출력할 임의 개수의 객체. 각각 별도의 줄에 출력됩니다.
 
 ---
 
 ### put_text() {#minimisc.put_text .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.put_text`(<span class="help-syntax-special">{...}</span>)</p>
-Print Lua objects in current buffer
+Lua 객체를 현재 버퍼에 출력
 
-#### Parameters {#minimisc.put_text-parameters}
+#### 매개변수 {#minimisc.put_text-parameters}
 
 
 
-<span class="help-syntax-special">{...}</span> `(any)` Any number of objects to be printed each on separate line.
+<span class="help-syntax-special">{...}</span> `(any)` 출력할 임의 개수의 객체. 각각 별도의 줄에 출력됩니다.
 
 ---
 
 ### resize_window() {#minimisc.resize_window .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.resize_window`(<span class="help-syntax-special">{win_id}</span>, <span class="help-syntax-special">{text_width}</span>)</p>
-Resize window to have exact number of editable columns
+창을 정확한 개수의 편집 가능한 열을 갖도록 크기 조정
 
-#### Parameters {#minimisc.resize_window-parameters}
+#### 매개변수 {#minimisc.resize_window-parameters}
 
 
 
-<span class="help-syntax-special">{win_id}</span> `(number|nil)` Window identifier (see [win\_getid()](https://neovim.io/doc/user/helptag.html?tag=win_getid\(\))) to be resized.
-  Default: 0 for current.
+<span class="help-syntax-special">{win_id}</span> `(number|nil)` 크기를 조정할 창 식별자 ([win\_getid()](https://neovim.io/doc/user/helptag.html?tag=win_getid\(\)) 참조). 기본값: 0 (현재 창).
 
-<span class="help-syntax-special">{text_width}</span> `(number|nil)` Number of editable columns resized window will
-  display. Default: first element of 'colorcolumn' or otherwise 'textwidth'
-  (using screen width as its default but not more than 79).
+<span class="help-syntax-special">{text_width}</span> `(number|nil)` 크기 조정된 창이 표시할 편집 가능한 열의 수. 기본값: 'colorcolumn'의 첫 번째 요소, 또는 'textwidth' (화면 너비를 기본값으로 사용하되 79를 넘지 않음).
 
 ---
 
 ### safely() {#minimisc.safely .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.safely`(<span class="help-syntax-special">{when}</span>, <span class="help-syntax-special">{f}</span>)</p>
-Execute a function on a condition and warn on error
+조건에 따라 함수를 실행하고 에러 발생 시 경고를 표시합니다.
 
-Input function is executed exactly once. Its possible error is captured and is
-shown as a [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) warning.
+입력 함수는 정확히 한 번 실행됩니다. 발생 가능한 에러는 캡처되어 [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) 경고로 표시됩니다.
 
-Useful to organize [init.lua](https://neovim.io/doc/user/helptag.html?tag=init.lua) in fail-safe sections with simple lazy loading.
+간단한 지연 로딩을 사용하여 [init.lua](https://neovim.io/doc/user/helptag.html?tag=init.lua)를 안전한 섹션으로 구성하는 데 유용합니다.
 
-#### Parameters {#minimisc.safely-parameters}
-
+#### 매개변수 {#minimisc.safely-parameters}
 
 
-<span class="help-syntax-special">{when}</span> `(string)` When to execute a function. One of:
 
-  - `'now'` - immediately.
+<span class="help-syntax-special">{when}</span> `(string)` 함수를 실행할 시점. 다음 중 하나:
 
-  - `'later'` - queue to be executed soon without blocking the execution of next
-    code in file. Queued functions are executed in order they are added.
+  - `'now'` - 즉시.
 
-  - `'delay:<number>'` - after a specified delay with [vim.defer\_fn()](https://neovim.io/doc/user/helptag.html?tag=vim.defer_fn\(\)).
+  - `'later'` - 파일의 다음 코드 실행을 방해하지 않고 곧 실행되도록 큐(queue)에 넣습니다. 대기 중인 함수는 추가된 순서대로 실행됩니다.
 
-  - `'event:<events>'` - on whichever specified event is triggered first.
+  - `'delay:<number>'` - [vim.defer\_fn()](https://neovim.io/doc/user/helptag.html?tag=vim.defer_fn\(\))을 사용하여 지정된 지연 시간 후에 실행.
 
-  - `'event:<events>~<patterns>` - same as above, but events must match
-    specified [autocmd-pattern](https://neovim.io/doc/user/helptag.html?tag=autocmd-pattern).
+  - `'event:<events>'` - 지정된 이벤트 중 먼저 트리거되는 이벤트에서 실행.
 
-  - `'filetype:<filetypes>'` - same as `'event:FileType~<filetypes>'`, but follow
-    successful function execution with [filetype-detect](https://neovim.io/doc/user/helptag.html?tag=filetype-detect) for all normal buffers
-    (if new [ftdetect](https://neovim.io/doc/user/helptag.html?tag=ftdetect) scripts were added) and sourcing [ftplugin](https://neovim.io/doc/user/helptag.html?tag=ftplugin) (for buffers
-    matching `<filetypes>`). Intended to be used for loading "language plugins".
+  - `'event:<events>~<patterns>` - 위와 같지만, 이벤트가 지정된 [autocmd-pattern](https://neovim.io/doc/user/helptag.html?tag=autocmd-pattern)과 일치해야 합니다.
 
-<span class="help-syntax-special">{f}</span> `(function)` Function to execute (without arguments).
+  - `'filetype:<filetypes>'` - `'event:FileType~<filetypes>'`와 같지만, 함수 실행 성공 후 모든 일반 버퍼에 대해 [filetype-detect](https://neovim.io/doc/user/helptag.html?tag=filetype-detect)를 수행하고(새로운 [ftdetect](https://neovim.io/doc/user/helptag.html?tag=ftdetect) 스크립트가 추가된 경우) [ftplugin](https://neovim.io/doc/user/helptag.html?tag=ftplugin)을 소싱합니다 (`<filetypes>`와 일치하는 버퍼에 대해). "언어 플러그인" 로딩에 사용하도록 고안되었습니다.
 
-#### Usage {#minimisc.safely-usage}
+<span class="help-syntax-special">{f}</span> `(function)` 실행할 함수 (인수 없음).
+
+#### 사용법 {#minimisc.safely-usage}
 
 
 
   ```lua
   MiniMisc.safely('later', function()
-    vim.notify('This will be executed after the next "now" call')
+    vim.notify('이 메시지는 다음 "now" 호출 이후에 실행됩니다')
   end)
-  MiniMisc.safely('now', function() error('This will be a warning') end)
+  MiniMisc.safely('now', function() error('이 에러는 경고로 표시됩니다') end)
 
   MiniMisc.safely('event:InsertEnter', function()
     require('mini.completion').setup()
   end)
   MiniMisc.safely('event:CmdlineEnter~/', function()
-    vim.notify('Start searching for the first time')
+    vim.notify('처음으로 검색을 시작합니다')
   end)
 
   MiniMisc.safely('filetype:tex,plaintex', function()
-    -- Load plugin to improve writing LaTeX
+    -- LaTeX 작성을 개선하는 플러그인 로드
   end)
   ```
 
@@ -359,25 +329,23 @@ Useful to organize [init.lua](https://neovim.io/doc/user/helptag.html?tag=init.l
 ### setup_auto_root() {#minimisc.setup_auto_root .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.setup_auto_root`(<span class="help-syntax-special">{names}</span>, <span class="help-syntax-special">{fallback}</span>)</p>
-Set up automated change of current directory
+현재 디렉토리 자동 변경 설정
 
-What it does:
+작동 방식:
 
-- Creates autocommand which on every [BufEnter](https://neovim.io/doc/user/helptag.html?tag=BufEnter) event with [MiniMisc.find\_root()](mini-misc.qmd#minimisc.find_root)
-  finds root directory for current buffer file and sets [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory)
-  to it (using [chdir()](https://neovim.io/doc/user/helptag.html?tag=chdir\(\))).
+- 모든 [BufEnter](https://neovim.io/doc/user/helptag.html?tag=BufEnter) 이벤트에서 [MiniMisc.find\_root()](mini-misc.qmd#minimisc.find_root)를 사용하여 현재 버퍼 파일의 루트 디렉토리를 찾고 [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory)를 해당 디렉토리로 설정하는 자동 명령을 생성합니다 ([chdir()](https://neovim.io/doc/user/helptag.html?tag=chdir\(\)) 사용).
 
-- Resets ['autochdir'](https://neovim.io/doc/user/helptag.html?tag='autochdir') to `false`.
+- ['autochdir'](https://neovim.io/doc/user/helptag.html?tag='autochdir')을 `false`로 초기화합니다.
 
-#### Parameters {#minimisc.setup_auto_root-parameters}
+#### 매개변수 {#minimisc.setup_auto_root-parameters}
 
 
 
-<span class="help-syntax-special">{names}</span> `(table|function|nil)` Forwarded to [MiniMisc.find\_root()](mini-misc.qmd#minimisc.find_root).
+<span class="help-syntax-special">{names}</span> `(table|function|nil)` [MiniMisc.find\_root()](mini-misc.qmd#minimisc.find_root)로 전달됩니다.
 
-<span class="help-syntax-special">{fallback}</span> `(function|nil)` Forwarded to [MiniMisc.find\_root()](mini-misc.qmd#minimisc.find_root).
+<span class="help-syntax-special">{fallback}</span> `(function|nil)` [MiniMisc.find\_root()](mini-misc.qmd#minimisc.find_root)로 전달됩니다.
 
-#### Usage {#minimisc.setup_auto_root-usage}
+#### 사용법 {#minimisc.setup_auto_root-usage}
 
 
 
@@ -391,101 +359,77 @@ What it does:
 ### find_root() {#minimisc.find_root .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.find_root`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{names}</span>, <span class="help-syntax-special">{fallback}</span>)</p>
-Find root directory
+루트 디렉토리 찾기
 
-Based on a buffer name (full path to file opened in a buffer) find a root
-directory. If buffer is not associated with file, returns `nil`.
+버퍼 이름(버퍼에 열린 파일의 전체 경로)을 기반으로 루트 디렉토리를 찾습니다. 버퍼가 파일과 연결되어 있지 않으면 `nil`을 반환합니다.
 
-Root directory is a directory containing at least one of pre-defined files.
-It is searched using [vim.fs.find()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.find\(\)) with `upward = true` starting from
-directory of current buffer file until first occurrence of root file(s).
+루트 디렉토리는 미리 정의된 파일 중 적어도 하나를 포함하는 디렉토리입니다. 루트 파일이 처음 나타날 때까지 현재 버퍼 파일의 디렉토리부터 위쪽으로 `upward = true` 옵션과 함께 [vim.fs.find()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.find\(\))를 사용하여 검색합니다.
 
-Notes:
+참고:
 
-- Uses directory path caching to speed up computations. This means that no
-  changes in root directory will be detected after directory path was already
-  used in this function. Reload Neovim to account for that.
+- 계산 속도를 높이기 위해 디렉토리 경로 캐싱을 사용합니다. 즉, 이 함수에서 디렉토리 경로가 이미 사용된 후에는 루트 디렉토리의 변경 사항이 감지되지 않습니다. 이를 반영하려면 Neovim을 다시 로드하세요.
 
-#### Parameters {#minimisc.find_root-parameters}
+#### 매개변수 {#minimisc.find_root-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier (see [bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\))) to use.
-  Default: 0 for current.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 사용할 버퍼 식별자 ([bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\)) 참조). 기본값: 0 (현재 창).
 
-<span class="help-syntax-special">{names}</span> `(table|function|nil)` Array of file names or a callable used to
-  identify a root directory. Forwarded to [vim.fs.find()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.find\(\)).
-  Default: `{ '.git', 'Makefile' }`.
+<span class="help-syntax-special">{names}</span> `(table|function|nil)` 루트 디렉토리를 식별하는 데 사용되는 파일 이름 배열 또는 호출 가능한 객체. [vim.fs.find()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.find\(\))로 전달됩니다. 기본값: `{ '.git', 'Makefile' }`.
 
-<span class="help-syntax-special">{fallback}</span> `(function|nil)` Callable fallback to use if no root is found
-  with [vim.fs.find()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.find\(\)). Will be called with a buffer path and should return
-  a valid directory path.
+<span class="help-syntax-special">{fallback}</span> `(function|nil)` [vim.fs.find()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.find\(\))로 루트를 찾지 못한 경우 사용할 호출 가능한 폴백(fallback). 버퍼 경로와 함께 호출되며 유효한 디렉토리 경로를 반환해야 합니다.
 
 ---
 
 ### setup_termbg_sync() {#minimisc.setup_termbg_sync .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.setup_termbg_sync`(<span class="help-syntax-special">{opts}</span>)</p>
-Set up terminal background synchronization
+터미널 배경색 동기화 설정
 
-What it does:
+작동 방식:
 
-- Checks if terminal emulator supports OSC 11 control sequence through
-  appropriate `stdout`. Stops if not.
+- 터미널 에뮬레이터가 적절한 `stdout`을 통해 OSC 11 제어 시퀀스를 지원하는지 확인합니다. 지원하지 않으면 중단합니다.
 
-- Creates autocommands for [ColorScheme](https://neovim.io/doc/user/helptag.html?tag=ColorScheme) and [VimResume](https://neovim.io/doc/user/helptag.html?tag=VimResume) events, which
-  change terminal background to have same color as [guibg](https://neovim.io/doc/user/helptag.html?tag=guibg) of [hl-Normal](https://neovim.io/doc/user/helptag.html?tag=hl-Normal).
+- [ColorScheme](https://neovim.io/doc/user/helptag.html?tag=ColorScheme) 및 [VimResume](https://neovim.io/doc/user/helptag.html?tag=VimResume) 이벤트에 대한 자동 명령을 생성하여 터미널 배경색을 [hl-Normal](https://neovim.io/doc/user/helptag.html?tag=hl-Normal)의 [guibg](https://neovim.io/doc/user/helptag.html?tag=guibg)와 동일한 색상으로 변경합니다.
 
-- Creates autocommands for [VimLeavePre](https://neovim.io/doc/user/helptag.html?tag=VimLeavePre) and [VimSuspend](https://neovim.io/doc/user/helptag.html?tag=VimSuspend) events which set
-  terminal background back to its original color.
+- [VimLeavePre](https://neovim.io/doc/user/helptag.html?tag=VimLeavePre) 및 [VimSuspend](https://neovim.io/doc/user/helptag.html?tag=VimSuspend) 이벤트에 대한 자동 명령을 생성하여 터미널 배경색을 원래 색상으로 되돌립니다.
 
-- Synchronizes background immediately to allow not depend on loading order.
+- 로딩 순서에 의존하지 않도록 즉시 배경색을 동기화합니다.
 
-Primary use case is to remove possible "frame" around current Neovim instance
-which appears if Neovim's [hl-Normal](https://neovim.io/doc/user/helptag.html?tag=hl-Normal) background color differs from what is
-used by terminal emulator itself.
+주요 사용 사례는 Neovim의 [hl-Normal](https://neovim.io/doc/user/helptag.html?tag=hl-Normal) 배경색이 터미널 에뮬레이터 자체에서 사용되는 것과 다를 때 나타나는 Neovim 인스턴스 주변의 "프레임"을 제거하는 것입니다.
 
-Works only on Neovim>=0.10.
+Neovim>=0.10에서만 작동합니다.
 
-#### Parameters {#minimisc.setup_termbg_sync-parameters}
+#### 매개변수 {#minimisc.setup_termbg_sync-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<explicit_reset\></span> `(boolean)` - whether to reset terminal background by
-    explicitly setting it to the color it had when this function was called.
-    Set to `true` if terminal emulator doesn't support OSC 111 control sequence.
-    Default: `false`.
+  - <span class="help-syntax-keys">\<explicit_reset\></span> `(boolean)` - 터미널 배경색을 이 함수가 호출되었을 때의 색상으로 명시적으로 설정하여 리셋할지 여부. 터미널 에뮬레이터가 OSC 111 제어 시퀀스를 지원하지 않는 경우 `true`로 설정하세요. 기본값: `false`.
 
 ---
 
 ### setup_restore_cursor() {#minimisc.setup_restore_cursor .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.setup_restore_cursor`(<span class="help-syntax-special">{opts}</span>)</p>
-Restore cursor position on file open
+파일 열기 시 커서 위치 복원
 
-When reopening a file this will make sure the cursor is placed back to the
-position where you left before. This implements [restore-cursor](https://neovim.io/doc/user/helptag.html?tag=restore-cursor) in a nicer way.
-File should have a recognized file type (see 'filetype') and be opened in
-a normal buffer (see 'buftype').
+파일을 다시 열 때 커서가 이전에 떠났던 위치에 놓이도록 합니다. 이는 [restore-cursor](https://neovim.io/doc/user/helptag.html?tag=restore-cursor)를 더 세련된 방식으로 구현합니다. 파일은 인식된 파일 타입('filetype' 참조)을 가져야 하며 일반 버퍼('buftype' 참조)에서 열려야 합니다.
 
-Note: it relies on file mark data stored in 'shadafile' (see [shada-f](https://neovim.io/doc/user/helptag.html?tag=shada-f)).
-Be sure to enable it.
+참고: 'shadafile'에 저장된 파일 마크 데이터에 의존합니다 ([shada-f](https://neovim.io/doc/user/helptag.html?tag=shada-f) 참조). 이 기능을 활성화했는지 확인하세요.
 
-#### Parameters {#minimisc.setup_restore_cursor-parameters}
+#### 매개변수 {#minimisc.setup_restore_cursor-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<center\></span> - (boolean) Center the window after we restored the cursor.
-    Default: `true`.
+  - <span class="help-syntax-keys">\<center\></span> - (boolean) 커서를 복원한 후 창을 중앙으로 정렬합니다. 기본값: `true`.
 
-  - <span class="help-syntax-keys">\<ignore_filetype\></span> - Array with file types to be ignored (see 'filetype').
-    Default: `{ "gitcommit", "gitrebase" }`.
+  - <span class="help-syntax-keys">\<ignore_filetype\></span> - 무시할 파일 타입 배열 ('filetype' 참조). 기본값: `{ "gitcommit", "gitrebase" }`.
 
-#### Usage {#minimisc.setup_restore_cursor-usage}
+#### 사용법 {#minimisc.setup_restore_cursor-usage}
 
 
 
@@ -498,132 +442,115 @@ Be sure to enable it.
 ### stat_summary() {#minimisc.stat_summary .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.stat_summary`(<span class="help-syntax-special">{t}</span>)</p>
-Compute summary statistics of numerical array
+숫자 배열의 통계 요약 계산
 
-This might be useful to compute summary of time benchmarking with
-[MiniMisc.bench\_time()](mini-misc.qmd#minimisc.bench_time).
+[MiniMisc.bench\_time()](mini-misc.qmd#minimisc.bench_time)을 사용한 시간 벤치마킹 요약을 계산하는 데 유용할 수 있습니다.
 
-#### Parameters {#minimisc.stat_summary-parameters}
-
+#### 매개변수 {#minimisc.stat_summary-parameters}
 
 
-<span class="help-syntax-special">{t}</span> `(table)` Array (table suitable for `ipairs`) of numbers.
 
-#### Return {#minimisc.stat_summary-return}
+<span class="help-syntax-special">{t}</span> `(table)` 숫자로 구성된 배열 (`ipairs`에 적합한 테이블).
+
+#### 반환값 {#minimisc.stat_summary-return}
 
 
-`(table)` Table with summary values under following keys (may be
-  extended in the future): <span class="help-syntax-keys">\<maximum\></span>, <span class="help-syntax-keys">\<mean\></span>, <span class="help-syntax-keys">\<median\></span>, <span class="help-syntax-keys">\<minimum\></span>, <span class="help-syntax-keys">\<n\></span>
-  (number of elements), <span class="help-syntax-keys">\<sd\></span> (sample standard deviation).
+`(table)` 다음 키 아래에 요약 값이 담긴 테이블 (향후 확장될 수 있음): <span class="help-syntax-keys">\<maximum\></span>(최대값), <span class="help-syntax-keys">\<mean\></span>(평균), <span class="help-syntax-keys">\<median\></span>(중앙값), <span class="help-syntax-keys">\<minimum\></span>(최소값), <span class="help-syntax-keys">\<n\></span>(요소 수), <span class="help-syntax-keys">\<sd\></span>(표본 표준 편차).
 
 ---
 
 ### tbl_head() {#minimisc.tbl_head .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.tbl_head`(<span class="help-syntax-special">{t}</span>, <span class="help-syntax-special">{n}</span>)</p>
-Return "first" elements of table as decided by `pairs`
+`pairs`에 의해 결정된 테이블의 "처음" 요소들을 반환합니다.
 
-Note: order of elements might vary.
+참고: 요소의 순서는 다를 수 있습니다.
 
-#### Parameters {#minimisc.tbl_head-parameters}
-
-
-
-<span class="help-syntax-special">{t}</span> `(table)` Input table.
-
-<span class="help-syntax-special">{n}</span> `(number|nil)` Maximum number of first elements. Default: 5.
-
-#### Return {#minimisc.tbl_head-return}
+#### 매개변수 {#minimisc.tbl_head-parameters}
 
 
-`(table)` Table with at most `n` first elements of `t` (with same keys).
+
+<span class="help-syntax-special">{t}</span> `(table)` 입력 테이블.
+
+<span class="help-syntax-special">{n}</span> `(number|nil)` 처음 요소의 최대 개수. 기본값: 5.
+
+#### 반환값 {#minimisc.tbl_head-return}
+
+
+`(table)` `t`에서 최대 `n`개의 처음 요소(동일한 키 사용)가 담긴 테이블.
 
 ---
 
 ### tbl_tail() {#minimisc.tbl_tail .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.tbl_tail`(<span class="help-syntax-special">{t}</span>, <span class="help-syntax-special">{n}</span>)</p>
-Return "last" elements of table as decided by `pairs`
+`pairs`에 의해 결정된 테이블의 "마지막" 요소들을 반환합니다.
 
-This function makes two passes through elements of `t`:
+이 함수는 `t`의 요소들을 두 번 거칩니다:
 
-- First to count number of elements.
+- 첫 번째는 요소의 개수를 세기 위해.
 
-- Second to construct result.
+- 두 번째는 결과를 생성하기 위해.
 
-Note: order of elements might vary.
+참고: 요소의 순서는 다를 수 있습니다.
 
-#### Parameters {#minimisc.tbl_tail-parameters}
-
-
-
-<span class="help-syntax-special">{t}</span> `(table)` Input table.
-
-<span class="help-syntax-special">{n}</span> `(number|nil)` Maximum number of last elements. Default: 5.
-
-#### Return {#minimisc.tbl_tail-return}
+#### 매개변수 {#minimisc.tbl_tail-parameters}
 
 
-`(table)` Table with at most `n` last elements of `t` (with same keys).
+
+<span class="help-syntax-special">{t}</span> `(table)` 입력 테이블.
+
+<span class="help-syntax-special">{n}</span> `(number|nil)` 마지막 요소의 최대 개수. 기본값: 5.
+
+#### 반환값 {#minimisc.tbl_tail-return}
+
+
+`(table)` `t`에서 최대 `n`개의 마지막 요소(동일한 키 사용)가 담긴 테이블.
 
 ---
 
 ### use_nested_comments() {#minimisc.use_nested_comments .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.use_nested_comments`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Add possibility of nested comment leader
+중첩된 주석 리더 가능성 추가
 
-This works by parsing 'commentstring' buffer option, extracting
-non-whitespace comment leader (symbols on the left of commented line), and
-locally modifying 'comments' option (by prepending `n:<leader>`). Does
-nothing if 'commentstring' is empty or has comment symbols both in front
-and back (like "/%s/").
+이 함수는 'commentstring' 버퍼 옵션을 파싱하여 공백이 아닌 주석 리더(주석 처리된 줄의 왼쪽에 있는 기호)를 추출하고, 'comments' 옵션을 로컬에서 수정(`n:<leader>`를 앞에 추가)하여 작동합니다. 'commentstring'이 비어 있거나 앞뒤에 모두 주석 기호가 있는 경우(예: "/%s/") 아무 작업도 수행하지 않습니다.
 
-Nested comment leader added with this function is useful for formatting
-nested comments. For example, have in Lua "first-level" comments with '--'
-and "second-level" comments with '----'. With nested comment leader second
-type can be formatted with `gq` in the same way as first one.
+이 함수로 추가된 중첩 주석 리더는 중첩된 주석의 포맷팅에 유용합니다. 예를 들어, Lua에서 '--'를 사용한 "1단계" 주석과 '----'를 사용한 "2단계" 주석이 있는 경우, 중첩 주석 리더를 사용하면 2단계 주석도 1단계와 동일하게 `gq`로 포맷팅할 수 있습니다.
 
-Recommended usage is with [autocmd](https://neovim.io/doc/user/helptag.html?tag=autocmd):
+권장되는 사용법은 [autocmd](https://neovim.io/doc/user/helptag.html?tag=autocmd)를 사용하는 것입니다:
 
   ```lua
   local use_nested_comments = function() MiniMisc.use_nested_comments() end
   vim.api.nvim_create_autocmd('BufEnter', { callback = use_nested_comments })
   ```
 
-Note: for most filetypes 'commentstring' option is added only when buffer
-with this filetype is entered, so using non-current `buf_id` can not lead
-to desired effect.
+참고: 대부분의 파일 타입에서 'commentstring' 옵션은 해당 파일 타입의 버퍼에 들어갈 때만 추가되므로, 현재가 아닌 `buf_id`를 사용하면 원하는 효과를 얻지 못할 수 있습니다.
 
-#### Parameters {#minimisc.use_nested_comments-parameters}
+#### 매개변수 {#minimisc.use_nested_comments-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier (see [bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\))) in which function
-  will operate. Default: 0 for current.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 함수가 작동할 버퍼 식별자 ([bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\)) 참조). 기본값: 0 (현재 창).
 
 ---
 
 ### zoom() {#minimisc.zoom .help-syntax-right-anchor}
 
 <p align="center">`MiniMisc.zoom`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{config}</span>)</p>
-Zoom in and out of a buffer, making it full screen in a floating window
+버퍼를 확대/축소하여 플로팅 창에서 전체 화면으로 만듭니다.
 
-This function is useful when working with multiple windows but temporarily
-needing to zoom into one to see more of the code from that buffer. Call it
-again (without arguments) to zoom out.
+이 함수는 여러 창으로 작업하는 동안 해당 버퍼의 코드를 더 많이 보기 위해 일시적으로 확대가 필요할 때 유용합니다. 확대/축소를 해제하려면 (인수 없이) 다시 호출하세요.
 
-#### Parameters {#minimisc.zoom-parameters}
+#### 매개변수 {#minimisc.zoom-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier (see [bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\))) to be zoomed.
-  Default: 0 for current.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 확대할 버퍼 식별자 ([bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\)) 참조). 기본값: 0 (현재 창).
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Optional config for window (as for [nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\))).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 창을 위한 선택적 설정 ([nvim\_open\_win()](https://neovim.io/doc/user/helptag.html?tag=nvim_open_win\(\))과 동일).
 
-#### Return {#minimisc.zoom-return}
+#### 반환값 {#minimisc.zoom-return}
 
 
-`(boolean)` Whether current buffer is zoomed in.
-
+`(boolean)` 현재 버퍼가 확대되었는지 여부.

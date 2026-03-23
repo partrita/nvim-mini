@@ -1,30 +1,30 @@
 ---
-title: "Announcing 'mini.indentscope'"
+title: "'mini.indentscope' 발표"
 author: Evgeni Chasnovski
 date: 2022-02-10
 categories: [announce, reddit]
-description: Visualize and operate on indent scope
+description: 들여쓰기 범위(indent scope) 시각화 및 조작
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/spc16j/miniindentscope_visualize_and_operate_on_indent/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/spc16j/miniindentscope_visualize_and_operate_on_indent/)*
 
 {{< video 2022-02-10-announce-mini-indentscope/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am happy to announce new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) - [mini.indentscope](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-indentscope.md). It is built around a notion of "indent scope" - minimal set of lines containing reference one (usually cursor line) and every line having indent not less than a reference (usually computed using indent of cursor line). Core functionalities:
+[mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈인 [mini.indentscope](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-indentscope.md)를 발표하게 되어 기쁩니다. 이 모듈은 "들여쓰기 범위(indent scope)"라는 개념을 중심으로 구축되었습니다. 이는 참조 행(보통 커서 행)을 포함하며 참조 행보다 작지 않은 들여쓰기를 가진 모든 행의 최소 집합입니다 (보통 커서 행의 들여쓰기를 사용하여 계산됨). 주요 기능:
 
-- Interactively visualize current indent scope. It is done in non-blocking way with customizable animation (there are some popular easing functions built in; of course no animation is also possible) and debounce delay.
-- Customizable way of computing scope. Like:
-    - What is considered a scope border (useful for certain filetypes, like Python).
-    - Whether to incorporate cursor column in computing reference indent (like behavior in animation).
-    - Whether to try and recognize line as border first (useful to place cursor on function header and visualize its body).
-- Move cursor to either side of scope.
-- Use scope textobject, both without and with border.
+- 현재 들여쓰기 범위를 대화형으로 시각화합니다. 사용자 정의 가능한 애니메이션(인기 있는 이징 함수가 내장되어 있으며, 물론 애니메이션을 사용하지 않는 것도 가능합니다)과 디바운스 지연을 통해 비차단 방식으로 수행됩니다.
+- 범위를 계산하는 사용자 정의 가능한 방법:
+    - 범위 경계로 간주되는 것 (Python과 같은 특정 파일 유형에 유용).
+    - 참조 들여쓰기를 계산할 때 커서 열을 포함할지 여부 (애니메이션 동작과 유사).
+    - 행을 경계로 먼저 인식하려고 시도할지 여부 (함수 헤더에 커서를 놓고 그 본문을 시각화하는 데 유용).
+- 커서를 범위의 양쪽 끝으로 이동합니다.
+- 범위 텍스트 객체(textobject)를 사용하며, 경계를 포함하거나 포함하지 않을 수 있습니다.
 
-How it compares to 'lukas-reineke/indent-blankline.nvim':
+'lukas-reineke/indent-blankline.nvim'과의 비교:
 
-- Main purpose of 'indent-blankline.nvim' is to show static indent guides. This module is intended to show what is a current indent scope (yes, 'indent-blankline.nvim' has similar functionality also, but not that general).
-- They both use Neovim's extmarks for visualization (in fact, I used 'indent-blankline.nvim' source code for some reference solutions). This doesn't cause big conflict, but one of visualizations will be placed on top of another (at the moment, it is a 'mini.indentscope's one).
+- 'indent-blankline.nvim'의 주요 목적은 정적 들여쓰기 가이드를 보여주는 것입니다. 이 모듈은 현재 들여쓰기 범위가 무엇인지 보여주기 위한 것입니다 ('indent-blankline.nvim'에도 유사한 기능이 있지만, 그렇게 일반적이지는 않습니다).
+- 두 플러그인 모두 시각화를 위해 Neovim의 extmarks를 사용합니다 (사실 저는 몇 가지 참조 솔루션을 위해 'indent-blankline.nvim' 소스 코드를 사용했습니다). 이것은 큰 충돌을 일으키지 않지만, 시각화 중 하나가 다른 것 위에 배치됩니다 (현재로서는 'mini.indentscope'의 것이 위에 옵니다).
 
-Try it out! Feedback is greatly appreciated. Feel free to drop a comment here or use a [dedicated issue](https://github.com/nvim-mini/mini.nvim/issues/46).
+한번 사용해 보세요! 피드백은 대단히 감사합니다. 여기에 댓글을 남기거나 [전용 이슈](https://github.com/nvim-mini/mini.nvim/issues/46)를 이용해 주세요.

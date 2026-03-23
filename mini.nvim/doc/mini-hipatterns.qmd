@@ -1,157 +1,126 @@
 ---
-title: "mini.hipatterns documentation"
+title: "mini.hipatterns 문서"
 ---
 
 _Generated from the `main` branch of 'mini.nvim'_
 
-<a name="mini.hipatterns" href="mini-hipatterns.qmd#mini.hipatterns"><b>mini.hipatterns</b></a> Highlight patterns in text
+<a name="mini.hipatterns" href="mini-hipatterns.qmd#mini.hipatterns"><b>mini.hipatterns</b></a> 텍스트 패턴 강조
 
 MIT License Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Highlight text with configurable patterns and highlight groups (can be
-  string or callable).
-
-
-- Highlighting is updated asynchronously with configurable debounce delay.
+- 설정 가능한 패턴과 하이라이트 그룹(문자열 또는 호출 가능 객체)으로 텍스트를 강조합니다.
 
 
-- Function to get matches in a buffer (see [MiniHipatterns.get\_matches()](mini-hipatterns.qmd#minihipatterns.get_matches)).
-
-See [MiniHipatterns-examples](mini-hipatterns.qmd#minihipatterns-examples) for common configuration examples.
-
-Notes:
-
-- It does not define any highlighters by default. Add to `config.highlighters`
-  to have a visible effect.
+- 설정 가능한 디바운스 지연 시간과 함께 비동기적으로 하이라이트가 업데이트됩니다.
 
 
-- Sometimes (especially during frequent buffer updates on same line numbers)
-  highlighting can be outdated or not applied when it should be. This is due
-  to asynchronous nature of updates reacting to text changes (via
-  `on_lines` of [nvim\_buf\_attach()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_attach\(\))).
-  To make them up to date, use one of the following:
+- 버퍼 내의 매치 항목을 가져오는 함수 ( [MiniHipatterns.get\_matches()](mini-hipatterns.qmd#minihipatterns.get_matches) 참고).
 
-    - Scroll window (for example, with [CTRL-E](https://neovim.io/doc/user/helptag.html?tag=CTRL-E) / [CTRL-Y](https://neovim.io/doc/user/helptag.html?tag=CTRL-Y)). This will ensure
-      up to date highlighting inside window view.
+공통 구성 예제는 [MiniHipatterns-examples](mini-hipatterns.qmd#minihipatterns-examples)를 참고하십시오.
 
-    - Hide and show buffer.
+참고:
 
-    - Execute `:edit` (if you enabled highlighting with [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)).
-
-    - Manually call [MiniHipatterns.update()](mini-hipatterns.qmd#minihipatterns.update).
+- 기본적으로는 어떤 하이라이터도 정의되어 있지 않습니다. 시각적인 효과를 보려면 `config.highlighters`에 추가하십시오.
 
 
-- If you experience flicker when typing near highlighted pattern in Insert
-  mode, it might be due to `delay` configuration of [mini.completion](mini-completion.qmd#mini.completion) or
-  using built-in completion.
-  For better experience with 'mini.completion', make sure that its
-  `delay.completion` is less than this module's `delay.text_change` (which
-  it is by default).
-  The reason for this is (currently unresolvable) limitations of Neovim's
-  built-in completion implementation.
+- 가끔(특히 동일한 줄 번호에서 버퍼 업데이트가 빈번할 때) 하이라이트가 최신 상태가 아니거나 적용되어야 할 때 적용되지 않을 수 있습니다. 이는 텍스트 변경에 반응하는 업데이트( [nvim\_buf\_attach()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_attach\(\))의 `on_lines`를 통한)의 비동기적 특성 때문입니다. 최신 상태로 유지하려면 다음 중 하나를 사용하십시오:
 
-#### Setup {#module-setup}
+    - 창 스크롤 (예: [CTRL-E](https://neovim.io/doc/user/helptag.html?tag=CTRL-E) / [CTRL-Y](https://neovim.io/doc/user/helptag.html?tag=CTRL-Y)). 이를 통해 창 보기 내부의 하이라이트가 최신 상태임을 보장합니다.
 
+    - 버퍼 숨기기 및 표시.
 
-Setting up highlights can be done in two ways:
+    - `:edit` 실행 ( [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)으로 하이라이트를 활성화한 경우).
 
-- Manually for every buffer with `require('mini.hipatterns').enable()`.
-  This will enable highlighting only in one particular buffer until it is
-  unloaded (which also includes calling `:edit` on current file).
+    - [MiniHipatterns.update()](mini-hipatterns.qmd#minihipatterns.update) 수동 호출.
 
 
-- Globally with `require('mini.hipatterns').setup({})` (replace `{}` with
-  your `config` table). This will auto-enable highlighting in "normal"
-  buffers (see 'buftype'). Use [MiniHipatterns.enable()](mini-hipatterns.qmd#minihipatterns.enable) to manually enable
-  in other buffers.
-  It will also create global Lua table `MiniHipatterns` which you can use
-  for scripting or manually (with `:lua MiniHipatterns.*`).
+- Insert 모드에서 강조된 패턴 근처에서 입력할 때 깜빡임이 발생한다면, [mini.completion](mini-completion.qmd#mini.completion)의 `delay` 설정이나 내장된 completion을 사용하기 때문일 수 있습니다.
+  'mini.completion'에서 더 나은 경험을 하려면 `delay.completion`이 이 모듈의 `delay.text_change`보다 작아야 합니다 (기본값으로 설정되어 있습니다).
+  이유는 (현재로서는 해결할 수 없는) Neovim의 내장 completion 구현의 한계 때문입니다.
 
-See [MiniHipatterns.config](mini-hipatterns.qmd#minihipatterns.config) for `config` structure and default values.
+#### 설정 {#module-setup}
 
-You can override runtime config settings (like highlighters and delays)
-locally to buffer inside `vim.b.minihipatterns_config` which should have
-same structure as `MiniHipatterns.config`.
-See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
 
-#### Comparisons {#module-comparisons}
+하이라이트 설정은 두 가지 방법으로 할 수 있습니다:
+
+- `require('mini.hipatterns').enable()`을 통해 각 버퍼에 대해 수동으로 설정합니다. 이는 언로드될 때까지(현재 파일에 대해 `:edit`을 호출하는 경우도 포함) 특정 버퍼에서만 하이라이트를 활성화합니다.
+
+
+- `require('mini.hipatterns').setup({})`을 통해 전역적으로 설정합니다 ( `{}`를 설정 테이블로 교체하십시오). 이는 "일반" 버퍼('buftype' 참고)에서 하이라이트를 자동으로 활성화합니다. 다른 버퍼에서 수동으로 활성화하려면 [MiniHipatterns.enable()](mini-hipatterns.qmd#minihipatterns.enable)을 사용하십시오.
+  또한 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블인 `MiniHipatterns`를 생성합니다 ( `:lua MiniHipatterns.*` 참고).
+
+설정 구조와 기본값은 [MiniHipatterns.config](mini-hipatterns.qmd#minihipatterns.config)를 참고하십시오.
+
+`vim.b.minihipatterns_config` 내에서 버퍼 로컬로 런타임 설정(하이라이터 및 지연 시간 등)을 재정의할 수 있으며, `MiniHipatterns.config`와 동일한 구조를 가져야 합니다.
+자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참고하십시오.
+
+#### 비교 {#module-comparisons}
 
 
 
 - [folke/todo-comments](https://github.com/folke/todo-comments):
 
-    - Oriented for "TODO", "NOTE", "FIXME" like patterns, while this module
-      can work with any Lua patterns and computable highlight groups.
+    - "TODO", "NOTE", "FIXME"와 같은 패턴에 특화되어 있는 반면, 이 모듈은 모든 Lua 패턴 및 계산 가능한 하이라이트 그룹과 함께 작동할 수 있습니다.
 
-    - Has functionality beyond text highlighting (sign placing,
-      "telescope.nvim" extension, etc.), while this module only focuses on
-      highlighting text.
+    - 텍스트 하이라이트 외의 기능(사인 배치, "telescope.nvim" 확장 등)이 있지만, 이 모듈은 텍스트 하이라이트에만 집중합니다.
 
 - [folke/paint.nvim](https://github.com/folke/paint.nvim):
 
-    - Mostly similar to this module, but with slightly less functionality,
-      such as computed pattern and highlight group, asynchronous delay, etc.
+    - 이 모듈과 거의 비슷하지만, 계산된 패턴 및 하이라이트 그룹, 비동기 지연 등 기능이 약간 적습니다.
 
 - [NvChad/nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua):
 
-    - Oriented for color highlighting, while this module can work with any
-      Lua patterns and computable highlight groups.
+    - 색상 하이라이트에 특화되어 있는 반면, 이 모듈은 모든 Lua 패턴 및 계산 가능한 하이라이트 그룹과 함께 작동할 수 있습니다.
 
-    - Has more built-in color spaces to highlight, while this module out of
-      the box provides only hex color highlighting
-      (see [MiniHipatterns.gen\_highlighter.hex\_color()](mini-hipatterns.qmd#minihipatterns.gen_highlighter.hex_color)). Other types are
-      also possible to implement.
+    - 하이라이트할 수 있는 더 많은 내장 색상 공간이 있는 반면, 이 모듈은 기본적으로 16진수 색상 하이라이트만 제공합니다
+      ( [MiniHipatterns.gen\_highlighter.hex\_color()](mini-hipatterns.qmd#minihipatterns.gen_highlighter.hex_color) 참고). 다른 유형도 구현이 가능합니다.
 
 - [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim):
 
-    - Has more than color highlighting functionality, which is compared to
-      this module in the same way as 'NvChad/nvim-colorizer.lua'.
+    - 색상 하이라이트 이상의 기능이 있으며, 'NvChad/nvim-colorizer.lua'와 같은 방식으로 이 모듈과 비교됩니다.
 
-#### Highlight groups {#module-highlightgroups}
-
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
-- `MiniHipatternsFixme` - suggested group to use for `FIXME`-like patterns.
 
-- `MiniHipatternsHack` - suggested group to use for `HACK`-like patterns.
+- `MiniHipatternsFixme` - `FIXME` 스타일의 패턴에 사용하기를 권장하는 그룹.
 
-- `MiniHipatternsTodo` - suggested group to use for `TODO`-like patterns.
+- `MiniHipatternsHack` - `HACK` 스타일의 패턴에 사용하기를 권장하는 그룹.
 
-- `MiniHipatternsNote` - suggested group to use for `NOTE`-like patterns.
+- `MiniHipatternsTodo` - `TODO` 스타일의 패턴에 사용하기를 권장하는 그룹.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+- `MiniHipatternsNote` - `NOTE` 스타일의 패턴에 사용하기를 권장하는 그룹.
 
-#### Disabling {#module-disabling}
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))로 직접 설정하십시오.
+
+#### 비활성화 {#module-disabling}
 
 
-This module can be disabled in three ways:
+이 모듈은 세 가지 방법으로 비활성화할 수 있습니다:
 
-- Globally: set `vim.g.minihipatterns_disable` to `true`.
+- 전역적으로: `vim.g.minihipatterns_disable`를 `true`로 설정합니다.
 
-- Locally for buffer permanently: set `vim.b.minihipatterns_disable` to `true`.
+- 버퍼에 대해 영구적으로 로컬로: `vim.b.minihipatterns_disable`를 `true`로 설정합니다.
 
-- Locally for buffer temporarily (until next auto-enabling event if set up
-  with [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)): call [MiniHipatterns.disable()](mini-hipatterns.qmd#minihipatterns.disable).
+- 버퍼에 대해 일시적으로 로컬로 ( [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)으로 설정된 경우 다음 자동 활성화 이벤트 전까지): [MiniHipatterns.disable()](mini-hipatterns.qmd#minihipatterns.disable)을 호출합니다.
 
-Considering high number of different scenarios and customization
-intentions, writing exact rules for disabling module's functionality is
-left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+시나리오와 사용자 정의 의도가 매우 다양하기 때문에 모듈 기능을 비활성화하기 위한 정확한 규칙을 작성하는 것은 사용자의 몫입니다. 일반적인 방법은 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참고하십시오.
 
 ---
 
-### Examples {#minihipatterns-examples .help-syntax-right-anchor}
+### 예제 {#minihipatterns-examples .help-syntax-right-anchor}
 
-#### Common configuration examples {#minihipatterns-examples-commonconfigurationexamples}
+#### 일반적인 구성 예제 {#minihipatterns-examples-commonconfigurationexamples}
 
 
 
-- Special words used to convey different level of attention:
+- 다양한 주의 수준을 전달하는 데 사용되는 특별한 단어:
 
   ```lua
   require('mini.hipatterns').setup({
@@ -165,13 +134,10 @@ left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disablin
   ```
 
 
-- To match only when pattern appears as a standalone word, use frontier
-  patterns `%f`. For example, instead of `'TODO'` pattern use
-  `'%f[%w]()TODO()%f[%W]'`. In this case, for example, 'TODOING' or 'MYTODO'
-  won't match, but 'TODO' and 'TODO:' will.
+- 패턴이 독립된 단어로 나타날 때만 매치하려면 프론티어 패턴 `%f`를 사용하십시오. 예를 들어 `'TODO'` 패턴 대신 `'%f[%w]()TODO()%f[%W]'`를 사용합니다. 이 경우 `'TODOING'`이나 `'MYTODO'`는 매치되지 않지만 `'TODO'`와 `'TODO:'`는 매치됩니다.
 
 
-- Color hex (like `#rrggbb`) highlighting:
+- 16진수 색상(예: `#rrggbb`) 하이라이트:
 
   ```lua
   local hipatterns = require('mini.hipatterns')
@@ -182,11 +148,10 @@ left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disablin
   })
   ```
 
-  You can customize which part of hex color is highlighted by using `style`
-  field of input options. See [MiniHipatterns.gen\_highlighter.hex\_color()](mini-hipatterns.qmd#minihipatterns.gen_highlighter.hex_color).
+  입력 옵션의 `style` 필드를 사용하여 16진수 색상의 어느 부분이 강조되는지 사용자 정의할 수 있습니다. [MiniHipatterns.gen\_highlighter.hex\_color()](mini-hipatterns.qmd#minihipatterns.gen_highlighter.hex_color)를 참고하십시오.
 
 
-- Colored words:
+- 색상이 지정된 단어:
 
   ```lua
   local words = { red = '#ff0000', green = '#00ff00', blue = '#0000ff' }
@@ -205,14 +170,14 @@ left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disablin
   ```
 
 
-- Trailing whitespace (if don't want to use more specific [mini.trailspace](mini-trailspace.qmd#mini.trailspace)):
+- 후행 공백 (더 구체적인 [mini.trailspace](mini-trailspace.qmd#mini.trailspace)를 사용하고 싶지 않은 경우):
 
   ```lua
   { pattern = '%f[%s]%s*$', group = 'Error' }
   ```
 
 
-- Censor certain sensitive information:
+- 특정 민감한 정보 검열:
 
   ```lua
   local censor_extmark_opts = function(_, match, _)
@@ -235,17 +200,13 @@ left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disablin
   ```
 
 
-- Enable only in certain filetypes. There are at least these ways to do it:
+- 특정 파일 형식에서만 활성화합니다. 적어도 다음과 같은 방법이 있습니다:
 
-    - (Suggested) With `vim.b.minihipatterns_config` in [filetype-plugin](https://neovim.io/doc/user/helptag.html?tag=filetype-plugin).
-      Basically, create "after/ftplugin/<span class="help-syntax-keys">\<filetype\></span>.lua" file in your config
-      directory (see [\$XDG\_CONFIG\_HOME](https://neovim.io/doc/user/helptag.html?tag=$XDG_CONFIG_HOME)) and define `vim.b.minihipatterns_config`
-      there with filetype specific highlighters.
+    - (권장) filetype-plugin에서 `vim.b.minihipatterns_config`를 사용합니다. 기본적으로 설정 디렉토리 ( [\$XDG\_CONFIG\_HOME](https://neovim.io/doc/user/helptag.html?tag=$XDG_CONFIG_HOME) 참고)에 "after/ftplugin/<span class="help-syntax-keys">\<filetype\></span>.lua" 파일을 만들고 파일 형식에 특화된 하이라이터로 `vim.b.minihipatterns_config`를 정의합니다.
 
-      This assumes `require('mini.hipatterns').setup()` call.
+      이는 `require('mini.hipatterns').setup()` 호출을 가정합니다.
 
-      For example, to highlight keywords in EmmyLua comments in Lua files,
-      create "after/ftplugin/lua.lua" with the following content:
+      예를 들어 Lua 파일의 EmmyLua 주석에서 키워드를 강조하려면 다음 내용으로 "after/ftplugin/lua.lua"를 생성하십시오:
 
         ```lua
         vim.b.minihipatterns_config = {
@@ -256,7 +217,7 @@ left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disablin
         ```
 
 
-    - Use callable `pattern` with condition. For example:
+    - 조건과 함께 호출 가능한 `pattern`을 사용합니다. 예:
 
       ```lua
       require('mini.hipatterns').setup({
@@ -273,30 +234,28 @@ left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disablin
       ```
 
 
-- Disable only in certain filetypes. Enable with [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)
-  and set `vim.b.minihipatterns_disable` buffer-local variable to `true` for
-  buffer you want disabled. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for more examples.
+- 특정 파일 형식에서만 비활성화합니다. [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)으로 활성화하고 비활성화하려는 버퍼에 대해 버퍼 로컬 변수인 `vim.b.minihipatterns_disable`를 `true`로 설정하십시오. 더 많은 예제는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참고하십시오.
 
 ---
 
 ### setup() {#minihipatterns.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minihipatterns.setup-parameters}
+#### 매개변수 {#minihipatterns.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniHipatterns.config](mini-hipatterns.qmd#minihipatterns.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniHipatterns.config](mini-hipatterns.qmd#minihipatterns.config) 참고.
 
-#### Usage {#minihipatterns.setup-usage}
+#### 사용법 {#minihipatterns.setup-usage}
 
 
 
   ```lua
-  require('mini.hipatterns').setup({}) -- replace {} with your config table
-                                       -- needs `highlighters` field present
+  require('mini.hipatterns').setup({}) -- {}를 설정 테이블로 교체하십시오
+                                       -- `highlighters` 필드가 필요합니다
   ```
 
 ---
@@ -304,320 +263,282 @@ Module setup
 ### config {#minihipatterns.config .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.config`</p>
-#### Defaults {#minihipatterns.config-defaults}
+#### 기본값 {#minihipatterns.config-defaults}
 
 
 
   ```lua
   MiniHipatterns.config = {
-    -- Table with highlighters (see |MiniHipatterns.config| for more details).
-    -- Nothing is defined by default. Add manually for visible effect.
+    -- 하이라이터가 포함된 테이블 (자세한 내용은 |MiniHipatterns.config| 참고).
+    -- 기본적으로는 아무것도 정의되어 있지 않습니다. 시각적인 효과를 위해 수동으로 추가하십시오.
     highlighters = {},
 
-    -- Delays (in ms) defining asynchronous highlighting process
+    -- 비동기 하이라이트 프로세스를 정의하는 지연 시간(ms)
     delay = {
-      -- How much to wait for update after every text change
+      -- 텍스트가 변경될 때마다 업데이트를 기다리는 시간
       text_change = 200,
 
-      -- How much to wait for update after window scroll
+      -- 창 스크롤 후 업데이트를 기다리는 시간
       scroll = 50,
     },
   }
   ```
 
-#### Highlighters {#minihipatterns.config-highlighters}
+#### 하이라이터 {#minihipatterns.config-highlighters}
 
 
-`highlighters` table defines which patterns will be highlighted by placing
-[extmark](https://neovim.io/doc/user/helptag.html?tag=extmark) at the match start. It might or might not have explicitly named
-fields, but having them is recommended and is required for proper use of
-`vim.b.minihipatterns_config` as buffer-local config. By default it is
-empty expecting user definition.
+`highlighters` 테이블은 매치 시작 부분에 [extmark](https://neovim.io/doc/user/helptag.html?tag=extmark)를 배치하여 강조할 패턴을 정의합니다. 명시적으로 명명된 필드가 있을 수도 있고 없을 수도 있지만, 버퍼 로컬 설정으로 `vim.b.minihipatterns_config`를 적절하게 사용하려면 필드 이름을 지정하는 것이 권장되며 필수입니다. 기본적으로는 사용자의 정의를 기다리는 빈 상태입니다.
 
-Each entry defines single highlighter as a table with the following fields:
+각 항목은 다음 필드를 포함하는 테이블로 단일 하이라이터를 정의합니다:
 
-- <span class="help-syntax-keys">\<pattern\></span> `(string|function|table)` - Lua pattern to highlight. Can be
-  either string, callable returning the string, or an array of those.
-  If string:
+- <span class="help-syntax-keys">\<pattern\></span> `(string|function|table)` - 강조할 Lua 패턴. 문자열, 문자열을 반환하는 호출 가능 객체 또는 이들의 배열일 수 있습니다.
+  문자열인 경우:
 
-    - It can have submatch delimited by placing `()` on start and end, NOT
-      by surrounding it with parenthesis (results in an error containing
-      `number expected, got string`). Example: `xx()abcd()xx` will match
-      `abcd` only if `xx` is placed before and after it.
+    - 시작과 끝에 `()`를 배치하여 하위 매치를 구분할 수 있습니다. 괄호로 감싸지 마십시오 ( `number expected, got string` 오류가 발생함). 예: `xx()abcd()xx`는 앞뒤에 `xx`가 있는 경우에만 `abcd`를 매치합니다.
 
-  If callable:
+  호출 가능한 경우:
 
-    - It will be called for every enabled buffer with its identifier as input.
-      Should return single string pattern or `nil` (meaning this particular
-      highlighter will not work in this particular buffer).
+    - 활성화된 모든 버퍼에 대해 버퍼 식별자를 입력으로 하여 호출됩니다. 단일 문자열 패턴 또는 `nil`(해당 하이라이터가 해당 버퍼에서 작동하지 않음을 의미)을 반환해야 합니다.
 
-  If array:
+  배열인 경우:
 
-    - Each element is matched and highlighted with the same highlight group.
+    - 각 요소는 매치되며 동일한 하이라이트 그룹으로 강조됩니다.
 
-    Note: matching does not result in overlapping (sub)matches (similarly
-    to how [cpo-c](https://neovim.io/doc/user/helptag.html?tag=cpo-c) works). For example, with line `xxxxxxx`:
+    참고: 매칭은 겹치는 (하위) 매칭을 생성하지 않습니다 ( [cpo-c](https://neovim.io/doc/user/helptag.html?tag=cpo-c)의 작동 방식과 유사). 예를 들어 `xxxxxxx` 줄의 경우:
 
-    - Pattern `xxx` matches columns 1-3, 4-6.
+    - 패턴 `xxx`는 1-3, 4-6 열을 매치합니다.
 
-    - Pattern `()xx()x` matches columns 1-2, 3-4, 5-6.
+    - 패턴 `()xx()x`는 1-2, 3-4, 5-6 열을 매치합니다.
 
-    - Pattern `x()xx()` matches columns 2-3, 5-6.
+    - 패턴 `x()xx()`는 2-3, 5-6 열을 매치합니다.
 
-    - Pattern `x()x()x` matches columns 2-2, 4-4, 6-6.
+    - 패턴 `x()x()x`는 2-2, 4-4, 6-6 열을 매치합니다.
 
 
-- <span class="help-syntax-keys">\<group\></span> `(string|function)` - name of highlight group to use. Can be either
-  string or callable returning the string.
-  If callable:
+- <span class="help-syntax-keys">\<group\></span> `(string|function)` - 사용할 하이라이트 그룹의 이름. 문자열이거나 문자열을 반환하는 호출 가능 객체일 수 있습니다.
+  호출 가능한 경우:
 
-    - It will be called for every pattern match with the following arguments:
+    - 모든 패턴 매치에 대해 다음 인수를 사용하여 호출됩니다:
 
-        - `buf_id` - buffer identifier.
+        - `buf_id` - 버퍼 식별자.
 
-        - `match` - string pattern match to be highlighted.
+        - `match` - 강조할 문자열 패턴 매치.
 
-        - `data` - extra table with information about the match.
-          It has at least these fields:
+        - `data` - 매치에 대한 정보가 포함된 추가 테이블.
+          최소한 다음과 같은 필드를 갖습니다:
 
-            - <span class="help-syntax-keys">\<full_match\></span> - string with full pattern match.
+            - <span class="help-syntax-keys">\<full_match\></span> - 전체 패턴 매치가 포함된 문자열.
 
-            - <span class="help-syntax-keys">\<line\></span> - match line number (1-indexed).
+            - <span class="help-syntax-keys">\<line\></span> - 매치 줄 번호 (1부터 시작).
 
-            - <span class="help-syntax-keys">\<from_col\></span> - match starting byte column (1-indexed).
+            - <span class="help-syntax-keys">\<from_col\></span> - 매치 시작 바이트 열 (1부터 시작).
 
-            - <span class="help-syntax-keys">\<to_col\></span> - match ending byte column (1-indexed, inclusive).
-
-
-    - It can return `nil` meaning this particular match will not be highlighted.
+            - <span class="help-syntax-keys">\<to_col\></span> - 매치 종료 바이트 열 (1부터 시작, 포함).
 
 
-- <span class="help-syntax-keys">\<extmark_opts\></span> `(table|function|nil)` - optional extra options
-  for [nvim\_buf\_set\_extmark()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_extmark\(\)). If callable, will be called in the same way
-  as callable <span class="help-syntax-keys">\<group\></span> (`data` will also contain `hl_group` key with <span class="help-syntax-keys">\<group\></span>
-  value) and should return a table with all options for extmark (including
-  `end_row`, `end_col`, `hl_group`, and `priority`).
-
-See "Common use cases" section for the examples.
-
-#### Delay {#minihipatterns.config-delay}
+    - `nil`을 반환할 수 있으며, 이는 해당 매치가 강조되지 않음을 의미합니다.
 
 
-`delay` is a table defining delays in milliseconds used for asynchronous
-highlighting process.
+- <span class="help-syntax-keys">\<extmark_opts\></span> `(table|function|nil)` - [nvim\_buf\_set\_extmark()](https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_extmark\(\))를 위한 선택적 추가 옵션. 호출 가능한 경우 호출 가능한 <span class="help-syntax-keys">\<group\></span>과 동일한 방식으로 호출되며( `data`에는 <span class="help-syntax-keys">\<group\></span> 값을 갖는 `hl_group` 키도 포함됨), extmark를 위한 모든 옵션( `end_row`, `end_col`, `hl_group` 및 `priority` 포함)이 포함된 테이블을 반환해야 합니다.
 
-`delay.text_change` is used to delay highlighting updates by accumulating
-them (in debounce fashion). Smaller values will lead to faster response but
-more frequent updates. Bigger - slower response but less frequent updates.
+예제는 "일반적인 사용 사례" 섹션을 참고하십시오.
 
-`delay.scroll` is used to delay updating highlights in current window view
-during scrolling (see [WinScrolled](https://neovim.io/doc/user/helptag.html?tag=WinScrolled) event). These updates are present to
-ensure up to date highlighting after scroll.
+#### 지연 시간 {#minihipatterns.config-delay}
+
+
+`delay`는 비동기 하이라이트 프로세스에 사용되는 밀리초 단위의 지연 시간을 정의하는 테이블입니다.
+
+`delay.text_change`는 하이라이트 업데이트를 누적하여(디바운스 방식) 지연시키는 데 사용됩니다. 값이 작을수록 응답은 빠르지만 업데이트가 더 빈번해집니다. 값이 클수록 응답은 느려지지만 업데이트 빈도는 낮아집니다.
+
+`delay.scroll`은 스크롤하는 동안 현재 창 보기에서 하이라이트 업데이트를 지연시키는 데 사용됩니다 ( [WinScrolled](https://neovim.io/doc/user/helptag.html?tag=WinScrolled) 이벤트 참고). 이러한 업데이트는 스크롤 후 최신 하이라이트를 보장하기 위해 존재합니다.
 
 ---
 
 ### enable() {#minihipatterns.enable .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.enable`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{config}</span>)</p>
-Enable highlighting in buffer
+버퍼에서 하이라이트 활성화
 
-Notes:
+참고:
 
-- With default config it will highlight nothing, as there are no default
-  highlighters.
-
-
-- Buffer highlighting is enabled until buffer is unloaded from memory
-  or [MiniHipatterns.disable()](mini-hipatterns.qmd#minihipatterns.disable) on this buffer is called.
+- 기본 설정으로는 어떤 하이라이터도 없기 때문에 아무것도 강조하지 않습니다.
 
 
-- `:edit` disables this, as it is mostly equivalent to closing and opening
-  buffer. In order for highlighting to persist after `:edit`, call
-  [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup).
+- 버퍼 하이라이트는 버퍼가 메모리에서 언로드되거나 이 버퍼에 대해 [MiniHipatterns.disable()](mini-hipatterns.qmd#minihipatterns.disable)이 호출될 때까지 활성화됩니다.
 
-#### Parameters {#minihipatterns.enable-parameters}
+
+- `:edit`은 버퍼를 닫고 여는 것과 거의 같기 때문에 이를 비활성화합니다. `:edit` 후에도 하이라이트가 유지되도록 하려면 [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)을 호출하십시오.
+
+#### 매개변수 {#minihipatterns.enable-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier in which to enable highlighting.
-  Default: 0 for current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 하이라이트를 활성화할 버퍼 식별자.
+  기본값: 현재 버퍼의 경우 0.
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Optional buffer-local config. Should have the same
-  structure as [MiniHipatterns.config](mini-hipatterns.qmd#minihipatterns.config). Values will be taken in this order:
+<span class="help-syntax-special">{config}</span> `(table|nil)` 선택적 버퍼 로컬 설정. [MiniHipatterns.config](mini-hipatterns.qmd#minihipatterns.config)와 동일한 구조를 가져야 합니다. 값은 다음 순서로 가져옵니다:
 
-  - From this `config` argument (if supplied).
+  - 이 `config` 인수로부터 (제공된 경우).
 
-  - From buffer-local config in `vim.b.minihipatterns_config` (if present).
+  - `vim.b.minihipatterns_config`의 버퍼 로컬 설정으로부터 (존재하는 경우).
 
-  - From global config (if [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup) was called).
+  - 전역 설정으로부터 ( [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)이 호출된 경우).
 
-  - From default values.
+  - 기본값으로부터.
 
 ---
 
 ### disable() {#minihipatterns.disable .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.disable`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Disable highlighting in buffer
+버퍼에서 하이라이트 비활성화
 
-Note that if [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup) was called, the effect is present
-until the next auto-enabling event. To permanently disable highlighting in
-buffer, set `vim.b.minihipatterns_disable` to `true`
+[MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)이 호출된 경우 효과는 다음 자동 활성화 이벤트 전까지만 지속된다는 점에 주의하십시오. 버퍼에서 하이라이트를 영구적으로 비활성화하려면 `vim.b.minihipatterns_disable`를 `true`로 설정하십시오.
 
-#### Parameters {#minihipatterns.disable-parameters}
+#### 매개변수 {#minihipatterns.disable-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier in which to enable highlighting.
-  Default: 0 for current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 하이라이트를 활성화할 버퍼 식별자.
+  기본값: 현재 버퍼의 경우 0.
 
 ---
 
 ### toggle() {#minihipatterns.toggle .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.toggle`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{config}</span>)</p>
-Toggle highlighting in buffer
+버퍼에서 하이라이트 토글
 
-Call [MiniHipatterns.disable()](mini-hipatterns.qmd#minihipatterns.disable) if enabled; [MiniHipatterns.enable()](mini-hipatterns.qmd#minihipatterns.enable) otherwise.
+활성화된 경우 [MiniHipatterns.disable()](mini-hipatterns.qmd#minihipatterns.disable)을 호출하고, 그렇지 않으면 [MiniHipatterns.enable()](mini-hipatterns.qmd#minihipatterns.enable)을 호출합니다.
 
-#### Parameters {#minihipatterns.toggle-parameters}
+#### 매개변수 {#minihipatterns.toggle-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier in which to enable highlighting.
-  Default: 0 for current buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 하이라이트를 활성화할 버퍼 식별자.
+  기본값: 현재 버퍼의 경우 0.
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Forwarded to [MiniHipatterns.enable()](mini-hipatterns.qmd#minihipatterns.enable).
+<span class="help-syntax-special">{config}</span> `(table|nil)` [MiniHipatterns.enable()](mini-hipatterns.qmd#minihipatterns.enable)로 전달됩니다.
 
 ---
 
 ### update() {#minihipatterns.update .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.update`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{from_line}</span>, <span class="help-syntax-special">{to_line}</span>)</p>
-Update highlighting in range
+범위 내의 하이라이트 업데이트
 
-Works only in buffer with enabled highlighting. Effect takes immediately
-without delay.
+하이라이트가 활성화된 버퍼에서만 작동합니다. 지연 없이 즉시 효과가 나타납니다.
 
-#### Parameters {#minihipatterns.update-parameters}
-
+#### 매개변수 {#minihipatterns.update-parameters}
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier in which to enable highlighting.
-  Default: 0 for current buffer.
 
-<span class="help-syntax-special">{from_line}</span> `(number|nil)` Start line from which to update (1-indexed).
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 하이라이트를 활성화할 버퍼 식별자.
+  기본값: 현재 버퍼의 경우 0.
 
-<span class="help-syntax-special">{to_line}</span> `(number|nil)` End line from which to update (1-indexed, inclusive).
+<span class="help-syntax-special">{from_line}</span> `(number|nil)` 업데이트를 시작할 줄 (1부터 시작).
+
+<span class="help-syntax-special">{to_line}</span> `(number|nil)` 업데이트를 종료할 줄 (1부터 시작, 포함).
 
 ---
 
 ### get_enabled_buffers() {#minihipatterns.get_enabled_buffers .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.get_enabled_buffers`()</p>
-Get an array of enabled buffers
+활성화된 버퍼의 배열 가져오기
 
-#### Return {#minihipatterns.get_enabled_buffers-return}
+#### 반환값 {#minihipatterns.get_enabled_buffers-return}
 
 
-`(table)` Array of buffer identifiers with enabled highlighting.
+`(table)` 하이라이트가 활성화된 버퍼 식별자의 배열.
 
 ---
 
 ### get_matches() {#minihipatterns.get_matches .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.get_matches`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{highlighters}</span>)</p>
-Get buffer matches
+버퍼 매치 항목 가져오기
 
-#### Parameters {#minihipatterns.get_matches-parameters}
-
-
-
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier for which to return matches.
-  Default: `nil` for current buffer.
-
-<span class="help-syntax-special">{highlighters}</span> `(table|nil)` Array of highlighter identifiers (as in
-  `highlighters` field of [MiniHipatterns.config](mini-hipatterns.qmd#minihipatterns.config)) for which to return matches.
-  Default: all available highlighters (ordered by string representation).
-
-#### Return {#minihipatterns.get_matches-return}
+#### 매개변수 {#minihipatterns.get_matches-parameters}
 
 
-`(table)` Array of buffer matches which are tables with following fields:
 
-  - <span class="help-syntax-keys">\<bufnr\></span> `(number)` - buffer identifier of a match.
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 매치 항목을 반환할 버퍼 식별자.
+  기본값: 현재 버퍼의 경우 `nil`.
 
-  - <span class="help-syntax-keys">\<highlighter\></span> `(any)` - highlighter identifier which produced the match.
+<span class="help-syntax-special">{highlighters}</span> `(table|nil)` 매치 항목을 반환할 하이라이터 식별자 배열 ( [MiniHipatterns.config](mini-hipatterns.qmd#minihipatterns.config)의 `highlighters` 필드와 동일).
+  기본값: 사용 가능한 모든 하이라이터 (문자열 표현에 따라 정렬됨).
 
-  - <span class="help-syntax-keys">\<lnum\></span> `(number)` - line number of the match start (starts with 1).
+#### 반환값 {#minihipatterns.get_matches-return}
 
-  - <span class="help-syntax-keys">\<col\></span> `(number)` - column number of the match start (starts with 1).
 
-  - <span class="help-syntax-keys">\<end_lnum\></span> `(number|nil)` - line number of the match end (starts with 1).
+`(table)` 다음 필드를 포함하는 테이블인 버퍼 매치 배열:
 
-  - <span class="help-syntax-keys">\<end_col\></span> `(number|nil)` - column number next to the match end
-    (implements end-exclusive region; starts with 1).
+  - <span class="help-syntax-keys">\<bufnr\></span> `(number)` - 매치의 버퍼 식별자.
 
-  - <span class="help-syntax-keys">\<hl_group\></span> `(string|nil)` - name of match's highlight group.
+  - <span class="help-syntax-keys">\<highlighter\></span> `(any)` - 매치를 생성한 하이라이터 식별자.
 
-  Matches are ordered first by supplied `highlighters`, then by line and
-  column of match start.
+  - <span class="help-syntax-keys">\<lnum\></span> `(number)` - 매치 시작 줄 번호 (1부터 시작).
+
+  - <span class="help-syntax-keys">\<col\></span> `(number)` - 매치 시작 열 번호 (1부터 시작).
+
+  - <span class="help-syntax-keys">\<end_lnum\></span> `(number|nil)` - 매치 종료 줄 번호 (1부터 시작).
+
+  - <span class="help-syntax-keys">\<end_col\></span> `(number|nil)` - 매치 종료 다음 열 번호 (종료 제외 영역 구현, 1부터 시작).
+
+  - <span class="help-syntax-keys">\<hl_group\></span> `(string|nil)` - 매치의 하이라이트 그룹 이름.
+
+  매치는 먼저 제공된 `highlighters`에 의해 정렬된 다음, 매치 시작 줄과 열에 의해 정렬됩니다.
 
 ---
 
 ### gen_highlighter {#minihipatterns.gen_highlighter .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.gen_highlighter`</p>
-Generate builtin highlighters
+내장 하이라이터 생성
 
-This is a table with function elements. Call to actually get highlighter.
+함수 요소를 포함하는 테이블입니다. 실제로 하이라이터를 가져오려면 호출하십시오.
 
 ---
 
 ### gen_highlighter.hex_color() {#minihipatterns.gen_highlighter.hex_color .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.gen_highlighter.hex_color`(<span class="help-syntax-special">{opts}</span>)</p>
-Highlight hex color string
+16진수 색상 문자열 강조
 
-This will match color hex string in format `#rrggbb` and highlight it
-according to `opts.style` displaying matched color.
+`#rrggbb` 형식의 색상 16진수 문자열을 매치하고 매치된 색상을 표시하는 `opts.style`에 따라 강조합니다.
 
-Highlight group is computed using [MiniHipatterns.compute\_hex\_color\_group()](mini-hipatterns.qmd#minihipatterns.compute_hex_color_group),
-so all its usage notes apply here.
+하이라이트 그룹은 [MiniHipatterns.compute\_hex\_color\_group()](mini-hipatterns.qmd#minihipatterns.compute_hex_color_group)을 사용하여 계산되므로 모든 사용 시 주의 사항이 여기에 적용됩니다.
 
-#### Parameters {#minihipatterns.gen_highlighter.hex_color-parameters}
+#### 매개변수 {#minihipatterns.gen_highlighter.hex_color-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<style\></span> `(string)` - one of:
+  - <span class="help-syntax-keys">\<style\></span> `(string)` - 다음 중 하나:
 
-      - `'full'` -  highlight background of whole hex string with it. Default.
+      - `'full'` - 전체 16진수 문자열의 배경을 해당 색상으로 강조합니다. 기본값.
 
-      - `'#'` - highlight background of only `#`.
+      - `'#'` - `#`의 배경만 강조합니다.
 
-      - `'line'` - highlight underline with that color.
+      - `'line'` - 해당 색상으로 밑줄을 강조합니다.
 
-      - `'inline'` - highlight text of <span class="help-syntax-keys">\<inline_text\></span>.
-        Note: requires Neovim>=0.10.
+      - `'inline'` - <span class="help-syntax-keys">\<inline_text\></span>의 텍스트를 강조합니다.
+        참고: Neovim>=0.10이 필요합니다.
 
-  - <span class="help-syntax-keys">\<priority\></span> `(number)` - priority of highlighting. Default: 200.
+  - <span class="help-syntax-keys">\<priority\></span> `(number)` - 하이라이트 우선순위. 기본값: 200.
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function)` - callable object used to filter buffers in which
-    highlighting will take place. It should take buffer identifier as input
-    and return `false` or `nil` to not highlight inside this buffer.
+  - <span class="help-syntax-keys">\<filter\></span> `(function)` - 하이라이트가 발생할 버퍼를 필터링하는 데 사용되는 호출 가능 객체입니다. 버퍼 식별자를 입력으로 받고 해당 버퍼 내부를 강조하지 않으려면 `false` 또는 `nil`을 반환해야 합니다.
 
-  - <span class="help-syntax-keys">\<inline_text\></span> `(string)` - string to be placed and highlighted with color
-    to the right of match in case <span class="help-syntax-keys">\<style\></span> is "inline". Default: "█".
+  - <span class="help-syntax-keys">\<inline_text\></span> `(string)` - <span class="help-syntax-keys">\<style\></span>이 "inline"인 경우 매치 오른쪽에 배치되고 색상으로 강조될 문자열입니다. 기본값: "█".
 
-#### Return {#minihipatterns.gen_highlighter.hex_color-return}
+#### 반환값 {#minihipatterns.gen_highlighter.hex_color-return}
 
 
-`(table)` Highlighter table ready to be used as part of `config.highlighters`.
-  Both `pattern` and `group` are callable.
+`(table)` `config.highlighters`의 일부로 사용할 준비가 된 하이라이터 테이블입니다. `pattern`과 `group` 모두 호출 가능합니다.
 
-#### Usage {#minihipatterns.gen_highlighter.hex_color-usage}
+#### 사용법 {#minihipatterns.gen_highlighter.hex_color-usage}
 
 
 
@@ -635,34 +556,30 @@ so all its usage notes apply here.
 ### compute_hex_color_group() {#minihipatterns.compute_hex_color_group .help-syntax-right-anchor}
 
 <p align="center">`MiniHipatterns.compute_hex_color_group`(<span class="help-syntax-special">{hex_color}</span>, <span class="help-syntax-special">{style}</span>)</p>
-Compute and create group to highlight hex color string
+16진수 색상 문자열을 강조하기 위한 그룹 계산 및 생성
 
-Notes:
+참고:
 
-- This works properly only with enabled ['termguicolors'](https://neovim.io/doc/user/helptag.html?tag='termguicolors').
+- 이 기능은 ['termguicolors'](https://neovim.io/doc/user/helptag.html?tag='termguicolors')가 활성화된 경우에만 제대로 작동합니다.
 
 
-- To increase performance, it caches highlight groups per `hex_color` and
-  `style` combination. Needs a call to [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup) to have
-  these groups be persistent across color scheme changes.
+- 성능을 높이기 위해 `hex_color`와 `style` 조합별로 하이라이트 그룹을 캐시합니다. 색상 구성표 변경 시에도 이러한 그룹이 유지되도록 하려면 [MiniHipatterns.setup()](mini-hipatterns.qmd#minihipatterns.setup)을 호출해야 합니다.
 
-#### Parameters {#minihipatterns.compute_hex_color_group-parameters}
+#### 매개변수 {#minihipatterns.compute_hex_color_group-parameters}
 
 
 
-<span class="help-syntax-special">{hex_color}</span> `(string)` Hex color string in format `#rrggbb`.
+<span class="help-syntax-special">{hex_color}</span> `(string)` `#rrggbb` 형식의 16진수 색상 문자열.
 
-<span class="help-syntax-special">{style|nil}</span> `(string)` One of:
+<span class="help-syntax-special">{style|nil}</span> `(string)` 다음 중 하나:
 
-  - `'bg'` - highlight background with `hex_color` and foreground with black or
-    white (whichever is more visible). Default.
+  - `'bg'` - 배경을 `hex_color`로 강조하고 전경을 검은색 또는 흰색(더 잘 보이는 것)으로 강조합니다. 기본값.
 
-  - `'fg'` - highlight foreground with `hex_color`.
+  - `'fg'` - 전경을 `hex_color`로 강조합니다.
 
-  - `'line'` - highlight underline with `hex_color`.
+  - `'line'` - 밑줄을 `hex_color`로 강조합니다.
 
-#### Return {#minihipatterns.compute_hex_color_group-return}
+#### 반환값 {#minihipatterns.compute_hex_color_group-return}
 
 
-`(string)` Name of created highlight group appropriate to show `hex_color`.
-
+`(string)` `hex_color`를 표시하기에 적합하게 생성된 하이라이트 그룹의 이름.

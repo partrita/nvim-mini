@@ -1,79 +1,71 @@
 ---
-title: "mini.bufremove documentation"
+title: "mini.bufremove 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 `main` 브랜치에서 생성됨 _
 
-<a name="mini.bufremove" href="mini-bufremove.qmd#mini.bufremove"><b>mini.bufremove</b></a> Remove buffers
+<a name="mini.bufremove" href="mini-bufremove.qmd#mini.bufremove"><b>mini.bufremove</b></a> 버퍼 제거
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Unshow, delete, and wipeout buffer while saving window layout
-  (opposite to builtin Neovim's commands).
+- 창 레이아웃을 유지하면서 버퍼를 언쇼(unshow), 삭제(delete) 및 완전 삭제(wipeout)합니다
+  (Neovim의 기본 명령어와 반대되는 동작).
 
-#### Setup {#module-setup}
-
-
-This module doesn't need setup, but it can be done to improve usability.
-Setup with `require('mini.bufremove').setup({})` (replace `{}` with your
-`config` table). It will create global Lua table `MiniBufremove` which you
-can use for scripting or manually (with `:lua MiniBufremove.*`).
-
-See [MiniBufremove.config](mini-bufremove.qmd#minibufremove.config) for `config` structure and default values.
-
-This module doesn't have runtime options, so using `vim.b.minibufremove_config`
-will have no effect here.
-
-To stop module from showing non-error feedback, set `config.silent = true`.
-
-#### Notes {#module-notes}
+#### 설정 {#module-setup}
 
 
-1. Which buffer to show in window(s) after its current buffer is removed is
-   decided by the algorithm:
+이 모듈은 설정을 하지 않아도 되지만, 사용성을 높이기 위해 설정을 할 수 있습니다.
+`require('mini.bufremove').setup({})`을 통해 설정하세요 (`{}`를 사용자 `config` 테이블로 대체). 그러면 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniBufremove`가 생성됩니다 (예: `:lua MiniBufremove.*`).
 
-   - If alternate buffer (see [CTRL-^](https://neovim.io/doc/user/helptag.html?tag=CTRL-^)) is listed (see [buflisted()](https://neovim.io/doc/user/helptag.html?tag=buflisted\(\))), use it.
+`config` 구조와 기본값은 [MiniBufremove.config](mini-bufremove.qmd#minibufremove.config)를 참조하세요.
 
-   - If previous listed buffer (see [:bprevious](https://neovim.io/doc/user/helptag.html?tag=:bprevious)) is different, use it.
+이 모듈은 런타임 옵션이 없으므로 `vim.b.minibufremove_config`를 사용하는 것은 효과가 없습니다.
 
-   - Otherwise create a new one with `nvim_create_buf(true, false)` and use it.
+모듈이 에러가 아닌 피드백을 표시하지 않게 하려면 `config.silent = true`로 설정하세요.
 
-#### Disabling {#module-disabling}
+#### 참고 사항 {#module-notes}
 
 
-To disable core functionality, set `vim.g.minibufremove_disable` (globally) or
-`vim.b.minibufremove_disable` (for a buffer) to `true`. Considering high
-number of different scenarios and customization intentions, writing exact
-rules for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+1. 현재 버퍼가 제거된 후 창에 어떤 버퍼를 표시할지는 다음 알고리즘에 의해 결정됩니다:
+
+   - 대체 버퍼(alternate buffer, [CTRL-^](https://neovim.io/doc/user/helptag.html?tag=CTRL-^) 참조)가 목록에 있으면([buflisted()](https://neovim.io/doc/user/helptag.html?tag=buflisted\(\)) 참조) 사용합니다.
+
+   - 이전 목록에 있는 버퍼([:bprevious](https://neovim.io/doc/user/helptag.html?tag=:bprevious) 참조)가 다르면 사용합니다.
+
+   - 그렇지 않으면 `nvim_create_buf(true, false)`로 새 버퍼를 만들어 사용합니다.
+
+#### 비활성화 {#module-disabling}
+
+
+핵심 기능을 비활성화하려면 `vim.g.minibufremove_disable`(전역) 또는 `vim.b.minibufremove_disable`(버퍼별)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화에 대한 정확한 규칙을 작성하는 것은 사용자의 몫으로 남겨둡니다. 일반적인 방법은 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
 ### setup() {#minibufremove.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniBufremove.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minibufremove.setup-parameters}
+#### 매개변수 {#minibufremove.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniBufremove.config](mini-bufremove.qmd#minibufremove.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniBufremove.config](mini-bufremove.qmd#minibufremove.config)를 참조하세요.
 
-#### Usage {#minibufremove.setup-usage}
+#### 사용법 {#minibufremove.setup-usage}
 
 
 
   ```lua
-  require('mini.bufremove').setup() -- use default config
-  -- OR
-  require('mini.bufremove').setup({}) -- replace {} with your config table
+  require('mini.bufremove').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.bufremove').setup({}) -- {}를 사용자 설정 테이블로 대체
   ```
 
 ---
@@ -81,13 +73,13 @@ Module setup
 ### config {#minibufremove.config .help-syntax-right-anchor}
 
 <p align="center">`MiniBufremove.config`</p>
-#### Defaults {#minibufremove.config-defaults}
+#### 기본값 {#minibufremove.config-defaults}
 
 
 
   ```lua
   MiniBufremove.config = {
-    -- Whether to disable showing non-error feedback
+    -- 에러가 아닌 피드백을 표시하지 않을지 여부
     silent = false,
   }
   ```
@@ -97,86 +89,83 @@ Module setup
 ### delete() {#minibufremove.delete .help-syntax-right-anchor}
 
 <p align="center">`MiniBufremove.delete`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{force}</span>)</p>
-Delete buffer `buf_id` with [:bdelete](https://neovim.io/doc/user/helptag.html?tag=:bdelete) after unshowing it
+버퍼 `buf_id`를 언쇼(unshow)한 후 [:bdelete](https://neovim.io/doc/user/helptag.html?tag=:bdelete)로 삭제합니다
 
-#### Parameters {#minibufremove.delete-parameters}
-
-
-
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier (see [bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\))) to use.
-  Default: 0 for current.
-
-<span class="help-syntax-special">{force}</span> `(boolean|nil)` Whether to ignore unsaved changes (using `!` version of
-  command). If `false`, calling with unsaved changes will prompt confirm dialog.
-  Default: `false`.
-
-#### Return {#minibufremove.delete-return}
+#### 매개변수 {#minibufremove.delete-parameters}
 
 
-`(boolean|nil)` Whether operation was successful. If `nil`, no operation was done.
+
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 사용할 버퍼 식별자([bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\)) 참조).
+  기본값: 현재 버퍼의 경우 0.
+
+<span class="help-syntax-special">{force}</span> `(boolean|nil)` 저장되지 않은 변경 사항을 무시할지 여부(명령어의 `!` 버전 사용). `false`인 경우, 저장되지 않은 변경 사항이 있는 상태에서 호출하면 확인 대화 상자가 나타납니다.
+  기본값: `false`.
+
+#### 반환값 {#minibufremove.delete-return}
+
+
+`(boolean|nil)` 작업 성공 여부. `nil`이면 아무 작업도 수행되지 않았음을 의미합니다.
 
 ---
 
 ### wipeout() {#minibufremove.wipeout .help-syntax-right-anchor}
 
 <p align="center">`MiniBufremove.wipeout`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{force}</span>)</p>
-Wipeout buffer `buf_id` with [:bwipeout](https://neovim.io/doc/user/helptag.html?tag=:bwipeout) after unshowing it
+버퍼 `buf_id`를 언쇼(unshow)한 후 [:bwipeout](https://neovim.io/doc/user/helptag.html?tag=:bwipeout)로 완전 삭제(wipeout)합니다
 
-#### Parameters {#minibufremove.wipeout-parameters}
-
-
-
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier (see [bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\))) to use.
-  Default: 0 for current.
-
-<span class="help-syntax-special">{force}</span> `(boolean|nil)` Whether to ignore unsaved changes (using `!` version of
-  command). If `false`, calling with unsaved changes will prompt confirm dialog.
-  Default: `false`.
-
-#### Return {#minibufremove.wipeout-return}
+#### 매개변수 {#minibufremove.wipeout-parameters}
 
 
-`(boolean|nil)` Whether operation was successful. If `nil`, no operation was done.
+
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 사용할 버퍼 식별자([bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\)) 참조).
+  기본값: 현재 버퍼의 경우 0.
+
+<span class="help-syntax-special">{force}</span> `(boolean|nil)` 저장되지 않은 변경 사항을 무시할지 여부(명령어의 `!` 버전 사용). `false`인 경우, 저장되지 않은 변경 사항이 있는 상태에서 호출하면 확인 대화 상자가 나타납니다.
+  기본값: `false`.
+
+#### 반환값 {#minibufremove.wipeout-return}
+
+
+`(boolean|nil)` 작업 성공 여부. `nil`이면 아무 작업도 수행되지 않았음을 의미합니다.
 
 ---
 
 ### unshow() {#minibufremove.unshow .help-syntax-right-anchor}
 
 <p align="center">`MiniBufremove.unshow`(<span class="help-syntax-special">{buf_id}</span>)</p>
-Stop showing buffer `buf_id` in all windows
+모든 창에서 버퍼 `buf_id` 표시를 중단합니다
 
-#### Parameters {#minibufremove.unshow-parameters}
-
-
-
-<span class="help-syntax-special">{buf_id}</span> `(number|nil)` Buffer identifier (see [bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\))) to use.
-  Default: 0 for current.
-
-#### Return {#minibufremove.unshow-return}
+#### 매개변수 {#minibufremove.unshow-parameters}
 
 
-`(boolean|nil)` Whether operation was successful. If `nil`, no operation was done.
+
+<span class="help-syntax-special">{buf_id}</span> `(number|nil)` 사용할 버퍼 식별자([bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\)) 참조).
+  기본값: 현재 버퍼의 경우 0.
+
+#### 반환값 {#minibufremove.unshow-return}
+
+
+`(boolean|nil)` 작업 성공 여부. `nil`이면 아무 작업도 수행되지 않았음을 의미합니다.
 
 ---
 
 ### unshow_in_window() {#minibufremove.unshow_in_window .help-syntax-right-anchor}
 
 <p align="center">`MiniBufremove.unshow_in_window`(<span class="help-syntax-special">{win_id}</span>)</p>
-Stop showing current buffer of window `win_id`
+창 `win_id`에서 현재 버퍼 표시를 중단합니다
 
-Notes:
+참고 사항:
 
-- If `win_id` represents [cmdline-window](https://neovim.io/doc/user/helptag.html?tag=cmdline-window), this function will close it.
+- 만약 `win_id`가 [cmdline-window](https://neovim.io/doc/user/helptag.html?tag=cmdline-window)라면, 이 함수는 해당 창을 닫습니다.
 
-#### Parameters {#minibufremove.unshow_in_window-parameters}
-
-
-
-<span class="help-syntax-special">{win_id}</span> `(number|nil)` Window identifier (see [win\_getid()](https://neovim.io/doc/user/helptag.html?tag=win_getid\(\))) to use.
-  Default: 0 for current.
-
-#### Return {#minibufremove.unshow_in_window-return}
+#### 매개변수 {#minibufremove.unshow_in_window-parameters}
 
 
-`(boolean|nil)` Whether operation was successful. If `nil`, no operation was done.
 
+<span class="help-syntax-special">{win_id}</span> `(number|nil)` 사용할 창 식별자([win\_getid()](https://neovim.io/doc/user/helptag.html?tag=win_getid\(\)) 참조).
+  기본값: 현재 창의 경우 0.
+
+#### 반환값 {#minibufremove.unshow_in_window-return}
+
+
+`(boolean|nil)` 작업 성공 여부. `nil`이면 아무 작업도 수행되지 않았음을 의미합니다.

@@ -1,251 +1,231 @@
 ---
-title: "mini.visits documentation"
+title: "mini.visits 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_이 문서는 'mini.nvim'의 `main` 브랜치에서 생성되었습니다._
 
-<a name="mini.visits" href="mini-visits.qmd#mini.visits"><b>mini.visits</b></a> Track and reuse file system visits
+<a name="mini.visits" href="mini-visits.qmd#mini.visits"><b>mini.visits</b></a> 파일 시스템 방문 추적 및 재사용
 
-MIT License Copyright (c) 2023 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
-
-
-- Persistently track file system visits (both files and directories)
-  per project directory. Store visit index is human readable and editable.
+기능:
 
 
-- Visit index is normalized on every write to contain relevant information.
-  Exact details can be customized. See [MiniVisits.normalize\_index()](mini-visits.qmd#minivisits.normalize_index).
+- 프로젝트 디렉토리별로 파일 시스템 방문(파일 및 디렉토리 모두)을 지속적으로 추적합니다.
+  방문 인덱스는 사람이 읽을 수 있고 편집 가능하도록 저장됩니다.
 
 
-- Built-in ability to persistently add labels to path for later use.
-  See [MiniVisits.add\_label()](mini-visits.qmd#minivisits.add_label) and [MiniVisits.remove\_label()](mini-visits.qmd#minivisits.remove_label).
+- 방문 인덱스는 작성될 때마다 관련 정보를 포함하도록 정규화됩니다.
+  정확한 세부 정보는 사용자 정의할 수 있습니다. [MiniVisits.normalize\_index()](mini-visits.qmd#minivisits.normalize_index)를 참조하세요.
 
 
-- Exported functions to reuse visit data:
-
-    - List visited paths/labels with custom filter and sort (uses "robust
-      frecency" by default). Can be used as source for pickers.
-      See [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths) and [MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels).
-      See [MiniVisits.gen\_filter](mini-visits.qmd#minivisits.gen_filter) and [MiniVisits.gen\_sort](mini-visits.qmd#minivisits.gen_sort).
+- 나중에 사용할 수 있도록 경로에 라벨을 지속적으로 추가하는 기능이 내장되어 있습니다.
+  [MiniVisits.add\_label()](mini-visits.qmd#minivisits.add_label) 및 [MiniVisits.remove\_label()](mini-visits.qmd#minivisits.remove_label)을 참조하세요.
 
 
-    - Select visited paths/labels using [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\)).
-      See [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path) and [MiniVisits.select\_label()](mini-visits.qmd#minivisits.select_label).
+- 방문 데이터를 재사용하기 위한 내보낸 함수들:
+
+    - 사용자 정의 필터 및 정렬(기본적으로 "견고한 frecency" 사용)을 사용하여 방문한 경로/라벨 목록을 표시합니다.
+      선택기(picker)의 소스로 사용할 수 있습니다.
+      [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths) 및 [MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels)를 참조하세요.
+      [MiniVisits.gen\_filter](mini-visits.qmd#minivisits.gen_filter) 및 [MiniVisits.gen\_sort](mini-visits.qmd#minivisits.gen_sort)를 참조하세요.
 
 
-    - Iterate through visit paths in target direction ("forward", "backward",
-      "first", "last"). See [MiniVisits.iterate\_paths()](mini-visits.qmd#minivisits.iterate_paths).
+    - [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\))를 사용하여 방문한 경로/라벨을 선택합니다.
+      [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path) 및 [MiniVisits.select\_label()](mini-visits.qmd#minivisits.select_label)을 참조하세요.
 
 
-- Exported functions to manually update visit index allowing persistent
-  track of any user information. See `*_index()` functions.
-
-Notes:
-
-- All data is stored _only_ in in-session Lua variable (for quick operation)
-  and at `config.store.path` on disk (for persistent usage).
-
-- Most of functions affect an in-session data which gets written to disk only
-  before Neovim is closing or when users asks to.
-
-- It doesn't account for paths being renamed or moved (because there is no
-  general way to detect that). Usually a manual intervention to the visit
-  index is required after the change but _before_ the next writing to disk
-  (usually before closing current session) because it will treat previous
-  path as deleted and remove it from index.
-  There is a [MiniVisits.rename\_in\_index()](mini-visits.qmd#minivisits.rename_in_index) helper for that.
-  If rename/move is done with [mini.files](mini-files.qmd#mini.files), index is autoupdated.
-
-Sources with more details:
-
-- [MiniVisits-overview](mini-visits.qmd#minivisits-overview)
-
-- [MiniVisits-index-specification](mini-visits.qmd#minivisits-index-specification)
-
-- [MiniVisits-examples](mini-visits.qmd#minivisits-examples)
-
-#### Setup {#module-setup}
+    - 대상 방향("forward", "backward", "first", "last")으로 방문 경로를 반복합니다.
+      [MiniVisits.iterate\_paths()](mini-visits.qmd#minivisits.iterate_paths)를 참조하세요.
 
 
-This module needs a setup with `require('mini.visits').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniVisits`
-which you can use for scripting or manually (with `:lua MiniVisits.*`).
+- 모든 사용자 정보를 지속적으로 추적할 수 있도록 방문 인덱스를 수동으로 업데이트하는 내보낸 함수들.
+  `*_index()` 함수들을 참조하세요.
 
-See [MiniVisits.config](mini-visits.qmd#minivisits.config) for `config` structure and default values.
+참고:
 
-You can override runtime config settings locally to buffer inside
-`vim.b.minivisits_config` which should have same structure as
-`MiniVisits.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+- 모든 데이터는 빠른 작업을 위해 세션 내 Lua 변수에만 저장되며, 지속적인 사용을 위해 디스크의
+  `config.store.path`에 저장됩니다.
 
-#### Comparisons {#module-comparisons}
+- 대부분의 함수는 세션 내 데이터에 영향을 미치며, Neovim이 종료되기 직전이나 사용자가 요청할 때만
+  디스크에 기록됩니다.
+
+- 경로의 이름이 변경되거나 이동되는 것을 감지하지 못합니다 (이를 감지하는 일반적인 방법이 없기 때문입니다).
+  일반적으로 변경 후 다음 디스크 기록 전(보통 현재 세션 종료 전)에 방문 인덱스에 대한 수동 개입이
+  필요합니다. 그렇지 않으면 이전 경로를 삭제된 것으로 간주하고 인덱스에서 제거합니다.
+  이를 위한 [MiniVisits.rename\_in\_index()](mini-visits.qmd#minivisits.rename_in_index) 헬퍼가 있습니다.
+  [mini.files](mini-files.qmd#mini.files)로 이름 변경/이동을 수행하면 인덱스가 자동으로 업데이트됩니다.
+
+더 자세한 정보 소스:
+
+- [MiniVisits 개요](mini-visits.qmd#minivisits-overview)
+
+- [MiniVisits 인덱스 사양](mini-visits.qmd#minivisits-index-specification)
+
+- [MiniVisits 예제](mini-visits.qmd#minivisits-examples)
+
+#### 설정 {#module-setup}
+
+
+이 모듈은 `require('mini.visits').setup({})`을 통한 설정이 필요합니다
+(`{}`를 사용자의 `config` 테이블로 교체하세요). 스크립팅이나 수동으로 사용할 수 있는
+전역 Lua 테이블 `MiniVisits`를 생성합니다 (예: `:lua MiniVisits.*`).
+
+`config` 구조 및 기본값은 [MiniVisits.config](mini-visits.qmd#minivisits.config)를 참조하세요.
+
+`vim.b.minivisits_config`를 사용하여 버퍼별로 런타임 설정 설정을 재정의할 수 있으며,
+이는 `MiniVisits.config`와 동일한 구조를 가져야 합니다. 자세한 내용은
+[mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
+
+#### 비교 {#module-comparisons}
 
 
 
 - [nvim-telescope/telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim):
 
-    - It stores array of actual visit timestamps, while this module tracks
-      only total number and latest timestamp of visits. This is by design
-      as a different trade-off between how much data is being used/stored
-      and complexity of underlying "frecency" sorting.
+    - 실제 방문 타임스탬프의 배열을 저장하는 반면, 이 모듈은 총 횟수와 최신 방문 타임스탬프만
+      추적합니다. 이는 사용/저장되는 데이터의 양과 기본 "frecency" 정렬의 복잡성 사이의
+      다른 트레이드오프로 설계된 것입니다.
 
-    - By default tracks a buffer only once per session, while this module
-      tracks on every meaningful buffer enter. This leads to a more relevant
-      in-session sorting.
+    - 기본적으로 세션당 한 번만 버퍼를 추적하는 반면, 이 모듈은 의미 있는 버퍼 진입 때마다
+      추적합니다. 이는 더 관련성 있는 세션 내 정렬로 이어집니다.
 
-    - Implements an original frecency algorithm of Firefox's address bar,
-      while this module uses own "robust frecency" approach.
+    - Firefox 주소 표시줄의 원래 frecency 알고리즘을 구현하는 반면, 이 모듈은 자체적인
+      "견고한 frecency" 접근 방식을 사용합니다.
 
-    - Mostly designed to work with 'nvim-telescope/telescope.nvim', while
-      this module provides general function to list paths and select
-      with [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\)).
+    - 주로 'nvim-telescope/telescope.nvim'과 함께 작동하도록 설계된 반면, 이 모듈은 경로를 나열하고
+      [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\))로 선택하는 일반적인 함수를 제공합니다.
 
-    - Does not allow use of custom data (like labels), while this module does.
+    - 사용자 정의 데이터(라벨 등)의 사용을 허용하지 않는 반면, 이 모듈은 허용합니다.
 
 
 - [ThePrimeagen/harpoon](https://github.com/ThePrimeagen/harpoon):
 
-    - Has slightly different concept than general labeling, which more
-      resembles adding paths to an ordered stack. This module implements
-      a more common labeling which does not imply order with ability to
-      make it automated depending on the task and/or preference.
+    - 일반적인 라벨링과는 약간 다른 개념을 가지고 있으며, 순서가 지정된 스택에 경로를 추가하는 것과
+      더 비슷합니다. 이 모듈은 작업 및/또는 선호도에 따라 자동화할 수 있는 기능과 함께,
+      순서를 암시하지 않는 보다 일반적인 라벨링을 구현합니다.
 
-    - Implements marks as positions in a path, while this module labels paths.
+    - 마크를 경로 내의 위치로 구현하는 반면, 이 모듈은 경로를 라벨링합니다.
 
-    - Writes data on disk after every meaning change, while this module is
-      more conservative and read only when Neovim closes or when asked to.
+    - 모든 의미 있는 변경 후에 디스크에 데이터를 기록하는 반면, 이 모듈은 더 보수적이며
+      Neovim이 종료되거나 요청할 때만 기록합니다.
 
-    - Has support for labeling terminals, while this modules is oriented
-      only towards paths.
+    - 터미널 라벨링을 지원하는 반면, 이 모듈은 경로에만 집중합니다.
 
-    - Has dedicated UI to manage marks, while this module does not by design.
-      There are functions for adding and removing label from the path.
+    - 마크를 관리하기 위한 전용 UI가 있는 반면, 이 모듈은 설계상 UI를 제공하지 않습니다.
+      경로에서 라벨을 추가하고 제거하는 함수가 있습니다.
 
-    - Does not provide functionality to track and reuse any visited path,
-      while this module does.
+    - 방문한 경로를 추적하고 재사용하는 기능을 제공하지 않는 반면, 이 모듈은 제공합니다.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable automated tracking, set `vim.g.minivisits_disable` (globally) or
-`vim.b.minivisits_disable` (for a buffer) to `true`. Considering high
-number of different scenarios and customization intentions, writing exact
-rules for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+자동 추적을 비활성화하려면 `vim.g.minivisits_disable` (전역) 또는
+`vim.b.minivisits_disable` (버퍼별)을 `true`로 설정하세요. 다양한
+시나리오와 사용자 정의 의도를 고려하여, 모듈 기능을 비활성화하기 위한 정확한 규칙을
+작성하는 것은 사용자의 몫으로 남겨둡니다. 일반적인 방법은
+[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
-### Overview {#minivisits-overview .help-syntax-right-anchor}
+### 개요 {#minivisits-overview .help-syntax-right-anchor}
 
-#### Tracking visits {#minivisits-overview-trackingvisits}
-
-
-File system visits (both directory and files) tracking is done in two steps:
-
-- On every dedicated event (`config.track.event`, [BufEnter](https://neovim.io/doc/user/helptag.html?tag=BufEnter) by default) timer
-  is (re)started to actually register visit after certain amount of time
-  (`config.track.delay` milliseconds, 1000 by default). It is not registered
-  immediately to allow navigation to target buffer in several steps
-  (for example, with series of [:bnext](https://neovim.io/doc/user/helptag.html?tag=:bnext) / [:bprevious](https://neovim.io/doc/user/helptag.html?tag=:bprevious)).
+#### 방문 추적 {#minivisits-overview-trackingvisits}
 
 
-- When delay time passes without any dedicated events being triggered
-  (meaning user is "settled" on certain buffer), [MiniVisits.register\_visit()](mini-visits.qmd#minivisits.register_visit)
-  is called if all of the following conditions are met:
+파일 시스템 방문(디렉토리 및 파일 모두) 추적은 두 단계로 수행됩니다:
 
-    - Module is not disabled (see "Disabling" section in [mini.visits](mini-visits.qmd#mini.visits)).
-
-    - Buffer is normal with non-empty name (used as visit path).
-
-    - Visit path does not equal to the latest tracked one. This is to allow
-      temporary enter of non-normal buffers (like help, terminal, etc.)
-      without artificial increase of visit count.
-
-Visit is autoregistered for [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory) and leads to increase of count
-and latest time of visit. See [MiniVisits-index-specification](mini-visits.qmd#minivisits-index-specification) for more details.
-
-Notes:
-
-- All data is stored _only_ in in-session Lua variable (for quick operation)
-  and at `config.store.path` on disk (for persistent usage). It is automatically
-  written to disk before every Neovim exit (if `config.store.autowrite` is set).
+- 모든 전용 이벤트(`config.track.event`, 기본적으로 [BufEnter](https://neovim.io/doc/user/helptag.html?tag=BufEnter))에서 일정 시간
+  (`config.track.delay` 밀리초, 기본값 1000) 후에 실제로 방문을 등록하기 위해 타이머를
+  시작(또는 재시작)합니다. 여러 단계(예: [:bnext](https://neovim.io/doc/user/helptag.html?tag=:bnext) / [:bprevious](https://neovim.io/doc/user/helptag.html?tag=:bprevious) 시리즈)를 통해
+  대상 버퍼로 탐색할 수 있도록 즉시 등록되지 않습니다.
 
 
-- Tracking can be disabled by supplying empty string as `track.event`.
-  Then it is up to the user to properly call [MiniVisits.register\_visit()](mini-visits.qmd#minivisits.register_visit).
+- 전용 이벤트가 트리거되지 않고 지연 시간이 지나면(사용자가 특정 버퍼에 "안착"했음을 의미),
+  다음 조건이 모두 충족되는 경우 [MiniVisits.register\_visit()](mini-visits.qmd#minivisits.register_visit)이 호출됩니다:
 
-#### Reusing visits {#minivisits-overview-reusingvisits}
+    - 모듈이 비활성화되지 않았습니다 ([mini.visits](mini-visits.qmd#mini.visits)의 "비활성화" 섹션 참조).
 
+    - 버퍼가 비어 있지 않은 이름을 가진 일반 버퍼입니다 (방문 경로로 사용됨).
 
-Visit data can be reused in at least these ways:
+    - 방문 경로가 마지막으로 추적된 경로와 같지 않습니다. 이는 도움말, 터미널 등과 같은
+      비정상 버퍼에 일시적으로 진입할 때 방문 횟수가 인위적으로 증가하는 것을 방지하기 위함입니다.
 
+방문은 [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory)에 대해 자동 등록되며 방문 횟수와 최신 방문 시간이 증가합니다.
+자세한 내용은 [MiniVisits 인덱스 사양](mini-visits.qmd#minivisits-index-specification)을 참조하세요.
 
-- Get a list of visited paths (see [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths)) and use it
-  to visualize/pick/navigate visit history.
+참고:
 
-
-- Select one of the visited paths to open it (see [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path)).
-
-
-- Move along visit history (see [MiniVisits.iterate\_paths()](mini-visits.qmd#minivisits.iterate_paths)).
-
-
-- Utilize labels. Any visit can be added one or more labels (like "core",
-  "tmp", etc.). They are bound to the visit (path registered for certain
-  directory) and are stored persistently.
-  Labels can be used to manually create groups of files and/or directories
-  that have particular interest to the user.
-  There is no one right way to use them, though. See [MiniVisits-examples](mini-visits.qmd#minivisits-examples)
-  for some inspiration.
+- 모든 데이터는 빠른 작업을 위해 세션 내 Lua 변수에만 저장되며, 지속적인 사용을 위해 디스크의
+  `config.store.path`에 저장됩니다. Neovim이 종료되기 전에 자동으로 디스크에 기록됩니다
+  (`config.store.autowrite`가 설정된 경우).
 
 
-- Utilizing custom data. Visit index can be manipulated manually using
-  `_index()` set of functions. All "storable" (i.e. not functions or
-  metatables) user data inside index is then stored on disk, so it can be
-  used to create any kind of workflow user wants.
+- 추적은 빈 문자열을 `track.event`로 제공하여 비활성화할 수 있습니다.
+  그러면 사용자가 [MiniVisits.register\_visit()](mini-visits.qmd#minivisits.register_visit)을 적절하게 호출해야 합니다.
 
-See [MiniVisits-examples](mini-visits.qmd#minivisits-examples) for some actual configuration and workflow examples.
+#### 방문 재사용 {#minivisits-overview-reusingvisits}
+
+
+방문 데이터는 최소한 다음과 같은 방법으로 재사용할 수 있습니다:
+
+
+- 방문한 경로 목록을 가져와서( [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths) 참조) 방문 기록을
+  시각화/선택/탐색하는 데 사용합니다.
+
+
+- 방문한 경로 중 하나를 선택하여 엽니다( [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path) 참조).
+
+
+- 방문 기록을 따라 이동합니다( [MiniVisits.iterate\_paths()](mini-visits.qmd#minivisits.iterate_paths) 참조).
+
+
+- 라벨을 활용합니다. 모든 방문에 하나 이상의 라벨(예: "core", "tmp" 등)을 추가할 수 있습니다.
+  이러한 라벨은 방문(특정 디렉토리에 대해 등록된 경로)에 바인딩되며 영구적으로 저장됩니다.
+  라벨을 사용하여 사용자가 특히 관심을 갖는 파일 및/또는 디렉토리 그룹을 수동으로 생성할 수 있습니다.
+  라벨을 사용하는 유일한 옳은 방법은 없습니다. 영감을 얻으려면 [MiniVisits-예제](mini-visits.qmd#minivisits-examples)를 참조하세요.
+
+
+- 사용자 정의 데이터 활용. `_index()` 함수 세트를 사용하여 방문 인덱스를 수동으로 조작할 수 있습니다.
+  인덱스 내부의 모든 "저장 가능한"(즉, 함수나 메타테이블이 아닌) 사용자 데이터는 디스크에 저장되므로
+  사용자가 원하는 모든 종류의 워크플로우를 만드는 데 사용할 수 있습니다.
+
+실제 구성 및 워크플로우 예제는 [MiniVisits-예제](mini-visits.qmd#minivisits-examples)를 참조하세요.
 
 ---
 
-### Index specification {#minivisits-index-specification .help-syntax-right-anchor}
+### 인덱스 사양 {#minivisits-index-specification .help-syntax-right-anchor}
 
-#### Structure {#minivisits-index-specification-structure}
+#### 구조 {#minivisits-index-specification-structure}
 
 
-Visit index is a table containing actual data in two level deep nested tables.
+방문 인덱스는 두 수준의 중첩된 테이블에 실제 데이터를 포함하는 테이블입니다.
 
-First level keys are paths of project directory (a.k.a "cwd") for which
-visits are registered.
+첫 번째 수준의 키는 방문이 등록된 프로젝트 디렉토리(일명 "cwd")의 경로입니다.
 
-Second level keys are actual visit paths. Their values are tables with visit
-data which should follow these requirements:
+두 번째 수준의 키는 실제 방문 경로입니다. 해당 값은 다음 요구 사항을 따라야 하는 방문 데이터를 가진 테이블입니다:
 
-- Field <span class="help-syntax-keys">\<count\></span> should be present and be a number. It represents the number
-  of times this path was visited under particular cwd.
+- <span class="help-syntax-keys">\<count\></span> 필드가 있어야 하며 숫자여야 합니다. 특정 cwd 하에서 이 경로를 방문한 횟수를 나타냅니다.
 
-- Field <span class="help-syntax-keys">\<latest\></span> should be present and be a number. It represents the time
-  of latest path visit under particular cwd.
-  By default computed with [os.time()](https://neovim.io/doc/user/helptag.html?tag=os.time\(\)) (up to a second).
+- <span class="help-syntax-keys">\<latest\></span> 필드가 있어야 하며 숫자여야 합니다. 특정 cwd 하에서 경로를 마지막으로 방문한 시간을 나타냅니다.
+  기본적으로 [os.time()](https://neovim.io/doc/user/helptag.html?tag=os.time\(\))으로 계산됩니다(초 단위).
 
-- Field <span class="help-syntax-keys">\<labels\></span> might not be present. If present, it should be a table
-  with string labels as keys and `true` as values. It represents labels of
-  the path under particular cwd.
+- <span class="help-syntax-keys">\<labels\></span> 필드는 없을 수도 있습니다. 있는 경우 문자열 라벨을 키로 하고 `true`를 값으로 하는 테이블이어야 합니다.
+  특정 cwd 하에서의 경로 라벨을 나타냅니다.
 
-Notes:
+참고:
 
-- All paths are absolute.
+- 모든 경로는 절대 경로입니다.
 
-- Visit path should not necessarily be a part of corresponding cwd.
+- 방문 경로가 반드시 해당 cwd의 일부일 필요는 없습니다.
 
-- Both `count` and `latest` can be any number: whole, fractional, negative, etc.
+- `count`와 `latest`는 정수, 소수, 음수 등 어떤 숫자라도 될 수 있습니다.
 
-Example of an index data:
+인덱스 데이터의 예:
 
   ```lua
   {
@@ -264,46 +244,43 @@ Example of an index data:
   }
   ```
 
-#### Storage {#minivisits-index-specification-storage}
+#### 저장소 {#minivisits-index-specification-storage}
 
 
-When stored on disk, visit index is a file containing Lua code returning
-visit index table. It can be edited by hand as long as it contains a valid
-Lua code (to be executed with [dofile()](https://neovim.io/doc/user/helptag.html?tag=dofile\(\))).
+디스크에 저장될 때 방문 인덱스는 방문 인덱스 테이블을 반환하는 Lua 코드가 포함된 파일입니다.
+유효한 Lua 코드( [dofile()](https://neovim.io/doc/user/helptag.html?tag=dofile\(\))로 실행됨)가 포함되어 있는 한 손으로 편집할 수 있습니다.
 
-Notes:
+참고:
 
-- Storage is implemented in such a way that it doesn't really support more
-  than one parallel Neovim processes. Meaning that if there are two or more
-  simultaneous Neovim processes with same visit index storage path, the last
-  one writing to it will preserve its visit history while others - won't.
+- 저장소는 둘 이상의 병렬 Neovim 프로세스를 실제로 지원하지 않는 방식으로 구현되었습니다.
+  즉, 동일한 방문 인덱스 저장 경로를 가진 둘 이상의 동시 Neovim 프로세스가 있는 경우,
+  마지막으로 기록하는 프로세스가 방문 기록을 보존하고 다른 프로세스는 보존하지 않습니다.
 
-#### Normalization {#minivisits-index-specification-normalization}
+#### 정규화 {#minivisits-index-specification-normalization}
 
 
-To ensure that visit index contains mostly relevant data, it gets normalized:
-automatically inside [MiniVisits.write\_index()](mini-visits.qmd#minivisits.write_index) or
-via [MiniVisits.normalize\_index()](mini-visits.qmd#minivisits.normalize_index).
+방문 인덱스에 주로 관련 데이터가 포함되도록 정규화됩니다:
+[MiniVisits.write\_index()](mini-visits.qmd#minivisits.write_index) 내부에서 자동으로 수행되거나
+[MiniVisits.normalize\_index()](mini-visits.qmd#minivisits.normalize_index)를 통해 수행됩니다.
 
-What normalization actually does can be configured in `config.store.normalize`.
+정규화가 실제로 수행하는 작업은 `config.store.normalize`에서 구성할 수 있습니다.
 
-See [MiniVisits.gen\_normalize.default()](mini-visits.qmd#minivisits.gen_normalize.default) for default normalization approach.
+기본 정규화 방식은 [MiniVisits.gen\_normalize.default()](mini-visits.qmd#minivisits.gen_normalize.default)를 참조하세요.
 
 ---
 
-### Examples {#minivisits-examples .help-syntax-right-anchor}
+### 예제 {#minivisits-examples .help-syntax-right-anchor}
 
-This module provides a flexible framework for working with file system visits.
-Exact choice of how to organize workflow is left to the user.
-Here are some examples for inspiration which can be combined together.
+이 모듈은 파일 시스템 방문 작업을 위한 유연한 프레임워크를 제공합니다.
+워크플로우를 구성하는 방법의 정확한 선택은 사용자에게 달려 있습니다.
+다음은 서로 결합할 수 있는 영감을 주는 몇 가지 예제입니다.
 
-#### Use different sorting {#minivisits-examples-usedifferentsorting}
+#### 다른 정렬 사용 {#minivisits-examples-usedifferentsorting}
 
 
-Default sorting in [MiniVisits.gen\_sort.default()](mini-visits.qmd#minivisits.gen_sort.default) allows flexible adjustment
-of which feature to prefer more: recency or frequency. Here is an example of
-how to make set of keymaps for three types of sorting combined with two types
-of scopes (all visits and only for current cwd):
+[MiniVisits.gen\_sort.default()](mini-visits.qmd#minivisits.gen_sort.default)의 기본 정렬을 사용하면 최신성(recency) 또는 빈도(frequency) 중
+어느 쪽을 더 선호할지 유연하게 조정할 수 있습니다. 다음은 세 가지 정렬 유형과 두 가지 범위
+(모든 방문 및 현재 cwd에 대해서만)를 결합한 키맵 세트를 만드는 예제입니다:
 
   ```lua
   local make_select_path = function(select_global, recency_weight)
@@ -320,33 +297,32 @@ of scopes (all visits and only for current cwd):
     vim.keymap.set('n', lhs, make_select_path(...), { desc = desc })
   end
 
-  -- Adjust LHS and description to your liking
-  map('<Leader>vr', 'Select recent (all)',   true,  1)
-  map('<Leader>vR', 'Select recent (cwd)',   false, 1)
-  map('<Leader>vy', 'Select frecent (all)',  true,  0.5)
-  map('<Leader>vY', 'Select frecent (cwd)',  false, 0.5)
-  map('<Leader>vf', 'Select frequent (all)', true,  0)
-  map('<Leader>vF', 'Select frequent (cwd)', false, 0)
+  -- LHS와 설명을 원하는 대로 조정하세요
+  map('<Leader>vr', '최근 방문 선택 (전체)',   true,  1)
+  map('<Leader>vR', '최근 방문 선택 (cwd)',    false, 1)
+  map('<Leader>vy', 'Frecent 방문 선택 (전체)', true,  0.5)
+  map('<Leader>vY', 'Frecent 방문 선택 (cwd)',  false, 0.5)
+  map('<Leader>vf', '자주 방문한 경로 선택 (전체)', true,  0)
+  map('<Leader>vF', '자주 방문한 경로 선택 (cwd)',  false, 0)
   ```
 
-Note: If using [mini.pick](mini-pick.qmd#mini.pick), consider [MiniExtra.pickers.visit\_paths()](mini-extra.qmd#miniextra.pickers.visit_paths).
+참고: [mini.pick](mini-pick.qmd#mini.pick)을 사용하는 경우 [MiniExtra.pickers.visit\_paths()](mini-extra.qmd#miniextra.pickers.visit_paths)를 고려하세요.
 
-#### Use manual labels {#minivisits-examples-usemanuallabels}
+#### 수동 라벨 사용 {#minivisits-examples-usemanuallabels}
 
 
-Labels is a powerful tool to create groups of associated paths.
-Usual workflow consists of:
+라벨은 연관된 경로 그룹을 만드는 강력한 도구입니다.
+일반적인 워크플로우는 다음과 같습니다:
 
-- Add label with [MiniVisits.add\_label()](mini-visits.qmd#minivisits.add_label) (prompts for actual label).
+- [MiniVisits.add\_label()](mini-visits.qmd#minivisits.add_label)로 라벨 추가 (실제 라벨을 묻는 메시지가 표시됨).
 
-- Remove label with [MiniVisits.remove\_label()](mini-visits.qmd#minivisits.remove_label) (prompts for actual label).
+- [MiniVisits.remove\_label()](mini-visits.qmd#minivisits.remove_label)로 라벨 제거 (실제 라벨을 묻는 메시지가 표시됨).
 
-- When need to use labeled groups, call [MiniVisits.select\_label()](mini-visits.qmd#minivisits.select_label) which
-  will then call [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path) to select path among those
-  having selected label.
-  Note: If using [mini.pick](mini-pick.qmd#mini.pick), consider [MiniExtra.pickers.visit\_labels()](mini-extra.qmd#miniextra.pickers.visit_labels).
+- 라벨링된 그룹을 사용해야 할 때 [MiniVisits.select\_label()](mini-visits.qmd#minivisits.select_label)을 호출하면,
+  선택된 라벨이 있는 경로 중에서 선택하기 위해 [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path)를 호출합니다.
+  참고: [mini.pick](mini-pick.qmd#mini.pick)을 사용하는 경우 [MiniExtra.pickers.visit\_labels()](mini-extra.qmd#miniextra.pickers.visit_labels)를 고려하세요.
 
-To make this workflow smoother, here is an example of keymaps:
+이 워크플로우를 더 원활하게 만들기 위한 키맵 예제입니다:
 
   ```lua
   local map_vis = function(keys, call, desc)
@@ -354,33 +330,32 @@ To make this workflow smoother, here is an example of keymaps:
     vim.keymap.set('n', '<Leader>' .. keys, rhs, { desc = desc })
   end
 
-  map_vis('vv', 'add_label()',          'Add label')
-  map_vis('vV', 'remove_label()',       'Remove label')
-  map_vis('vl', 'select_label("", "")', 'Select label (all)')
-  map_vis('vL', 'select_label()',       'Select label (cwd)')
+  map_vis('vv', 'add_label()',          '라벨 추가')
+  map_vis('vV', 'remove_label()',       '라벨 제거')
+  map_vis('vl', 'select_label("", "")', '라벨 선택 (전체)')
+  map_vis('vL', 'select_label()',       '라벨 선택 (cwd)')
   ```
 
-#### Use fixed labels {#minivisits-examples-usefixedlabels}
+#### 고정 라벨 사용 {#minivisits-examples-usefixedlabels}
 
 
-During work on every project there is usually a handful of files where core
-activity is concentrated. This can be made easier by creating mappings
-which add/remove special fixed label (for example, "core") and select paths
-with that label for both all and current cwd. Example:
+모든 프로젝트 작업을 하는 동안 일반적으로 핵심 활동이 집중되는 소수의 파일이 있습니다.
+특수 고정 라벨(예: "core")을 추가/제거하고 전체 및 현재 cwd에 대해 해당 라벨이 있는 경로를
+선택하는 매핑을 만들어 이를 더 쉽게 만들 수 있습니다. 예제:
 
   ```lua
-  -- Create and select
+  -- 생성 및 선택
   local map_vis = function(keys, call, desc)
     local rhs = '<Cmd>lua MiniVisits.' .. call .. '<CR>'
     vim.keymap.set('n', '<Leader>' .. keys, rhs, { desc = desc })
   end
 
-  map_vis('vv', 'add_label("core")',                     'Add to core')
-  map_vis('vV', 'remove_label("core")',                  'Remove from core')
-  map_vis('vc', 'select_path("", { filter = "core" })',  'Select core (all)')
-  map_vis('vC', 'select_path(nil, { filter = "core" })', 'Select core (cwd)')
+  map_vis('vv', 'add_label("core")',                     'core에 추가')
+  map_vis('vV', 'remove_label("core")',                  'core에서 제거')
+  map_vis('vc', 'select_path("", { filter = "core" })',  'core 선택 (전체)')
+  map_vis('vC', 'select_path(nil, { filter = "core" })', 'core 선택 (cwd)')
 
-  -- Iterate based on recency
+  -- 최신성을 기반으로 반복
   local sort_latest = MiniVisits.gen_sort.default({ recency_weight = 1 })
   local map_iterate_core = function(lhs, direction, desc)
     local opts = { filter = 'core', sort = sort_latest, wrap = true }
@@ -390,18 +365,18 @@ with that label for both all and current cwd. Example:
     vim.keymap.set('n', lhs, rhs, { desc = desc })
   end
 
-  map_iterate_core('[{', 'last',     'Core label (earliest)')
-  map_iterate_core('[[', 'forward',  'Core label (earlier)')
-  map_iterate_core(']]', 'backward', 'Core label (later)')
-  map_iterate_core(']}', 'first',    'Core label (latest)')
+  map_iterate_core('[{', 'last',     'Core 라벨 (가장 오래전)')
+  map_iterate_core('[[', 'forward',  'Core 라벨 (이전)')
+  map_iterate_core(']]', 'backward', 'Core 라벨 (이후)')
+  map_iterate_core(']}', 'first',    'Core 라벨 (최신)')
   ```
 
-#### Use automated labels {#minivisits-examples-useautomatedlabels}
+#### 자동 라벨 사용 {#minivisits-examples-useautomatedlabels}
 
 
-When using version control system (such as Git), usually there is already
-an identifier that groups files you are working with - branch name.
-Here is an example of keymaps to add/remove label equal to branch name:
+버전 제어 시스템(예: Git)을 사용할 때는 일반적으로 작업 중인 파일을 그룹화하는
+식별자인 브랜치 이름이 이미 있습니다. 다음은 브랜치 이름과 동일한 라벨을
+추가/제거하는 키맵 예제입니다:
 
   ```lua
   local map_branch = function(keys, action, desc)
@@ -414,8 +389,8 @@ Here is an example of keymaps to add/remove label equal to branch name:
     vim.keymap.set('n', '<Leader>' .. keys, rhs, { desc = desc })
   end
 
-  map_branch('vb', 'add_label',    'Add branch label')
-  map_branch('vB', 'remove_label', 'Remove branch label')
+  map_branch('vb', 'add_label',    '브랜치 라벨 추가')
+  map_branch('vB', 'remove_label', '브랜치 라벨 제거')
   ```
 
 ---
@@ -423,22 +398,22 @@ Here is an example of keymaps to add/remove label equal to branch name:
 ### setup() {#minivisits.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minivisits.setup-parameters}
+#### 매개변수 {#minivisits.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniVisits.config](mini-visits.qmd#minivisits.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniVisits.config](mini-visits.qmd#minivisits.config)를 참조하세요.
 
-#### Usage {#minivisits.setup-usage}
+#### 사용법 {#minivisits.setup-usage}
 
 
 
   ```lua
-  require('mini.visits').setup() -- use default config
-  -- OR
-  require('mini.visits').setup({}) -- replace {} with your config table
+  require('mini.visits').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.visits').setup({}) -- {}를 사용자의 설정 테이블로 교체
   ```
 
 ---
@@ -446,43 +421,43 @@ Module setup
 ### config {#minivisits.config .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.config`</p>
-#### Defaults {#minivisits.config-defaults}
+#### 기본값 {#minivisits.config-defaults}
 
 
 
   ```lua
   MiniVisits.config = {
-    -- How visit index is converted to list of paths
+    -- 방문 인덱스가 경로 목록으로 변환되는 방법
     list = {
-      -- Predicate for which paths to include (all by default)
+      -- 포함할 경로에 대한 서술어(기본적으로 전체 포함)
       filter = nil,
 
-      -- Sort paths based on the visit data (robust frecency by default)
+      -- 방문 데이터를 기반으로 경로 정렬(기본적으로 견고한 frecency)
       sort = nil,
     },
 
-    -- Whether to disable showing non-error feedback
+    -- 오류가 아닌 피드백 표시를 비활성화할지 여부
     silent = false,
 
-    -- How visit index is stored
+    -- 방문 인덱스가 저장되는 방법
     store = {
-      -- Whether to write all visits before Neovim is closed
+      -- Neovim이 종료되기 전에 모든 방문을 기록할지 여부
       autowrite = true,
 
-      -- Function to ensure that written index is relevant
+      -- 작성된 인덱스가 관련성이 있는지 확인하는 함수
       normalize = nil,
 
-      -- Path to store visit index
+      -- 방문 인덱스를 저장할 경로
       path = vim.fn.stdpath('data') .. '/mini-visits-index',
     },
 
-    -- How visit tracking is done
+    -- 방문 추적 방법
     track = {
-      -- Start visit register timer at this event
-      -- Supply empty string (`''`) to not do this automatically
+      -- 이 이벤트에서 방문 등록 타이머 시작
+      -- 이를 자동으로 수행하지 않으려면 빈 문자열(`''`)을 제공하세요
       event = 'BufEnter',
 
-      -- Debounce delay after event to register a visit
+      -- 방문을 등록하기 위한 이벤트 후의 디바운스 지연 시간
       delay = 1000,
     },
   }
@@ -493,765 +468,748 @@ Module setup
 
 <a name="minivisits.config.list" href="mini-visits.qmd#minivisits.config.list"><b>MiniVisits.config.list</b></a>
 
-`config.list` defines how visit index is converted to a path list by default.
+`config.list`는 방문 인덱스가 기본적으로 경로 목록으로 변환되는 방식을 정의합니다.
 
-`list.filter` is a callable which should take a path data and return `true` if
-this path should be present in the list.
-Default: output of [MiniVisits.gen\_filter.default()](mini-visits.qmd#minivisits.gen_filter.default).
+`list.filter`는 경로 데이터를 받아 이 경로가 목록에 있어야 하는 경우 `true`를 반환해야 하는
+호출 가능한 객체입니다.
+기본값: [MiniVisits.gen\_filter.default()](mini-visits.qmd#minivisits.gen_filter.default)의 출력.
 
-Path data is a table with at least these fields:
+경로 데이터는 최소한 다음 필드를 포함하는 테이블입니다:
 
-- <span class="help-syntax-keys">\<path\></span> `(string)` - absolute path of visit.
+- <span class="help-syntax-keys">\<path\></span> `(string)` - 방문의 절대 경로.
 
-- <span class="help-syntax-keys">\<count\></span> `(number)` - number of visits.
+- <span class="help-syntax-keys">\<count\></span> `(number)` - 방문 횟수.
 
-- <span class="help-syntax-keys">\<latest\></span> `(number)` - timestamp of latest visit.
+- <span class="help-syntax-keys">\<latest\></span> `(number)` - 최신 방문의 타임스탬프.
 
-- <span class="help-syntax-keys">\<labels\></span> `(table|nil)` - table of labels (has string keys with `true` values).
+- <span class="help-syntax-keys">\<labels\></span> `(table|nil)` - 라벨 테이블(`true` 값을 가진 문자열 키 포함).
 
-Notes:
+참고:
 
-- Both `count` and `latest` (in theory) can be any number. But built-in tracking
-  results into positive integer `count` and `latest` coming from [os.time()](https://neovim.io/doc/user/helptag.html?tag=os.time\(\)).
+- `count`와 `latest`는 (이론적으로) 어떤 숫자라도 될 수 있습니다. 하지만 내장된 추적은
+  양의 정수 `count`와 [os.time()](https://neovim.io/doc/user/helptag.html?tag=os.time\(\))에서 오는 `latest`를 결과로 생성합니다.
 
-- There can be other entries if they are set by user as index entry.
+- 사용자가 인덱스 항목으로 설정한 경우 다른 항목이 있을 수 있습니다.
 
-`list.sort` is a callable which should take an array of path data and return
-a sorted array of path data (or at least tables each containing <span class="help-syntax-keys">\<path\></span> field).
-Default: output of [MiniVisits.gen\_sort.default()](mini-visits.qmd#minivisits.gen_sort.default).
-Single path data entry is a table with a same structure as for `list.filter`.
+`list.sort`는 경로 데이터 배열을 받아 정렬된 경로 데이터 배열(또는 적어도 각 테이블에
+<span class="help-syntax-keys">\<path\></span> 필드가 포함된 테이블)을 반환해야 하는 호출 가능한 객체입니다.
+기본값: [MiniVisits.gen\_sort.default()](mini-visits.qmd#minivisits.gen_sort.default)의 출력.
+단일 경로 데이터 항목은 `list.filter`와 동일한 구조를 가진 테이블입니다.
 
-Note, that `list.sort` can be used both to filter, sort, or even return paths
-unrelated to the input.
+참고로 `list.sort`는 필터링, 정렬 또는 입력과 무관한 경로를 반환하는 데 모두 사용될 수 있습니다.
 
 #### Silent {#minivisits.config-silent}
 
 
-`config.silent` is a boolean controlling whether to show non-error feedback
-(like adding/removing labels, etc.). Default: `false`.
+`config.silent`는 오류가 아닌 피드백(라벨 추가/제거 등)을 표시할지 여부를 제어하는 부울 값입니다.
+기본값: `false`.
 
 #### Store {#minivisits.config-store}
 
 
-`config.store` defines how visit index is stored on disk to enable persistent
-data across several sessions.
+`config.store`는 여러 세션에서 영구 데이터를 활성화하기 위해 방문 인덱스가 디스크에
+저장되는 방식을 정의합니다.
 
-`store.autowrite` is a boolean controlling whether to write visit data to
-disk on [VimLeavePre](https://neovim.io/doc/user/helptag.html?tag=VimLeavePre) event. Default: `true`.
+`store.autowrite`는 [VimLeavePre](https://neovim.io/doc/user/helptag.html?tag=VimLeavePre) 이벤트 시 디스크에 방문 데이터를 기록할지 여부를 제어하는
+부울 값입니다. 기본값: `true`.
 
-`store.normalize` is a callable which should take visit index
-(see [MiniVisits-index-specification](mini-visits.qmd#minivisits-index-specification)) as input and return "normalized" visit
-index as output. This is used to ensure that visit index is up to date and
-contains only relevant data. For example, it controls how old and
-irrelevant visits are "forgotten", and more.
-Default: output of [MiniVisits.gen\_normalize.default()](mini-visits.qmd#minivisits.gen_normalize.default).
+`store.normalize`는 방문 인덱스( [MiniVisits 인덱스 사양](mini-visits.qmd#minivisits-index-specification) 참조)를 입력으로 받아
+"정규화된" 방문 인덱스를 출력으로 반환해야 하는 호출 가능한 객체입니다.
+이는 방문 인덱스가 최신 상태이고 관련 데이터만 포함하도록 하는 데 사용됩니다.
+예를 들어, 오래되고 관련 없는 방문을 "잊어버리는" 방법 등을 제어합니다.
+기본값: [MiniVisits.gen\_normalize.default()](mini-visits.qmd#minivisits.gen_normalize.default)의 출력.
 
-`store.path` is a path to which visit index is written. See "Storage" section
-of [MiniVisits-index-specification](mini-visits.qmd#minivisits-index-specification) for more details.
-Note: set to empty string to disable any writing with not explicitly set
-path (including the one on [VimLeavePre](https://neovim.io/doc/user/helptag.html?tag=VimLeavePre)).
-Default: "mini-visits-index" file inside [\$XDG\_DATA\_HOME](https://neovim.io/doc/user/helptag.html?tag=$XDG_DATA_HOME).
+`store.path`는 방문 인덱스가 작성되는 경로입니다. 자세한 내용은 [MiniVisits 인덱스 사양](mini-visits.qmd#minivisits-index-specification)의
+"저장소" 섹션을 참조하세요.
+참고: 명시적으로 설정되지 않은 경로( [VimLeavePre](https://neovim.io/doc/user/helptag.html?tag=VimLeavePre)의 경로 포함)에 대한 쓰기를
+비활성화하려면 빈 문자열로 설정하세요.
+기본값: [\$XDG\_DATA\_HOME](https://neovim.io/doc/user/helptag.html?tag=$XDG_DATA_HOME) 내부의 "mini-visits-index" 파일.
 
 #### Track {#minivisits.config-track}
 
 
-`config.track` defines how visits are tracked (index entry is autoupdated).
-See "Tracking visits" section in [MiniVisits-overview](mini-visits.qmd#minivisits-overview) for more details.
+`config.track`은 방문이 추적되는 방식(인덱스 항목 자동 업데이트)을 정의합니다.
+자세한 내용은 [MiniVisits 개요](mini-visits.qmd#minivisits-overview)의 "방문 추적" 섹션을 참조하세요.
 
-`track.event` is a proper Neovim [<span class="help-syntax-special">{event}</span>](https://neovim.io/doc/user/helptag.html?tag={event}) on which track get triggered.
-Note: set to empty string to disable automated tracking.
-Default: [BufEnter](https://neovim.io/doc/user/helptag.html?tag=BufEnter).
+`track.event`는 추적을 트리거하는 올바른 Neovim [<span class="help-syntax-special">{event}</span>](https://neovim.io/doc/user/helptag.html?tag={event})입니다.
+참고: 자동 추적을 비활성화하려면 빈 문자열로 설정하세요.
+기본값: [BufEnter](https://neovim.io/doc/user/helptag.html?tag=BufEnter).
 
-`track.delay` is a delay in milliseconds after event is triggered and visit
-is autoregistered.
-Default: 1000 (to allow navigation between buffers without tracking
-intermediate ones).
+`track.delay`는 이벤트가 트리거되고 방문이 자동으로 등록된 후의 밀리초 단위 지연 시간입니다.
+기본값: 1000 (중간 버퍼를 추적하지 않고 버퍼 간 탐색을 허용하기 위함).
 
 ---
 
 ### register_visit() {#minivisits.register_visit .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.register_visit`(<span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{cwd}</span>)</p>
-Register visit
+방문 등록
 
-Steps:
+단계:
 
-- Ensure that there is an entry for path-cwd pair.
+- 경로-cwd 쌍에 대한 항목이 있는지 확인합니다.
 
-- Add 1 to visit `count`.
+- 방문 `count`에 1을 더합니다.
 
-- Set `latest` visit time to equal current time.
+- `latest` 방문 시간을 현재 시간과 동일하게 설정합니다.
 
-#### Parameters {#minivisits.register_visit-parameters}
+#### 매개변수 {#minivisits.register_visit-parameters}
 
 
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` Visit path. Default: path of current buffer if normal,
-  error otherwise.
+<span class="help-syntax-special">{path}</span> `(string|nil)` 방문 경로. 기본값: 일반적인 경우 현재 버퍼의 경로,
+  그렇지 않으면 오류.
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Visit cwd (project directory). Default: [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+<span class="help-syntax-special">{cwd}</span> `(string|nil)` 방문 cwd (프로젝트 디렉토리). 기본값: [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory).
 
 ---
 
 ### add_path() {#minivisits.add_path .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.add_path`(<span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{cwd}</span>)</p>
-Add path to index
+인덱스에 경로 추가
 
-Ensures that there is a (one or more) entry for path-cwd pair. If entry is
-already present, does nothing. If not - creates it with both `count` and
-`latest` set to 0.
+경로-cwd 쌍에 대한 하나 이상의 항목이 있는지 확인합니다. 항목이 이미 존재하는 경우
+아무 작업도 수행하지 않습니다. 존재하지 않는 경우 `count`와 `latest`를 모두 0으로
+설정하여 생성합니다.
 
-#### Parameters {#minivisits.add_path-parameters}
+#### 매개변수 {#minivisits.add_path-parameters}
 
 
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` Visit path. Can be empty string to mean "all visited
-  paths for `cwd`". Default: path of current buffer if normal, error otherwise.
+<span class="help-syntax-special">{path}</span> `(string|nil)` 방문 경로. `cwd`에 대해 "방문한 모든 경로"를 의미하도록
+  빈 문자열일 수 있습니다. 기본값: 일반적인 경우 현재 버퍼의 경로, 그렇지 않으면 오류.
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Visit cwd (project directory). Can be empty string to mean
-  "all visited cwd". Default: [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+<span class="help-syntax-special">{cwd}</span> `(string|nil)` 방문 cwd (프로젝트 디렉토리). "방문한 모든 cwd"를
+  의미하도록 빈 문자열일 수 있습니다. 기본값: [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory).
 
 ---
 
 ### add_label() {#minivisits.add_label .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.add_label`(<span class="help-syntax-special">{label}</span>, <span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{cwd}</span>)</p>
-Add label to path
+경로에 라벨 추가
 
-Steps:
+단계:
 
-- Ensure that there is an entry for path-cwd pair.
+- 경로-cwd 쌍에 대한 항목이 있는지 확인합니다.
 
-- Add label to the entry.
+- 항목에 라벨을 추가합니다.
 
-#### Parameters {#minivisits.add_label-parameters}
+#### 매개변수 {#minivisits.add_label-parameters}
 
 
 
-<span class="help-syntax-special">{label}</span> `(string|nil)` Label string. Default: `nil` to ask from user.
+<span class="help-syntax-special">{label}</span> `(string|nil)` 라벨 문자열. 기본값: `nil` (사용자에게 요청).
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` Visit path. Can be empty string to mean "all visited
-  paths for `cwd`". Default: path of current buffer if normal, error otherwise.
+<span class="help-syntax-special">{path}</span> `(string|nil)` 방문 경로. `cwd`에 대해 "방문한 모든 경로"를 의미하도록
+  빈 문자열일 수 있습니다. 기본값: 일반적인 경우 현재 버퍼의 경로, 그렇지 않으면 오류.
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Visit cwd (project directory). Can be empty string to mean
-  "all visited cwd". Default: [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+<span class="help-syntax-special">{cwd}</span> `(string|nil)` 방문 cwd (프로젝트 디렉토리). "방문한 모든 cwd"를
+  의미하도록 빈 문자열일 수 있습니다. 기본값: [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory).
 
 ---
 
 ### remove_path() {#minivisits.remove_path .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.remove_path`(<span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{cwd}</span>)</p>
-Remove path
+경로 제거
 
-Deletes a (one or more) entry for path-cwd pair from an index. If entry is
-already absent, does nothing.
+인덱스에서 경로-cwd 쌍에 대한 하나 이상의 항목을 삭제합니다. 항목이 이미 없으면
+아무 작업도 수행하지 않습니다.
 
-Notes:
+참고:
 
-- Affects only in-session Lua variable. Call [MiniVisits.write\_index()](mini-visits.qmd#minivisits.write_index) to
-  make it persistent.
+- 세션 내 Lua 변수에만 영향을 미칩니다. 영구적으로 유지하려면
+  [MiniVisits.write\_index()](mini-visits.qmd#minivisits.write_index)를 호출하세요.
 
-#### Parameters {#minivisits.remove_path-parameters}
+#### 매개변수 {#minivisits.remove_path-parameters}
 
 
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` Visit path. Can be empty string to mean "all visited
-  paths for `cwd`". Default: path of current buffer if normal, error otherwise.
+<span class="help-syntax-special">{path}</span> `(string|nil)` 방문 경로. `cwd`에 대해 "방문한 모든 경로"를 의미하도록
+  빈 문자열일 수 있습니다. 기본값: 일반적인 경우 현재 버퍼의 경로, 그렇지 않으면 오류.
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Visit cwd (project directory). Can be empty string to mean
-  "all visited cwd". Default: [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+<span class="help-syntax-special">{cwd}</span> `(string|nil)` 방문 cwd (프로젝트 디렉토리). "방문한 모든 cwd"를
+  의미하도록 빈 문자열일 수 있습니다. 기본값: [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory).
 
 ---
 
 ### remove_label() {#minivisits.remove_label .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.remove_label`(<span class="help-syntax-special">{label}</span>, <span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{cwd}</span>)</p>
-Remove label from path
+경로에서 라벨 제거
 
-Steps:
+단계:
 
-- Remove label from (one or more) index entry.
+- 하나 이상의 인덱스 항목에서 라벨을 제거합니다.
 
-- If it was last label in an entry, remove `labels` key.
+- 항목의 마지막 라벨인 경우 `labels` 키를 제거합니다.
 
-#### Parameters {#minivisits.remove_label-parameters}
+#### 매개변수 {#minivisits.remove_label-parameters}
 
 
 
-<span class="help-syntax-special">{label}</span> `(string|nil)` Label string. Default: `nil` to ask from user.
+<span class="help-syntax-special">{label}</span> `(string|nil)` 라벨 문자열. 기본값: `nil` (사용자에게 요청).
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` Visit path. Can be empty string to mean "all visited
-  paths for `cwd`". Default: path of current buffer if normal, error otherwise.
+<span class="help-syntax-special">{path}</span> `(string|nil)` 방문 경로. `cwd`에 대해 "방문한 모든 경로"를 의미하도록
+  빈 문자열일 수 있습니다. 기본값: 일반적인 경우 현재 버퍼의 경로, 그렇지 않으면 오류.
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Visit cwd (project directory). Can be empty string to mean
-  "all visited cwd". Default: [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+<span class="help-syntax-special">{cwd}</span> `(string|nil)` 방문 cwd (프로젝트 디렉토리). "방문한 모든 cwd"를
+  의미하도록 빈 문자열일 수 있습니다. 기본값: [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory).
 
 ---
 
 ### list_paths() {#minivisits.list_paths .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.list_paths`(<span class="help-syntax-special">{cwd}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-List visit paths
+방문 경로 나열
 
-Convert visit index for certain cwd into an ordered list of visited paths.
-Supports custom filtering and sorting.
+특정 cwd의 방문 인덱스를 방문한 경로의 정렬된 목록으로 변환합니다.
+사용자 정의 필터링 및 정렬을 지원합니다.
 
-Examples:
+예제:
 
   ```lua
-  -- Get paths sorted from most to least recent
+  -- 가장 최근 방문 순으로 정렬된 경로 가져오기
   local sort_recent = MiniVisits.gen_sort.default({ recency_weight = 1 })
   MiniVisits.list_paths(nil, { sort = sort_recent })
 
-  -- Get paths from all cwd sorted from most to least frequent
+  -- 모든 cwd에서 가장 빈번하게 방문한 순으로 정렬된 경로 가져오기
   local sort_frequent = MiniVisits.gen_sort.default({ recency_weight = 0 })
   MiniVisits.list_paths('', { sort = sort_frequent })
 
-  -- Get paths not including hidden
+  -- 숨김 파일을 제외한 경로 가져오기
   local is_not_hidden = function(path_data)
     return not vim.startswith(vim.fn.fnamemodify(path_data.path, ':t'), '.')
   end
   MiniVisits.list_paths(nil, { filter = is_not_hidden })
   ```
 
-#### Parameters {#minivisits.list_paths-parameters}
+#### 매개변수 {#minivisits.list_paths-parameters}
 
 
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Visit cwd (project directory). Can be empty string to mean
-  "all visited cwd". Default: [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+<span class="help-syntax-special">{cwd}</span> `(string|nil)` 방문 cwd (프로젝트 디렉토리). "방문한 모든 cwd"를
+  의미하도록 빈 문자열일 수 있습니다. 기본값: [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory).
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function)` - predicate to filter paths. For more information
-    about how it is used, see [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list).
-    Default: value of `config.list.filter` with [MiniVisits.gen\_filter.default()](mini-visits.qmd#minivisits.gen_filter.default)
-    as its default.
+  - <span class="help-syntax-keys">\<filter\></span> `(function)` - 경로를 필터링하는 서술어. 사용 방법에 대한 자세한 내용은
+    [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list)를 참조하세요.
+    기본값: 기본값으로 [MiniVisits.gen\_filter.default()](mini-visits.qmd#minivisits.gen_filter.default)를 사용하는
+    `config.list.filter` 값.
 
-  - <span class="help-syntax-keys">\<sort\></span> `(function)` - path data sorter. For more information about how
-    it is used, see [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list).
-    Default: value of `config.list.sort` or [MiniVisits.gen\_sort.default()](mini-visits.qmd#minivisits.gen_sort.default)
-    as its default.
+  - <span class="help-syntax-keys">\<sort\></span> `(function)` - 경로 데이터 정렬기. 사용 방법에 대한 자세한 내용은
+    [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list)를 참조하세요.
+    기본값: 기본값으로 `config.list.sort` 또는 [MiniVisits.gen\_sort.default()](mini-visits.qmd#minivisits.gen_sort.default)를
+    사용하는 값.
 
-#### Return {#minivisits.list_paths-return}
+#### 반환 {#minivisits.list_paths-return}
 
 
-`(table)` Array of visited paths.
+`(table)` 방문한 경로의 배열.
 
 ---
 
 ### list_labels() {#minivisits.list_labels .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.list_labels`(<span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{cwd}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-List visit labels
+방문 라벨 나열
 
-Convert visit index for certain path-cwd pair into an ordered list of labels.
-Supports custom filtering for paths. Result is ordered from most to least
-frequent label.
+특정 경로-cwd 쌍의 방문 인덱스를 정렬된 라벨 목록으로 변환합니다.
+경로에 대한 사용자 정의 필터링을 지원합니다. 결과는 가장 빈번한 라벨부터 정렬됩니다.
 
-Examples:
+예제:
 
   ```lua
-  -- Get labels for current path-cwd pair
+  -- 현재 경로-cwd 쌍에 대한 라벨 가져오기
   MiniVisits.list_labels()
 
-  -- Get labels for current path across all cwd
+  -- 모든 cwd에서 현재 경로에 대한 라벨 가져오기
   MiniVisits.list_labels(nil, '')
 
-  -- Get all available labels excluding ones from hidden files
+  -- 숨김 파일을 제외한 모든 사용 가능한 라벨 가져오기
   local is_not_hidden = function(path_data)
     return not vim.startswith(vim.fn.fnamemodify(path_data.path, ':t'), '.')
   end
   MiniVisits.list_labels('', '', { filter = is_not_hidden })
   ```
 
-#### Parameters {#minivisits.list_labels-parameters}
+#### 매개변수 {#minivisits.list_labels-parameters}
 
 
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` Visit path. Can be empty string to mean "all visited
-  paths for `cwd`". Default: path of current buffer if normal, error otherwise.
+<span class="help-syntax-special">{path}</span> `(string|nil)` 방문 경로. `cwd`에 대해 "방문한 모든 경로"를 의미하도록
+  빈 문자열일 수 있습니다. 기본값: 일반적인 경우 현재 버퍼의 경로, 그렇지 않으면 오류.
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Visit cwd (project directory). Can be empty string to mean
-  "all visited cwd". Default: [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+<span class="help-syntax-special">{cwd}</span> `(string|nil)` 방문 cwd (프로젝트 디렉토리). "방문한 모든 cwd"를
+  의미하도록 빈 문자열일 수 있습니다. 기본값: [현재 디렉토리](https://neovim.io/doc/user/helptag.html?tag=current-directory).
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function)` - predicate to filter paths. For more information
-    about how it is used, see [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list).
-    Default: value of `config.list.filter` with [MiniVisits.gen\_filter.default()](mini-visits.qmd#minivisits.gen_filter.default)
-    as its default.
+  - <span class="help-syntax-keys">\<filter\></span> `(function)` - 경로를 필터링하는 서술어. 사용 방법에 대한 자세한 내용은
+    [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list)를 참조하세요.
+    기본값: 기본값으로 [MiniVisits.gen\_filter.default()](mini-visits.qmd#minivisits.gen_filter.default)를 사용하는
+    `config.list.filter` 값.
 
-  - <span class="help-syntax-keys">\<sort\></span> `(function)` - path data sorter. For more information about how
-    it is used, see [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list).
-    Default: value of `config.list.sort` or [MiniVisits.gen\_sort.default()](mini-visits.qmd#minivisits.gen_sort.default)
-    as its default.
+  - <span class="help-syntax-keys">\<sort\></span> `(function)` - 경로 데이터 정렬기. 사용 방법에 대한 자세한 내용은
+    [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list)를 참조하세요.
+    기본값: 기본값으로 `config.list.sort` 또는 [MiniVisits.gen\_sort.default()](mini-visits.qmd#minivisits.gen_sort.default)를
+    사용하는 값.
 
-#### Return {#minivisits.list_labels-return}
+#### 반환 {#minivisits.list_labels-return}
 
 
-`(table)` Array of available labels.
+`(table)` 사용 가능한 라벨의 배열.
 
 ---
 
 ### select_path() {#minivisits.select_path .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.select_path`(<span class="help-syntax-special">{cwd}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Select visit path
+방문 경로 선택
 
-Uses [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\)) with an output of [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths) and
-calls [:edit](https://neovim.io/doc/user/helptag.html?tag=:edit) on the chosen item.
+[MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths)의 출력과 함께 [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\))를 사용하고
+선택한 항목에서 [:edit](https://neovim.io/doc/user/helptag.html?tag=:edit)를 호출합니다.
 
-Note: if you have [mini.pick](mini-pick.qmd#mini.pick), consider using [MiniExtra.pickers.visit\_labels()](mini-extra.qmd#miniextra.pickers.visit_labels)
-and [MiniExtra.pickers.visit\_paths()](mini-extra.qmd#miniextra.pickers.visit_paths).
+참고: [mini.pick](mini-pick.qmd#mini.pick)을 사용하는 경우 [MiniExtra.pickers.visit\_labels()](mini-extra.qmd#miniextra.pickers.visit_labels)
+및 [MiniExtra.pickers.visit\_paths()](mini-extra.qmd#miniextra.pickers.visit_paths)를 고려하세요.
 
-Examples:
-
-
-- Select from all visited paths: `MiniVisits.select_path('')`
+예제:
 
 
-- Select from paths under current directory sorted from most to least recent:
+- 모든 방문 경로에서 선택: `MiniVisits.select_path('')`
+
+
+- 현재 디렉토리 아래의 경로 중에서 가장 최근 방문 순으로 선택:
 
     ```lua
     local sort_recent = MiniVisits.gen_sort.default({ recency_weight = 1 })
     MiniVisits.select_path(nil, { sort = sort_recent })
     ```
 
-#### Parameters {#minivisits.select_path-parameters}
+#### 매개변수 {#minivisits.select_path-parameters}
 
 
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Forwarded to [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths).
+<span class="help-syntax-special">{cwd}</span> [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths)로 전달됩니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Forwarded to [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths).
+<span class="help-syntax-special">{opts}</span> [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths)로 전달됩니다.
 
 ---
 
 ### select_label() {#minivisits.select_label .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.select_label`(<span class="help-syntax-special">{path}</span>, <span class="help-syntax-special">{cwd}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Select visit label
+방문 라벨 선택
 
-Uses [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\)) with an output of [MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels) and
-calls [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path) to get target paths with selected label.
+[MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels)의 출력과 함께 [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\))를 사용하고
+선택한 라벨이 있는 대상 경로를 가져오기 위해 [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path)를 호출합니다.
 
-Note: if you have [mini.pick](mini-pick.qmd#mini.pick), consider using [MiniExtra.pickers.visit\_labels()](mini-extra.qmd#miniextra.pickers.visit_labels).
+참고: [mini.pick](mini-pick.qmd#mini.pick)을 사용하는 경우 [MiniExtra.pickers.visit\_labels()](mini-extra.qmd#miniextra.pickers.visit_labels)를 고려하세요.
 
-Examples:
-
-
-- Select from labels of current path: `MiniVisits.select_label()`
+예제:
 
 
-- Select from all visited labels: `MiniVisits.select_label('', '')`
+- 현재 경로의 라벨 중에서 선택: `MiniVisits.select_label()`
 
 
-- Select from current project labels and sort paths (after choosing) from most
-  to least recent:
+- 모든 방문한 라벨 중에서 선택: `MiniVisits.select_label('', '')`
+
+
+- 현재 프로젝트 라벨 중에서 선택하고 (선택 후) 경로를 가장 최근 순으로 정렬:
 
     ```lua
     local sort_recent = MiniVisits.gen_sort.default({ recency_weight = 1 })
     MiniVisits.select_label('', nil, { sort = sort_recent })
     ```
 
-#### Parameters {#minivisits.select_label-parameters}
+#### 매개변수 {#minivisits.select_label-parameters}
 
 
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` Forwarded to [MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels).
+<span class="help-syntax-special">{path}</span> [MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels)로 전달됩니다.
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Forwarded to [MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels).
+<span class="help-syntax-special">{cwd}</span> [MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels)로 전달됩니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Forwarded to both [MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels)
- and [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path) (after choosing a label).
+<span class="help-syntax-special">{opts}</span> [MiniVisits.list\_labels()](mini-visits.qmd#minivisits.list_labels) 및
+ (라벨을 선택한 후) [MiniVisits.select\_path()](mini-visits.qmd#minivisits.select_path)로 모두 전달됩니다.
 
 ---
 
 ### iterate_paths() {#minivisits.iterate_paths .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.iterate_paths`(<span class="help-syntax-special">{direction}</span>, <span class="help-syntax-special">{cwd}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Iterate visit paths
+방문 경로 반복
 
-Steps:
+단계:
 
-- Compute a sorted array of target paths using [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths).
+- [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths)를 사용하여 대상 경로의 정렬된 배열을 계산합니다.
 
-- Identify the current index inside the array based on path of current buffer.
+- 현재 버퍼의 경로를 기반으로 배열 내부의 현재 인덱스를 식별합니다.
 
-- Iterate through the array certain amount of times in a dedicated direction:
+- 전용 방향으로 배열을 일정 횟수만큼 반복합니다:
 
-    - For "first" direction - forward starting from index 0 (so that single
-      first iteration leads to first path).
+    - "first" 방향 - 인덱스 0부터 정방향으로 시작 (단일 첫 번째 반복이 첫 번째 경로로 연결됨).
 
-    - For "backward" direction - backward starting from current index.
+    - "backward" 방향 - 현재 인덱스부터 역방향으로 시작.
 
-    - For "forward" direction - forward starting from current index.
+    - "forward" 방향 - 현재 인덱스부터 정방향으로 시작.
 
-    - For "last" direction - backward starting from index after the last one
-      (so that single first iteration leads to the last path).
+    - "last" 방향 - 마지막 다음 인덱스부터 역방향으로 시작 (단일 첫 번째 반복이 마지막 경로로 연결됨).
 
-Notes:
+참고:
 
-- Mostly designed to be used as a mapping. See `MiniVisits-examples`.
+- 주로 매핑으로 사용되도록 설계되었습니다. `MiniVisits-예제`를 참조하세요.
 
-- If path from current buffer is not in the output of `MiniVisits.list_paths()`,
-  starting index is inferred such that first iteration lands on first item
-  (if iterating forward) or last item (if iterating backward).
+- 현재 버퍼의 경로가 `MiniVisits.list_paths()`의 출력에 없는 경우,
+  첫 번째 반복이 (정방향으로 반복하는 경우) 첫 번째 항목에 안착하거나
+  (역방향으로 반복하는 경우) 마지막 항목에 안착하도록 시작 인덱스가 유추됩니다.
 
-- Navigation with this function is not tracked (see [MiniVisits-overview](mini-visits.qmd#minivisits-overview)).
-  This is done to allow consecutive application without affecting
-  underlying list of paths.
+- 이 함수를 통한 탐색은 추적되지 않습니다 ([MiniVisits-개요](mini-visits.qmd#minivisits-overview) 참조).
+  이는 기본 경로 목록에 영향을 주지 않고 연속적으로 적용할 수 있도록 하기 위함입니다.
 
-Examples assuming underlying array of files `{ "file1", "file2", "file3" }`:
+기본 파일 배열이 `{ "file1", "file2", "file3" }`이라고 가정한 예:
 
 
-- `MiniVisits("first")` results into focusing on "file1".
+- `MiniVisits("first")`는 "file1"에 집중하게 됩니다.
 
-- `MiniVisits("backward", { n_times = 2 })` from "file3" results into "file1".
+- "file3"에서 `MiniVisits("backward", { n_times = 2 })`는 "file1"로 이어집니다.
 
-- `MiniVisits("forward", { n_times = 10 })` from "file1" results into "file3".
+- "file1"에서 `MiniVisits("forward", { n_times = 10 })`은 "file3"으로 이어집니다.
 
-- `MiniVisits("last", { n_times = 4, wrap = true })` results into "file3".
+- `MiniVisits("last", { n_times = 4, wrap = true })`는 "file3"으로 이어집니다.
 
-#### Parameters {#minivisits.iterate_paths-parameters}
+#### 매개변수 {#minivisits.iterate_paths-parameters}
 
 
 
-<span class="help-syntax-special">{direction}</span> `(string)` One of "first", "backward", "forward", "last".
+<span class="help-syntax-special">{direction}</span> `(string)` "first", "backward", "forward", "last" 중 하나.
 
-<span class="help-syntax-special">{cwd}</span> `(string|nil)` Forwarded to [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths).
+<span class="help-syntax-special">{cwd}</span> [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths)로 전달됩니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function)` - forwarded to [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths).
+  - <span class="help-syntax-keys">\<filter\></span> `(function)` - [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths)로 전달됩니다.
 
-  - <span class="help-syntax-keys">\<sort\></span> `(function)` - forwarded to [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths).
+  - <span class="help-syntax-keys">\<sort\></span> `(function)` - [MiniVisits.list\_paths()](mini-visits.qmd#minivisits.list_paths)로 전달됩니다.
 
-  - <span class="help-syntax-keys">\<n_times\></span> `(number)` - number of steps to go in certain direction.
-    Default: [v:count1](https://neovim.io/doc/user/helptag.html?tag=v:count1).
+  - <span class="help-syntax-keys">\<n_times\></span> `(number)` - 특정 방향으로 이동할 단계 수.
+    기본값: [v:count1](https://neovim.io/doc/user/helptag.html?tag=v:count1).
 
-  - <span class="help-syntax-keys">\<wrap\></span> `(boolean)` - whether to wrap around list edges. Default: `false`.
+  - <span class="help-syntax-keys">\<wrap\></span> `(boolean)` - 목록 가장자리를 넘을 때 감싸기(wrap) 여부. 기본값: `false`.
 
 ---
 
 ### get_index() {#minivisits.get_index .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.get_index`()</p>
-Get active visit index
+활성 방문 인덱스 가져오기
 
-#### Return {#minivisits.get_index-return}
+#### 반환 {#minivisits.get_index-return}
 
 
-`(table)` Copy of currently active visit index table.
+`(table)` 현재 활성 방문 인덱스 테이블의 복사본.
 
 ---
 
 ### set_index() {#minivisits.set_index .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.set_index`(<span class="help-syntax-special">{index}</span>)</p>
-Set active visit index
+활성 방문 인덱스 설정
 
-#### Parameters {#minivisits.set_index-parameters}
+#### 매개변수 {#minivisits.set_index-parameters}
 
 
 
-<span class="help-syntax-special">{index}</span> `(table)` Visit index table.
+<span class="help-syntax-special">{index}</span> `(table)` 방문 인덱스 테이블.
 
 ---
 
 ### reset_index() {#minivisits.reset_index .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.reset_index`()</p>
-Reset active visit index
+활성 방문 인덱스 초기화
 
-Set currently active visit index to the output of [MiniVisits.read\_index()](mini-visits.qmd#minivisits.read_index).
-Does nothing if reading the index failed.
+현재 활성 방문 인덱스를 [MiniVisits.read\_index()](mini-visits.qmd#minivisits.read_index)의 출력으로 설정합니다.
+인덱스 읽기에 실패하면 아무 작업도 수행하지 않습니다.
 
 ---
 
 ### normalize_index() {#minivisits.normalize_index .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.normalize_index`(<span class="help-syntax-special">{index}</span>)</p>
-Normalize visit index
+방문 인덱스 정규화
 
-Applies `config.store.normalize` ([MiniVisits.gen\_normalize.default()](mini-visits.qmd#minivisits.gen_normalize.default) by default)
-to the input index object and returns the output (if it fits in the definition
-of index object; see [MiniVisits-index-specification](mini-visits.qmd#minivisits-index-specification)).
+입력 인덱스 개체에 `config.store.normalize` (기본적으로 [MiniVisits.gen\_normalize.default()](mini-visits.qmd#minivisits.gen_normalize.default))를
+적용하고 출력을 반환합니다(인덱스 개체의 정의에 맞는 경우.
+[MiniVisits 인덱스 사양](mini-visits.qmd#minivisits-index-specification) 참조).
 
-#### Parameters {#minivisits.normalize_index-parameters}
-
-
-
-<span class="help-syntax-special">{index}</span> `(table|nil)` Index object. Default: copy of the current index.
-
-#### Return {#minivisits.normalize_index-return}
+#### 매개변수 {#minivisits.normalize_index-parameters}
 
 
-`(table)` Normalized index object.
+
+<span class="help-syntax-special">{index}</span> `(table|nil)` 인덱스 개체. 기본값: 현재 인덱스의 복사본.
+
+#### 반환 {#minivisits.normalize_index-return}
+
+
+`(table)` 정규화된 인덱스 개체.
 
 ---
 
 ### read_index() {#minivisits.read_index .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.read_index`(<span class="help-syntax-special">{store_path}</span>)</p>
-Read visit index from disk
+디스크에서 방문 인덱스 읽기
 
-#### Parameters {#minivisits.read_index-parameters}
-
-
-
-<span class="help-syntax-special">{store_path}</span> `(string|nil)` Path on the disk containing visit index data.
-  Default: `config.store.path`.
-  Notes:
-
-  - Can return `nil` if path is empty string or file is not readable.
-
-  - File is sourced with [dofile()](https://neovim.io/doc/user/helptag.html?tag=dofile\(\)) as a regular Lua file.
-
-#### Return {#minivisits.read_index-return}
+#### 매개변수 {#minivisits.read_index-parameters}
 
 
-`(table|nil)` Output of the file source.
+
+<span class="help-syntax-special">{store_path}</span> `(string|nil)` 방문 인덱스 데이터가 포함된 디스크 상의 경로.
+  기본값: `config.store.path`.
+  참고:
+
+  - 경로가 빈 문자열이거나 파일을 읽을 수 없는 경우 `nil`을 반환할 수 있습니다.
+
+  - 파일은 일반 Lua 파일처럼 [dofile()](https://neovim.io/doc/user/helptag.html?tag=dofile\(\))로 소스화됩니다.
+
+#### 반환 {#minivisits.read_index-return}
+
+
+`(table|nil)` 파일 소스의 출력.
 
 ---
 
 ### write_index() {#minivisits.write_index .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.write_index`(<span class="help-syntax-special">{store_path}</span>, <span class="help-syntax-special">{index}</span>)</p>
-Write visit index to disk
+디스크에 방문 인덱스 기록
 
-Steps:
+단계:
 
-- Normalize index with [MiniVisits.normalize\_index()](mini-visits.qmd#minivisits.normalize_index).
+- [MiniVisits.normalize\_index()](mini-visits.qmd#minivisits.normalize_index)를 사용하여 인덱스를 정규화합니다.
 
-- Ensure path is valid (all parent directories are created, etc.).
+- 경로가 유효한지 확인합니다(모든 상위 디렉토리가 생성되었는지 등).
 
-- Write index object to the path so that it is readable
-  with [MiniVisits.read\_index()](mini-visits.qmd#minivisits.read_index).
+- [MiniVisits.read\_index()](mini-visits.qmd#minivisits.read_index)로 읽을 수 있도록 인덱스 개체를 경로에 기록합니다.
 
-#### Parameters {#minivisits.write_index-parameters}
-
+#### 매개변수 {#minivisits.write_index-parameters}
 
 
-<span class="help-syntax-special">{store_path}</span> `(string|nil)` Path on the disk where to write visit index data.
-  Default: `config.store.path`. Note: if empty string, nothing is written.
 
-<span class="help-syntax-special">{index}</span> `(table|nil)` Index object to write to disk.
-  Default: current session index.
+<span class="help-syntax-special">{store_path}</span> `(string|nil)` 방문 인덱스 데이터를 기록할 디스크 상의 경로.
+  기본값: `config.store.path`. 참고: 빈 문자열인 경우 아무것도 기록되지 않습니다.
+
+<span class="help-syntax-special">{index}</span> `(table|nil)` 디스크에 기록할 인덱스 개체.
+  기본값: 현재 세션 인덱스.
 
 ---
 
 ### rename_in_index() {#minivisits.rename_in_index .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.rename_in_index`(<span class="help-syntax-special">{path_from}</span>, <span class="help-syntax-special">{path_to}</span>, <span class="help-syntax-special">{index}</span>)</p>
-Rename path in index
+인덱스 내 경로 이름 변경
 
-A helper to react for a path rename/move in order to preserve its visit data.
-It works both for file and directory paths.
+방문 데이터를 보존하기 위해 경로 이름 변경/이동에 반응하는 헬퍼입니다.
+파일 및 디렉토리 경로 모두에 작동합니다.
 
-Notes:
+참고:
 
-- It does not update current index, but returns a modified index object.
-  Use [MiniVisits.set\_index()](mini-visits.qmd#minivisits.set_index) to make it current.
+- 현재 인덱스를 업데이트하지 않고 수정된 인덱스 개체를 반환합니다.
+  현재 인덱스로 만들려면 [MiniVisits.set\_index()](mini-visits.qmd#minivisits.set_index)를 사용하세요.
 
-- Use only full paths.
+- 전체 경로만 사용하세요.
 
-- Do not append `/` to directory paths. Use same format as for files.
+- 디렉토리 경로에 `/`를 추가하지 마세요. 파일과 동일한 형식을 사용하세요.
 
-Assuming `path_from` and `path_to` are variables containing full paths
-before and after rename/move, here is an example to update current index:
+`path_from` 및 `path_to`가 이름 변경/이동 전후의 전체 경로를 포함하는 변수라고
+가정할 때, 현재 인덱스를 업데이트하는 예제입니다:
 
   ```lua
   local new_index = MiniVisits.rename_in_index(path_from, path_to)
   MiniVisits.set_index(new_index)
   ```
 
-#### Parameters {#minivisits.rename_in_index-parameters}
+#### 매개변수 {#minivisits.rename_in_index-parameters}
 
 
 
-<span class="help-syntax-special">{path_from}</span> `(string)` Full path to be renamed.
+<span class="help-syntax-special">{path_from}</span> `(string)` 이름을 변경할 전체 경로.
 
-<span class="help-syntax-special">{path_to}</span> `(string)` Full path to be replaced with.
+<span class="help-syntax-special">{path_to}</span> `(string)` 대체할 전체 경로.
 
-<span class="help-syntax-special">{index}</span> `(table|nil)` Index object inside which to perform renaming.
-  Default: current session index.
+<span class="help-syntax-special">{index}</span> `(table|nil)` 이름 변경을 수행할 인덱스 개체.
+  기본값: 현재 세션 인덱스.
 
-#### Return {#minivisits.rename_in_index-return}
+#### 반환 {#minivisits.rename_in_index-return}
 
 
-`(table)` Index object with renamed path.
+`(table)` 경로 이름이 변경된 인덱스 개체.
 
 ---
 
 ### gen_filter {#minivisits.gen_filter .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.gen_filter`</p>
-Generate filter function
+필터 함수 생성
 
-This is a table with function elements. Call to actually get specification.
+이것은 함수 요소가 있는 테이블입니다. 실제로 사양을 가져오려면 호출하세요.
 
 ---
 
 ### gen_filter.default() {#minivisits.gen_filter.default .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.gen_filter.default`()</p>
-Default filter
+기본 필터
 
-Always returns `true` resulting in no actual filter.
+항상 `true`를 반환하여 실제 필터링을 수행하지 않습니다.
 
-#### Return {#minivisits.gen_filter.default-return}
+#### 반환 {#minivisits.gen_filter.default-return}
 
 
-`(function)` Visit filter function. See [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list) for more details.
+`(function)` 방문 필터 함수. 자세한 내용은 [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list)를 참조하세요.
 
 ---
 
 ### gen_filter.this_session() {#minivisits.gen_filter.this_session .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.gen_filter.this_session`()</p>
-Filter visits from current session
+현재 세션의 방문 필터링
 
-#### Return {#minivisits.gen_filter.this_session-return}
+#### 반환 {#minivisits.gen_filter.this_session-return}
 
 
-`(function)` Visit filter function. See [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list) for more details.
+`(function)` 방문 필터 함수. 자세한 내용은 [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list)를 참조하세요.
 
 ---
 
 ### gen_sort {#minivisits.gen_sort .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.gen_sort`</p>
-Generate sort function
+정렬 함수 생성
 
-This is a table with function elements. Call to actually get specification.
+이것은 함수 요소가 있는 테이블입니다. 실제로 사양을 가져오려면 호출하세요.
 
 ---
 
 ### gen_sort.default() {#minivisits.gen_sort.default .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.gen_sort.default`(<span class="help-syntax-special">{opts}</span>)</p>
-Default sort
+기본 정렬
 
-Sort paths using "robust frecency" approach. It relies on the rank operation:
-based on certain reference number for every item, assign it a number
-between 1 (best) and number of items (worst). Ties are dealt with "average
-rank" approach: each element with a same reference number is assigned
-an average rank among such elements. This way total rank sum depends only
-on number of paths.
+"견고한 frecency" 접근 방식을 사용하여 경로를 정렬합니다. 순위 연산에 의존합니다:
+특정 기준 번호를 바탕으로 모든 항목에 1(최고)부터 항목 수(최악) 사이의 숫자를 할당합니다.
+동점은 "평균 순위" 접근 방식으로 처리됩니다. 기준 번호가 동일한 각 요소에는 해당 요소들 간의
+평균 순위가 할당됩니다. 이 방식을 통해 총 순위 합계는 경로 수에만 의존하게 됩니다.
 
-Here is an algorithm outline:
+알고리즘 개요입니다:
 
-- Rank paths based on frequency (`count` value): from most to least frequent.
+- 빈도(`count` 값)를 기준으로 경로 순위 지정: 가장 빈번한 것부터 빈도가 낮은 것 순으로.
 
-- Rank paths based on recency (`latest` value): from most to least recent.
+- 최신성(`latest` 값)을 기준으로 경로 순위 지정: 가장 최근 것부터 오래된 것 순으로.
 
-- Combine ranks from previous steps with weights:
-  `score = (1 - w) * rank_frequency + w * rank_recency`, where `w` is
-  "recency weight". The smaller this weight the less recency affects outcome.
+- 이전 단계의 순위를 가중치와 결합:
+  `score = (1 - w) * rank_frequency + w * rank_recency`, 여기서 `w`는 "최신성 가중치"입니다.
+  이 가중치가 작을수록 최신성이 결과에 미치는 영향이 줄어듭니다.
 
-Examples:
+예제:
 
-- Default recency weight 0.5 results into "robust frecency" sorting: it
-  combines both frequency and recency.
-  This is called a "robust frecency" because actual values don't have direct
-  effect on the outcome, only ordering matters. For example, if there is
-  a very frequent file with `count = 100` while all others have `count = 5`,
-  it will not massively dominate the outcome as long as it is not very recent.
+- 기본 최신성 가중치 0.5는 "견고한 frecency" 정렬을 결과로 생성합니다: 빈도와 최신성을 모두 결합합니다.
+  실제 값이 결과에 직접적인 영향을 주지 않고 순서만 중요하기 때문에 이를 "견고한 frecency"라고 부릅니다.
+  예를 들어, 매우 빈번한 파일의 `count = 100`이고 다른 모든 파일의 `count = 5`인 경우,
+  해당 파일이 매우 최근의 것이 아닌 한 결과를 대폭 지배하지는 않습니다.
 
 
-- Having recency weight 1 results into "from most to least recent" sorting.
+- 최신성 가중치가 1이면 "가장 최근 것부터 가장 오래된 것 순으로" 정렬됩니다.
 
 
-- Having recency weight 0 results into "from most to least frequent" sorting.
+- 최신성 가중치가 0이면 "가장 빈번한 것부터 빈도가 가장 낮은 것 순으로" 정렬됩니다.
 
-#### Parameters {#minivisits.gen_sort.default-parameters}
+#### 매개변수 {#minivisits.gen_sort.default-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Option. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<recency_weight\></span> `(number)` - a number between 0 and 1 for recency weight.
-    Default: 0.5.
+  - <span class="help-syntax-keys">\<recency_weight\></span> `(number)` - 최신성 가중치를 위한 0과 1 사이의 숫자.
+    기본값: 0.5.
 
-#### Return {#minivisits.gen_sort.default-return}
+#### 반환 {#minivisits.gen_sort.default-return}
 
 
-`(function)` Visit sort function. See [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list) for more details.
+`(function)` 방문 정렬 함수. 자세한 내용은 [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list)를 참조하세요.
 
 ---
 
 ### gen_sort.z() {#minivisits.gen_sort.z .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.gen_sort.z`()</p>
-Z sort
+Z 정렬
 
-Sort as in https://github.com/rupa/z.
+https://github.com/rupa/z 와 같이 정렬합니다.
 
-#### Return {#minivisits.gen_sort.z-return}
+#### 반환 {#minivisits.gen_sort.z-return}
 
 
-`(function)` Visit sort function. See [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list) for more details.
+`(function)` 방문 정렬 함수. 자세한 내용은 [MiniVisits.config.list](mini-visits.qmd#minivisits.config.list)를 참조하세요.
 
 ---
 
 ### gen_normalize {#minivisits.gen_normalize .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.gen_normalize`</p>
-Generate normalize function
+정규화 함수 생성
 
-This is a table with function elements. Call to actually get specification.
+이것은 함수 요소가 있는 테이블입니다. 실제로 사양을 가져오려면 호출하세요.
 
 ---
 
 ### gen_normalize.default() {#minivisits.gen_normalize.default .help-syntax-right-anchor}
 
 <p align="center">`MiniVisits.gen_normalize.default`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate default normalize function
+기본 정규화 함수 생성
 
-Steps:
+단계:
 
-- Prune visits, i.e. remove outdated visits:
+- 방문 가지치기(Prune), 즉 오래된 방문 제거:
 
-    - If `count` number of visits is below prune threshold, remove that visit
-      entry from particular cwd (it can still be present in others).
+    - `count` 방문 횟수가 가지치기 임계값 미만인 경우, 특정 cwd에서 해당 방문 항목을 제거합니다
+      (다른 cwd에는 여전히 존재할 수 있음).
 
-    - If either first (cwd) or second (path) level key doesn't represent an
-      actual path on disk, remove the whole associated value.
+    - 첫 번째 수준(cwd) 또는 두 번째 수준(경로) 키가 디스크 상의 실제 경로를 나타내지 않는 경우,
+      관련된 값 전체를 제거합니다.
 
-    - NOTE: if visit has any label, it is not automatically pruned.
-
-
-- Decay visits, i.e. possibly make visits more outdated. This is an important
-  part to the whole usability: together with pruning it results into automated
-  removing of paths which were visited long ago and are not relevant.
-
-  Decay is done per cwd if its total `count` values sum exceeds decay threshold.
-  It is performed through multiplying each `count` by same coefficient so that
-  the new total sum of `count` is equal to some smaller target value.
-  Note: only two decimal places are preserved, so the sum might not be exact.
+    - 참고: 방문에 라벨이 있는 경우 자동으로 가지치기되지 않습니다.
 
 
-- Prune once more to ensure that there are no outdated paths after decay.
+- 방문 감쇠(Decay), 즉 방문을 더 오래된 것으로 만들 수 있습니다. 이는 전체 유용성에 중요한 부분입니다:
+  가지치기와 함께 사용하면 오래전에 방문하여 관련 없는 경로를 자동으로 제거하는 결과를 낳습니다.
 
-#### Parameters {#minivisits.gen_normalize.default-parameters}
+  감쇠는 총 `count` 값의 합계가 감쇠 임계값을 초과하는 경우 cwd별로 수행됩니다.
+  각 `count`에 동일한 계수를 곱하여 새로운 `count` 총합이 더 작은 목표 값과 같아지도록 하여 수행됩니다.
+  참고: 소수점 이하 두 자리까지만 보존되므로 합계가 정확하지 않을 수 있습니다.
+
+
+- 가지치기를 한 번 더 수행하여 감쇠 후 오래된 경로가 없는지 확인합니다.
+
+#### 매개변수 {#minivisits.gen_normalize.default-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<decay_threshold\></span> `(number)` - decay threshold. Default: 1000.
+  - <span class="help-syntax-keys">\<decay_threshold\></span> `(number)` - 감쇠 임계값. 기본값: 1000.
 
-  - <span class="help-syntax-keys">\<decay_target\></span> `(number)` - decay target. Default: 800.
+  - <span class="help-syntax-keys">\<decay_target\></span> `(number)` - 감쇠 목표. 기본값: 800.
 
-  - <span class="help-syntax-keys">\<prune_threshold\></span> `(number)` - prune threshold. Default: 0.5.
+  - <span class="help-syntax-keys">\<prune_threshold\></span> `(number)` - 가지치기 임계값. 기본값: 0.5.
 
-  - <span class="help-syntax-keys">\<prune_paths\></span> `(boolean)` - whether to prune outdated paths. Default: `true`.
+  - <span class="help-syntax-keys">\<prune_paths\></span> `(boolean)` - 오래된 경로를 가지치기할지 여부. 기본값: `true`.
 
-#### Return {#minivisits.gen_normalize.default-return}
+#### 반환 {#minivisits.gen_normalize.default-return}
 
 
-`(function)` Visit index normalize function. See "Store" in [MiniVisits.config](mini-visits.qmd#minivisits.config).
-
+`(function)` 방문 인덱스 정규화 함수. [MiniVisits.config](mini-visits.qmd#minivisits.config)의 "Store"를 참조하세요.

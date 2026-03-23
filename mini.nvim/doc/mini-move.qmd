@@ -1,124 +1,102 @@
 ---
-title: "mini.move documentation"
+title: "mini.move 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 `main` 브랜치에서 생성됨 _
 
-<a name="mini.move" href="mini-move.qmd#mini.move"><b>mini.move</b></a> Move any selection in any direction
+<a name="mini.move" href="mini-move.qmd#mini.move"><b>mini.move</b></a> 선택 영역을 원하는 방향으로 이동
 
-MIT License Copyright (c) 2023 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Works in two modes:
+- 두 가지 모드에서 작동합니다:
 
-    - Visual mode. Select text (charwise with [v](https://neovim.io/doc/user/helptag.html?tag=v), linewise with [V](https://neovim.io/doc/user/helptag.html?tag=V), and
-      blockwise with [CTRL-V](https://neovim.io/doc/user/helptag.html?tag=CTRL-V)) and press customizable mapping to move in
-      all four directions (left, right, down, up). It keeps Visual mode.
+    - 비주얼 모드(Visual mode). 텍스트를 선택([v](https://neovim.io/doc/user/helptag.html?tag=v)로 문자 단위, [V](https://neovim.io/doc/user/helptag.html?tag=V)로 줄 단위, [CTRL-V](https://neovim.io/doc/user/helptag.html?tag=CTRL-V)로 블록 단위)하고 사용자 정의 매핑을 눌러 네 방향(왼쪽, 오른쪽, 아래, 위)으로 이동합니다. 비주얼 모드는 유지됩니다.
 
-    - Normal mode. Press customizable mapping to move current line in all
-      four directions (left, right, down, up).
+    - 노멀 모드(Normal mode). 사용자 정의 매핑을 눌러 현재 줄을 네 방향(왼쪽, 오른쪽, 아래, 위)으로 이동합니다.
 
-    - Special handling of linewise movement:
+    - 줄 단위 이동 시 특별한 처리:
 
-        - Vertical movement gets reindented with [=](https://neovim.io/doc/user/helptag.html?tag==).
+        - 수직 이동 시 [=](https://neovim.io/doc/user/helptag.html?tag==)을 사용하여 자동으로 들여쓰기가 조정됩니다.
 
-        - Horizontal movement is improved indent/dedent with [>](https://neovim.io/doc/user/helptag.html?tag=>) / [<](https://neovim.io/doc/user/helptag.html?tag=<).
+        - 수평 이동은 [>](https://neovim.io/doc/user/helptag.html?tag=>) / [<](https://neovim.io/doc/user/helptag.html?tag=<)를 사용한 개선된 들여쓰기/내어쓰기입니다.
 
-        - Cursor moves along with selection.
+        - 커서가 선택 영역과 함께 이동합니다.
 
 
-- Provides both mappings and Lua functions for motions. See
-  [MiniMove.move\_selection()](mini-move.qmd#minimove.move_selection) and [MiniMove.move\_line()](mini-move.qmd#minimove.move_line).
+- 이동을 위한 매핑과 Lua 함수를 모두 제공합니다. [MiniMove.move\_selection()](mini-move.qmd#minimove.move_selection) 및 [MiniMove.move\_line()](mini-move.qmd#minimove.move_line)을 참조하세요.
 
 
-- Respects [v:count](https://neovim.io/doc/user/helptag.html?tag=v:count). Movement mappings can be preceded by a number which
-  multiplies command effect.
+- [v:count](https://neovim.io/doc/user/helptag.html?tag=v:count)를 지원합니다. 이동 매핑 앞에 숫자를 입력하여 명령의 효과를 배가할 수 있습니다.
 
 
-- All consecutive moves (regardless of direction) can be undone by a single [u](https://neovim.io/doc/user/helptag.html?tag=u).
+- 방향에 관계없이 연속된 모든 이동은 단일 [u](https://neovim.io/doc/user/helptag.html?tag=u) 키로 실행 취소할 수 있습니다.
 
 
-- Respects preferred column for vertical movement. It will vertically move
-  selection as how cursor is moving (not strictly vertically if target
-  column is not present in target line).
+- 수직 이동 시 선호하는 열(column) 위치를 존중합니다. 커서가 이동하는 방식과 동일하게 선택 영역을 수직으로 이동합니다 (대상 줄에 해당 열이 없는 경우 엄격하게 수직으로 이동하지 않을 수 있음).
 
-Notes:
+참고 사항:
 
-- Doesn't allow moving selection outside of current lines (by design).
+- 선택 영역을 현재 줄 밖으로 이동하는 것은 허용하지 않습니다 (의도된 설계).
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.move').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniMove`
-which you can use for scripting or manually (with `:lua MiniMove.*`).
+이 모듈은 `require('mini.move').setup({})`을 통한 설정이 필요합니다 (`{}`를 사용자 `config` 테이블로 대체). 그러면 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniMove`가 생성됩니다 (예: `:lua MiniMove.*`).
 
-See [MiniMove.config](mini-move.qmd#minimove.config) for available config settings.
+사용 가능한 설정 옵션은 [MiniMove.config](mini-move.qmd#minimove.config)를 참조하세요.
 
-You can override runtime config settings (but not `config.mappings`) locally
-to buffer inside `vim.b.minimove_config` which should have same structure
-as `MiniMove.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+`MiniMove.config`와 동일한 구조를 가진 `vim.b.minimove_config`를 사용하여 버퍼별로 런타임 설정(단, `config.mappings` 제외)을 재정의할 수 있습니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [matze/vim-move](https://github.com/matze/vim-move):
 
-    - Doesn't support vertical movement of charwise and blockwise selections.
-      While 'mini.move' does.
+    - 문자 단위 및 블록 단위 선택 영역의 수직 이동을 지원하지 않지만, 'mini.move'는 지원합니다.
 
-    - Doesn't support horizontal movement of current line in favor of
-      horizontal movement of current character. While 'mini.move' supports
-      horizontal movement of current line and doesn't support such movement
-      of current character.
+    - 현재 문자의 수평 이동 대신 현재 줄의 수평 이동을 지원하지 않지만, 'mini.move'는 현재 줄의 수평 이동을 지원하며 현재 문자의 이동은 지원하지 않습니다.
 
-    - Has extra functionality for certain moves (like move by half page).
-      While 'mini.move' does not (by design).
+    - 반 페이지 이동과 같은 특정 이동에 대한 추가 기능이 있지만, 'mini.move'는 의도적으로 이를 지원하지 않습니다.
 
 - [booperlv/nvim-gomove](https://github.com/booperlv/nvim-gomove):
 
-    - Doesn't support movement in charwise visual selection.
-      While 'mini.move' does.
+    - 문자 단위 비주얼 선택 영역에서의 이동을 지원하지 않지만, 'mini.move'는 지원합니다.
 
-    - Has extra functionality beyond moving text, like duplication.
-      While 'mini.move' concentrates only on moving functionality.
+    - 텍스트 이동 외에 복제와 같은 추가 기능이 있지만, 'mini.move'는 이동 기능에만 집중합니다.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable, set `vim.g.minimove_disable` (globally) or `vim.b.minimove_disable`
-(for a buffer) to `true`. Considering high number of different scenarios
-and customization intentions, writing exact rules for disabling module's
-functionality is left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common
-recipes.
+비활성화하려면 `vim.g.minimove_disable`(전역) 또는 `vim.b.minimove_disable`(버퍼별)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화에 대한 정확한 규칙을 작성하는 것은 사용자의 몫으로 남겨둡니다. 일반적인 방법은 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
 ### setup() {#minimove.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniMove.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minimove.setup-parameters}
+#### 매개변수 {#minimove.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniMove.config](mini-move.qmd#minimove.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniMove.config](mini-move.qmd#minimove.config)를 참조하세요.
 
-#### Usage {#minimove.setup-usage}
+#### 사용법 {#minimove.setup-usage}
 
 
 
   ```lua
-  require('mini.move').setup() -- use default config
-  -- OR
-  require('mini.move').setup({}) -- replace {} with your config table
+  require('mini.move').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.move').setup({}) -- {}를 사용자 설정 테이블로 대체
   ```
 
 ---
@@ -126,42 +104,42 @@ Module setup
 ### config {#minimove.config .help-syntax-right-anchor}
 
 <p align="center">`MiniMove.config`</p>
-#### Defaults {#minimove.config-defaults}
+#### 기본값 {#minimove.config-defaults}
 
 
 
   ```lua
   MiniMove.config = {
-    -- Module mappings. Use `''` (empty string) to disable one.
+    -- 모듈 매핑. 비활성화하려면 `''`(빈 문자열)을 사용하세요.
     mappings = {
-      -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+      -- 비주얼 모드에서 비주얼 선택 영역 이동. 기본값은 Alt (Meta) + hjkl입니다.
       left = '<M-h>',
       right = '<M-l>',
       down = '<M-j>',
       up = '<M-k>',
 
-      -- Move current line in Normal mode
+      -- 노멀 모드에서 현재 줄 이동
       line_left = '<M-h>',
       line_right = '<M-l>',
       line_down = '<M-j>',
       line_up = '<M-k>',
     },
 
-    -- Options which control moving behavior
+    -- 이동 동작을 제어하는 옵션
     options = {
-      -- Automatically reindent selection during linewise vertical move
+      -- 줄 단위 수직 이동 중 자동으로 선택 영역 들여쓰기 조정
       reindent_linewise = true,
     },
   }
   ```
 
-#### Mappings {#minimove.config-mappings}
+#### 매개변수 {#minimove.config-mappings}
 
 
-Other possible choices of mappings:
+다른 매핑 선택지 예시:
 
   ```lua
-  -- `HJKL` for moving visual selection (overrides H, L, J in Visual mode)
+  -- 비주얼 선택 영역 이동을 위해 `HJKL` 사용 (비주얼 모드에서 H, L, J 재정의)
   require('mini.move').setup({
     mappings = {
       left  = 'H',
@@ -171,7 +149,7 @@ Other possible choices of mappings:
     }
   })
 
-  -- Shift + arrows
+  -- Shift + 화살표 키
   require('mini.move').setup({
     mappings = {
       left  = '<S-left>',
@@ -192,54 +170,49 @@ Other possible choices of mappings:
 ### move_selection() {#minimove.move_selection .help-syntax-right-anchor}
 
 <p align="center">`MiniMove.move_selection`(<span class="help-syntax-special">{direction}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Move visually selected region in any direction within present lines
+현재 줄 내에서 비주얼 선택 영역을 원하는 방향으로 이동합니다
 
-Main function powering visual selection move in Visual mode.
+비주얼 모드에서 비주얼 선택 영역 이동을 담당하는 주요 함수입니다.
 
-Notes:
+참고 사항:
 
-- Vertical movement in linewise mode is followed up by reindent with [v\_=](https://neovim.io/doc/user/helptag.html?tag=v_=).
+- 줄 단위 모드에서의 수직 이동 후에는 [v\_=](https://neovim.io/doc/user/helptag.html?tag=v_=)를 사용한 자동 들여쓰기 조정이 이어집니다.
 
-- Horizontal movement in linewise mode is same as [v\_<](https://neovim.io/doc/user/helptag.html?tag=v_<) and [v\_>](https://neovim.io/doc/user/helptag.html?tag=v_>).
+- 줄 단위 모드에서의 수평 이동은 [v\_<](https://neovim.io/doc/user/helptag.html?tag=v_<) 및 [v\_>](https://neovim.io/doc/user/helptag.html?tag=v_>)와 동일합니다.
 
-#### Parameters {#minimove.move_selection-parameters}
+#### 매개변수 {#minimove.move_selection-parameters}
 
 
 
-<span class="help-syntax-special">{direction}</span> `(string)` One of "left", "down", "up", "right".
+<span class="help-syntax-special">{direction}</span> `(string)` "left", "down", "up", "right" 중 하나.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Same structure as `options` in [MiniMove.config](mini-move.qmd#minimove.config)
-  (with its values as defaults) plus these allowed extra fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. [MiniMove.config](mini-move.qmd#minimove.config)의 `options`와 동일한 구조(기본값 포함)이며, 다음 추가 필드를 허용합니다:
 
-  - <span class="help-syntax-keys">\<n_times\></span> (number) - number of times to try to make a move.
-    Default: [v:count1](https://neovim.io/doc/user/helptag.html?tag=v:count1).
+  - <span class="help-syntax-keys">\<n_times\></span> (number) - 이동을 시도할 횟수.
+    기본값: [v:count1](https://neovim.io/doc/user/helptag.html?tag=v:count1).
 
 ---
 
 ### move_line() {#minimove.move_line .help-syntax-right-anchor}
 
 <p align="center">`MiniMove.move_line`(<span class="help-syntax-special">{direction}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Move current line in any direction
+현재 줄을 원하는 방향으로 이동합니다
 
-Main function powering current line move in Normal mode.
+노멀 모드에서 현재 줄 이동을 담당하는 주요 함수입니다.
 
-Notes:
+참고 사항:
 
-- Vertical movement is followed up by reindent with [v\_=](https://neovim.io/doc/user/helptag.html?tag=v_=).
+- 수직 이동 후에는 [v\_=](https://neovim.io/doc/user/helptag.html?tag=v_=)를 사용한 자동 들여쓰기 조정이 이어집니다.
 
-- Horizontal movement is almost the same as [<<](https://neovim.io/doc/user/helptag.html?tag=<<) and [>>](https://neovim.io/doc/user/helptag.html?tag=>>) with a different
-  handling of [v:count](https://neovim.io/doc/user/helptag.html?tag=v:count) (multiplies shift effect instead of modifying that
-  number of lines).
+- 수평 이동은 [<<](https://neovim.io/doc/user/helptag.html?tag=<<) 및 [>>](https://neovim.io/doc/user/helptag.html?tag=>>)와 거의 동일하지만, [v:count](https://neovim.io/doc/user/helptag.html?tag=v:count) 처리가 다릅니다 (줄 수를 수정하는 대신 들여쓰기 효과를 배가합니다).
 
-#### Parameters {#minimove.move_line-parameters}
+#### 매개변수 {#minimove.move_line-parameters}
 
 
 
-<span class="help-syntax-special">{direction}</span> `(string)` One of "left", "down", "up", "right".
+<span class="help-syntax-special">{direction}</span> `(string)` "left", "down", "up", "right" 중 하나.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Same structure as `options` in [MiniMove.config](mini-move.qmd#minimove.config)
-  (with its values as defaults) plus these allowed extra fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. [MiniMove.config](mini-move.qmd#minimove.config)의 `options`와 동일한 구조(기본값 포함)이며, 다음 추가 필드를 허용합니다:
 
-  - <span class="help-syntax-keys">\<n_times\></span> (number) - number of times to try to make a move.
-    Default: [v:count1](https://neovim.io/doc/user/helptag.html?tag=v:count1).
-
+  - <span class="help-syntax-keys">\<n_times\></span> (number) - 이동을 시도할 횟수.
+    기본값: [v:count1](https://neovim.io/doc/user/helptag.html?tag=v:count1).

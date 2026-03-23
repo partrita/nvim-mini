@@ -1,37 +1,37 @@
 ---
-title: "Announcing 'mini.hipatterns'"
+title: "'mini.hipatterns' 발표"
 author: Evgeni Chasnovski
 date: 2023-05-25
 categories: [announce, reddit]
-description: Highlight patterns in text
+description: 텍스트 내 패턴 하이라이트
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/13rh66h/minihipatterns_highlight_patterns_in_text/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/13rh66h/minihipatterns_highlight_patterns_in_text/)*
 
 {{< video 2023-05-25-announce-mini-hipatterns/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am excited to announce the release of [mini.hipatterns](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-hipatterns.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) to highlight patterns in text. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.hipatterns).
-
-------
-
-This type of module did not have a high priority in my TODO list as I was pretty happy to use both [folke/todo-comments.nvim](https://github.com/folke/todo-comments.nvim) and [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua). But having just written [mini.colors](https://github.com/nvim-mini/mini.nvim/blob/hipatterns/readmes/mini-colors.md) and [mini.hues](https://github.com/nvim-mini/mini.nvim/blob/hipatterns/readmes/mini-hues.md) I thought it would be fun to make a future 0.9.0 release mostly about colors. Besides, it will replace in my config two plugins with one module, which I always enjoy.
-
-I am also extra proud to note that this is a **module number 30 of 'mini.nvim'**. I didn't even imagine when I first started writing functioning Lua modules (around two years ago) that it will go this far. Yet here we are. I really hope more will come (it is definitely planned). **Huge** thanks to everyone using my work and spreading the word. It means a world to me during these tough times!
+텍스트 내 패턴을 하이라이트하기 위한 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.hipatterns](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-hipatterns.md)의 출시를 발표하게 되어 기쁩니다. [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.hipatterns)를 통해서도 설치할 수 있습니다.
 
 ------
 
-Here are the features of 'mini.hipatterns':
+저는 [folke/todo-comments.nvim](https://github.com/folke/todo-comments.nvim)과 [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)를 모두 만족스럽게 사용하고 있었기에 이런 종류의 모듈은 제 할 일 목록에서 우선순위가 높지 않았습니다. 하지만 최근에 [mini.colors](https://github.com/nvim-mini/mini.nvim/blob/hipatterns/readmes/mini-colors.md)와 [mini.hues](https://github.com/nvim-mini/mini.nvim/blob/hipatterns/readmes/mini-hues.md)를 작성하면서 다가올 0.9.0 릴리스를 주로 색상에 관한 내용으로 채우면 재미있겠다고 생각했습니다. 게다가 제 설정에서 두 개의 플러그인을 하나의 모듈로 대체할 수 있다는 점도 마음에 들었습니다.
 
-- Highlight text with configurable patterns and highlight groups (can be string or callable).
-
-- Highlighting is updated asynchronously with configurable debounce delay.
-
-For more information, see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-hipatterns.txt). See [this part](https://github.com/nvim-mini/mini.nvim/blob/48b924e4f3b37f62246873d237a4a89704d88948/doc/mini-hipatterns.txt#L107) for examples of common use cases.
+또한 이것이 **'mini.nvim'의 30번째 모듈**이라는 점이 매우 자랑스럽습니다. 약 2년 전 처음으로 Lua 모듈을 작성하기 시작했을 때는 여기까지 오게 될 줄은 상상도 못 했습니다. 하지만 우리는 여기까지 왔습니다. 더 많은 모듈이 나올 수 있기를 진심으로 바랍니다 (확실히 계획되어 있습니다). 제 작업물을 사용해 주시고 널리 알려주시는 모든 분께 **진심으로** 감사드립니다. 이 힘든 시기에 저에게는 큰 힘이 됩니다!
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/339).
+'mini.hipatterns'의 주요 기능은 다음과 같습니다:
 
-Thanks!
+- 설정 가능한 패턴과 하이라이트 그룹(문자열 또는 호출 가능한 객체)을 사용하여 텍스트를 하이라이트합니다.
+
+- 하이라이트는 설정 가능한 디바운스(debounce) 지연 시간과 함께 비동기적으로 업데이트됩니다.
+
+자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-hipatterns.txt)을 참조하세요. 일반적인 사용 사례의 예시는 [이 부분](https://github.com/nvim-mini/mini.nvim/blob/48b924e4f3b37f62246873d237a4a89704d88948/doc/mini-hipatterns.txt#L107)을 확인해 주세요.
+
+------
+
+사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/339)를 통해 남겨주시면 감사하겠습니다.
+
+감사합니다!

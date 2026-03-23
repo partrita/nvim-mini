@@ -1,50 +1,50 @@
 ---
-title: "Release 0.16.0"
+title: "0.16.0 버전 출시"
 author: Evgeni Chasnovski
 date: 2025-05-20
 categories: [release, reddit]
-description: Smart mappings, better autocompletion, and many small improvements
+description: 스마트 매핑, 개선된 자동 완성 및 수많은 소규모 개선 사항
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/1kr4or7/mininvim_release_0160_smart_mappings_better/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/1kr4or7/mininvim_release_0160_smart_mappings_better/)*
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-The [mini.nvim](https://github.com/nvim-mini/mini.nvim) plugin has released a new 0.16.0 version. The previous release was about 4 months and 250 commits ago, so it felt like the right time. Here is a [full release description](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.16.0) if you are curious.
-
----
-
-There is only one new module, but it fixes some common issues when it comes to mappings:
-
-- [mini.keymap](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-keymap.md) - Special key mappings. It has two main features: multi-step actions (like "smart" tab, shift-tab, enter, backspace) and combos (more general "better escape" like behavior). You can read more in [this release post](2025-05-03-announce-mini-keymap.qmd).
+[mini.nvim](https://github.com/nvim-mini/mini.nvim) 플러그인의 새로운 0.16.0 버전이 출시되었습니다. 지난 릴리스 이후 약 4개월 동안 250개의 커밋이 쌓였기에, 지금이 적기라고 판단했습니다. 궁금하신 분들은 [전체 릴리스 설명](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.16.0)을 확인해 보세요.
 
 ---
 
-The main attention in this release cycle went towards revamping 'mini.completion' with long overdue features like snippet support (made fully possible after release of 'mini.snippets'), better highlighting and scroll support in info/signature windows, overall more proper coverage of LSP capabilities, and various quality of life improvements. There was a [release post](2025-03-07-update-mini-completion-snippet-support.qmd), but full changelog is [here](https://github.com/nvim-mini/mini.nvim/blob/main/CHANGELOG.md#minicompletion) (there were new changes after the post).
+새로운 모듈은 하나뿐이지만, 매핑과 관련된 몇 가지 고질적인 문제들을 해결해 줍니다:
+
+- [mini.keymap](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-keymap.md) - 특수 키 매핑 모듈입니다. 다단계 동작("스마트" 탭, 엔터 등)과 콤보(더 범용적인 "better escape" 스타일 동작)라는 두 가지 주요 기능을 제공합니다. 자세한 내용은 [관련 출시 포스트](2025-05-03-announce-mini-keymap.qmd)를 읽어보세요.
 
 ---
 
-A lot of effort was put into unifying certain behavior across all modules:
-
-- How floating windows are displayed: better titles, 'single' border by default but respecting new 'winborder' options, etc.
-- Naming scheme for special module-specific buffers, which makes buffer list and some custom actions clearer.
-- Stop handling general options behind `set_vim_settings` config value in favor of setting them automatically if they were not already set by the user.
+이번 릴리스 주기에 가장 공을 들인 부분은 'mini.completion'의 개편이었습니다. 'mini.snippets' 출시 덕분에 가능해진 스니펫 지원, 정보/시그니처 창의 하이라이팅 및 스크롤 지원 개선, LSP 사양의 더욱 적절한 반영, 그리고 다양한 사용자 편의성 향상 등 오랫동안 미뤄왔던 기능들을 대거 추가했습니다. [관련 출시 포스트](2025-03-07-update-mini-completion-snippet-support.qmd)도 있었지만, 포스트 이후에도 새로운 변경 사항이 있었으므로 [전체 변경 로그](https://github.com/nvim-mini/mini.nvim/blob/main/CHANGELOG.md#minicompletion)를 확인해 보세요.
 
 ---
 
-Various plugins got small and not so much updates. Here are some of them:
+모든 모듈에서 특정 동작을 통일하기 위해 많은 노력을 기울였습니다:
 
-- 'mini.ai' and 'mini.surround' got better support of tree-sitter captures and non-latin textobject/surrounding identifiers.
-- 'mini.diff' got the ability to set array of sources to attempt to attach them one at a time. This allows having setup like "try attach Git source, but fall back to custom Mercurial source" (there might be built-in sources for other VCS in the future).
-- 'mini.operators' now remaps built-in `gx` (open URL under cursor) to `gX` if the `exchange` operator is about to override it.
-- 'mini.pairs' now support multibyte characters in pairs.
-- 'mini.pick' now has more highlighting customizations of prompt and better scripting capabilities for setting current and marked matches.
-- 'mini.snippets' has `start_lsp_server()` that starts an in-process LSP server that provides completion suggestions from snippets loaded via 'mini.snippets'. This integrates well with 'mini.completion'.
-- 'mini.tabline' now shows special truncation symbols on left and/or right if there are more text to the left/right.
+- 플로팅 창 표시 방식: 더 나은 제목 표시, 기본적으로 'single' 테두리를 사용하되 새로운 'winborder' 옵션 존중 등.
+- 모듈별 특수 버퍼의 명명 규칙: 버퍼 목록과 커스텀 동작 시인성을 높였습니다.
+- 사용자가 직접 설정하지 않은 경우 일반 옵션들을 자동으로 설정하도록 변경했습니다 (기존 `set_vim_settings` 설정값에 의존하던 방식 폐지).
+
+---
+
+다양한 플러그인에 크고 작은 업데이트가 있었습니다:
+
+- 'mini.ai' 및 'mini.surround': tree-sitter 캡처와 비라틴어 텍스트 오브젝트/서라운딩 식별자 지원이 개선되었습니다.
+- 'mini.diff': 여러 소스를 배열로 설정하여 하나씩 시도를 할 수 있는 기능이 추가되었습니다. 이를 통해 "Git 소스 시도 후 실패 시 Mercurial 소스 시도"와 같은 설정이 가능해졌습니다 (향후 다른 VCS용 내장 소스도 추가될 수 있습니다).
+- 'mini.operators': `exchange` 연산자가 내장 `gx`(커서 아래 URL 열기)와 충돌할 경우 `gx`를 `gX`로 자동 리매핑합니다.
+- 'mini.pairs': 이제 쌍(pair)에서 멀티바이트 문자를 지원합니다.
+- 'mini.pick': 프롬프트의 하이라이트 커스터마이징 기능이 강화되었고, 현재 및 마크된 일치 항목 설정을 위한 스크립팅 기능이 개선되었습니다.
+- 'mini.snippets': `start_lsp_server()` 함수를 통해 'mini.snippets'로 로드된 스니펫의 자동 완성 제안을 제공하는 프로세스 내 LSP 서버를 시작할 수 있습니다. 이는 'mini.completion'과 잘 통합됩니다.
+- 'mini.tabline': 왼쪽이나 오른쪽에 더 많은 텍스트가 있을 경우 특수한 생략 기호를 표시합니다.
 
 ------
 
-Thanks for the continued support of 'mini.nvim' project! We are past 7.2K stars now 🌟❤️
-I still have a lot of ideas I want to add to 'mini.nvim' to make it even better. I also plan to spend some time implementing several important features in upstream Neovim. So stay tuned!
+'mini.nvim' 프로젝트에 보내주시는 지속적인 성원에 감사드립니다! 어느덧 별 7,200개를 넘어섰네요 🌟❤️
+'mini.nvim'을 더 좋게 만들기 위한 수많은 아이디어가 여전히 남아 있습니다. 또한 Neovim 업스트림에 몇 가지 중요한 기능을 구현하는 데에도 시간을 할애할 계획입니다. 기대해 주세요!
 
-Hope to see you soon with new and exciting updates!
+곧 새롭고 흥미로운 업데이트와 함께 다시 뵙겠습니다!

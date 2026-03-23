@@ -1,52 +1,52 @@
 ---
-title: "'mini.nvim' now has dual distribution model"
+title: "'mini.nvim' 이중 배포 모델 도입"
 author: Evgeni Chasnovski
 date: 2022-10-30
 categories: [announce, reddit]
-description: Welcome 22 new standalone plugins!
+description: 22개의 새로운 독립형 플러그인을 환영합니다!
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/yh7ao1/mininvim_now_has_dual_distribution_model_welcome/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/yh7ao1/mininvim_now_has_dual_distribution_model_welcome/)*
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-For more than a year I've been developing a [mini.nvim](https://github.com/nvim-mini/mini.nvim) plugin - library of 20+ independent Lua modules improving overall Neovim experience with minimal effort. Each one can be used separately without any startup and usage overhead. In this post I am announcing its **dual distribution**: both as current "bundle" and standalone plugins for each module.
+1년 넘게 저는 최소한의 노력으로 전반적인 Neovim 경험을 개선하는 20개 이상의 독립적인 Lua 모듈 라이브러리인 [mini.nvim](https://github.com/nvim-mini/mini.nvim) 플러그인을 개발해 왔습니다. 각 모듈은 시작 시나 사용 시 오버헤드 없이 개별적으로 사용할 수 있습니다. 이번 게시물에서는 기존의 "번들" 형태와 각 모듈에 대한 독립형 플러그인이라는 **이중 배포** 방식을 발표합니다.
 
-Initial motivation behind 'mini.nvim' was to share with community a set of small-ish modules which I had developed for myself in spare time for fun. As almost each module initially was mediocre compared to analogues, to gain visibility I had come up with the idea of bundling them together in one "traditional" plugin and ship them as a single Git repository. It kind of worked and in slightly more than a year since [initial announcement](2021-10-13-announce-mini-nvim.qmd) it hit 1000 GitHub stars, for which I am super grateful! This was only possible with your support and contributions. Thank you!
+'mini.nvim' 뒤에 숨겨진 초기 동기는 제가 재미삼아 여가 시간에 개발한 작은 모듈들을 커뮤니티와 공유하는 것이었습니다. 거의 모든 모듈이 처음에는 유사한 제품들에 비해 평범했기 때문에, 가시성을 확보하기 위해 하나로 묶어 하나의 "전통적인" 플러그인으로 만들고 단일 Git 저장소로 배포하자는 아이디어를 냈습니다. 이것이 어느 정도 효과를 거두어 [최초 발표](2021-10-13-announce-mini-nvim.qmd) 이후 1년 남짓 만에 GitHub 별 1000개를 달성했습니다. 정말 감사드립니다! 이는 여러분의 지지와 기여가 있었기에 가능했습니다. 감사합니다!
 
-However, although this "bundle" approach fulfilled (and keeps fulfilling) its purposes, it also immediately got criticised with some legitimate arguments (albeit personally sometimes a little far-fetched). So in the back of my head I kept thinking about addressing this in a way that would make me comfortable continuing improving 'mini.nvim'. And I think the dual distribution model is the solution here.
+하지만 이러한 "번들" 방식이 그 목적을 충실히 수행해 왔고 지금도 수행하고 있지만, 정당한 이유로 즉각적인 비판을 받기도 했습니다 (개인적으로는 가끔 조금 과장되었다고 생각하기도 하지만요). 그래서 저는 'mini.nvim'을 계속 개선해 나가는 데 마음이 편할 수 있는 방식으로 이 문제를 해결하는 방법을 고민해 왔습니다. 그리고 이중 배포 모델이 그 해결책이라고 생각합니다.
 
-**In a nutshell**, 'mini.nvim' will continue its development as before, but at the same time each module will also be distributed as a standalone plugin. This will be done by running a script (first manually; then, hopefully, automatically) which inside each standalone plugin will duplicate 'mini.nvim' Git commits relevant to the plugin. This way history of all incremental changes will be preserved. As a slight bonus, each plugin is super lightweight as they come only with the files necessary for their distribution (no testing infrastructure, etc.).
+**요약하자면**, 'mini.nvim'은 이전과 같이 계속 개발될 것이며, 동시에 각 모듈은 독립형 플러그인으로도 배포될 것입니다. 이는 스크립트를 실행하여 (처음에는 수동으로, 나중에는 자동으로 되기를 바랍니다) 각 독립형 플러그인 내부에서 해당 플러그인과 관련된 'mini.nvim' Git 커밋을 복제하는 방식으로 진행됩니다. 이렇게 하면 모든 증분 변경 사항의 이력이 보존될 것입니다. 약간의 보너스로, 각 플러그인은 배포에 필요한 파일만 포함하기 때문에 매우 가볍습니다 (테스트 인프라 등이 포함되지 않음).
 
-Consider standalone plugins only as an alternative distribution of 'mini.nvim' modules. All issues, PRs and other user interaction will be done in 'mini.nvim' repo (mostly because all testing infrastructure is set up there).
+독립형 플러그인은 'mini.nvim' 모듈의 대안적인 배포 방식으로만 간주해 주세요. 모든 이슈, PR 및 기타 사용자 상호작용은 'mini.nvim' 저장소에서 진행될 것입니다 (대부분의 테스트 인프라가 그곳에 설정되어 있기 때문입니다).
 
-So please welcome 22 new standalone plugins:
+22개의 새로운 독립형 플러그인을 환영해 주세요:
 
-| Plugin name and link                                                | Short description                           |
+| 플러그인 이름 및 링크                                                | 간략한 설명                           |
 |---------------------------------------------------------------------|---------------------------------------------|
-| [mini.ai](https://github.com/nvim-mini/mini.ai)                   | Extend and create `a`/`i` textobjects       |
-| [mini.align](https://github.com/nvim-mini/mini.align)             | Align text interactively                    |
-| [mini.base16](https://github.com/nvim-mini/mini.base16)           | Base16 colorscheme creation                 |
-| [mini.bufremove](https://github.com/nvim-mini/mini.bufremove)     | Remove buffers                              |
-| [mini.comment](https://github.com/nvim-mini/mini.comment)         | Fast and familiar per-line comment          |
-| [mini.completion](https://github.com/nvim-mini/mini.completion)   | Completion and signature help               |
-| [mini.cursorword](https://github.com/nvim-mini/mini.cursorword)   | Autohighlight word under cursor             |
-| [mini.doc](https://github.com/nvim-mini/mini.doc)                 | Generate Neovim help files                  |
-| [mini.fuzzy](https://github.com/nvim-mini/mini.fuzzy)             | Fuzzy matching                              |
-| [mini.indentscope](https://github.com/nvim-mini/mini.indentscope) | Visualize and operate on indent scope       |
-| [mini.jump](https://github.com/nvim-mini/mini.jump)               | Jump forward/backward to a single character |
-| [mini.jump2d](https://github.com/nvim-mini/mini.jump2d)           | Jump within visible lines                   |
-| [mini.map](https://github.com/nvim-mini/mini.map)                 | Window with buffer text overview            |
-| [mini.misc](https://github.com/nvim-mini/mini.misc)               | Miscellaneous useful functions              |
-| [mini.pairs](https://github.com/nvim-mini/mini.pairs)             | Autopairs                                   |
-| [mini.sessions](https://github.com/nvim-mini/mini.sessions)       | Session management                          |
-| [mini.starter](https://github.com/nvim-mini/mini.starter)         | Fast and flexible start screen              |
-| [mini.statusline](https://github.com/nvim-mini/mini.statusline)   | Statusline                                  |
-| [mini.surround](https://github.com/nvim-mini/mini.surround)       | Fast and feature-rich surround actions      |
-| [mini.tabline](https://github.com/nvim-mini/mini.tabline)         | Tabline                                     |
-| [mini.test](https://github.com/nvim-mini/mini.test)               | Test Neovim plugins                         |
-| [mini.trailspace](https://github.com/nvim-mini/mini.trailspace)   | Work with trailing whitespace               |
+| [mini.ai](https://github.com/nvim-mini/mini.ai)                   | `a`/`i` 텍스트 객체 확장 및 생성       |
+| [mini.align](https://github.com/nvim-mini/mini.align)             | 대화형 텍스트 정렬                    |
+| [mini.base16](https://github.com/nvim-mini/mini.base16)           | Base16 색상 테마 생성                 |
+| [mini.bufremove](https://github.com/nvim-mini/mini.bufremove)     | 버퍼 제거                              |
+| [mini.comment](https://github.com/nvim-mini/mini.comment)         | 빠르고 익숙한 행별 주석 처리          |
+| [mini.completion](https://github.com/nvim-mini/mini.completion)   | 자동 완성 및 시그니처 도우미          |
+| [mini.cursorword](https://github.com/nvim-mini/mini.cursorword)   | 커서 아래 단어 자동 하이라이트        |
+| [mini.doc](https://github.com/nvim-mini/mini.doc)                 | Neovim 도움말 파일 생성               |
+| [mini.fuzzy](https://github.com/nvim-mini/mini.fuzzy)             | 퍼지 매칭                              |
+| [mini.indentscope](https://github.com/nvim-mini/mini.indentscope) | 들여쓰기 범위 시각화 및 조작          |
+| [mini.jump](https://github.com/nvim-mini/mini.jump)               | 단일 문자로 전진/후진 점프            |
+| [mini.jump2d](https://github.com/nvim-mini/mini.jump2d)           | 가시적인 행 내에서 점프               |
+| [mini.map](https://github.com/nvim-mini/mini.map)                 | 버퍼 텍스트 개요가 포함된 창          |
+| [mini.misc](https://github.com/nvim-mini/mini.misc)               | 유용한 잡다한 함수                    |
+| [mini.pairs](https://github.com/nvim-mini/mini.pairs)             | 자동 쌍(Autopairs)                    |
+| [mini.sessions](https://github.com/nvim-mini/mini.sessions)       | 세션 관리                              |
+| [mini.starter](https://github.com/nvim-mini/mini.starter)         | 빠르고 유연한 시작 화면               |
+| [mini.statusline](https://github.com/nvim-mini/mini.statusline)   | 상태줄(Statusline)                    |
+| [mini.surround](https://github.com/nvim-mini/mini.surround)       | 빠르고 기능이 풍부한 주변 텍스트 작업 |
+| [mini.tabline](https://github.com/nvim-mini/mini.tabline)         | 탭줄(Tabline)                         |
+| [mini.test](https://github.com/nvim-mini/mini.test)               | Neovim 플러그인 테스트                |
+| [mini.trailspace](https://github.com/nvim-mini/mini.trailspace)   | 후행 공백 작업                        |
 
-If you are looking where to start, I am particularly proud of 'mini.ai', 'mini.align', 'mini.indentscope', 'mini.starter', and 'mini.surround'. For Neovim plugin authors I can not recommend enough 'mini.doc' and 'mini.test', they were life changers for my workflow.
+어디서부터 시작해야 할지 고민 중이시라면, 저는 특히 'mini.ai', 'mini.align', 'mini.indentscope', 'mini.starter', 'mini.surround'가 자랑스럽습니다. Neovim 플러그인 제작자분들께는 'mini.doc'과 'mini.test'를 강력히 추천합니다. 이들은 제 작업 방식에 큰 변화를 가져다주었습니다.
 
-If you find my work useful, please leave GitHub star for 'mini.nvim' itself and/or for its standalone plugins. Or simply share this news so that more people are aware of it. This really motivates my work on 'mini.nvim'. I am looking forward to implementing some really interesting I have. Thanks!
+제 작업이 유용하다고 생각하신다면 'mini.nvim' 자체나 독립형 플러그인에 GitHub 별을 남겨주세요. 또는 단순히 이 소식을 공유하여 더 많은 사람이 알 수 있도록 해주세요. 이는 제가 'mini.nvim' 작업을 계속하는 데 큰 동기부여가 됩니다. 제가 가진 흥미로운 계획들을 구현할 수 있기를 기대하고 있습니다. 감사합니다!

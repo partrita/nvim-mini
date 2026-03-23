@@ -1,37 +1,37 @@
 ---
-title: "Announcing 'mini.align'"
+title: "'mini.align' 발표"
 author: Evgeni Chasnovski
 date: 2022-09-22
 categories: [announce, reddit]
-description: Align text interactively (like 'vim-easy-align', but in Lua and slightly different mechanics)
+description: 대화형 텍스트 정렬 ('vim-easy-align'과 유사하지만 Lua로 구현되어 메커니즘이 약간 다름)
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/xkzg7z/minialign_align_text_interactively_like/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/xkzg7z/minialign_align_text_interactively_like/)*
 
 {{< video 2022-09-22-announce-mini-align/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am happy to announce the release of [mini.align](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-align.md) - module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) for aligning text interactively (with or without live preview). This is mostly designed after [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align), but is implemented in Lua and has slightly different alignment specification and user interaction lifecycle.
+대화형으로 텍스트를 정렬(라이브 프리뷰 포함 또는 미포함)하기 위한 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 모듈인 [mini.align](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-align.md)의 출시를 발표하게 되어 기쁩니다. 이 모듈은 주로 [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)을 모델로 설계되었지만, Lua로 구현되었으며 정렬 사양과 사용자 상호작용 방식이 약간 다릅니다.
 
-Features:
+기능:
 
-- Alignment is done in three main steps:
-    - **Split** lines into parts based on Lua pattern(s) or user-supplied rule.
-    - **Justify** parts for certain side(s) to be same width inside columns.
-    - **Merge** parts to be lines, with customizable delimiter(s).
+- 정렬은 세 가지 주요 단계로 수행됩니다:
+    - Lua 패턴이나 사용자 제공 규칙에 따라 행을 여러 부분으로 **분할(Split)**합니다.
+    - 열 내부에서 특정 측면이 동일한 너비가 되도록 각 부분을 **정렬(Justify)**합니다.
+    - 커스터마이징 가능한 구분 기호를 사용하여 각 부분을 행으로 **결합(Merge)**합니다.
 
-    Each main step can be preceded by other steps (pre-steps) to achieve highly customizable outcome.
-- User can control alignment interactively by pressing customizable modifiers (single keys representing how alignment steps and/or options should change). Some of default modifiers:
-    - Press `s` to enter split Lua pattern.
-    - Press `j` to choose justification side from available ones ("left", "center", "right", "none").
-    - Press `m` to enter merge delimiter.
-    - Press `f` to enter filter Lua expression to configure which parts will be affected (like "align only first column").
-    - Press `i` to ignore some commonly unwanted split matches.
-    - Press `p` to pair neighboring parts so they be aligned together.
-    - Press `t` to trim whitespace from parts.
-    - Press `<BS>` (backspace) to delete some last pre-step.
-- Alignment can be done with instant preview (result is updated after each modifier) or without it (result is shown and accepted after non-default split pattern is set).
-- Every user interaction is accompanied with helper status message showing relevant information about current alignment process.
+    각 주요 단계 전에는 고도로 커스터마이징 가능한 결과를 얻기 위해 다른 단계(사전 단계)를 둘 수 있습니다.
+- 사용자는 커스터마이징 가능한 수정자(정렬 단계 및/또는 옵션이 변경되는 방식을 나타내는 단일 키)를 눌러 대화형으로 정렬을 제어할 수 있습니다. 기본 수정자의 예:
+    - `s`를 눌러 분할할 Lua 패턴을 입력합니다.
+    - `j`를 눌러 사용 가능한 정렬 방식("left", "center", "right", "none") 중에서 선택합니다.
+    - `m`을 눌러 결합 구분 기호를 입력합니다.
+    - `f`를 눌러 어떤 부분에 영향을 줄지 설정하는 필터 Lua 표현식을 입력합니다 (예: "첫 번째 열만 정렬").
+    - `i`를 눌러 일반적으로 원치 않는 분할 매칭을 무시합니다.
+    - `p`를 눌러 인접한 부분을 쌍으로 묶어 함께 정렬합니다.
+    - `t`를 눌러 부분의 공백을 제거(trim)합니다.
+    - `<BS>` (백스페이스)를 눌러 마지막 사전 단계를 삭제합니다.
+- 정렬은 즉각적인 프리뷰(수정자 입력 후 결과가 즉시 업데이트됨)와 함께 수행되거나 프리뷰 없이(기본값이 아닌 분할 패턴이 설정된 후 결과가 표시되고 승인됨) 수행될 수 있습니다.
+- 모든 사용자 상호작용에는 현재 정렬 프로세스에 대한 관련 정보를 보여주는 도우미 상태 메시지가 함께 표시됩니다.
 
-Please, check it out and tell me what you think! Either here in comments or in dedicated [beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/132). Thanks!
+사용해 보시고 의견을 들려주세요! 여기 댓글이나 전용 [베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/132)를 통해 피드백을 주시면 감사하겠습니다. 감사합니다!

@@ -1,61 +1,61 @@
 ---
-title: "Announcing 'mini.clue'"
+title: "'mini.clue' 발표"
 author: Evgeni Chasnovski
 date: 2023-08-01
 categories: [announce, reddit]
-description: Show next key clues. Basically a 'which-key' + 'hydra' combo with different UI, implementation, and configuration
+description: 다음 키 힌트 표시. 'which-key'와 'hydra'가 결합된 형태이며 UI, 구현 및 설정 방식이 다름
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/15fc34y/miniclue_show_next_key_clues_basically_a_whichkey/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/15fc34y/miniclue_show_next_key_clues_basically_a_whichkey/)*
 
 {{< video 2023-08-01-announce-mini-clue/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am relieved to finally make the release of [mini.clue](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-clue.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) to show next key clues. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.clue).
-
-------
-
-'mini.clue' is basically a [folke/which-key.nvim](https://github.com/folke/which-key.nvim) but with different implementation of how user input is processed. This allows it to have 'hydra'-like submodes and be independent from 'timeoutlen' (built-in duration after which currently typed keys are forced to execute).
-
-One important distinction from 'folke/which-key.nvim' is that 'mini.clue' can't create mappings during its setup. It needs to be done separately, mostly because I believe that this (separation of mapping creation and showing setup) leads to a cleaner user config.
-
-I love how this module turned out. Originally, I thought that it would be not hard to implement, but it became a really painful process to try to mitigate all Neovim's built-in quirks (especially for Operator-pending mode). It is a huge relief to finally release this.
-
-On a slightly sad note, this will replace the last Folke's plugin in my config :(
+드디어 다음 키의 힌트(clue)를 보여주는 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.clue](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-clue.md)의 출시를 발표하게 되어 홀가분합니다. [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.clue)를 통해서도 설치할 수 있습니다.
 
 ------
 
-Here are main features of 'mini.clue':
+'mini.clue'는 기본적으로 [folke/which-key.nvim](https://github.com/folke/which-key.nvim)과 비슷하지만 사용자 입력을 처리하는 방식이 다릅니다. 이를 통해 'hydra'와 같은 서브모드를 가질 수 있고, 'timeoutlen'(입력 중인 키가 강제로 실행되기까지의 내장 지연 시간)으로부터 독립적일 수 있습니다.
 
-- Implement custom key query process to reach target key combination:
-    - Starts after customizable opt-in triggers (mode + keys).
+'folke/which-key.nvim'과의 한 가지 중요한 차이점은 'mini.clue'가 설정 중에 매핑을 생성할 수 없다는 것입니다. 매핑 생성은 별도로 이루어져야 하는데, 저는 매핑 생성과 힌트 표시 설정을 분리하는 것이 더 깔끔한 사용자 설정을 만든다고 믿기 때문입니다.
 
-    - Each key press narrows down set of possible targets.
+저는 이 모듈의 결과물이 마음에 듭니다. 처음에는 구현이 어렵지 않을 것으로 생각했지만, Neovim의 내장된 모든 특이 사항(특히 연산자 대기(Operator-pending) 모드에 대한 것)을 완화하려다 보니 정말 고통스러운 과정이 되었습니다. 마침내 이를 출시하게 되어 정말 다행입니다.
 
-      Pressing `<BS>` removes previous user entry.
+조금 아쉬운 점은, 이로 인해 제 설정에서 마지막으로 남아있던 Folke님의 플러그인이 대체되었다는 것입니다 :(
 
-      Pressing `<Esc>` or `<C-c>` leads to an early stop.
+------
 
-      Doesn't depend on 'timeoutlen' and has basic support for 'langmap'.
+'mini.clue'의 주요 기능은 다음과 같습니다:
 
-    - Ends when there is at most one target left or user pressed `<CR>`. Results into emulating pressing all query keys plus possible postkeys.
+- 대상 키 조합에 도달하기 위한 커스텀 키 쿼리 프로세스 구현:
+    - 설정 가능한 트리거(모드 + 키) 이후에 시작됩니다.
 
-- Show window (after configurable delay) with clues. It lists available next keys along with their descriptions (auto generated from descriptions present keymaps and user-supplied clues).
+    - 각 키 입력은 가능한 대상 집합을 좁힙니다.
 
-- Configurable "postkeys" for key combinations - keys which will be emulated after combination is reached during key query process.
+      `<BS>`를 누르면 이전 입력을 제거합니다.
 
-- Provide customizable sets of clues for common built-in keys/concepts:
-    - `g` key.
-    - `z` key.
-    - Window commands.
-    - Built-in completion.
-    - Marks.
-    - Registers.
+      `<Esc>` 또는 `<C-c>`를 누르면 조기에 중단됩니다.
 
-- Lua functions to disable/enable triggers globally or per buffer.
+      'timeoutlen'에 의존하지 않으며 'langmap'을 기본적으로 지원합니다.
 
-For more details see these tags in help:
+    - 대상이 하나만 남거나 사용자가 `<CR>`을 누르면 종료됩니다. 쿼리된 모든 키와 가능한 postkeys를 누르는 것을 에뮬레이트하는 결과로 이어집니다.
+
+- (설정 가능한 지연 시간 후) 힌트 창을 표시합니다. 사용 가능한 다음 키와 설명(키맵에 있는 설명 및 사용자가 제공한 힌트에서 자동 생성됨)을 나열합니다.
+
+- 키 조합에 대해 설정 가능한 "postkeys" - 키 쿼리 프로세스 중에 조합에 도달한 후 에뮬레이트될 키입니다.
+
+- 일반적인 내장 키/개념에 대해 설정 가능한 힌트 세트 제공:
+    - `g` 키.
+    - `z` 키.
+    - 창(Window) 명령.
+    - 내장 완성.
+    - 마크(Marks).
+    - 레지스터(Registers).
+
+- 트리거를 전역적으로 또는 버퍼별로 비활성화/활성화하는 Lua 함수.
+
+자세한 내용은 도움말의 다음 태그들을 참조하세요:
 
 - [MiniClue-key-query-process](https://github.com/nvim-mini/mini.nvim/blob/609b449fb4e536a88543a32d23e81f98f907a12a/doc/mini-clue.txt#L120)
 
@@ -65,10 +65,10 @@ For more details see these tags in help:
 
 - [MiniClue.gen_clues](https://github.com/nvim-mini/mini.nvim/blob/609b449fb4e536a88543a32d23e81f98f907a12a/doc/mini-clue.txt#L581)
 
-For more information, see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-clue.txt).
+자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-clue.txt)을 참조하세요.
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/430).
+사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/430)를 통해 남겨주시면 감사하겠습니다.
 
-Thanks!
+감사합니다!

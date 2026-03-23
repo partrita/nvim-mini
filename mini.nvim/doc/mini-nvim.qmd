@@ -1,477 +1,319 @@
 ---
-title: "mini.nvim documentation"
+title: "mini.nvim 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_이 문서는 'mini.nvim'의 `main` 브랜치에서 생성되었습니다._
 
-<a name="mini.nvim" href="mini-nvim.qmd#mini.nvim"><b>mini.nvim</b></a> Collection of minimal, independent and fast Lua modules
+<a name="mini.nvim" href="mini-nvim.qmd#mini.nvim"><b>mini.nvim</b></a> 미니멀하고 독립적이며 빠른 Lua 모듈 모음
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Table of contents {#mini.nvim-table-of-contents .help-syntax-right-anchor}
+### 목차 {#mini.nvim-table-of-contents .help-syntax-right-anchor}
 
-[mini.nvim](mini-nvim.qmd#mini.nvim) is a collection of minimal, independent, and fast Lua modules
-dedicated to improve Neovim (version 0.9 and higher) experience. Each
-module can be considered as a separate sub-plugin.
+[mini.nvim](mini-nvim.qmd#mini.nvim)은 Neovim(버전 0.9 이상) 경험을 개선하기 위한 미니멀하고 독립적이며 빠른 Lua 모듈 모음입니다. 각 모듈은 별도의 하위 플러그인으로 간주될 수 있습니다.
 
-Table of contents:
+목차:
 
 |  |  |
 |---|---:|
-| General principles | [mini.nvim-general-principles](mini-nvim.qmd#mini.nvim-general-principles) |
-| Module list | [mini.nvim-module-list](mini-nvim.qmd#mini.nvim-module-list) |
-| Disabling recipes | [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) |
-| Buffer-local config | [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) |
-| Plugin color schemes | [mini.nvim-color-schemes](mini-nvim.qmd#mini.nvim-color-schemes) |
-| Extend and create a/i textobjects | [mini.ai](mini-ai.qmd#mini.ai) |
-| Align text interactively | [mini.align](mini-align.qmd#mini.align) |
-| Animate common Neovim actions | [mini.animate](mini-animate.qmd#mini.animate) |
-| Base16 colorscheme creation | [mini.base16](mini-base16.qmd#mini.base16) |
-| Common configuration presets | [mini.basics](mini-basics.qmd#mini.basics) |
-| Go forward/backward with square brackets | [mini.bracketed](mini-bracketed.qmd#mini.bracketed) |
-| Remove buffers | [mini.bufremove](mini-bufremove.qmd#mini.bufremove) |
-| Show next key clues | [mini.clue](mini-clue.qmd#mini.clue) |
-| Command line tweaks | [mini.cmdline](mini-cmdline.qmd#mini.cmdline) |
-| Tweak and save any color scheme | [mini.colors](mini-colors.qmd#mini.colors) |
-| Comment lines | [mini.comment](mini-comment.qmd#mini.comment) |
-| Completion and signature help | [mini.completion](mini-completion.qmd#mini.completion) |
-| Autohighlight word under cursor | [mini.cursorword](mini-cursorword.qmd#mini.cursorword) |
-| Plugin manager | [mini.deps](mini-deps.qmd#mini.deps) |
-| Work with diff hunks | [mini.diff](mini-diff.qmd#mini.diff) |
-| Generate Neovim help files | [mini.doc](mini-doc.qmd#mini.doc) |
-| Extra 'mini.nvim' functionality | [mini.extra](mini-extra.qmd#mini.extra) |
-| Navigate and manipulate file system | [mini.files](mini-files.qmd#mini.files) |
-| Fuzzy matching | [mini.fuzzy](mini-fuzzy.qmd#mini.fuzzy) |
-| Git integration | [mini.git](mini-git.qmd#mini.git) |
-| Highlight patterns in text | [mini.hipatterns](mini-hipatterns.qmd#mini.hipatterns) |
-| Generate configurable color scheme | [mini.hues](mini-hues.qmd#mini.hues) |
-| Icon provider | [mini.icons](mini-icons.qmd#mini.icons) |
-| Visualize and work with indent scope | [mini.indentscope](mini-indentscope.qmd#mini.indentscope) |
-| Jump to next/previous single character | [mini.jump](mini-jump.qmd#mini.jump) |
-| Jump within visible lines | [mini.jump2d](mini-jump2d.qmd#mini.jump2d) |
-| Special key mappings | [mini.keymap](mini-keymap.qmd#mini.keymap) |
-| Window with buffer text overview | [mini.map](mini-map.qmd#mini.map) |
-| Miscellaneous functions | [mini.misc](mini-misc.qmd#mini.misc) |
-| Move any selection in any direction | [mini.move](mini-move.qmd#mini.move) |
-| Show notifications | [mini.notify](mini-notify.qmd#mini.notify) |
-| Text edit operators | [mini.operators](mini-operators.qmd#mini.operators) |
-| Autopairs | [mini.pairs](mini-pairs.qmd#mini.pairs) |
-| Pick anything | [mini.pick](mini-pick.qmd#mini.pick) |
-| Session management | [mini.sessions](mini-sessions.qmd#mini.sessions) |
-| Manage and expand snippets | [mini.snippets](mini-snippets.qmd#mini.snippets) |
-| Split and join arguments | [mini.splitjoin](mini-splitjoin.qmd#mini.splitjoin) |
-| Start screen | [mini.starter](mini-starter.qmd#mini.starter) |
-| Statusline | [mini.statusline](mini-statusline.qmd#mini.statusline) |
-| Surround actions | [mini.surround](mini-surround.qmd#mini.surround) |
-| Tabline | [mini.tabline](mini-tabline.qmd#mini.tabline) |
-| Test Neovim plugins | [mini.test](mini-test.qmd#mini.test) |
-| Trailspace (highlight and remove) | [mini.trailspace](mini-trailspace.qmd#mini.trailspace) |
-| Track and reuse file system visits | [mini.visits](mini-visits.qmd#mini.visits) |
+| 일반 원칙 | [mini.nvim-일반-원칙](mini-nvim.qmd#mini.nvim-general-principles) |
+| 모듈 목록 | [mini.nvim-모듈-목록](mini-nvim.qmd#mini.nvim-module-list) |
+| 비활성화 레시피 | [mini.nvim-비활성화-레시피](mini-nvim.qmd#mini.nvim-disabling-recipes) |
+| 버퍼 로컬 설정 | [mini.nvim-버퍼-로컬-설정](mini-nvim.qmd#mini.nvim-buffer-local-config) |
+| 플러그인 컬러 스킴 | [mini.nvim-컬러-스킴](mini-nvim.qmd#mini.nvim-color-schemes) |
+| a/i 텍스트 오브젝트 확장 및 생성 | [mini.ai](mini-ai.qmd#mini.ai) |
+| 대화형 텍스트 정렬 | [mini.align](mini-align.qmd#mini.align) |
+| 일반적인 Neovim 동작 애니메이션화 | [mini.animate](mini-animate.qmd#mini.animate) |
+| Base16 컬러 스킴 생성 | [mini.base16](mini-base16.qmd#mini.base16) |
+| 일반적인 구성 프리셋 | [mini.basics](mini-basics.qmd#mini.basics) |
+| 대괄호를 사용하여 앞뒤로 이동 | [mini.bracketed](mini-bracketed.qmd#mini.bracketed) |
+| 버퍼 제거 | [mini.bufremove](mini-bufremove.qmd#mini.bufremove) |
+| 다음 키 힌트 표시 | [mini.clue](mini-clue.qmd#mini.clue) |
+| 명령줄 조정 | [mini.cmdline](mini-cmdline.qmd#mini.cmdline) |
+| 모든 컬러 스킴 조정 및 저장 | [mini.colors](mini-colors.qmd#mini.colors) |
+| 줄 주석 처리 | [mini.comment](mini-comment.qmd#mini.comment) |
+| 자동 완성 및 시그니처 헬프 | [mini.completion](mini-completion.qmd#mini.completion) |
+| 커서 아래의 단어 자동 하이라이트 | [mini.cursorword](mini-cursorword.qmd#mini.cursorword) |
+| 플러그인 관리자 | [mini.deps](mini-deps.qmd#mini.deps) |
+| 디프 헝크(diff hunk) 작업 | [mini.diff](mini-diff.qmd#mini.diff) |
+| Neovim 도움말 파일 생성 | [mini.doc](mini-doc.qmd#mini.doc) |
+| 추가적인 'mini.nvim' 기능 | [mini.extra](mini-extra.qmd#mini.extra) |
+| 파일 시스템 탐색 및 조작 | [mini.files](mini-files.qmd#mini.files) |
+| 퍼지 매칭(Fuzzy matching) | [mini.fuzzy](mini-fuzzy.qmd#mini.fuzzy) |
+| Git 통합 | [mini.git](mini-git.qmd#mini.git) |
+| 텍스트의 패턴 하이라이트 | [mini.hipatterns](mini-hipatterns.qmd#mini.hipatterns) |
+| 구성 가능한 컬러 스킴 생성 | [mini.hues](mini-hues.qmd#mini.hues) |
+| 아이콘 제공자 | [mini.icons](mini-icons.qmd#mini.icons) |
+| 들여쓰기 범위 시각화 및 작업 | [mini.indentscope](mini-indentscope.qmd#mini.indentscope) |
+| 다음/이전 단일 문자로 이동 | [mini.jump](mini-jump.qmd#mini.jump) |
+| 보이는 줄 내에서 이동 | [mini.jump2d](mini-jump2d.qmd#mini.jump2d) |
+| 특수 키 매핑 | [mini.keymap](mini-keymap.qmd#mini.keymap) |
+| 버퍼 텍스트 개요가 있는 창 | [mini.map](mini-map.qmd#mini.map) |
+| 기타 유용한 기능들 | [mini.misc](mini-misc.qmd#mini.misc) |
+| 모든 방향으로 선택 영역 이동 | [mini.move](mini-move.qmd#mini.move) |
+| 알림 표시 | [mini.notify](mini-notify.qmd#mini.notify) |
+| 텍스트 편집 오퍼레이터 | [mini.operators](mini-operators.qmd#mini.operators) |
+| 자동 페어(Autopairs) | [mini.pairs](mini-pairs.qmd#mini.pairs) |
+| 무엇이든 선택(Pick) | [mini.pick](mini-pick.qmd#mini.pick) |
+| 세션 관리 | [mini.sessions](mini-sessions.qmd#mini.sessions) |
+| 스니펫 관리 및 확장 | [mini.snippets](mini-snippets.qmd#mini.snippets) |
+| 인자 분할 및 결합 | [mini.splitjoin](mini-splitjoin.qmd#mini.splitjoin) |
+| 시작 화면 | [mini.starter](mini-starter.qmd#mini.starter) |
+| 상태라인(Statusline) | [mini.statusline](mini-statusline.qmd#mini.statusline) |
+| 서라운드(Surround) 동작 | [mini.surround](mini-surround.qmd#mini.surround) |
+| 탭라인(Tabline) | [mini.tabline](mini-tabline.qmd#mini.tabline) |
+| Neovim 플러그인 테스트 | [mini.test](mini-test.qmd#mini.test) |
+| 트레일스페이스(하이라이트 및 제거) | [mini.trailspace](mini-trailspace.qmd#mini.trailspace) |
+| 파일 시스템 방문 추적 및 재사용 | [mini.visits](mini-visits.qmd#mini.visits) |
 
 ---
 
-### General principles {#mini.nvim-general-principles .help-syntax-right-anchor}
+### 일반 원칙 {#mini.nvim-general-principles .help-syntax-right-anchor}
 
-#### Design {#mini.nvim-general-principles-design}
-
-
-Each module is designed to solve a particular problem targeting balance
-between feature-richness (handling as many edge-cases as possible) and
-simplicity of implementation/support. Granted, not all of them ended up
-with the same balance, but it is the goal nevertheless.
-
-#### Independence {#mini.nvim-general-principles-independence}
+#### 디자인 {#mini.nvim-general-principles-design}
 
 
-Modules are independent of each other and can be run without external
-dependencies. Although some of them may need dependencies for full experience.
+각 모듈은 기능의 풍부함(가능한 한 많은 엣지 케이스 처리)과 구현/지원의 단순함 사이의 균형을 목표로 특정 문제를 해결하도록 설계되었습니다. 물론 모든 모듈이 동일한 균형을 이룬 것은 아니지만, 그럼에도 불구하고 그것이 목표입니다.
 
-#### Structure {#mini.nvim-general-principles-structure}
+#### 독립성 {#mini.nvim-general-principles-independence}
 
 
-Each module is a submodule for a placeholder "mini" module. For example,
-"surround" module should be referred to as "mini.surround". As later will
-be explained, this plugin can also be referred to as "MiniSurround".
+모듈은 서로 독립적이며 외부 종속성 없이 실행될 수 있습니다. 비록 일부 모듈은 완전한 경험을 위해 종속성이 필요할 수 있습니다.
 
-#### Setup {#mini.nvim-general-principles-setup}
+#### 구조 {#mini.nvim-general-principles-structure}
+
+
+각 모듈은 자리 표시자인 "mini" 모듈의 하위 모듈입니다. 예를 들어, "surround" 모듈은 "mini.surround"로 참조되어야 합니다. 나중에 설명하겠지만, 이 플러그인은 "MiniSurround"로도 참조될 수 있습니다.
+
+#### 설정 (Setup) {#mini.nvim-general-principles-setup}
 
 
 
-- Each module you want to use should be enabled separately with
-  `require(<name of module>).setup({})`. Possibly replace `{}` with your
-  config table or omit altogether to use defaults. You can supply only
-  parts of config, the rest will be inferred from defaults.
+- 사용하려는 각 모듈은 `require(<모듈 이름>).setup({})`을 통해 별도로 활성화해야 합니다. `{}`를 설정 테이블로 바꾸거나 기본값을 사용하려면 아예 생략할 수도 있습니다. 설정의 일부만 제공할 수 있으며, 나머지는 기본값에서 유추됩니다.
 
 
-- Call to module's `setup()` always creates a global Lua object with
-  coherent camel-case name: `require('mini.surround').setup()` creates
-  `_G.MiniSurround`. This allows for a simpler usage of plugin available
-  from `v:lua` like `v:lua.MiniSurround`. Considering this, "module" and
-  "Lua object" names can be used interchangeably:
-  'mini.surround' and 'MiniSurround' will mean the same thing.
+- 모듈의 `setup()` 호출은 항상 일관된 카멜 케이스 이름을 가진 전역 Lua 객체를 생성합니다: `require('mini.surround').setup()`은 `_G.MiniSurround`를 생성합니다. 이를 통해 `v:lua.MiniSurround`와 같이 `v:lua`에서 플러그인을 더 간단하게 사용할 수 있습니다. 이를 고려할 때, "모듈"과 "Lua 객체" 이름은 서로 바꿔서 사용할 수 있습니다: 'mini.surround'와 'MiniSurround'는 같은 것을 의미합니다.
 
 
-- Each supplied `config` table (after extending with default values) is
-  stored in `config` field of global object. Like `MiniSurround.config`.
+- 제공된 각 `config` 테이블은 (기본값으로 확장된 후) 전역 객체의 `config` 필드에 저장됩니다. 예: `MiniSurround.config`.
 
 
-- Values of `config`, which affect runtime activity, can be changed on the
-  fly to have effect. For example, `MiniSurround.config.n_lines` can be
-  changed during runtime; but changing `MiniSurround.config.mappings` won't
-  have any effect (as mappings are created once during `setup()`).
+- 런타임 활동에 영향을 주는 `config` 값은 즉시 효과를 보기 위해 실행 중에 변경할 수 있습니다. 예를 들어, `MiniSurround.config.n_lines`는 실행 중에 변경할 수 있습니다. 하지만 `MiniSurround.config.mappings`를 변경하는 것은 (매핑이 `setup()` 중에 한 번만 생성되므로) 아무런 효과가 없습니다.
 
 
-- If module works best with some specific non-default option value, it is
-  set during `setup()`. If the value is not essential to module's functionality,
-  it is done only if user or another plugin hasn't set it beforehand (no
-  matter the value).
+- 모듈이 기본값이 아닌 특정 옵션 값에서 가장 잘 작동하는 경우, `setup()` 중에 설정됩니다. 해당 값이 모듈의 기능에 필수적이지 않은 경우, 사용자나 다른 플러그인이 미리 설정하지 않은 경우에만 설정됩니다 (값에 관계없이).
 
-#### Buffer local configuration {#mini.nvim-general-principles-bufferlocalconfiguration}
+#### 버퍼 로컬 구성 {#mini.nvim-general-principles-bufferlocalconfiguration}
 
 
-Each module can be additionally configured to use certain runtime config
-settings locally to buffer. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more
-information.
+각 모듈은 버퍼에 국한하여 특정 런타임 설정 설정을 사용하도록 추가로 구성할 수 있습니다. 자세한 내용은 [mini.nvim-버퍼-로컬-설정](mini-nvim.qmd#mini.nvim-buffer-local-config)을 참조하세요.
 
-#### Buffer names {#mini.nvim-general-principles-buffernames}
+#### 버퍼 이름 {#mini.nvim-general-principles-buffernames}
 
 
-All module-related buffers are named according to the following format:
-`mini<module-name>://<buffer-number>/<useful-info>` (forward slashes are
-used on any platform; `<useful-info>` may be empty). This structure allows
-creating identifiable, reasonably unique, and useful buffer names.
-For example, [mini.files](mini-files.qmd#mini.files) buffers are created per displayed directory/file with
-names like `minifiles://10/path/to/displayed/directory`.
+모든 모듈 관련 버퍼는 다음 형식에 따라 명명됩니다: `mini<module-name>://<buffer-number>/<useful-info>` (플랫폼에 관계없이 슬래시가 사용되며, `<useful-info>`는 비어 있을 수 있습니다). 이 구조를 통해 식별 가능하고 합리적으로 고유하며 유용한 버퍼 이름을 생성할 수 있습니다. 예를 들어, [mini.files](mini-files.qmd#mini.files) 버퍼는 표시된 디렉토리/파일마다 `minifiles://10/path/to/displayed/directory`와 같은 이름으로 생성됩니다.
 
-#### Disabling {#mini.nvim-general-principles-disabling}
+#### 비활성화 {#mini.nvim-general-principles-disabling}
 
 
-Each module's core functionality can be disabled globally or locally to
-buffer. See "Disabling" section in module's help page for more details.
-See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+각 모듈의 핵심 기능은 전역적으로 또는 버퍼 로컬에서 비활성화할 수 있습니다. 자세한 내용은 모듈의 도움말 페이지에 있는 "비활성화" 섹션을 참조하세요. 일반적인 레시피는 [mini.nvim-비활성화-레시피](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
-#### Silencing {#mini.nvim-general-principles-silencing}
+#### 무음 설정 (Silencing) {#mini.nvim-general-principles-silencing}
 
 
-Each module can be configured to not show non-error feedback globally or
-locally to buffer. See "Silencing" section in module's help for more details.
+각 모듈은 전역적으로 또는 버퍼 로컬에서 에러가 아닌 피드백을 표시하지 않도록 구성할 수 있습니다. 자세한 내용은 모듈의 도움말에 있는 "무음 설정" 섹션을 참조하세요.
 
-#### Highlighting {#mini.nvim-general-principles-highlighting}
-
-
-Appearance of module's output is controlled by certain set of highlight
-groups (see [highlight-groups](https://neovim.io/doc/user/helptag.html?tag=highlight-groups)). By default they usually link to some
-semantically close built-in highlight group. Use [:highlight](https://neovim.io/doc/user/helptag.html?tag=:highlight) command or
-[nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)) Lua function to customize highlighting. To see a more
-calibrated look, use [mini.hues](mini-hues.qmd#mini.hues), [mini.base16](mini-base16.qmd#mini.base16), or plugin's colorschemes.
-
-#### Stability {#mini.nvim-general-principles-stability}
+#### 하이라이트 {#mini.nvim-general-principles-highlighting}
 
 
-Each module upon release is considered to be relatively stable: both in
-terms of setup and functionality. Any non-bugfix backward-incompatible
-change will be released gradually as much as possible.
+모듈 출력의 외관은 특정 하이라이트 그룹 세트에 의해 제어됩니다 ([highlight-groups](https://neovim.io/doc/user/helptag.html?tag=highlight-groups) 참조). 기본적으로 이들은 보통 의미적으로 가까운 일부 내장 하이라이트 그룹에 연결됩니다. 하이라이트를 사용자 정의하려면 [:highlight](https://neovim.io/doc/user/helptag.html?tag=:highlight) 명령어나 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)) Lua 함수를 사용하세요. 더 정밀하게 조정된 룩을 보려면 [mini.hues](mini-hues.qmd#mini.hues), [mini.base16](mini-base16.qmd#mini.base16) 또는 플러그인의 컬러 스킴을 사용하세요.
 
-#### Not filetype and language specific {#mini.nvim-general-principles-notfiletypeandlanguagespecific}
+#### 안정성 {#mini.nvim-general-principles-stability}
 
 
-Including functionality which needs several filetype/language specific
-implementations is an explicit no-goal of this project. This is mostly due
-to the potential increase in maintenance to keep implementation up to date.
-However, any part which might need filetype/language specific tuning should
-be designed to allow it by letting user set proper buffer options and/or
-local configuration.
+각 모듈은 릴리스 시 설정과 기능 측면 모두에서 상대적으로 안정적인 것으로 간주됩니다. 버그 수정이 아닌 하위 호환되지 않는 변경 사항은 가능한 한 점진적으로 릴리스될 것입니다.
+
+#### 파일 타입 및 언어에 특화되지 않음 {#mini.nvim-general-principles-notfiletypeandlanguagespecific}
+
+
+여러 파일 타입/언어별 구현이 필요한 기능을 포함하는 것은 이 프로젝트의 명시적인 목표가 아닙니다. 이는 주로 구현을 최신 상태로 유지하기 위한 유지 관리 비용 증가 가능성 때문입니다. 그러나 파일 타입/언어별 조정이 필요할 수 있는 부분은 사용자가 적절한 버퍼 옵션 및/또는 로컬 구성을 설정할 수 있도록 설계되어야 합니다.
 
 ---
 
-### Module list {#mini.nvim-module-list .help-syntax-right-anchor}
+### 모듈 목록 {#mini.nvim-module-list .help-syntax-right-anchor}
 
 
-- [mini.ai](mini-ai.qmd#mini.ai) - extend and create `a`/`i` textobjects (like in `di(` or
-  `va"`). It enhances some builtin [text-objects](https://neovim.io/doc/user/helptag.html?tag=text-objects) (like [a(](https://neovim.io/doc/user/helptag.html?tag=a\(), [a)](https://neovim.io/doc/user/helptag.html?tag=a\)), [a'](https://neovim.io/doc/user/helptag.html?tag=a'),
-  and more), creates new ones (like `a*`, `a<Space>`, `af`, `a?`, and
-  more), and allows user to create their own (like based on treesitter, and
-  more). Supports dot-repeat, `v:count`, different search methods,
-  consecutive application, and customization via Lua patterns or functions.
-  Has builtins for brackets, quotes, function call, argument, tag, user
-  prompt, and any punctuation/digit/whitespace character.
+- [mini.ai](mini-ai.qmd#mini.ai) - `a`/`i` 텍스트 오브젝트 확장 및 생성 (`di(` 또는 `va"`와 같이). 일부 내장 [텍스트 오브젝트](https://neovim.io/doc/user/helptag.html?tag=text-objects) ([a(](https://neovim.io/doc/user/helptag.html?tag=a\(), [a)](https://neovim.io/doc/user/helptag.html?tag=a\)), [a'](https://neovim.io/doc/user/helptag.html?tag=a') 등)를 향상시키고, 새로운 오브젝트(`a*`, `a<Space>`, `af`, `a?` 등)를 생성하며, 사용자가 직접(트리시터 기반 등) 생성할 수 있도록 합니다. 점 반복, `v:count`, 다양한 검색 방법, 연속 적용, Lua 패턴 또는 함수를 통한 사용자 정의를 지원합니다. 괄호, 따옴표, 함수 호출, 인자, 태그, 사용자 프롬프트 및 모든 문장 부호/숫자/공백 문자에 대한 내장 기능을 갖추고 있습니다.
 
 
-- [mini.align](mini-align.qmd#mini.align) - align text interactively (with or without instant preview).
-  Allows rich and flexible customization of both alignment rules and user
-  interaction. Works with charwise, linewise, and blockwise selections in
-  both Normal mode (on textobject/motion; with dot-repeat) and Visual mode.
+- [mini.align](mini-align.qmd#mini.align) - 대화형으로 텍스트 정렬 (즉시 미리보기 포함 또는 미포함). 정렬 규칙과 사용자 상호 작용 모두에 대해 풍부하고 유연한 사용자 정의를 허용합니다. 일반 모드(텍스트 오브젝트/동작 시, 점 반복 지원)와 비주얼 모드 모두에서 문자 단위, 줄 단위 및 블록 단위 선택 영역과 함께 작동합니다.
 
 
-- [mini.animate](mini-animate.qmd#mini.animate) - animate common Neovim actions. Has "works out of the box"
-  builtin animations for cursor movement, scroll, resize, window open and
-  close. All of them can be customized and enabled/disabled independently.
+- [mini.animate](mini-animate.qmd#mini.animate) - 일반적인 Neovim 동작 애니메이션화. 커서 이동, 스크롤, 크기 조정, 창 열기 및 닫기에 대해 "설치 즉시 작동하는" 내장 애니메이션을 제공합니다. 이들 모두는 독립적으로 사용자 정의하거나 활성화/비활성화할 수 있습니다.
 
 
-- [mini.base16](mini-base16.qmd#mini.base16) - fast implementation of base16 theme for manually supplied
-  palette. Supports 30+ plugin integrations. Has unique palette generator
-  which needs only background and foreground colors.
+- [mini.base16](mini-base16.qmd#mini.base16) - 수동으로 제공된 팔레트에 대한 base16 테마의 빠른 구현. 30개 이상의 플러그인 통합을 지원합니다. 배경색과 전경색만 필요한 독특한 팔레트 생성기를 갖추고 있습니다.
 
 
-- [mini.basics](mini-basics.qmd#mini.basics) - common configuration presets. Has configurable presets for
-  options, mappings, and autocommands. It doesn't change option or mapping
-  if it was manually created.
+- [mini.basics](mini-basics.qmd#mini.basics) - 일반적인 구성 프리셋. 옵션, 매핑 및 자동 명령에 대해 구성 가능한 프리셋을 제공합니다. 수동으로 생성된 옵션이나 매핑은 변경하지 않습니다.
 
 
-- [mini.bracketed](mini-bracketed.qmd#mini.bracketed) - go forward/backward with square brackets. Among others,
-  supports variety of non-trivial targets: comments, files on disk, indent
-  changes, tree-sitter nodes, linear undo states, yank history entries.
+- [mini.bracketed](mini-bracketed.qmd#mini.bracketed) - 대괄호를 사용하여 앞뒤로 이동. 주석, 디스크의 파일, 들여쓰기 변경, 트리시터 노드, 선형 실행 취소 상태, 얀크 히스토리 항목 등 다양한 비사소한 대상을 지원합니다.
 
 
-- [mini.bufremove](mini-bufremove.qmd#mini.bufremove) - buffer removing (unshow, delete, wipeout) while saving
-  window layout.
+- [mini.bufremove](mini-bufremove.qmd#mini.bufremove) - 창 레이아웃을 유지하면서 버퍼 제거 (표시 취소, 삭제, 영구 삭제).
 
 
-- [mini.clue](mini-clue.qmd#mini.clue) - show next key clues. Implements custom key query process with
-  customizable opt-in triggers, next key descriptions (clues), hydra-like
-  submodes, window delay/config. Provides clue sets for some built-in
-  concepts: `g`/`z` keys, window commands, etc.
+- [mini.clue](mini-clue.qmd#mini.clue) - 다음 키 힌트 표시. 사용자 정의 가능한 옵트인 트리거, 다음 키 설명(클루), 히드라(hydra) 스타일 하위 모드, 창 지연/설정을 사용하여 커스텀 키 쿼리 프로세스를 구현합니다. `g`/`z` 키, 창 명령어 등 일부 내장 개념에 대한 클루 세트를 제공합니다.
 
 
-- [mini.cmdline](mini-cmdline.qmd#mini.cmdline) - command line tweaks. Adds autocompletion with customizable
-  delay, autocorrection for words with fixed candidates, and autopeek command
-  range in a floating window with customizable context size.
+- [mini.cmdline](mini-cmdline.qmd#mini.cmdline) - 명령줄 조정. 사용자 정의 가능한 지연 시간이 있는 자동 완성, 고정된 후보군이 있는 단어 자동 수정, 그리고 사용자 정의 가능한 컨텍스트 크기를 가진 플로팅 창에서의 명령 범위 자동 엿보기(autopeek) 기능을 추가합니다.
 
 
-- [mini.colors](mini-colors.qmd#mini.colors) - tweak and save any color scheme. Can create colorscheme
-  object with methods to invert/set/modify/etc.
-  lightness/saturation/hue/temperature/etc. of foreground/background/all
-  colors, infer cterm attributes, add transparency, save to a file and more.
-  Has functionality for interactive experiments and animation of
-  transition between color schemes.
+- [mini.colors](mini-colors.qmd#mini.colors) - 모든 컬러 스킴 조정 및 저장. 전경/배경/모든 색상의 밝기/채도/색조/온도 등을 반전/설정/수정할 수 있는 메서드를 가진 컬러 스킴 객체를 생성하고, cterm 속성 유추, 투명도 추가, 파일 저장 등을 할 수 있습니다. 대화형 실험 및 컬러 스킴 간 전환 애니메이션 기능을 갖추고 있습니다.
 
 
-- [mini.comment](mini-comment.qmd#mini.comment) - fast and familiar per-line code commenting.
+- [mini.comment](mini-comment.qmd#mini.comment) - 빠르고 익숙한 줄 단위 코드 주석 처리.
 
 
-- [mini.completion](mini-completion.qmd#mini.completion) - async (with customizable 'debounce' delay) 'two-stage
-  chain completion': first builtin LSP, then configurable fallback. Also
-  has functionality for completion item info and function signature (both
-  in floating window appearing after customizable delay).
+- [mini.completion](mini-completion.qmd#mini.completion) - 비동기(사용자 정의 가능한 '디바운스' 지연 시간 포함) '2단계 체인 완료': 먼저 내장 LSP, 그다음 구성 가능한 폴백. 또한 사용자 정의 가능한 지연 시간 후에 플로팅 창에 나타나는 완료 항목 정보 및 함수 시그니처 기능을 갖추고 있습니다.
 
 
-- [mini.cursorword](mini-cursorword.qmd#mini.cursorword) - automatic highlighting of word under cursor (displayed
-  after customizable delay). Current word under cursor can be highlighted
-  differently.
+- [mini.cursorword](mini-cursorword.qmd#mini.cursorword) - 커서 아래 단어의 자동 하이라이트 (사용자 정의 가능한 지연 시간 후 표시). 커서 아래의 현재 단어는 다르게 하이라이트될 수 있습니다.
 
 
-- [mini.deps](mini-deps.qmd#mini.deps) - plugin manager for plugins outside of 'mini.nvim'. Uses Git and
-  built-in packages to install, update, clean, and snapshot plugins.
+- [mini.deps](mini-deps.qmd#mini.deps) - 'mini.nvim' 외부 플러그인을 위한 플러그인 관리자. Git과 내장 패키지를 사용하여 플러그인을 설치, 업데이트, 정리 및 스냅샷을 생성합니다.
 
 
-- [mini.diff](mini-diff.qmd#mini.diff) - visualize difference between buffer text and its reference
-  interactively (with colored signs or line numbers). Uses Git index as
-  default reference. Provides toggleable overview in text area, built-in
-  apply/reset/textobject/goto mappings.
+- [mini.diff](mini-diff.qmd#mini.diff) - 버퍼 텍스트와 참조 간의 차이점을 대화형으로 시각화합니다 (색상 기호 또는 줄 번호 사용). Git 인덱스를 기본 참조로 사용합니다. 텍스트 영역에 토글 가능한 개요, 내장된 적용/리셋/텍스트 오브젝트/이동 매핑을 제공합니다.
 
 
-- [mini.doc](mini-doc.qmd#mini.doc) - generation of help files from EmmyLua-like annotations.
-  Allows flexible customization of output via hook functions. Used for
-  documenting this plugin.
+- [mini.doc](mini-doc.qmd#mini.doc) - EmmyLua 스타일의 어노테이션에서 도움말 파일 생성. 훅 함수를 통해 출력의 유연한 사용자 정의가 가능합니다. 이 플러그인의 문서화에 사용되었습니다.
 
 
-- [mini.extra](mini-extra.qmd#mini.extra) - extra 'mini.nvim' functionality. Contains 'mini.pick' pickers,
-  'mini.ai' textobjects, and more.
+- [mini.extra](mini-extra.qmd#mini.extra) - 추가적인 'mini.nvim' 기능. 'mini.pick' 피커, 'mini.ai' 텍스트 오브젝트 등을 포함합니다.
 
 
-- [mini.files](mini-files.qmd#mini.files) - navigate and manipulate file system. A file explorer with
-  column view capable of manipulating file system by editing text. Can
-  create/delete/rename/copy/move files/directories inside and across
-  directories. For full experience needs enabled [mini.icons](mini-icons.qmd#mini.icons) module (but works
-  without it).
+- [mini.files](mini-files.qmd#mini.files) - 파일 시스템 탐색 및 조작. 텍스트를 편집하여 파일 시스템을 조작할 수 있는 컬럼 뷰 파일 탐색기입니다. 디렉토리 내부 및 디렉토리 간에 파일/디렉토리를 생성/삭제/이름 변경/복사/이동할 수 있습니다. 완전한 경험을 위해 활성화된 [mini.icons](mini-icons.qmd#mini.icons) 모듈이 필요하지만, 없어도 작동합니다.
 
 
-- [mini.fuzzy](mini-fuzzy.qmd#mini.fuzzy) - functions for fast and simple fuzzy matching. It has
-  not only functions to perform fuzzy matching of one string to others, but
-  also a sorter for 'nvim-telescope/telescope.nvim'.
+- [mini.fuzzy](mini-fuzzy.qmd#mini.fuzzy) - 빠르고 간단한 퍼지 매칭 함수. 한 문자열을 다른 문자열과 퍼지 매칭하는 함수뿐만 아니라 'nvim-telescope/telescope.nvim'용 정렬기(sorter)도 갖추고 있습니다.
 
 
-- [mini.git](mini-git.qmd#mini.git) - Git integration (https://git-scm.com/). Implements tracking of
-  Git related data (root, branch, etc.), [:Git](mini-git.qmd#git) command for better integration
-  with running Neovim instance, and various helpers to explore Git history.
+- [mini.git](mini-git.qmd#mini.git) - Git 통합 (https://git-scm.com/). Git 관련 데이터(루트, 브랜치 등) 추적, 실행 중인 Neovim 인스턴스와의 더 나은 통합을 위한 [:Git](mini-git.qmd#git) 명령어, 그리고 Git 히스토리를 탐색하기 위한 다양한 헬퍼를 구현합니다.
 
 
-- [mini.hipatterns](mini-hipatterns.qmd#mini.hipatterns) - highlight patterns in text with configurable highlighters
-  (pattern and/or highlight group can be string or callable).
-  Works asynchronously with configurable debounce delay.
+- [mini.hipatterns](mini-hipatterns.qmd#mini.hipatterns) - 구성 가능한 하이라이터(패턴 및/또는 하이라이트 그룹은 문자열 또는 호출 가능 객체일 수 있음)로 텍스트의 패턴을 하이라이트합니다. 구성 가능한 디바운스 지연 시간과 함께 비동기적으로 작동합니다.
 
 
-- [mini.hues](mini-hues.qmd#mini.hues) - generate configurable color scheme. Takes only background
-  and foreground colors as required arguments. Can adjust number of hues
-  for non-base colors, saturation, accent color, plugin integration.
+- [mini.hues](mini-hues.qmd#mini.hues) - 구성 가능한 컬러 스킴 생성. 배경색과 전경색만 필수 인수로 받습니다. 비기본 색상의 색조 수, 채도, 강조 색상, 플러그인 통합을 조정할 수 있습니다.
 
 
-- [mini.icons](mini-icons.qmd#mini.icons) - icon provider with fixed set of highlight groups.
-  Supports various categories, icon and style customizations, caching for
-  performance. Integrates with Neovim's filetype matching.
+- [mini.icons](mini-icons.qmd#mini.icons) - 고정된 하이라이트 그룹 세트를 갖춘 아이콘 제공자. 다양한 카테고리, 아이콘 및 스타일 사용자 정의, 성능을 위한 캐싱을 지원합니다. Neovim의 파일 타입 매칭과 통합됩니다.
 
 
-- [mini.indentscope](mini-indentscope.qmd#mini.indentscope) - visualize and operate on indent scope. Supports
-  customization of debounce delay, animation style, and different
-  granularity of options for scope computing algorithm.
+- [mini.indentscope](mini-indentscope.qmd#mini.indentscope) - 들여쓰기 범위 시각화 및 작업. 디바운스 지연 시간, 애니메이션 스타일, 그리고 범위 계산 알고리즘을 위한 다양한 옵션 세부 조정을 지원합니다.
 
 
-- [mini.jump](mini-jump.qmd#mini.jump) - minimal and fast module for smarter jumping to a single
-  character.
+- [mini.jump](mini-jump.qmd#mini.jump) - 단일 문자로의 더 스마트한 점프를 위한 미니멀하고 빠른 모듈입니다.
 
 
-- [mini.jump2d](mini-jump2d.qmd#mini.jump2d) - minimal and fast Lua plugin for jumping (moving cursor)
-  within visible lines via iterative label filtering. Supports custom jump
-  targets (spots), labels, hooks, allowed windows and lines, and more.
+- [mini.jump2d](mini-jump2d.qmd#mini.jump2d) - 반복적인 레이블 필터링을 통해 보이는 줄 내에서 점프(커서 이동)하기 위한 미니멀하고 빠른 Lua 플러그인입니다. 커스텀 점프 대상(스폿), 레이블, 훅, 허용된 창 및 줄 등을 지원합니다.
 
 
-- [mini.keymap](mini-keymap.qmd#mini.keymap) - utilities to make special key mappings: multi-step actions
-  (with built-in steps for "smart" <span class="help-syntax-keys">\<Tab\></span>, <span class="help-syntax-keys">\<S-Tab\></span>, <span class="help-syntax-keys">\<CR\></span>, <span class="help-syntax-keys">\<BS\></span>),
-  combos (more general version of "better escape" like behavior).
+- [mini.keymap](mini-keymap.qmd#mini.keymap) - 특수 키 매핑을 만들기 위한 유틸리티: 다단계 동작 ("스마트한" <span class="help-syntax-keys">\<Tab\></span>, <span class="help-syntax-keys">\<S-Tab\></span>, <span class="help-syntax-keys">\<CR\></span>, <span class="help-syntax-keys">\<BS\></span>을 위한 내장 단계 포함), 콤보 ("better escape"와 유사한 동작의 더 일반적인 버전).
 
 
-- [mini.map](mini-map.qmd#mini.map) - window with buffer text overview, scrollbar, and highlights.
-  Allows configurable symbols for line encode and scrollbar, extensible
-  highlight integration (with pre-built ones for builtin search, diagnostic,
-  git line status), window properties, and more.
+- [mini.map](mini-map.qmd#mini.map) - 버퍼 텍스트 개요, 스크롤바 및 하이라이트가 있는 창. 줄 인코드 및 스크롤바를 위한 구성 가능한 기호, 확장 가능한 하이라이트 통합(내장 검색, 진단, git 줄 상태용 프리빌트 포함), 창 속성 등을 허용합니다.
 
 
-- [mini.misc](mini-misc.qmd#mini.misc) - collection of miscellaneous useful functions. Like `put()`
-  and `put_text()` which print Lua objects to command line and current
-  buffer respectively.
+- [mini.misc](mini-misc.qmd#mini.misc) - 기타 유용한 기능 모음. Lua 객체를 명령줄과 현재 버퍼에 각각 출력하는 `put()` 및 `put_text()`와 같은 기능을 포함합니다.
 
 
-- [mini.move](mini-move.qmd#mini.move) - move any selection in any direction. Supports any Visual
-  mode (charwise, linewise, blockwise) and Normal mode (current line) for
-  all four directions (left, right, down, up). Respects `count` and undo.
+- [mini.move](mini-move.qmd#mini.move) - 모든 선택 영역을 모든 방향으로 이동. 네 방향(왼쪽, 오른쪽, 아래, 위) 모두에 대해 모든 비주얼 모드(문자 단위, 줄 단위, 블록 단위) 및 일반 모드(현재 줄)를 지원합니다. `count`와 실행 취소(undo)를 존중합니다.
 
 
-- [mini.notify](mini-notify.qmd#mini.notify) - show one or more highlighted notifications in a single window.
-  Provides both low-level functions (add, update, remove, clear) and maker
-  of [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) implementation. Sets up automated LSP progress updates.
+- [mini.notify](mini-notify.qmd#mini.notify) - 단일 창에 하나 이상의 하이라이트된 알림을 표시합니다. 저수준 함수(추가, 업데이트, 제거, 지우기)와 [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) 구현 제작자를 모두 제공합니다. 자동화된 LSP 진행 업데이트를 설정합니다.
 
 
-- [mini.operators](mini-operators.qmd#mini.operators) - various text edit operators: replace, exchange,
-  multiply, sort, evaluate. Creates mappings to operate on textobject,
-  line, and visual selection. Supports [[count]](https://neovim.io/doc/user/helptag.html?tag=[count]) and dot-repeat.
+- [mini.operators](mini-operators.qmd#mini.operators) - 다양한 텍스트 편집 오퍼레이터: 교체, 교환, 복제, 정렬, 평가. 텍스트 오브젝트, 줄 및 비주얼 선택 영역에서 작동하는 매핑을 생성합니다. [[count]](https://neovim.io/doc/user/helptag.html?tag=[count])와 점 반복을 지원합니다.
 
 
-- [mini.pairs](mini-pairs.qmd#mini.pairs) - autopairs plugin which has minimal defaults and
-  functionality to do per-key expression mappings.
+- [mini.pairs](mini-pairs.qmd#mini.pairs) - 미니멀한 기본값과 키별 표현식 매핑 기능을 가진 자동 페어(autopairs) 플러그인입니다.
 
 
-- [mini.pick](mini-pick.qmd#mini.pick) - general purpose interactive non-blocking picker with
-  toggleable preview. Has fast default matching with fuzzy/exact/grouped
-  modes. Provides most used built-in pickers for files, pattern matches,
-  buffers, etc. For full experience needs enabled [mini.icons](mini-icons.qmd#mini.icons) module (but
-  works without it).
+- [mini.pick](mini-pick.qmd#mini.pick) - 토글 가능한 미리보기가 있는 범용 대화형 비차단형 피커입니다. 퍼지/일치/그룹화 모드와 함께 빠른 기본 매칭 기능을 제공합니다. 파일, 패턴 일치, 버퍼 등에 대해 가장 많이 사용되는 내장 피커를 제공합니다. 완전한 경험을 위해 활성화된 [mini.icons](mini-icons.qmd#mini.icons) 모듈이 필요하지만, 없어도 작동합니다.
 
 
-- [mini.sessions](mini-sessions.qmd#mini.sessions) - session management (read, write, delete) which works
-  using [:mksession](https://neovim.io/doc/user/helptag.html?tag=:mksession). Implements both global (from configured directory) and
-  local (from current directory) sessions.
+- [mini.sessions](mini-sessions.qmd#mini.sessions) - [:mksession](https://neovim.io/doc/user/helptag.html?tag=:mksession)을 사용하여 작동하는 세션 관리 (읽기, 쓰기, 삭제). 전역(구성된 디렉토리에서) 및 로컬(현재 디렉토리에서) 세션을 모두 구현합니다.
 
 
-- [mini.snippets](mini-snippets.qmd#mini.snippets) - manage and expand snippets. Supports only syntax from LSP
-  specification. Provides flexible loaders to manage snippet files, exact and
-  fuzzy prefix matching, interactive selection, and rich interactive snippet
-  session experience with dynamic tabstop visualization.
+- [mini.snippets](mini-snippets.qmd#mini.snippets) - 스니펫 관리 및 확장. LSP 사양의 구문만 지원합니다. 스니펫 파일을 관리하기 위한 유연한 로더, 정확하고 퍼지한 접두사 매칭, 대화형 선택, 그리고 동적 탭스탑 시각화와 함께 풍부한 대화형 스니펫 세션 경험을 제공합니다.
 
 
-- [mini.splitjoin](mini-splitjoin.qmd#mini.splitjoin) - split and join arguments (regions inside brackets
-  between allowed separators). Has customizable pre and post hooks.
-  Works inside comments.
+- [mini.splitjoin](mini-splitjoin.qmd#mini.splitjoin) - 인자(허용된 구분자 사이의 괄호 내부 영역) 분할 및 결합. 사용자 정의 가능한 사전 및 사후 훅을 갖추고 있습니다. 주석 내에서 작동합니다.
 
 
-- [mini.starter](mini-starter.qmd#mini.starter) - minimal, fast, and flexible start screen. Displayed items
-  are fully customizable both in terms of what they do and how they look
-  (with reasonable defaults). Item selection can be done using prefix query
-  with instant visual feedback.
+- [mini.starter](mini-starter.qmd#mini.starter) - 미니멀하고 빠르며 유연한 시작 화면. 표시되는 항목은 기능과 외관(합리적인 기본값 포함) 측면 모두에서 완전히 사용자 정의 가능합니다. 즉각적인 시각적 피드백과 함께 접두사 쿼리를 사용하여 항목을 선택할 수 있습니다.
 
 
-- [mini.statusline](mini-statusline.qmd#mini.statusline) - minimal and fast statusline. Has ability to use custom
-  content supplied with concise function (using module's provided section
-  functions) along with builtin default. For full experience needs
-  enabled [mini.diff](mini-diff.qmd#mini.diff), [mini.git](mini-git.qmd#mini.git), and [mini.icons](mini-icons.qmd#mini.icons) modules (but works without
-  any of them).
+- [mini.statusline](mini-statusline.qmd#mini.statusline) - 미니멀하고 빠른 상태라인. 내장된 기본값과 함께 간결한 함수(모듈에서 제공하는 섹션 함수 사용)로 제공되는 커스텀 콘텐츠를 사용하는 기능을 갖추고 있습니다. 완전한 경험을 위해 활성화된 [mini.diff](mini-diff.qmd#mini.diff), [mini.git](mini-git.qmd#mini.git) 및 [mini.icons](mini-icons.qmd#mini.icons) 모듈이 필요하지만, 이들 없이도 작동합니다.
 
 
-- [mini.surround](mini-surround.qmd#mini.surround) - fast and feature-rich surround plugin. Add, delete,
-  replace, find, highlight surrounding (like pair of parenthesis, quotes,
-  etc.). Supports dot-repeat, `v:count`, different search methods,
-  "last"/"next" extended mappings, customization via Lua patterns or
-  functions, and more. Has builtins for brackets, function call, tag, user
-  prompt, and any alphanumeric/punctuation/whitespace character.
+- [mini.surround](mini-surround.qmd#mini.surround) - 빠르고 풍부한 기능을 갖춘 서라운드 플러그인. 주변 요소(괄호 쌍, 따옴표 등)를 추가, 삭제, 교체, 찾기, 하이라이트합니다. 점 반복, `v:count`, 다양한 검색 방법, "last"/"next" 확장 매핑, Lua 패턴 또는 함수를 통한 사용자 정의 등을 지원합니다. 괄호, 함수 호출, 태그, 사용자 프롬프트 및 모든 영숫자/문장 부호/공백 문자에 대한 내장 기능을 갖추고 있습니다.
 
 
-- [mini.test](mini-test.qmd#mini.test) - framework for writing extensive Neovim plugin tests.
-  Supports hierarchical tests, hooks, parametrization, filtering (like from
-  current file or cursor position), screen tests, "busted-style" emulation,
-  customizable reporters, and more. Designed to be used with provided
-  wrapper for managing child Neovim processes.
+- [mini.test](mini-test.qmd#mini.test) - 광범위한 Neovim 플러그인 테스트 작성을 위한 프레임워크. 계층적 테스트, 훅, 매개변수화, 필터링(현재 파일이나 커서 위치 등), 화면 테스트, "busted 스타일" 에뮬레이션, 사용자 정의 가능한 리포터 등을 지원합니다. 하위 Neovim 프로세스 관리를 위해 제공된 래퍼와 함께 사용하도록 설계되었습니다.
 
 
-- [mini.tabline](mini-tabline.qmd#mini.tabline) - minimal tabline which always shows listed (see 'buflisted')
-  buffers. Allows showing extra information section in case of multiple vim
-  tabpages. For full experience needs enabled [mini.icons](mini-icons.qmd#mini.icons) module (but works
-  without it).
+- [mini.tabline](mini-tabline.qmd#mini.tabline) - 나열된 ( 'buflisted' 참조) 버퍼를 항상 보여주는 미니멀한 탭라인입니다. 여러 vim 탭 페이지가 있는 경우 추가 정보 섹션을 표시할 수 있습니다. 완전한 경험을 위해 활성화된 [mini.icons](mini-icons.qmd#mini.icons) 모듈이 필요하지만, 없어도 작동합니다.
 
 
-- [mini.trailspace](mini-trailspace.qmd#mini.trailspace) - automatic highlighting of trailing whitespace with
-  functionality to remove it.
+- [mini.trailspace](mini-trailspace.qmd#mini.trailspace) - 후행 공백의 자동 하이라이트 및 제거 기능을 제공합니다.
 
 
-- [mini.visits](mini-visits.qmd#mini.visits) - track and reuse file system visits. Tracks data about each
-  file/directory visit (after delay) and stores it (only) locally. This can be
-  used to get a list of "recent"/"frequent"/"frecent" visits.
-  Allows persistently adding labels to visits enabling flexible workflow.
+- [mini.visits](mini-visits.qmd#mini.visits) - 파일 시스템 방문 추적 및 재사용. 각 파일/디렉토리 방문에 대한 데이터(지연 시간 후)를 추적하고 로컬에만 저장합니다. 이는 "최근(recent)"/"자주(frequent)"/"최근 빈번(frecent)" 방문 목록을 얻는 데 사용될 수 있습니다. 유연한 워크플로우를 가능하게 하는 레이블을 영구적으로 추가할 수 있습니다.
 
 ---
 
-### Disabling recipes {#mini.nvim-disabling-recipes .help-syntax-right-anchor}
+### 비활성화 레시피 {#mini.nvim-disabling-recipes .help-syntax-right-anchor}
 
-Each module's core functionality can be disabled globally or buffer-locally
-by creating appropriate global or buffer-scoped variables equal to [v:true](https://neovim.io/doc/user/helptag.html?tag=v:true).
-Functionality is disabled if at least one of [g:](https://neovim.io/doc/user/helptag.html?tag=g:) or [b:](https://neovim.io/doc/user/helptag.html?tag=b:) variables is `v:true`.
+각 모듈의 핵심 기능은 [v:true](https://neovim.io/doc/user/helptag.html?tag=v:true)와 동일한 전역 또는 버퍼 범위 변수를 생성하여 전역적으로 또는 버퍼 로컬에서 비활성화할 수 있습니다. [g:](https://neovim.io/doc/user/helptag.html?tag=g:) 또는 [b:](https://neovim.io/doc/user/helptag.html?tag=b:) 변수 중 적어도 하나가 `v:true`이면 기능이 비활성화됩니다.
 
-Variable names have the same structure: `{g,b}:mini*_disable` where `*` is
-module's lowercase name. For example, `g:minianimate_disable` disables
-[mini.animate](mini-animate.qmd#mini.animate) globally and `b:minianimate_disable` - for current buffer.
-Note: in this section disabling 'mini.animate' is used as example;
-everything holds for other module variables.
+변수 이름은 동일한 구조를 가집니다: `{g,b}:mini*_disable`. 여기서 `*`는 모듈의 소문자 이름입니다. 예를 들어, `g:minianimate_disable`은 [mini.animate](mini-animate.qmd#mini.animate)를 전역적으로 비활성화하고 `b:minianimate_disable`은 현재 버퍼에 대해 비활성화합니다.
+참고: 이 섹션에서는 'mini.animate'를 비활성화하는 것을 예로 들었지만, 다른 모듈 변수에도 모두 해당됩니다.
 
-Considering high number of different scenarios and customization intentions,
-writing exact rules for disabling module's functionality is left to user.
+다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능을 비활성화하기 위한 정확한 규칙 작성은 사용자의 몫입니다.
 
-#### Manual disabling {#mini.nvim-disabling-recipes-manualdisabling}
+#### 수동 비활성화 {#mini.nvim-disabling-recipes-manualdisabling}
 
 
 
   ```lua
-  -- Disable globally
+  -- 전역적으로 비활성화
   vim.g.minianimate_disable = true
 
-  -- Disable for current buffer
+  -- 현재 버퍼에 대해 비활성화
   vim.b.minianimate_disable = true
 
-  -- Toggle (disable if enabled, enable if disabled)
-  vim.g.minianimate_disable = not vim.g.minianimate_disable -- globally
-  vim.b.minianimate_disable = not vim.b.minianimate_disable -- for buffer
+  -- 토글 (활성화된 경우 비활성화, 비활성화된 경우 활성화)
+  vim.g.minianimate_disable = not vim.g.minianimate_disable -- 전역
+  vim.b.minianimate_disable = not vim.b.minianimate_disable -- 버퍼
   ```
 
-#### Automated disabling {#mini.nvim-disabling-recipes-automateddisabling}
+#### 자동 비활성화 {#mini.nvim-disabling-recipes-automateddisabling}
 
 
-Automated disabling is suggested to be done inside autocommands:
+자동 비활성화는 자동 명령(autocommands) 내에서 수행하는 것이 좋습니다.
 
   ```lua
-  -- Disable for a certain filetype (for example, "lua")
+  -- 특정 파일 타입(예: "lua")에 대해 비활성화
   local f = function(args) vim.b[args.buf].minianimate_disable = true end
   vim.api.nvim_create_autocmd('Filetype', { pattern = 'lua', callback = f })
 
-  -- Enable only for certain filetypes (for example, "lua" and "help")
+  -- 특정 파일 타입(예: "lua" 및 "help")에 대해서만 활성화
   local f = function(args)
     local ft = vim.bo[args.buf].filetype
     if ft == 'lua' or ft == 'help' then return end
@@ -479,7 +321,7 @@ Automated disabling is suggested to be done inside autocommands:
   end
   vim.api.nvim_create_autocmd('Filetype', { callback = f })
 
-  -- Disable in Visual mode
+  -- 비주얼 모드에서 비활성화
   local f_en = function(args) vim.b[args.buf].minianimate_disable = false end
   local enable_opts = { pattern = '[vV\x16]*:*', callback = f_en }
   vim.api.nvim_create_autocmd('ModeChanged', enable_opts)
@@ -488,39 +330,31 @@ Automated disabling is suggested to be done inside autocommands:
   local disable_opts = { pattern = '*:[vV\x16]*', callback = f_dis }
   vim.api.nvim_create_autocmd('ModeChanged', disable_opts)
 
-  -- Disable in Terminal buffer
+  -- 터미널 버퍼에서 비활성화
   local f = function(args) vim.b[args.buf].minianimate_disable = true end
   vim.api.nvim_create_autocmd('TermOpen', { callback = f })
   ```
 
 ---
 
-### Buffer local config {#mini.nvim-buffer-local-config .help-syntax-right-anchor}
+### 버퍼 로컬 설정 {#mini.nvim-buffer-local-config .help-syntax-right-anchor}
 
-Each module can be additionally configured locally to buffer by creating
-appropriate buffer-scoped variable with values to override. It affects only
-runtime options and not those used once during setup (like most `mappings`).
+각 모듈은 재정의할 값이 포함된 적절한 버퍼 범위 변수를 생성하여 버퍼 로컬로 추가 구성할 수 있습니다. 이는 런타임 옵션에만 영향을 주며 설정 중에 한 번 사용되는 옵션(대부분의 `mappings`와 같은)에는 영향을 주지 않습니다.
 
-Variable names have the same structure: `b:mini*_config` where `*` is
-module's lowercase name. For example, `b:minianimate_config` can store
-information about how [mini.animate](mini-animate.qmd#mini.animate) will act inside current buffer. Its
-value should be a table with same structure as module's `config`. Example:
+변수 이름은 동일한 구조를 가집니다: `b:mini*_config`. 여기서 `*`는 모듈의 소문자 이름입니다. 예를 들어, `b:minianimate_config`는 현재 버퍼 내에서 [mini.animate](mini-animate.qmd#mini.animate)가 어떻게 작동할지에 대한 정보를 저장할 수 있습니다. 그 값은 모듈의 `config`와 동일한 구조를 가진 테이블이어야 합니다. 예시:
 
   ```lua
-  -- Disable scroll animation in current buffer
+  -- 현재 버퍼에서 스크롤 애니메이션 비활성화
   vim.b.minianimate_config = { scroll = { enable = false } }
   ```
 
-Considering high number of different scenarios and customization intentions,
-writing exact rules for module's buffer local configuration is left to
-user. It is done in similar fashion to [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes).
+다양한 시나리오와 사용자 정의 의도를 고려하여 모듈의 버퍼 로컬 구성을 위한 정확한 규칙 작성은 사용자의 몫입니다. 이는 [mini.nvim-비활성화-레시피](mini-nvim.qmd#mini.nvim-disabling-recipes)와 유사한 방식으로 수행됩니다.
 
 ---
 
-### Color schemes {#mini.nvim-color-schemes .help-syntax-right-anchor}
+### 컬러 스킴 (Color schemes) {#mini.nvim-color-schemes .help-syntax-right-anchor}
 
 
-- Color schemes based on [mini.hues](mini-hues.qmd#mini.hues): [MiniHues-color-schemes](mini-hues.qmd#minihues-color-schemes).
+- [mini.hues](mini-hues.qmd#mini.hues) 기반 컬러 스킴: [MiniHues-컬러-스킴](mini-hues.qmd#minihues-color-schemes).
 
-- Color schemes based on [mini.base16](mini-base16.qmd#mini.base16): [MiniBase16-color-schemes](mini-base16.qmd#minibase16-color-schemes).
-
+- [mini.base16](mini-base16.qmd#mini.base16) 기반 컬러 스킴: [MiniBase16-컬러-스킴](mini-base16.qmd#minibase16-color-schemes).

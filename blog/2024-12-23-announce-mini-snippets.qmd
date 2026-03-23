@@ -1,67 +1,67 @@
 ---
-title: "Announcing 'mini.snippets'"
+title: "'mini.snippets' 발표"
 author: Evgeni Chasnovski
 date: 2024-12-23
 categories: [announce, reddit]
-description: Manage and expand snippets. LSP snippet syntax, flexible loaders, fuzzy prefix matching, interactive snippet session with rich visualization, and more
+description: 스니펫 관리 및 확장 모듈입니다. LSP 스니펫 구문, 유연한 로더, 퍼지 접두사 매칭, 풍부한 시각화를 갖춘 대화형 스니펫 세션 등을 지원합니다.
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/1hknze1/minisnippets_manage_and_expand_snippets_lsp/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/1hknze1/minisnippets_manage_and_expand_snippets_lsp/)*
 
 {{< video 2024-12-23-announce-mini-snippets/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-Let's celebrate passed December solstice with the long overdue release of [mini.snippets](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-snippets.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) that can manage and expand snippets. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.snippets).
-
-------
-
-Snippets are a vital part of my editing workflow. That's why I wanted to have 'mini.snippets' for about 3 years now. My initial plan was to wait and utilize snippet expansion capabilities in core and implement only snippet management (find/load/match/etc). And indeed, when `vim.snippet` became a thing in 0.10 back in May I used it together with some small set of commonly used snippets.
-
-Due to time consuming development of 'mini.icons' and cleaning 'mini.nvim' feature backlog, I started 'mini.snippets' mid-September. It proved to be outstandingly long development period for various reasons: both external and internal. Some of them are:
-
-- Desire to make things "right": robust yet flexible, out-of-the-box yet customizable. There were many iterations of back and forth, which were as late as several days ago. Eventually it converged into *something*, let's hope it is enough.
-
-- Although very capable already, some decisions about `vim.snippet` direction proved to not sit well with me (not wanting to add dedicated events and forcing `<Tab>`/`<S-Tab>` overrides are the main ones). It resulted in a long internal debate about whether having own snippet parsing and interactive session is worth it. The fact that I needed to interact with LSP specification (which I am not very good at) made own implementation even less compelling.
-
-  In the end I managed to come up with several distinctive snippet session features that I realized I wanted to have for a long time: no Select mode mappings (extra complexity and visually not adjustable), dynamic highlighting, ability to not stop session immediately at final tabstop, etc. That eventually got me nerd-sniped (by myself, mind you) into deciding to take it on.
-
-- Snippet LSP specification is compact, but at the same time allows a lot of weird cases which need to be accounted for (mostly because of nested placeholders and linked tabstops). Finding and addressing them also took many sleepless nights.
-
-  Plus all the tests and documentation... **a lot** of tests and documentation.
-
-But the main thing is that 'mini.snippets' is out and it is **good**. This should take a bit of weight out of my shoulders.
-
-Next thing (after a bit of backlog cleanup) is to add another long overdue feature: snippet support in 'mini.completion'. As it also requires LSP related work, it might take a while (again).
+지난 12월의 동지를 기념하며 오랫동안 기다려온 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.snippets](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-snippets.md)의 출시 소식을 전합니다. 이 모듈은 스니펫을 관리하고 확장할 수 있는 기능을 제공하며, [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.snippets)를 통해서도 설치할 수 있습니다.
 
 ------
 
-Features:
+스니펫은 제 편집 워크플로우에서 매우 중요한 부분입니다. 그래서 약 3년 전부터 'mini.snippets'를 만들고 싶었습니다. 초기 계획은 코어의 스니펫 확장 기능을 기다렸다가 스니펫 관리(찾기/로드/매칭 등)만 구현하는 것이었습니다. 실제로 지난 5월 0.10 버전에서 `vim.snippet`이 도입되었을 때, 저는 이를 자주 사용하는 스니펫들과 함께 사용했습니다.
 
-- Manage snippet collection by adding it explicitly or with a flexible set of performant built-in loaders. See [`MiniSnippets.gen_loader`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L702).
+'mini.icons'의 개발과 'mini.nvim' 기능 백로그 정리로 인해 'mini.snippets' 개발은 9월 중순에야 시작할 수 있었습니다. 대내외적인 여러 이유로 인해 개발 기간이 이례적으로 길어졌는데, 그 이유는 다음과 같습니다:
 
-- Configured snippets are efficiently resolved before every expand based on current local context. This, for example, allows using different snippets in different local tree-sitter languages (like in markdown code blocks). See [`MiniSnippets.default_prepare()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L837).
+- "제대로" 만들고 싶었습니다. 견고하면서도 유연하고, 기본 기능이 충실하면서도 커스터마이징이 가능해야 했습니다. 불과 며칠 전까지도 수많은 반복 수정을 거쳤습니다. 결국 *무언가*로 수렴되었고, 충분히 만족스럽기를 바랍니다.
 
-- Match which snippet to insert based on the currently typed text. Supports both exact and fuzzy matching. See [`MiniSnippets.default_match()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L884).
+- `vim.snippet`이 이미 강력한 기능을 갖추고 있었지만, 몇몇 방향성(전용 이벤트 추가를 원치 않거나 `<Tab>`/`<S-Tab>` 오버라이드를 강제하는 등)이 저와는 잘 맞지 않았습니다. 그로 인해 자체적인 스니펫 파싱과 대화형 세션을 만드는 것이 가치가 있는지에 대해 긴 내부 토론이 이어졌습니다. 특히 제가 LSP 사양(그렇게 잘 알지 못하는 분야입니다)을 직접 다뤄야 한다는 사실 때문에 자체 구현이 더욱 망설여졌습니다.
 
-- Select from several matched snippets via `vim.ui.select()`. See [`MiniSnippets.default_select()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L923).
+  결국 저는 오랫동안 원했던 몇 가지 독특한 스니펫 세션 기능을 생각해 냈습니다. 선택 모드 매핑 제거(복잡성을 줄이고 시각적으로 조정 가능하게 함), 동적 하이라이팅, 마지막 탭스톱(tabstop)에서 세션을 즉시 중단하지 않는 기능 등입니다. 이러한 아이디어들이 저를 "너드 스나이핑(nerd-sniped)"했고, 결국 직접 구현하기로 마음먹게 되었습니다.
 
-- Insert, jump, and edit during snippet session in a configurable manner:
-    - Configurable mappings for jumping and stopping.
-    - Jumping wraps around the tabstops for easier navigation.
-    - Easy to reason rules for when session automatically stops.
-    - Text synchronization of linked tabstops.
-    - Dynamic tabstop state visualization (current/visited/unvisited, etc.)
-    - Inline visualization of empty tabstops (requires Neovim>=0.10).
-    - Works inside comments by preserving comment leader on new lines.
-    - Supports nested sessions (expand snippet while there is an one active).
+- 스니펫 LSP 사양은 간결하지만, 중첩된 플레이스홀더나 연결된 탭스톱 등으로 인해 고려해야 할 까다로운 케이스가 많습니다. 이를 찾아내고 해결하기 위해 수많은 밤을 지새웠습니다.
 
-    See [`MiniSnippets.default_insert()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L943).
+  게다가 수많은 테스트와 문서 작업까지... 정말 **엄청난** 양의 테스트와 문서가 필요했습니다.
 
-- Exported function to parse snippet body into easy-to-reason data structure. See [`MiniSnippets.parse()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L1127).
+하지만 가장 중요한 것은 'mini.snippets'가 마침내 출시되었고, 성능이 **매우 좋다**는 것입니다. 덕분에 어깨의 짐을 조금이나마 덜 수 있게 되었습니다.
+
+다음 할 일은 (백로그를 조금 더 정리한 뒤에) 오랫동안 미뤄왔던 'mini.completion'의 스니펫 지원 기능을 추가하는 것입니다. 이 역시 LSP 관련 작업이 필요하기 때문에 또 시간이 좀 걸릴 수도 있습니다.
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in dedicated [beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/1428).
+주요 기능:
 
-Thanks!
+- 명시적으로 추가하거나 성능이 뛰어난 유연한 내장 로더 세트를 사용하여 스니펫 컬렉션을 관리합니다. [`MiniSnippets.gen_loader`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L702)를 참조하세요.
+
+- 설정된 스니펫은 확장하기 직전에 현재 로컬 컨텍스트를 기반으로 효율적으로 결정됩니다. 예를 들어, 마크다운 코드 블록과 같이 서로 다른 로컬 tree-sitter 언어에서 다른 스니펫을 사용할 수 있습니다. [`MiniSnippets.default_prepare()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L837)를 참조하세요.
+
+- 현재 입력된 텍스트를 바탕으로 삽입할 스니펫을 매칭합니다. 정확한 매칭과 퍼지 매칭을 모두 지원합니다. [`MiniSnippets.default_match()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L884)를 참조하세요.
+
+- 여러 매칭된 스니펫 중에서 `vim.ui.select()`를 통해 선택합니다. [`MiniSnippets.default_select()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L923)를 참조하세요.
+
+- 설정 가능한 방식으로 스니펫 세션 중에 삽입, 이동 및 편집을 수행합니다:
+    - 이동 및 중단을 위한 설정 가능한 매핑.
+    - 더 쉬운 탐색을 위해 탭스톱 간의 순환 이동을 지원합니다.
+    - 세션이 자동으로 중단되는 규칙이 이해하기 쉽습니다.
+    - 연결된 탭스톱의 텍스트 동기화.
+    - 동적인 탭스톱 상태 시각화 (현재/방문함/방문하지 않음 등).
+    - 빈 탭스톱의 인라인 시각화 (Neovim>=0.10 필요).
+    - 새 줄에서 주석 리더를 보존하여 주석 내부에서도 잘 작동합니다.
+    - 중첩된 세션 지원 (활성화된 세션이 있는 상태에서 다른 스니펫 확장).
+
+    [`MiniSnippets.default_insert()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L943)를 참조하세요.
+
+- 스니펫 본문을 이해하기 쉬운 데이터 구조로 파싱하는 함수를 제공합니다. [`MiniSnippets.parse()`](https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L1127)를 참조하세요.
+
+------
+
+한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/1428)에 남겨주시면 감사하겠습니다.
+
+감사합니다!

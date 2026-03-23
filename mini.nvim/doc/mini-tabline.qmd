@@ -1,135 +1,120 @@
 ---
-title: "mini.tabline documentation"
+title: "mini.tabline 문서"
 ---
 
 _Generated from the `main` branch of 'mini.nvim'_
 
-<a name="mini.tabline" href="mini-tabline.qmd#mini.tabline"><b>mini.tabline</b></a> Tabline
+<a name="mini.tabline" href="mini-tabline.qmd#mini.tabline"><b>mini.tabline</b></a> 탭 라인
 
 MIT License Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Key idea: show all listed buffers in readable way with minimal total width.
+핵심 아이디어: 나열된 모든 버퍼를 최소한의 전체 너비로 가독성 있게 표시합니다.
 
-Features:
+기능:
 
-- Buffers are listed in the order of their identifier (see [bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\))).
-
-
-- Different highlight groups for "states" of buffer affecting 'buffer tabs'.
+- 버퍼는 식별자 순서대로 나열됩니다 ( [bufnr()](https://neovim.io/doc/user/helptag.html?tag=bufnr\(\)) 참고).
 
 
-- Buffer names are made unique by extending paths to files or appending
-  unique identifier to buffers without name.
+- '버퍼 탭'에 영향을 미치는 버퍼의 "상태"에 따른 다양한 하이라이트 그룹.
 
 
-- Current buffer is displayed "optimally centered" (in center of screen
-  while maximizing the total number of buffers shown) when there are many
-  buffers open.
+- 파일 경로를 확장하거나 이름이 없는 버퍼에 고유 식별자를 추가하여 버퍼 이름을 고유하게 만듭니다.
 
 
-- 'Buffer tabs' are clickable if Neovim allows it.
+- 많은 버퍼가 열려 있을 때 현재 버퍼를 "최적으로 중앙에" (표시되는 총 버퍼 수를 최대화하면서 화면 중앙에) 표시합니다.
 
 
-- Extra information section in case of multiple Neovim tabpages.
+- Neovim이 허용하는 경우 '버퍼 탭'을 클릭할 수 있습니다.
 
 
-- Truncation symbols which show if there are tabs to the left and/or right.
-  Exact characters are taken from 'listchars' global value (`precedes` and
-  `extends` fields) and are shown only if 'list' option is enabled.
-
-What it doesn't do:
-
-- Custom buffer order is not supported.
-
-#### Dependencies {#module-dependencies}
+- Neovim 탭 페이지가 여러 개인 경우를 위한 추가 정보 섹션.
 
 
-Suggested dependencies (provide extra functionality, will work without them):
+- 왼쪽 및/또는 오른쪽에 탭이 더 있는지 보여주는 잘림 기호. 정확한 문자는 'listchars' 전역 값( `precedes` 및 `extends` 필드)에서 가져오며 'list' 옵션이 활성화된 경우에만 표시됩니다.
+
+하지 않는 기능:
+
+- 사용자 정의 버퍼 순서는 지원되지 않습니다.
+
+#### 의존성 {#module-dependencies}
 
 
-- Enabled [mini.icons](mini-icons.qmd#mini.icons) module to show icons near file names.
-  Falls back to [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
-  or shows nothing.
-
-#### Setup {#module-setup}
+권장 의존성 (추가 기능을 제공하며, 없어도 작동합니다):
 
 
-This module needs a setup with `require('mini.tabline').setup({})`
-(replace `{}` with your `config` table). It will create global Lua table
-`MiniTabline` which you can use for scripting or manually (with
-`:lua MiniTabline.*`).
+- 파일 이름 근처에 아이콘을 표시하기 위해 활성화된 [mini.icons](mini-icons.qmd#mini.icons) 모듈.
+  [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)로 폴백하거나 아무것도 표시하지 않습니다.
 
-See [MiniTabline.config](mini-tabline.qmd#minitabline.config) for `config` structure and default values.
-
-You can override runtime config settings locally to buffer inside
-`vim.b.minitabline_config` which should have same structure as
-`MiniTabline.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
-
-#### Suggested option values {#module-suggestedoptionvalues}
+#### 설정 {#module-setup}
 
 
-Some options are set automatically by [MiniTabline.setup()](mini-tabline.qmd#minitabline.setup):
+이 모듈은 `require('mini.tabline').setup({})` 설정이 필요합니다 ( `{}`를 설정 테이블로 교체하십시오). 또한 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블인 `MiniTabline`을 생성합니다 ( `:lua MiniTabline.*` 참고).
 
-- 'showtabline' is set to 2 to always show tabline.
+설정 구조와 기본값은 [MiniTabline.config](mini-tabline.qmd#minitabline.config)를 참고하십시오.
 
-#### Highlight groups {#module-highlightgroups}
+`vim.b.minitabline_config` 내에서 버퍼 로컬로 런타임 설정을 재정의할 수 있으며, `MiniTabline.config`와 동일한 구조를 가져야 합니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참고하십시오.
+
+#### 권장 옵션값 {#module-suggestedoptionvalues}
+
+
+일부 옵션은 [MiniTabline.setup()](mini-tabline.qmd#minitabline.setup)에 의해 자동으로 설정됩니다:
+
+- 'showtabline'은 탭 라인을 항상 표시하도록 2로 설정됩니다.
+
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
 
-- `MiniTablineCurrent` - buffer is current (has cursor in it).
+- `MiniTablineCurrent` - 버퍼가 현재 상태입니다 (커서가 위치함).
 
-- `MiniTablineVisible` - buffer is visible (displayed in some window).
+- `MiniTablineVisible` - 버퍼가 보입니다 (특정 창에 표시됨).
 
-- `MiniTablineHidden` - buffer is hidden (not displayed).
+- `MiniTablineHidden` - 버퍼가 숨겨져 있습니다 (표시되지 않음).
 
-- `MiniTablineModifiedCurrent` - buffer is modified and current.
+- `MiniTablineModifiedCurrent` - 버퍼가 수정되었으며 현재 상태입니다.
 
-- `MiniTablineModifiedVisible` - buffer is modified and visible.
+- `MiniTablineModifiedVisible` - 버퍼가 수정되었으며 보입니다.
 
-- `MiniTablineModifiedHidden` - buffer is modified and hidden.
+- `MiniTablineModifiedHidden` - 버퍼가 수정되었으며 숨겨져 있습니다.
 
-- `MiniTablineFill` - unused right space of tabline.
+- `MiniTablineFill` - 탭 라인의 사용되지 않는 오른쪽 공간.
 
-- `MiniTablineTabpagesection` - section with tabpage information.
+- `MiniTablineTabpagesection` - 탭 페이지 정보가 포함된 섹션.
 
-- `MiniTablineTrunc` - truncation symbols indicating more left/right tabs.
+- `MiniTablineTrunc` - 왼쪽/오른쪽 탭이 더 있음을 나타내는 잘림 기호.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))로 직접 설정하십시오.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable (show empty tabline), set `vim.g.minitabline_disable` (globally) or
-`vim.b.minitabline_disable` (for a buffer) to `true`. Considering high number
-of different scenarios and customization intentions, writing exact rules
-for disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+비활성화하려면(빈 탭 라인 표시), `vim.g.minitabline_disable`(전역) 또는 `vim.b.minitabline_disable`(버퍼별)를 `true`로 설정하십시오. 시나리오와 사용자 정의 의도가 매우 다양하기 때문에 모듈 기능을 비활성화하기 위한 정확한 규칙을 작성하는 것은 사용자의 몫입니다. 일반적인 방법은 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참고하십시오.
 
 ---
 
 ### setup() {#minitabline.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniTabline.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minitabline.setup-parameters}
+#### 매개변수 {#minitabline.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniTabline.config](mini-tabline.qmd#minitabline.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniTabline.config](mini-tabline.qmd#minitabline.config) 참고.
 
-#### Usage {#minitabline.setup-usage}
+#### 사용법 {#minitabline.setup-usage}
 
 
 
   ```lua
-  require('mini.tabline').setup() -- use default config
-  -- OR
-  require('mini.tabline').setup({}) -- replace {} with your config table
+  require('mini.tabline').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.tabline').setup({}) -- {}를 설정 테이블로 교체하십시오
   ```
 
 ---
@@ -137,35 +122,31 @@ Module setup
 ### config {#minitabline.config .help-syntax-right-anchor}
 
 <p align="center">`MiniTabline.config`</p>
-#### Defaults {#minitabline.config-defaults}
+#### 기본값 {#minitabline.config-defaults}
 
 
 
   ```lua
   MiniTabline.config = {
-    -- Whether to show file icons (requires 'mini.icons')
+    -- 파일 아이콘 표시 여부 ('mini.icons' 필요)
     show_icons = true,
 
-    -- Function which formats the tab label
-    -- By default surrounds with space and possibly prepends with icon
+    -- 탭 레이블 형식을 지정하는 함수
+    -- 기본적으로 공백으로 감싸고 필요한 경우 앞에 아이콘을 추가합니다.
     format = nil,
 
-    -- Where to show tabpage section in case of multiple vim tabpages.
-    -- One of 'left', 'right', 'none'.
+    -- 여러 vim 탭 페이지가 있는 경우 탭 페이지 섹션을 표시할 위치.
+    -- 'left', 'right', 'none' 중 하나.
     tabpage_section = 'left',
   }
   ```
 
-#### Format {#minitabline.config-format}
+#### 형식 {#minitabline.config-format}
 
 
-`config.format` is a callable that takes buffer identifier and pre-computed
-label as arguments and returns a string with formatted label. Output will be
-treated strictly as text (i.e. no 'statusline' like constructs is allowed).
-This function will be called for all displayable in tabline buffers.
-Default: [MiniTabline.default\_format()](mini-tabline.qmd#minitabline.default_format).
+`config.format`은 버퍼 식별자와 미리 계산된 레이블을 인수로 받고 형식이 지정된 레이블이 포함된 문자열을 반환하는 호출 가능 객체입니다. 출력은 엄격하게 텍스트로 처리됩니다 (즉, 'statusline'과 같은 구문은 허용되지 않습니다). 이 함수는 탭 라인에 표시 가능한 모든 버퍼에 대해 호출됩니다. 기본값: [MiniTabline.default\_format()](mini-tabline.qmd#minitabline.default_format).
 
-Example of adding "+" suffix for modified buffers:
+수정된 버퍼에 "+" 접미사를 추가하는 예:
 
   ```lua
   function(buf_id, label)
@@ -179,30 +160,28 @@ Example of adding "+" suffix for modified buffers:
 ### make_tabline_string() {#minitabline.make_tabline_string .help-syntax-right-anchor}
 
 <p align="center">`MiniTabline.make_tabline_string`()</p>
-Make string for ['tabline'](https://neovim.io/doc/user/helptag.html?tag='tabline')
+['tabline'](https://neovim.io/doc/user/helptag.html?tag='tabline')을 위한 문자열 만들기
 
 ---
 
 ### default_format() {#minitabline.default_format .help-syntax-right-anchor}
 
 <p align="center">`MiniTabline.default_format`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{label}</span>)</p>
-Default tab format
+기본 탭 형식
 
-Used by default as `config.format`.
-Prepends label with padded icon based on buffer's name (if `show_icon`
-in [MiniTabline.config](mini-tabline.qmd#minitabline.config) is `true`) and surrounds label with single space.
-Note: it is meant to be used only as part of `format` in [MiniTabline.config](mini-tabline.qmd#minitabline.config).
+기본적으로 `config.format`으로 사용됩니다.
+버퍼 이름을 기반으로 패딩된 아이콘을 레이블 앞에 추가하고( [MiniTabline.config](mini-tabline.qmd#minitabline.config)의 `show_icon`이 `true`인 경우), 레이블을 단일 공백으로 감쌉니다.
+참고: [MiniTabline.config](mini-tabline.qmd#minitabline.config)의 `format` 일부로만 사용하도록 설계되었습니다.
 
-#### Parameters {#minitabline.default_format-parameters}
-
+#### 매개변수 {#minitabline.default_format-parameters}
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number)` Buffer identifier.
 
-<span class="help-syntax-special">{label}</span> `(string)` Pre-computed label.
+<span class="help-syntax-special">{buf_id}</span> `(number)` 버퍼 식별자.
 
-#### Return {#minitabline.default_format-return}
+<span class="help-syntax-special">{label}</span> `(string)` 미리 계산된 레이블.
+
+#### 반환값 {#minitabline.default_format-return}
 
 
-`(string)` Formatted label.
-
+`(string)` 형식이 지정된 레이블.

@@ -1,135 +1,127 @@
 ---
-title: "mini.pick documentation"
+title: "mini.pick 문서"
 ---
 
 _Generated from the `main` branch of 'mini.nvim'_
 
-<a name="mini.pick" href="mini-pick.qmd#mini.pick"><b>mini.pick</b></a> Pick anything
+<a name="mini.pick" href="mini-pick.qmd#mini.pick"><b>mini.pick</b></a> 무엇이든 선택하세요
 
 MIT License Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
-
-
-- Single window general purpose interface for picking element from any array.
+기능:
 
 
-- On demand toggleable preview and info views.
+- 모든 배열에서 요소를 선택할 수 있는 단일 윈도우 범용 인터페이스입니다.
 
 
-- Interactive query matching (filter+sort) with fast non-blocking default
-  which does fuzzy matching and allows other modes ([MiniPick.default\_match()](mini-pick.qmd#minipick.default_match)).
+- 필요에 따라 프리뷰 및 정보 뷰를 토글할 수 있습니다.
 
 
-- Built-in pickers (see [MiniPick.builtin](mini-pick.qmd#minipick.builtin)):
-
-    - Files.
-
-    - Pattern match (for fixed pattern or with live feedback; both allow
-      file filtering via glob patterns).
-
-    - Buffers.
-
-    - Help tags.
-
-    - CLI output.
-
-    - Resume latest picker.
+- 퍼지 매칭(fuzzy matching)을 수행하고 다른 모드([MiniPick.default\_match()](mini-pick.qmd#minipick.default_match))를 허용하는, 빠르고 논블로킹(non-blocking)인 대화형 쿼리 매칭(필터+정렬)을 지원합니다.
 
 
-- [:Pick](mini-pick.qmd#pick) command to work with extensible [MiniPick.registry](mini-pick.qmd#minipick.registry).
+- 내장 픽커([MiniPick.builtin](mini-pick.qmd#minipick.builtin) 참고):
+
+    - 파일.
+
+    - 패턴 매치(고정 패턴 또는 라이브 피드백; 둘 다 glob 패턴을 통한 파일 필터링 허용).
+
+    - 버퍼.
+
+    - 도움말 태그(Help tags).
+
+    - CLI 출력.
+
+    - 최근 픽커 재개(Resume).
 
 
-- [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\)) implementation. To adjust, use [MiniPick.ui\_select()](mini-pick.qmd#minipick.ui_select)
-  or save-restore `vim.ui.select` manually after calling [MiniPick.setup()](mini-pick.qmd#minipick.setup).
+- 확장 가능한 [MiniPick.registry](mini-pick.qmd#minipick.registry)를 사용하는 [:Pick](mini-pick.qmd#pick) 명령을 제공합니다.
 
 
-- Rich and customizable built-in [MiniPick-actions](mini-pick.qmd#minipick-actions) when picker is active:
-
-    - Manually change currently focused item.
-
-    - Scroll vertically and horizontally.
-
-    - Toggle preview or info view.
-
-    - Mark/unmark items to choose later.
-
-    - Refine current matches (make them part of a new picker).
-
-    - And many more.
+- [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\)) 구현을 제공합니다. 이를 조정하려면 [MiniPick.ui\_select()](mini-pick.qmd#minipick.ui_select)를 사용하거나, [MiniPick.setup()](mini-pick.qmd#minipick.setup) 호출 후 수동으로 `vim.ui.select`를 저장/복원하십시오.
 
 
-- Minimal yet flexible [MiniPick-source](mini-pick.qmd#minipick-source) specification with:
+- 픽커 활성화 시 사용할 수 있는 풍부하고 맞춤 설정 가능한 내장 [MiniPick-actions](mini-pick.qmd#minipick-actions):
 
-    - Items (array, callable, or manually set later).
+    - 현재 포커스된 항목 수동 변경.
 
-    - Source name.
+    - 수직 및 수평 스크롤.
 
-    - Working directory.
+    - 프리뷰 또는 정보 뷰 토글.
 
-    - Matching algorithm.
+    - 나중에 선택할 항목 표시/해제(Mark/unmark).
 
-    - Way matches are shown in main window.
+    - 현재 매치 결과 정제(Refine, 새 픽커의 일부로 만듦).
 
-    - Item preview.
-
-    - "On choice" action for current and marked items.
+    - 그 외 다수.
 
 
-- Custom actions/keys can be configured globally, per buffer, or per picker.
+- 다음을 포함하는 최소한의 유연한 [MiniPick-source](mini-pick.qmd#minipick-source) 사양:
+
+    - 항목(배열, 콜러블, 또는 나중에 수동으로 설정).
+
+    - 소스 이름.
+
+    - 작업 디렉터리(CWD).
+
+    - 매칭 알고리즘.
+
+    - 메인 윈도우에 매치 결과가 표시되는 방식.
+
+    - 항목 프리뷰.
+
+    - 현재 및 표시된 항목에 대한 "선택 시(On choice)" 액션.
 
 
-- Out of the box support for 'ignorecase' and 'smartcase'.
+- 사용자 정의 액션/키를 전역, 버퍼별 또는 픽커별로 구성할 수 있습니다.
 
 
-- Match caching to increase responsiveness on repeated prompts.
-
-Notes:
-
-- Works on all supported versions but Neovim>=0.10 will give more visual
-  feedback in floating window footer.
+- 'ignorecase' 및 'smartcase'를 즉시 지원합니다.
 
 
-- For more pickers see [MiniExtra.pickers](mini-extra.qmd#miniextra.pickers).
+- 반복되는 프롬프트에서 응답성을 높이기 위한 매치 캐싱을 지원합니다.
 
-Sources with more details:
+참고:
 
-- [MiniPick-overview](mini-pick.qmd#minipick-overview)
+- 모든 지원 버전에서 작동하지만, Neovim>=0.10에서는 플로팅 윈도우 하단(footer)에 더 많은 시각적 피드백을 제공합니다.
 
-- [MiniPick-source](mini-pick.qmd#minipick-source)
 
-- [MiniPick-actions](mini-pick.qmd#minipick-actions)
+- 더 많은 픽커는 [MiniExtra.pickers](mini-extra.qmd#miniextra.pickers)를 참고하십시오.
 
-- [MiniPick-examples](mini-pick.qmd#minipick-examples)
+상세 정보 원본:
+
+- [MiniPick-개요](mini-pick.qmd#minipick-overview)
+
+- [MiniPick-소스](mini-pick.qmd#minipick-source)
+
+- [MiniPick-액션](mini-pick.qmd#minipick-actions)
+
+- [MiniPick-예시](mini-pick.qmd#minipick-examples)
 
 - [MiniPick.builtin](mini-pick.qmd#minipick.builtin)
 
-#### Dependencies {#module-dependencies}
+#### 의존성 {#module-dependencies}
 
 
-Suggested dependencies (provide extra functionality, will work without them):
+권장 의존성 (추가 기능을 제공하며, 없어도 작동합니다):
 
 
-- Enabled [mini.icons](mini-icons.qmd#mini.icons) module to show icons near the items for actual paths.
-  Falls back to 'nvim-tree/nvim-web-devicons' plugin or no icons will be used.
+- 실제 경로 항목 근처에 아이콘을 표시하려면 [mini.icons](mini-icons.qmd#mini.icons) 모듈을 활성화하십시오. 활성화되어 있지 않으면 'nvim-tree/nvim-web-devicons' 플러그인을 사용하거나 아이콘을 표시하지 않습니다.
 
 
-- <a name="minipick-cli-tools" href="mini-pick.qmd#minipick-cli-tools"><b>MiniPick-cli-tools</b></a> CLI tool(s) to power [MiniPick.builtin.files()](mini-pick.qmd#minipick.builtin.files),
-  [MiniPick.builtin.grep()](mini-pick.qmd#minipick.builtin.grep), and [MiniPick.builtin.grep\_live()](mini-pick.qmd#minipick.builtin.grep_live) built-in pickers:
+- <a name="minipick-cli-tools" href="mini-pick.qmd#minipick-cli-tools"><b>MiniPick-cli-tools</b></a> [MiniPick.builtin.files()](mini-pick.qmd#minipick.builtin.files), [MiniPick.builtin.grep()](mini-pick.qmd#minipick.builtin.grep), [MiniPick.builtin.grep\_live()](mini-pick.qmd#minipick.builtin.grep_live) 내장 픽커를 지원하는 CLI 도구:
 
-    - `rg` (github.com/BurntSushi/ripgrep; enough for all three; recommended).
+    - `rg` (github.com/BurntSushi/ripgrep; 세 가지 모두에 충분하며 권장됨).
 
-    - `fd` (github.com/sharkdp/fd; for `files` only).
+    - `fd` (github.com/sharkdp/fd; `files`에만 해당).
 
-    - `git` (github.com/git/git; enough for all three).
+    - `git` (github.com/git/git; 세 가지 모두에 충분함).
 
-  Note: CLI tools are called only with basic arguments needed to get items.
-  To customize the output, use their respective configuration approaches.
-  Here are some examples of where to start:
+  참고: CLI 도구는 항목을 가져오는 데 필요한 기본 인자만 사용하여 호출됩니다. 출력을 맞춤 설정하려면 각 도구의 구성 방식을 사용하십시오. 시작할 수 있는 몇 가지 예시는 다음과 같습니다:
 
     - github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 
@@ -137,289 +129,254 @@ Suggested dependencies (provide extra functionality, will work without them):
 
     - git-scm.com/docs/gitignore
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.pick').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniPick`
-which you can use for scripting or manually (with `:lua MiniPick.*`).
+이 모듈은 `require('mini.pick').setup({})`을 통한 설정이 필요합니다(`{}`를 사용자 `config` 테이블로 교체). 이를 통해 스크립팅이나 수동 작업(예: `:lua MiniPick.*`) 시 사용할 수 있는 전역 Lua 테이블 `MiniPick`이 생성됩니다.
 
-See [MiniPick.config](mini-pick.qmd#minipick.config) for available config settings.
+사용 가능한 구성 설정은 [MiniPick.config](mini-pick.qmd#minipick.config)를 참고하십시오.
 
-You can override runtime config settings locally to buffer inside
-`vim.b.minipick_config` which should have same structure as `MiniPick.config`.
-See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+`MiniPick.config`와 동일한 구조를 가진 `vim.b.minipick_config`를 사용하여 버퍼별로 런타임 구성을 재정의할 수 있습니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참고하십시오.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim):
 
-    - The main inspiration for this module, so there is significant overlap.
+    - 이 모듈의 주요 영감 원천이므로 상당 부분 중복됩니다.
 
-    - Has three (or two) window UI (prompt, matches, preview), while this
-      module combines everything in one window. It allows more straightforward
-      customization for unusual scenarios.
+    - prompt, matches, preview의 3개(또는 2개) 윈도우 UI를 가진 반면, 이 모듈은 모든 것을 하나의 윈도우에 결합합니다. 이를 통해 특이한 시나리오에서도 더 직관적인 맞춤 설정이 가능합니다.
 
-    - Default match algorithm is somewhat slow, while this module should
-      match relatively lag-free for at least 100K+ items.
+    - 기본 매치 알고리즘이 다소 느린 편인 반면, 이 모듈은 최소 10만 개 이상의 항목에 대해서도 지연 없는 매칭을 제공합니다.
 
-    - Has many built-in pickers, while this module has handful at its core
-      relying on other 'mini.nvim' modules to provide more (see [mini.extra](mini-extra.qmd#mini.extra)).
+    - 수많은 내장 픽커를 가지고 있는 반면, 이 모듈은 핵심적인 몇 가지만 제공하며 나머지는 다른 'mini.nvim' 모듈에 의존합니다([mini.extra](mini-extra.qmd#mini.extra) 참고).
 
 
 - [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua):
 
-    - Mostly same comparison as with 'nvim-telescope/telescope.nvim'.
+    - 'nvim-telescope/telescope.nvim'과의 비교와 대부분 유사합니다.
 
-    - Requires [junegunn/fzf](https://github.com/junegunn/fzf) installed to
-      power fuzzy matching, while this module provides built-in Lua matching.
+    - 퍼지 매칭을 위해 [junegunn/fzf](https://github.com/junegunn/fzf) 설치가 필요한 반면, 이 모듈은 내장 Lua 매칭을 제공합니다.
 
-#### Highlight groups {#module-highlightgroups}
-
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
-- `MiniPickBorder` - window border.
 
-- `MiniPickBorderBusy` - window border while picker is busy processing.
+- `MiniPickBorder` - 윈도우 테두리.
 
-- `MiniPickBorderText` - non-prompt on border.
+- `MiniPickBorderBusy` - 픽커가 처리 중일 때의 윈도우 테두리.
 
-- `MiniPickCursor` - cursor during active picker (hidden by default).
+- `MiniPickBorderText` - 테두리의 프롬프트가 아닌 텍스트.
 
-- `MiniPickIconDirectory` - default icon for directory.
+- `MiniPickCursor` - 픽커 활성 시의 커서 (기본적으로 숨겨짐).
 
-- `MiniPickIconFile` - default icon for file.
+- `MiniPickIconDirectory` - 디렉터리용 기본 아이콘.
 
-- `MiniPickHeader` - headers in info buffer and previews.
+- `MiniPickIconFile` - 파일용 기본 아이콘.
 
-- `MiniPickMatchCurrent` - current matched item.
+- `MiniPickHeader` - 정보 버퍼 및 프리뷰의 헤더.
 
-- `MiniPickMatchMarked` - marked matched items.
+- `MiniPickMatchCurrent` - 현재 매치된 항목.
 
-- `MiniPickMatchRanges` - ranges matching query elements.
+- `MiniPickMatchMarked` - 표시(mark)된 매치 항목.
 
-- `MiniPickNormal` - basic foreground/background highlighting.
+- `MiniPickMatchRanges` - 쿼리 요소와 매치되는 범위.
 
-- `MiniPickPreviewLine` - target line in preview.
+- `MiniPickNormal` - 기본적인 전경/배경 하이라이트.
 
-- `MiniPickPreviewRegion` - target region in preview.
+- `MiniPickPreviewLine` - 프리뷰의 대상 줄.
 
-- `MiniPickPrompt` - prompt.
+- `MiniPickPreviewRegion` - 프리뷰의 대상 영역.
 
-- `MiniPickPromptCaret` - caret in prompt.
+- `MiniPickPrompt` - 프롬프트.
 
-- `MiniPickPromptPrefix` - prefix of the prompt.
+- `MiniPickPromptCaret` - 프롬프트의 캐럿.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+- `MiniPickPromptPrefix` - 프롬프트 접두사.
 
----
-
-### Events {#minipick-events .help-syntax-right-anchor}
-
-To allow user customization and integration of external tools, certain [User](https://neovim.io/doc/user/helptag.html?tag=User)
-autocommand events are triggered under common circumstances:
-
-
-- `MiniPickMatch` - just after updating query matches or setting items.
-
-- `MiniPickStart` - just after picker has started.
-
-- `MiniPickStop` - just before picker is stopped.
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하십시오.
 
 ---
 
-### Overview {#minipick-overview .help-syntax-right-anchor}
+### 이벤트 {#minipick-events .help-syntax-right-anchor}
 
-General idea is to take array of objects, display them with interactive
-filter/sort/navigate/preview, and allow to choose one or more items.
-
-#### How to start a picker {#minipick-overview-howtostartapicker}
+사용자 맞춤 설정 및 외부 도구와의 통합을 위해, 일반적인 상황에서 특정 [User](https://neovim.io/doc/user/helptag.html?tag=User) 자동 명령(autocommand) 이벤트가 트리거됩니다:
 
 
+- `MiniPickMatch` - 쿼리 매치를 업데이트하거나 항목을 설정한 직후.
 
-- Use [MiniPick.start()](mini-pick.qmd#minipick.start) with `opts.source` defining [MiniPick-source](mini-pick.qmd#minipick-source).
-  Example: `MiniPick.start({ source = { items = vim.fn.readdir('.') } })`
+- `MiniPickStart` - 픽커가 시작된 직후.
+
+- `MiniPickStop` - 픽커가 중지되기 직전.
+
+---
+
+### 개요 {#minipick-overview .help-syntax-right-anchor}
+
+일반적인 개념은 객체 배열을 가져와 대화형 필터/정렬/탐색/프리뷰와 함께 표시하고, 하나 이상의 항목을 선택할 수 있게 하는 것입니다.
+
+#### 픽커 시작 방법 {#minipick-overview-howtostartapicker}
 
 
-- Use any of [MiniPick.builtin](mini-pick.qmd#minipick.builtin) pickers directly.
-  Example: `MiniPick.builtin.files({ tool = 'git' })`
+
+- [MiniPick-source](mini-pick.qmd#minipick-source)를 정의하는 `opts.source`와 함께 [MiniPick.start()](mini-pick.qmd#minipick.start)를 사용합니다.
+  예시: `MiniPick.start({ source = { items = vim.fn.readdir('.') } })`
 
 
-- Use [:Pick](mini-pick.qmd#pick) command which uses customizable pickers from [MiniPick.registry](mini-pick.qmd#minipick.registry).
-  Example: `:Pick files tool='git'`
-
-#### User interface {#minipick-overview-userinterface}
+- [MiniPick.builtin](mini-pick.qmd#minipick.builtin) 픽커 중 하나를 직접 사용합니다.
+  예시: `MiniPick.builtin.files({ tool = 'git' })`
 
 
-UI consists from a single window capable of displaying three different views:
+- [MiniPick.registry](mini-pick.qmd#minipick.registry)의 맞춤형 픽커를 사용하는 [:Pick](mini-pick.qmd#pick) 명령을 사용합니다.
+  예시: `:Pick files tool='git'`
 
-- "Main" - where current query matches are shown.
+#### 사용자 인터페이스 {#minipick-overview-userinterface}
 
-- "Preview" - preview of current item (toggle with `<Tab>`).
 
-- "Info" - general info about picker and its state (toggle with `<S-Tab>`).
+UI는 세 가지 다른 뷰를 표시할 수 있는 단일 윈도우로 구성됩니다:
 
-Current prompt is displayed at the top left of the window border with vertical
-line indicating caret (current input position).
+- "Main" - 현재 쿼리 매치가 표시되는 곳입니다.
 
-Bottom part of window border displays (in Neovim>=0.10) extra visual feedback:
+- "Preview" - 현재 항목의 프리뷰입니다(`<Tab>`으로 토글).
 
-- Left part is a picker name.
+- "Info" - 픽커 및 상태에 대한 일반 정보입니다(`<S-Tab>`으로 토글).
 
-- Right part contains information in the format
+현재 프롬프트는 윈도우 테두리 왼쪽 상단에 표시되며, 캐럿(현재 입력 위치)은 수직선으로 나타납니다.
+
+윈도우 테두리 하단(Neovim>=0.10)에는 추가적인 시각적 피드백이 표시됩니다:
+
+- 왼쪽은 픽커 이름입니다.
+
+- 오른쪽은 다음 형식의 정보를 포함합니다:
 
   ```
-  <current index in matches> | <match count> | <marked count> / <total count>
+  <매치 결과 중 현재 인덱스> | <매치 총합> | <표시된 수> / <전체 수>
   ```
 
-When picker is busy (like if there are no items yet set or matching is active)
-window border changes color to be `MiniPickBorderBusy` after `config.delay.busy`
-milliseconds of idle time.
+픽커가 바쁠 때(아직 항목이 설정되지 않았거나 매칭이 진행 중인 경우), `config.delay.busy` 밀리초의 유휴 시간 후 윈도우 테두리 색상이 `MiniPickBorderBusy`로 변경됩니다.
 
-#### Life cycle {#minipick-overview-lifecycle}
+#### 수명 주기 {#minipick-overview-lifecycle}
 
 
 
-- Type characters to filter and sort matches. It uses [MiniPick.default\_match()](mini-pick.qmd#minipick.default_match)
-  with `query` being an array of pressed characters.
-  Overview of how it matches:
+- 문자를 입력하여 매치 결과를 필터링하고 정렬합니다. 눌린 문자 배열인 `query`와 함께 [MiniPick.default\_match()](mini-pick.qmd#minipick.default_match)를 사용합니다.
+  매칭 방식 개요:
 
-    - If query starts with `'`, the match is exact.
+    - 쿼리가 `'`로 시작하면 정확히 일치(exact match)하는 항목을 찾습니다.
 
-    - If query starts with `^`, the match is exact at start.
+    - 쿼리가 `^`로 시작하면 시작 부분이 정확히 일치하는 항목을 찾습니다.
 
-    - If query ends with `$`, the match is exact at end.
+    - 쿼리가 `$`로 끝나면 끝 부분이 정확히 일치하는 항목을 찾습니다.
 
-    - If query starts with `*`, the match is forced to be fuzzy.
+    - 쿼리가 `*`로 시작하면 퍼지 매칭(fuzzy matching)을 강제합니다.
 
-    - Otherwise match is fuzzy.
+    - 그 외의 경우 퍼지 매칭을 수행합니다.
 
-    - Sorting is done to first minimize match width and then match start.
-      Nothing more: no favoring certain places in string, etc.
+    - 정렬은 먼저 매치 너비(width)를 최소화한 다음 매치 시작 위치를 기준으로 수행됩니다. 문자열의 특정 위치를 선호하는 등의 추가 로직은 없습니다.
 
 
-- Type special keys to perform [MiniPick-actions](mini-pick.qmd#minipick-actions). Here are some basic ones:
+- 특수 키를 입력하여 [MiniPick-actions](mini-pick.qmd#minipick-actions)를 수행합니다. 기본적인 것들은 다음과 같습니다:
 
-    - `<C-n>` / `<Down>` moves down; `<C-p>` / `<Up>` moves up.
+    - `<C-n>` / `<Down>`은 아래로, `<C-p>` / `<Up>`은 위로 이동합니다.
 
-    - `<Left>` / `<Right>` moves prompt caret left / right.
+    - `<Left>` / `<Right>`는 프롬프트 캐럿을 왼쪽/오른쪽으로 이동합니다.
 
-    - `<S-Tab>` toggles information window with all available mappings.
+    - `<S-Tab>`은 사용 가능한 모든 매핑이 포함된 정보 창을 토글합니다.
 
-    - `<Tab>` toggles preview.
+    - `<Tab>`은 프리뷰를 토글합니다.
 
-    - `<C-x>` / `<C-a>` toggles current / all item(s) as (un)marked.
+    - `<C-x>` / `<C-a>`는 현재 / 모든 항목의 표시(mark) 상태를 토글합니다.
 
-    - `<C-Space>` / `<M-Space>` makes all matches or marked items as new picker.
+    - `<C-Space>` / `<M-Space>`는 모든 매치 결과 또는 표시된 항목으로 새 픽커를 만듭니다.
 
-    - `<CR>` / `<M-CR>` chooses current/marked item(s).
+    - `<CR>` / `<M-CR>`은 현재/표시된 항목을 선택합니다.
 
-    - `<Esc>` / `<C-c>` stops picker.
+    - `<Esc>` / `<C-c>`는 픽커를 중지합니다.
 
-#### Implementation details {#minipick-overview-implementationdetails}
+#### 구현 세부 사항 {#minipick-overview-implementationdetails}
 
 
 
-- Processing key typing is done via a dedicated key query process for more
-  control over their side effects. As a result, regular mappings don't work
-  here and picker's window needs to be current as long as it is shown.
-  Changing window focus leads to automatic picker stop (after small delay).
-  Not picker related screen changes require explicit [:redraw](https://neovim.io/doc/user/helptag.html?tag=:redraw).
+- 키 입력 처리는 부수 효과 제어를 위해 전용 키 쿼리 프로세스를 통해 수행됩니다. 결과적으로 일반 매핑은 여기서 작동하지 않으며, 픽커 창이 표시되는 동안에는 해당 창이 현재 창이어야 합니다. 창 포커스를 변경하면 짧은 지연 후 픽커가 자동으로 중지됩니다. 픽커와 관련 없는 화면 변경에는 명시적인 [:redraw](https://neovim.io/doc/user/helptag.html?tag=:redraw)가 필요합니다.
 
-- Any picker is non-blocking but waits to return the chosen item. Example:
-  `file = MiniPick.builtin.files()` allows other actions to be executed when
-  picker is shown while still assigning `file` with value of the chosen item.
+- 모든 픽커는 논블로킹(non-blocking)이지만 선택된 항목을 반환하기 위해 대기합니다. 예시: `file = MiniPick.builtin.files()`는 픽커가 표시되는 동안 다른 액션을 실행할 수 있게 하면서도, `file`에 선택된 항목의 값을 할당합니다.
 
 ---
 
-### Source {#minipick-source .help-syntax-right-anchor}
+### 소스 {#minipick-source .help-syntax-right-anchor}
 
-Source is defined as a `source` field inside one of (in increasing priority):
+소스(Source)는 다음 중 하나의 `source` 필드 내에 정의됩니다(우선순위 오름차순):
 
-- [MiniPick.config](mini-pick.qmd#minipick.config) - has global effect.
+- [MiniPick.config](mini-pick.qmd#minipick.config) - 전역적으로 적용됩니다.
 
-- `vim.b.minipick_config` - has buffer-local effect.
+- `vim.b.minipick_config` - 버퍼별로 적용됩니다.
 
-- `opts.source` in picker call - has effect for that particular call.
+- 픽커 호출 시의 `opts.source` - 해당 호출에만 적용됩니다.
 
-Example of source to choose from [arglist](https://neovim.io/doc/user/helptag.html?tag=arglist):
+[arglist](https://neovim.io/doc/user/helptag.html?tag=arglist)에서 선택하는 소스 예시:
 
   ```lua
   { items = vim.fn.argv, name = 'Arglist' }
   ```
 
-Note: this is mostly useful for writing pickers. Can safely skip if you
-want to just use provided pickers.
+참고: 이는 주로 픽커를 작성할 때 유용합니다. 제공된 픽커만 사용하려는 경우 건너뛰어도 무방합니다.
 
-#### Items {#minipick-source-items}
+#### 항목 {#minipick-source-items}
 
 
 <a name="minipick-source.items" href="mini-pick.qmd#minipick-source.items"><b>MiniPick-source.items</b></a>
 
-`source.items` defines items to choose from. It should be one of the following:
+`source.items`는 선택할 항목을 정의합니다. 다음 중 하나여야 합니다:
 
-- Array of objects which can have different types. Any type is allowed.
+- 다양한 타입을 가질 수 있는 객체 배열. 모든 타입이 허용됩니다.
 
-- `nil`. Picker waits for explicit [MiniPick.set\_picker\_items()](mini-pick.qmd#minipick.set_picker_items) call.
+- `nil`. 픽커는 명시적인 [MiniPick.set\_picker\_items()](mini-pick.qmd#minipick.set_picker_items) 호출을 기다립니다.
 
-- Callable returning any of the previous types. Will be called once on start
-  with source's `cwd` set as [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+- 이전 타입 중 하나를 반환하는 콜러블. 시작 시 소스의 `cwd`가 [현재 디렉터리](https://neovim.io/doc/user/helptag.html?tag=current-directory)로 설정된 상태에서 한 번 호출됩니다.
 
 <a name="minipick-source.items-stritems" href="mini-pick.qmd#minipick-source.items-stritems"><b>MiniPick-source.items-stritems</b></a>
-Matching is done for items array based on the string representation of its
-elements (here called "stritems"). For single item it is computed as follows:
+매칭은 요소의 문자열 표현(여기서는 "stritems"라고 함)을 기반으로 항목 배열에 대해 수행됩니다. 단일 항목에 대해 다음과 같이 계산됩니다:
 
-- Callable is called once with output used in next steps.
+- 콜러블이 한 번 호출되고 그 출력이 다음 단계에서 사용됩니다.
 
-- String item is used as is.
+- 문자열 항목은 그대로 사용됩니다.
 
-- String <span class="help-syntax-keys">\<text\></span> field of table item is used (if present).
+- 테이블 항목의 문자열 <span class="help-syntax-keys">\<text\></span> 필드가 사용됩니다(존재하는 경우).
 
-- Use output of [vim.inspect()](https://neovim.io/doc/user/helptag.html?tag=vim.inspect\(\)).
+- [vim.inspect()](https://neovim.io/doc/user/helptag.html?tag=vim.inspect\(\))의 출력을 사용합니다.
 
-Example:
+예시:
 
   ```lua
   items = { 'aaa.txt', { text = 'bbb' }, function() return 'ccc' end }
-  -- corresponding stritems are { 'aaa.txt', 'bbb', 'ccc' }
+  -- 해당 stritems는 { 'aaa.txt', 'bbb', 'ccc' }입니다.
   ```
 
-Default value is `nil`, assuming it always be supplied by the caller.
+기본값은 `nil`이며, 호출자가 항상 공급하는 것으로 가정합니다.
 
 <a name="minipick-source.items-common" href="mini-pick.qmd#minipick-source.items-common"><b>MiniPick-source.items-common</b></a>
-There are some recommendations for common item types in order for them to work
-out of the box with [MiniPick.default\_show()](mini-pick.qmd#minipick.default_show), [MiniPick.default\_preview()](mini-pick.qmd#minipick.default_preview),
-[MiniPick.default\_choose()](mini-pick.qmd#minipick.default_choose), [MiniPick.default\_choose\_marked()](mini-pick.qmd#minipick.default_choose_marked):
+일반적인 항목 타입이 [MiniPick.default\_show()](mini-pick.qmd#minipick.default_show), [MiniPick.default\_preview()](mini-pick.qmd#minipick.default_preview), [MiniPick.default\_choose()](mini-pick.qmd#minipick.default_choose), [MiniPick.default\_choose\_marked()](mini-pick.qmd#minipick.default_choose_marked)와 즉시 연동되도록 하기 위한 몇 가지 권장 사항이 있습니다:
 
 
-- Path (file or directory). Use string or `path` field of a table. Path can
-  be either absolute, relative to the `source.cwd`, or have a general URI format
-  (only if supplied as table field).
-  Examples: `'aaa.txt'`, `{ path = 'aaa.txt' }`
+- 경로 (파일 또는 디렉터리). 문자열 또는 테이블의 `path` 필드를 사용하십시오. 경로는 절대 경로이거나 `source.cwd`에 대한 상대 경로일 수 있으며, 일반적인 URI 형식(테이블 필드로 공급되는 경우에만)을 가질 수 있습니다.
+  예시: `'aaa.txt'`, `{ path = 'aaa.txt' }`
 
 
-- Buffer. Use buffer id as number, string, or `bufnr` / `buf_id` / `buf`
-  field of a table (any name is allowed).
-  Examples: `1`, `'1'`, `{ bufnr = 1 }`, `{ buf_id = 1 }`, `{ buf = 1 }`
+- 버퍼. 버퍼 ID를 숫자, 문자열 또는 테이블의 `bufnr` / `buf_id` / `buf` 필드(어떤 이름이든 허용됨)로 사용하십시오.
+  예시: `1`, `'1'`, `{ bufnr = 1 }`, `{ buf_id = 1 }`, `{ buf = 1 }`
 
 
-- Line in file or buffer. Use table representation with `lnum` field with line
-  number (starting from 1) or string in "<span class="help-syntax-keys">\<path\></span>\0<span class="help-syntax-keys">\<line\></span>" format (`\0` is
-  an actual null character; don't escape the slash; may need to be `\000`).
-  Examples:
+- 파일 또는 버퍼의 줄. 줄 번호를 가진 `lnum` 필드(1부터 시작)가 포함된 테이블 표현 또는 "<span class="help-syntax-keys">\<path\></span>\0<span class="help-syntax-keys">\<line\></span>" 형식의 문자열을 사용하십시오(`\0`은 실제 null 문자입니다. 슬래시를 이스케이프하지 마십시오. `\000`이어야 할 수도 있습니다).
+  예시:
 
     ```lua
     { path = 'aaa.txt', lnum = 2 }, 'aaa.txt\0002', { bufnr = 1, lnum = 3 }
     ```
 
 
-- Position in file or buffer. Use table representation with `lnum` and `col`
-  fields with line and column numbers (starting from 1) or string in
-  "<span class="help-syntax-keys">\<path\></span>\0<span class="help-syntax-keys">\<line\></span>\0<span class="help-syntax-keys">\<col\></span>" format (`\0` is an actual null character, don't
-  escape the slash; may need to be `\000`).
-  Examples:
+- 파일 또는 버퍼의 위치. 줄 및 열 번호를 가진 `lnum` 및 `col` 필드(1부터 시작)가 포함된 테이블 표현 또는 "<span class="help-syntax-keys">\<path\></span>\0<span class="help-syntax-keys">\<line\></span>\0<span class="help-syntax-keys">\<col\></span>" 형식의 문자열을 사용하십시오(`\0`은 실제 null 문자입니다. 슬래시를 이스케이프하지 마십시오. `\000`이어야 할 수도 있습니다).
+  예시:
 
     ```lua
     { path = 'aaa.txt', lnum = 2, col = 3 }, 'aaa.txt\0' .. '2\0003',
@@ -427,89 +384,65 @@ out of the box with [MiniPick.default\_show()](mini-pick.qmd#minipick.default_sh
     ```
 
 
-- Region in file or buffer. Use table representation with `lnum`, `col`,
-  `end_lnum`, `end_col` fields for start and end line/column. All numbers
-  start from 1, end line is inclusive, end column is exclusive.
-  This naming is similar to [getqflist()](https://neovim.io/doc/user/helptag.html?tag=getqflist\(\)) and [diagnostic-structure](https://neovim.io/doc/user/helptag.html?tag=diagnostic-structure).
-  Examples:
+- 파일 또는 버퍼의 영역. 시작 및 끝 줄/열을 위해 `lnum`, `col`, `end_lnum`, `end_col` 필드가 포함된 테이블 표현을 사용하십시오. 모든 숫자는 1부터 시작하며, 끝 줄은 포함(inclusive)되고 끝 열은 제외(exclusive)됩니다.
+  이 명명법은 [getqflist()](https://neovim.io/doc/user/helptag.html?tag=getqflist\(\)) 및 [diagnostic-structure](https://neovim.io/doc/user/helptag.html?tag=diagnostic-structure)와 유사합니다.
+  예시:
 
     ```lua
     { path = 'aaa.txt', lnum = 2, col = 3, end_lnum = 4, end_col = 5 },
     { bufnr = 1, lnum = 3, col = 4, end_lnum = 5, end_col = 6 }
     ```
 
-Note: all table items will benefit from having `text` field for better matching.
+참고: 모든 테이블 항목은 더 나은 매칭을 위해 `text` 필드를 가지는 것이 좋습니다.
 
-#### Name {#minipick-source-name}
+#### 이름 {#minipick-source-name}
 
 
 <a name="minipick-source.name" href="mini-pick.qmd#minipick-source.name"><b>MiniPick-source.name</b></a>
 
-`source.name` defines the name of the picker to be used for visual feedback.
+`source.name`은 시각적 피드백에 사용될 픽커의 이름을 정의합니다.
 
-Default value is "<No name>".
+기본값은 "<No name>"입니다.
 
-#### Current working directory {#minipick-source-currentworkingdirectory}
+#### 현재 작업 디렉터리 {#minipick-source-currentworkingdirectory}
 
 
 <a name="minipick-source.cwd" href="mini-pick.qmd#minipick-source.cwd"><b>MiniPick-source.cwd</b></a>
 
-`source.cwd` is a string defining the current working directory in which
-picker operates. It should point to a valid actually present directory path.
-This is a part of source to allow persistent way to use relative paths,
-i.e. not depend on current directory being constant after picker start.
-It also makes the [MiniPick.builtin.resume()](mini-pick.qmd#minipick.builtin.resume) picker more robust.
+`source.cwd`는 픽커가 작동하는 현재 작업 디렉터리를 정의하는 문자열입니다. 실제로 존재하는 유효한 디렉터리 경로를 가리켜야 합니다. 이는 상대 경로를 사용하는 일관된 방식을 허용하기 위한 소스의 일부로, 즉 픽커 시작 후 현재 디렉터리가 일정하게 유지되는지에 의존하지 않게 합니다. 또한 [MiniPick.builtin.resume()](mini-pick.qmd#minipick.builtin.resume) 픽커를 더 견고하게 만듭니다.
 
-It will be set as local [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory) ([:lcd](https://neovim.io/doc/user/helptag.html?tag=:lcd)) of picker's main window
-to allow simpler code for "in window" functions (choose/preview/custom/etc.).
+픽커의 메인 윈도우의 로컬 [현재 디렉터리](https://neovim.io/doc/user/helptag.html?tag=current-directory) ([:lcd](https://neovim.io/doc/user/helptag.html?tag=:lcd))로 설정되어 "윈도우 내" 함수(선택/프리뷰/사용자 정의 등)를 위한 코드를 더 간단하게 작성할 수 있게 합니다.
 
-Default value is [current-directory](https://neovim.io/doc/user/helptag.html?tag=current-directory).
+기본값은 [현재 디렉터리](https://neovim.io/doc/user/helptag.html?tag=current-directory)입니다.
 
-#### Match {#minipick-source-match}
+#### 매치 {#minipick-source-match}
 
 
 <a name="minipick-source.match" href="mini-pick.qmd#minipick-source.match"><b>MiniPick-source.match</b></a>
 
-`source.match` is a callable defining how stritems
-(see [MiniPick-source.items-stritems](mini-pick.qmd#minipick-source.items-stritems)) are matched (filtered and sorted) based
-on the query.
+`source.match`는 쿼리를 기반으로 stritems([MiniPick-source.items-stritems](mini-pick.qmd#minipick-source.items-stritems) 참고)가 매칭(필터링 및 정렬)되는 방식을 정의하는 콜러블입니다.
 
-It will be called with the following arguments:
+다음 인자와 함께 호출됩니다:
 
-- `stritems` - all available stritems for current picker.
+- `stritems` - 현재 픽커에서 사용 가능한 모든 stritems입니다.
 
-- `inds` - array of `stritems` indexes usually pointing at current matches.
-  It does point to current matches in the case of interactively appending
-  character at the end of the query. It assumes that matches for such bigger
-  query is a subset of previous matches (implementation can ignore it).
-  This can be utilized to increase performance by checking fewer stritems.
+- `inds` - 보통 현재 매치 결과를 가리키는 `stritems` 인덱스 배열입니다. 쿼리 끝에 문자를 대화형으로 추가하는 경우 현재 매치 결과를 가리킵니다. 더 큰 쿼리에 대한 매치 결과는 이전 매치 결과의 하위 집합이라고 가정합니다(구현 시 이를 무시할 수 있습니다). 이는 더 적은 수의 stritems를 확인하여 성능을 높이는 데 활용될 수 있습니다.
 
-- `query` - array of strings. Usually (like is common case of user interactively
-  typing query) each string represents one character. However, any strings are
-  allowed, as query can be set with [MiniPick.set\_picker\_query()](mini-pick.qmd#minipick.set_picker_query).
+- `query` - 문자열 배열입니다. 보통 (사용자가 대화형으로 쿼리를 입력하는 일반적인 경우) 각 문자열은 하나의 문자를 나타냅니다. 그러나 [MiniPick.set\_picker\_query()](mini-pick.qmd#minipick.set_picker_query)를 통해 쿼리를 설정할 수 있으므로 모든 문자열이 허용됩니다.
 
-It should either return array of match indexes for stritems elements matching
-the query (synchronous) or explicitly use [MiniPick.set\_picker\_match\_inds()](mini-pick.qmd#minipick.set_picker_match_inds)
-to set them (may be asynchronous).
+쿼리와 일치하는 stritems 요소의 인덱스 배열을 반환하거나(동기식), [MiniPick.set\_picker\_match\_inds()](mini-pick.qmd#minipick.set_picker_match_inds)를 사용하여 명시적으로 설정해야 합니다(비동기식 가능).
 
-Notes:
+참고:
 
-- The result can be any array of `stritems` indexes, i.e. not necessarily
-  a subset of input `inds`.
+- 결과는 `stritems` 인덱스의 임의의 배열일 수 있으며, 반드시 입력 `inds`의 하위 집합일 필요는 없습니다.
 
 
-- Both `stritems` and `query` depend on values of 'ignorecase' and 'smartcase'.
-  If query shows "ignore case" properties (only 'ignorecase' is set or both
-  'ignorecase' / 'smartcase' are set and query has only lowercase characters),
-  then `stritems` and `query` will have only lowercase characters.
-  This allows automatic support for case insensitive matching while being
-  faster and having simpler match function implementation.
+- `stritems`와 `query` 모두 'ignorecase' 및 'smartcase' 값에 의존합니다. 쿼리가 "대소문자 무시" 속성을 보여주면('ignorecase'만 설정되어 있거나 'ignorecase' / 'smartcase'가 모두 설정되어 있고 쿼리에 소문자만 있는 경우), `stritems`와 `query`는 소문자만 포함하게 됩니다. 이는 매치 함수 구현을 더 빠르고 단순하게 만들면서 대소문자를 구분하지 않는 매칭을 자동으로 지원하게 합니다.
 
 
-- Writing custom `source.match` usually means also changing [MiniPick-source.show](mini-pick.qmd#minipick-source.show)
-  because it is used to highlight stritems parts actually matching the query.
+- 사용자 정의 `source.match`를 작성한다는 것은 보통 [MiniPick-source.show](mini-pick.qmd#minipick-source.show)도 변경해야 함을 의미하는데, 이는 stritems에서 실제로 쿼리와 일치하는 부분을 하이라이트하는 데 사용되기 때문입니다.
 
-Example of simple "exact" `match()` preserving initial order:
+초기 순서를 유지하는 단순한 "정확한(exact)" `match()` 예시:
 
   ```lua
   local match_exact = function(stritems, inds, query)
@@ -517,33 +450,29 @@ Example of simple "exact" `match()` preserving initial order:
     local f = function(i) return stritems[i]:find(prompt_pattern) ~= nil end
     return vim.tbl_filter(f, inds)
   end
-  -- For non-blocking version see `:h MiniPick.poke_is_picker_active()`
+  -- 논블로킹 버전은 `:h MiniPick.poke_is_picker_active()`를 참고하십시오.
   ```
 
-Default value is [MiniPick.default\_match()](mini-pick.qmd#minipick.default_match).
+기본값은 [MiniPick.default\_match()](mini-pick.qmd#minipick.default_match)입니다.
 
-#### Show {#minipick-source-show}
+#### 표시 {#minipick-source-show}
 
 
 <a name="minipick-source.show" href="mini-pick.qmd#minipick-source.show"><b>MiniPick-source.show</b></a>
 
-`source.show` is a callable defining how matched items are shown in the window.
+`source.show`는 매치된 항목이 윈도우에 표시되는 방식을 정의하는 콜러블입니다.
 
-It will be called with the following arguments:
+다음 인자와 함께 호출됩니다:
 
-- `buf_id` - identifier of the target buffer.
+- `buf_id` - 대상 버퍼의 식별자입니다.
 
-- `items_to_show` - array of actual items to be shown in `buf_id`. This is
-  a subset of currently matched items computed to fit in current window view.
+- `items_to_show` - 현재 윈도우 뷰에 맞도록 계산된, 현재 매치된 항목의 하위 집합입니다.
 
-- `query` - array of strings. Same as in `source.match`.
+- `query` - 문자열 배열입니다. `source.match`와 동일합니다.
 
-It should update buffer `buf_id` to visually represent `items_to_show`
-__one item per line starting from line one__ (it shouldn't depend on
-`options.content_from_bottom`). This also includes possible visualization
-of which parts of stritem actually matched query.
+`items_to_show`를 시각적으로 나타내기 위해 버퍼 `buf_id`를 업데이트해야 하며, __첫 번째 줄부터 한 줄에 한 항목씩__ 표시해야 합니다(`options.content_from_bottom`에 의존해서는 안 됩니다). 이는 stritem의 어느 부분이 실제로 쿼리와 일치하는지에 대한 시각화도 포함합니다.
 
-Example (assuming string items; without highlighting):
+예시 (문자열 항목 가정, 하이라이트 없음):
 
   ```lua
   local show_prepend = function(buf_id, items_arr, query)
@@ -552,27 +481,24 @@ Example (assuming string items; without highlighting):
   end
   ```
 
-Default value is [MiniPick.default\_show()](mini-pick.qmd#minipick.default_show).
+기본값은 [MiniPick.default\_show()](mini-pick.qmd#minipick.default_show)입니다.
 
-#### Preview {#minipick-source-preview}
+#### 프리뷰 {#minipick-source-preview}
 
 
 <a name="minipick-source.preview" href="mini-pick.qmd#minipick-source.preview"><b>MiniPick-source.preview</b></a>
 
-`source.preview` is a callable defining how item preview is done.
+`source.preview`는 항목 프리뷰가 수행되는 방식을 정의하는 콜러블입니다.
 
-It will be called with the following arguments:
+다음 인자와 함께 호출됩니다:
 
-- `buf_id` - identifier of the target buffer. Note: for every separate instance
-  of item previewing new scratch buffer is be created.
+- `buf_id` - 대상 버퍼의 식별자입니다. 참고: 각 항목 프리뷰 인스턴스에 대해 새로운 스크래치 버퍼가 생성됩니다.
 
-- `item` - item to preview.
+- `item` - 프리뷰할 항목입니다.
 
-It should update buffer `buf_id` to visually represent `item`. It can also
-directly set another buffer in picker's main window, but usually it is more
-robust to update given `buf_id` directly.
+`item`을 시각적으로 나타내기 위해 버퍼 `buf_id`를 업데이트해야 합니다. 픽커의 메인 윈도우에 다른 버퍼를 직접 설정할 수도 있지만, 일반적으로 제공된 `buf_id`를 직접 업데이트하는 것이 더 견고합니다.
 
-Example:
+예시:
 
   ```lua
   local preview_inspect = function(buf_id, item)
@@ -581,29 +507,26 @@ Example:
   end
   ```
 
-Default value is [MiniPick.default\_preview()](mini-pick.qmd#minipick.default_preview).
+기본값은 [MiniPick.default\_preview()](mini-pick.qmd#minipick.default_preview)입니다.
 
-#### Choose an item {#minipick-source-chooseanitem}
+#### 항목 선택 {#minipick-source-chooseanitem}
 
 
 <a name="minipick-source.choose" href="mini-pick.qmd#minipick-source.choose"><b>MiniPick-source.choose</b></a>
 
-`source.choose` is a callable defining what to do when an item is chosen.
+`source.choose`는 항목을 선택했을 때 수행할 동작을 정의하는 콜러블입니다.
 
-It will be called with the following arguments:
+다음 인자와 함께 호출됩니다:
 
-- `item` - chosen item. Always non-`nil`.
+- `item` - 선택된 항목입니다. 항상 `nil`이 아닙니다.
 
-It should perform any intended "choose" action for an item and return
-a value indicating whether picker should continue (i.e. not stop):
-`nil` and `false` will stop picker, other values will continue.
+항목에 대해 의도된 "선택" 액션을 수행하고, 픽커의 계속 여부(즉, 중지하지 않음)를 나타내는 값을 반환해야 합니다: `nil` 및 `false`는 픽커를 중지하고, 그 외의 값은 계속합니다.
 
-Notes:
+참고:
 
-- It is called when picker window is still current. Use `windows.target` value
-  from [MiniPick.get\_picker\_state()](mini-pick.qmd#minipick.get_picker_state) output to do something with target window.
+- 픽커 창이 여전히 현재 창일 때 호출됩니다. 대상 창에 무언가를 하려면 [MiniPick.get\_picker\_state()](mini-pick.qmd#minipick.get_picker_state) 출력의 `windows.target` 값을 사용하십시오.
 
-Example:
+예시:
 
   ```lua
   local choose_file_continue = function(item)
@@ -616,263 +539,231 @@ Example:
   end
   ```
 
-Default value is [MiniPick.default\_choose()](mini-pick.qmd#minipick.default_choose).
+기본값은 [MiniPick.default\_choose()](mini-pick.qmd#minipick.default_choose)입니다.
 
-#### Choose marked items {#minipick-source-choosemarkeditems}
+#### 표시된 항목 선택 {#minipick-source-choosemarkeditems}
 
 
 <a name="minipick-source.choose_marked" href="mini-pick.qmd#minipick-source.choose_marked"><b>MiniPick-source.choose_marked</b></a>
 
-`source.choose_marked` is a callable defining what to do when marked items
-(see [MiniPick-actions-mark](mini-pick.qmd#minipick-actions-mark)) are chosen. Serves as a companion to
-`source.choose` which can choose several items.
+`source.choose_marked`는 표시(mark)된 항목([MiniPick-actions-mark](mini-pick.qmd#minipick-actions-mark) 참고)을 선택했을 때 수행할 동작을 정의하는 콜러블입니다. 여러 항목을 선택할 수 있는 `source.choose`의 보조 역할을 합니다.
 
-It will be called with the following arguments:
+다음 인자와 함께 호출됩니다:
 
-- `items_marked` - array of marked items. Can be empty.
+- `items_marked` - 표시된 항목 배열입니다. 비어있을 수 있습니다.
 
-It should perform any intended "choose" action for several items and return
-a value indicating whether picker should continue (i.e. not stop):
-`nil` and `false` will stop picker, other values will continue.
+여러 항목에 대해 의도된 "선택" 액션을 수행하고, 픽커의 계속 여부(즉, 중지하지 않음)를 나타내는 값을 반환해야 합니다: `nil` 및 `false`는 픽커를 중지하고, 그 외의 값은 계속합니다.
 
-Notes:
+참고:
 
-- It is called when picker window is still current. Use `windows.target` value
-  from [MiniPick.get\_picker\_state()](mini-pick.qmd#minipick.get_picker_state) output to do something with target window.
+- 픽커 창이 여전히 현재 창일 때 호출됩니다. 대상 창에 무언가를 하려면 [MiniPick.get\_picker\_state()](mini-pick.qmd#minipick.get_picker_state) 출력의 `windows.target` 값을 사용하십시오.
 
-Example:
+예시:
 
   ```lua
   local choose_marked_print = function(items) print(vim.inspect(items)) end
   ```
 
-Default value is [MiniPick.default\_choose\_marked()](mini-pick.qmd#minipick.default_choose_marked).
+기본값은 [MiniPick.default\_choose\_marked()](mini-pick.qmd#minipick.default_choose_marked)입니다.
 
 ---
 
-### Actions {#minipick-actions .help-syntax-right-anchor}
+### 액션 {#minipick-actions .help-syntax-right-anchor}
 
-When picker is active, `mappings` table defines a set of special keys which when
-pressed will execute certain actions. Those can be of two types:
+픽커가 활성화된 상태에서 `mappings` 테이블은 특정 액션을 실행할 특수 키 세트를 정의합니다. 이들은 두 가지 유형이 있습니다:
 
-- Built-in: actions present in default `config.mappings`. Can be only overridden
-  with a different key.
+- 내장(Built-in): 기본 `config.mappings`에 존재하는 액션입니다. 다른 키로만 재정의할 수 있습니다.
 
-- Custom: user defined actions. Should be a table with `char` and `func` fields.
+- 사용자 정의(Custom): 사용자가 정의한 액션입니다. `char` 및 `func` 필드가 있는 테이블이어야 합니다.
 
 
-#### Built-in {#minipick-actions-built-in}
+#### 내장 {#minipick-actions-built-in}
 
 
-##### Caret {#minipick-actions-built-in-caret}
+##### 캐럿 {#minipick-actions-built-in-caret}
 
 
 <a name="minipick-actions-caret" href="mini-pick.qmd#minipick-actions-caret"><b>MiniPick-actions-caret</b></a>
 
-User can add character not only at query end, but more generally at caret.
+사용자는 쿼리 끝뿐만 아니라 캐럿 위치에서도 문자를 추가할 수 있습니다.
 
 
-- `mappings.caret_left` - move caret to left.
+- `mappings.caret_left` - 캐럿을 왼쪽으로 이동합니다.
 
-- `mappings.caret_right` - move caret to right.
+- `mappings.caret_right` - 캐럿을 오른쪽으로 이동합니다.
 
-##### Choose {#minipick-actions-built-in-choose}
+##### 선택 {#minipick-actions-built-in-choose}
 
 
 <a name="minipick-actions-choose" href="mini-pick.qmd#minipick-actions-choose"><b>MiniPick-actions-choose</b></a>
 
-Choose is a fundamental action that actually implements the intent of
-calling a picker, i.e. pick an item.
+선택(Choose)은 픽커 호출의 의도, 즉 항목을 선택하는 기능을 실제로 구현하는 핵심 액션입니다.
 
 
-- `mappings.choose` - choose as is, i.e. apply `source.choose` for current item.
+- `mappings.choose` - 그대로 선택합니다. 즉, 현재 항목에 `source.choose`를 적용합니다.
 
-- `mappings.choose_in_split` - make horizontal split at target window, update
-  target window to the new split, and choose.
+- `mappings.choose_in_split` - 대상 창에서 수평 분할을 수행하고, 대상 창을 새 분할 창으로 업데이트한 후 선택합니다.
 
-- `mappings.choose_in_tabpage` - same as `choose_in_split`, but create tabpage.
+- `mappings.choose_in_tabpage` - `choose_in_split`과 동일하지만, 탭 페이지를 생성합니다.
 
-- `mappings.choose_in_vsplit` - same as `choose_in_split`, but split vertically.
+- `mappings.choose_in_vsplit` - `choose_in_split`과 동일하지만, 수직으로 분할합니다.
 
-- `mappings.choose_marked` - choose marked items as is, i.e.
-  apply `source.choose_marked` at current marked items.
+- `mappings.choose_marked` - 표시된 항목을 그대로 선택합니다. 즉, 현재 표시된 항목에 `source.choose_marked`를 적용합니다.
 
-##### Delete {#minipick-actions-built-in-delete}
+##### 삭제 {#minipick-actions-built-in-delete}
 
 
 <a name="minipick-actions-delete" href="mini-pick.qmd#minipick-actions-delete"><b>MiniPick-actions-delete</b></a>
 
-Delete actions are for deleting elements from query.
+삭제 액션은 쿼리에서 요소를 삭제하기 위한 것입니다.
 
 
-- `mappings.delete_char` - delete one character to the left.
+- `mappings.delete_char` - 왼쪽으로 한 문자를 삭제합니다.
 
-- `mappings.delete_char_right` - delete one character to the right.
+- `mappings.delete_char_right` - 오른쪽으로 한 문자를 삭제합니다.
 
-- `mappings.delete_left` - delete everything to the left (like [i\_CTRL-U](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-U)).
+- `mappings.delete_left` - 왼쪽의 모든 내용을 삭제합니다([i\_CTRL-U](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-U)와 유사).
 
-- `mappings.delete_word` - delete word to the left (like [i\_CTRL-W](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-W)).
+- `mappings.delete_word` - 왼쪽의 단어를 삭제합니다([i\_CTRL-W](https://neovim.io/doc/user/helptag.html?tag=i_CTRL-W)와 유사).
 
-##### Mark {#minipick-actions-built-in-mark}
+##### 표시 {#minipick-actions-built-in-mark}
 
 
 <a name="minipick-actions-mark" href="mini-pick.qmd#minipick-actions-mark"><b>MiniPick-actions-mark</b></a>
 
-Marking is an action of adding certain items to a separate list which then can
-be chosen with `mappings.choose_marked` (for example, sent to quickfix list).
-This is a companion to a regular choosing which can pick only one item.
+표시(Marking)는 특정 항목을 별도의 리스트에 추가하는 액션으로, 나중에 `mappings.choose_marked`를 통해 선택할 수 있습니다(예: 퀵픽스 리스트로 보내기). 이는 오직 하나의 항목만 선택할 수 있는 일반적인 선택 기능의 보조 역할을 합니다.
 
 
-- `mappings.mark` - toggle marked/unmarked state of current item.
+- `mappings.mark` - 현재 항목의 표시/미표시 상태를 토글합니다.
 
-- `mappings.mark_all` - toggle marked/unmarked state (mark all if not all
-  marked; unmark all otherwise) of all currently matched items.
+- `mappings.mark_all` - 현재 매치된 모든 항목의 표시/미표시 상태를 토글합니다(모두 표시되어 있지 않으면 모두 표시하고, 그렇지 않으면 모두 해제함).
 
-Notes:
+참고:
 
-- Marks persist across queries and matches. For example, user can make a query
-  with marking all matches several times and marked items from all queries
-  will be preserved.
+- 표시는 쿼리와 매치 결과가 바뀌어도 유지됩니다. 예를 들어, 사용자가 여러 번의 쿼리를 통해 각 매치 결과를 모두 표시하면, 모든 쿼리에서 표시된 항목들이 보존됩니다.
 
-##### Move {#minipick-actions-built-in-move}
+##### 이동 {#minipick-actions-built-in-move}
 
 
 <a name="minipick-actions-move" href="mini-pick.qmd#minipick-actions-move"><b>MiniPick-actions-move</b></a>
 
-Move is a fundamental action of changing which item is current.
+이동은 포커스된 항목을 변경하는 핵심 액션입니다.
 
 
-- `mappings.move_down` - change focus to the item below.
+- `mappings.move_down` - 포커스를 아래 항목으로 변경합니다.
 
-- `mappings.move_start` change focus to the first currently matched item
+- `mappings.move_start` - 포커스를 현재 매치된 첫 번째 항목으로 변경합니다.
 
-- `mappings.move_up` - change focus to the item above.
+- `mappings.move_up` - 포커스를 위 항목으로 변경합니다.
 
-Notes:
+참고:
 
-- Up and down wrap around edges: `move_down` on last item moves to first,
-  `move_up` on first moves to last.
+- 위아래 이동은 끝에서 순환합니다: 마지막 항목에서 `move_down`은 첫 번째 항목으로, 첫 번째 항목에서 `move_up`은 마지막 항목으로 이동합니다.
 
-- Moving when preview or info view is shown updates the view with new item.
+- 프리뷰나 정보 뷰가 표시된 상태에서 이동하면 뷰가 새 항목으로 업데이트됩니다.
 
-- These also work with non-overridable alternatives:
+- 다음의 재정의 불가능한 대안 키도 작동합니다:
 
-    - `<Down>` moves down.
+    - `<Down>`은 아래로 이동합니다.
 
-    - `<Home>` moves to first matched.
+    - `<Home>`은 첫 번째 매치 항목으로 이동합니다.
 
-    - `<Up>` moves up.
+    - `<Up>`은 위로 이동합니다.
 
-##### Paste {#minipick-actions-built-in-paste}
+##### 붙여넣기 {#minipick-actions-built-in-paste}
 
 
 <a name="minipick-actions-paste" href="mini-pick.qmd#minipick-actions-paste"><b>MiniPick-actions-paste</b></a>
 
-Paste is an action to paste content of [registers](https://neovim.io/doc/user/helptag.html?tag=registers) at caret.
+붙여넣기는 [레지스트리](https://neovim.io/doc/user/helptag.html?tag=registers)의 내용을 캐럿 위치에 붙여넣는 액션입니다.
 
 
-- `mappings.paste` - paste from register defined by the next key press.
+- `mappings.paste` - 다음 키 입력으로 정의된 레지스터의 내용을 붙여넣습니다.
 
-Notes:
+참고:
 
-- Does not support expression register `=`.
+- 표현식 레지스터 `=`는 지원하지 않습니다.
 
-- Supports special cases of register: <span class="help-syntax-keys">\<C-f\></span> (as [c\_CTRL-R\_CTRL-F](https://neovim.io/doc/user/helptag.html?tag=c_CTRL-R_CTRL-F)),
-  <span class="help-syntax-keys">\<C-w\></span> (as [c\_CTRL-R\_CTRL-W](https://neovim.io/doc/user/helptag.html?tag=c_CTRL-R_CTRL-W)), <span class="help-syntax-keys">\<C-a\></span> (as [c\_CTRL-R\_CTRL-A](https://neovim.io/doc/user/helptag.html?tag=c_CTRL-R_CTRL-A)),
-  <span class="help-syntax-keys">\<C-l\></span> (as [c\_CTRL-R\_CTRL-L](https://neovim.io/doc/user/helptag.html?tag=c_CTRL-R_CTRL-L)).
+- 특수 레지스터 사례를 지원합니다: <span class="help-syntax-keys">\<C-f\></span> ([c\_CTRL-R\_CTRL-F](https://neovim.io/doc/user/helptag.html?tag=c_CTRL-R_CTRL-F)와 동일), <span class="help-syntax-keys">\<C-w\></span> ([c\_CTRL-R\_CTRL-W](https://neovim.io/doc/user/helptag.html?tag=c_CTRL-R_CTRL-W)와 동일), <span class="help-syntax-keys">\<C-a\></span> ([c\_CTRL-R\_CTRL-A](https://neovim.io/doc/user/helptag.html?tag=c_CTRL-R_CTRL-A)와 동일), <span class="help-syntax-keys">\<C-l\></span> ([c\_CTRL-R\_CTRL-L](https://neovim.io/doc/user/helptag.html?tag=c_CTRL-R_CTRL-L)과 동일).
 
-##### Refine {#minipick-actions-built-in-refine}
+##### 정제 {#minipick-actions-built-in-refine}
 
 
 <a name="minipick-actions-refine" href="mini-pick.qmd#minipick-actions-refine"><b>MiniPick-actions-refine</b></a>
 
-Refine is an action that primarily executes the following:
+정제(Refine)는 기본적으로 다음을 실행하는 액션입니다:
 
-- Takes certain items and makes them be all items (in order they are present).
+- 특정 항목들을 가져와 (현재 순서대로) 전체 항목으로 만듭니다.
 
-- Resets query.
+- 쿼리를 재설정합니다.
 
-- Updates `source.match` to be the one from config.
+- `source.match`를 설정의 기본값으로 업데이트합니다.
 
 
-- `mappings.refine` - refine currently matched items.
+- `mappings.refine` - 현재 매치된 항목들을 정제합니다.
 
-- `mappings.refine_marked` - refine currently marked items.
+- `mappings.refine_marked` - 현재 표시된 항목들을 정제합니다.
 
-This action is useful in at least two cases:
+이 액션은 적어도 다음 두 가지 경우에 유용합니다:
 
-- Perform consecutive "narrowing" queries. Example: to get items that contain
-  both "hello" and "world" exact matches (in no particular order) with default
-  matching, type "'hello" (notice "'" at the start) followed by `<C-Space>` and
-  another "'world".
+- 연속적인 "좁히기" 쿼리를 수행합니다. 예시: 기본 매칭을 사용하여 "hello"와 "world"를 모두 포함하는(순서 상관없음) 항목을 찾으려면, "'hello"(앞에 "'" 주의)를 입력한 후 `<C-Space>`를 누르고 다시 "'world"를 입력하십시오.
 
-- Reset `match` to default. Particularly useful in [MiniPick.builtin.grep\_live()](mini-pick.qmd#minipick.builtin.grep_live)
-  and [MiniExtra.pickers.lsp()](mini-extra.qmd#miniextra.pickers.lsp) with "workspace_symbol_live" scope.
+- `match`를 기본값으로 재설정합니다. 특히 [MiniPick.builtin.grep\_live()](mini-pick.qmd#minipick.builtin.grep_live) 및 "workspace_symbol_live" 범위를 가진 [MiniExtra.pickers.lsp()](mini-extra.qmd#miniextra.pickers.lsp)에서 유용합니다.
 
-##### Scroll {#minipick-actions-built-in-scroll}
+##### 스크롤 {#minipick-actions-built-in-scroll}
 
 
 <a name="minipick-actions-scroll" href="mini-pick.qmd#minipick-actions-scroll"><b>MiniPick-actions-scroll</b></a>
 
-Scroll is an action to either move current item focus further than to the
-neighbor item or adjust window view to see more information.
+스크롤은 현재 항목 포커스를 인접한 항목보다 더 멀리 이동하거나, 더 많은 정보를 보기 위해 창 뷰를 조정하는 액션입니다.
 
 
-- `mappings.scroll_down` - when matches are shown, go down by the amount of
-  visible matches. In preview and info view - scroll down as with [CTRL-F](https://neovim.io/doc/user/helptag.html?tag=CTRL-F).
+- `mappings.scroll_down` - 매치 결과가 표시된 경우 표시된 매치 수만큼 아래로 이동합니다. 프리뷰 및 정보 뷰에서는 [CTRL-F](https://neovim.io/doc/user/helptag.html?tag=CTRL-F)와 같이 아래로 스크롤합니다.
 
-- `mappings.scroll_left` - scroll left as with [zH](https://neovim.io/doc/user/helptag.html?tag=zH).
+- `mappings.scroll_left` - [zH](https://neovim.io/doc/user/helptag.html?tag=zH)와 같이 왼쪽으로 스크롤합니다.
 
-- `mappings.scroll_right` - scroll right as with [zL](https://neovim.io/doc/user/helptag.html?tag=zL).
+- `mappings.scroll_right` - [zL](https://neovim.io/doc/user/helptag.html?tag=zL)과 같이 오른쪽으로 스크롤합니다.
 
-- `mappings.scroll_up` - when matches are shown, go up by the amount of
-  visible matches. In preview and info view - scroll up as with [CTRL-B](https://neovim.io/doc/user/helptag.html?tag=CTRL-B).
+- `mappings.scroll_up` - 매치 결과가 표시된 경우 표시된 매치 수만큼 위로 이동합니다. 프리뷰 및 정보 뷰에서는 [CTRL-B](https://neovim.io/doc/user/helptag.html?tag=CTRL-B)와 같이 위로 스크롤합니다.
 
-##### Stop {#minipick-actions-built-in-stop}
+##### 중지 {#minipick-actions-built-in-stop}
 
 
 <a name="minipick-actions-stop" href="mini-pick.qmd#minipick-actions-stop"><b>MiniPick-actions-stop</b></a>
 
-`mappings.stop` stops the picker. <span class="help-syntax-keys">\<C-c\></span> also always stops the picker.
+`mappings.stop`은 픽커를 중지합니다. <span class="help-syntax-keys">\<C-c\></span>도 항상 픽커를 중지합니다.
 
 
-##### Toggle {#minipick-actions-built-in-toggle}
+##### 토글 {#minipick-actions-built-in-toggle}
 
 
 <a name="minipick-actions-toggle" href="mini-pick.qmd#minipick-actions-toggle"><b>MiniPick-actions-toggle</b></a>
 
-Toggle action is a way to change view: show if target is not shown, reset to
-main view otherwise.
+토글 액션은 뷰를 변경하는 방식입니다: 대상이 표시되지 않았으면 표시하고, 그렇지 않으면 메인 뷰로 재설정합니다.
 
 
-- `mappings.toggle_info` - toggle info view.
+- `mappings.toggle_info` - 정보 뷰를 토글합니다.
 
-- `mappings.toggle_preview` - toggle preview.
+- `mappings.toggle_preview` - 프리뷰를 토글합니다.
 
-Note:
+참고:
 
-- Updating query in any way resets window view to show matches.
+- 어떠한 방식으로든 쿼리를 업데이트하면 창 뷰가 매치 결과를 보여주도록 재설정됩니다.
 
-- Moving current item focus keeps preview or info view with updated item.
+- 현재 항목 포커스를 이동해도 프리뷰 또는 정보 뷰는 업데이트된 항목과 함께 유지됩니다.
 
-#### Custom {#minipick-actions-custom}
+#### 사용자 정의 {#minipick-actions-custom}
 
 
 <a name="minipick-actions-custom" href="mini-pick.qmd#minipick-actions-custom"><b>MiniPick-actions-custom</b></a>
 
-Along with built-in actions, users can define custom actions. This can be
-done by supplying custom elements to `mappings` table. The field defines action
-name (used to infer an action description in info view). The value is a table
-with the following fields:
+내장 액션과 함께 사용자는 커스텀 액션을 정의할 수 있습니다. 이는 `mappings` 테이블에 커스텀 요소를 공급함으로써 가능합니다. 필드는 액션 이름(정보 뷰에서 액션 설명을 추론하는 데 사용됨)을 정의합니다. 값은 다음 필드를 가진 테이블입니다:
 
-- <span class="help-syntax-keys">\<char\></span> `(string)` - single character acting as action trigger.
+- <span class="help-syntax-keys">\<char\></span> `(string)` - 액션 트리거 역할을 하는 단일 문자입니다.
 
-- <span class="help-syntax-keys">\<func\></span> `(function)` - callable to be executed without arguments after
-  user presses <span class="help-syntax-keys">\<char\></span>. Its return value is treated as "should stop picker
-  after execution", i.e. returning nothing, `nil`, or `false` continues
-  picker while everything else (prefer `true`) stops it.
+- <span class="help-syntax-keys">\<func\></span> `(function)` - 사용자가 <span class="help-syntax-keys">\<char\></span>을 누른 후 인자 없이 실행될 콜러블입니다. 반환값은 "실행 후 픽커를 중지해야 하는지" 여부로 처리됩니다. 즉, 아무것도 반환하지 않거나 `nil` 또는 `false`를 반환하면 픽커를 계속하고, 그 외의 값(가급적 `true`)을 반환하면 중지합니다.
 
-Example of `execute` custom mapping:
+`execute` 커스텀 매핑 예시:
 
   ```lua
   execute = {
@@ -883,19 +774,19 @@ Example of `execute` custom mapping:
 
 ---
 
-### Examples {#minipick-examples .help-syntax-right-anchor}
+### 예시 {#minipick-examples .help-syntax-right-anchor}
 
-#### Disable icons {#minipick-examples-disableicons}
+#### 아이콘 비활성화 {#minipick-examples-disableicons}
 
 
-Disable icons in [MiniPick.builtin](mini-pick.qmd#minipick.builtin) pickers related to paths:
+경로와 관련된 [MiniPick.builtin](mini-pick.qmd#minipick.builtin) 픽커에서 아이콘 비활성화:
 
   ```lua
   local pick = require('mini.pick')
   pick.setup({ source = { show = pick.default_show } })
   ```
 
-#### Switch toggle and move keys {#minipick-examples-switchtoggleandmovekeys}
+#### 토글 및 이동 키 전환 {#minipick-examples-switchtoggleandmovekeys}
 
 
 
@@ -910,15 +801,15 @@ Disable icons in [MiniPick.builtin](mini-pick.qmd#minipick.builtin) pickers rela
   })
   ```
 
-#### Different window styles {#minipick-examples-differentwindowstyles}
+#### 다양한 윈도우 스타일 {#minipick-examples-differentwindowstyles}
 
 
 
   ```lua
-  -- Different border
+  -- 다른 테두리
   { window = { config = { border = 'double' } } }
 
-  -- "Cursor tooltip"
+  -- "커서 툴팁"
   {
     window = {
       config = {
@@ -928,7 +819,7 @@ Disable icons in [MiniPick.builtin](mini-pick.qmd#minipick.builtin) pickers rela
     },
   }
 
-  -- Centered on screen
+  -- 화면 중앙에 배치
   local win_config = function()
     local height = math.floor(0.618 * vim.o.lines)
     local width = math.floor(0.618 * vim.o.columns)
@@ -946,19 +837,17 @@ Disable icons in [MiniPick.builtin](mini-pick.qmd#minipick.builtin) pickers rela
 ### setup() {#minipick.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
 #### :Pick {#minipick.setup-pick}
 
 
 <a name="pick" href="mini-pick.qmd#pick"><b>:Pick</b></a>
 
-Calling this function creates a `:Pick` user command. It takes picker name
-from [MiniPick.registry](mini-pick.qmd#minipick.registry) as mandatory first argument and executes it with
-following (expanded, [expandcmd()](https://neovim.io/doc/user/helptag.html?tag=expandcmd\(\))) [<span class="help-syntax-keys">\<f-args\></span>](https://neovim.io/doc/user/helptag.html?tag=<f-args>) combined in a single table.
-To add custom pickers, update [MiniPick.registry](mini-pick.qmd#minipick.registry).
+이 함수를 호출하면 `:Pick` 사용자 명령이 생성됩니다. [MiniPick.registry](mini-pick.qmd#minipick.registry)의 픽커 이름을 필수 첫 번째 인자로 받고, 뒤따르는 (확장된 [expandcmd()](https://neovim.io/doc/user/helptag.html?tag=expandcmd\(\))) [<span class="help-syntax-keys">\<f-args\></span>](https://neovim.io/doc/user/helptag.html?tag=<f-args>)를 단일 테이블로 결합하여 실행합니다.
+커스텀 픽커를 추가하려면 [MiniPick.registry](mini-pick.qmd#minipick.registry)를 업데이트하십시오.
 
-Example:
+예시:
 
   ```vim
   :Pick files tool='git'
@@ -966,23 +855,23 @@ Example:
   ```
 
 
-It also sets custom [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\)) implementation to use the module.
-See [MiniPick.ui\_select()](mini-pick.qmd#minipick.ui_select).
+또한 모듈을 사용하도록 커스텀 [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\)) 구현을 설정합니다.
+[MiniPick.ui\_select()](mini-pick.qmd#minipick.ui_select)를 참고하십시오.
 
-#### Parameters {#minipick.setup-parameters}
+#### 매개변수 {#minipick.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniPick.config](mini-pick.qmd#minipick.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniPick.config](mini-pick.qmd#minipick.config)를 참고하십시오.
 
-#### Usage {#minipick.setup-usage}
+#### 사용법 {#minipick.setup-usage}
 
 
 
   ```lua
-  require('mini.pick').setup() -- use default config
-  -- OR
-  require('mini.pick').setup({}) -- replace {} with your config table
+  require('mini.pick').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.pick').setup({}) -- {}를 사용자 설정 테이블로 교체
   ```
 
 ---
@@ -990,22 +879,22 @@ See [MiniPick.ui\_select()](mini-pick.qmd#minipick.ui_select).
 ### config {#minipick.config .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.config`</p>
-#### Defaults {#minipick.config-defaults}
+#### 기본값 {#minipick.config-defaults}
 
 
 
   ```lua
   MiniPick.config = {
-    -- Delays (in ms; should be at least 1)
+    -- 지연 시간 (ms 단위, 최소 1이어야 함)
     delay = {
-      -- Delay between forcing asynchronous behavior
+      -- 비동기 동작 강제 사이의 지연 시간
       async = 10,
 
-      -- Delay between computation start and visual feedback about it
+      -- 계산 시작과 이에 대한 시각적 피드백 사이의 지연 시간
       busy = 50,
     },
 
-    -- Keys for performing actions. See `:h MiniPick-actions`.
+    -- 액션 수행을 위한 키. `:h MiniPick-actions` 참고.
     mappings = {
       caret_left  = '<Left>',
       caret_right = '<Right>',
@@ -1044,16 +933,16 @@ See [MiniPick.ui\_select()](mini-pick.qmd#minipick.ui_select).
       toggle_preview = '<Tab>',
     },
 
-    -- General options
+    -- 일반 옵션
     options = {
-      -- Whether to show content from bottom to top
+      -- 내용을 아래에서 위로 표시할지 여부
       content_from_bottom = false,
 
-      -- Whether to cache matches (more speed and memory on repeated prompts)
+      -- 매치 결과 캐싱 여부 (반복되는 프롬프트에서 속도는 빨라지지만 메모리 사용량 증가)
       use_cache = false,
     },
 
-    -- Source definition. See `:h MiniPick-source`.
+    -- 소스 정의. `:h MiniPick-source` 참고.
     source = {
       items = nil,
       name  = nil,
@@ -1067,255 +956,221 @@ See [MiniPick.ui\_select()](mini-pick.qmd#minipick.ui_select).
       choose_marked = nil,
     },
 
-    -- Window related options
+    -- 윈도우 관련 옵션
     window = {
-      -- Float window config (table or callable returning it)
+      -- 플로팅 윈도우 설정 (테이블 또는 이를 반환하는 콜러블)
       config = nil,
 
-      -- String to use as caret in prompt
+      -- 프롬프트에서 캐럿으로 사용할 문자열
       prompt_caret = '▏',
 
-      -- String to use as prefix in prompt
+      -- 프롬프트에서 접두사로 사용할 문자열
       prompt_prefix = '> ',
     },
   }
   ```
 
-#### Delays {#minipick.config-delays}
+#### 지연 시간 {#minipick.config-delays}
 
 
-`config.delay` defines plugin delays (in ms). All should be strictly positive.
+`config.delay`는 플러그인 지연 시간(ms 단위)을 정의합니다. 모두 양수여야 합니다.
 
-`delay.async` is a delay between forcing asynchronous behavior. This usually
-means forcing [:redraw](https://neovim.io/doc/user/helptag.html?tag=:redraw) in preview (several but limited number of times to
-ensure visible async highlighting) and using [MiniPick.poke\_is\_picker\_active()](mini-pick.qmd#minipick.poke_is_picker_active)
-(for example, to stop current matching if query has updated).
-Smaller values give smoother user experience at the cost of more computations.
+`delay.async`는 비동기 동작을 강제하는 사이의 지연 시간입니다. 이는 보통 프리뷰에서 명시적으로 [:redraw](https://neovim.io/doc/user/helptag.html?tag=:redraw)를 수행하고 (가시적인 비동기 하이라이트를 보장하기 위해 제한된 횟수만큼), [MiniPick.poke\_is\_picker\_active()](mini-pick.qmd#minipick.poke_is_picker_active)를 사용하는 것(예를 들어 쿼리가 업데이트된 경우 현재 매칭을 중지하기 위해)을 의미합니다. 값이 작을수록 더 많은 계산 성능을 대가로 더 부드러운 사용자 경험을 제공합니다.
 
-`delay.busy` is a delay between when some computation starts and showing
-visual feedback about it by making window border to have `MiniPickBorderBusy`
-highlight group.
-Smaller values will give feedback faster at the cost of feeling like flicker.
+`delay.busy`는 특정 계산이 시작된 시점과 윈도우 테두리의 하이라이트 그룹을 `MiniPickBorderBusy`로 바꾸어 시각적 피드백을 제공하는 시점 사이의 지연 시간입니다. 값이 작을수록 피드백은 빨라지지만 깜박임처럼 느껴질 수 있습니다.
 
-#### Mappings {#minipick.config-mappings}
+#### 매핑 {#minipick.config-mappings}
 
 
-`config.mappings` defines keys for special actions to be triggered after certain
-keys. See [MiniPick-actions](mini-pick.qmd#minipick-actions) for more information.
+`config.mappings`는 특정 키를 눌렀을 때 트리거될 특수 액션용 키를 정의합니다. 자세한 정보는 [MiniPick-actions](mini-pick.qmd#minipick-actions)를 참고하십시오.
 
-#### Options {#minipick.config-options}
-
-
-`config.options` contains some general purpose options.
-
-`options.content_from_bottom` is a boolean indicating whether content should be
-shown from bottom to top. That means that best matches will be shown at
-the bottom. Note: for better experience use Neovim>=0.10, which has floating
-window footer capability. Default: `false`.
-
-`options.use_cache` is a boolean indicating whether match results should be
-cached per prompt (i.e. concatenated query). This results into faster response
-on repeated prompts (like when deleting query entries) at the cost of using
-more memory. Default: `false`.
-
-#### Source {#minipick.config-source}
+#### 옵션 {#minipick.config-options}
 
 
-`config.source` defines fallbacks for source specification. For example, this
-can be used to change default `match` to use different implementation or `show`
-to not show icons for some [MiniPick.builtin](mini-pick.qmd#minipick.builtin) pickers (see [MiniPick-examples](mini-pick.qmd#minipick-examples)).
-See [MiniPick-source](mini-pick.qmd#minipick-source) for more information.
+`config.options`는 몇 가지 범용 옵션을 포함합니다.
 
-#### Window {#minipick.config-window}
+`options.content_from_bottom`은 내용을 아래에서 위로 표시할지를 나타내는 불리언 값입니다. 즉, 가장 잘 매치된 결과가 하단에 표시됩니다. 참고: 더 나은 경험을 위해서는 플로팅 윈도우 하단(footer) 기능이 있는 Neovim>=0.10을 사용하십시오. 기본값: `false`.
+
+`options.use_cache`는 프롬프트(즉, 결합된 쿼리)별로 매치 결과를 캐싱할지를 나타내는 불리언 값입니다. 이는 메모리 사용량을 대가로 반복되는 프롬프트(예: 쿼리 항목 삭제 시)에서 더 빠른 응답을 제공합니다. 기본값: `false`.
+
+#### 소스 {#minipick.config-source}
 
 
-`config.window` contains window specific configurations.
+`config.source`는 소스 사양에 대한 폴백(fallback)을 정의합니다. 예를 들어, 기본 `match`를 다른 구현으로 변경하거나, 일부 [MiniPick.builtin](mini-pick.qmd#minipick.builtin) 픽커에서 `show`가 아이콘을 표시하지 않도록 변경하는 데 사용할 수 있습니다([MiniPick-예시](mini-pick.qmd#minipick-examples) 참고). 자세한 정보는 [MiniPick-소스](mini-pick.qmd#minipick-source)를 참고하십시오.
 
-`window.config` defines a (parts of) default floating window config for the main
-picker window. This can be either a table overriding some parts or a callable
-returning such table. See [MiniPick-examples](mini-pick.qmd#minipick-examples) for some examples.
+#### 윈도우 {#minipick.config-window}
 
-`window.prompt_caret` defines how caret is displayed in window's prompt.
-Default: '▏'.
 
-`window.prompt_prefix` defines what prefix is used in window's prompt.
-Default: '> '.
+`config.window`는 윈도우 관련 구성을 포함합니다.
+
+`window.config`는 메인 픽커 윈도우를 위한 기본 플로팅 윈도우 구성(의 일부)을 정의합니다. 이는 일부를 재정의하는 테이블이거나 해당 테이블을 반환하는 콜러블일 수 있습니다. 몇 가지 예시는 [MiniPick-예시](mini-pick.qmd#minipick-examples)를 참고하십시오.
+
+`window.prompt_caret`은 윈도우 프롬프트에서 캐럿이 표시되는 방식을 정의합니다. 기본값: '▏'.
+
+`window.prompt_prefix`는 윈도우 프롬프트에서 어떤 접두사가 사용되는지 정의합니다. 기본값: '> '.
 
 ---
 
 ### start() {#minipick.start .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.start`(<span class="help-syntax-special">{opts}</span>)</p>
-Start picker
+픽커 시작
 
-Notes:
+참고:
 
-- If there is currently an active picker, it is properly stopped and new one
-  is started "soon" in the main event-loop (see [vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\))).
+- 현재 활성화된 픽커가 있으면 적절히 중지하고, 메인 이벤트 루프에서 "곧" 새 픽커를 시작합니다([vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\)) 참고).
 
-- Current window at the moment of this function call is treated as "target".
-  It will be set back as current after [MiniPick.stop()](mini-pick.qmd#minipick.stop).
-  See [MiniPick.get\_picker\_state()](mini-pick.qmd#minipick.get_picker_state) and [MiniPick.set\_picker\_target\_window()](mini-pick.qmd#minipick.set_picker_target_window).
+- 이 함수가 호출되는 시점의 현재 창은 "대상(target)"으로 취급됩니다. [MiniPick.stop()](mini-pick.qmd#minipick.stop) 이후에 다시 현재 창으로 설정됩니다. [MiniPick.get\_picker\_state()](mini-pick.qmd#minipick.get_picker_state) 및 [MiniPick.set\_picker\_target\_window()](mini-pick.qmd#minipick.set_picker_target_window)를 참고하십시오.
 
-#### Parameters {#minipick.start-parameters}
+#### 매개변수 {#minipick.start-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Should have same structure as [MiniPick.config](mini-pick.qmd#minipick.config).
-  Default values are inferred from there.
-  Usually should have proper [MiniPick-source.items](mini-pick.qmd#minipick-source.items) defined.
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. [MiniPick.config](mini-pick.qmd#minipick.config)와 동일한 구조여야 합니다. 기본값은 거기서 추론됩니다. 보통 적절한 [MiniPick-source.items](mini-pick.qmd#minipick-source.items)가 정의되어 있어야 합니다.
 
-#### Return {#minipick.start-return}
+#### 반환값 {#minipick.start-return}
 
 
-`(any)` Item which was current when picker is stopped; `nil` if aborted.
+`(any)` 픽커가 중지될 때 현재 포커스되어 있던 항목입니다. 취소된 경우 `nil`입니다.
 
 ---
 
 ### stop() {#minipick.stop .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.stop`()</p>
-Stop active picker
+활성화된 픽커 중지
 
 ---
 
 ### refresh() {#minipick.refresh .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.refresh`()</p>
-Refresh active picker
+활성화된 픽커 새로고침
 
 ---
 
 ### default_match() {#minipick.default_match .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.default_match`(<span class="help-syntax-special">{stritems}</span>, <span class="help-syntax-special">{inds}</span>, <span class="help-syntax-special">{query}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Default match
+기본 매치
 
-Filter target stritems to contain query and sort from best to worst matches.
+대상 stritems를 필터링하여 쿼리를 포함하는지 확인하고 가장 좋은 매치부터 가장 나쁜 매치 순으로 정렬합니다.
 
-Implements default value for [MiniPick-source.match](mini-pick.qmd#minipick-source.match).
+[MiniPick-source.match](mini-pick.qmd#minipick-source.match)의 기본값을 구현합니다.
 
-By default (if no special modes apply) it does the following fuzzy matching:
-
-
-- Stritem contains query if it contains all its elements verbatim in the same
-  order (possibly with gaps, i.e. not strictly one after another).
-  Note: empty query and empty string element is contained in any string.
+기본적으로(특수 모드가 적용되지 않는 경우) 다음과 같은 퍼지 매칭을 수행합니다:
 
 
-- Sorting is done with the following ordering (same as in [mini.fuzzy](mini-fuzzy.qmd#mini.fuzzy)):
+- stritem이 쿼리의 모든 요소를 동일한 순서로(반드시 연속될 필요는 없으며 사이에 다른 문자가 있을 수 있음) 포함하면 해당 쿼리를 포함하는 것으로 간주합니다.
+  참고: 빈 쿼리 및 빈 문자열 요소는 모든 문자열에 포함된 것으로 간주됩니다.
 
-    - The smaller the match width (end column minus start column) the better.
 
-    - Among same match width, the smaller start column the better.
+- 정렬은 다음 순서에 따라 수행됩니다([mini.fuzzy](mini-fuzzy.qmd#mini.fuzzy)와 동일):
 
-    - Among same match width and start column, preserve original order.
+    - 매치 너비(끝 열에서 시작 열을 뺀 값)가 작을수록 좋습니다.
 
-Notes:
+    - 매치 너비가 같다면, 시작 열이 작을수록 좋습니다.
 
-- Most common interactive usage results into `query` containing one typed
-  character per element.
+    - 매치 너비와 시작 열이 모두 같다면 초기 순서를 유지합니다.
 
-#### Special modes {#minipick.default_match-specialmodes}
+참고:
+
+- 가장 일반적인 대화형 사용의 경우 `query`는 입력된 문자당 하나의 요소를 포함합니다.
+
+#### 특수 모드 {#minipick.default_match-specialmodes}
 
 
 
-- Forced modes:
+- 강제 모드:
 
-    - Query starts with "*": match the rest fuzzy (without other modes).
+    - 쿼리가 "*"로 시작하면 나머지를 퍼지 방식으로 매칭합니다 (다른 모드 없이).
 
-    - Query starts with "'": match the rest exactly (without gaps).
-
-
-- Place modes:
-
-    - Query starts with '^': match the rest exactly at start.
-
-    - Query ends with '$': match the rest exactly at end.
-
-    - Both modes can be used simultaneously.
+    - 쿼리가 "'"로 시작하면 나머지를 정확히(중간에 다른 문자 없이) 매칭합니다.
 
 
-- Grouped: query contains at least one whitespace element. Output is computed
-  as if query is split at whitespace indexes with concatenation between them.
+- 위치 모드:
 
-Precedence of modes:
-  "forced exact" = "forced fuzzy" > "place start/end" > "grouped" > "default"
+    - 쿼리가 '^'로 시작하면 시작 부분에서 정확히 일치하는지 확인합니다.
 
-#### Examples {#minipick.default_match-examples}
+    - 쿼리가 '$'로 끝나면 끝 부분에서 정확히 일치하는지 확인합니다.
+
+    - 두 모드는 동시에 사용될 수 있습니다.
 
 
-Assuming `stritems` are `{ '_abc', 'a_bc', 'ab_c', 'abc_' }`, here are some
-example matches based on prompt (concatenated query):
+- 그룹화됨: 쿼리에 하나 이상의 공백 요소가 포함된 경우입니다. 쿼리를 공백 인덱스에서 나누어 그 사이를 연결한 것과 같이 출력이 계산됩니다.
+
+모드 우선순위:
+  "강제 정확" = "강제 퍼지" > "위치 시작/끝" > "그룹화됨" > "기본값"
+
+#### 예시 {#minipick.default_match-examples}
+
+
+`stritems`가 `{ '_abc', 'a_bc', 'ab_c', 'abc_' }`라고 가정할 때, 프롬프트(결합된 쿼리)를 기반으로 한 매치 결과 예시입니다:
 
   ```
-  | Prompt | Matches                |
-  |--------|------------------------|
-  | abc    | All                    |
-  | *abc   | All                    |
-  |        |                        |
-  | 'abc   | abc_, _abc             |
-  | *'abc  | None (no "'" in items) |
-  |        |                        |
-  | ^abc   | abc_                   |
-  | *^abc  | None (no "^" in items) |
-  |        |                        |
-  | abc$   | _abc                   |
-  | *abc$  | None (no "$" in items) |
-  |        |                        |
-  | ab c   | abc_, _abc, ab_c       |
-  | *ab c  | None (no " " in items) |
+  | 프롬프트 | 매치 결과              |
+  |----------|------------------------|
+  | abc      | 모두                   |
+  | *abc     | 모두                   |
+  |          |                        |
+  | 'abc     | abc_, _abc             |
+  | *'abc    | 없음 (항목에 "'" 없음) |
+  |          |                        |
+  | ^abc     | abc_                   |
+  | *^abc    | 없음 (항목에 "^" 없음) |
+  |          |                        |
+  | abc$     | _abc                   |
+  | *abc$    | 없음 (항목에 "$" 없음) |
+  |          |                        |
+  | ab c     | abc_, _abc, ab_c       |
+  | *ab c    | 없음 (항목에 " " 없음) |
   ```
 
-Having query `{ 'ab', 'c' }` is the same as "ab c" prompt.
+쿼리 `{ 'ab', 'c' }`를 가지는 것은 "ab c" 프롬프트와 동일합니다.
 
-You can have a feel of how this works with this command:
+이 명령으로 어떻게 작동하는지 느껴볼 수 있습니다:
 
   ```lua
   MiniPick.start({ source = { items = { '_abc', 'a_bc', 'ab_c', 'abc_' } } })
   ```
 
-#### Parameters {#minipick.default_match-parameters}
+#### 매개변수 {#minipick.default_match-parameters}
 
 
 
-<span class="help-syntax-special">{stritems}</span> `(table)` Array of all stritems.
+<span class="help-syntax-special">{stritems}</span> `(table)` 모든 stritems 배열입니다.
 
-<span class="help-syntax-special">{inds}</span> `(table)` Array of `stritems` indexes to match. All of them should point
-  at string elements of `stritems`. No check is done for performance reasons.
+<span class="help-syntax-special">{inds}</span> `(table)` 매칭할 `stritems` 인덱스 배열입니다. 모두 `stritems`의 문자열 요소를 가리켜야 합니다. 성능상의 이유로 별도의 확인은 하지 않습니다.
 
-<span class="help-syntax-special">{query}</span> `(table)` Array of strings.
+<span class="help-syntax-special">{query}</span> `(table)` 문자열 배열입니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<sync\></span> `(boolean)` - Whether to match synchronously. Default: `false`.
+  - <span class="help-syntax-keys">\<sync\></span> `(boolean)` - 동기적으로 매칭할지 여부입니다. 기본값: `false`.
 
-  - <span class="help-syntax-keys">\<preserve_order\></span> `(boolean)` - Whether to skip sort step. Default: `false`.
+  - <span class="help-syntax-keys">\<preserve_order\></span> `(boolean)` - 정렬 단계를 건너뛸지 여부입니다. 기본값: `false`.
 
-#### Return {#minipick.default_match-return}
+#### 반환값 {#minipick.default_match-return}
 
 
-`(table|nil)` Depending on whether computation is synchronous (either `opts.sync`
-  is `true` or there is an active picker):
+`(table|nil)` 동기 계산 여부(`opts.sync`가 `true`이거나 활성 픽커가 있는 경우)에 따라 달라집니다:
 
-  - If yes, array of `stritems` indexes matching the `query` (from best to worst).
+  - 그렇다면, `query`와 매치되는 `stritems` 인덱스 배열(가장 좋은 순서부터)을 반환합니다.
 
-  - If no, `nil` is returned with [MiniPick.set\_picker\_match\_inds()](mini-pick.qmd#minipick.set_picker_match_inds) used later.
+  - 아니면 `nil`이 반환되고 나중에 [MiniPick.set\_picker\_match\_inds()](mini-pick.qmd#minipick.set_picker_match_inds)가 사용됩니다.
 
 ---
 
 ### default_show() {#minipick.default_show .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.default_show`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{items}</span>, <span class="help-syntax-special">{query}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Default show
+기본 표시
 
-Show items in a buffer and highlight parts that actually match query (assuming
-match is done with [MiniPick.default\_match()](mini-pick.qmd#minipick.default_match)). Lines are computed based on
-the [MiniPick-source.items-stritems](mini-pick.qmd#minipick-source.items-stritems).
+버퍼에 항목을 표시하고 쿼리와 실제로 일치하는 부분을 하이라이트합니다(매칭이 [MiniPick.default\_match()](mini-pick.qmd#minipick.default_match)로 수행되었다고 가정). 줄은 [MiniPick-source.items-stritems](mini-pick.qmd#minipick-source.items-stritems)를 기반으로 계산됩니다.
 
-Implements default value for [MiniPick-source.show](mini-pick.qmd#minipick-source.show).
+[MiniPick-source.show](mini-pick.qmd#minipick-source.show)의 기본값을 구현합니다.
 
-Uses the following highlight groups (see [mini.pick](mini-pick.qmd#mini.pick) for their description):
+다음 하이라이트 그룹을 사용합니다(설명은 [mini.pick](mini-pick.qmd#mini.pick) 참고):
 
 
 - `MiniPickIconDirectory`
@@ -1328,161 +1183,151 @@ Uses the following highlight groups (see [mini.pick](mini-pick.qmd#mini.pick) fo
 
 - `MiniPickMatchRanges`
 
-#### Parameters {#minipick.default_show-parameters}
+#### 매개변수 {#minipick.default_show-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number)` Identifier of target buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number)` 대상 버퍼의 식별자입니다.
 
-<span class="help-syntax-special">{items}</span> `(table)` Array of items to show.
+<span class="help-syntax-special">{items}</span> `(table)` 표시할 항목 배열입니다.
 
-<span class="help-syntax-special">{query}</span> `(table)` Array of strings representing query.
+<span class="help-syntax-special">{query}</span> `(table)` 쿼리를 나타내는 문자열 배열입니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<show_icons\></span> `(boolean)` - whether to show icons for entries recognized as
-    valid actually present paths on disk (see [MiniPick-source.items-common](mini-pick.qmd#minipick-source.items-common)),
-    empty space otherwise. Tries to use `text` field as fallback for path.
-    Default: `false`. Note: [MiniPick.builtin](mini-pick.qmd#minipick.builtin) pickers showing file/directory
-    paths use `true` by default.
+  - <span class="help-syntax-keys">\<show_icons\></span> `(boolean)` - 디스크 상에 실제로 존재하는 유효한 경로로 인식된 항목에 대해 아이콘을 표시할지 여부입니다([MiniPick-source.items-common](mini-pick.qmd#minipick-source.items-common) 참고). 경로가 아니면 공백을 표시합니다. 경로에 대한 폴백으로 `text` 필드를 사용하려고 시도합니다. 기본값: `false`. 참고: 파일/디렉터리 경로를 보여주는 [MiniPick.builtin](mini-pick.qmd#minipick.builtin) 픽커는 기본적으로 `true`를 사용합니다.
 
-  - <span class="help-syntax-keys">\<icons\></span> `(table)` - table with fallback icons used if icon provider
-    does not itself supply default icons for category. Can have fields:
+  - <span class="help-syntax-keys">\<icons\></span> `(table)` - 아이콘 공급자가 카테고리에 대한 기본 아이콘을 공급하지 않을 때 사용되는 폴백 아이콘 테이블입니다. 다음 필드를 가질 수 있습니다:
 
-      - <span class="help-syntax-keys">\<directory\></span> `(string)` - icon for directory. Default: " ".
+      - <span class="help-syntax-keys">\<directory\></span> `(string)` - 디렉터리용 아이콘. 기본값: " ".
 
-      - <span class="help-syntax-keys">\<file\></span> `(string)` - icon for file. Default: " ".
+      - <span class="help-syntax-keys">\<file\></span> `(string)` - 파일용 아이콘. 기본값: " ".
 
-      - <span class="help-syntax-keys">\<none\></span> `(string)` - icon for non-valid path. Default: "  ".
+      - <span class="help-syntax-keys">\<none\></span> `(string)` - 유효하지 않은 경로용 아이콘. 기본값: "  ".
 
 ---
 
 ### default_preview() {#minipick.default_preview .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.default_preview`(<span class="help-syntax-special">{buf_id}</span>, <span class="help-syntax-special">{item}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Default preview
+기본 프리뷰
 
-Preview item. Logic follows the rules in [MiniPick-source.items-common](mini-pick.qmd#minipick-source.items-common):
+항목을 프리뷰합니다. 로직은 [MiniPick-source.items-common](mini-pick.qmd#minipick-source.items-common)의 규칙을 따릅니다:
 
-- File and buffer are shown at the start.
+- 파일 및 버퍼는 시작 부분부터 표시됩니다.
 
-- Directory has its content listed.
+- 디렉터리는 그 내용이 나열됩니다.
 
-- Line/position/region in file or buffer is shown at start.
+- 파일 또는 버퍼의 줄/위치/영역은 해당 위치부터 표시됩니다.
 
-- Others are shown directly with [vim.inspect()](https://neovim.io/doc/user/helptag.html?tag=vim.inspect\(\)).
+- 그 외의 항목은 [vim.inspect()](https://neovim.io/doc/user/helptag.html?tag=vim.inspect\(\))를 통해 직접 표시됩니다.
 
-Implements default value for [MiniPick-source.preview](mini-pick.qmd#minipick-source.preview).
+[MiniPick-source.preview](mini-pick.qmd#minipick.preview)의 기본값을 구현합니다.
 
-Uses the following highlight groups (see [mini.pick](mini-pick.qmd#mini.pick) for their description):
+다음 하이라이트 그룹을 사용합니다(설명은 [mini.pick](mini-pick.qmd#mini.pick) 참고):
 
 
 - `MiniPickPreviewLine`
 
 - `MiniPickPreviewRegion`
 
-#### Parameters {#minipick.default_preview-parameters}
+#### 매개변수 {#minipick.default_preview-parameters}
 
 
 
-<span class="help-syntax-special">{buf_id}</span> `(number)` Identifier of target buffer.
+<span class="help-syntax-special">{buf_id}</span> `(number)` 대상 버퍼의 식별자입니다.
 
-<span class="help-syntax-special">{item}</span> `(any)` Item to preview.
+<span class="help-syntax-special">{item}</span> `(any)` 프리뷰할 항목입니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible values:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 값:
 
-  - <span class="help-syntax-keys">\<n_context_lines\></span> `(number)` - number of lines to load past target position
-    when reading from disk. Useful to explore context. Default: 'lines' twice.
+  - <span class="help-syntax-keys">\<n_context_lines\></span> `(number)` - 디스크에서 읽을 때 대상 위치 이후에 로드할 줄 수입니다. 주변 맥락을 파악하는 데 유용합니다. 기본값: 'lines'의 두 배.
 
-  - <span class="help-syntax-keys">\<line_position\></span> `(string)` - where in the window to show item position.
-    One of "top", "center", "bottom". Default: "top".
+  - <span class="help-syntax-keys">\<line_position\></span> `(string)` - 윈도우의 어느 부분에 항목 위치를 표시할지입니다. "top", "center", "bottom" 중 하나입니다. 기본값: "top".
 
 ---
 
 ### default_choose() {#minipick.default_choose .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.default_choose`(<span class="help-syntax-special">{item}</span>)</p>
-Default choose
+기본 선택
 
-Choose item. Logic follows the rules in [MiniPick-source.items-common](mini-pick.qmd#minipick-source.items-common):
+항목을 선택합니다. 로직은 [MiniPick-source.items-common](mini-pick.qmd#minipick-source.items-common)의 규칙을 따릅니다:
 
-- File uses [bufadd()](https://neovim.io/doc/user/helptag.html?tag=bufadd\(\)) and sets cursor at the start of line/position/region.
+- 파일은 [bufadd()](https://neovim.io/doc/user/helptag.html?tag=bufadd\(\))를 사용하고 줄/위치/영역의 시작 부분에 커서를 놓습니다.
 
-- Buffer is set as current in target window and sets cursor similarly.
+- 버퍼는 대상 창에서 현재 버퍼로 설정되고 유사하게 커서를 놓습니다.
 
-- Directory is called with [:edit](https://neovim.io/doc/user/helptag.html?tag=:edit) in the target window.
+- 디렉터리는 대상 창에서 [:edit](https://neovim.io/doc/user/helptag.html?tag=:edit)로 호출됩니다.
 
-- Others have the output of [vim.inspect()](https://neovim.io/doc/user/helptag.html?tag=vim.inspect\(\)) printed in Command line.
+- 그 외의 항목은 [vim.inspect()](https://neovim.io/doc/user/helptag.html?tag=vim.inspect\(\))의 출력이 명령 라인에 출력됩니다.
 
-Implements default value for [MiniPick-source.choose](mini-pick.qmd#minipick-source.choose).
+[MiniPick-source.choose](mini-pick.qmd#minipick.choose)의 기본값을 구현합니다.
 
-#### Parameters {#minipick.default_choose-parameters}
+#### 매개변수 {#minipick.default_choose-parameters}
 
 
 
-<span class="help-syntax-special">{item}</span> `(any)` Item to choose.
+<span class="help-syntax-special">{item}</span> `(any)` 선택할 항목입니다.
 
 ---
 
 ### default_choose_marked() {#minipick.default_choose_marked .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.default_choose_marked`(<span class="help-syntax-special">{items}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Default choose marked items
+표시된 항목 선택의 기본값
 
-Choose marked items. Logic follows the rules in [MiniPick-source.items-common](mini-pick.qmd#minipick-source.items-common):
+표시된 항목을 선택합니다. 로직은 [MiniPick-source.items-common](mini-pick.qmd#minipick-source.items-common)의 규칙을 따릅니다:
 
-- If among items there is at least one file or buffer, quickfix list is opened
-  with all file or buffer lines/positions/regions.
+- 항목 중에 하나 이상의 파일 또는 버퍼가 있는 경우, 모든 파일 또는 버퍼의 줄/위치/영역으로 퀵픽스 리스트를 엽니다.
 
-- Otherwise, picker's `source.choose` is called on the first item.
+- 그렇지 않으면 첫 번째 항목에 대해 픽커의 `source.choose`가 호출됩니다.
 
-Implements default value for [MiniPick-source.choose\_marked](mini-pick.qmd#minipick-source.choose_marked).
+[MiniPick-source.choose\_marked](mini-pick.qmd#minipick.choose_marked)의 기본값을 구현합니다.
 
-#### Parameters {#minipick.default_choose_marked-parameters}
-
+#### 매개변수 {#minipick.default_choose_marked-parameters}
 
 
-<span class="help-syntax-special">{items}</span> `(table)` Array of items to choose.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{items}</span> `(table)` 선택할 항목 배열입니다.
 
-  - <span class="help-syntax-keys">\<list_type\></span> `(string)` - which type of list to open. One of "quickfix"
-    or "location". Default: "quickfix".
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
+
+  - <span class="help-syntax-keys">\<list_type\></span> `(string)` - 어떤 타입의 리스트를 열지입니다. "quickfix" 또는 "location" 중 하나입니다. 기본값: "quickfix".
 
 ---
 
 ### ui_select() {#minipick.ui_select .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.ui_select`(<span class="help-syntax-special">{items}</span>, <span class="help-syntax-special">{opts}</span>, <span class="help-syntax-special">{on_choice}</span>, <span class="help-syntax-special">{start_opts}</span>)</p>
-Select rewrite
+Select 재작성
 
-Function which can be used to directly override [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\)) to use
-'mini.pick' for any "select" type of tasks.
-Set automatically in [MiniPick.setup()](mini-pick.qmd#minipick.setup).
+모든 "선택(select)" 유형의 작업에 'mini.pick'을 사용하도록 [vim.ui.select()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.select\(\))를 직접 재정의하는 데 사용할 수 있는 함수입니다.
+[MiniPick.setup()](mini-pick.qmd#minipick.setup)에서 자동으로 설정됩니다.
 
-Implements required by `vim.ui.select()` signature, with some differencies:
+`vim.ui.select()` 시그니처에서 요구하는 사항을 구현하며, 몇 가지 차이점이 있습니다:
 
-- Allows `opts.preview_item` that returns an array of lines for item preview.
+- 항목 프리뷰를 위한 줄 배열을 반환하는 `opts.preview_item`을 허용합니다.
 
-- Allows fourth `start_opts` argument to customize [MiniPick.start()](mini-pick.qmd#minipick.start) call.
+- [MiniPick.start()](mini-pick.qmd#minipick.start) 호출을 맞춤 설정하기 위한 네 번째 `start_opts` 인자를 허용합니다.
 
-Notes:
+참고:
 
-- `on_choice` is called when target window is current.
+- `on_choice`는 대상 창이 현재 창일 때 호출됩니다.
 
-#### Usage {#minipick.ui_select-usage}
+#### 사용법 {#minipick.ui_select-usage}
 
 
 
   ```lua
-  -- Customize with fourth argument inside a function wrapper
+  -- 함수 래퍼 내의 네 번째 인자로 맞춤 설정
   vim.ui.select = function(items, opts, on_choice)
     local start_opts = { window = { config = { width = vim.o.columns } } }
     return MiniPick.ui_select(items, opts, on_choice, start_opts)
   end
   ```
 
-To preserve original `vim.ui.select()`:
+원본 `vim.ui.select()`를 보존하려면:
 
   ```lua
   local ui_select_orig = vim.ui.select
@@ -1495,143 +1340,116 @@ To preserve original `vim.ui.select()`:
 ### builtin {#minipick.builtin .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.builtin`</p>
-Table with built-in pickers
+내장 픽커 테이블
 
 ---
 
 ### builtin.files() {#minipick.builtin.files .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.builtin.files`(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Pick from files
+파일에서 선택
 
-Lists all files recursively in all subdirectories. Tries to use one of the
-CLI tools to create items (see [MiniPick-cli-tools](mini-pick.qmd#minipick-cli-tools)): `rg`, `fd`, `git`.
-If none is present, uses fallback which utilizes [vim.fs.dir()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.dir\(\)).
+모든 하위 디렉터리에서 모든 파일을 재귀적으로 나열합니다. 항목을 생성하기 위해 CLI 도구 중 하나를 사용하려고 시도합니다([MiniPick-cli-tools](mini-pick.qmd#minipick-cli-tools) 참고): `rg`, `fd`, `git`.
+어떤 도구도 없으면 [vim.fs.dir()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.dir\(\))을 활용하는 폴백(fallback)을 사용합니다.
 
-To customize CLI tool search, either use tool's global configuration approach
-or directly [MiniPick.builtin.cli()](mini-pick.qmd#minipick.builtin.cli) with specific command.
+CLI 도구 검색을 맞춤 설정하려면 도구의 전역 구성 방식을 사용하거나, 특정 명령과 함께 [MiniPick.builtin.cli()](mini-pick.qmd#minipick.builtin.cli)를 직접 사용하십시오.
 
-#### Parameters {#minipick.builtin.files-parameters}
+#### 매개변수 {#minipick.builtin.files-parameters}
 
 
 
-<span class="help-syntax-special">{local_opts}</span> `(table|nil)` Options defining behavior of this particular picker.
-  Possible fields:
+<span class="help-syntax-special">{local_opts}</span> `(table|nil)` 이 특정 픽커의 동작을 정의하는 옵션입니다. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<tool\></span> `(string)` - which tool to use. One of "rg", "fd", "git", "fallback".
-    Default: whichever tool is present, trying in that same order.
+  - <span class="help-syntax-keys">\<tool\></span> `(string)` - 어떤 도구를 사용할지입니다. "rg", "fd", "git", "fallback" 중 하나입니다. 기본값: 존재하는 도구 중 동일한 순서로 시도하여 선택됩니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options forwarded to [MiniPick.start()](mini-pick.qmd#minipick.start).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [MiniPick.start()](mini-pick.qmd#minipick.start)로 전달되는 옵션입니다.
 
 ---
 
 ### builtin.grep() {#minipick.builtin.grep .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.builtin.grep`(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Pick from pattern matches
+패턴 매치 결과에서 선택
 
-Lists all pattern matches recursively in all subdirectories.
-Tries to use one of the CLI tools to create items (see [MiniPick-cli-tools](mini-pick.qmd#minipick-cli-tools)):
-`rg`, `git`. If none is present, uses fallback which utilizes [vim.fs.dir()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.dir\(\)) and
-Lua pattern matches (NOT recommended in large directories).
+모든 하위 디렉터리에서 모든 패턴 매치 결과를 재귀적으로 나열합니다.
+항목을 생성하기 위해 CLI 도구 중 하나를 사용하려고 시도합니다([MiniPick-cli-tools](mini-pick.qmd#minipick-cli-tools) 참고): `rg`, `git`. 어떤 도구도 없으면 [vim.fs.dir()](https://neovim.io/doc/user/helptag.html?tag=vim.fs.dir\(\)) 및 Lua 패턴 매치를 활용하는 폴백을 사용합니다(대규모 디렉터리에서는 권장하지 않음).
 
-To customize CLI tool search, either use tool's global configuration approach
-or directly [MiniPick.builtin.cli()](mini-pick.qmd#minipick.builtin.cli) with specific command.
-Options 'ignorecase' and 'smartcase' are respected via forcing appropriate
-flags to CLI tool (i.e. overriding tool's global config).
+CLI 도구 검색을 맞춤 설정하려면 도구의 전역 구성 방식을 사용하거나, 특정 명령과 함께 [MiniPick.builtin.cli()](mini-pick.qmd#minipick.builtin.cli)를 직접 사용하십시오.
+'ignorecase' 및 'smartcase' 옵션은 CLI 도구에 적절한 플래그를 강제하여(즉, 도구의 전역 구성을 재정의하여) 존중됩니다.
 
-#### Parameters {#minipick.builtin.grep-parameters}
+#### 매개변수 {#minipick.builtin.grep-parameters}
 
 
 
-<span class="help-syntax-special">{local_opts}</span> `(table|nil)` Options defining behavior of this particular picker.
-  Possible fields:
+<span class="help-syntax-special">{local_opts}</span> `(table|nil)` 이 특정 픽커의 동작을 정의하는 옵션입니다. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<tool\></span> `(string)` - which tool to use. One of "rg", "git", "fallback".
-    Default: whichever tool is present, trying in that same order.
+  - <span class="help-syntax-keys">\<tool\></span> `(string)` - 어떤 도구를 사용할지입니다. "rg", "git", "fallback" 중 하나입니다. 기본값: 존재하는 도구 중 동일한 순서로 시도하여 선택됩니다.
 
-  - <span class="help-syntax-keys">\<pattern\></span> `(string)` - string pattern to search. If not given, asks user
-    interactively with [input()](https://neovim.io/doc/user/helptag.html?tag=input\(\)).
+  - <span class="help-syntax-keys">\<pattern\></span> `(string)` - 검색할 문자열 패턴입니다. 주어지지 않으면 [input()](https://neovim.io/doc/user/helptag.html?tag=input\(\))을 통해 대화형으로 사용자에게 묻습니다.
 
-  - <span class="help-syntax-keys">\<globs\></span> `(table)` - array of string glob patterns to restrict search to
-    matching files. Supported only by "rg" and "git" tools, respects their
-    specific glob syntax and effects. Default: `{}` (no restriction).
-    Example: `{ '*.lua', 'lua/**' }` for Lua files and files in "lua" directory.
+  - <span class="help-syntax-keys">\<globs\></span> `(table)` - 검색을 일치하는 파일로 제한하기 위한 문자열 glob 패턴 배열입니다. "rg" 및 "git" 도구에서만 지원되며, 해당 도구의 특정 glob 구문 및 효과를 따릅니다. 기본값: `{}` (제한 없음).
+    예시: 루아 파일 및 "lua" 디렉터리 내의 파일로 제한하려면 `{ '*.lua', 'lua/**' }`.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options forwarded to [MiniPick.start()](mini-pick.qmd#minipick.start).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [MiniPick.start()](mini-pick.qmd#minipick.start)로 전달되는 옵션입니다.
 
 ---
 
 ### builtin.grep_live() {#minipick.builtin.grep_live .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.builtin.grep_live`(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Pick from pattern matches with live feedback
+라이브 피드백과 함께 패턴 매치 결과에서 선택
 
-Perform pattern matching treating prompt as pattern. Gives live feedback on
-which matches are found. Use [MiniPick-actions-refine](mini-pick.qmd#minipick-actions-refine) to revert to regular
-matching. Use `<C-o>` to restrict search to files matching glob patterns.
-Tries to use one of the CLI tools to create items (see [MiniPick-cli-tools](mini-pick.qmd#minipick-cli-tools)):
-`rg`, `git`. If none is present, error is thrown (for performance reasons).
+프롬프트를 패턴으로 간주하여 패턴 매칭을 수행합니다. 어떤 매치 결과가 발견되는지에 대한 라이브 피드백을 제공합니다. 일반 매칭으로 돌아가려면 [MiniPick-actions-refine](mini-pick.qmd#minipick.actions-refine)을 사용하십시오. 검색을 glob 패턴과 일치하는 파일로 제한하려면 `<C-o>`를 사용하십시오.
+항목을 생성하기 위해 CLI 도구 중 하나를 사용하려고 시도합니다([MiniPick-cli-tools](mini-pick.qmd#minipick-cli-tools) 참고): `rg`, `git`. 도구가 없으면 (성능상의 이유로) 에러를 던집니다.
 
-To customize search, use tool's global configuration approach.
-Options 'ignorecase' and 'smartcase' are respected via forcing appropriate
-flags to CLI tool (i.e. overriding tool's global config).
+검색을 맞춤 설정하려면 도구의 전역 구성 방식을 사용하십시오.
+'ignorecase' 및 'smartcase' 옵션은 CLI 도구에 적절한 플래그를 강제하여(즉, 도구의 전역 구성을 재정의하여) 존중됩니다.
 
-#### Parameters {#minipick.builtin.grep_live-parameters}
+#### 매개변수 {#minipick.builtin.grep_live-parameters}
 
 
 
-<span class="help-syntax-special">{local_opts}</span> `(table|nil)` Options defining behavior of this particular picker.
-  Possible fields:
+<span class="help-syntax-special">{local_opts}</span> `(table|nil)` 이 특정 픽커의 동작을 정의하는 옵션입니다. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<tool\></span> `(string)` - which tool to use. One of "rg", "git".
-    Default: whichever tool is present, trying in that same order.
+  - <span class="help-syntax-keys">\<tool\></span> `(string)` - 어떤 도구를 사용할지입니다. "rg", "git" 중 하나입니다. 기본값: 존재하는 도구 중 동일한 순서로 시도하여 선택됩니다.
 
-  - <span class="help-syntax-keys">\<globs\></span> `(table)` - array of string glob patterns to restrict search to
-    matching files. Supported only by "rg" and "git" tools, respects their
-    specific glob syntax and effects. Default: `{}` (no restriction).
-    Example: `{ '*.lua', 'lua/**' }` for Lua files and files in "lua" directory.
-    Use `<C-o>` custom mapping to add glob to the array.
+  - <span class="help-syntax-keys">\<globs\></span> `(table)` - 검색을 일치하는 파일로 제한하기 위한 문자열 glob 패턴 배열입니다. "rg" 및 "git" 도구에서만 지원되며, 해당 도구의 특정 glob 구문 및 효과를 따릅니다. 기본값: `{}` (제한 없음).
+    예시: 루아 파일 및 "lua" 디렉터리 내의 파일로 제한하려면 `{ '*.lua', 'lua/**' }`.
+    배열에 glob을 추가하려면 `<C-o>` 커스텀 매핑을 사용하십시오.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options forwarded to [MiniPick.start()](mini-pick.qmd#minipick.start).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [MiniPick.start()](mini-pick.qmd#minipick.start)로 전달되는 옵션입니다.
 
 ---
 
 ### builtin.help() {#minipick.builtin.help .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.builtin.help`(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Pick from help tags
+도움말 태그에서 선택
 
-Notes:
+참고:
 
-- On choose directly executes [:help](https://neovim.io/doc/user/helptag.html?tag=:help) command with appropriate modifier
-  (none, [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical), [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab)). This is done through custom mappings named
-  `show_help_in_{split,vsplit,tab}`. Not `choose_in_{split,vsplit,tab}` because
-  there is no split guarantee (like if there is already help window opened).
+- 선택 시 적절한 수식어(없음, [:vertical](https://neovim.io/doc/user/helptag.html?tag=:vertical), [:tab](https://neovim.io/doc/user/helptag.html?tag=:tab))와 함께 [:help](https://neovim.io/doc/user/helptag.html?tag=:help) 명령을 직접 실행합니다. 이는 `show_help_in_{split,vsplit,tab}`으로 명명된 커스텀 매핑을 통해 수행됩니다. 분할이 보장되지 않으므로(이미 도움말 창이 열려 있는 경우 등) `choose_in_{split,vsplit,tab}`이 아닙니다.
 
-#### Parameters {#minipick.builtin.help-parameters}
+#### 매개변수 {#minipick.builtin.help-parameters}
 
 
 
-<span class="help-syntax-special">{local_opts}</span> `(table|nil)` Options defining behavior of this particular picker.
-  Possible fields:
+<span class="help-syntax-special">{local_opts}</span> `(table|nil)` 이 특정 픽커의 동작을 정의하는 옵션입니다. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<default_split\></span> `(string)` - direction of a split for `choose` action.
-    One of "horizontal", "vertical", "tab". Default: "horizontal".
+  - <span class="help-syntax-keys">\<default_split\></span> `(string)` - `choose` 액션을 위한 분할 방향입니다. "horizontal", "vertical", "tab" 중 하나입니다. 기본값: "horizontal".
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options forwarded to [MiniPick.start()](mini-pick.qmd#minipick.start).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [MiniPick.start()](mini-pick.qmd#minipick.start)로 전달되는 옵션입니다.
 
 ---
 
 ### builtin.buffers() {#minipick.builtin.buffers .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.builtin.buffers`(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Pick from buffers
+버퍼에서 선택
 
-Notes:
+참고:
 
-- There are not built-in mappings for buffer manipulation. Here is an example
-  of how to call this function with mapping to wipeout the current item:
+- 버퍼 조작을 위한 내장 매핑은 없습니다. 다음은 현재 항목을 지우는(wipeout) 매핑과 함께 이 함수를 호출하는 예시입니다:
 
   ```lua
   local wipeout_cur = function()
@@ -1641,73 +1459,68 @@ Notes:
   MiniPick.builtin.buffers(local_opts, { mappings = buffer_mappings })
   ```
 
-#### Parameters {#minipick.builtin.buffers-parameters}
+#### 매개변수 {#minipick.builtin.buffers-parameters}
 
 
 
-<span class="help-syntax-special">{local_opts}</span> `(table|nil)` Options defining behavior of this particular picker.
-  Possible fields:
+<span class="help-syntax-special">{local_opts}</span> `(table|nil)` 이 특정 픽커의 동작을 정의하는 옵션입니다. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<include_current\></span> `(boolean)` - whether to include current buffer in
-    the output. Default: `true`.
+  - <span class="help-syntax-keys">\<include_current\></span> `(boolean)` - 현재 버퍼를 결과에 포함할지 여부입니다. 기본값: `true`.
 
-  - <span class="help-syntax-keys">\<include_unlisted\></span> `(boolean)` - whether to include [unlisted-buffer](https://neovim.io/doc/user/helptag.html?tag=unlisted-buffer)s in
-    the output. Default: `false`.
+  - <span class="help-syntax-keys">\<include_unlisted\></span> `(boolean)` - [unlisted-buffer](https://neovim.io/doc/user/helptag.html?tag=unlisted-buffer)를 결과에 포함할지 여부입니다. 기본값: `false`.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options forwarded to [MiniPick.start()](mini-pick.qmd#minipick.start).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [MiniPick.start()](mini-pick.qmd#minipick.start)로 전달되는 옵션입니다.
 
 ---
 
 ### builtin.cli() {#minipick.builtin.cli .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.builtin.cli`(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Pick from CLI output
+CLI 출력에서 선택
 
-Executes command line tool and constructs items based on its output.
-Uses [MiniPick.set\_picker\_items\_from\_cli()](mini-pick.qmd#minipick.set_picker_items_from_cli).
+명령줄 도구를 실행하고 그 출력을 바탕으로 항목을 구성합니다.
+[MiniPick.set\_picker\_items\_from\_cli()](mini-pick.qmd#minipick.set_picker_items_from_cli)를 사용합니다.
 
-Example: `MiniPick.builtin.cli({ command = { 'echo', 'a\nb\nc' } })`
+예시: `MiniPick.builtin.cli({ command = { 'echo', 'a\nb\nc' } })`
 
-#### Parameters {#minipick.builtin.cli-parameters}
+#### 매개변수 {#minipick.builtin.cli-parameters}
 
 
 
-<span class="help-syntax-special">{local_opts}</span> `(table|nil)` Options defining behavior of this particular picker.
-  Possible fields:
+<span class="help-syntax-special">{local_opts}</span> `(table|nil)` 이 특정 픽커의 동작을 정의하는 옵션입니다. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<command\></span> `(table)` - forwarded to `set_picker_items_from_cli()`.
+  - <span class="help-syntax-keys">\<command\></span> `(table)` - `set_picker_items_from_cli()`로 전달됩니다.
 
-  - <span class="help-syntax-keys">\<postprocess\></span> `(function)` - forwarded to `set_picker_items_from_cli()`.
+  - <span class="help-syntax-keys">\<postprocess\></span> `(function)` - `set_picker_items_from_cli()`로 전달됩니다.
 
-  - <span class="help-syntax-keys">\<spawn_opts\></span> `(table)` - forwarded to `set_picker_items_from_cli()`.
-    Note: if `cwd` field is absent, it is inferred from [MiniPick-source.cwd](mini-pick.qmd#minipick-source.cwd).
+  - <span class="help-syntax-keys">\<spawn_opts\></span> `(table)` - `set_picker_items_from_cli()`로 전달됩니다.
+    참고: `cwd` 필드가 없으면 [MiniPick-source.cwd](mini-pick.qmd#minipick-source.cwd)에서 추론됩니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options forwarded to [MiniPick.start()](mini-pick.qmd#minipick.start).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [MiniPick.start()](mini-pick.qmd#minipick.start)로 전달되는 옵션입니다.
 
 ---
 
 ### builtin.resume() {#minipick.builtin.resume .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.builtin.resume`()</p>
-Resume latest picker
+최근 픽커 재개
 
 ---
 
 ### registry {#minipick.registry .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.registry`</p>
-Picker registry
+픽커 레지스트리
 
-Place for users and extensions to manage pickers with their commonly used
-local options. By default contains all [MiniPick.builtin](mini-pick.qmd#minipick.builtin) pickers.
-All entries should accept only a single `local_opts` table argument.
+사용자와 익스텐션이 자주 사용되는 로컬 옵션과 함께 픽커를 관리하는 곳입니다. 기본적으로 모든 [MiniPick.builtin](mini-pick.qmd#minipick.builtin) 픽커를 포함합니다.
+모든 항목은 단일 `local_opts` 테이블 인자만 받아야 합니다.
 
-Serves as a source for [:Pick](mini-pick.qmd#pick) command.
+[:Pick](mini-pick.qmd#pick) 명령의 소스 역할을 합니다.
 
-Customization examples:
+맞춤 설정 예시:
 
   ```lua
-  -- Adding custom picker to pick `register` entries
+  -- `register` 항목을 선택하기 위해 커스텀 픽커 추가
   MiniPick.registry.registry = function()
     local items = vim.tbl_keys(MiniPick.registry)
     table.sort(items)
@@ -1717,7 +1530,7 @@ Customization examples:
     return MiniPick.registry[chosen_picker_name]()
   end
 
-  -- Make `:Pick files` accept `cwd`
+  -- `:Pick files`가 `cwd`를 수용하도록 설정
   MiniPick.registry.files = function(local_opts)
     local opts = { source = { cwd = local_opts.cwd } }
     local_opts.cwd = nil
@@ -1730,66 +1543,64 @@ Customization examples:
 ### get_picker_items() {#minipick.get_picker_items .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.get_picker_items`()</p>
-Get items of active picker
+활성화된 픽커의 항목 가져오기
 
-#### Return {#minipick.get_picker_items-return}
-
-
-`(table|nil)` Picker items or `nil` if no active picker.
-
-#### See also {#minipick.get_picker_items-seealso}
+#### 반환값 {#minipick.get_picker_items-return}
 
 
-[MiniPick.set\_picker\_items()](mini-pick.qmd#minipick.set_picker_items) and [MiniPick.set\_picker\_items\_from\_cli()](mini-pick.qmd#minipick.set_picker_items_from_cli)
+`(table|nil)` 픽커 항목 또는 활성 픽커가 없는 경우 `nil`.
+
+#### 참고 {#minipick.get_picker_items-seealso}
+
+
+[MiniPick.set\_picker\_items()](mini-pick.qmd#minipick.set_picker_items) 및 [MiniPick.set\_picker\_items\_from\_cli()](mini-pick.qmd#minipick.set_picker_items_from_cli)
 
 ---
 
 ### get_picker_stritems() {#minipick.get_picker_stritems .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.get_picker_stritems`()</p>
-Get stritems of active picker
+활성화된 픽커의 stritems 가져오기
 
-#### Return {#minipick.get_picker_stritems-return}
-
-
-`(table|nil)` Picker stritems ([MiniPick-source.items-stritems](mini-pick.qmd#minipick-source.items-stritems)) or `nil` if
-  no active picker.
-
-#### See also {#minipick.get_picker_stritems-seealso}
+#### 반환값 {#minipick.get_picker_stritems-return}
 
 
-[MiniPick.set\_picker\_items()](mini-pick.qmd#minipick.set_picker_items) and [MiniPick.set\_picker\_items\_from\_cli()](mini-pick.qmd#minipick.set_picker_items_from_cli)
+`(table|nil)` 픽커 stritems([MiniPick-source.items-stritems](mini-pick.qmd#minipick-source.items-stritems)) 또는 활성 픽커가 없는 경우 `nil`.
+
+#### 참고 {#minipick.get_picker_stritems-seealso}
+
+
+[MiniPick.set\_picker\_items()](mini-pick.qmd#minipick.set_picker_items) 및 [MiniPick.set\_picker\_items\_from\_cli()](mini-pick.qmd#minipick.set_picker_items_from_cli)
 
 ---
 
 ### get_picker_matches() {#minipick.get_picker_matches .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.get_picker_matches`()</p>
-Get matches of active picker
+활성화된 픽커의 매치 결과 가져오기
 
-#### Return {#minipick.get_picker_matches-return}
+#### 반환값 {#minipick.get_picker_matches-return}
 
 
-`(table|nil)` Picker matches or `nil` if no active picker. Matches is a table
-  with the following fields:
+`(table|nil)` 픽커 매치 결과 또는 활성 픽커가 없는 경우 `nil`. 매치 결과는 다음 필드를 가진 테이블입니다:
 
-  - <span class="help-syntax-keys">\<all\></span> `(table|nil)` - all currently matched items.
+  - <span class="help-syntax-keys">\<all\></span> `(table|nil)` - 현재 매치된 모든 항목입니다.
 
-  - <span class="help-syntax-keys">\<all_inds\></span> `(table|nil)` - indexes of all currently matched items.
+  - <span class="help-syntax-keys">\<all_inds\></span> `(table|nil)` - 현재 매치된 모든 항목의 인덱스입니다.
 
-  - <span class="help-syntax-keys">\<current\></span> `(any)` - current matched item.
+  - <span class="help-syntax-keys">\<current\></span> `(any)` - 현재 매치된 항목입니다.
 
-  - <span class="help-syntax-keys">\<current_ind\></span> `(number|nil)` - index of current matched item.
+  - <span class="help-syntax-keys">\<current_ind\></span> `(number|nil)` - 현재 매치된 항목의 인덱스입니다.
 
-  - <span class="help-syntax-keys">\<marked\></span> `(table|nil)` - marked items.
+  - <span class="help-syntax-keys">\<marked\></span> `(table|nil)` - 표시된 항목들입니다.
 
-  - <span class="help-syntax-keys">\<marked_inds\></span> `(table|nil)` - indexes of marked items.
+  - <span class="help-syntax-keys">\<marked_inds\></span> `(table|nil)` - 표시된 항목들의 인덱스입니다.
 
-  - <span class="help-syntax-keys">\<shown\></span> `(table|nil)` - shown items (from top to bottom).
+  - <span class="help-syntax-keys">\<shown\></span> `(table|nil)` - 표시된 항목들(위에서 아래 순)입니다.
 
-  - <span class="help-syntax-keys">\<shown_inds\></span> `(table|nil)` - indexes of shown items (from top to bottom).
+  - <span class="help-syntax-keys">\<shown_inds\></span> `(table|nil)` - 표시된 항목들의 인덱스(위에서 아래 순)입니다.
 
-#### See also {#minipick.get_picker_matches-seealso}
+#### 참고 {#minipick.get_picker_matches-seealso}
 
 
 [MiniPick.set\_picker\_match\_inds()](mini-pick.qmd#minipick.set_picker_match_inds)
@@ -1799,15 +1610,14 @@ Get matches of active picker
 ### get_picker_opts() {#minipick.get_picker_opts .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.get_picker_opts`()</p>
-Get config of active picker
+활성화된 픽커의 설정 가져오기
 
-#### Return {#minipick.get_picker_opts-return}
+#### 반환값 {#minipick.get_picker_opts-return}
 
 
-`(table|nil)` Picker config (`start()`'s input `opts` table) or `nil` if
-  no active picker.
+`(table|nil)` 픽커 설정(`start()`의 입력 `opts` 테이블) 또는 활성 픽커가 없는 경우 `nil`.
 
-#### See also {#minipick.get_picker_opts-seealso}
+#### 참고 {#minipick.get_picker_opts-seealso}
 
 
 [MiniPick.set\_picker\_opts()](mini-pick.qmd#minipick.set_picker_opts)
@@ -1817,25 +1627,22 @@ Get config of active picker
 ### get_picker_state() {#minipick.get_picker_state .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.get_picker_state`()</p>
-Get state data of active picker
+활성화된 픽커의 상태 데이터 가져오기
 
-#### Return {#minipick.get_picker_state-return}
+#### 반환값 {#minipick.get_picker_state-return}
 
 
-`(table|nil)` Table with picker state data or `nil` if no active picker.
-  State data is a table with the following fields:
+`(table|nil)` 픽커 상태 데이터를 가진 테이블 또는 활성 픽커가 없는 경우 `nil`. 상태 데이터는 다음 필드를 가진 테이블입니다:
 
-  - <span class="help-syntax-keys">\<buffers\></span> `(table)` - table with `main`, `preview`, `info` fields representing
-    buffer identifier (or `nil`) for corresponding view.
+  - <span class="help-syntax-keys">\<buffers\></span> `(table)` - 각 뷰에 해당하는 버퍼 식별자(또는 `nil`)를 나타내는 `main`, `preview`, `info` 필드를 가진 테이블입니다.
 
-  - <span class="help-syntax-keys">\<windows\></span> `(table)` - table with `main` and `target` fields representing
-    window identifiers for main and target windows.
+  - <span class="help-syntax-keys">\<windows\></span> `(table)` - 메인 및 대상 창의 창 식별자를 나타내는 `main` 및 `target` 필드를 가진 테이블입니다.
 
-  - <span class="help-syntax-keys">\<caret\></span> `(number)` - caret column.
+  - <span class="help-syntax-keys">\<caret\></span> `(number)` - 캐럿 열입니다.
 
-  - <span class="help-syntax-keys">\<is_busy\></span> `(boolean)` - whether picker is busy with computations.
+  - <span class="help-syntax-keys">\<is_busy\></span> `(boolean)` - 픽커가 계산 중인지 여부입니다.
 
-#### See also {#minipick.get_picker_state-seealso}
+#### 참고 {#minipick.get_picker_state-seealso}
 
 
 [MiniPick.set\_picker\_target\_window()](mini-pick.qmd#minipick.set_picker_target_window)
@@ -1845,14 +1652,14 @@ Get state data of active picker
 ### get_picker_query() {#minipick.get_picker_query .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.get_picker_query`()</p>
-Get query of active picker
+활성화된 픽커의 쿼리 가져오기
 
-#### Return {#minipick.get_picker_query-return}
+#### 반환값 {#minipick.get_picker_query-return}
 
 
-`(table|nil)` Array of picker query or `nil` if no active picker.
+`(table|nil)` 픽커 쿼리 배열 또는 활성 픽커가 없는 경우 `nil`.
 
-#### See also {#minipick.get_picker_query-seealso}
+#### 참고 {#minipick.get_picker_query-seealso}
 
 
 [MiniPick.set\_picker\_query()](mini-pick.qmd#minipick.set_picker_query)
@@ -1862,40 +1669,37 @@ Get query of active picker
 ### set_picker_items() {#minipick.set_picker_items .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.set_picker_items`(<span class="help-syntax-special">{items}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Set items for active picker
+활성화된 픽커의 항목 설정
 
-Note: sets items asynchronously in non-blocking fashion.
+참고: 논블로킹 방식으로 비동기적으로 항목을 설정합니다.
 
-#### Parameters {#minipick.set_picker_items-parameters}
-
-
-
-<span class="help-syntax-special">{items}</span> `(table)` Array of items.
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
-
-  - <span class="help-syntax-keys">\<do_match\></span> `(boolean)` - whether to perform match after setting items.
-    Default: `true`.
-
-  - <span class="help-syntax-keys">\<querytick\></span> `(number|nil)` - value of querytick ([MiniPick.get\_querytick()](mini-pick.qmd#minipick.get_querytick))
-    to periodically check against when setting items. If checked querytick
-    differs from supplied, no items are set.
-
-#### See also {#minipick.set_picker_items-seealso}
+#### 매개변수 {#minipick.set_picker_items-parameters}
 
 
-[MiniPick.get\_picker\_items()](mini-pick.qmd#minipick.get_picker_items) and [MiniPick.get\_picker\_stritems()](mini-pick.qmd#minipick.get_picker_stritems)
+
+<span class="help-syntax-special">{items}</span> `(table)` 항목 배열입니다.
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
+
+  - <span class="help-syntax-keys">\<do_match\></span> `(boolean)` - 항목 설정 후 매칭을 수행할지 여부입니다. 기본값: `true`.
+
+  - <span class="help-syntax-keys">\<querytick\></span> `(number|nil)` - 항목 설정 시 주기적으로 확인할 querytick([MiniPick.get\_querytick()](mini-pick.qmd#minipick.get_querytick)) 값입니다. 확인된 querytick이 공급된 것과 다르면 항목을 설정하지 않습니다.
+
+#### 참고 {#minipick.set_picker_items-seealso}
+
+
+[MiniPick.get\_picker\_items()](mini-pick.get_picker_items) 및 [MiniPick.get\_picker\_stritems()](mini-pick.get_picker_stritems)
 
 ---
 
 ### set_picker_items_from_cli() {#minipick.set_picker_items_from_cli .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.set_picker_items_from_cli`(<span class="help-syntax-special">{command}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Set items for active picker based on CLI output
+CLI 출력을 기반으로 활성화된 픽커의 항목 설정
 
-Asynchronously executes `command` and sets items to its postprocessed output.
+`command`를 비동기적으로 실행하고 그 후처리된 출력으로 항목을 설정합니다.
 
-Example:
+예시:
 
   ```lua
   local items = vim.schedule_wrap(function()
@@ -1904,115 +1708,110 @@ Example:
   MiniPick.start({ source = { items = items, name = 'Echo abc' } })
   ```
 
-#### Parameters {#minipick.set_picker_items_from_cli-parameters}
+#### 매개변수 {#minipick.set_picker_items_from_cli-parameters}
 
 
 
-<span class="help-syntax-special">{command}</span> `(table)` Array with (at least one) string command parts.
+<span class="help-syntax-special">{command}</span> `(table)` 하나 이상의 문자열 명령 부분으로 구성된 배열입니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<postprocess\></span> `(function)` - callable performing postprocessing of output.
-    Will be called with array of lines as input, should return array of items.
-    Default: removes trailing empty lines and uses rest as string items.
+  - <span class="help-syntax-keys">\<postprocess\></span> `(function)` - 출력의 후처리를 수행하는 콜러블입니다. 줄 배열을 입력으로 받아 항목 배열을 반환해야 합니다. 기본값: 끝의 빈 줄을 제거하고 나머지를 문자열 항목으로 사용합니다.
 
-  - <span class="help-syntax-keys">\<spawn_opts\></span> `(table)` - `options` for [uv.spawn()](https://neovim.io/doc/user/helptag.html?tag=uv.spawn\(\)), except `args` and `stdio`.
-    Note: relative `cwd` path is resolved against active picker's `cwd`.
+  - <span class="help-syntax-keys">\<spawn_opts\></span> `(table)` - `args`와 `stdio`를 제외한 [uv.spawn()](https://neovim.io/doc/user/helptag.html?tag=uv.spawn\(\))용 `options`입니다.
+    참고: 상대 `cwd` 경로는 활성 픽커의 `cwd`를 기준으로 해석됩니다.
 
-  - <span class="help-syntax-keys">\<set_items_opts\></span> `(table)` - table forwarded to [MiniPick.set\_picker\_items()](mini-pick.qmd#minipick.set_picker_items).
+  - <span class="help-syntax-keys">\<set_items_opts\></span> `(table)` - [MiniPick.set\_picker\_items()](mini-pick.qmd#minipick.set_picker_items)로 전달되는 테이블입니다.
 
-#### See also {#minipick.set_picker_items_from_cli-seealso}
+#### 참고 {#minipick.set_picker_items_from_cli-seealso}
 
 
-[MiniPick.get\_picker\_items()](mini-pick.qmd#minipick.get_picker_items) and [MiniPick.get\_picker\_stritems()](mini-pick.qmd#minipick.get_picker_stritems)
+[MiniPick.get\_picker\_items()](mini-pick.get_picker_items) 및 [MiniPick.get\_picker\_stritems()](mini-pick.get_picker_stritems)
 
 ---
 
 ### set_picker_match_inds() {#minipick.set_picker_match_inds .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.set_picker_match_inds`(<span class="help-syntax-special">{match_inds}</span>, <span class="help-syntax-special">{match_type}</span>)</p>
-Set match indexes for active picker
+활성화된 픽커의 매치 인덱스 설정
 
-There are two intended use cases:
+두 가지 용도가 있습니다:
 
-- Inside custom asynchronous [MiniPick-source.match](mini-pick.qmd#minipick-source.match) function to set which of
-  picker's stritems match the query. See [MiniPick.poke\_is\_picker\_active()](mini-pick.qmd#minipick.poke_is_picker_active).
+- 커스텀 비동기 [MiniPick-source.match](mini-pick.qmd#minipick-source.match) 함수 내부에서 픽커의 어떤 stritems가 쿼리와 일치하는지 설정합니다. [MiniPick.poke\_is\_picker\_active()](mini-pick.qmd#minipick.poke_is_picker_active)를 참고하십시오.
 
-- To programmatically set current match and marked items.
-  See [MiniPick.get\_picker\_matches()](mini-pick.qmd#minipick.get_picker_matches).
+- 프로그래밍 방식으로 현재 매치 결과 및 표시된 항목을 설정합니다.
+  [MiniPick.get\_picker\_matches()](mini-pick.qmd#minipick.get_picker_matches)를 참고하십시오.
 
-#### Parameters {#minipick.set_picker_match_inds-parameters}
-
+#### 매개변수 {#minipick.set_picker_match_inds-parameters}
 
 
-<span class="help-syntax-special">{match_inds}</span> `(table)` Array of numbers with picker's items indexes.
 
-<span class="help-syntax-special">{match_type}</span> `(string|nil)` Type of match indexes to set. One of:
+<span class="help-syntax-special">{match_inds}</span> `(table)` 픽커 항목 인덱스를 담은 숫자 배열입니다.
 
-  - `"all"` (default) - indexes of items that match query.
+<span class="help-syntax-special">{match_type}</span> `(string|nil)` 설정할 매치 인덱스의 타입입니다. 다음 중 하나입니다:
 
-  - `"current"` - index of current match. Only first element is used and should
-    also be present among query matches.
+  - `"all"` (기본값) - 쿼리와 일치하는 항목의 인덱스입니다.
 
-  - `"marked"` - indexes of marked items. Values can be not among query matches.
-    Will make only input indexes be marked, i.e. current marks are reset.
-  Note: no `"shown"` match type as those indexes are computed automatically.
+  - `"current"` - 현재 매치 항목의 인덱스입니다. 첫 번째 요소만 사용되며, 쿼리 매치 결과 중에도 있어야 합니다.
 
-#### See also {#minipick.set_picker_match_inds-seealso}
+  - `"marked"` - 표시된 항목의 인덱스입니다. 쿼리 매치 결과 중에 없어도 됩니다. 입력된 인덱스만 표시된 상태가 되며, 즉 현재 표시 상태는 재설정됩니다.
+  참고: `"shown"` 타입은 해당 인덱스가 자동으로 계산되므로 없습니다.
+
+#### 참고 {#minipick.set_picker_match_inds-seealso}
 
 
-[MiniPick.get\_picker\_matches()](mini-pick.qmd#minipick.get_picker_matches)
+[MiniPick.get\_picker\_matches()](mini-pick.get_picker_matches)
 
 ---
 
 ### set_picker_opts() {#minipick.set_picker_opts .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.set_picker_opts`(<span class="help-syntax-special">{opts}</span>)</p>
-Set config for active picker
+활성화된 픽커의 설정 지정
 
-#### Parameters {#minipick.set_picker_opts-parameters}
-
-
-
-<span class="help-syntax-special">{opts}</span> `(table)` Table overriding initial `opts` input of [MiniPick.start()](mini-pick.qmd#minipick.start).
-
-#### See also {#minipick.set_picker_opts-seealso}
+#### 매개변수 {#minipick.set_picker_opts-parameters}
 
 
-[MiniPick.get\_picker\_opts()](mini-pick.qmd#minipick.get_picker_opts)
+
+<span class="help-syntax-special">{opts}</span> `(table)` [MiniPick.start()](mini-pick.qmd#minipick.start)의 초기 `opts` 입력을 재정의하는 테이블입니다.
+
+#### 참고 {#minipick.set_picker_opts-seealso}
+
+
+[MiniPick.get\_picker\_opts()](mini-pick.get_picker_opts)
 
 ---
 
 ### set_picker_target_window() {#minipick.set_picker_target_window .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.set_picker_target_window`(<span class="help-syntax-special">{win_id}</span>)</p>
-Set target window for active picker
+활성화된 픽커의 대상 창 설정
 
-#### Parameters {#minipick.set_picker_target_window-parameters}
-
-
-
-<span class="help-syntax-special">{win_id}</span> `(number)` Valid window identifier to be used as the new target window.
-
-#### See also {#minipick.set_picker_target_window-seealso}
+#### 매개변수 {#minipick.set_picker_target_window-parameters}
 
 
-[MiniPick.get\_picker\_state()](mini-pick.qmd#minipick.get_picker_state)
+
+<span class="help-syntax-special">{win_id}</span> `(number)` 새로운 대상 창으로 사용될 유효한 창 식별자입니다.
+
+#### 참고 {#minipick.set_picker_target_window-seealso}
+
+
+[MiniPick.get\_picker_state()](mini-pick.qmd#minipick.get_picker_state)
 
 ---
 
 ### set_picker_query() {#minipick.set_picker_query .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.set_picker_query`(<span class="help-syntax-special">{query}</span>)</p>
-Set query for active picker
+활성화된 픽커의 쿼리 설정
 
-#### Parameters {#minipick.set_picker_query-parameters}
+#### 매개변수 {#minipick.set_picker_query-parameters}
 
 
 
-<span class="help-syntax-special">{query}</span> `(table)` Array of strings to be set as the new picker query.
+<span class="help-syntax-special">{query}</span> `(table)` 새로운 픽커 쿼리로 설정할 문자열 배열입니다.
 
-#### See also {#minipick.set_picker_query-seealso}
+#### 참고 {#minipick.set_picker_query-seealso}
 
 
 [MiniPick.get\_picker\_query()](mini-pick.qmd#minipick.get_picker_query)
@@ -2022,32 +1821,30 @@ Set query for active picker
 ### get_querytick() {#minipick.get_querytick .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.get_querytick`()</p>
-Get query tick
+쿼리 틱 가져오기
 
-Query tick is a unique query identifier. Intended to be used to detect user
-activity during and between [MiniPick.start()](mini-pick.qmd#minipick.start) calls for efficient non-blocking
-functionality. Updates after any query change, picker start and stop.
+쿼리 틱은 고유한 쿼리 식별자입니다. 효율적인 논블로킹 기능을 위해 [MiniPick.start()](mini-pick.qmd#minipick.start) 호출 중 및 호출 사이의 사용자 활동을 감지하는 데 사용됩니다. 쿼리 변경, 픽커 시작 및 중지 후에 업데이트됩니다.
 
-See [MiniPick.poke\_is\_picker\_active()](mini-pick.qmd#minipick.poke_is_picker_active) for usage example.
+사용 예시는 [MiniPick.poke\_is\_picker\_active()](mini-pick.qmd#minipick.poke_is_picker_active)를 참고하십시오.
 
-#### Return {#minipick.get_querytick-return}
+#### 반환값 {#minipick.get_querytick-return}
 
 
-`(number)` Query tick.
+`(number)` 쿼리 틱입니다.
 
 ---
 
 ### is_picker_active() {#minipick.is_picker_active .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.is_picker_active`()</p>
-Check if there is an active picker
+픽커 활성화 여부 확인
 
-#### Return {#minipick.is_picker_active-return}
+#### 반환값 {#minipick.is_picker_active-return}
 
 
-`(boolean)` Whether there is currently an active picker.
+`(boolean)` 현재 활성화된 픽커가 있는지 여부입니다.
 
-#### See also {#minipick.is_picker_active-seealso}
+#### 참고 {#minipick.is_picker_active-seealso}
 
 
 [MiniPick.poke\_is\_picker\_active()](mini-pick.qmd#minipick.poke_is_picker_active)
@@ -2057,18 +1854,15 @@ Check if there is an active picker
 ### poke_is_picker_active() {#minipick.poke_is_picker_active .help-syntax-right-anchor}
 
 <p align="center">`MiniPick.poke_is_picker_active`()</p>
-Poke if picker is active
+픽커 활성 상태 확인(Poke)
 
-Intended to be used for non-blocking implementation of source methods.
-Returns an output of [MiniPick.is\_picker\_active()](mini-pick.qmd#minipick.is_picker_active), but depending on
-whether there is a coroutine running:
+소스 메서드의 논블로킹 구현을 위해 설계되었습니다. [MiniPick.is\_picker\_active()](mini-pick.qmd#minipick.is_picker_active)의 출력을 반환하지만, 실행 중인 코루틴이 있는지 여부에 따라 다음과 같이 달라집니다:
 
-- If no, return it immediately.
+- 없다면 즉시 반환합니다.
 
-- If yes, return it after `coroutine.yield()` with `coroutine.resume()`
-  called "soon" by the main event-loop (see [vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\))).
+- 있다면 `coroutine.yield()` 이후에 메인 이벤트 루프에 의해 "곧" `coroutine.resume()`이 호출된 후 반환합니다([vim.schedule()](https://neovim.io/doc/user/helptag.html?tag=vim.schedule\(\)) 참고).
 
-Example of non-blocking exact `match` (as demo; can be optimized further):
+논블로킹 정확한(exact) `match` 예시 (데모용이며 추가 최적화가 가능합니다):
 
   ```lua
   local match_nonblock = function(match_inds, stritems, query)
@@ -2090,13 +1884,12 @@ Example of non-blocking exact `match` (as demo; can be optimized further):
   end
   ```
 
-#### Return {#minipick.poke_is_picker_active-return}
+#### 반환값 {#minipick.poke_is_picker_active-return}
 
 
-`(boolean)` Whether there is an active picker.
+`(boolean)` 활성화된 픽커가 있는지 여부입니다.
 
-#### See also {#minipick.poke_is_picker_active-seealso}
+#### 참고 {#minipick.poke_is_picker_active-seealso}
 
 
 [MiniPick.is\_picker\_active()](mini-pick.qmd#minipick.is_picker_active)
-

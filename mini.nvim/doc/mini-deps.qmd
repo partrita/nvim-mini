@@ -1,67 +1,62 @@
 ---
-title: "mini.deps documentation"
+title: "mini.deps 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 'main' 브랜치에서 생성됨 _
 
-<a name="mini.deps" href="mini-deps.qmd#mini.deps"><b>mini.deps</b></a> Plugin manager
+<a name="mini.deps" href="mini-deps.qmd#mini.deps"><b>mini.deps</b></a> 플러그인 관리자
 
-MIT License Copyright (c) 2024 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2024 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
-
-
-- Manage plugins utilizing Git and built-in [packages](https://neovim.io/doc/user/helptag.html?tag=packages) with these actions:
-
-    - Add plugin to current session, download if absent. See [MiniDeps.add()](mini-deps.qmd#minideps.add).
-
-    - Update with/without confirm, with/without parallel download of new data.
-      See [MiniDeps.update()](mini-deps.qmd#minideps.update).
-
-    - Delete unused plugins with/without confirm. See [MiniDeps.clean()](mini-deps.qmd#minideps.clean).
-
-    - Get / set / save / load snapshot. See `MiniDeps.snap_*()` functions.
-
-    All main actions are available both as Lua functions and user commands
-    (see [MiniDeps-commands](mini-deps.qmd#minideps-commands)).
+기능:
 
 
-- Minimal yet flexible plugin [MiniDeps-plugin-specification](mini-deps.qmd#minideps-plugin-specification):
+- Git과 내장 [packages](https://neovim.io/doc/user/helptag.html?tag=packages)를 사용하여 다음 작업으로 플러그인을 관리합니다:
 
-    - Plugin source.
+    - 현재 세션에 플러그인을 추가하고, 없는 경우 다운로드합니다. [MiniDeps.add()](mini-deps.qmd#minideps.add)를 참고하세요.
 
-    - Name of target plugin directory.
+    - 확인 여부와 상관없이, 새로운 데이터의 병렬 다운로드 여부와 상관없이 업데이트합니다.
+      [MiniDeps.update()](mini-deps.qmd#minideps.update)를 참고하세요.
 
-    - Checkout target: branch, commit, tag, etc.
+    - 확인 여부와 상관없이 사용하지 않는 플러그인을 삭제합니다. [MiniDeps.clean()](mini-deps.qmd#minideps.clean)를 참고하세요.
 
-    - Monitor branch to track updates without checking out.
+    - 스냅샷을 가져오기 / 설정 / 저장 / 로드합니다. `MiniDeps.snap_*()` 함수들을 참고하세요.
 
-    - Dependencies to be set up prior to the target plugin.
-
-    - Hooks to call before/after plugin is created/changed.
-
-
-- Helpers implementing two-stage startup: [MiniDeps.now()](mini-deps.qmd#minideps.now) and [MiniDeps.later()](mini-deps.qmd#minideps.later).
-  See [MiniDeps-overview](mini-deps.qmd#minideps-overview) for how to implement basic lazy loading with them.
-
-What it doesn't do:
+    모든 주요 작업은 Lua 함수와 사용자 명령어([MiniDeps-commands](mini-deps.qmd#minideps-commands) 참고)로 모두 제공됩니다.
 
 
-- Manage plugins which are developed without Git. The suggested approach is
-  to create a separate package (see [packages](https://neovim.io/doc/user/helptag.html?tag=packages)).
+- 최소한이지만 유연한 플러그인 [사양](mini-deps.qmd#minideps-plugin-specification):
+
+    - 플러그인 소스.
+
+    - 대상 플러그인 디렉토리 이름.
+
+    - 체크아웃 대상: 브랜치, 커밋, 태그 등.
+
+    - 체크아웃하지 않고 업데이트를 추적할 모니터 브랜치.
+
+    - 대상 플러그인 전에 설정할 의존성.
+
+    - 플러그인이 생성/변경되기 전후에 호출할 훅.
 
 
-- Provide ways to completely remove or update plugin's functionality in
-  current session. Although this is partially doable, it can not be done
-  in full (yet) because plugins can have untraceable side effects
-  (autocmmands, mappings, etc.).
-  The suggested approach is to restart Nvim.
+- 2단계 시작을 구현하는 헬퍼: [MiniDeps.now()](mini-deps.qmd#minideps.now) 및 [MiniDeps.later()](mini-deps.qmd#minideps.later).
+  이것들을 사용하여 기본적인 지연 로딩을 구현하는 방법은 [MiniDeps-overview](mini-deps.qmd#minideps-overview)를 참고하세요.
 
-Sources with more details:
+하지 않는 기능:
+
+
+- Git 없이 개발된 플러그인 관리. 권장되는 방법은 별도의 패키지를 만드는 것입니다 ([packages](https://neovim.io/doc/user/helptag.html?tag=packages) 참고).
+
+
+- 현재 세션에서 플러그인의 기능을 완전히 제거하거나 업데이트하는 방법을 제공하지 않습니다. 이것은 부분적으로는 가능하지만, 플러그인이 추적할 수 없는 부작용(자동 명령, 매핑 등)을 가질 수 있기 때문에 (아직은) 완전히 수행할 수 없습니다.
+  권장되는 방법은 Nvim을 재시작하는 것입니다.
+
+상세 정보를 위한 출처:
 
 - [MiniDeps-overview](mini-deps.qmd#minideps-overview)
 
@@ -69,405 +64,350 @@ Sources with more details:
 
 - [MiniDeps-commands](mini-deps.qmd#minideps-commands)
 
-#### Dependencies {#module-dependencies}
+#### 의존성 {#module-dependencies}
 
 
-For most of its functionality this plugin relies on `git` CLI tool.
-See https://git-scm.com/ for more information about how to install it.
-Actual knowledge of Git is not required but helpful.
+이 플러그인의 대부분의 기능은 `git` CLI 도구에 의존합니다.
+설치 방법에 대한 자세한 내용은 https://git-scm.com/ 을 참고하세요.
+Git에 대한 실질적인 지식은 필수적이지 않지만 도움이 됩니다.
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.deps').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniDeps`
-which you can use for scripting or manually (with `:lua MiniDeps.*`).
+이 모듈은 `require('mini.deps').setup({})`으로 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 스크립팅이나 수동으로 (`:lua MiniDeps.*`) 사용할 수 있는 전역 Lua 테이블 `MiniDeps`가 생성됩니다.
 
-See [MiniDeps.config](mini-deps.qmd#minideps.config) for `config` structure and default values.
+`config` 구조와 기본값은 [MiniDeps.config](mini-deps.qmd#minideps.config)를 참고하세요.
 
-You can override runtime config settings locally to buffer inside
-`vim.b.minideps_config` which should have same structure as
-`MiniDeps.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+`vim.b.minideps_config` 내부의 버퍼에 로컬로 런타임 설정을 재정의할 수 있으며, 이는 `MiniDeps.config`와 동일한 구조를 가져야 합니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참고하세요.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [folke/lazy.nvim](https://github.com/folke/lazy.nvim):
 
-    - More feature-rich and complex.
+    - 더 기능이 풍부하고 복잡합니다.
 
-    - Uses table specification with dedicated functions to add plugins,
-      while this module uses direct function call approach
-      (calling [MiniDeps.add()](mini-deps.qmd#minideps.add) ensures that plugin is usable).
+    - 전용 함수를 사용하여 플러그인을 추가하는 테이블 사양을 사용하는 반면, 이 모듈은 직접 함수 호출 방식([MiniDeps.add()](mini-deps.qmd#minideps.add) 호출로 플러그인 사용 가능 보장)을 사용합니다.
 
-    - Uses version tags by default, while this module is more designed towards
-      tracking branches. Using tags is possible too (see [MiniDeps-overview](mini-deps.qmd#minideps-overview)).
+    - 기본적으로 버전 태그를 사용하는 반면, 이 모듈은 브랜치를 추적하도록 더 설계되었습니다. 태그 사용도 가능합니다 ([MiniDeps-overview](mini-deps.qmd#minideps-overview) 참고).
 
 
 - [savq/paq-nvim](https://github.com/savq/paq-nvim):
 
-    - Overall less feature-rich than this module (by design).
+    - 전반적으로 이 모듈보다 기능이 적습니다 (의도된 설계).
 
-    - Uses array of plugin specifications inside `setup()` call to define which
-      plugins should be installed. Requires separate `:PaqInstall` call to
-      actually install them. This module ensures installation on first load.
+    - `setup()` 호출 내부에서 어떤 플러그인을 설치할지 정의하기 위해 플러그인 사양 배열을 사용합니다. 실제로 설치하려면 별도의 `:PaqInstall` 호출이 필요합니다. 이 모듈은 첫 로드 시 설치를 보장합니다.
 
 
 - [junegunn/vim-plug](https://github.com/junegunn/vim-plug):
 
-    - Written in Vimscript, while this module is in Lua.
+    - Vimscript로 작성된 반면, 이 모듈은 Lua로 작성되었습니다.
 
-    - Similar approach to defining and installing plugins as 'savq/paq-nvim'.
+    - 'savq/paq-nvim'과 유사한 플러그인 정의 및 설치 방식을 사용합니다.
 
-    - Has basic lazy-loading built-in, while this module does not (by design).
+    - 기본적인 지연 로딩이 내장되어 있지만, 이 모듈은 그렇지 않습니다 (의도된 설계).
 
-#### Highlight groups {#module-highlightgroups}
-
-
-Highlight groups are used inside confirmation buffers after
-default [MiniDeps.update()](mini-deps.qmd#minideps.update) and [MiniDeps.clean()](mini-deps.qmd#minideps.clean).
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
-- `MiniDepsChangeAdded`   - added change (commit) during update.
+하이라이트 그룹은 기본 [MiniDeps.update()](mini-deps.qmd#minideps.update) 및 [MiniDeps.clean()](mini-deps.qmd#minideps.clean) 이후의 확인 버퍼 내부에서 사용됩니다.
 
-- `MiniDepsChangeRemoved` - removed change (commit) during update.
 
-- `MiniDepsHint`          - various hints.
+- `MiniDepsChangeAdded`   - 업데이트 중 추가된 변경 사항 (커밋).
 
-- `MiniDepsInfo`          - various information.
+- `MiniDepsChangeRemoved` - 업데이트 중 제거된 변경 사항 (커밋).
 
-- `MiniDepsMsgBreaking`   - message for (conventional commit) breaking change.
+- `MiniDepsHint`          - 각종 힌트.
 
-- `MiniDepsPlaceholder`   - placeholder when there is no valuable information.
+- `MiniDepsInfo`          - 각종 정보.
 
-- `MiniDepsTitle`         - various titles.
+- `MiniDepsMsgBreaking`   - (conventional commit) 주요 변경 사항(breaking change) 메시지.
 
-- `MiniDepsTitleError`    - title when plugin had errors during update.
+- `MiniDepsPlaceholder`   - 유용한 정보가 없을 때의 자리 표시자.
 
-- `MiniDepsTitleSame`     - title when plugin has no changes to update.
+- `MiniDepsTitle`         - 각종 제목.
 
-- `MiniDepsTitleUpdate`   - title when plugin has changes to update.
+- `MiniDepsTitleError`    - 업데이트 중 플러그인에 오류가 발생했을 때의 제목.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+- `MiniDepsTitleSame`     - 업데이트할 변경 사항이 없을 때의 제목.
+
+- `MiniDepsTitleUpdate`   - 업데이트할 변경 사항이 있을 때의 제목.
+
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
 
 ---
 
-### Overview {#minideps-overview .help-syntax-right-anchor}
+### 개요 {#minideps-overview .help-syntax-right-anchor}
 
-#### Directory structure {#minideps-overview-directorystructure}
-
-
-This module uses built-in [packages](https://neovim.io/doc/user/helptag.html?tag=packages) to make plugins usable in current session.
-It works with "pack/deps" package inside `config.path.package` directory.
-
-By default "opt" subdirectory is used to install optional plugins which are
-loaded on demand with [MiniDeps.add()](mini-deps.qmd#minideps.add).
-Non-optional plugins in "start" subdirectory are supported but only if moved
-there manually after initial install. Use it if you know what you are doing.
-
-#### Add plugin {#minideps-overview-addplugin}
+#### 디렉토리 구조 {#minideps-overview-directorystructure}
 
 
-Use [MiniDeps.add()](mini-deps.qmd#minideps.add) to add plugin to current session. Supply plugin's URL
-source as a string or [MiniDeps-plugin-specification](mini-deps.qmd#minideps-plugin-specification) in general. If plugin is
-not present in "pack/deps" package, it will be created (a.k.a. installed)
-before processing anything else.
+이 모듈은 현재 세션에서 플러그인을 사용할 수 있도록 내장 [packages](https://neovim.io/doc/user/helptag.html?tag=packages)를 사용합니다.
+`config.path.package` 디렉토리 내부의 "pack/deps" 패키지와 작동합니다.
 
-The recommended way of adding a plugin is by calling [MiniDeps.add()](mini-deps.qmd#minideps.add) in the
-[init.lua](https://neovim.io/doc/user/helptag.html?tag=init.lua) file (make sure [MiniDeps.setup()](mini-deps.qmd#minideps.setup) is called prior):
+기본적으로 [MiniDeps.add()](mini-deps.qmd#minideps.add)로 요청 시 로드되는 선택적 플러그인을 설치하기 위해 "opt" 하위 디렉토리가 사용됩니다.
+"start" 하위 디렉토리의 필수 플러그인은 초기 설치 후 수동으로 이동한 경우에만 지원됩니다. 무엇을 하고 있는지 잘 아는 경우에만 사용하세요.
+
+#### 플러그인 추가 {#minideps-overview-addplugin}
+
+
+현재 세션에 플러그인을 추가하려면 [MiniDeps.add()](mini-deps.qmd#minideps.add)를 사용하세요. 플러그인의 URL 소스를 문자열로 제공하거나 일반적으로 [플러그인 사양](mini-deps.qmd#minideps-plugin-specification)을 제공하세요. 플러그인이 "pack/deps" 패키지에 없는 경우, 다른 작업을 처리하기 전에 생성(일명 설치)됩니다.
+
+플러그인을 추가하는 권장 방법은 [init.lua](https://neovim.io/doc/user/helptag.html?tag=init.lua) 파일에서 [MiniDeps.add()](mini-deps.qmd#minideps.add)를 호출하는 것입니다 ([MiniDeps.setup()](mini-deps.qmd#minideps.setup)이 먼저 호출되었는지 확인하세요):
 
   ```lua
   local add = MiniDeps.add
 
-  -- Add to current session (install if absent)
+  -- 현재 세션에 추가 (없으면 설치)
   add({
     source = 'neovim/nvim-lspconfig',
-    -- Supply dependencies near target plugin
+    -- 대상 플러그인 근처에 의존성 제공
     depends = { 'williamboman/mason.nvim' },
   })
 
   add({
     source = 'nvim-treesitter/nvim-treesitter',
-    -- Use 'master' while monitoring updates in 'main'
+    -- 'main'에서 업데이트를 모니터링하면서 'master' 사용
     checkout = 'master',
     monitor = 'main',
-    -- Perform action after every checkout
+    -- 매 체크아웃 후 작업 수행
     hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
   })
-  -- Possible to immediately execute code which depends on the added plugin
+  -- 추가된 플러그인에 의존하는 코드를 즉시 실행 가능
   require('nvim-treesitter.configs').setup({
     ensure_installed = { 'lua', 'vimdoc' },
     highlight = { enable = true },
   })
   ```
 
-NOTE:
+참고:
 
-- To increase performance, `add()` only ensures presence on disk and
-  nothing else. In particular, it doesn't ensure `opts.checkout` state.
-  Update or modify plugin state explicitly (see later sections).
+- 성능을 높이기 위해 `add()`는 디스크에 존재 여부만 보장하고 그 외에는 아무것도 하지 않습니다. 특히 `opts.checkout` 상태를 보장하지 않습니다.
+  플러그인 상태를 명시적으로 업데이트하거나 수정하세요 (이후 섹션 참고).
 
-#### Lazy loading {#minideps-overview-lazyloading}
+#### 지연 로딩 {#minideps-overview-lazyloading}
 
 
-Any lazy-loading is assumed to be done manually by calling [MiniDeps.add()](mini-deps.qmd#minideps.add)
-at appropriate time. This module provides helpers implementing special safe
-two-stage loading:
+모든 지연 로딩은 적절한 시점에 [MiniDeps.add()](mini-deps.qmd#minideps.add)를 호출하여 수동으로 수행되는 것으로 가정합니다. 이 모듈은 특수한 안전한 2단계 로딩을 구현하는 헬퍼를 제공합니다:
 
-- [MiniDeps.now()](mini-deps.qmd#minideps.now) safely executes code immediately. Use it to load plugins
-  with UI necessary to make initial screen draw.
+- [MiniDeps.now()](mini-deps.qmd#minideps.now)는 즉시 코드를 안전하게 실행합니다. 초기 화면 그리기에 필요한 UI가 있는 플러그인을 로드하는 데 사용하세요.
 
-- [MiniDeps.later()](mini-deps.qmd#minideps.later) schedules code to be safely executed later, preserving
-  order. Use it (with caution) for everything else which doesn't need
-  precisely timed effect, as it will be executed some time soon on one of
-  the next event loops.
+- [MiniDeps.later()](mini-deps.qmd#minideps.later)는 나중에 코드가 안전하게 실행되도록 예약하며 순서를 유지합니다. 정확한 타이밍이 필요하지 않은 다른 모든 작업에 (주의해서) 사용하세요. 다음 이벤트 루프 중 하나에서 곧 실행될 것입니다.
 
   ```lua
   local now, later = MiniDeps.now, MiniDeps.later
 
-  -- Safely execute immediately
+  -- 즉시 안전하게 실행
   now(function() vim.cmd('colorscheme miniwinter') end)
   now(function() require('mini.statusline').setup() end)
 
-  -- Safely execute later
+  -- 나중에 안전하게 실행
   later(function() require('mini.pick').setup() end)
   ```
 
-#### Update {#minideps-overview-update}
+#### 업데이트 {#minideps-overview-update}
 
 
-To update plugins from current session with new data from their sources,
-use [:DepsUpdate](mini-deps.qmd#depsupdate). This will download updates (utilizing multiple cores) and
-show confirmation buffer. Follow instructions at its top to finish an update.
+현재 세션의 플러그인을 소스의 새로운 데이터로 업데이트하려면 [:DepsUpdate](mini-deps.qmd#depsupdate)를 사용하세요. 업데이트를 다운로드하고(멀티 코어 활용) 확인 버퍼를 표시합니다. 업데이트를 완료하려면 상단의 지침을 따르세요.
 
-NOTE: This updates plugins on disk which most likely won't affect current
-session. Restart Nvim to have them properly loaded.
+참고: 이것은 디스크의 플러그인을 업데이트하며 현재 세션에는 영향을 주지 않을 가능성이 큽니다. 제대로 로드하려면 Nvim을 재시작하세요.
 
-#### Modify {#minideps-overview-modify}
+#### 수정 {#minideps-overview-modify}
 
 
-To change plugin's specification (like set different `checkout`, etc.):
+플러그인 사양을 변경하려면 (다른 `checkout` 설정 등):
 
-- Update corresponding [MiniDeps.add()](mini-deps.qmd#minideps.add) call.
+- 해당 [MiniDeps.add()](mini-deps.qmd#minideps.add) 호출을 업데이트하세요.
 
-- Run `:DepsUpdateOffline <plugin_name>`.
+- `:DepsUpdateOffline <plugin_name>`을 실행하세요.
 
-- Review changes and confirm.
+- 변경 사항을 검토하고 확인하세요.
 
-- Restart Nvim.
+- Nvim을 재시작하세요.
 
-NOTE: if `add()` prior used a single source string, make sure to convert
-its argument to `{ source = '<previous_argument>', checkout = '<state>'}`
+참고: 이전에 `add()`가 단일 소스 문자열을 사용했다면, 인수를 `{ source = '<이전_인수>', checkout = '<상태>'}`로 변환해야 합니다.
 
-#### Snapshots {#minideps-overview-snapshots}
-
-
-Use [:DepsSnapSave](mini-deps.qmd#depssnapsave) to save state of all plugins from current session into
-a snapshot file (see `config.path.snapshot`).
-
-Use [:DepsSnapLoad](mini-deps.qmd#depssnapload) to load snapshot. This will change (without confirmation)
-state on disk. Plugins present in both snapshot file and current session
-will be affected. Restart Nvim to see the effect.
-
-NOTE: loading snapshot does not change plugin's specification defined inside
-[MiniDeps.add()](mini-deps.qmd#minideps.add) call. This means that next update might change plugin's state.
-To make it permanent, freeze plugin in target state manually.
-
-#### Freeze {#minideps-overview-freeze}
+#### 스냅샷 {#minideps-overview-snapshots}
 
 
-Modify plugin's specification to have `checkout` pointing to a static
-target: tag, state (commit hash), or 'HEAD' (to freeze in current state).
+현재 세션의 모든 플러그인 상태를 스냅샷 파일에 저장하려면 [:DepsSnapSave](mini-deps.qmd#depssnapsave)를 사용하세요 (`config.path.snapshot` 참고).
 
-Frozen plugins will not receive updates. You can monitor any new changes from
-its source by "subscribing" to `monitor` branch which will be shown inside
-confirmation buffer after [:DepsUpdate](mini-deps.qmd#depsupdate).
+스냅샷을 로드하려면 [:DepsSnapLoad](mini-deps.qmd#depssnapload)를 사용하세요. 확인 없이 디스크의 상태를 변경합니다. 스냅샷 파일과 현재 세션 모두에 있는 플러그인이 영향을 받습니다. 효과를 보려면 Nvim을 재시작하세요.
 
-Example: use `checkout = 'v0.10.0'` to freeze plugin at tag "v0.10.0" while
-monitoring new versions in the log from `monitor` (usually default) branch.
+참고: 스냅샷을 로드해도 [MiniDeps.add()](mini-deps.qmd#minideps.add) 호출 내부에 정의된 플러그인 사양은 변경되지 않습니다. 즉, 다음 업데이트 시 플러그인 상태가 변경될 수 있습니다. 영구적으로 만들려면 대상 상태에서 플러그인을 수동으로 동결하세요.
 
-#### Rollback {#minideps-overview-rollback}
+#### 동결 {#minideps-overview-freeze}
 
 
-To roll back after an unfortunate update:
+플러그인 사양을 수정하여 `checkout`이 정적 대상을 가리키도록 하세요: 태그, 상태(커밋 해시) 또는 'HEAD'(현재 상태로 동결).
 
-- Get identifier of latest working state:
+동결된 플러그인은 업데이트를 받지 않습니다. [:DepsUpdate](mini-deps.qmd#depsupdate) 후 확인 버퍼에 표시될 `monitor` 브랜치를 "구독"하여 소스의 새로운 변경 사항을 모니터링할 수 있습니다.
 
-    - Use [:DepsShowLog](mini-deps.qmd#depsshowlog) to see update log, look for plugin's name, and copy
-      identifier listed as "State before:".
+예시: `checkout = 'v0.10.0'`을 사용하여 플러그인을 "v0.10.0" 태그로 동결하고, `monitor`(보통 기본값) 브랜치의 로그에서 새로운 버전을 모니터링합니다.
 
-    - See previously saved snapshot file for plugin's name and copy
-      identifier next to it.
+#### 롤백 {#minideps-overview-rollback}
 
-- Freeze plugin at that state while monitoring appropriate branch.
-  Revert to previous shape of [MiniDeps.add()](mini-deps.qmd#minideps.add) call to resume updating.
 
-#### Remove {#minideps-overview-remove}
+불운한 업데이트 후 롤백하려면:
+
+- 최신 작동 상태의 식별자를 가져옵니다:
+
+    - [:DepsShowLog](mini-deps.qmd#depsshowlog)를 사용하여 업데이트 로그를 보고, 플러그인 이름을 찾은 다음 "State before:"로 나열된 식별자를 복사합니다.
+
+    - 이전에 저장된 스냅샷 파일에서 플러그인 이름을 찾고 그 옆의 식별자를 복사합니다.
+
+- 적절한 브랜치를 모니터링하면서 해당 상태에서 플러그인을 동결합니다. 업데이트를 재개하려면 [MiniDeps.add()](mini-deps.qmd#minideps.add) 호출의 이전 모양으로 되돌립니다.
+
+#### 삭제 {#minideps-overview-remove}
 
 
 
-- Make sure that target plugin is not registered in current session.
-  Usually it means removing corresponding [MiniDeps.add()](mini-deps.qmd#minideps.add) call.
+- 대상 플러그인이 현재 세션에 등록되어 있지 않은지 확인하세요. 보통 해당 [MiniDeps.add()](mini-deps.qmd#minideps.add) 호출을 제거하는 것을 의미합니다.
 
-- Run [:DepsClean](mini-deps.qmd#depsclean). This will show confirmation buffer with a list of plugins to
-  be deleted from disk. Follow instructions at its top to finish cleaning.
+- [:DepsClean](mini-deps.qmd#depsclean)을 실행하세요. 디스크에서 삭제될 플러그인 목록이 포함된 확인 버퍼를 표시합니다. 삭제를 완료하려면 상단의 지침을 따르세요.
 
-Alternatively, manually delete plugin's directory from "pack/deps" package.
+또는 "pack/deps" 패키지에서 플러그인 디렉토리를 수동으로 삭제하세요.
 
 ---
 
-### Plugin specification {#minideps-plugin-specification .help-syntax-right-anchor}
+### 플러그인 사양 {#minideps-plugin-specification .help-syntax-right-anchor}
 
-Each plugin dependency is managed based on its specification (a.k.a. "spec").
-See [MiniDeps-overview](mini-deps.qmd#minideps-overview) for some examples.
+각 플러그인 의존성은 사양(일명 "spec")을 기반으로 관리됩니다.
+몇 가지 예시는 [MiniDeps-overview](mini-deps.qmd#minideps-overview)를 참고하세요.
 
-Specification can be a single string which is inferred as:
+사양은 다음과 같이 추론되는 단일 문자열일 수 있습니다:
 
-- Plugin <span class="help-syntax-keys">\<name\></span> if it doesn't contain "/".
+- "/"를 포함하지 않는 경우 플러그인 <span class="help-syntax-keys">\<name\></span>.
 
-- Plugin <span class="help-syntax-keys">\<source\></span> otherwise.
+- 그렇지 않은 경우 플러그 <span class="help-syntax-keys">\<source\></span>.
 
-Primarily, specification is a table with the following fields:
-
-
-- <span class="help-syntax-keys">\<source\></span> `(string|nil)` - field with URI of plugin source used during creation
-  or update. Can be anything allowed by `git clone`.
-  Default: `nil` to rely on source set up during install.
-  Notes:
-
-    - It is required for creating plugin, but can be omitted afterwards.
-
-    - As the most common case, URI of the format "user/repo" (if it contains
-      valid characters) is transformed into "https://github.com/user/repo".
+기본적으로 사양은 다음 필드를 갖는 테이블입니다:
 
 
-- <span class="help-syntax-keys">\<name\></span> `(string|nil)` - directory basename of where to put plugin source.
-  It is put in "pack/deps/opt" subdirectory of `config.path.package`.
-  Default: basename of <span class="help-syntax-keys">\<source\></span> if it is present, otherwise should be
-  provided explicitly.
+- <span class="help-syntax-keys">\<source\></span> `(string|nil)` - 생성 또는 업데이트 중에 사용되는 플러그인 소스의 URI 필드입니다. `git clone`이 허용하는 무엇이든 가능합니다.
+  기본값: 설치 중에 설정된 소스에 의존하도록 `nil`.
+  참고:
+
+    - 플러그인 생성에는 필수적이지만 나중에는 생략할 수 있습니다.
+
+    - 가장 흔한 경우로, "user/repo" 형식의 URI(유효한 문자가 포함된 경우)는 "https://github.com/user/repo"로 변환됩니다.
 
 
-- <span class="help-syntax-keys">\<checkout\></span> `(string|nil)` - checkout target used to set state during update.
-  Can be anything supported by `git checkout` - branch, commit, tag, etc.
-  Default: `nil` for default branch (usually "main" or "master").
+- <span class="help-syntax-keys">\<name\></span> `(string|nil)` - 플러그인 소스를 저장할 디렉토리 기본 이름입니다.
+  `config.path.package`의 "pack/deps/opt" 하위 디렉토리에 저장됩니다.
+  기본값: <span class="help-syntax-keys">\<source\></span>가 있는 경우 그 기본 이름이며, 그렇지 않으면 명시적으로 제공되어야 합니다.
 
 
-- <span class="help-syntax-keys">\<monitor\></span> `(string|nil)` - monitor branch used to track new changes from
-  different target than `checkout`. Should be a name of present Git branch.
-  Default: `nil` for default branch (usually "main" or "master").
+- <span class="help-syntax-keys">\<checkout\></span> `(string|nil)` - 업데이트 중 상태를 설정하는 데 사용되는 체크아웃 대상입니다.
+  `git checkout`이 지원하는 무엇이든(브랜치, 커밋, 태그 등) 가능합니다.
+  기본값: 기본 브랜치(보통 "main" 또는 "master")의 경우 `nil`.
 
 
-- <span class="help-syntax-keys">\<depends\></span> `(table|nil)` - array of plugin specifications (strings or tables)
-  to be added prior to the target.
-  Default: `nil` for no dependencies.
+- <span class="help-syntax-keys">\<monitor\></span> `(string|nil)` - `checkout`과 다른 대상에서 새로운 변경 사항을 추적하는 데 사용되는 모니터 브랜치입니다. 존재하는 Git 브랜치 이름이어야 합니다.
+  기본값: 기본 브랜치(보통 "main" 또는 "master")의 경우 `nil`.
 
 
-- <span class="help-syntax-keys">\<hooks\></span> `(table|nil)` - table with callable hooks to call on certain events.
-  Possible hook names:
+- <span class="help-syntax-keys">\<depends\></span> `(table|nil)` - 대상 전에 추가할 플러그인 사양(문자열 또는 테이블)의 배열입니다.
+  기본값: 의존성이 없는 경우 `nil`.
 
-    - <span class="help-syntax-keys">\<pre_install\></span>   - before creating plugin directory.
 
-    - <span class="help-syntax-keys">\<post_install\></span>  - after  creating plugin directory (before [:packadd](https://neovim.io/doc/user/helptag.html?tag=:packadd)).
+- <span class="help-syntax-keys">\<hooks\></span> `(table|nil)` - 특정 이벤트 발생 시 호출할 수 있는 훅 테이블입니다.
+  가능한 훅 이름:
 
-    - <span class="help-syntax-keys">\<pre_checkout\></span>  - before making change in existing plugin.
+    - <span class="help-syntax-keys">\<pre_install\></span>   - 플러그인 디렉토리를 생성하기 전.
 
-    - <span class="help-syntax-keys">\<post_checkout\></span> - after  making change in existing plugin.
-  Each hook is executed with the following table as an argument:
+    - <span class="help-syntax-keys">\<post_install\></span>  - 플러그인 디렉토리를 생성한 후 ([:packadd](https://neovim.io/doc/user/helptag.html?tag=:packadd) 전).
 
-    - <span class="help-syntax-keys">\<path\></span> (`string`)   - absolute path to plugin's directory
-      (might not yet exist on disk).
+    - <span class="help-syntax-keys">\<pre_checkout\></span>  - 기존 플러그인을 변경하기 전.
 
-    - <span class="help-syntax-keys">\<source\></span> (`string`) - resolved <span class="help-syntax-keys">\<source\></span> from spec.
+    - <span class="help-syntax-keys">\<post_checkout\></span> - 기존 플러그인을 변경한 후.
+  각 훅은 다음 테이블을 인수로 하여 실행됩니다:
 
-    - <span class="help-syntax-keys">\<name\></span> (`string`)   - resolved <span class="help-syntax-keys">\<name\></span> from spec.
-  Default: `nil` for no hooks.
+    - <span class="help-syntax-keys">\<path\></span> (`string`)   - 플러그인 디렉토리의 절대 경로 (디스크에 아직 존재하지 않을 수 있음).
+
+    - <span class="help-syntax-keys">\<source\></span> (`string`) - 사양에서 해석된 <span class="help-syntax-keys">\<source\></span>.
+
+    - <span class="help-syntax-keys">\<name\></span> (`string`)   - 사양에서 해석된 <span class="help-syntax-keys">\<name\></span>.
+  기본값: 훅이 없는 경우 `nil`.
 
 ---
 
-### Commands {#minideps-commands .help-syntax-right-anchor}
+### 명령어 {#minideps-commands .help-syntax-right-anchor}
 
-Note: Most commands have a Lua function alternative which they rely on.
-Like [:DepsAdd](mini-deps.qmd#depsadd) uses [MiniDeps.add()](mini-deps.qmd#minideps.add), etc.
+참고: 대부분의 명령에는 의존하는 Lua 함수 대안이 있습니다.
+[:DepsAdd](mini-deps.qmd#depsadd)가 [MiniDeps.add()](mini-deps.qmd#minideps.add)를 사용하는 식입니다.
 
 #### :DepsAdd {#minideps-commands-depsadd}
 
 
-<a name="depsadd" href="mini-deps.qmd#depsadd"><b>:DepsAdd</b></a> with `user/repo` argument makes plugin https://github.com/user/repo
-available in the current session (also creates it, if it is not present).
-`:DepsAdd name` adds already installed plugin `name` to current session.
-Accepts only single string compatible with [MiniDeps-plugin-specification](mini-deps.qmd#minideps-plugin-specification).
-To add plugin in every session, put [MiniDeps.add()](mini-deps.qmd#minideps.add) in [init.lua](https://neovim.io/doc/user/helptag.html?tag=init.lua).
+<a name="depsadd" href="mini-deps.qmd#depsadd"><b>:DepsAdd</b></a>에 `user/repo` 인수를 사용하면 https://github.com/user/repo 플러그인을 현재 세션에서 사용할 수 있게 합니다 (없는 경우 생성도 함).
+`:DepsAdd name`은 이미 설치된 플러그인 `name`을 현재 세션에 추가합니다.
+[MiniDeps-plugin-specification](mini-deps.qmd#minideps-plugin-specification)과 호환되는 단일 문자열만 허용합니다.
+모든 세션에 플러그인을 추가하려면 [init.lua](https://neovim.io/doc/user/helptag.html?tag=init.lua)에 [MiniDeps.add()](mini-deps.qmd#minideps.add)를 넣으세요.
 
 #### :DepsUpdate {#minideps-commands-depsupdate}
 
 
-<a name="depsupdate" href="mini-deps.qmd#depsupdate"><b>:DepsUpdate</b></a> synchronizes plugins with their session specifications and
-updates them with new changes from sources. It shows confirmation buffer in
-a separate [tabpage](https://neovim.io/doc/user/helptag.html?tag=tabpage) with information about an upcoming update to review
-and (selectively) apply. See [MiniDeps.update()](mini-deps.qmd#minideps.update) for more info.
+<a name="depsupdate" href="mini-deps.qmd#depsupdate"><b>:DepsUpdate</b></a>는 플러그인을 세션 사양과 동기화하고 소스의 새로운 변경 사항으로 업데이트합니다. 검토하고 (선택적으로) 적용할 예정인 업데이트에 대한 정보와 함께 별도의 [tabpage](https://neovim.io/doc/user/helptag.html?tag=tabpage)에 확인 버퍼를 표시합니다. 자세한 내용은 [MiniDeps.update()](mini-deps.qmd#minideps.update)를 참고하세요.
 
-`:DepsUpdate name` updates plugin `name`. Any number of names is allowed.
+`:DepsUpdate name`은 플러그인 `name`을 업데이트합니다. 이름은 몇 개든 허용됩니다.
 
-`:DepsUpdate!` and `:DepsUpdate! name` update without confirmation.
-You can see what was done in the log file afterwards ([:DepsShowLog](mini-deps.qmd#depsshowlog)).
+`:DepsUpdate!` 및 `:DepsUpdate! name`은 확인 없이 업데이트합니다.
+나중에 로그 파일([:DepsShowLog](mini-deps.qmd#depsshowlog))에서 수행된 작업을 확인할 수 있습니다.
 
 #### :DepsUpdateOffline {#minideps-commands-depsupdateoffline}
 
 
-<a name="depsupdateoffline" href="mini-deps.qmd#depsupdateoffline"><b>:DepsUpdateOffline</b></a> is same as [:DepsUpdate](mini-deps.qmd#depsupdate) but doesn't download new updates
-from sources. Useful to only synchronize plugin specification in code and
-on disk without unnecessary downloads.
+<a name="depsupdateoffline" href="mini-deps.qmd#depsupdateoffline"><b>:DepsUpdateOffline</b></a>은 [:DepsUpdate](mini-deps.qmd#depsupdate)와 동일하지만 소스에서 새로운 업데이트를 다운로드하지 않습니다. 불필요한 다운로드 없이 코드와 디스크의 플러그인 사양만 동기화하는 데 유용합니다.
 
 #### :DepsShowLog {#minideps-commands-depsshowlog}
 
 
-<a name="depsshowlog" href="mini-deps.qmd#depsshowlog"><b>:DepsShowLog</b></a> opens log file to review.
+<a name="depsshowlog" href="mini-deps.qmd#depsshowlog"><b>:DepsShowLog</b></a>는 검토할 로그 파일을 엽니다.
 
 #### :DepsClean {#minideps-commands-depsclean}
 
 
-<a name="depsclean" href="mini-deps.qmd#depsclean"><b>:DepsClean</b></a> deletes plugins from disk not added to current session. It shows
-confirmation buffer in a separate [tabpage](https://neovim.io/doc/user/helptag.html?tag=tabpage) with information about an upcoming
-deletes to review and (selectively) apply. See [MiniDeps.clean()](mini-deps.qmd#minideps.clean) for more info.
+<a name="depsclean" href="mini-deps.qmd#depsclean"><b>:DepsClean</b></a>은 현재 세션에 추가되지 않은 플러그인을 디스크에서 삭제합니다. 검토하고 (선택적으로) 적용할 예정인 삭제에 대한 정보와 함께 별도의 [tabpage](https://neovim.io/doc/user/helptag.html?tag=tabpage)에 확인 버퍼를 표시합니다. 자세한 내용은 [MiniDeps.clean()](mini-deps.qmd#minideps.clean)을 참고하세요.
 
-`:DepsClean!` deletes plugins without confirmation.
+`:DepsClean!`은 확인 없이 플러그인을 삭제합니다.
 
 #### :DepsSnapSave {#minideps-commands-depssnapsave}
 
 
-<a name="depssnapsave" href="mini-deps.qmd#depssnapsave"><b>:DepsSnapSave</b></a> creates snapshot file in default location (see [MiniDeps.config](mini-deps.qmd#minideps.config)).
-`:DepsSnapSave path` creates snapshot file at `path`.
+<a name="depssnapsave" href="mini-deps.qmd#depssnapsave"><b>:DepsSnapSave</b></a>는 기본 위치([MiniDeps.config](mini-deps.qmd#minideps.config) 참고)에 스냅샷 파일을 생성합니다.
+`:DepsSnapSave path`는 `path`에 스냅샷 파일을 생성합니다.
 
 #### :DepsSnapLoad {#minideps-commands-depssnapload}
 
 
-<a name="depssnapload" href="mini-deps.qmd#depssnapload"><b>:DepsSnapLoad</b></a> loads snapshot file from default location (see [MiniDeps.config](mini-deps.qmd#minideps.config)).
-`:DepsSnapLoad path` loads snapshot file at `path`.
+<a name="depssnapload" href="mini-deps.qmd#depssnapload"><b>:DepsSnapLoad</b></a>는 기본 위치([MiniDeps.config](mini-deps.qmd#minideps.config) 참고)에서 스냅샷 파일을 로드합니다.
+`:DepsSnapLoad path`는 `path`에서 스냅샷 파일을 로드합니다.
 
 ---
 
 ### setup() {#minideps.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-Calling this function creates user commands described in [MiniDeps-commands](mini-deps.qmd#minideps-commands).
+이 함수를 호출하면 [MiniDeps-commands](mini-deps.qmd#minideps-commands)에 설명된 사용자 명령어가 생성됩니다.
 
-#### Parameters {#minideps.setup-parameters}
+#### 매개변수 {#minideps.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniDeps.config](mini-deps.qmd#minideps.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniDeps.config](mini-deps.qmd#minideps.config)를 참고하세요.
 
-#### Usage {#minideps.setup-usage}
+#### 사용법 {#minideps.setup-usage}
 
 
 
   ```lua
-  require('mini.deps').setup() -- use default config
-  -- OR
-  require('mini.deps').setup({}) -- replace {} with your config table
+  require('mini.deps').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.deps').setup({}) -- {}를 설정 테이블로 교체
   ```
 
 ---
@@ -475,302 +415,285 @@ Calling this function creates user commands described in [MiniDeps-commands](min
 ### config {#minideps.config .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.config`</p>
-#### Defaults {#minideps.config-defaults}
+#### 기본값 {#minideps.config-defaults}
 
 
 
   ```lua
   MiniDeps.config = {
-    -- Parameters of CLI jobs
+    -- CLI 작업 매개변수
     job = {
-      -- Number of parallel threads to use. Default: 80% of all available.
+      -- 사용할 병렬 스레드 수. 기본값: 전체 가용 리소스의 80%.
       n_threads = nil,
 
-      -- Timeout (in ms) for each job before force quit
+      -- 강제 종료 전 각 작업의 타임아웃 (ms 단위)
       timeout = 30000,
     },
 
-    -- Paths describing where to store data
+    -- 데이터 저장 위치를 설명하는 경로
     path = {
-      -- Directory for built-in package.
-      -- All plugins are actually stored in 'pack/deps' subdirectory.
+      -- 내장 패키지 디렉토리.
+      -- 모든 플러그인은 실제로 'pack/deps' 하위 디렉토리에 저장됩니다.
       package = vim.fn.stdpath('data') .. '/site',
 
-      -- Default file path for a snapshot
+      -- 스냅샷의 기본 파일 경로
       snapshot = vim.fn.stdpath('config') .. '/mini-deps-snap',
 
-      -- Log file
+      -- 로그 파일
       log = vim.fn.stdpath('log') .. '/mini-deps.log'
     },
 
-    -- Whether to disable showing non-error feedback
+    -- 오류가 아닌 피드백 표시를 비활성화할지 여부
     silent = false,
   }
   ```
 
-#### Job {#minideps.config-job}
+#### 작업 {#minideps.config-job}
 
 
-`config.job` defines how CLI jobs are run.
+`config.job`은 CLI 작업이 실행되는 방식을 정의합니다.
 
-`job.n_threads` is a maximum number of parallel jobs used when needed.
-Default: 80% of all available.
+`job.n_threads`는 필요할 때 사용되는 최대 병렬 작업 수입니다.
+기본값: 전체 가용 리소스의 80%.
 
-`job.timeout` is a duration (in ms) from job start until it is forced to stop.
-Default: 30000.
+`job.timeout`은 작업 시작부터 강제 종료까지의 기간(ms 단위)입니다.
+기본값: 30000.
 
-#### Paths {#minideps.config-paths}
-
-
-`config.path` defines main paths used in this module.
-
-`path.package` is a string with path inside which "pack/deps" package is stored
-(see [MiniDeps-overview](mini-deps.qmd#minideps-overview)).
-Default: "site" subdirectory of "data" standard path (see [stdpath()](https://neovim.io/doc/user/helptag.html?tag=stdpath\(\))).
-
-`path.snapshot` is a string with default path for snapshot.
-See [:DepsSnapSave](mini-deps.qmd#depssnapsave) and [:DepsSnapLoad](mini-deps.qmd#depssnapload).
-Default: "mini-deps-snap" file in "config" standard path (see [stdpath()](https://neovim.io/doc/user/helptag.html?tag=stdpath\(\))).
-
-`path.log` is a string with path containing log of operations done by module.
-In particular, it contains all changes done after making an update.
-Default: "mini-deps.log" file in "log" standard path (see [stdpath()](https://neovim.io/doc/user/helptag.html?tag=stdpath\(\))).
-
-#### Silent {#minideps.config-silent}
+#### 경로 {#minideps.config-paths}
 
 
-`config.silent` is a boolean controlling whether to suppress non-error feedback.
-Default: `false`.
+`config.path`는 이 모듈에서 사용되는 주요 경로를 정의합니다.
+
+`path.package`는 "pack/deps" 패키지가 저장되는 경로가 포함된 문자열입니다
+([MiniDeps-overview](mini-deps.qmd#minideps-overview) 참고).
+기본값: "data" 표준 경로([stdpath()](https://neovim.io/doc/user/helptag.html?tag=stdpath\(\)) 참고)의 "site" 하위 디렉토리.
+
+`path.snapshot`은 스냅샷의 기본 경로가 포함된 문자열입니다.
+[:DepsSnapSave](mini-deps.qmd#depssnapsave) 및 [:DepsSnapLoad](mini-deps.qmd#depssnapload)를 참고하세요.
+기본값: "config" 표준 경로([stdpath()](https://neovim.io/doc/user/helptag.html?tag=stdpath\(\)) 참고)의 "mini-deps-snap" 파일.
+
+`path.log`는 모듈에서 수행한 작업 로그가 포함된 경로의 문자열입니다.
+특히 업데이트 후 수행된 모든 변경 사항이 포함됩니다.
+기본값: "log" 표준 경로([stdpath()](https://neovim.io/doc/user/helptag.html?tag=stdpath\(\)) 참고)의 "mini-deps.log" 파일.
+
+#### 자동 모드 {#minideps.config-silent}
+
+
+`config.silent`는 오류가 아닌 피드백을 억제할지 여부를 제어하는 불리언입니다.
+기본값: `false`.
 
 ---
 
 ### add() {#minideps.add .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.add`(<span class="help-syntax-special">{spec}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Add plugin to current session
+현재 세션에 플러그인 추가
 
 
-- Process specification by expanding dependencies into single spec array.
+- 의존성을 단일 사양 배열로 확장하여 사양을 처리합니다.
 
-- Ensure plugin is present on disk along with its dependencies by installing
-  (in parallel) absent ones:
+- 없는 의존성을 (병렬로) 설치하여 디스크에 플러그인과 그 의존성이 있는지 확인합니다:
 
-    - Execute `opts.hooks.pre_install`.
+    - `opts.hooks.pre_install`을 실행합니다.
 
-    - Use `git clone` to clone plugin from its source URI into "pack/deps/opt".
+    - `git clone`을 사용하여 소스 URI에서 "pack/deps/opt"로 플러그인을 클론합니다.
 
-    - Set state according to `opts.checkout`.
+    - `opts.checkout`에 따라 상태를 설정합니다.
 
-    - Execute `opts.hooks.post_install`.
+    - `opts.hooks.post_install`을 실행합니다.
 
-- Register spec(s) in current session.
+- 현재 세션에 사양을 등록합니다.
 
-- Make sure plugin(s) can be used in current session (see [:packadd](https://neovim.io/doc/user/helptag.html?tag=:packadd)).
+- 현재 세션에서 플러그인을 사용할 수 있는지 확인합니다 ([:packadd](https://neovim.io/doc/user/helptag.html?tag=:packadd) 참고).
 
-- If not during startup and is needed, source all "after/plugin/" scripts.
+- 시작 중이 아니고 필요한 경우, 모든 "after/plugin/" 스크립트를 소싱합니다.
 
-Notes:
+참고:
 
-- Presence of plugin is checked by its name which is the same as the name
-  of its directory inside "pack/deps" package (see [MiniDeps-overview](mini-deps.qmd#minideps-overview)).
+- 플러그인의 존재 여부는 "pack/deps" 패키지 내부의 디렉토리 이름과 동일한 이름으로 확인됩니다 ([MiniDeps-overview](mini-deps.qmd#minideps-overview) 참고).
 
-- To increase performance, this function only ensures presence on disk and
-  nothing else. In particular, it doesn't ensure `opts.checkout` state.
-  Use [MiniDeps.update()](mini-deps.qmd#minideps.update) or [:DepsUpdateOffline](mini-deps.qmd#depsupdateoffline) explicitly.
+- 성능을 높이기 위해 이 함수는 디스크에 존재 여부만 보장하고 그 외에는 아무것도 하지 않습니다. 특히 `opts.checkout` 상태를 보장하지 않습니다.
+  [MiniDeps.update()](mini-deps.qmd#minideps.update) 또는 [:DepsUpdateOffline](mini-deps.qmd#depsupdateoffline)을 명시적으로 사용하세요.
 
-- Adding plugin several times updates its session specs.
+- 플러그인을 여러 번 추가하면 세션 사양이 업데이트됩니다.
 
-#### Parameters {#minideps.add-parameters}
+#### 매개변수 {#minideps.add-parameters}
 
 
 
-<span class="help-syntax-special">{spec}</span> `(table|string)` Plugin specification. See [MiniDeps-plugin-specification](mini-deps.qmd#minideps-plugin-specification).
+<span class="help-syntax-special">{spec}</span> `(table|string)` 플러그인 사양. [플러그인 사양](mini-deps.qmd#minideps-plugin-specification)을 참고하세요.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<bang\></span> `(boolean)` - whether to use `:packadd!` instead of plain [:packadd](https://neovim.io/doc/user/helptag.html?tag=:packadd).
+  - <span class="help-syntax-keys">\<bang\></span> `(boolean)` - 일반 [:packadd](https://neovim.io/doc/user/helptag.html?tag=:packadd) 대신 `:packadd!`를 사용할지 여부.
 
 ---
 
 ### update() {#minideps.update .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.update`(<span class="help-syntax-special">{names}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Update plugins
+플러그인 업데이트
 
 
-- Synchronize specs with state of plugins on disk (set `source`, etc.).
+- 사양을 디스크의 플러그인 상태와 동기화합니다 (`source` 설정 등).
 
-- Infer data before downloading updates.
+- 업데이트를 다운로드하기 전에 데이터를 추론합니다.
 
-- If not offline, download updates (in parallel).
+- 오프라인이 아닌 경우, 업데이트를 (병렬로) 다운로드합니다.
 
-- Infer data after downloading updates.
+- 업데이트를 다운로드한 후 데이터를 추론합니다.
 
-- If update is forced, apply all changes immediately while updating log
-  file (at `config.path.log`; use [:DepsShowLog](mini-deps.qmd#depsshowlog) to review).
-  Otherwise show confirmation buffer with instructions on how to proceed.
+- 업데이트가 강제된 경우, 로그 파일(`config.path.log`에 위치; 검토하려면 [:DepsShowLog](mini-deps.qmd#depsshowlog) 사용)을 업데이트하면서 모든 변경 사항을 즉시 적용합니다.
+  그렇지 않으면 진행 방법에 대한 지침과 함께 확인 버퍼를 표시합니다.
 
-#### Parameters {#minideps.update-parameters}
-
+#### 매개변수 {#minideps.update-parameters}
 
 
-<span class="help-syntax-special">{names}</span> `(table|nil)` Array of plugin names to update.
- Default: all plugins from current session (see [MiniDeps.get\_session()](mini-deps.qmd#minideps.get_session)).
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{names}</span> `(table|nil)` 업데이트할 플러그인 이름 배열.
+ 기본값: 현재 세션의 모든 플러그인 ([MiniDeps.get\_session()](mini-deps.qmd#minideps.get_session) 참고).
 
-  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - whether to force update without confirmation.
-    Default: `false`.
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<offline\></span> `(boolean)` - whether to skip downloading updates from sources.
-    Default: `false`.
+  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - 확인 없이 업데이트를 강제할지 여부.
+    기본값: `false`.
+
+  - <span class="help-syntax-keys">\<offline\></span> `(boolean)` - 소스에서 업데이트 다운로드를 건너뛸지 여부.
+    기본값: `false`.
 
 ---
 
 ### clean() {#minideps.clean .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.clean`(<span class="help-syntax-special">{opts}</span>)</p>
-Clean plugins
+플러그인 삭제
 
 
-- Compute absent plugins: not registered in current session
-  (see [MiniDeps.get\_session()](mini-deps.qmd#minideps.get_session)) but present on disk in dedicated "pack/deps"
-  package (inside `config.path.package`).
+- 없는 플러그인 계산: 현재 세션에 등록되지 않았지만([MiniDeps.get\_session()](mini-deps.qmd#minideps.get_session) 참고) 전용 "pack/deps" 패키지(`config.path.package` 내부)의 디스크에 존재하는 플러그인.
 
-- If cleaning is forced, delete all absent plugins from disk.
-  Otherwise show confirmation buffer with instructions on how to proceed.
+- 삭제가 강제된 경우, 디스크에서 모든 없는 플러그인을 삭제합니다.
+  그렇지 않으면 진행 방법에 대한 지침과 함께 확인 버퍼를 표시합니다.
 
-#### Parameters {#minideps.clean-parameters}
+#### 매개변수 {#minideps.clean-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - whether to force delete without confirmation.
-    Default: `false`.
+  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - 확인 없이 삭제를 강제할지 여부.
+    기본값: `false`.
 
 ---
 
 ### snap_get() {#minideps.snap_get .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.snap_get`()</p>
-Compute snapshot
+스냅샷 계산
 
-#### Return {#minideps.snap_get-return}
+#### 반환값 {#minideps.snap_get-return}
 
 
-`(table)` A snapshot table: plugin names as keys and state as values.
-  All plugins in current session are processed.
+`(table)` 스냅샷 테이블: 플러그인 이름이 키이고 상태가 값입니다.
+  현재 세션의 모든 플러그인이 처리됩니다.
 
 ---
 
 ### snap_set() {#minideps.snap_set .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.snap_set`(<span class="help-syntax-special">{snap}</span>)</p>
-Apply snapshot
+스냅샷 적용
 
-Notes:
+참고:
 
-- Checking out states from snapshot does not update session plugin spec
-  (`checkout` field in particular). Among others, it means that next call
-  to [MiniDeps.update()](mini-deps.qmd#minideps.update) might override the result of this function.
-  To make changes permanent, set `checkout` spec field to state from snapshot.
+- 스냅샷에서 상태를 체크아웃해도 세션 플러그인 사양(특히 `checkout` 필드)은 업데이트되지 않습니다. 즉, 다음 [MiniDeps.update()](mini-deps.qmd#minideps.update) 호출 시 이 함수의 결과가 무시될 수 있습니다.
+  변경 사항을 영구적으로 만들려면 `checkout` 사양 필드를 스냅샷의 상태로 설정하세요.
 
-#### Parameters {#minideps.snap_set-parameters}
+#### 매개변수 {#minideps.snap_set-parameters}
 
 
 
-<span class="help-syntax-special">{snap}</span> `(table)` A snapshot table: plugin names as keys and state as values.
-  Only plugins in current session are processed.
+<span class="help-syntax-special">{snap}</span> `(table)` 스냅샷 테이블: 플러그인 이름이 키이고 상태가 값입니다.
+  현재 세션의 플러그인만 처리됩니다.
 
 ---
 
 ### snap_save() {#minideps.snap_save .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.snap_save`(<span class="help-syntax-special">{path}</span>)</p>
-Save snapshot
+스냅샷 저장
 
-#### Parameters {#minideps.snap_save-parameters}
+#### 매개변수 {#minideps.snap_save-parameters}
 
 
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` A valid path on disk where to write snapshot computed
-  with [MiniDeps.snap\_get()](mini-deps.qmd#minideps.snap_get).
-  Default: `config.path.snapshot`.
+<span class="help-syntax-special">{path}</span> `(string|nil)` [MiniDeps.snap\_get()](mini-deps.qmd#minideps.snap_get)으로 계산된 스냅샷을 기록할 디스크의 유효한 경로입니다.
+  기본값: `config.path.snapshot`.
 
 ---
 
 ### snap_load() {#minideps.snap_load .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.snap_load`(<span class="help-syntax-special">{path}</span>)</p>
-Load snapshot file
+스냅샷 파일 로드
 
-Notes from [MiniDeps.snap\_set()](mini-deps.qmd#minideps.snap_set) also apply here.
+[MiniDeps.snap\_set()](mini-deps.qmd#minideps.snap_set)의 참고 사항이 여기에도 적용됩니다.
 
-#### Parameters {#minideps.snap_load-parameters}
+#### 매개변수 {#minideps.snap_load-parameters}
 
 
 
-<span class="help-syntax-special">{path}</span> `(string|nil)` A valid path on disk from where to read snapshot.
-  Default: `config.path.snapshot`.
+<span class="help-syntax-special">{path}</span> `(string|nil)` 스냅샷을 읽어올 디스크의 유효한 경로입니다.
+  기본값: `config.path.snapshot`.
 
 ---
 
 ### get_session() {#minideps.get_session .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.get_session`()</p>
-Get session
+세션 가져오기
 
-Plugin is registered in current session if it either:
+플러그인은 다음 중 하나에 해당하면 현재 세션에 등록됩니다:
 
-- Was added with [MiniDeps.add()](mini-deps.qmd#minideps.add) (preserving order of calls).
+- [MiniDeps.add()](mini-deps.qmd#minideps.add)로 추가된 경우 (호출 순서 유지).
 
-- Is a "start" plugin and present in 'runtimpath'.
+- "start" 플러그인이며 'runtimpath'에 있는 경우.
 
-#### Return {#minideps.get_session-return}
+#### 반환값 {#minideps.get_session-return}
 
 
-`(table)` Array with specifications of all plugins registered in
-  current session.
+`(table)` 현재 세션에 등록된 모든 플러그인의 사양이 포함된 배열.
 
 ---
 
 ### now() {#minideps.now .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.now`(<span class="help-syntax-special">{f}</span>)</p>
-Execute function now
+함수 즉시 실행
 
-Safely execute function immediately. Errors are shown with [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\))
-later, after all queued functions (including with [MiniDeps.later()](mini-deps.qmd#minideps.later))
-are executed, thus not blocking execution of next code in file.
+함수를 즉시 안전하게 실행합니다. 오류는 나중에 대기 중인 모든 함수([MiniDeps.later()](mini-deps.qmd#minideps.later) 포함)가 실행된 후 [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\))로 표시되므로, 파일의 다음 코드 실행을 방해하지 않습니다.
 
-Assumed to be used as a first step during two-stage config execution to
-load plugins immediately during startup. See [MiniDeps-overview](mini-deps.qmd#minideps-overview).
+시작 시 플러그인을 즉시 로드하기 위해 2단계 설정 실행 중 첫 번째 단계로 사용되는 것으로 가정합니다. [MiniDeps-overview](mini-deps.qmd#minideps-overview)를 참고하세요.
 
-#### Parameters {#minideps.now-parameters}
+#### 매개변수 {#minideps.now-parameters}
 
 
 
-<span class="help-syntax-special">{f}</span> `(function)` Callable to execute.
+<span class="help-syntax-special">{f}</span> `(function)` 실행할 호출 가능한 객체.
 
 ---
 
 ### later() {#minideps.later .help-syntax-right-anchor}
 
 <p align="center">`MiniDeps.later`(<span class="help-syntax-special">{f}</span>)</p>
-Execute function later
+함수 나중에 실행
 
-Queue function to be safely executed later without blocking execution of
-next code in file. All queued functions are guaranteed to be executed in
-order they were added.
-Errors are shown with [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\)) after all queued functions are executed.
+파일의 다음 코드 실행을 방해하지 않고 나중에 안전하게 실행되도록 함수를 대기열에 추가합니다. 대기 중인 모든 함수는 추가된 순서대로 실행되는 것이 보장됩니다.
+오류는 모든 대기 중인 함수가 실행된 후 [vim.notify()](https://neovim.io/doc/user/helptag.html?tag=vim.notify\(\))로 표시됩니다.
 
-Assumed to be used as a second step during two-stage config execution to
-load plugins "lazily" after startup. See [MiniDeps-overview](mini-deps.qmd#minideps-overview).
+시작 후 플러그인을 "지연" 로드하기 위해 2단계 설정 실행 중 두 번째 단계로 사용되는 것으로 가정합니다. [MiniDeps-overview](mini-deps.qmd#minideps-overview)를 참고하세요.
 
-#### Parameters {#minideps.later-parameters}
+#### 매개변수 {#minideps.later-parameters}
 
 
 
-<span class="help-syntax-special">{f}</span> `(function)` Callable to execute.
-
+<span class="help-syntax-special">{f}</span> `(function)` 실행할 호출 가능한 객체.

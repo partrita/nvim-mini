@@ -1,248 +1,217 @@
 ---
-title: "mini.colors documentation"
+title: "mini.colors 문서"
 ---
 
 _Generated from the `main` branch of 'mini.nvim'_
 
-<a name="mini.colors" href="mini-colors.qmd#mini.colors"><b>mini.colors</b></a> Tweak and save any color scheme
+<a name="mini.colors" href="mini-colors.qmd#mini.colors"><b>mini.colors</b></a> 모든 색상 스키마를 조정하고 저장합니다
 
 MIT License Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+기능:
 
-- Create colorscheme object: either manually ([MiniColors.as\_colorscheme()](mini-colors.qmd#minicolors.as_colorscheme))
-  or by querying present color schemes (including currently active one; see
-  [MiniColors.get\_colorscheme()](mini-colors.qmd#minicolors.get_colorscheme)).
-
-
-- Infer data about color scheme and/or modify based on it:
-
-    - Add transparency by removing background color (requires transparency
-      in terminal emulator).
-
-    - Infer cterm attributes ([cterm-colors](https://neovim.io/doc/user/helptag.html?tag=cterm-colors)) based on gui colors making it
-      compatible with 'notermguicolors'.
-
-    - Resolve highlight group links ([:highlight-link](https://neovim.io/doc/user/helptag.html?tag=:highlight-link)).
-
-    - Compress by removing redundant highlight groups.
-
-    - Extract palette of used colors and/or infer terminal colors
-      ([terminal-config](https://neovim.io/doc/user/helptag.html?tag=terminal-config)) based on it.
+- 색상 스키마 객체 생성: 수동([MiniColors.as\_colorscheme()](mini-colors.qmd#minicolors.as_colorscheme))으로 생성하거나
+  현재 등록된 색상 스키마(현재 활성화된 것 포함; [MiniColors.get\_colorscheme()](mini-colors.qmd#minicolors.get_colorscheme) 참고)를 조회하여 생성할 수 있습니다.
 
 
-- Modify colors to better fit your taste and/or goals (see more in
-  [MiniColors-colorscheme-methods](mini-colors.qmd#minicolors-colorscheme-methods)):
+- 색상 스키마 데이터 추론 및 수정:
 
-    - Apply any function to color hex string.
+    - 배경색을 제거하여 투명도 추가(터미널 에뮬레이터에서 투명도를 지원해야 함).
 
-    - Update channels (like lightness, saturation, hue, temperature, red,
-      green, blue, etc.; see more in [MiniColors-channels](mini-colors.qmd#minicolors-channels)).
-      Use either own function or one of the implemented methods:
+    - GUI 색상을 기반으로 cterm 속성([cterm-colors](https://neovim.io/doc/user/helptag.html?tag=cterm-colors))을 추론하여 'notermguicolors'와 호환되게 만듭니다.
 
-        - Add value to channel or multiply it by coefficient. Like "add 10
-          to saturation of every color" or "multiply saturation by 2" to
-          make colors more saturated (less gray).
+    - 하이라이트 그룹 링크([:highlight-link](https://neovim.io/doc/user/helptag.html?tag=:highlight-link))를 해결합니다.
 
-        - Invert. Like "invert lightness" to convert between dark/light theme.
+    - 중복된 하이라이트 그룹을 제거하여 압축합니다.
 
-        - Set to one or more values (picks closest to current one). Like
-          "set to one or two hues" to make mono- or dichromatic color scheme.
-
-        - Repel from certain source(s) with stronger effect for closer values.
-          Like "repel from hue 30" to remove red color from color scheme.
-          Repel hue (how much is removed) is configurable.
-
-    - Simulate color vision deficiency.
+    - 사용된 색상의 팔레트를 추출하거나 이를 기반으로 터미널 색상([terminal-config](https://neovim.io/doc/user/helptag.html?tag=terminal-config))을 추론합니다.
 
 
-- Once color scheme is ready, either apply it to see effects right away or
-  write it into a Lua file as a fully functioning separate color scheme.
+- 취향이나 목적에 맞게 색상 수정([MiniColors-colorscheme-methods](mini-colors.qmd#minicolors-colorscheme-methods) 참고):
+
+    - 색상 16진수 문자열에 임의의 함수를 적용합니다.
+
+    - 채널(명도, 채도, 색상, 색온도, 빨강, 초록, 파랑 등; [MiniColors-channels](mini-colors.qmd#minicolors-channels) 참고)을 업데이트합니다.
+      직접 함수를 사용하거나 다음 메서드 중 하나를 사용하십시오:
+
+        - 채널에 값을 더하거나 계수를 곱합니다. 예를 들어 "모든 색상의 채도에 10 더하기" 또는 "채도에 2 곱하기"를 통해 색상을 더 선명하게(회색기 제거) 만들 수 있습니다.
+
+        - 반전. 예를 들어 "명도 반전"을 통해 다크/라이트 테마를 서로 전환할 수 있습니다.
+
+        - 하나 이상의 값으로 설정(현재 값과 가장 가까운 값을 선택). 예를 들어 "하나 또는 두 개의 색상으로 설정"하여 단색(monochromatic) 또는 이색(dichromatic) 색상 스키마를 만들 수 있습니다.
+
+        - 특정 원본에서 멀어지게 하며, 가까운 값일수록 더 강하게 적용합니다. 예를 들어 "색상 30(빨강)에서 멀어지게" 하여 색상 스키마에서 빨간색을 제거할 수 있습니다. 멀어지는 정도는 구성 가능합니다.
+
+    - 색각 결핍(color vision deficiency)을 시뮬레이션합니다.
 
 
-- Experiment interactively with a feedback ([MiniColors.interactive()](mini-colors.qmd#minicolors.interactive)).
+- 색상 스키마가 준비되면 바로 적용하여 효과를 확인하거나, 완전히 작동하는 별도의 색상 스키마로서 Lua 파일로 저장할 수 있습니다.
 
 
-- Animate transition between color schemes either with [MiniColors.animate()](mini-colors.qmd#minicolors.animate)
-  or with [:Colorscheme](mini-colors.qmd#colorscheme) user command.
+- 피드백을 받으며 대화형으로 실험할 수 있습니다([MiniColors.interactive()](mini-colors.qmd#minicolors.interactive)).
 
 
-- Convert within supported color spaces ([MiniColors.convert()](mini-colors.qmd#minicolors.convert)):
+- [MiniColors.animate()](mini-colors.qmd#minicolors.animate) 또는 [:Colorscheme](mini-colors.qmd#colorscheme) 사용자 명령을 통해 색상 스키마 간의 전환 애니메이션을 보여줍니다.
 
-    - Hex string.
 
-    - 8-bit number (terminal colors).
+- 지원되는 색 공간 내에서 변환합니다([MiniColors.convert()](mini-colors.qmd#minicolors.convert)):
+
+    - 16진수 문자열(Hex).
+
+    - 8비트 숫자(터미널 색상).
 
     - RGB.
 
     - Oklab, Oklch, Okhsl (https://bottosson.github.io/posts/oklab/).
 
-Notes:
+참고:
 
-- There is a collection of [MiniColors-recipes](mini-colors.qmd#minicolors-recipes) with code snippets for some
-  common tasks.
+- 일반적인 작업을 위한 코드 스니펫이 포함된 [MiniColors-recipes](mini-colors.qmd#minicolors-recipes) 컬렉션이 있습니다.
 
-- There is no goal to support as many color spaces as possible, only the
-  already present ones.
+- 가능한 많은 색 공간을 지원하는 것이 목표가 아니며, 현재 존재하는 색 공간만 지원합니다.
 
-#### Tweak quick start {#module-tweakquickstart}
+#### 조정 퀵 스타트 {#module-tweakquickstart}
 
 
 
-- Execute `:lua require('mini.colors').interactive()`.
+- `:lua require('mini.colors').interactive()`를 실행합니다.
 
 
-- Experiment by writing calls to exposed color scheme methods and applying
-  them with `<M-a>`. For more information, see [MiniColors-colorscheme-methods](mini-colors.qmd#minicolors-colorscheme-methods)
-  and [MiniColors-recipes](mini-colors.qmd#minicolors-recipes).
+- 노출된 색상 스키마 메서드를 호출하는 코드를 작성하고 `<M-a>`로 적용하며 실험합니다. 자세한 정보는 [MiniColors-colorscheme-methods](mini-colors.qmd#minicolors-colorscheme-methods) 및 [MiniColors-recipes](mini-colors.qmd#minicolors-recipes)를 참고하십시오.
 
 
-- If you are happy with result, write color scheme with `<M-w>`. If not,
-  reset to initial color scheme with `<M-r>`.
+- 결과가 마음에 들면 `<M-w>`로 색상 스키마를 저장합니다. 그렇지 않다면 `<M-r>`로 초기 색상 스키마로 재설정합니다.
 
 
-- If only some highlight groups can be made better, adjust them manually
-  inside written color scheme file.
+- 일부 하이라이트 그룹만 더 개선할 수 있다면, 저장된 색상 스키마 파일 내에서 직접 조정하십시오.
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module doesn't need setup, but it can be done to improve usability.
-Setup with `require('mini.colors').setup({})` (replace `{}` with your
-`config` table). It will create global Lua table `MiniColors` which you can
-use for scripting or manually (with `:lua MiniColors.*`).
+이 모듈은 설정을 필수로 요구하지 않지만, 사용 편의성을 위해 설정할 수 있습니다.
+`require('mini.colors').setup({})`으로 설정하십시오(`{}`를 `config` 테이블로 교체). 이를 통해 스크립트나 수동 작업 시 사용할 수 있는 전역 Lua 테이블 `MiniColors`가 생성됩니다(예: `:lua MiniColors.*`).
 
-See [MiniColors.config](mini-colors.qmd#minicolors.config) for `config` structure and default values.
+`config` 구조와 기본값은 [MiniColors.config](mini-colors.qmd#minicolors.config)를 참고하십시오.
 
-This module doesn't have runtime options, so using `vim.b.minicolors_config`
-will have no effect here.
+이 모듈은 런타임 옵션이 없으므로 `vim.b.minicolors_config`를 사용해도 효과가 없습니다.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [rktjmp/lush.nvim](https://github.com/rktjmp/lush.nvim):
 
-    - Oriented towards tweaking separate highlight groups, while 'mini.colors'
-      is more designed to work with color scheme as a whole.
+    - 개별 하이라이트 그룹 조정에 중점을 둔 반면, 'mini.colors'는 색상 스키마 전체를 작업하도록 설계되었습니다.
 
-    - Uses HSL and HSLuv color spaces, while 'mini.colors' uses Oklab, Oklch,
-      and Okhsl which have slightly better perceptual uniformity properties.
+    - HSL 및 HSLuv 색 공간을 사용하지만, 'mini.colors'는 지각적으로 더 균일한 속성을 가진 Oklab, Oklch, Okhsl을 사용합니다.
 
-    - Doesn't have functionality to infer and repair missing data in color
-      scheme (like cterm attributes, terminal colors, transparency, etc.),
-      while 'mini.colors' does.
+    - 색상 스키마에서 누락된 데이터(cterm 속성, 터미널 색상, 투명도 등)를 추론하고 복구하는 기능이 없지만, 'mini.colors'는 이를 지원합니다.
 
-    - Doesn't implement animation of color scheme transition, while
-      'mini.colors' does.
+    - 색상 스키마 전환 애니메이션을 구현하지 않지만, 'mini.colors'는 지원합니다.
 
 - [lifepillar/vim-colortemplate](https://github.com/lifepillar/vim-colortemplate):
 
-    - Comparisons are similar to that of 'rktjmp/lush.nvim'.
+    - 'rktjmp/lush.nvim'과 유사한 차이점이 있습니다.
 
 - [tjdevries/colorbuddy.nvim](https://github.com/tjdevries/colorbuddy.nvim):
 
-    - Comparisons are similar to that of 'rktjmp/lush.nvim'.
+    - 'rktjmp/lush.nvim'과 유사한 차이점이 있습니다.
 
 ---
 
-### Recipes {#minicolors-recipes .help-syntax-right-anchor}
+### 레시피 {#minicolors-recipes .help-syntax-right-anchor}
 
-All following code snippets assume to be executed inside interactive buffer
-([MiniColors.interactive()](mini-colors.qmd#minicolors.interactive)). They are directly copy-pasteable.
+다음의 모든 코드 스니펫은 대화형 버퍼([MiniColors.interactive()](mini-colors.qmd#minicolors.interactive)) 내부에서 실행되는 것을 가정합니다. 직접 복사하여 붙여넣을 수 있습니다.
 
-To apply single method to current color scheme, use
+현재 색상 스키마에 단일 메서드를 적용하려면 다음을 사용하십시오.
 
   ```vim
-  :lua MiniColors.get_colorscheme():<method goes here>:apply().
+  :lua MiniColors.get_colorscheme():<메서드 내용>:apply().
   ```
 
-Recipes:
+레시피:
 
-- Tweak lightness:
+- 명도(lightness) 조정:
 
   ```lua
-  -- Invert dark/light color scheme to be light/dark
+  -- 다크/라이트 색상 스키마를 라이트/다크로 반전
   chan_invert('lightness', { gamut_clip = 'cusp' })
 
-  -- Ensure constant contrast ratio
+  -- 일정한 대비 비율 보장
   chan_set('lightness', 15, { filter = 'bg' })
   chan_set('lightness', 85, { filter = 'fg' })
   ```
 
 
-- Tweak saturation:
+- 채도(saturation) 조정:
 
   ```lua
-  -- Make background colors less saturated and foreground - more
+  -- 배경색의 채도는 낮추고 전경색은 높이기
   chan_add('saturation', -20, { filter = 'bg' })
   chan_add('saturation', 20,  { filter = 'fg' })
 
-  -- Convert to grayscale
+  -- 회색조(grayscale)로 변환
   chan_set('saturation', 0)
   ```
 
 
-- Tweak hue:
+- 색상(hue) 조정:
 
   ```lua
-  -- Create monochromatic variant (this uses green color)
+  -- 단색 변형 생성 (초록색 사용)
   chan_set('hue', 135)
 
-  -- Create dichromatic variant (this uses Neovim-themed hues)
+  -- 이색 변형 생성 (Neovim 테마 색상 사용)
   chan_set('hue', { 140, 245 })
   ```
 
 
-- Tweak temperature:
+- 색온도(temperature) 조정:
 
   ```lua
-  -- Invert temperature (make cold theme become warm and vice versa)
+  -- 색온도 반전 (차가운 테마를 따뜻하게 또는 반대로)
   chan_invert('temperature')
 
-  -- Make background colors colder and foreground warmer
+  -- 배경색은 더 차갑게, 전경색은 더 따뜻하게 만들기
   chan_add('temperature', -40, { filter = 'bg' })
   chan_add('temperature', 40,  { filter = 'fg' })
   ```
 
 
-- Counter color vision deficiency (try combinations of these to see which
-  one works best for you):
+- 색각 결핍 대응 (자신에게 가장 잘 맞는 조합을 찾아보십시오):
 
 
-    - Improve text saturation contrast (usually the best starting approach):
+    - 텍스트 채도 대비 개선 (일반적으로 가장 좋은 시작 방법):
 
       ```lua
       chan_set('saturation', { 10, 90 }, { filter = 'fg' })
       ```
 
 
-    - Remove certain hues from all colors (use 30 for red, 90 for yellow,
-      135 for green, 270 for blue):
+    - 모든 색상에서 특정 색상 제거 (빨강 30, 노랑 90, 초록 135, 파랑 270 사용):
 
       ```lua
-      -- Repel red color
+      -- 빨간색 제거
       chan_repel('hue', 30, 45)
       ```
 
 
-    - Force equally spaced palette (remove ones with which you know you
-      have trouble):
+    - 균일한 간격의 팔레트 강제 (문제가 있는 것으로 알려진 색상 제거):
 
       ```lua
-      -- Might be a good choice for red-green color blindness
+      -- 적녹 색맹에게 좋은 선택일 수 있음
       chan_set('hue', { 90, 180, 270})
 
-      -- Might be a good choice for blue-yellow color blindness
+      -- 청황 색맹에게 좋은 선택일 수 있음
       chan_set('hue', { 0, 90, 180 })
       ```
 
 
-    - Inverting temperature or pressure can sometimes improve readability:
+    - 온도나 압력(pressure)을 반전시키면 가독성이 좋아질 수 있음:
 
       ```lua
       chan_invert('temperature')
@@ -250,217 +219,155 @@ Recipes:
       ```
 
 
-    - If all hope is lost, hue random generation might help if you are lucky:
+    - 모든 방법이 실패한다면, 운 좋게 색상 무작위 생성이 도움이 될 수 있음:
 
       ```lua
       chan_modify('hue', function() return math.random(0, 359) end)
       ```
 
 
-- For color scheme creators use [MiniColors-colorscheme:simulate\_cvd()](mini-colors.qmd#minicolors-colorschemesimulate_cvd) to
-  simulate various color vision deficiency types to see how color scheme
-  would look in the eyes of color blind person.
+- 색상 스키마 제작자는 [MiniColors-colorscheme:simulate\_cvd()](mini-colors.qmd#minicolors-colorschemesimulate_cvd)를 사용하여 다양한 색각 결핍 유형을 시뮬레이션하고, 색맹인 사람의 눈에 색상 스키마가 어떻게 보일지 확인할 수 있습니다.
 
 ---
 
-### Color spaces {#minicolors-color-spaces .help-syntax-right-anchor}
+### 색 공간 {#minicolors-color-spaces .help-syntax-right-anchor}
 
-Color space is a way to quantitatively describe a color. In this module
-color spaces are used both as source for [MiniColors-channels](mini-colors.qmd#minicolors-channels) and inputs
-for [MiniColors.convert()](mini-colors.qmd#minicolors.convert)
+색 공간은 색상을 정량적으로 설명하는 방법입니다. 이 모듈에서 색 공간은 [MiniColors-channels](mini-colors.qmd#minicolors-channels)의 원본과 [MiniColors.convert()](mini-colors.qmd#minicolors.convert)의 입력으로 사용됩니다.
 
-List of supported color spaces (along with their id in parenthesis):
+지원되는 색 공간 목록(괄호 안은 ID):
 
-- 8-bit (`8-bit`) - integer between 16 and 255. Usually values 0-15 are also
-  supported, but they depend on terminal emulator theme which is not reliable.
-  See https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit .
+- 8비트 (`8-bit`) - 16에서 255 사이의 정수. 보통 0-15도 지원되지만, 터미널 에뮬레이터 테마에 따라 달라지므로 신뢰할 수 없습니다.
+  참고: https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit
 
 
-- Hex (`hex`) - string of the form "#xxxxxx" where `x` is a hexadecimal number.
+- 16진수 (`hex`) - "#xxxxxx" 형식의 문자열 (여기서 `x`는 16진수).
 
 
-- RGB (`rgb`) - table with numeric fields `r` (red), `g` (green), `b` (blue).
-  Visible range is from 0 to 255.
+- RGB (`rgb`) - `r` (빨강), `g` (초록), `b` (파랑) 숫자 필드를 가진 테이블. 표시 범위는 0에서 255 사이입니다.
 
 
-- Oklab (`oklab`) - table with fields `l` (lightness; numeric in [0; 100]),
-  `a`, `b` (both are unbounded numeric; visible range is usually between
-  -30 to 30). Field `l` describes how light is color; `a` - how "green-red" it is;
-  `b` - how "blue-yellow" it is.
+- Oklab (`oklab`) - `l` (명도; [0; 100] 범위의 숫자), `a`, `b` (둘 다 범위 제한 없는 숫자; 가시 범위는 보통 -30에서 30 사이) 필드를 가진 테이블. 필드 `l`은 색상이 얼마나 밝은지, `a`는 "초록-빨강" 정도, `b`는 "파랑-노랑" 정도를 설명합니다.
 
 
-- Oklch (`oklch`) - table with fields `l` (same as in Oklab),
-  `c` (chroma; positive numeric, visible range usually lower than 32),
-  `h` (`nil` for grays or periodic numeric in [0, 360)). Field `c` describes how
-  colorful a color is; `h` is a value of "true color" on color circle/wheel.
-  NOTE: gray colors, being achromatic by nature, don't have hue.
+- Oklch (`oklch`) - `l` (Oklab과 동일), `c` (크로마; 양수, 가시 범위는 보통 32 미만), `h` (회색인 경우 `nil`, 아니면 [0, 360) 범위의 주기적 숫자) 필드를 가진 테이블. 필드 `c`는 색상이 얼마나 선명한지, `h`는 색상 휠 상의 "실제 색상" 값을 설명합니다.
+  참고: 회색과 같은 무채색은 색상(hue) 정보가 없습니다.
 
 
-- Okhsl (`okhsl`) - Oklch but with `c` replaced by `s` (saturation; numeric
-  in [0; 100]). Field `s` describes a percent of chroma relative to maximum
-  visible chroma for the particular lightness and hue combination. Note,
-  that mathematical model used to compute maximum visible chroma is
-  approximate which might lead to inaccuracies for highly saturated colors
-  with relatively low or high lightness.
+- Okhsl (`okhsl`) - Oklch에서 `c`가 `s`(채도; [0; 100] 범위의 숫자)로 대체된 형태입니다. 필드 `s`는 특정 명도 및 색상 조합에 대해 가시적인 최대 크로마에 대한 비율(퍼센트)을 설명합니다. 최대 크로마 계산에 사용되는 수학적 모델은 근사치이므로, 명도가 매우 낮거나 높은 고채도 색상의 경우 오차가 발생할 수 있습니다.
 
-Sources for Oklab/Oklch/Okhsl:
+Oklab/Oklch/Okhsl 자료:
 
-- https://bottosson.github.io/posts/oklab/ - initial derivation and
-  introduction of Oklab and Oklch.
+- https://bottosson.github.io/posts/oklab/ - Oklab 및 Oklch의 초기 유도 및 소개.
 
-- https://bottosson.github.io/misc/colorpicker - interactive color picker.
-  Great way for a hands-on introduction to concepts of lightness, chroma,
-  saturation, and hue.
+- https://bottosson.github.io/misc/colorpicker - 대화형 색상 선택기. 명도, 크로마, 채도, 색상 개념을 직접 익히기에 좋습니다.
 
-Note that Oklab/Oklch/Okhsl use channel normalization for `l`, `a`, `b`, `c`, `s` that
-is more oriented towards integer numbers (according to the above sources).
-Some implementations (like in CSS) are more oriented towards [0; 1] range or
-percentages. Adjust accordingly by dividing/multiplying output by 100.
-Also use `adjust_lightness = false` in [MiniColors.convert()](mini-colors.qmd#minicolors.convert).
+Oklab/Oklch/Okhsl은 (위 자료에 따라) 정수에 더 적합하도록 `l`, `a`, `b`, `c`, `s` 채널 정규화를 사용합니다. CSS와 같은 일부 구현은 [0; 1] 범위나 퍼센트를 더 지향합니다. 필요한 경우 출력값을 100으로 나누거나 곱하여 조정하십시오.
+또한 [MiniColors.convert()](mini-colors.qmd#minicolors.convert)에서 `adjust_lightness = false`를 사용하십시오.
 
-#### Gamut clip {#minicolors-color-spaces-gamutclip}
+#### 가멋 클립 {#minicolors-color-spaces-gamutclip}
 
 
 <a name="minicolors-gamut-clip" href="mini-colors.qmd#minicolors-gamut-clip"><b>MiniColors-gamut-clip</b></a>
 
-In Neovim highlight group colors are usually specified by their red, green,
-and blue values from 0 to 255 in the form of HEX string (see [gui-colors](https://neovim.io/doc/user/helptag.html?tag=gui-colors)).
-Although plenty, these are not all possible colors.
+Neovim의 하이라이트 그룹 색상은 일반적으로 0에서 255 사이의 빨강, 초록, 파랑 값을 HEX 문자열 형태로 지정합니다([gui-colors](https://neovim.io/doc/user/helptag.html?tag=gui-colors) 참고). 하지만 이것이 가능한 모든 색상을 나타내는 것은 아닙니다.
 
-When performing color manipulation using [MiniColors-colorscheme-methods](mini-colors.qmd#minicolors-colorscheme-methods),
-it is possible to end up with "impossible" color (which can't be directly
-converted to HEX string). For example, inverting lightness of color "#fce094"
-will lead to a color `{ l = 10, c = 10, h = 90 }` in Oklch space, i.e.
-"dark yellow" which is impossible to show in HEX.
+[MiniColors-colorscheme-methods](mini-colors.qmd#minicolors-colorscheme-methods)를 사용하여 색상을 조작할 때, HEX 문자열로 직접 변환할 수 없는 "불가능한" 색상이 만들어질 수 있습니다. 예를 들어, Oklch 공간에서 "#fce094" 색상의 명도를 반전시키면 `{ l = 10, c = 10, h = 90 }` 색상이 되는데, 이 "어두운 노란색"은 HEX로 표현할 수 없습니다.
 
-Gamut clipping is an action of converting color outside of visible gamut
-(colors representable with HEX string) to be inside it while preserving
-certain perceptual characteristics as much as possible.
+가멋 클리핑(Gamut clipping)은 가시 영역 밖의 색상(HEX 문자열로 표현할 수 없는 색상)을 특정 지각적 특성을 최대한 유지하면서 가시 영역 안으로 변환하는 작업입니다.
 
-Gamut clipping in this module is done inside Oklch color space. The goal is to
-preserve hue as much as possible while manipulating lightness and/or chroma.
+이 모듈의 가멋 클리핑은 Oklch 색 공간 내부에서 수행됩니다. 목표는 명도나 크로마를 조작하는 동안 색상(hue)을 최대한 유지하는 것입니다.
 
-List of supported gamut clip methods (along with their id in parenthesis):
+지원되는 가멋 클립 방법 목록(괄호 안은 ID):
 
-- Clip chroma (`'chroma'`) - reduce chroma while preserving lightness until
-  color is inside visible gamut. Default method.
+- 크로마 클립 (`'chroma'`) - 색상이 가시 영역 안에 들어올 때까지 명도를 유지하면서 크로마를 줄입니다. 기본 방법입니다.
 
 
-- Clip lightness (`'lightness'`) - reduce lightness while preserving chroma
-  until color is inside visible gamut.
+- 명도 클립 (`'lightness'`) - 색상이 가시 영역 안에 들어올 때까지 크로마를 유지하면서 명도를 줄입니다.
 
 
-- Clip according to "cusp" (`'cusp'`) - reduce both lightness and chroma in
-  a compromise way depending on hue.
-  Cusp is a color with the highest chroma inside slice of visible gamut
-  with the same hue (hue leaf). It is called that way because the slice has
-  a roughly triangular shape with points at (0, 0) - (0, 100) - "cusp" in
-  (chroma, lightness) coordinates.
-  Gamut clipping using "cusp" as reference is done by changing color towards
-  (0, cusp_lightness) point (gray with lightness equal to that of a current
-  cusp) until color is inside visible gamut.
+- 커스프에 따른 클립 (`'cusp'`) - 색상(hue)에 따라 명도와 크로마를 절충하여 줄입니다.
+  커스프는 동일한 색상(hue)을 가진 가시 영역 단면(색상 잎) 내부에서 가장 높은 크로마를 가진 색상입니다. 단면의 모양이 (0, 0) - (0, 100) - (크로마, 명도 좌표의 "커스프")를 꼭짓점으로 하는 대략적인 삼각형 모양이기 때문에 그렇게 불립니다.
+  커스프를 기준으로 하는 가멋 클리핑은 색상이 가시 영역 안에 들어올 때까지 현재 커스프와 동일한 명도를 가진 회색(0, cusp_lightness) 지점을 향해 색상을 변화시킴으로써 수행됩니다.
 
-In short:
+요약하자면:
 
-- Usually `'chroma'` is enough.
+- 보통 `'chroma'`로 충분합니다.
 
-- If colors are too desaturated - try `'cusp'`.
+- 색상이 너무 탁해지면 `'cusp'`를 시도해보십시오.
 
-- If still not colorful enough - try `'lightness'`.
+- 여전히 색감이 부족하다면 `'lightness'`를 시도해보십시오.
 
-Notes:
+참고:
 
-- Currently implemented formulas are approximate (by design; to reduce code
-  complexity) so there might be problems for highly saturated colors with
-  relatively low or high lightness.
+- 현재 구현된 공식은 (코드 복잡성을 줄이기 위해) 근사치이므로, 명도가 매우 낮거나 높은 고채도 색상에서는 문제가 발생할 수 있습니다.
 
 ---
 
-### Channels {#minicolors-channels .help-syntax-right-anchor}
+### 채널 {#minicolors-channels .help-syntax-right-anchor}
 
-A color channel is a number describing one particular aspect of a color.
-It is usually direct or modified coordinate of a color space. See
-[MiniColors-color-spaces](mini-colors.qmd#minicolors-color-spaces) for information on color spaces.
+색상 채널은 색상의 특정 측면을 설명하는 숫자입니다. 보통 색 공간의 직접적인 또는 수정된 좌표입니다. 색 공간에 대한 정보는 [MiniColors-color-spaces](mini-colors.qmd#minicolors-color-spaces)를 참고하십시오.
 
-List of supported channels (along with their id in parenthesis):
+지원되는 채널 목록(괄호 안은 ID):
 
-- Lightness (`lightness`) - corrected `l` component of Oklch. Describes how
-  light is a color. Ranges from 0 (black dark) to 100 (white light).
+- 명도 (`lightness`) - Oklch의 보정된 `l` 구성 요소. 색상이 얼마나 밝은지 설명합니다. 0(가장 어두움)에서 100(가장 밝음)까지의 범위를 갖습니다.
 
 
-- Chroma (`chroma`) - `c` component of Oklch. Describes how colorful is
-  a color in absolute units. Ranges from 0 (gray) to infinity (more like
-  around 30 in practice).
+- 크로마 (`chroma`) - Oklch의 `c` 구성 요소. 절대 단위로 색상이 얼마나 선명한지 설명합니다. 0(회색)에서 무한대(실제로는 약 30 내외)까지의 범위를 갖습니다.
 
 
-- Saturation (`saturation`) - `s` component of Okhsl. Describes how colorful
-  is color in relative units. Ranges from 0 (gray) to 100 (maximum saturation
-  for a given lightness-hue pair).
+- 채도 (`saturation`) - Okhsl의 `s` 구성 요소. 상대 단위로 색상이 얼마나 선명한지 설명합니다. 0(회색)에서 100(주어진 명도-색상 쌍에 대한 최대 채도)까지의 범위를 갖습니다.
 
 
-- Hue (`hue`) - `h` component of Oklch. Describes "true color value" (like
-  red/green/blue) as a number. It is a periodic value from 0 (included) to
-  360 (not included). Best perceived as a degree on a color circle/wheel.
+- 색상 (`hue`) - Oklch의 `h` 구성 요소. 빨강/초록/파랑과 같은 "실제 색상 값"을 숫자로 설명합니다. 0(포함)에서 360(미포함) 사이의 주기적인 값입니다. 색상 휠 상의 각도로 인식하는 것이 가장 좋습니다.
 
-  Approximate values for common color names:
+  일반적인 색상 이름에 대한 근사치:
 
-    - 0   - pink.
+    - 0   - 분홍색.
 
-    - 30  - red.
+    - 30  - 빨간색.
 
-    - 60  - orange.
+    - 60  - 주황색.
 
-    - 90  - yellow.
+    - 90  - 노란색.
 
-    - 135 - green.
+    - 135 - 초록색.
 
-    - 180 - cyan.
+    - 180 - 청록색(cyan).
 
-    - 225 - light blue.
+    - 225 - 연한 파란색.
 
-    - 270 - blue.
+    - 270 - 파란색.
 
-    - 315 - magenta/purple.
+    - 315 - 자홍색(magenta)/보라색.
 
 
-- Temperature (`temperature`) - circular distance from current hue to hue 270
-  angle (blue). Ranges from 0 (cool) to 180 (hot) anchored at hues 270 (blue)
-  and 90 (yellow). Similar to `b` channel but tries to preserve chroma.
+- 색온도 (`temperature`) - 현재 색상(hue)에서 270도(파랑)까지의 원형 거리입니다. 270도(파랑)와 90도(노랑)를 기준으로 0(차가움)에서 180(따뜻함)까지의 범위를 갖습니다. `b` 채널과 유사하지만 크로마를 유지하려고 시도합니다.
 
 
-- Pressure (`pressure`) - circular distance from current hue to hue 180.
-  Ranges from 0 (low; green-ish) to 180 (high; red-ish) anchored at hues
-  180 and 0. Similar to `a` channel but tries to preserve chroma.
-  Not widely used; added to have something similar to temperature.
+- 압력 (`pressure`) - 현재 색상(hue)에서 180도까지의 원형 거리입니다. 180도와 0도를 기준으로 0(낮음; 초록빛)에서 180(높음; 빨간빛)까지의 범위를 갖습니다. `a` 채널과 유사하지만 크로마를 유지하려고 시도합니다. 널리 사용되지는 않으며, 색온도와 유사한 기능을 위해 추가되었습니다.
 
 
-- a (`a`) - `a` component of Oklab. Describes how "green-red" a color is.
-  Can have any value. Negative values are "green-ish", positive - "red-ish".
+- a (`a`) - Oklab의 `a` 구성 요소. 색상이 얼마나 "초록-빨강"인지 설명합니다. 모든 값을 가질 수 있습니다. 음수는 "초록빛", 양수는 "빨간빛"을 의미합니다.
 
 
-- b (`b`) - `b` component of Oklab. Describes how "blue-yellow" a color is.
-  Can have any value. Negative values are "blue-ish", positive - "yellow-ish".
+- b (`b`) - Oklab의 `b` 구성 요소. 색상이 얼마나 "파랑-노랑"인지 설명합니다. 모든 값을 가질 수 있습니다. 음수는 "파란빛", 양수는 "노란빛"을 의미합니다.
 
 
-- Red (`red`) - `r` component of RGB. Describes how much red a color has.
-  Ranges from 0 (no red) to 255 (full red).
+- 빨강 (`red`) - RGB의 `r` 구성 요소. 빨간색의 양을 설명합니다. 0(빨강 없음)에서 255(최대 빨강)까지의 범위를 갖습니다.
 
 
-- Green (`green`) - `g` component of RGB. Describes how much green a color has.
-  Ranges from 0 (no green) to 255 (full green).
+- 초록 (`green`) - RGB의 `g` 구성 요소. 초록색의 양을 설명합니다. 0(초록 없음)에서 255(최대 초록)까지의 범위를 갖습니다.
 
 
-- Blue (`blue`) - `b` component of RGB. Describes how much blue a color has.
-  Ranges from 0 (no blue) to 255 (full blue).
+- 파랑 (`blue`) - RGB의 `b` 구성 요소. 파란색의 양을 설명합니다. 0(파랑 없음)에서 255(최대 파랑)까지의 범위를 갖습니다.
 
 ---
 
-### Colorscheme {#minicolors-colorscheme .help-syntax-right-anchor}
+### 색상 스키마 {#minicolors-colorscheme .help-syntax-right-anchor}
 
-Colorscheme object is a central structure of this module. It contains all
-data relevant to colors in fields and provides methods to modify it.
+색상 스키마(Colorscheme) 객체는 이 모듈의 핵심 구조입니다. 필드에는 색상과 관련된 모든 데이터를 포함하며, 이를 수정하는 메서드를 제공합니다.
 
-Create colorscheme object manually with [MiniColors.as\_colorscheme()](mini-colors.qmd#minicolors.as_colorscheme):
+[MiniColors.as\_colorscheme()](mini-colors.qmd#minicolors.as_colorscheme)를 사용하여 수동으로 색상 스키마 객체를 생성합니다:
 
   ```lua
   MiniColors.as_colorscheme({
@@ -473,18 +380,17 @@ Create colorscheme object manually with [MiniColors.as\_colorscheme()](mini-colo
   })
   ```
 
-Get any registered color scheme (including currently active) as colorscheme
-object with [MiniColors.get\_colorscheme()](mini-colors.qmd#minicolors.get_colorscheme):
+[MiniColors.get\_colorscheme()](mini-colors.qmd#minicolors.get_colorscheme)를 사용하여 등록된 색상 스키마(현재 활성화된 것 포함)를 객체로 가져옵니다:
 
   ```lua
-  -- Get current color scheme
+  -- 현재 색상 스키마 가져오기
   MiniColors.get_colorscheme()
 
-  -- Get registered color scheme by name
+  -- 이름을 지정하여 등록된 색상 스키마 가져오기
   MiniColors.get_colorscheme('minischeme', { new_name = 'maxischeme' })
   ```
 
-#### Class {#minicolors-colorscheme-class}
+#### 클래스 {#minicolors-colorscheme-class}
 
 
 
@@ -492,41 +398,33 @@ object with [MiniColors.get\_colorscheme()](mini-colors.qmd#minicolors.get_color
 
 <a name="minicolors-colorscheme-fields" href="mini-colors.qmd#minicolors-colorscheme-fields"><b>MiniColors-colorscheme-fields</b></a>
 
-#### Fields {#minicolors-colorscheme-fields}
+#### 필드 {#minicolors-colorscheme-fields}
 
 
 
-<span class="help-syntax-special">{name}</span> `(string|nil)` Name of the color scheme (as in [g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name)).
+<span class="help-syntax-special">{name}</span> `(string|nil)` 색상 스키마의 이름([g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name)과 동일).
 
 
-<span class="help-syntax-special">{groups}</span> `(table|nil)` Table with highlight groups data. Keys are group
-  names appropriate for `name` argument of [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)), values - tables
-  appropriate for its `val` argument. Note: gui colors are accepted only in
-  short form (`fg`, `bg`, `sp`).
+<span class="help-syntax-special">{groups}</span> `(table|nil)` 하이라이트 그룹 데이터를 포함하는 테이블. 키는 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))의 `name` 인자에 적합한 그룹 이름이며, 값은 `val` 인자에 적합한 테이블입니다. 참고: GUI 색상은 짧은 형식(`fg`, `bg`, `sp`)만 허용됩니다.
 
 
-<span class="help-syntax-special">{terminal}</span> `(table|nil)` Table with terminal colors data ([terminal-config](https://neovim.io/doc/user/helptag.html?tag=terminal-config)).
-  Keys are numbers from 0 to 15, values - strings representing color (hex
-  string or plain color name; see [nvim\_get\_color\_by\_name()](https://neovim.io/doc/user/helptag.html?tag=nvim_get_color_by_name\(\))).
+<span class="help-syntax-special">{terminal}</span> `(table|nil)` 터미널 색상 데이터를 포함하는 테이블([terminal-config](https://neovim.io/doc/user/helptag.html?tag=terminal-config)). 키는 0에서 15 사이의 숫자이며, 값은 색상을 나타내는 문자열(HEX 문자열 또는 일반 색상 이름; [nvim\_get\_color\_by\_name()](https://neovim.io/doc/user/helptag.html?tag=nvim_get_color_by_name\(\)) 참고)입니다.
 
-#### Methods {#minicolors-colorscheme-methods}
+#### 메서드 {#minicolors-colorscheme-methods}
 
 
 <a name="minicolors-colorscheme-methods" href="mini-colors.qmd#minicolors-colorscheme-methods"><b>MiniColors-colorscheme-methods</b></a>
 
-Notes about all methods:
+모든 메서드에 대한 참고 사항:
 
-- They never modify underlying colorscheme object instead returning deep
-  copy with modified fields.
+- 기본 색상 스키마 객체를 수정하지 않고, 수정된 필드를 가진 딥 카피(deep copy)를 반환합니다.
 
-- They accept `self` colorscheme object as first argument meaning they should be
-  called with `:` notation (like `cs:method()`).
+- `self` 색상 스키마 객체를 첫 번째 인자로 받으므로 `:` 표기법(예: `cs:method()`)으로 호출해야 합니다.
 
-Example calling methods:
+메서드 호출 예시:
 
   ```lua
-  -- Get current color scheme, set hue of colors to 135, infer cterm
-  -- attributes and apply
+  -- 현재 색상 스키마를 가져와 색상을 135로 설정하고, cterm 속성을 추론하여 적용
   local cs = MiniColors.get_colorscheme()
   cs:chan_set('hue', 135):add_cterm_attributes():apply()
   ```
@@ -536,121 +434,104 @@ Example calling methods:
 
 <a name="minicolors-colorschemeadd_cterm_attributes" href="mini-colors.qmd#minicolors-colorschemeadd_cterm_attributes"><b>MiniColors-colorscheme:add_cterm_attributes()</b></a>
 
-Infer [cterm-colors](https://neovim.io/doc/user/helptag.html?tag=cterm-colors) based on present [gui-colors](https://neovim.io/doc/user/helptag.html?tag=gui-colors). It updates `ctermbg`/`ctermfg`
-based on `fg`/`bg` by approximating in perceptually uniform distance in Oklab
-space ([MiniColors-color-spaces](mini-colors.qmd#minicolors-color-spaces)).
+현재 [gui-colors](https://neovim.io/doc/user/helptag.html?tag=gui-colors)를 기반으로 [cterm-colors](https://neovim.io/doc/user/helptag.html?tag=cterm-colors)를 추론합니다. Oklab 공간([MiniColors-color-spaces](mini-colors.qmd#minicolors-color-spaces))에서 지각적으로 균일한 거리를 근사화하여 `fg`/`bg`를 기반으로 `ctermbg`/`ctermfg`를 업데이트합니다.
 
-###### Parameters {#minicolors-colorscheme-methods-add_cterm_attributes-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-add_cterm_attributes-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - Whether to replace already present cterm attributes
-    with inferred ones. Default: `true`.
+  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - 이미 존재하는 cterm 속성을 추론된 것으로 교체할지 여부. 기본값: `true`.
 
 ##### add_terminal_colors() {#minicolors-colorscheme-methods-add_terminal_colors}
 
 
 <a name="minicolors-colorschemeadd_terminal_colors" href="mini-colors.qmd#minicolors-colorschemeadd_terminal_colors"><b>MiniColors-colorscheme:add_terminal_colors()</b></a>
 
-Infer terminal colors ([terminal-config](https://neovim.io/doc/user/helptag.html?tag=terminal-config)) based on colorscheme palette
-(see [MiniColors-colorscheme:get\_palette()](mini-colors.qmd#minicolors-colorschemeget_palette)). It updates `terminal` field
-based on color scheme's palette by picking the most appropriate entry to
-represent terminal color. Colors from 0 to 7 are attempted to be black,
-red, green, yellow, blue, magenta, cyan, white. Colors from 8 to 15 are
-the same as from 0 to 7.
+색상 스키마 팔레트([MiniColors-colorscheme:get\_palette()](mini-colors.qmd#minicolors-colorschemeget_palette) 참고)를 기반으로 터미널 색상([terminal-config](https://neovim.io/doc/user/helptag.html?tag=terminal-config))을 추론합니다. 색상 스키마의 팔레트에서 터미널 색상을 나타내기에 가장 적절한 항목을 선택하여 `terminal` 필드를 업데이트합니다. 0에서 7까지의 색상은 검정, 빨강, 초록, 노랑, 파랑, 자홍, 청록, 하양으로 맞추려 시도하며, 8에서 15까지는 0에서 7과 동일하게 설정됩니다.
 
-###### Parameters {#minicolors-colorscheme-methods-add_terminal_colors-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-add_terminal_colors-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - Whether to replace already present terminal colors
-    with inferred ones. Default: `true`.
+  - <span class="help-syntax-keys">\<force\></span> `(boolean)` - 이미 존재하는 터미널 색상을 추론된 것으로 교체할지 여부. 기본값: `true`.
 
-  - <span class="help-syntax-keys">\<palette_args\></span> `(table)` - [MiniColors-colorscheme:get\_palette()](mini-colors.qmd#minicolors-colorschemeget_palette) arguments.
+  - <span class="help-syntax-keys">\<palette_args\></span> `(table)` - [MiniColors-colorscheme:get\_palette()](mini-colors.qmd#minicolors-colorschemeget_palette) 인자.
 
 ##### add_transparency() {#minicolors-colorscheme-methods-add_transparency}
 
 
 <a name="minicolors-colorschemeadd_transparency" href="mini-colors.qmd#minicolors-colorschemeadd_transparency"><b>MiniColors-colorscheme:add_transparency()</b></a>
 
-Add transparency by removing background from a certain highlight groups.
-Requires actual transparency from terminal emulator to see background image.
-Has no effect on linked groups; use [MiniColors-colorscheme:resolve\_links()](mini-colors.qmd#minicolors-colorschemeresolve_links)
-explicitly before applying transparency.
+특정 하이라이트 그룹에서 배경색을 제거하여 투명도를 추가합니다. 배경 이미지를 보려면 터미널 에뮬레이터에서 실제 투명도를 지원해야 합니다. 링크된 그룹에는 효과가 없으므로, 투명도를 적용하기 전에 [MiniColors-colorscheme:resolve\_links()](mini-colors.qmd#minicolors-colorschemeresolve_links)를 명시적으로 호출하십시오.
 
-###### Parameters {#minicolors-colorscheme-methods-add_transparency-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-add_transparency-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields can be used to configure which
-  sets of highlight groups to update:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 업데이트할 하이라이트 그룹 세트를 구성하는 옵션:
 
-  - <span class="help-syntax-keys">\<general\></span> `(boolean)` - general groups (like `Normal`). Default: `true`.
+  - <span class="help-syntax-keys">\<general\></span> `(boolean)` - 일반 그룹(예: `Normal`). 기본값: `true`.
 
-  - <span class="help-syntax-keys">\<float\></span> `(boolean)` - built-in groups for floating windows. Default: `false`.
+  - <span class="help-syntax-keys">\<float\></span> `(boolean)` - 플로팅 윈도우용 내장 그룹. 기본값: `false`.
 
-  - <span class="help-syntax-keys">\<statuscolumn\></span> `(boolean)` - groups related to 'statuscolumn' (signcolumn,
-    numbercolumn, foldcolumn, `DiagnosticSignXxx`, and `XxxMsg` groups). Also
-    updates groups for all currently defined signs. Default: `false`.
+  - <span class="help-syntax-keys">\<statuscolumn\></span> `(boolean)` - 'statuscolumn' 관련 그룹(signcolumn, numbercolumn, foldcolumn, `DiagnosticSignXxx`, `XxxMsg` 그룹). 또한 현재 정의된 모든 사인(sign)에 대한 그룹도 업데이트합니다. 기본값: `false`.
 
-  - <span class="help-syntax-keys">\<statusline\></span> `(boolean)` - built-in groups for 'statusline'. Default: `false`.
+  - <span class="help-syntax-keys">\<statusline\></span> `(boolean)` - 'statusline'용 내장 그룹. 기본값: `false`.
 
-  - <span class="help-syntax-keys">\<tabline\></span> `(boolean)` - built-in groups for 'tabline'. Default: `false`.
+  - <span class="help-syntax-keys">\<tabline\></span> `(boolean)` - 'tabline'용 내장 그룹. 기본값: `false`.
 
-  - <span class="help-syntax-keys">\<winbar\></span> `(boolean)` - built-in groups for 'winbar'. Default: `false`.
+  - <span class="help-syntax-keys">\<winbar\></span> `(boolean)` - 'winbar'용 내장 그룹. 기본값: `false`.
 
 ##### apply() {#minicolors-colorscheme-methods-apply}
 
 
 <a name="minicolors-colorschemeapply" href="mini-colors.qmd#minicolors-colorschemeapply"><b>MiniColors-colorscheme:apply()</b></a>
 
-Apply colorscheme:
+색상 스키마 적용:
 
-- Set [g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name) to a `name` field.
+- [g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name)을 `name` 필드로 설정합니다.
 
-- Apply highlight groups in a `groups` field.
+- `groups` 필드의 하이라이트 그룹을 적용합니다.
 
-- Set terminal colors from a `terminal` field.
+- `terminal` 필드의 터미널 색상을 설정합니다.
 
-###### Parameters {#minicolors-colorscheme-methods-apply-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-apply-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<clear\></span> `(boolean)` - whether to execute [:hi-clear](https://neovim.io/doc/user/helptag.html?tag=:hi-clear) first. Default: `true`.
+  - <span class="help-syntax-keys">\<clear\></span> `(boolean)` - [:hi-clear](https://neovim.io/doc/user/helptag.html?tag=:hi-clear)를 먼저 실행할지 여부. 기본값: `true`.
 
 ##### chan_add() {#minicolors-colorscheme-methods-chan_add}
 
 
 <a name="minicolors-colorschemechan_add" href="mini-colors.qmd#minicolors-colorschemechan_add"><b>MiniColors-colorscheme:chan_add()</b></a>
 
-Add value to a channel (see [MiniColors-channels](mini-colors.qmd#minicolors-channels)).
+채널에 값을 더합니다([MiniColors-channels](mini-colors.qmd#minicolors-channels) 참고).
 
-###### Parameters {#minicolors-colorscheme-methods-chan_add-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-chan_add-parameters}
 
 
 
-<span class="help-syntax-special">{channel}</span> `(string)` One of supported [MiniColors-channels](mini-colors.qmd#minicolors-channels).
+<span class="help-syntax-special">{channel}</span> `(string)` 지원되는 [MiniColors-channels](mini-colors.qmd#minicolors-channels) 중 하나.
 
-<span class="help-syntax-special">{value}</span> `(number)` Number to add (can be negative).
+<span class="help-syntax-special">{value}</span> `(number)` 더할 숫자(음수 가능).
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - filter colors to update. Possible values:
+  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - 업데이트할 색상을 필터링합니다. 가능한 값:
 
-      - String representing target attributes. One of `'fg'`, `'bg'`, `'sp'`,
-        `'term'` (only terminal colors).
+      - 대상 속성을 나타내는 문자열. `'fg'`, `'bg'`, `'sp'`, `'term'`(터미널 색상만) 중 하나.
 
-      - Callable with signature as in [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify).
-    Default: `nil` to update all colors.
+      - [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify)와 동일한 시그니처를 가진 콜러블.
+    기본값: 모든 색상을 업데이트하려면 `nil`.
 
-  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - gamut clipping method. One of `'chroma'`,
-    `'lightness'`, `'cusp'`. See [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip). Default: `'chroma'`.
+  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - 가멋 클리핑 방법. `'chroma'`, `'lightness'`, `'cusp'` 중 하나. [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip)을 참고하십시오. 기본값: `'chroma'`.
 
 
 ##### chan_invert() {#minicolors-colorscheme-methods-chan_invert}
@@ -658,200 +539,176 @@ Add value to a channel (see [MiniColors-channels](mini-colors.qmd#minicolors-cha
 
 <a name="minicolors-colorschemechan_invert" href="mini-colors.qmd#minicolors-colorschemechan_invert"><b>MiniColors-colorscheme:chan_invert()</b></a>
 
-Invert value in a channel (see [MiniColors-channels](mini-colors.qmd#minicolors-channels)).
+채널의 값을 반전시킵니다([MiniColors-channels](mini-colors.qmd#minicolors-channels) 참고).
 
-Notes:
+참고:
 
-- Most Oklab/Oklch inversions are not exactly invertible: applying it twice
-  might lead to slightly different colors depending on gamut clip method
-  ([MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip)) like smaller chroma with default `'chroma'` method.
+- 대부분의 Oklab/Oklch 반전은 정확히 가역적이지 않습니다. 가멋 클립 방법([MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip))에 따라 두 번 적용하면 약간 다른 색상이 될 수 있습니다(예: 기본 `'chroma'` 방법의 경우 크로마가 더 작아짐).
 
-###### Parameters {#minicolors-colorscheme-methods-chan_invert-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-chan_invert-parameters}
 
 
 
-<span class="help-syntax-special">{channel}</span> `(string)` One of supported [MiniColors-channels](mini-colors.qmd#minicolors-channels).
+<span class="help-syntax-special">{channel}</span> `(string)` 지원되는 [MiniColors-channels](mini-colors.qmd#minicolors-channels) 중 하나.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - filter colors to update. Possible values:
+  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - 업데이트할 색상을 필터링합니다. 가능한 값:
 
-      - String representing target attributes. One of `'fg'`, `'bg'`, `'sp'`,
-        `'term'` (only terminal colors).
+      - 대상 속성을 나타내는 문자열. `'fg'`, `'bg'`, `'sp'`, `'term'`(터미널 색상만) 중 하나.
 
-      - Callable with signature as in [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify).
-    Default: `nil` to update all colors.
+      - [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify)와 동일한 시그니처를 가진 콜러블.
+    기본값: 모든 색상을 업데이트하려면 `nil`.
 
-  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - gamut clipping method. One of `'chroma'`,
-    `'lightness'`, `'cusp'`. See [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip). Default: `'chroma'`.
+  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - 가멋 클리핑 방법. `'chroma'`, `'lightness'`, `'cusp'` 중 하나. [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip)을 참고하십시오. 기본값: `'chroma'`.
 
 ##### chan_modify() {#minicolors-colorscheme-methods-chan_modify}
 
 
 <a name="minicolors-colorschemechan_modify" href="mini-colors.qmd#minicolors-colorschemechan_modify"><b>MiniColors-colorscheme:chan_modify()</b></a>
 
-Modify channel with a callable.
+콜러블을 사용하여 채널을 수정합니다.
 
-###### Parameters {#minicolors-colorscheme-methods-chan_modify-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-chan_modify-parameters}
 
 
 
-<span class="help-syntax-special">{channel}</span> `(string)` One of supported [MiniColors-channels](mini-colors.qmd#minicolors-channels).
+<span class="help-syntax-special">{channel}</span> `(string)` 지원되는 [MiniColors-channels](mini-colors.qmd#minicolors-channels) 중 하나.
 
-<span class="help-syntax-special">{f}</span> `(function)` - callable which defines modification. Should take current
-  value of a channel and return a new one.
+<span class="help-syntax-special">{f}</span> `(function)` - 수정을 정의하는 콜러블. 채널의 현재 값을 받아 새 값을 반환해야 합니다.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - filter colors to update. Possible values:
+  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - 업데이트할 색상을 필터링합니다. 가능한 값:
 
-      - String representing target attributes. One of `'fg'`, `'bg'`, `'sp'`,
-        `'term'` (only terminal colors).
+      - 대상 속성을 나타내는 문자열. `'fg'`, `'bg'`, `'sp'`, `'term'`(터미널 색상만) 중 하나.
 
-      - Callable with signature as in [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify).
-    Default: `nil` to update all colors.
+      - [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify)와 동일한 시그니처를 가진 콜러블.
+    기본값: 모든 색상을 업데이트하려면 `nil`.
 
-  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - gamut clipping method. One of `'chroma'`,
-    `'lightness'`, `'cusp'`. See [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip). Default: `'chroma'`.
+  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - 가멋 클리핑 방법. `'chroma'`, `'lightness'`, `'cusp'` 중 하나. [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip)을 참고하십시오. 기본값: `'chroma'`.
 
 ##### chan_multiply() {#minicolors-colorscheme-methods-chan_multiply}
 
 
 <a name="minicolors-colorschemechan_multiply" href="mini-colors.qmd#minicolors-colorschemechan_multiply"><b>MiniColors-colorscheme:chan_multiply()</b></a>
 
-Multiply value of a channel (see [MiniColors-channels](mini-colors.qmd#minicolors-channels)).
+채널의 값에 곱셈을 수행합니다([MiniColors-channels](mini-colors.qmd#minicolors-channels) 참고).
 
-###### Parameters {#minicolors-colorscheme-methods-chan_multiply-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-chan_multiply-parameters}
 
 
 
-<span class="help-syntax-special">{channel}</span> `(string)` One of supported [MiniColors-channels](mini-colors.qmd#minicolors-channels).
+<span class="help-syntax-special">{channel}</span> `(string)` 지원되는 [MiniColors-channels](mini-colors.qmd#minicolors-channels) 중 하나.
 
-<span class="help-syntax-special">{coef}</span> `(number)` Number to multiply with (can be negative).
+<span class="help-syntax-special">{coef}</span> `(number)` 곱할 계수(음수 가능).
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - filter colors to update. Possible values:
+  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - 업데이트할 색상을 필터링합니다. 가능한 값:
 
-      - String representing target attributes. One of `'fg'`, `'bg'`, `'sp'`,
-        `'term'` (only terminal colors).
+      - 대상 속성을 나타내는 문자열. `'fg'`, `'bg'`, `'sp'`, `'term'`(터미널 색상만) 중 하나.
 
-      - Callable with signature as in [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify).
-    Default: `nil` to update all colors.
+      - [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify)와 동일한 시그니처를 가진 콜러블.
+    기본값: 모든 색상을 업데이트하려면 `nil`.
 
-  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - gamut clipping method. One of `'chroma'`,
-    `'lightness'`, `'cusp'`. See [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip). Default: `'chroma'`.
+  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - 가멋 클리핑 방법. `'chroma'`, `'lightness'`, `'cusp'` 중 하나. [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip)을 참고하십시오. 기본값: `'chroma'`.
 
 ##### chan_repel() {#minicolors-colorscheme-methods-chan_repel}
 
 
 <a name="minicolors-colorschemechan_repel" href="mini-colors.qmd#minicolors-colorschemechan_repel"><b>MiniColors-colorscheme:chan_repel()</b></a>
 
-Repel from certain sources.
+특정 원본에서 멀어지게 합니다.
 
-Given an array of repel centers (`sources`) and repel degree (`coef`) add to
-current channel value some amount ("nudge") with the following properties:
+원본 배열(`sources`)과 멀어지는 정도(`coef`)가 주어지면, 현재 채널 값에 다음 속성을 가진 특정 양("nudge")을 더합니다:
 
-- Nudges from several sources are added together.
+- 여러 원본으로부터의 이동량(nudge)이 합산됩니다.
 
-- Nudge is directly proportional to `coef`: bigger `coef` means bigger nudge.
+- 이동량은 `coef`에 정비례합니다: `coef`가 클수록 이동량이 커집니다.
 
-- Nudge is inversely proportional to the distance between current value and
-  source: for positive `coef` bigger distance means smaller nudge, i.e.
-  repel effect weakens with distance.
+- 이동량은 현재 값과 원본 사이의 거리에 반비례합니다: 양수 `coef`의 경우 거리가 멀수록 이동량이 작아집니다. 즉, 거리가 멀어질수록 밀어내는 효과가 약해집니다.
 
-- With positive `coef` nudges close to source are computed in a way to remove
-  whole `[source - coef; source + coef]` range.
+- 양수 `coef`의 경우, 원본 근처의 이동량은 전체 `[source - coef; source + coef]` 범위를 제거하도록 계산됩니다.
 
-- Negative `coef` results into attraction to source. Nudges in
-  `[source - coef; source + coef]` range are computed to completely collapse it
-  into `source`.
+- 음수 `coef`는 원본으로 끌어당기는 결과를 낳습니다. `[source - coef; source + coef]` 범위의 이동량은 해당 범위를 완전히 `source`로 붕괴시키도록 계산됩니다.
 
-Examples:
+예시:
 
   ```lua
-  -- Repel hue from red color removing hue in range from 20 to 40
+  -- 빨간색으로부터 색상(hue)을 멀어지게 하여 20에서 40 사이의 색상을 제거
   chan_repel('hue', 30, 10)
 
-  -- Attract hue to red color collapsing [20; 40] range into 30.
+  -- 빨간색으로 색상을 끌어당겨 [20; 40] 범위를 30으로 붕괴
   chan_repel('hue', 30, -10)
   ```
 
-###### Parameters {#minicolors-colorscheme-methods-chan_repel-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-chan_repel-parameters}
 
 
 
-<span class="help-syntax-special">{channel}</span> `(string)` One of supported [MiniColors-channels](mini-colors.qmd#minicolors-channels).
+<span class="help-syntax-special">{channel}</span> `(string)` 지원되는 [MiniColors-channels](mini-colors.qmd#minicolors-channels) 중 하나.
 
-<span class="help-syntax-special">{sources}</span> `(table|number)` Single or multiple source from which to repel.
+<span class="help-syntax-special">{sources}</span> `(table|number)` 멀어질 기준이 되는 하나 이상의 원본.
 
-<span class="help-syntax-special">{coef}</span> `(number)` Repel degree (can be negative to attract).
+<span class="help-syntax-special">{coef}</span> `(number)` 멀어지는 정도(끌어당기려면 음수).
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - filter colors to update. Possible values:
+  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - 업데이트할 색상을 필터링합니다. 가능한 값:
 
-      - String representing target attributes. One of `'fg'`, `'bg'`, `'sp'`,
-        `'term'` (only terminal colors).
+      - 대상 속성을 나타내는 문자열. `'fg'`, `'bg'`, `'sp'`, `'term'`(터미널 색상만) 중 하나.
 
-      - Callable with signature as in [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify).
-    Default: `nil` to update all colors.
+      - [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify)와 동일한 시그니처를 가진 콜러블.
+    기본값: 모든 색상을 업데이트하려면 `nil`.
 
-  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - gamut clipping method. One of `'chroma'`,
-    `'lightness'`, `'cusp'`. See [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip). Default: `'chroma'`.
+  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - 가멋 클리핑 방법. `'chroma'`, `'lightness'`, `'cusp'` 중 하나. [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip)을 참고하십시오. 기본값: `'chroma'`.
 
 ##### chan_set() {#minicolors-colorscheme-methods-chan_set}
 
 
 <a name="minicolors-colorschemechan_set" href="mini-colors.qmd#minicolors-colorschemechan_set"><b>MiniColors-colorscheme:chan_set()</b></a>
 
-Set channel to certain value(s). This can be used to ensure that channel has
-value(s) only within supplied set. If more than one is supplied, closest
-element to current value is used.
+채널을 특정 값(들)으로 설정합니다. 채널이 제공된 세트 내의 값만 갖도록 하는 데 사용할 수 있습니다. 둘 이상의 값이 제공되면 현재 값과 가장 가까운 항목이 사용됩니다.
 
-###### Parameters {#minicolors-colorscheme-methods-chan_set-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-chan_set-parameters}
 
 
 
-<span class="help-syntax-special">{channel}</span> `(string)` One of supported [MiniColors-channels](mini-colors.qmd#minicolors-channels).
+<span class="help-syntax-special">{channel}</span> `(string)` 지원되는 [MiniColors-channels](mini-colors.qmd#minicolors-channels) 중 하나.
 
-<span class="help-syntax-special">{values}</span> `(table|number)` Single or multiple values to set.
+<span class="help-syntax-special">{values}</span> `(table|number)` 설정할 하나 이상의 값.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - filter colors to update. Possible values:
+  - <span class="help-syntax-keys">\<filter\></span> `(function|string)` - 업데이트할 색상을 필터링합니다. 가능한 값:
 
-      - String representing target attributes. One of `'fg'`, `'bg'`, `'sp'`,
-        `'term'` (only terminal colors).
+      - 대상 속성을 나타내는 문자열. `'fg'`, `'bg'`, `'sp'`, `'term'`(터미널 색상만) 중 하나.
 
-      - Callable with signature as in [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify).
-    Default: `nil` to update all colors.
+      - [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify)와 동일한 시그니처를 가진 콜러블.
+    기본값: 모든 색상을 업데이트하려면 `nil`.
 
-  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - gamut clipping method. One of `'chroma'`,
-    `'lightness'`, `'cusp'`. See [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip). Default: `'chroma'`.
+  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - 가멋 클리핑 방법. `'chroma'`, `'lightness'`, `'cusp'` 중 하나. [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip)을 참고하십시오. 기본값: `'chroma'`.
 
 ##### color_modify() {#minicolors-colorscheme-methods-color_modify}
 
 
 <a name="minicolors-colorschemecolor_modify" href="mini-colors.qmd#minicolors-colorschemecolor_modify"><b>MiniColors-colorscheme:color_modify()</b></a>
 
-Modify all colors with a callable. It should return new color value (hex
-string or `nil` to remove attribute) base on the following input:
+콜러블을 사용하여 모든 색상을 수정합니다. 다음 입력을 기반으로 새 색상 값(HEX 문자열 또는 속성을 제거하려면 `nil`)을 반환해야 합니다:
 
-- Current color as hex string.
+- 현재 색상 (HEX 문자열).
 
-- Data about the color: a table with fields:
+- 색상에 대한 데이터: 다음 필드를 가진 테이블:
 
-    - <span class="help-syntax-keys">\<attr\></span> - one of `'fg'`, `'bg'`, `'sp'`, and `'term'` for terminal color.
+    - <span class="help-syntax-keys">\<attr\></span> - `'fg'`, `'bg'`, `'sp'`, 터미널 색상의 경우 `'term'` 중 하나.
 
-    - <span class="help-syntax-keys">\<name\></span> - name of color source. Either a name of highlight group or
-      string of the form `terminal_color_x` for terminal color (as in
-      [terminal-config](https://neovim.io/doc/user/helptag.html?tag=terminal-config)).
+    - <span class="help-syntax-keys">\<name\></span> - 색상 원본의 이름. 하이라이트 그룹의 이름이거나 터미널 색상의 경우 `terminal_color_x` 형식의 문자열([terminal-config](https://neovim.io/doc/user/helptag.html?tag=terminal-config) 참고).
 
-Example:
+예시:
 
   ```lua
-  -- Set to '#dd2222' all foreground colors for groups starting with "N"
+  -- "N"으로 시작하는 그룹의 모든 전경색을 '#dd2222'로 설정
   color_modify(function(hex, data)
     if data.attr == 'fg' and data.name:find('^N') then
       return '#dd2222'
@@ -860,166 +717,140 @@ Example:
   end)
   ```
 
-###### Parameters {#minicolors-colorscheme-methods-color_modify-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-color_modify-parameters}
 
 
 
-<span class="help-syntax-special">{f}</span> `(function)` Callable returning new color value.
+<span class="help-syntax-special">{f}</span> `(function)` 새 색상 값을 반환하는 콜러블.
 
 ##### compress() {#minicolors-colorscheme-methods-compress}
 
 
 <a name="minicolors-colorschemecompress" href="mini-colors.qmd#minicolors-colorschemecompress"><b>MiniColors-colorscheme:compress()</b></a>
 
-Remove redundant highlight groups. These are one of the two kinds:
+중복된 하이라이트 그룹을 제거합니다. 중복은 다음 두 가지 종류 중 하나입니다:
 
-- Having values identical to ones after [:hi-clear](https://neovim.io/doc/user/helptag.html?tag=:hi-clear) (meaning they usually
-  don't add new information).
+- [:hi-clear](https://neovim.io/doc/user/helptag.html?tag=:hi-clear) 이후의 값과 동일한 값을 가진 그룹 (보통 새로운 정보를 추가하지 않음을 의미).
 
-- Coming from a curated list of plugins with highlight groups usually not
-  worth keeping around. Current list of such plugins:
+- 일반적으로 보관할 가치가 없는 플러그인 하이라이트 그룹 목록에 포함된 그룹. 현재 대상 플러그인 목록:
 
     - [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 
     - [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)
 
-This method is useful to reduce size of color scheme before writing into
-the file with [MiniColors-colorscheme:write()](mini-colors.qmd#minicolors-colorschemewrite).
+이 메서드는 [MiniColors-colorscheme:write()](mini-colors.qmd#minicolors-colorschemewrite)를 통해 파일로 저장하기 전에 색상 스키마의 크기를 줄이는 데 유용합니다.
 
-###### Parameters {#minicolors-colorscheme-methods-compress-parameters}
-
+###### 매개변수 {#minicolors-colorscheme-methods-compress-parameters}
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
 
-  - <span class="help-syntax-keys">\<plugins\></span> `(boolean)` - whether to remove highlight groups from a curated
-    list of plugins. Default: `true`.
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
+
+  - <span class="help-syntax-keys">\<plugins\></span> `(boolean)` - 선별된 플러그인 목록의 하이라이트 그룹을 제거할지 여부. 기본값: `true`.
 
 ##### get_palette() {#minicolors-colorscheme-methods-get_palette}
 
 
 <a name="minicolors-colorschemeget_palette" href="mini-colors.qmd#minicolors-colorschemeget_palette"><b>MiniColors-colorscheme:get_palette()</b></a>
 
-Get commonly used colors. This basically counts number of all color
-occurrences and filter out rare ones.
+자주 사용되는 색상을 가져옵니다. 기본적으로 모든 색상의 발생 횟수를 세고 드문 색상을 필터링합니다.
 
-It is usually a good idea to apply both [MiniColors-colorscheme:compress()](mini-colors.qmd#minicolors-colorschemecompress)
-and [MiniColors-colorscheme:resolve\_links()](mini-colors.qmd#minicolors-colorschemeresolve_links) before applying this.
+이 기능을 적용하기 전에 [MiniColors-colorscheme:compress()](mini-colors.qmd#minicolors-colorschemecompress)와 [MiniColors-colorscheme:resolve\_links()](mini-colors.qmd#minicolors-colorschemeresolve_links)를 모두 적용하는 것이 좋습니다.
 
-###### Parameters {#minicolors-colorscheme-methods-get_palette-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-get_palette-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<threshold\></span> `(number)` - relative threshold for groups to keep. A group
-    is not included in output if it has less than this many occurrences
-    relative to a total number of colors. Default: 0.01.
+  - <span class="help-syntax-keys">\<threshold\></span> `(number)` - 유지할 그룹의 상대적 임계값. 전체 색상 수에 비해 이 수치보다 적게 발생하는 그룹은 출력에 포함되지 않습니다. 기본값: 0.01.
 
 ##### resolve_links() {#minicolors-colorscheme-methods-resolve_links}
 
 
 <a name="minicolors-colorschemeresolve_links" href="mini-colors.qmd#minicolors-colorschemeresolve_links"><b>MiniColors-colorscheme:resolve_links()</b></a>
 
-Resolve links ([:highlight-link](https://neovim.io/doc/user/helptag.html?tag=:highlight-link)). This makes all highlight groups with `link`
-attribute have data from a linked one.
+링크([:highlight-link](https://neovim.io/doc/user/helptag.html?tag=:highlight-link))를 해결합니다. `link` 속성을 가진 모든 하이라이트 그룹이 연결된 그룹의 데이터를 갖도록 만듭니다.
 
-Notes:
+참고:
 
-- Resolves nested links.
+- 중첩된 링크를 해결합니다.
 
-- If some group is linked to a group missing in current colorscheme object,
-  it is not resolved.
+- 현재 색상 스키마 객체에 없는 그룹에 링크된 경우 해결되지 않습니다.
 
 ##### simulate_cvd() {#minicolors-colorscheme-methods-simulate_cvd}
 
 
 <a name="minicolors-colorschemesimulate_cvd" href="mini-colors.qmd#minicolors-colorschemesimulate_cvd"><b>MiniColors-colorscheme:simulate_cvd()</b></a>
 
-Simulate color vision deficiency (CVD, color blindness). This is basically
-a wrapper using [MiniColors.simulate\_cvd()](mini-colors.qmd#minicolors.simulate_cvd) as a part of
-call to [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify) method.
+색각 결핍(CVD, 색맹)을 시뮬레이션합니다. 기본적으로 [MiniColors-colorscheme:color\_modify()](mini-colors.qmd#minicolors-colorschemecolor_modify) 메서드 호출의 일부로 [MiniColors.simulate\_cvd()](mini-colors.qmd#minicolors.simulate_cvd)를 사용하는 래퍼입니다.
 
-###### Parameters {#minicolors-colorscheme-methods-simulate_cvd-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-simulate_cvd-parameters}
 
 
 
-<span class="help-syntax-special">{cvd_type}</span> `(string)` One of `'protan'`, `'deutan'`, `'tritan'`, `'mono'`.
+<span class="help-syntax-special">{cvd_type}</span> `(string)` `'protan'`, `'deutan'`, `'tritan'`, `'mono'` 중 하나.
 
-<span class="help-syntax-special">{severity}</span> `(number|nil)` Severity of CVD, number between 0 and 1. Default: 1.
+<span class="help-syntax-special">{severity}</span> `(number|nil)` CVD의 심각도, 0에서 1 사이의 숫자. 기본값: 1.
 
 ##### write() {#minicolors-colorscheme-methods-write}
 
 
 <a name="minicolors-colorschemewrite" href="mini-colors.qmd#minicolors-colorschemewrite"><b>MiniColors-colorscheme:write()</b></a>
 
-Write color scheme to a file. It will be a Lua script readily usable as
-a regular color scheme. Useful to both save results of color scheme tweaking
-and making local snapshot of some other color scheme.
+색상 스키마를 파일로 저장합니다. 일반 색상 스키마로 즉시 사용할 수 있는 Lua 스크립트가 됩니다. 색상 스키마 조정 결과를 저장하거나 다른 색상 스키마의 로컬 스냅샷을 만드는 데 유용합니다.
 
-Sourcing this file on startup usually leads to a better performance that
-sourcing initial color scheme, as it is essentially a conditioned
-[:hi-clear](https://neovim.io/doc/user/helptag.html?tag=:hi-clear) call followed by a series of [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)) calls.
+시작할 때 이 파일을 소싱하는 것은 조건부 [:hi-clear](https://neovim.io/doc/user/helptag.html?tag=:hi-clear) 호출과 일련의 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)) 호출로 구성되므로, 초기 색상 스키마를 소싱하는 것보다 일반적으로 성능이 더 좋습니다.
 
-Default writing location is a "colors" directory of your Neovim config
-directory (see [base-directories](https://neovim.io/doc/user/helptag.html?tag=base-directories)). After writing, it should be available
-for sourcing with [:colorscheme](https://neovim.io/doc/user/helptag.html?tag=:colorscheme) or [:Colorscheme](mini-colors.qmd#colorscheme).
+기본 저장 위치는 Neovim 설정 디렉터리의 "colors" 디렉터리입니다([base-directories](https://neovim.io/doc/user/helptag.html?tag=base-directories) 참고). 저장 후에는 [:colorscheme](https://neovim.io/doc/user/helptag.html?tag=:colorscheme) 또는 [:Colorscheme](mini-colors.qmd#colorscheme)으로 소싱할 수 있습니다.
 
-Name of the file by default is taken from `name` field (`'mini_colors'` is
-used if it is `nil`). If color scheme with this name already exists, it
-appends prefix based on current time to make it unique.
+파일 이름은 기본적으로 `name` 필드에서 가져옵니다(`nil`인 경우 `'mini_colors'` 사용). 해당 이름의 색상 스키마가 이미 존재하면 현재 시간을 기준으로 접두사를 추가하여 고유하게 만듭니다.
 
-Notes:
+참고:
 
-- If colors were updated, it is usually a good idea to infer cterm attributes
-  with [MiniColors-colorscheme:add\_cterm\_attributes()](mini-colors.qmd#minicolors-colorschemeadd_cterm_attributes) prior to writing.
+- 색상을 업데이트한 경우, 저장하기 전에 [MiniColors-colorscheme:add\_cterm\_attributes()](mini-colors.qmd#minicolors-colorschemeadd_cterm_attributes)로 cterm 속성을 추론하는 것이 좋습니다.
 
-###### Parameters {#minicolors-colorscheme-methods-write-parameters}
+###### 매개변수 {#minicolors-colorscheme-methods-write-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<compress\></span> `(boolean)` - whether to call [MiniColors-colorscheme:compress()](mini-colors.qmd#minicolors-colorschemecompress)
-    prior to writing. Default: `true`.
+  - <span class="help-syntax-keys">\<compress\></span> `(boolean)` - 저장하기 전에 [MiniColors-colorscheme:compress()](mini-colors.qmd#minicolors-colorschemecompress)를 호출할지 여부. 기본값: `true`.
 
-  - <span class="help-syntax-keys">\<name\></span> `(string|nil)` - basename of written file. Default: `nil` to infer
-    from `name` field.
+  - <span class="help-syntax-keys">\<name\></span> `(string|nil)` - 저장될 파일의 기본 이름. 기본값: `name` 필드에서 추론하려면 `nil`.
 
-  - <span class="help-syntax-keys">\<directory\></span> `(string)` - directory to where file should be saved.
-    Default: "colors" subdirectory of Neovim home config (`stdpath("config")`).
+  - <span class="help-syntax-keys">\<directory\></span> `(string)` - 파일이 저장될 디렉터리. 기본값: Neovim 홈 설정의 "colors" 하위 디렉터리(`stdpath("config")`).
 
 ---
 
 ### setup() {#minicolors.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniColors.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
 #### :Colorscheme {#minicolors.setup-colorscheme}
 
 
 <a name="colorscheme" href="mini-colors.qmd#colorscheme"><b>:Colorscheme</b></a>
 
-Calling this function creates a `:Colorscheme` user command. It takes one or
-more registered color scheme names and performs animated transition between
-them (starting from currently active color scheme).
-It uses [MiniColors.animate()](mini-colors.qmd#minicolors.animate) with default options.
+이 함수를 호출하면 `:Colorscheme` 사용자 명령이 생성됩니다. 하나 이상의 등록된 색상 스키마 이름을 인자로 받아 (현재 활성화된 색상 스키마부터 시작하여) 애니메이션 전환을 수행합니다.
+기본 옵션과 함께 [MiniColors.animate()](mini-colors.qmd#minicolors.animate)를 사용합니다.
 
-#### Parameters {#minicolors.setup-parameters}
+#### 매개변수 {#minicolors.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniColors.config](mini-colors.qmd#minicolors.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniColors.config](mini-colors.qmd#minicolors.config)를 참고하십시오.
 
-#### Usage {#minicolors.setup-usage}
+#### 사용법 {#minicolors.setup-usage}
 
 
 
   ```lua
-  require('mini.colors').setup() -- use default config
-  -- OR
-  require('mini.colors').setup({}) -- replace {} with your config table
+  require('mini.colors').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.colors').setup({}) -- {}를 사용자 설정 테이블로 교체
   ```
 
 ---
@@ -1027,7 +858,7 @@ It uses [MiniColors.animate()](mini-colors.qmd#minicolors.animate) with default 
 ### config {#minicolors.config .help-syntax-right-anchor}
 
 <p align="center">`MiniColors.config`</p>
-#### Defaults {#minicolors.config-defaults}
+#### 기본값 {#minicolors.config-defaults}
 
 
 
@@ -1040,89 +871,82 @@ It uses [MiniColors.animate()](mini-colors.qmd#minicolors.animate) with default 
 ### as_colorscheme() {#minicolors.as_colorscheme .help-syntax-right-anchor}
 
 <p align="center">`MiniColors.as_colorscheme`(<span class="help-syntax-special">{x}</span>)</p>
-Create colorscheme object
+색상 스키마 객체 생성
 
-#### Parameters {#minicolors.as_colorscheme-parameters}
-
-
-
-<span class="help-syntax-special">{x}</span> `(table)` Table to be transformed into [MiniColors-colorscheme](mini-colors.qmd#minicolors-colorscheme) object.
-
-#### Return {#minicolors.as_colorscheme-return}
+#### 매개변수 {#minicolors.as_colorscheme-parameters}
 
 
-`(table)` Copy of `x` transformed into a colorscheme object.
+
+<span class="help-syntax-special">{x}</span> `(table)` [MiniColors-colorscheme](mini-colors.qmd#minicolors-colorscheme) 객체로 변환할 테이블.
+
+#### 반환값 {#minicolors.as_colorscheme-return}
+
+
+`(table)` 색상 스키마 객체로 변환된 `x`의 복사본.
 
 ---
 
 ### get_colorscheme() {#minicolors.get_colorscheme .help-syntax-right-anchor}
 
 <p align="center">`MiniColors.get_colorscheme`(<span class="help-syntax-special">{name}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Get colorscheme object from registered color scheme
+등록된 색상 스키마로부터 색상 스키마 객체 가져오기
 
-#### Parameters {#minicolors.get_colorscheme-parameters}
-
-
-
-<span class="help-syntax-special">{name}</span> `(string|nil)` Name of color scheme to use. If `nil` (default) creates
- colorscheme object based on currently active data ([g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name),
- highlight groups, terminal colors). If string, converts color scheme with
- that name to a colorscheme object.
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
-
-  - <span class="help-syntax-keys">\<new_name\></span> `(string|nil)` - new name of colorscheme object.
-
-#### Return {#minicolors.get_colorscheme-return}
+#### 매개변수 {#minicolors.get_colorscheme-parameters}
 
 
-`(table)` Colorscheme object ([MiniColors-colorscheme](mini-colors.qmd#minicolors-colorscheme)).
+
+<span class="help-syntax-special">{name}</span> `(string|nil)` 사용할 색상 스키마의 이름. `nil`(기본값)인 경우 현재 활성화된 데이터([g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name), 하이라이트 그룹, 터미널 색상)를 기반으로 색상 스키마 객체를 생성합니다. 문자열인 경우 해당 이름의 색상 스키마를 객체로 변환합니다.
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
+
+  - <span class="help-syntax-keys">\<new_name\></span> `(string|nil)` - 색상 스키마 객체의 새 이름.
+
+#### 반환값 {#minicolors.get_colorscheme-return}
+
+
+`(table)` 색상 스키마 객체([MiniColors-colorscheme](mini-colors.qmd#minicolors-colorscheme)).
 
 ---
 
 ### interactive() {#minicolors.interactive .help-syntax-right-anchor}
 
 <p align="center">`MiniColors.interactive`(<span class="help-syntax-special">{opts}</span>)</p>
-Start interactive experiments
+대화형 실험 시작
 
-Create a special buffer in which user can write plain Lua code to tweak
-color scheme and apply to get visual feedback.
+사용자가 일반 Lua 코드를 작성하여 색상 스키마를 조정하고 시각적 피드백을 즉시 확인할 수 있는 특별한 버퍼를 생성합니다.
 
-#### General principles {#minicolors.interactive-generalprinciples}
-
+#### 일반 원칙 {#minicolors.interactive-generalprinciples}
 
 
-- Initial colorscheme object is fixed to interactive buffer on its creation.
+
+- 초기 색상 스키마 객체은 대화형 버퍼 생성 시 해당 버퍼에 고정됩니다.
 
 
-- There are special buffer convenience mappings:
+- 특별한 버퍼 편의 매핑이 제공됩니다:
 
-    - Apply (source) current buffer content.
+    - 현재 버퍼 내용을 적용(소싱)합니다.
 
-    - Reset color scheme (make initial colorscheme the current one).
+    - 색상 스키마를 재설정(초기 색상 스키마를 현재 상태로 설정)합니다.
 
-    - Write to a file the result of applying current buffer content.
-      This sources current content and calls [MiniColors-colorscheme:write()](mini-colors.qmd#minicolors-colorschemewrite).
+    - 현재 버퍼 내용을 적용한 결과를 파일로 저장합니다.
+      현재 내용을 소싱하고 [MiniColors-colorscheme:write()](mini-colors.qmd#minicolors-colorschemewrite)를 호출합니다.
 
-    - Quit interactive buffer.
-
-
-- User is expected to iteratively tweak color scheme by writing general Lua
-  code in interactive buffer and applying it using convenience mapping.
+    - 대화형 버퍼를 닫습니다.
 
 
-- Application of interactive buffer is essentially these steps:
+- 사용자는 대화형 버퍼에 일반 Lua 코드를 작성하고 편의 매핑을 사용하여 적용함으로써 색상 스키마를 반복적으로 조정할 수 있습니다.
 
-    - Expose `self` as initial colorscheme object on any application.
-      It is always the same for every application.
 
-    - Expose initial colorscheme methods as standalone functions. So instead
-      of writing `self = self:add_transparency()` user can only write
-      `add_transparency()`.
+- 대화형 버퍼의 적용은 기본적으로 다음 단계를 거칩니다:
 
-    - Source buffer content as plain Lua code.
+    - 모든 적용 시 `self`를 초기 색상 스키마 객체로 노출합니다.
+      모든 적용에 대해 항상 동일합니다.
 
-Example of interactive buffer content:
+    - 초기 색상 스키마 메서드를 독립형 함수로 노출합니다. 따라서 사용자는 `self = self:add_transparency()` 대신 `add_transparency()`만 작성할 수 있습니다.
+
+    - 버퍼 내용을 일반 Lua 코드로 소싱합니다.
+
+대화형 버퍼 내용 예시:
 
   ```lua
   chan_modify('hue', function() return math.random(0, 359) end)
@@ -1131,144 +955,128 @@ Example of interactive buffer content:
   add_terminal_colors()
   ```
 
-#### Parameters {#minicolors.interactive-parameters}
+#### 매개변수 {#minicolors.interactive-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<colorscheme\></span> `(table|nil)` - [MiniColors-colorscheme](mini-colors.qmd#minicolors-colorscheme) object to be
-    used as initial colorscheme for executed code. By default uses current
-    color scheme.
+  - <span class="help-syntax-keys">\<colorscheme\></span> `(table|nil)` - 실행될 코드의 초기 색상 스키마로 사용될 [MiniColors-colorscheme](mini-colors.qmd#minicolors-colorscheme) 객체. 기본적으로 현재 색상 스키마를 사용합니다.
 
-  - <span class="help-syntax-keys">\<mappings\></span> `table` - buffer mappings for actions. Possible fields:
+  - <span class="help-syntax-keys">\<mappings\></span> `table` - 동작에 대한 버퍼 매핑. 가능한 필드:
 
-      - <span class="help-syntax-keys">\<Apply\></span> `(string)` - apply buffer code. Default: `'<M-a>'`.
+      - <span class="help-syntax-keys">\<Apply\></span> `(string)` - 버퍼 코드 적용. 기본값: `'<M-a>'`.
 
-      - <span class="help-syntax-keys">\<Reset\></span> `(string)` - apply initial color scheme as is. Default: `'<M-r>'`.
+      - <span class="help-syntax-keys">\<Reset\></span> `(string)` - 초기 색상 스키마를 그대로 적용. 기본값: `'<M-r>'`.
 
-      - <span class="help-syntax-keys">\<Quit\></span> `(string)` - close interactive buffer. Default: `'<M-q>'`.
+      - <span class="help-syntax-keys">\<Quit\></span> `(string)` - 대화형 버퍼 닫기. 기본값: `'<M-q>'`.
 
-      - <span class="help-syntax-keys">\<Write\></span> `(string)` - write result of buffer code into a file.
-        Prompts for file name with [vim.ui.input()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.input\(\)) and then
-        uses [MiniColors-colorscheme:write()](mini-colors.qmd#minicolors-colorschemewrite) with other options being default.
-        Default: `'<M-w>'`.
+      - <span class="help-syntax-keys">\<Write\></span> `(string)` - 버퍼 코드의 결과를 파일로 저장.
+        [vim.ui.input()](https://neovim.io/doc/user/helptag.html?tag=vim.ui.input\(\))으로 파일 이름을 묻고, 나머지는 기본 옵션과 함께 [MiniColors-colorscheme:write()](mini-colors.qmd#minicolors-colorschemewrite)를 사용합니다.
+        기본값: `'<M-w>'`.
 
 ---
 
 ### animate() {#minicolors.animate .help-syntax-right-anchor}
 
 <p align="center">`MiniColors.animate`(<span class="help-syntax-special">{cs_array}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Animate color scheme change
+색상 스키마 변경 애니메이션
 
-Start from currently active color scheme and loop through `cs_array`.
+현재 활성화된 색상 스키마부터 시작하여 `cs_array`를 순회합니다.
 
-Powers [:Colorscheme](mini-colors.qmd#colorscheme) user command created in [MiniColors.setup()](mini-colors.qmd#minicolors.setup).
+[MiniColors.setup()](mini-colors.qmd#minicolors.setup)에서 생성된 [:Colorscheme](mini-colors.qmd#colorscheme) 사용자 명령을 지원합니다.
 
-#### Parameters {#minicolors.animate-parameters}
+#### 매개변수 {#minicolors.animate-parameters}
 
 
 
-<span class="help-syntax-special">{cs_array}</span> `(table)` Array of [MiniColors-colorscheme](mini-colors.qmd#minicolors-colorscheme) objects.
+<span class="help-syntax-special">{cs_array}</span> `(table)` [MiniColors-colorscheme](mini-colors.qmd#minicolors-colorscheme) 객체 배열.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
 
-  - <span class="help-syntax-keys">\<transition_steps\></span> `(number)` - number of intermediate steps to show
-    during transition between two color schemes. Bigger values result in
-    smoother visual feedback but require more computational power.
-    Default: 25.
+  - <span class="help-syntax-keys">\<transition_steps\></span> `(number)` - 두 색상 스키마 사이의 전환 중에 표시할 중간 단계 수. 값이 클수록 시각적 피드백이 더 부드러워지지만 더 많은 계산 성능이 필요합니다.
+    기본값: 25.
 
-  - <span class="help-syntax-keys">\<transition_duration\></span> `(number)` - number of milliseconds to spend
-    showing transition. Default: 1000.
+  - <span class="help-syntax-keys">\<transition_duration\></span> `(number)` - 전환을 보여주는 데 소요되는 밀리초 수. 기본값: 1000.
 
-  - <span class="help-syntax-keys">\<show_duration\></span> `(number)` - number of milliseconds to show intermediate
-    color schemes (all but last in `cs_array`). Default: 1000.
+  - <span class="help-syntax-keys">\<show_duration\></span> `(number)` - 중간 색상 스키마(`cs_array`의 마지막을 제외한 모든 항목)를 보여주는 시간(밀리초). 기본값: 1000.
 
 ---
 
 ### convert() {#minicolors.convert .help-syntax-right-anchor}
 
 <p align="center">`MiniColors.convert`(<span class="help-syntax-special">{x}</span>, <span class="help-syntax-special">{to_space}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Convert between color spaces
+색 공간 간 변환
 
-For a list of supported colors spaces see [MiniColors-color-spaces](mini-colors.qmd#minicolors-color-spaces).
+지원되는 색 공간 목록은 [MiniColors-color-spaces](mini-colors.qmd#minicolors-color-spaces)를 참고하십시오.
 
-#### Parameters {#minicolors.convert-parameters}
-
-
-
-<span class="help-syntax-special">{x}</span> `(table|string|number|nil)` Color to convert from. Its color space is
-  inferred automatically.
-
-<span class="help-syntax-special">{to_space}</span> `(string)` Id of allowed color space.
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
-
-  - <span class="help-syntax-keys">\<adjust_lightness\></span> `(boolean)` - whether to adjust lightness value to have
-    a more uniform progression from 0 to 100. Set `false` for results more
-    compatible with some other Oklab/Oklch implementations (like in CSS).
-    Source: "Intermission - a new lightness estimate for Oklab" section of
-    https://bottosson.github.io/posts/colorpicker
-    Default: `true`.
-
-  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - method for [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip).
-    Default: `'chroma'`.
-
-#### Return {#minicolors.convert-return}
+#### 매개변수 {#minicolors.convert-parameters}
 
 
-`(table|string|number|nil)` Color in space `to_space` or `nil` if input is `nil`.
+
+<span class="help-syntax-special">{x}</span> `(table|string|number|nil)` 변환할 원본 색상. 색 공간은 자동으로 추론됩니다.
+
+<span class="help-syntax-special">{to_space}</span> `(string)` 허용되는 색 공간 ID.
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
+
+  - <span class="help-syntax-keys">\<adjust_lightness\></span> `(boolean)` - 0에서 100까지 더 균일한 진행을 갖도록 명도 값을 보정할지 여부. 일부 다른 Oklab/Oklch 구현(예: CSS)과 더 호환되는 결과를 원하면 `false`로 설정하십시오.
+    출처: https://bottosson.github.io/posts/colorpicker 의 "Intermission - a new lightness estimate for Oklab" 섹션.
+    기본값: `true`.
+
+  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip) 방법.
+    기본값: `'chroma'`.
+
+#### 반환값 {#minicolors.convert-return}
+
+
+`(table|string|number|nil)` `to_space` 공간의 색상 또는 입력이 `nil`인 경우 `nil`.
 
 ---
 
 ### modify_channel() {#minicolors.modify_channel .help-syntax-right-anchor}
 
 <p align="center">`MiniColors.modify_channel`(<span class="help-syntax-special">{x}</span>, <span class="help-syntax-special">{channel}</span>, <span class="help-syntax-special">{f}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Modify channel
+채널 수정
 
-#### Parameters {#minicolors.modify_channel-parameters}
-
-
-
-<span class="help-syntax-special">{x}</span> `(table|string|number|nil)` Color which channel will be modified. Color
-  space is inferred automatically.
-
-<span class="help-syntax-special">{channel}</span> `(string)` One of supported [MiniColors-channels](mini-colors.qmd#minicolors-channels).
-
-<span class="help-syntax-special">{f}</span> `(function)` Callable which defines modification. Should take current
-  value of a channel and return a new one.
-
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
-
-  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - method for [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip).
-    Default: `'chroma'`.
-
-#### Return {#minicolors.modify_channel-return}
+#### 매개변수 {#minicolors.modify_channel-parameters}
 
 
-`(string|nil)` Hex string of color with modified channel or `nil` if input is `nil`.
+
+<span class="help-syntax-special">{x}</span> `(table|string|number|nil)` 채널을 수정할 색상. 색 공간은 자동으로 추론됩니다.
+
+<span class="help-syntax-special">{channel}</span> `(string)` 지원되는 [MiniColors-channels](mini-colors.qmd#minicolors-channels) 중 하나.
+
+<span class="help-syntax-special">{f}</span> `(function)` 수정을 정의하는 콜러블. 채널의 현재 값을 받아 새 값을 반환해야 합니다.
+
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사용 가능한 필드:
+
+  - <span class="help-syntax-keys">\<gamut_clip\></span> `(string)` - [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip) 방법.
+    기본값: `'chroma'`.
+
+#### 반환값 {#minicolors.modify_channel-return}
+
+
+`(string|nil)` 수정된 채널을 가진 색상의 HEX 문자열 또는 입력이 `nil`인 경우 `nil`.
 
 ---
 
 ### simulate_cvd() {#minicolors.simulate_cvd .help-syntax-right-anchor}
 
 <p align="center">`MiniColors.simulate_cvd`(<span class="help-syntax-special">{x}</span>, <span class="help-syntax-special">{cvd_type}</span>, <span class="help-syntax-special">{severity}</span>)</p>
-Simulate color vision deficiency
+색각 결핍 시뮬레이션
 
-#### Parameters {#minicolors.simulate_cvd-parameters}
-
-
-
-<span class="help-syntax-special">{x}</span> `(table|string|number|nil)` Color to convert from. Its color space is
-  inferred automatically.
-
-<span class="help-syntax-special">{cvd_type}</span> `(string)` Type of CVD. One of `'protan'`, `'deutan'`,
-or `'mono'` (equivalent to converting to graysacle).
-
-<span class="help-syntax-special">{severity}</span> `(number|nil)` Severity of CVD. A number between 0 and 1 (default).
-
-#### Return {#minicolors.simulate_cvd-return}
+#### 매개변수 {#minicolors.simulate_cvd-parameters}
 
 
-`(string|nil)` Hex string of simulated color or `nil` if input is `nil`.
 
+<span class="help-syntax-special">{x}</span> `(table|string|number|nil)` 변환할 원본 색상. 색 공간은 자동으로 추론됩니다.
+
+<span class="help-syntax-special">{cvd_type}</span> `(string)` CVD 유형. `'protan'`, `'deutan'`, 또는 `'mono'`(회색조 변환과 동일) 중 하나.
+
+<span class="help-syntax-special">{severity}</span> `(number|nil)` CVD 심각도. 0에서 1 사이의 숫자(기본값).
+
+#### 반환값 {#minicolors.simulate_cvd-return}
+
+
+`(string|nil)` 시뮬레이션된 색상의 HEX 문자열 또는 입력이 `nil`인 경우 `nil`.

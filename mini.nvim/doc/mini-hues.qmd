@@ -1,62 +1,56 @@
 ---
-title: "mini.hues documentation"
+title: "mini.hues 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_mini.nvim의 'main' 브랜치에서 생성됨_
 
-<a name="mini.hues" href="mini-hues.qmd#mini.hues"><b>mini.hues</b></a> Generate configurable color scheme
+<a name="mini.hues" href="mini-hues.qmd#mini.hues"><b>mini.hues</b></a> 설정 가능한 색상 테마 생성
 
-MIT License Copyright (c) 2023 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+주요 기능:
 
-- Required to set two base colors: background and foreground.
-  Their shades and other non-base colors are computed to be as much
-  perceptually different as reasonably possible.
-  See [MiniHues.config](mini-hues.qmd#minihues.config) for setup inspiration.
+- 배경색(background)과 전경색(foreground) 두 가지 기본 색상을 설정해야 합니다. 이들의 음영과 다른 비기본 색상들은 시각적으로 최대한 구별되도록 계산됩니다. 설정 영감은 [MiniHues.config](mini-hues.qmd#minihues.config)를 참조하세요.
 
 
-- Configurable:
+- 설정 가능:
 
-    - Number of hues used for non-base colors (from 0 to 8).
+    - 비기본 색상에 사용되는 색조(hue)의 수 (0에서 8까지).
 
-    - Saturation level ("low", "lowmedium", "medium", "mediumhigh", "high").
+    - 채도 레벨 ("low", "lowmedium", "medium", "mediumhigh", "high").
 
-    - Accent color used for some selected UI elements.
+    - 선택된 일부 UI 요소에 사용되는 강조(accent) 색상.
 
-    - Plugin integration (can be selectively enabled for faster startup).
-
-
-- Random generator for base colors. See [MiniHues.gen\_random\_base\_colors()](mini-hues.qmd#minihues.gen_random_base_colors).
-  Powers [randomhue](mini-hues.qmd#randomhue) color scheme.
+    - 플러그인 통합 (빠른 시작을 위해 선택적으로 활성화 가능).
 
 
-- Lua function to compute palette used in color scheme.
-  See [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette).
+- 기본 색상을 위한 무작위 생성기. [MiniHues.gen\_random\_base\_colors()](mini-hues.qmd#minihues.gen_random_base_colors)를 참조하세요. [randomhue](mini-hues.qmd#randomhue) 색상 테마를 구동합니다.
 
 
-- Bundled color schemes. See [MiniHues-color-schemes](mini-hues.qmd#minihues-color-schemes).
-
-Supported highlight groups:
-
-- All built-in UI and syntax groups.
+- 색상 테마에 사용되는 팔레트를 계산하는 Lua 함수. [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette)를 참조하세요.
 
 
-- Built-in Neovim LSP and diagnostic.
+- 번들 색상 테마. [MiniHues-color-schemes](mini-hues.qmd#minihues-color-schemes)를 참조하세요.
+
+지원되는 하이라이트 그룹:
+
+- 모든 내장 UI 및 구문 그룹.
+
+
+- 내장 Neovim LSP 및 진단(diagnostic).
 
 
 - Tree-sitter ([treesitter-highlight-groups](https://neovim.io/doc/user/helptag.html?tag=treesitter-highlight-groups)).
 
 
-- LSP semantic tokens ([lsp-semantic-highlight](https://neovim.io/doc/user/helptag.html?tag=lsp-semantic-highlight)).
+- LSP 시맨틱 토큰 ([lsp-semantic-highlight](https://neovim.io/doc/user/helptag.html?tag=lsp-semantic-highlight)).
 
 
-- Plugins (either with explicit definition or by verification that default
-  highlighting works appropriately):
+- 플러그인 (명시적 정의 또는 기본 하이라이팅이 적절하게 작동함을 확인):
 
     - [nvim-mini/mini.nvim](https://nvim-mini.org/mini.nvim)
 
@@ -132,20 +126,16 @@ Supported highlight groups:
 
     - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.hues').setup({})` and
-mandatory `background` and `foreground` fields (add more fields to fit
-your taste). It will create global Lua table `MiniHues` which you can use
-for scripting or manually (with `:lua MiniHues.*`).
+이 모듈은 `require('mini.hues').setup({})`과 필수 `background` 및 `foreground` 필드로 설정이 필요합니다 (취향에 맞게 필드를 추가하세요). 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniHues`를 생성합니다 (`:lua MiniHues.*` 사용).
 
-See [MiniHues.config](mini-hues.qmd#minihues.config) for `config` structure and default values.
+`config` 구조와 기본값은 [MiniHues.config](mini-hues.qmd#minihues.config)를 참조하세요.
 
-This module doesn't have runtime options, so using `vim.b.minihues_config`
-will have no effect here.
+이 모듈은 런타임 옵션이 없으므로 `vim.b.minihues_config`를 사용해도 효과가 없습니다.
 
-Example:
+예시:
 
 
   ```
@@ -159,74 +149,61 @@ Example:
   })
   ```
 
-#### Notes {#module-notes}
+#### 참고 {#module-notes}
 
 
 
-- This is used to create some of plugin's color schemes
-  (see [MiniHues-color-schemes](mini-hues.qmd#minihues-color-schemes)).
+- 이것은 플러그인의 일부 색상 테마를 생성하는 데 사용됩니다 ([MiniHues-color-schemes](mini-hues.qmd#minihues-color-schemes) 참조).
 
 
-- Using `setup()` doesn't actually create a colorscheme. It basically
-  creates a coordinated set of [highlight-groups](https://neovim.io/doc/user/helptag.html?tag=highlight-groups). To create your own scheme:
+- `setup()`을 사용하는 것이 실제로 색상 테마를 생성하는 것은 아닙니다. 기본적으로 조정된 [highlight-groups](https://neovim.io/doc/user/helptag.html?tag=highlight-groups) 세트를 생성합니다. 자신만의 테마를 만들려면:
 
-    - Put "myscheme.lua" file (name after your chosen theme name) inside
-      any "colors" directory reachable from 'runtimepath' ("colors" inside
-      your Neovim config directory is usually enough).
+    - 'runtimepath'에서 접근 가능한 모든 "colors" 디렉토리(보통 Neovim 설정 디렉토리 내부의 "colors"면 충분함) 안에 "myscheme.lua" 파일(선택한 테마 이름으로 명명)을 넣으세요.
 
-    - Inside "myscheme.lua" call `require('mini.hues').setup()` with your
-      palette and only after that set [g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name) to "myscheme".
+    - "myscheme.lua" 내부에서 팔레트와 함께 `require('mini.hues').setup()`을 호출하고, 그 후에만 [g:colors\_name](https://neovim.io/doc/user/helptag.html?tag=g:colors_name)을 "myscheme"으로 설정하세요.
 
 
-- This module doesn't define [cterm-colors](https://neovim.io/doc/user/helptag.html?tag=cterm-colors) for implementation simplicity.
-  Use [mini.colors](mini-colors.qmd#mini.colors) module, [MiniColors-colorscheme:add\_cterm\_attributes()](mini-colors.qmd#minicolors-colorschemeadd_cterm_attributes)
-  in particular.
+- 이 모듈은 구현의 단순성을 위해 [cterm-colors](https://neovim.io/doc/user/helptag.html?tag=cterm-colors)를 정의하지 않습니다. [mini.colors](mini-colors.qmd#mini.colors) 모듈, 특히 [MiniColors-colorscheme:add\_cterm\_attributes()](mini-colors.qmd#minicolors-colorschemeadd_cterm_attributes)를 사용하세요.
 
 ---
 
-### Color schemes {#minihues-color-schemes .help-syntax-right-anchor}
+### 색상 테마 {#minihues-color-schemes .help-syntax-right-anchor}
 
-Bundled color schemes
-
-
-- <a name="miniwinter" href="mini-hues.qmd#miniwinter"><b>miniwinter</b></a> : "icy winter" palette with azure background.
-
-- <a name="minispring" href="mini-hues.qmd#minispring"><b>minispring</b></a> : "blooming spring" palette with green background.
-
-- <a name="minisummer" href="mini-hues.qmd#minisummer"><b>minisummer</b></a> : "hot summer" palette with brown/yellow background.
-
-- <a name="miniautumn" href="mini-hues.qmd#miniautumn"><b>miniautumn</b></a> : "cooling autumn" palette with purple background.
+번들 색상 테마
 
 
-- <a name="randomhue" href="mini-hues.qmd#randomhue"><b>randomhue</b></a> : uses randomly generated same hue background and foreground.
-  Every `:colorscheme randomhue` call results in a different (randomly yet
-  carefully selected) colors.
+- <a name="miniwinter" href="mini-hues.qmd#miniwinter"><b>miniwinter</b></a> : 청색(azure) 배경의 "차가운 겨울" 팔레트.
 
-  It is essentially a combination of calls to [MiniHues.setup()](mini-hues.qmd#minihues.setup) and
-  [MiniHues.gen\_random\_base\_colors()](mini-hues.qmd#minihues.gen_random_base_colors) with a slight adjustments for
-  'background' value.
+- <a name="minispring" href="mini-hues.qmd#minispring"><b>minispring</b></a> : 녹색 배경의 "꽃피는 봄" 팔레트.
 
-  Activate it as regular [:colorscheme](https://neovim.io/doc/user/helptag.html?tag=:colorscheme). Get currently active config with
-  `:lua print(vim.inspect(MiniHues.config))`.
+- <a name="minisummer" href="mini-hues.qmd#minisummer"><b>minisummer</b></a> : 갈색/노란색 배경의 "더운 여름" 팔레트.
+
+- <a name="miniautumn" href="mini-hues.qmd#miniautumn"><b>miniautumn</b></a> : 보라색 배경의 "선선한 가을" 팔레트.
+
+
+- <a name="randomhue" href="mini-hues.qmd#randomhue"><b>randomhue</b></a> : 무작위로 생성된 동일한 색조의 배경과 전경을 사용합니다. 모든 `:colorscheme randomhue` 호출은 서로 다른 (무작위지만 신중하게 선택된) 색상을 생성합니다.
+
+  이는 본질적으로 'background' 값을 약간 조정한 [MiniHues.setup()](mini-hues.qmd#minihues.setup)과 [MiniHues.gen\_random\_base\_colors()](mini-hues.qmd#minihues.gen_random_base_colors) 호출의 조합입니다.
+
+  일반적인 [:colorscheme](https://neovim.io/doc/user/helptag.html?tag=:colorscheme)처럼 활성화하세요. `:lua print(vim.inspect(MiniHues.config))`로 현재 활성 설정을 가져올 수 있습니다.
 
 ---
 
 ### setup() {#minihues.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniHues.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-Main side effect is to create palette and apply it. Essentially, a combination
-of [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette) and [MiniHues.apply\_palette()](mini-hues.qmd#minihues.apply_palette).
+주요 부작용(side effect)은 팔레트를 생성하고 적용하는 것입니다. 본질적으로 [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette)와 [MiniHues.apply\_palette()](mini-hues.qmd#minihues.apply_palette)의 조합입니다.
 
-#### Usage {#minihues.setup-usage}
+#### 사용법 {#minihues.setup-usage}
 
 
 
   ```lua
   require('mini.hues').setup({
-    -- Use config table as you like
-    -- Needs both `background` and `foreground` fields present
+    -- 취향에 따라 구성 테이블을 사용하세요
+    -- 'background'와 'foreground' 필드가 모두 있어야 합니다
     background = '#11262d',
     foreground = '#c0c8cc',
   })
@@ -237,50 +214,47 @@ of [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette) and [MiniHues
 ### config {#minihues.config .help-syntax-right-anchor}
 
 <p align="center">`MiniHues.config`</p>
-#### Defaults {#minihues.config-defaults}
+#### 기본값 {#minihues.config-defaults}
 
 
 
   ```lua
   MiniHues.config = {
-    -- **Required** base colors as '#rrggbb' hex strings
+    -- **필수** '#rrggbb' 16진수 문자열 형식의 기본 색상
     background = nil,
     foreground = nil,
 
-    -- Number of hues used for non-base colors
+    -- 비기본 색상에 사용되는 색조의 수
     n_hues = 8,
 
-    -- Saturation. One of 'low', 'lowmedium', 'medium', 'mediumhigh', 'high'.
+    -- 채도. 'low', 'lowmedium', 'medium', 'mediumhigh', 'high' 중 하나.
     saturation = 'medium',
 
-    -- Accent color. One of: 'bg', 'fg', 'red', 'orange', 'yellow', 'green',
-    -- 'cyan', 'azure', 'blue', 'purple'
+    -- 강조 색상. 'bg', 'fg', 'red', 'orange', 'yellow', 'green',
+    -- 'cyan', 'azure', 'blue', 'purple' 중 하나.
     accent = 'bg',
 
-    -- Plugin integrations. Use `default = false` to disable all integrations.
-    -- Also can be set per plugin (see |MiniHues.config|).
+    -- 플러그인 통합. 모든 통합을 비활성화하려면 'default = false'를 사용하세요.
+    -- 플러그인별로 설정할 수도 있습니다 (|MiniHues.config| 참조).
     plugins = { default = true },
 
-    -- Whether to auto adjust highlight groups based on certain events
+    -- 특정 이벤트를 기반으로 하이라이트 그룹을 자동으로 조정할지 여부
     autoadjust = true,
   }
   ```
 
-See [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette) for more information about how certain settings
-affect output color scheme.
+특정 설정이 출력 색상 테마에 어떻게 영향을 미치는지에 대한 자세한 내용은 [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette)를 참조하세요.
 
-#### Plugin integrations {#minihues.config-pluginintegrations}
+#### 플러그인 통합 {#minihues.config-pluginintegrations}
 
 
-`config.plugins` defines for which supported plugins highlight groups will
-be created. Limiting number of integrations slightly decreases startup time.
-It is a table with boolean (`true`/`false`) values which are applied as follows:
+`config.plugins`는 어떤 지원되는 플러그인에 대해 하이라이트 그룹을 생성할지 정의합니다. 통합 수를 제한하면 시작 시간이 약간 단축됩니다. 이는 다음과 같이 적용되는 불리언(`true`/`false`) 값을 가진 테이블입니다:
 
-- If plugin name (as listed in [mini.hues](mini-hues.qmd#mini.hues)) has entry, it is used.
+- [mini.hues](mini-hues.qmd#mini.hues)에 나열된 플러그인 이름에 항목이 있으면 해당 항목이 사용됩니다.
 
-- Otherwise `config.plugins.default` is used.
+- 그렇지 않으면 `config.plugins.default`가 사용됩니다.
 
-Example which will load only "mini.nvim" integration:
+\"mini.nvim\" 통합만 로드하는 예시:
 
   ```lua
   require('mini.hues').setup({
@@ -293,34 +267,28 @@ Example which will load only "mini.nvim" integration:
   })
   ```
 
-#### Auto adjust {#minihues.config-autoadjust}
+#### 자동 조정 {#minihues.config-autoadjust}
 
 
-`config.autoadjust` defines whether to adjust some highlight groups based on
-events relevant to them. Currently adjusted groups:
+`config.autoadjust`는 관련 이벤트에 따라 일부 하이라이트 그룹을 조정할지 정의합니다. 현재 조정되는 그룹:
 
 
-- [hl-MsgSeparator](https://neovim.io/doc/user/helptag.html?tag=hl-MsgSeparator) is adjusted based on `msgsep` flag in ['fillchars'](https://neovim.io/doc/user/helptag.html?tag='fillchars').
-  If it is whitespace - highlight background, otherwise - foreground.
+- [hl-MsgSeparator](https://neovim.io/doc/user/helptag.html?tag=hl-MsgSeparator)는 ['fillchars'](https://neovim.io/doc/user/helptag.html?tag='fillchars')의 `msgsep` 플래그에 따라 조정됩니다. 공백이면 배경을, 그렇지 않으면 전경을 강조합니다.
 
 
-- [hl-Pmenu](https://neovim.io/doc/user/helptag.html?tag=hl-Pmenu) is adjusted based on ['pumborder'](https://neovim.io/doc/user/helptag.html?tag='pumborder') value (on Neovim>=0.12).
-  If it results in a border - same as floating window (but with no accent
-  foreground in border), otherwise - same as [hl-CursorLine](https://neovim.io/doc/user/helptag.html?tag=hl-CursorLine). This design
-  makes [ins-completion-menu](https://neovim.io/doc/user/helptag.html?tag=ins-completion-menu) stand out from regular floating windows.
+- [hl-Pmenu](https://neovim.io/doc/user/helptag.html?tag=hl-Pmenu)는 ['pumborder'](https://neovim.io/doc/user/helptag.html?tag='pumborder') 값에 따라 조정됩니다 (Neovim>=0.12). 테두리가 생기면 플로팅 창과 동일하게(단, 테두리에 강조 전경색 없음), 그렇지 않으면 [hl-CursorLine](https://neovim.io/doc/user/helptag.html?tag=hl-CursorLine)과 동일하게 설정됩니다. 이 설계는 [ins-completion-menu](https://neovim.io/doc/user/helptag.html?tag=ins-completion-menu)를 일반 플로팅 창과 구별되게 만듭니다.
 
-#### Examples {#minihues.config-examples}
+#### 예시 {#minihues.config-examples}
 
 
 <a name="minihues-examples" href="mini-hues.qmd#minihues-examples"><b>MiniHues-examples</b></a>
 
-Here are some possible setup configurations (copy first line and then use
-only one `setup` call):
+가능한 설정 구성 몇 가지는 다음과 같습니다 (첫 번째 줄을 복사한 후 `setup` 호출 하나만 사용하세요):
 
   ```lua
   local setup = require('mini.hues').setup
 
-  -- Choose background and foreground
+  -- 배경 및 전경 선택
   setup({ background = '#2f1c22', foreground = '#cdc4c6' }) -- red
   setup({ background = '#2f1e16', foreground = '#cdc5c1' }) -- orange
   setup({ background = '#282211', foreground = '#c9c6c0' }) -- yellow
@@ -330,20 +298,20 @@ only one `setup` call):
   setup({ background = '#1d2231', foreground = '#c4c6cd' }) -- blue
   setup({ background = '#281e2c', foreground = '#c9c5cb' }) -- purple
 
-  -- Choose number of accent colors
+  -- 강조 색상의 수 선택
   setup({ background = '#11262d', foreground = '#c0c8cc', n_hues = 6 })
   setup({ background = '#11262d', foreground = '#c0c8cc', n_hues = 4 })
   setup({ background = '#11262d', foreground = '#c0c8cc', n_hues = 2 })
   setup({ background = '#11262d', foreground = '#c0c8cc', n_hues = 0 })
 
-  -- Choose saturation of colored text
+  -- 색상 텍스트의 채도 선택
   setup({ background = '#11262d', foreground = '#c0c8cc', saturation = 'low' })
   setup({ background = '#11262d', foreground = '#c0c8cc', saturation = 'lowmedium' })
   setup({ background = '#11262d', foreground = '#c0c8cc', saturation = 'medium' })
   setup({ background = '#11262d', foreground = '#c0c8cc', saturation = 'mediumhigh' })
   setup({ background = '#11262d', foreground = '#c0c8cc', saturation = 'high' })
 
-  -- Choose accent color
+  -- 강조 색상 선택
   setup({ background = '#11262d', foreground = '#c0c8cc', accent = 'bg' })
   setup({ background = '#11262d', foreground = '#c0c8cc', accent = 'red' })
   setup({ background = '#11262d', foreground = '#c0c8cc', accent = 'yellow' })
@@ -356,114 +324,86 @@ only one `setup` call):
 ### make_palette() {#minihues.make_palette .help-syntax-right-anchor}
 
 <p align="center">`MiniHues.make_palette`(<span class="help-syntax-special">{config}</span>)</p>
-#### Make palette {#minihues.make_palette-makepalette}
+#### 팔레트 생성 {#minihues.make_palette-makepalette}
 
 
-General idea of palette generation is that it is mostly based on color channel
-information extracted from base colors (background and foreground).
+팔레트 생성의 일반적인 아이디어는 주로 기본 색상(배경 및 전경)에서 추출된 색상 채널 정보를 기반으로 한다는 것입니다.
 
-All operations are done inside `Oklch` color space, meaning that each color
-is defined by three numbers:
+모든 작업은 `Oklch` 색상 공간 내에서 수행되며, 이는 각 색상이 세 가지 숫자로 정의됨을 의미합니다:
 
-- Lightness (`l`) - number between 0 (black) and 100 (white) describing how
-  light is a color.
+- 밝기 (`l`) - 색상이 얼마나 밝은지 설명하는 0(검정)에서 100(흰색) 사이의 숫자.
 
-- Chroma (`c`) - positive number describing how colorful is a color (bigger
-  values - more colorful; 0 is gray).
+- 채도 (`c`) - 색상이 얼마나 다채로운지 설명하는 양수 (값이 클수록 더 화려하고, 0은 회색입니다).
 
-- Hue (`h`) - periodic number in [0, 360) describing a value of "true color"
-  on color circle/wheel.
+- 색조 (`h`) - 색상환/휠에서 "진정한 색상"의 값을 설명하는 [0, 360) 범위의 주기적인 숫자.
 
-For more details about `Oklch` see [MiniColors-color-spaces](mini-colors.qmd#minicolors-color-spaces) or
-https://bottosson.github.io/posts/oklab/.
+`Oklch`에 대한 자세한 내용은 [MiniColors-color-spaces](mini-colors.qmd#minicolors-color-spaces) 또는
+https://bottosson.github.io/posts/oklab/을 참조하세요.
 
-##### Algorithm overview {#minihues.make_palette-makepalette-algorithmoverview}
+##### 알고리즘 개요 {#minihues.make_palette-makepalette-algorithmoverview}
 
 
 
-- Extract lightness, chroma, and hue of base colors.
+- 기본 색상의 밝기, 채도, 색조를 추출합니다.
 
 
-- Generate reference lightness values:
+- 참조 밝기 값을 생성합니다:
 
-    - Background edge: 0 or 100, whichever is closest to background lightness.
+    - 배경 가장자리: 0 또는 100 중 배경 밝기에 더 가까운 것.
 
-    - Foreground edge: 0 or 100, different from background edge.
+    - 전경 가장자리: 0 또는 100 중 배경 가장자리와 다른 것.
 
-    - Middle: arithmetic mean of background and foreground lightness values.
-
-
-- Compute background and foreground tints and shades by changing lightness
-  of background color: two colors closer to background lightness edge and
-  two closer to middle.
+    - 중간: 배경과 전경 밝기 값의 산술 평균.
 
 
-- Pick chroma value for non-base colors based on `config.saturation`.
+- 배경색의 밝기를 변경하여 배경 및 전경의 틴트(tint)와 쉐이드(shade)를 계산합니다: 배경 밝기 가장자리에 가까운 색상 두 개와 중간에 가까운 색상 두 개.
 
 
-- Generate hues for non-base colors:
-
-    - Fit an equidistant circular grid with `config.n_hues` points to be as
-      far from both background and foreground hues. This will ensure that
-      non-base colors are as different as possible from base ones (for
-      better visual perception).
-      Example: for background hue 0, foreground hue 180, and `config.n_hues` 2
-      the output grid will be `{ 90, 270 }`.
+- `config.saturation`을 기반으로 비기본 색상의 채도 값을 선택합니다.
 
 
-    - For each hue of reference color (which itself is an equidistant grid
-      of 8 hues) compute the closest value from the grid. This allows
-      operating in same terms (like "red", "green") despite maybe actually
-      having less different hues.
+- 비기본 색상의 색조를 생성합니다:
+
+    - 배경 및 전경 색조 모두에서 가장 멀리 떨어지도록 `config.n_hues`개의 점을 가진 등간격 원형 그리드를 맞춥니다. 이는 비기본 색상이 기본 색상과 최대한 다르게 보이도록 보장합니다 (더 나은 시각적 인식을 위해). 예시: 배경 색조 0, 전경 색조 180, `config.n_hues` 2인 경우 출력 그리드는 `{ 90, 270 }`이 됩니다.
 
 
-- Compute for each hue two variants of non-base colors: with background and
-  foreground lightness values.
+    - 참조 색상의 각 색조(그 자체로 8개 색조의 등간격 그리드임)에 대해 그리드에서 가장 가까운 값을 계산합니다. 이를 통해 실제로는 더 적은 수의 색조를 가졌더라도 동일한 용어(\"빨강\", \"초록\" 등)로 작업할 수 있습니다.
 
 
-- Compute two variants of accent color (with background and foreground
-  lightness) based on `config.accent`.
-
-Notes:
-
-- Some output colors can have not exact values of generated Oklch channels.
-  This is due to actually computed colors being impossible to represent via
-  '#rrggbb' hex string. In this case a process called gamut clipping is done
-  to reduce lightness and chroma in optimal way while maintaining same hue.
-  For more information see [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip).
+- 각 색조에 대해 배경 및 전경 밝기 값을 가진 두 가지 변형의 비기본 색상을 계산합니다.
 
 
-- Not all colors are actually used in highlight groups and are present for the
-  sake of completeness.
+- `config.accent`를 기반으로 두 가지 변형의 강조 색상(배경 및 전경 밝기)을 계산합니다.
 
-#### Parameters {#minihues.make_palette-parameters}
+참고:
+
+- 일부 출력 색상은 생성된 Oklch 채널의 정확한 값을 갖지 못할 수 있습니다. 이는 실제로 계산된 색상을 '#rrggbb' 16진수 문자열로 표현할 수 없기 때문입니다. 이 경우 가멋 클리핑(gamut clipping)이라는 프로세스를 수행하여 동일한 색조를 유지하면서 최적의 방식으로 밝기와 채도를 줄입니다. 자세한 내용은 [MiniColors-gamut-clip](mini-colors.qmd#minicolors-gamut-clip)을 참조하세요.
+
+
+- 모든 색상이 실제로 하이라이트 그룹에 사용되는 것은 아니며, 완전성을 위해 존재합니다.
+
+#### 매개변수 {#minihues.make_palette-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table)` Configuration for palette. Same structure as [MiniHues.config](mini-hues.qmd#minihues.config).
-  Needs to have <span class="help-syntax-keys">\<background\></span> and <span class="help-syntax-keys">\<foreground\></span> fields.
+<span class="help-syntax-special">{config}</span> `(table)` 팔레트 구성. [MiniHues.config](mini-hues.qmd#minihues.config)와 동일한 구조입니다. <span class="help-syntax-keys">\<background\></span> 및 <span class="help-syntax-keys">\<foreground\></span> 필드가 필요합니다.
 
-#### Return {#minihues.make_palette-return}
+#### 반환 {#minihues.make_palette-return}
 
 
-`(table)` Palette with the following fields:
+`(table)` 다음 필드를 포함하는 팔레트:
 
-  - <span class="help-syntax-keys">\<bg\></span> and <span class="help-syntax-keys">\<fg\></span> with supplied `background` and `foreground` colors.
+  - 제공된 `background` 및 `foreground` 색상을 포함하는 <span class="help-syntax-keys">\<bg\></span> 및 <span class="help-syntax-keys">\<fg\></span>.
 
-  - Fields like <span class="help-syntax-keys">\<bg_xxx\></span> and <span class="help-syntax-keys">\<fg_xxx\></span> are essentially <span class="help-syntax-keys">\<bg\></span> and <span class="help-syntax-keys">\<fg\></span> but with
-    different lightness values: `_edge`/`_edge2` - closer to edge lightness,
-    `_mid`/`_mid2` - closer to middle lightness.
+  - <span class="help-syntax-keys">\<bg_xxx\></span> 및 <span class="help-syntax-keys">\<fg_xxx\></span> 같은 필드들은 본질적으로 <span class="help-syntax-keys">\<bg\></span> 및 <span class="help-syntax-keys">\<fg\></span>와 같지만 밝기 값이 다릅니다: `_edge`/`_edge2` - 가장자리 밝기에 더 가깝고, `_mid`/`_mid2` - 중간 밝기에 더 가깝습니다.
 
-  - Fields for non-base colors (<span class="help-syntax-keys">\<red\></span>, <span class="help-syntax-keys">\<orange\></span>, <span class="help-syntax-keys">\<yellow\></span>, <span class="help-syntax-keys">\<green\></span>, <span class="help-syntax-keys">\<cyan\></span>,
-    <span class="help-syntax-keys">\<azure\></span>, <span class="help-syntax-keys">\<blue\></span>, <span class="help-syntax-keys">\<purple\></span>) have the same lightness as foreground.
+  - 비기본 색상 필드(<span class="help-syntax-keys">\<red\></span>, <span class="help-syntax-keys">\<orange\></span>, <span class="help-syntax-keys">\<yellow\></span>, <span class="help-syntax-keys">\<green\></span>, <span class="help-syntax-keys">\<cyan\></span>, <span class="help-syntax-keys">\<azure\></span>, <span class="help-syntax-keys">\<blue\></span>, <span class="help-syntax-keys">\<purple\></span>)는 전경과 동일한 밝기를 가집니다.
 
-  - Fields for non-base colors with <span class="help-syntax-keys">\<_bg\></span> suffix have the same lightness as
-    background.
+  - <span class="help-syntax-keys">\<_bg\></span> 접미사가 붙은 비기본 색상 필드들은 배경과 동일한 밝기를 가집니다.
 
-  - <span class="help-syntax-keys">\<accent\></span> and <span class="help-syntax-keys">\<accent_bg\></span> represent accent colors with foreground and
-    background lightness values.
+  - <span class="help-syntax-keys">\<accent\></span> 및 <span class="help-syntax-keys">\<accent_bg\></span>는 전경 및 배경 밝기 값을 가진 강조 색상을 나타냅니다.
 
-#### See also {#minihues.make_palette-seealso}
+#### 참고 항목 {#minihues.make_palette-seealso}
 
 
 [MiniHues.get\_palette()](mini-hues.qmd#minihues.get_palette)
@@ -473,28 +413,23 @@ Notes:
 ### apply_palette() {#minihues.apply_palette .help-syntax-right-anchor}
 
 <p align="center">`MiniHues.apply_palette`(<span class="help-syntax-special">{palette}</span>, <span class="help-syntax-special">{plugins}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Apply palette
+팔레트 적용
 
-Create color scheme highlight groups and terminal colors based on supplied
-palette. This is useful if you want to tweak palette colors.
-For regular usage prefer [MiniHues.setup()](mini-hues.qmd#minihues.setup).
+제공된 팔레트를 기반으로 색상 테마 하이라이트 그룹과 터미널 색상을 생성합니다. 이는 팔레트 색상을 미세 조정하고 싶을 때 유용합니다. 일반적인 용도로는 [MiniHues.setup()](mini-hues.qmd#minihues.setup)을 권장합니다.
 
-#### Parameters {#minihues.apply_palette-parameters}
+#### 매개변수 {#minihues.apply_palette-parameters}
 
 
 
-<span class="help-syntax-special">{palette}</span> `(table)` Table with structure as [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette) output.
+<span class="help-syntax-special">{palette}</span> `(table)` [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette) 출력과 동일한 구조의 테이블.
 
-<span class="help-syntax-special">{plugins}</span> `(table|nil)` Table with boolean values indicating whether to create
-  highlight groups for specific plugins. See [MiniHues.config](mini-hues.qmd#minihues.config) for more details.
-  Default: the value from [MiniHues.config](mini-hues.qmd#minihues.config).
+<span class="help-syntax-special">{plugins}</span> `(table|nil)` 특정 플러그인에 대한 하이라이트 그룹 생성 여부를 나타내는 불리언 값을 가진 테이블입니다. 자세한 내용은 [MiniHues.config](mini-hues.qmd#minihues.config)를 참조하세요. 기본값: [MiniHues.config](mini-hues.qmd#minihues.config)의 값.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<autoadjust\></span> - whether to auto adjust some highlight groups when needed.
-    Default: value of `autoadjust` in [MiniHues.config](mini-hues.qmd#minihues.config).
+  - <span class="help-syntax-keys">\<autoadjust\></span> - 필요할 때 일부 하이라이트 그룹을 자동으로 조정할지 여부. 기본값: [MiniHues.config](mini-hues.qmd#minihues.config)의 `autoadjust` 값.
 
-#### Usage {#minihues.apply_palette-usage}
+#### 사용법 {#minihues.apply_palette-usage}
 
 
 
@@ -508,7 +443,7 @@ For regular usage prefer [MiniHues.setup()](mini-hues.qmd#minihues.setup).
   require('mini.hues').apply_palette(palette)
   ```
 
-#### See also {#minihues.apply_palette-seealso}
+#### 참고 항목 {#minihues.apply_palette-seealso}
 
 
 [MiniHues.get\_palette()](mini-hues.qmd#minihues.get_palette)
@@ -518,26 +453,23 @@ For regular usage prefer [MiniHues.setup()](mini-hues.qmd#minihues.setup).
 ### get_palette() {#minihues.get_palette .help-syntax-right-anchor}
 
 <p align="center">`MiniHues.get_palette`()</p>
-Get latest applied palette
+최근 적용된 팔레트 가져오기
 
-#### Return {#minihues.get_palette-return}
+#### 반환 {#minihues.get_palette-return}
 
 
-`(table)` Table with structure as [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette) output that was
-  the latest applied (via [MiniHues.apply\_palette()](mini-hues.qmd#minihues.apply_palette)) palette.
+`(table)` 가장 최근에 적용된([MiniHues.apply\_palette()](mini-hues.qmd#minihues.apply_palette)를 통해) [MiniHues.make\_palette()](mini-hues.qmd#minihues.make_palette) 출력 구조의 테이블.
 
 ---
 
 ### gen_random_base_colors() {#minihues.gen_random_base_colors .help-syntax-right-anchor}
 
 <p align="center">`MiniHues.gen_random_base_colors`(<span class="help-syntax-special">{opts}</span>)</p>
-Generate random base colors
+무작위 기본 색상 생성
 
-Compute background and foreground colors based on randomly generated hue
-and heuristically picked lightness-chroma values.
+무작위로 생성된 색조와 휴리스틱하게 선택된 밝기-채도 값을 기반으로 배경 및 전경 색상을 계산합니다.
 
-You can recreate a similar functionality but tweaked to your taste
-using [mini.colors](mini-colors.qmd#mini.colors): >
+[mini.colors](mini-colors.qmd#mini.colors)를 사용하여 취향에 맞게 조정된 유사한 기능을 재현할 수 있습니다: >
   local convert = require('mini.colors').convert
   local hue = math.random(0, 359)
   return {
@@ -545,32 +477,26 @@ using [mini.colors](mini-colors.qmd#mini.colors): >
     foreground = convert({ l = 80, c = 1, h = hue }, 'hex'),
   }
 
-Notes:
+참고:
 
-- Respects 'background' (uses different lightness and chroma values for
-  "dark" and "light" backgrounds).
+- 'background' 설정을 존중합니다 ("dark" 및 "light" 배경에 대해 서로 다른 밝기와 채도 값을 사용).
 
 
-- When used during startup, might require usage of `math.randomseed()` for
-  proper random generation. For example: >
+- 시작 중에 사용되는 경우, 적절한 무작위 생성을 위해 `math.randomseed()` 사용이 필요할 수 있습니다. 예시: >
 
   local hues = require('mini.hues')
   math.randomseed(vim.loop.hrtime())
   hues.setup(hues.gen_random_base_colors())
 
-#### Parameters {#minihues.gen_random_base_colors-parameters}
+#### 매개변수 {#minihues.gen_random_base_colors-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible values:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 값:
 
-  - <span class="help-syntax-keys">\<gen_hue\></span> `(function)` - callable which will return single number for
-    output hue. Can be used to limit which hues will be generated.
-    Default: random integer between 0 and 359.
+  - <span class="help-syntax-keys">\<gen_hue\></span> `(function)` - 출력 색조를 위한 단일 숫자를 반환하는 호출 가능한 객체(function). 생성될 색조를 제한하는 데 사용할 수 있습니다. 기본값: 0에서 359 사이의 무작위 정수.
 
-#### Return {#minihues.gen_random_base_colors-return}
+#### 반환 {#minihues.gen_random_base_colors-return}
 
 
-`(table)` Table with <span class="help-syntax-keys">\<background\></span> and <span class="help-syntax-keys">\<foreground\></span> fields containing
-  color hex strings.
-
+`(table)` 색상 16진수 문자열을 포함하는 <span class="help-syntax-keys">\<background\></span> 및 <span class="help-syntax-keys">\<foreground\></span> 필드를 가진 테이블.

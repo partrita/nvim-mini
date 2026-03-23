@@ -1,45 +1,45 @@
 ---
-title: "Announcing 'mini.keymap'"
+title: "'mini.keymap' 발표"
 author: Evgeni Chasnovski
 date: 2025-05-03
 categories: [announce, reddit]
-description: "Make special key mappings: multi-step actions (like \"smart\" tab, shift-tab, enter, backspace) and combos (more general \"better escape\" like behavior)"
+description: "특수 키 매핑을 설정하세요: 다단계 동작(\"스마트\" 탭, 엔터 등) 및 콤보(더 범용적인 \"better escape\" 스타일 동작) 기능을 제공합니다."
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/1kdrhjn/minikeymap_make_special_key_mappings_multistep/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/1kdrhjn/minikeymap_make_special_key_mappings_multistep/)*
 
 {{< video 2025-05-03-announce-mini-keymap/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I invite you to break a long pause between new [mini.nvim](https://github.com/nvim-mini/mini.nvim) module releases together with ['mini.keymap'](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-keymap.md). It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.keymap).
-
-------
-
-This module is aimed to solve three pressing issues:
-
-- Provide a way to tie together different modules/plugins which can use `<Tab>` / `<S-Tab>` / `<CR>` / `<BS>` keys in Insert mode. These are usually known as "smart" keys, but 'mini.keymap' offers a more general and customizable alternative of "multi-step actions".
-
-- Resolve [the oldest open feature request](https://github.com/nvim-mini/mini.nvim/issues/86) for adding "better escape" like functionality into 'mini.nvim'. I personally prefer exiting into Normal mode with `<C-S>` (which also saves), but I can see the appeal of `jk`. Maybe I'll try to get used to it. Besides, the end result in 'mini.keymap' (called "combo") is more versatile.
-
-- The upcoming 'mini.nvim' release 0.16.0 will be mostly about [new 'mini.completion' features](2025-03-07-update-mini-completion-snippet-support.qmd) and many new features in other modules. But I'd like for every stable release to provide at least one new module. So here we are.
+새로운 [mini.nvim](https://github.com/nvim-mini/mini.nvim) 모듈인 [mini.keymap](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-keymap.md) 출시와 함께 긴 공백기를 깨고 여러분을 초대합니다. 이 모듈은 [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.keymap)를 통해서도 설치할 수 있습니다.
 
 ------
 
-Features of 'mini.keymap':
+이 모듈은 세 가지 시급한 문제를 해결하기 위해 제작되었습니다:
 
-- Map keys to perform configurable multi-step actions: if condition for step one is true - execute step one action, else check step two, and so on until falling back to executing original keys. This is usually referred to as "smart" keys (like "smart tab").
+- 입력(Insert) 모드에서 `<Tab>` / `<S-Tab>` / `<CR>` / `<BS>` 키를 사용할 수 있는 서로 다른 모듈/플러그인들을 하나로 묶는 방법을 제공합니다. 흔히 "스마트" 키라고 알려진 이 기능을 'mini.keymap'은 더욱 일반적이고 커스터마이징 가능한 "다단계 동작(multi-step actions)"이라는 대안으로 제공합니다.
 
-  There are many built-in steps targeted for Insert mode mappings of special keys like `<Tab>`, `<S-Tab>`, `<CR>`, and `<BS>`. Here is the [full list](https://github.com/nvim-mini/mini.nvim/blob/ee23e1abc206efc6d6cce19ec8c0a3da7a897035/doc/mini-keymap.txt#L220-L261) and [some common examples](https://github.com/nvim-mini/mini.nvim/blob/ee23e1abc206efc6d6cce19ec8c0a3da7a897035/doc/mini-keymap.txt#L81-L126). More plugin might support in the future (like for accepting inline completion and "next text edit"), but having as much coverage as possible is not the goal.
+- 'mini.nvim'에 "better escape"와 같은 기능을 추가해 달라는 [가장 오래된 오픈 기능 요청](https://github.com/nvim-mini/mini.nvim/issues/86)을 해결합니다. 저는 개인적으로 `<C-S>`(저장 기능 포함)로 일반(Normal) 모드로 나가는 것을 선호하지만, `jk`의 매력도 충분히 이해합니다. 저도 익숙해지도록 노력해 봐야겠네요. 또한 'mini.keymap'의 최종 결과물( "콤보(combo)"라고 함)은 더욱 다재다능합니다.
 
-- Map keys as "combo": each key acts immediately plus execute extra action if all are typed within configurable delay between each other. Some of the common use cases include:
-    - Map insertable keys to exit into Normal mode (as this won't have side effects like `inoremap jk <Esc>`).
-    - Show a notification if there are too many same navigation keys pressed (to break bad habits).
-
-  Here are [more examples](https://github.com/nvim-mini/mini.nvim/blob/ee23e1abc206efc6d6cce19ec8c0a3da7a897035/doc/mini-keymap.txt#L127-L182).
+- 곧 출시될 'mini.nvim' 0.16.0 버전은 주로 [새로운 'mini.completion' 기능](2025-03-07-update-mini-completion-snippet-support.qmd)과 다른 모듈들의 수많은 새 기능을 다룰 예정입니다. 하지만 저는 매 안정 릴리스마다 적어도 하나의 새로운 모듈을 제공하고 싶었고, 그래서 이렇게 공개하게 되었습니다.
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in dedicated [beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/1780). I'd also like to collect ideas about useful combos that are not convenient to be done as a regular mapping.
+'mini.keymap'의 주요 기능:
 
-Thanks!
+- 설정 가능한 다단계 동작을 수행하도록 키를 매핑합니다: 첫 번째 단계의 조건이 참이면 해당 동작을 실행하고, 그렇지 않으면 두 번째 단계를 확인하는 식으로 진행하다가 마지막에는 원래 키 입력을 실행합니다. 이는 주로 "스마트" 키(예: "스마트 탭")라고 불리는 기능입니다.
+
+  입력 모드에서 `<Tab>`, `<S-Tab>`, `<CR>`, `<BS>`와 같은 특수 키 매핑을 위해 미리 빌드된 수많은 단계가 있습니다. 여기 [전체 목록](https://github.com/nvim-mini/mini.nvim/blob/ee23e1abc206efc6d6cce19ec8c0a3da7a897035/doc/mini-keymap.txt#L220-L261)과 [일반적인 사용 예시](https://github.com/nvim-mini/mini.nvim/blob/ee23e1abc206efc6d6cce19ec8c0a3da7a897035/doc/mini-keymap.txt#L81-L126)가 있습니다. 앞으로 더 많은 플러그인(예: 인라인 완성 수락 등)을 지원할 수 있겠지만, 최대한 많은 범위를 커버하는 것이 목표는 아닙니다.
+
+- 키를 "콤보(combo)"로 매핑합니다: 각 키가 즉시 입력되는 동시에, 설정된 시간 지연 내에 모든 키가 입력되면 추가 동작을 실행합니다. 일반적인 사용 사례는 다음과 같습니다:
+    - 입력 가능한 키를 일반 모드로 나가는 용도로 매핑 (이는 `inoremap jk <Esc>`와 달리 부작용이 없습니다).
+    - 동일한 이동 키를 너무 많이 누를 경우 알림을 표시 (나쁜 습관 고치기).
+
+  여기 [더 많은 예시](https://github.com/nvim-mini/mini.nvim/blob/ee23e1abc206efc6d6cce19ec8c0a3da7a897035/doc/mini-keymap.txt#L127-L182)가 있습니다.
+
+------
+
+한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/1780)에 남겨주시면 감사하겠습니다. 또한 일반적인 매핑으로는 하기 불편한 유용한 콤보 아이디어도 수집하고 있으니 많은 참여 부탁드립니다.
+
+감사합니다!

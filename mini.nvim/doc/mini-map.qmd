@@ -1,87 +1,57 @@
 ---
-title: "mini.map documentation"
+title: "mini.map 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_ 'mini.nvim'의 `main` 브랜치에서 생성됨 _
 
-<a name="mini.map" href="mini-map.qmd#mini.map"><b>mini.map</b></a> Window with buffer text overview
+<a name="mini.map" href="mini-map.qmd#mini.map"><b>mini.map</b></a> 버퍼 텍스트 개요 창
 
-MIT License Copyright (c) 2022 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2022 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Features:
+주요 기능:
 
-- Show and manage special floating window displaying automatically updated
-  overview of current buffer text. Window takes up whole height of Neovim
-  instance and is fixed to a left/right side. Map content is computed by
-  taking all current lines, converting it to binary whitespace/non-whitespace
-  mask, rescaling to appropriate dimensions, and converting back to strings
-  consisting from special encoding symbols. All this is done very fast and
-  asynchronously. See [MiniMap.open()](mini-map.qmd#minimap.open), [MiniMap.refresh()](mini-map.qmd#minimap.refresh), [MiniMap.close()](mini-map.qmd#minimap.close),
-  [MiniMap.toggle()](mini-map.qmd#minimap.toggle), [MiniMap.toggle\_side()](mini-map.qmd#minimap.toggle_side).
-  For a general overview and tips, see [mini.map-usage](mini-map.qmd#mini.map-usage).
+- 현재 버퍼 텍스트의 자동으로 업데이트되는 개요를 표시하는 특수 플로팅 창(floating window)을 표시하고 관리합니다. 창은 Neovim 인스턴스의 전체 높이를 차지하며 왼쪽 또는 오른쪽 사이드에 고정됩니다. 맵 콘텐츠는 현재 모든 줄을 가져와 이진 화이트스페이스/논-화이트스페이스 마스크로 변환하고, 적절한 차원으로 리스케일링한 후, 특수 인코딩 심볼로 구성된 문자열로 다시 변환하여 계산됩니다. 이 모든 작업은 매우 빠르고 비동기적으로 수행됩니다. [MiniMap.open()](mini-map.qmd#minimap.open), [MiniMap.refresh()](mini-map.qmd#minimap.refresh), [MiniMap.close()](mini-map.qmd#minimap.close), [MiniMap.toggle()](mini-map.qmd#minimap.toggle), [MiniMap.toggle\_side()](mini-map.qmd#minimap.toggle_side)를 참조하세요. 일반적인 개요와 팁은 [mini.map-usage](mini-map.qmd#mini.map-usage)를 참조하세요.
 
 
-- Show scrollbar next to map content. It represents current line and view
-  (top and bottom visible lines). Can be the only thing shown, making map
-  window a "pure scrollbar". See "Pure scrollbar config" section in
-  [MiniMap.config](mini-map.qmd#minimap.config).
+- 맵 콘텐츠 옆에 스크롤바(scrollbar)를 표시합니다. 이는 현재 줄과 뷰(상단 및 하단에 표시되는 줄)를 나타냅니다. 표시되는 유일한 항목이 될 수 있어 맵 창을 "순수 스크롤바"로 만들 수도 있습니다. [MiniMap.config](mini-map.qmd#minimap.config)의 "Pure scrollbar config" 섹션을 참조하세요.
 
 
-- Highlight map lines representing certain data in current buffer. This is
-  done via extensible set of callables, called integrations (see
-  "Integrations" section in [MiniMap.config](mini-map.qmd#minimap.config)). There are pre-built generators
-  for common integrations:
+- 현재 버퍼의 특정 데이터를 나타내는 맵 라인을 하이라이트합니다. 이는 통합(integrations)이라 불리는 확장 가능한 콜러블(callable) 세트를 통해 수행됩니다 ([MiniMap.config](mini-map.qmd#minimap.config)의 "Integrations" 섹션 참조). 일반적인 통합을 위해 사전 구축된 생성기가 있습니다:
 
-    - Builtin search (as result of [/](https://neovim.io/doc/user/helptag.html?tag=/) and similar).
+    - 내장 검색 ([/](https://neovim.io/doc/user/helptag.html?tag=/) 및 유사한 결과).
 
-    - Builtin diagnostic (taken from [vim.diagnostic.get()](https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.get\(\))).
+    - 내장 진단 ([vim.diagnostic.get()](https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.get\(\))에서 가져옴).
 
-    - General diff hunks provided by [mini.diff](mini-diff.qmd#mini.diff).
+    - [mini.diff](mini-diff.qmd#mini.diff)에서 제공하는 일반 diff 헝크(hunks).
 
-    - Hunks computed provided by 'lewis6991/gitsigns.nvim'.
-  For more details see [MiniMap.gen\_integration](mini-map.qmd#minimap.gen_integration).
+    - 'lewis6991/gitsigns.nvim'에서 제공하는 헝크.
+  자세한 내용은 [MiniMap.gen\_integration](mini-map.qmd#minimap.gen_integration)을 참조하세요.
 
 
-- Focus on map window to quickly browse current (source) buffer. Moving inside
-  map window updates cursor position in source window enabling fast and
-  targeted buffer exploration. To focus back, hit `<CR>` to accept current
-  explored position or `<Esc>` to go back to original position. See
-  [MiniMap.toggle\_focus()](mini-map.qmd#minimap.toggle_focus).
+- 맵 창에 포커스하여 현재(소스) 버퍼를 빠르게 탐색합니다. 맵 창 내부에서 이동하면 소스 창의 커서 위치가 업데이트되어 빠르고 타겟팅된 버퍼 탐색이 가능합니다. 다시 포커스하려면 현재 탐색된 위치를 수락하기 위해 `<CR>`을 누르거나 원래 위치로 돌아가기 위해 `<Esc>`를 누르세요. [MiniMap.toggle\_focus()](mini-map.qmd#minimap.toggle_focus)를 참조하세요.
 
 
-- Customizable via [MiniMap.config](mini-map.qmd#minimap.config) and/or `opts` argument of [MiniMap.open()](mini-map.qmd#minimap.open)
-  or [MiniMap.refresh()](mini-map.qmd#minimap.refresh):
+- [MiniMap.config](mini-map.qmd#minimap.config) 및/또는 [MiniMap.open()](mini-map.qmd#minimap.open) 또는 [MiniMap.refresh()](mini-map.qmd#minimap.refresh)의 `opts` 인수를 통해 사용자 정의 가능:
 
-    - Encoding symbols used to display binary information of different
-      resolution (default is 3x2). There are pre-built generators for
-      different basic character families and resolutions. See
-      [MiniMap.gen\_encode\_symbols](mini-map.qmd#minimap.gen_encode_symbols).
+    - 서로 다른 해상도의 이진 정보를 표시하는 데 사용되는 인코딩 심볼(기본값은 3x2). 다양한 기본 문자 패밀리 및 해상도에 대한 사전 구축된 생성기가 있습니다. [MiniMap.gen\_encode\_symbols](mini-map.qmd#minimap.gen_encode_symbols)를 참조하세요.
 
-    - Scrollbar symbols, separate for line and view. Can have any width
-      (even zero, which virtually disables scrollbar).
+    - 줄과 뷰에 대해 별도의 스크롤바 심볼. 어떤 너비든 가질 수 있습니다(스크롤바를 사실상 비활성화하는 너비 0 포함).
 
-    - Integrations producing map line highlights.
+    - 맵 라인 하이라이트를 생성하는 통합.
 
-    - Window options: side (left/right), width, 'winblend', and more.
+    - 창 옵션: 사이드(왼쪽/오른쪽), 너비, 'winblend' 등.
 
-What it doesn't do:
+하지 않는 것:
 
-- Automatically refresh when typing in Insert mode. Although it can be done in
-  non-blocking way, it still might introduce considerable computation overhead
-  (especially in very large files).
+- Insert 모드에서 입력할 때 자동으로 새로 고치지 않습니다. 논-블로킹(non-blocking) 방식으로 수행할 수 있지만 여전히 상당한 계산 오버헤드를 유발할 수 있습니다(특히 매우 큰 파일에서).
 
-- Has more flexible window configuration. In case a full height floating
-  window obstructs vision of underlying buffers, use [MiniMap.toggle()](mini-map.qmd#minimap.toggle) or
-  [MiniMap.toggle\_side()](mini-map.qmd#minimap.toggle_side). Works best with global statusline.
+- 유연한 창 구성을 제공하지 않습니다. 전체 높이의 플로팅 창이 기본 버퍼의 시야를 가리는 경우, [MiniMap.toggle()](mini-map.qmd#minimap.toggle) 또는 [MiniMap.toggle\_side()](mini-map.qmd#minimap.toggle_side)를 사용하세요. 글로벌 상태표시줄(global statusline)과 함께 사용할 때 가장 잘 작동합니다.
 
-- Provide autoopen functionality. Due to vast differences in user preference
-  of when map window should be shown, set up of automatic opening is left to
-  user. A common approach would be to call `MiniMap.open()` on [VimEnter](https://neovim.io/doc/user/helptag.html?tag=VimEnter) event.
-  If you use [mini.starter](mini-starter.qmd#mini.starter), you can modify `<CR>` buffer mapping:
+- 자동 열기 기능을 제공하지 않습니다. 맵 창이 표시되어야 하는 시점에 대한 사용자 선호도가 매우 다양하므로 자동 열기 설정은 사용자에게 맡깁니다. 일반적인 접근 방식은 [VimEnter](https://neovim.io/doc/user/helptag.html?tag=VimEnter) 이벤트에서 `MiniMap.open()`을 호출하는 것입니다. [mini.starter](mini-starter.qmd#mini.starter)를 사용하는 경우 `<CR>` 버퍼 매핑을 수정할 수 있습니다:
 
     ```lua
     local set_map_keymap = function()
@@ -89,125 +59,103 @@ What it doesn't do:
         MiniStarter.eval_current_item()
         MiniMap.open()
       end
+      -- Enter 키를 누르면 현재 항목을 실행하고 미니맵을 엽니다
       vim.keymap.set('n', '<CR>', rhs, { buffer = true })
     end
     local opts = { pattern = 'MiniStarterOpened', callback = set_map_keymap }
+    -- MiniStarter가 열렸을 때 매핑을 설정합니다
     vim.api.nvim_create_autocmd('User', opts)
     ```
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.map').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniMap`
-which you can use for scripting or manually (with `:lua MiniMap.*`).
+이 모듈은 `require('mini.map').setup({})`으로 설정이 필요합니다 (`{}`를 `config` 테이블로 교체하세요). 스크립팅이나 수동으로 사용할 수 있는 글로벌 Lua 테이블 `MiniMap`을 생성합니다 (`:lua MiniMap.*` 사용).
 
-See [MiniMap.config](mini-map.qmd#minimap.config) for available config settings.
+사용 가능한 구성 설정은 [MiniMap.config](mini-map.qmd#minimap.config)를 참조하세요.
 
-You can override runtime config settings (like `config.modifiers`) locally
-to buffer inside `vim.b.minimap_config` which should have same structure
-as `MiniMap.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+런타임 구성 설정(예: `config.modifiers`)을 `vim.b.minimap_config` 내부의 버퍼에 로컬로 재정의할 수 있으며, 이는 `MiniMap.config`와 동일한 구조여야 합니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
 
-#### Dependencies {#module-dependencies}
+#### 의존성 {#module-dependencies}
 
 
-Suggested dependencies (provide extra functionality for integrations):
+권장 의존성 (통합을 위한 추가 기능 제공):
 
-- Enabled [mini.diff](mini-diff.qmd#mini.diff) module for general diff highlighting via
-  [MiniMap.gen\_integration.diff()](mini-map.qmd#minimap.gen_integration.diff). If missing, no highlighting is added.
+- [MiniMap.gen\_integration.diff()](mini-map.qmd#minimap.gen_integration.diff)를 통한 일반 diff 하이라이팅을 위해 활성화된 [mini.diff](mini-diff.qmd#mini.diff) 모듈. 없는 경우 하이라이팅이 추가되지 않습니다.
 
-- Plugin [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
-  for Git status highlighting via [MiniMap.gen\_integration.gitsigns()](mini-map.qmd#minimap.gen_integration.gitsigns).
-  If missing, no highlighting is added.
+- [MiniMap.gen\_integration.gitsigns()](mini-map.qmd#minimap.gen_integration.gitsigns)를 통한 Git 상태 하이라이팅을 위한 [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) 플러그인. 없는 경우 하이라이팅이 추가되지 않습니다.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [wfxr/minimap.vim](https://github.com/wfxr/minimap.vim):
 
-    - 'mini.map' doesn't have dependencies while being as fast as written
-      in Rust dependency of 'minimap.vim'.
+    - 'mini.map'은 Rust 의존성이 있는 'minimap.vim'만큼 빠르면서도 의존성이 없습니다.
 
-    - 'mini.map' uses floating window, while 'minimap.vim' uses regular one.
+    - 'mini.map'은 플로팅 창을 사용하는 반면 'minimap.vim'은 일반 창을 사용합니다.
 
-    - 'mini.map' provides slightly different visual interface with
-      scrollbar and integration counts.
+    - 'mini.map'은 스크롤바와 통합 카운트가 있는 약간 다른 시각적 인터페이스를 제공합니다.
 
-    - 'mini.map' allows encode symbols customization, 'minimap.vim' does not.
+    - 'mini.map'은 인코딩 심볼 사용자 정의를 허용하지만 'minimap.vim'은 허용하지 않습니다.
 
-    - 'mini.map' allows extending highlight integrations, while only
-      builtin search and git status are supported in 'minimap.vim'.
+    - 'mini.map'은 하이라이트 통합 확장을 허용하는 반면, 'minimap.vim'은 내장 검색 및 git 상태만 지원합니다.
 
-    - 'mini.map' updates in asynchronous (non-blocking) fashion, 'minimap.vim'
-      does not.
+    - 'mini.map'은 비동기(논-블로킹) 방식으로 업데이트되지만 'minimap.vim'은 그렇지 않습니다.
 
-    - 'mini.map' can be used as a pure scrollbar, 'minimap.vim' can not.
+    - 'mini.map'은 순수 스크롤바로 사용할 수 있지만 'minimap.vim'은 그렇지 않습니다.
 
 - [dstein64/nvim-scrollview](https://github.com/dstein64/nvim-scrollview):
 
-    - 'mini.map' has two-part scrollbar showing current line and view (with
-      variable height), while 'nvim-scrollview' shows only current view
-      (with fixed height).
+    - 'mini.map'은 현재 줄과 뷰(가변 높이)를 보여주는 두 부분으로 된 스크롤바를 사용하는 반면, 'nvim-scrollview'는 현재 뷰(고정 높이)만 보여줍니다.
 
-    - 'nvim-scrollview' respects folds, i.e. shows view of visible lines,
-      while 'mini.map' by design always shows view based on actual lines.
+    - 'nvim-scrollview'는 폴드(folds)를 존중하여 표시되는 줄의 뷰를 보여주는 반면, 'mini.map'은 설계상 항상 실제 줄을 기반으로 뷰를 보여줍니다.
 
-    - 'nvim-scrollview' creates scrollbar which can be dragged with mouse,
-      while 'mini.nvim' does not, by design (use [MiniMap.toggle\_focus()](mini-map.qmd#minimap.toggle_focus)).
+    - 'nvim-scrollview'는 마우스로 드래그할 수 있는 스크롤바를 생성하지만 'mini.nvim'은 설계상 그렇지 않습니다 ([MiniMap.toggle\_focus()](mini-map.qmd#minimap.toggle_focus) 사용).
 
-    - 'mini.map' can show buffer outline, while 'nvim-scrollview' can not.
+    - 'mini.map'은 버퍼 윤곽선(outline)을 보여줄 수 있지만 'nvim-scrollview'는 그렇지 않습니다.
 
-    - 'mini.map' can show highlight integrations, while 'nvim-scrollview'
-      can not.
+    - 'mini.map'은 통합 하이라이트를 보여줄 수 있지만 'nvim-scrollview'는 그렇지 않습니다.
 
 - [petertriho/nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar):
 
-    - 'mini.map' has two-part scrollbar showing current line and view (with
-      variable height), while 'nvim-scrollbar' shows only current view.
+    - 'mini.map'은 현재 줄과 뷰(가변 높이)를 보여주는 두 부분으로 된 스크롤바를 사용하는 반면, 'nvim-scrollbar'는 현재 뷰만 보여줍니다.
 
-    - 'mini.map' can show buffer outline, while 'nvim-scrollbar' can not.
+    - 'mini.map'은 버퍼 윤곽선을 보여줄 수 있지만 'nvim-scrollbar'는 그렇지 않습니다.
 
-    - 'mini.map' has fully extendable highlight integrations, while
-      'nvim-scrollbar' only supports diagnostic and search (with dependency).
+    - 'mini.map'은 완전히 확장 가능한 통합 하이라이트를 제공하지만, 'nvim-scrollbar'는 진단 및 검색(의존성 필요)만 지원합니다.
 
 - [lewis6991/satellite.nvim](https://github.com/lewis6991/satellite.nvim):
 
-    - Almost the same differences as with 'dstein64/nvim-scrollview', except
-      'satellite.nvim' can display some set of integration highlights.
+    - 'dstein64/nvim-scrollview'와 거의 동일한 차이점이 있지만, 'satellite.nvim'은 일부 통합 하이라이트를 표시할 수 있습니다.
 
-#### Highlight groups {#module-highlightgroups}
-
+#### 하이라이트 그룹 {#module-highlightgroups}
 
 
-- `MiniMapNormal` - basic highlight of whole window.
 
-- `MiniMapSymbolCount` - counts of per-line integration items.
+- `MiniMapNormal` - 전체 창의 기본 하이라이트.
 
-- `MiniMapSymbolLine` - scrollbar part representing current line.
+- `MiniMapSymbolCount` - 라인별 통합 항목의 수.
 
-- `MiniMapSymbolView` - scrollbar part representing current view.
+- `MiniMapSymbolLine` - 현재 줄을 나타내는 스크롤바 부분.
 
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
+- `MiniMapSymbolView` - 현재 뷰를 나타내는 스크롤바 부분.
 
-#### Disabling {#module-disabling}
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
+
+#### 비활성화 {#module-disabling}
 
 
-To disable, set `vim.g.minimap_disable` (globally) or `vim.b.minimap_disable`
-(for a buffer) to `true`. Considering high number of different scenarios
-and customization intentions, writing exact rules for disabling module's
-functionality is left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common
-recipes.
+비활성화하려면 `vim.g.minimap_disable`(전역) 또는 `vim.b.minimap_disable`(버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 레시피는 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
-### Usage {#mini.map-usage .help-syntax-right-anchor}
+### 사용법 {#mini.map-usage .help-syntax-right-anchor}
 
-#### Mappings {#mini.map-usage-mappings}
+#### 매핑 {#mini.map-usage-mappings}
 
 
-This module doesn't make mappings, only provides functions for users to map
-manually. Here is how one [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>) set of mappings can be constructed:
+이 모듈은 매핑을 생성하지 않으며 사용자가 수동으로 매핑할 수 있는 함수만 제공합니다. 다음은 한 가지 [<span class="help-syntax-keys">\<Leader\></span>](https://neovim.io/doc/user/helptag.html?tag=<Leader>) 매핑 세트의 예입니다:
 
   ```lua
   vim.keymap.set('n', '<Leader>mc', MiniMap.close)
@@ -218,47 +166,42 @@ manually. Here is how one [<span class="help-syntax-keys">\<Leader\></span>](htt
   vim.keymap.set('n', '<Leader>mt', MiniMap.toggle)
   ```
 
-#### How automatic refresh works {#mini.map-usage-howautomaticrefreshworks}
+#### 자동 새로고침 작동 방식 {#mini.map-usage-howautomaticrefreshworks}
 
 
-Automatic refresh is done by calling [MiniMap.refresh()](mini-map.qmd#minimap.refresh) when appropriate
-[events](https://neovim.io/doc/user/helptag.html?tag=events) occur. It is done with specially chosen `parts` argument value (to
-avoid unnecessary computations). For example, when only cursor has moved
-([CursorMoved](https://neovim.io/doc/user/helptag.html?tag=CursorMoved)), only scrollbar is updated; so no recomputation of integrations
-or line encoding is done.
+자동 새로고침은 적절한 [이벤트](https://neovim.io/doc/user/helptag.html?tag=events)가 발생할 때 [MiniMap.refresh()](mini-map.qmd#minimap.refresh)를 호출하여 수행됩니다. 불필요한 계산을 피하기 위해 특별히 선택된 `parts` 인수 값으로 수행됩니다. 예를 들어, 커서만 이동한 경우([CursorMoved](https://neovim.io/doc/user/helptag.html?tag=CursorMoved)), 스크롤바만 업데이트되며 통합이나 라인 인코딩의 재계산은 수행되지 않습니다.
 
-To avoid visual clutter, automatic refresh is done only in normal buffers
-and help pages (i.e. with ['buftype'](https://neovim.io/doc/user/helptag.html?tag='buftype') being empty or "help")
+시각적 혼란을 피하기 위해 자동 새로고침은 일반 버퍼와 도움말 페이지(즉, ['buftype'](https://neovim.io/doc/user/helptag.html?tag='buftype')이 비어 있거나 "help"인 경우)에서만 수행됩니다.
 
-When you think content is not up to date, try one of these:
+콘텐츠가 최신 상태가 아니라고 생각되면 다음 중 하나를 시도해 보세요:
 
-- Call [MiniMap.refresh()](mini-map.qmd#minimap.refresh) manually. Make mapping to make it easier.
+- [MiniMap.refresh()](mini-map.qmd#minimap.refresh)를 수동으로 호출합니다. 더 쉽게 사용할 수 있도록 매핑을 만드세요.
 
-- Save current buffer, for example with [:write](https://neovim.io/doc/user/helptag.html?tag=:write).
+- 현재 버퍼를 저장합니다(예: [:write](https://neovim.io/doc/user/helptag.html?tag=:write) 사용).
 
-- Exit and enter Normal mode (if your Neovim version supports [ModeChanged](https://neovim.io/doc/user/helptag.html?tag=ModeChanged)).
+- Normal 모드를 나갔다 다시 들어갑니다(Neovim 버전이 [ModeChanged](https://neovim.io/doc/user/helptag.html?tag=ModeChanged)를 지원하는 경우).
 
 ---
 
 ### setup() {#minimap.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minimap.setup-parameters}
+#### 매개변수 {#minimap.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniMap.config](mini-map.qmd#minimap.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 구성 테이블. [MiniMap.config](mini-map.qmd#minimap.config)를 참조하세요.
 
-#### Usage {#minimap.setup-usage}
+#### 사용법 {#minimap.setup-usage}
 
 
 
   ```lua
-  require('mini.map').setup() -- use default config
-  -- OR
-  require('mini.map').setup({}) -- replace {} with your config table
+  require('mini.map').setup() -- 기본 구성 사용
+  -- 또는
+  require('mini.map').setup({}) -- {}를 사용자 구성 테이블로 교체
   ```
 
 ---
@@ -266,42 +209,42 @@ Module setup
 ### config {#minimap.config .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.config`</p>
-#### Defaults {#minimap.config-defaults}
+#### 기본값 {#minimap.config-defaults}
 
 
 
   ```lua
   MiniMap.config = {
-    -- Highlight integrations (none by default)
+    -- 하이라이트 통합 (기본적으로 없음)
     integrations = nil,
 
-    -- Symbols used to display data
+    -- 데이터 표시에 사용되는 심볼
     symbols = {
-      -- Encode symbols. See `:h MiniMap.config` for specification and
-      -- `:h MiniMap.gen_encode_symbols` for pre-built ones.
-      -- Default: solid blocks with 3x2 resolution.
+      -- 인코딩 심볼. 사양은 `:h MiniMap.config`를,
+      -- 사전 구축된 항목은 `:h MiniMap.gen_encode_symbols`를 참조하세요.
+      -- 기본값: 3x2 해상도의 속이 찬 블록.
       encode = nil,
 
-      -- Scrollbar parts for view and line. Use empty string to disable any.
+      -- 뷰와 줄을 위한 스크롤바 부분. 비활성화하려면 빈 문자열을 사용하세요.
       scroll_line = '█',
       scroll_view = '┃',
     },
 
-    -- Window options
+    -- 창 옵션
     window = {
-      -- Whether window is focusable in normal way (with `wincmd` or mouse)
+      -- 창을 일반적인 방식(`wincmd` 또는 마우스)으로 포커스할 수 있는지 여부
       focusable = false,
 
-      -- Side to stick ('left' or 'right')
+      -- 고정할 사이드 ('left' 또는 'right')
       side = 'right',
 
-      -- Whether to show count of multiple integration highlights
+      -- 다중 통합 하이라이트의 개수를 표시할지 여부
       show_integration_count = true,
 
-      -- Total width
+      -- 총 너비
       width = 10,
 
-      -- Value of 'winblend' option
+      -- 'winblend' 옵션 값
       winblend = 25,
 
       -- Z-index
@@ -310,40 +253,27 @@ Module setup
   }
   ```
 
-#### Symbols {#minimap.config-symbols}
+#### 심볼 {#minimap.config-symbols}
 
 
-Options in `config.symbols` define characters used to display various
-information in map window.
+`config.symbols`의 옵션은 맵 창에 다양한 정보를 표시하는 데 사용되는 문자를 정의합니다.
 
-##### Encode symbols {#minimap.config-symbols-encodesymbols}
+##### 인코딩 심볼 {#minimap.config-symbols-encodesymbols}
 
 
-The `config.symbols.encode` option defines which characters are used to
-encode source buffer lines. For details of encode algorithm, see
-[MiniMap.encode\_strings()](mini-map.qmd#minimap.encode_strings).
+`config.symbols.encode` 옵션은 소스 버퍼 라인을 인코딩하는 데 사용되는 문자를 정의합니다. 인코딩 알고리즘에 대한 자세한 내용은 [MiniMap.encode\_strings()](mini-map.qmd#minimap.encode_strings)를 참조하세요.
 
-This option should be a table with the following structure:
+이 옵션은 다음과 같은 구조의 테이블이어야 합니다:
 
-- <span class="help-syntax-keys">\<resolution\></span> field - table containing <span class="help-syntax-keys">\<row\></span> and <span class="help-syntax-keys">\<col\></span> elements with row
-  and column resolution of each symbol. This defines encoding structure and
-  number of needed encode symbols.
+- <span class="help-syntax-keys">\<resolution\></span> 필드 - 각 심볼의 행과 열 해상도를 갖는 <span class="help-syntax-keys">\<row\></span> 및 <span class="help-syntax-keys">\<col\></span> 요소를 포함하는 테이블. 이는 인코딩 구조와 필요한 인코딩 심볼 수를 정의합니다.
 
-- Numerical fields 1, 2, ..., 2^(row_resolution * col_resolution). Each symbol
-  represents a `(row_resolution, col_resolution)` boolean mask (`true` for
-  non-whitespace, `false` for whitespace), created as (reversed) binary digit:
-  `true` as 1; `false` as 0. Traversing left-right, top-bottom (top-left is
-  lowest bit, bottom-right - highest). So first symbol encodes a complete
-  whitespace, last - complete non-whitespace.
+- 숫자 필드 1, 2, ..., 2^(row_resolution * col_resolution). 각 심볼은 `(row_resolution, col_resolution)` 불리언 마스크(화이트스페이스가 아니면 `true`, 화이트스페이스면 `false`)를 나타내며, (역순) 이진 숫자로 생성됩니다: `true`는 1, `false`는 0. 왼쪽에서 오른쪽으로, 위에서 아래로 순회합니다(왼쪽 상단이 최하위 비트, 오른쪽 하단이 최상위 비트). 따라서 첫 번째 심볼은 완전한 화이트스페이스를, 마지막 심볼은 완전한 논-화이트스페이스를 인코딩합니다.
 
-If `nil` (default), output of [MiniMap.gen\_encode\_symbols.block()](mini-map.qmd#minimap.gen_encode_symbols.block) with `'3x2'`
-identifier is used.
+`nil`(기본값)인 경우, `'3x2'` 식별자가 있는 [MiniMap.gen\_encode\_symbols.block()](mini-map.qmd#minimap.gen_encode_symbols.block)의 출력이 사용됩니다.
 
-Example: { '1', '2', '3', '4', resolution = { row = 1, col = 2 } }. This
-will encode two characters in each input row. So a string `'  a  aaa'` will
-be encoded as `'1234'`.
+예: { '1', '2', '3', '4', resolution = { row = 1, col = 2 } }. 이는 각 입력 행에서 두 문자를 인코딩합니다. 따라서 문자열 `'  a  aaa'`는 `'1234'`로 인코딩됩니다.
 
-There are pre-built generators of encode symbols:
+사전 구축된 인코딩 심볼 생성기가 있습니다:
 
 - [MiniMap.gen\_encode\_symbols.block()](mini-map.qmd#minimap.gen_encode_symbols.block)
 
@@ -351,39 +281,29 @@ There are pre-built generators of encode symbols:
 
 - [MiniMap.gen\_encode\_symbols.shade()](mini-map.qmd#minimap.gen_encode_symbols.shade)
 
-##### Scrollbar symbols {#minimap.config-symbols-scrollbarsymbols}
+##### 스크롤바 심볼 {#minimap.config-symbols-scrollbarsymbols}
 
 
-Options `config.symbols.scroll_line` and `config.symbols.scroll_view` define
-strings used to represent current line and current view inside map window.
-Can have any length, map window content will adjust.
+`config.symbols.scroll_line` 및 `config.symbols.scroll_view` 옵션은 맵 창 내부에서 현재 줄과 현재 뷰를 나타내는 데 사용되는 문자열을 정의합니다. 길이에 제한이 없으며 맵 창 콘텐츠가 이에 맞춰 조정됩니다.
 
-If supplied window width is small enough so that only (part of) of
-scrollbar can be shown, it is called a "pure scrollbar". The behavior differs
-slightly from normal map window. See "Pure scrollbar config" later section.
+제공된 창 너비가 작아서 스크롤바의 (일부)만 표시될 수 있는 경우 이를 "순수 스크롤바(pure scrollbar)"라고 합니다. 동작은 일반 맵 창과 약간 다릅니다. 나중에 나오는 "Pure scrollbar config" 섹션을 참조하세요.
 
-Some suggestions for scrollbar symbols:
+스크롤바 심볼에 대한 몇 가지 제안:
 
-- View-line pairs: '▒' and '█'.
+- 뷰-라인 쌍: '▒' 및 '█'.
 
-- Line - '🮚', '▶'.
+- 라인 - '🮚', '▶'.
 
-- View - '╎', '┋', '┋'.
+- 뷰 - '╎', '┋', '┋'.
 
-#### Integrations {#minimap.config-integrations}
+#### 통합 {#minimap.config-integrations}
 
 
-Option `config.integrations` is an array of integrations. Each one is used
-to define map line highlights representing some important lines in source
-buffer. If `nil` (default), no integrations are used.
+`config.integrations` 옵션은 통합 배열입니다. 각 통합은 소스 버퍼의 일부 중요한 라인을 나타내는 맵 라인 하이라이트를 정의하는 데 사용됩니다. `nil`(기본값)인 경우 통합이 사용되지 않습니다.
 
-Each integration should be a callable returning an array with data about
-source buffer lines it wants to highlight. Each array element should be
-a table with <span class="help-syntax-keys">\<line\></span> (source buffer line number) and <span class="help-syntax-keys">\<hl_group\></span> (string with
-highlight group name) keys. Note: line number outside of source buffer
-count will be converted to a nearest appropriate one.
+각 통합은 하이라이트하려는 소스 버퍼 라인에 대한 데이터 배열을 반환하는 콜러블이어야 합니다. 각 배열 요소는 <span class="help-syntax-keys">\<line\></span> (소스 버퍼 라인 번호) 및 <span class="help-syntax-keys">\<hl_group\></span> (하이라이트 그룹 이름이 포함된 문자열) 키가 있는 테이블이어야 합니다. 참고: 소스 버퍼 범위를 벗어난 라인 번호는 가장 가까운 적절한 라인 번호로 변환됩니다.
 
-Example output of single integration:
+단일 통합의 출력 예:
 
   ```lua
   {
@@ -393,22 +313,13 @@ Example output of single integration:
   }
   ```
 
-Conversion to map highlights is done on a "first seen" basis: actual
-highlight group applied to a map line is taken from the first integration
-output convertible to that map line. Other outputs with same map line
-(after conversion) contribute to integration count shown between scrollbar
-and encoded lines (if `config.window.show_integration_count` is `true`).
+맵 하이라이트로의 변환은 "먼저 발견된" 기준(first seen basis)으로 수행됩니다: 맵 라인에 적용되는 실제 하이라이트 그룹은 해당 맵 라인으로 변환 가능한 첫 번째 통합 출력에서 가져옵니다. 동일한 맵 라인을 갖는 다른 출력(변환 후)은 스크롤바와 인코딩된 라인 사이에 표시되는 통합 카운트에 기여합니다 (`config.window.show_integration_count`가 `true`인 경우).
 
-Previous example output with default `'3x2'` resolution will add [hl-Search](https://neovim.io/doc/user/helptag.html?tag=hl-Search)
-highlight on map lines 1 and 3, and show integration count 2 on first line.
+이전 예제 출력은 기본 `'3x2'` 해상도에서 맵 라인 1과 3에 [hl-Search](https://neovim.io/doc/user/helptag.html?tag=hl-Search) 하이라이트를 추가하고, 첫 번째 라인에 통합 카운트 2를 표시합니다.
 
-Every element of integrations array is called one by one from start to end
-with their outputs appended to end of single array. This means that more
-important integrations should be placed in the beginning of an array, as
-this will make them have higher priority in case other integrations will
-highlight same map line.
+통합 배열의 모든 요소는 시작부터 끝까지 하나씩 호출되며 그 출력은 단일 배열의 끝에 추가됩니다. 즉, 다른 통합이 동일한 맵 라인을 하이라이트할 경우 우선순위가 더 높아야 하는 더 중요한 통합을 배열의 처음에 배치해야 합니다.
 
-Example of using `config.integrations`:
+`config.integrations` 사용 예:
 
   ```lua
   local map = require('mini.map')
@@ -421,59 +332,46 @@ Example of using `config.integrations`:
   })
   ```
 
-#### Window config {#minimap.config-windowconfig}
+#### 창 구성 {#minimap.config-windowconfig}
 
 
-Option `config.window` defines some properties of map window.
+`config.window` 옵션은 맵 창의 일부 속성을 정의합니다.
 
-`window.focusable` - whether to allow focusing on map window with other
-methods beside [MiniMap.toggle\_focus()](mini-map.qmd#minimap.toggle_focus) (like [:wincmd](https://neovim.io/doc/user/helptag.html?tag=:wincmd), [CTRL-W](https://neovim.io/doc/user/helptag.html?tag=CTRL-W), or mouse).
-Default: `false`.
+`window.focusable` - [MiniMap.toggle\_focus()](mini-map.qmd#minimap.toggle_focus) 이외의 다른 방법([:wincmd](https://neovim.io/doc/user/helptag.html?tag=:wincmd), [CTRL-W](https://neovim.io/doc/user/helptag.html?tag=CTRL-W) 또는 마우스)으로 맵 창에 포커스할 수 있는지 여부. 기본값: `false`.
 
-`window.side` - which side to stick map window: `'left'` or `'right'` (default).
+`window.side` - 맵 창을 고정할 사이드: `'left'` 또는 `'right'` (기본값).
 
-`window.show_integration_count` - whether to show integration count between
-scrollbar and encoded lines. Integration count is a number of integration
-outputs which were converted to same map line. When `true`, adds single
-cell column with numbers from 2 to 9 and character '+' indicating count
-greater than 9. Count 1 is not shown, because it is redundant to highlighted
-map line. Default: `true`.
+`window.show_integration_count` - 스크롤바와 인코딩된 라인 사이에 통합 카운트를 표시할지 여부. 통합 카운트는 동일한 맵 라인으로 변환된 통합 출력의 수입니다. `true`인 경우 2에서 9까지의 숫자와 9보다 큰 카운트를 나타내는 문자 '+'가 있는 단일 셀 열을 추가합니다. 카운트 1은 하이라이트된 맵 라인으로 충분하므로 표시되지 않습니다. 기본값: `true`.
 
-`window.width` - width of floating window, including scrollbar and
-integration count column. Default: 10.
+`window.width` - 스크롤바 및 통합 카운트 열을 포함한 플로팅 창의 너비. 기본값: 10.
 
-`window.winblend` - value of 'winblend' of floating window. Value 0 makes it
-completely non-transparent, 100 - completely transparent (content is still
-visible, but with slightly different highlights).
+`window.winblend` - 플로팅 창의 'winblend' 값. 0은 완전히 불투명하게, 100은 완전히 투명하게 만듭니다(콘텐츠는 여전히 보이지만 하이라이트가 약간 다름).
 
-`window.zindex` - z-index of floating window. Default: 10.
+`window.zindex` - 플로팅 창의 z-index. 기본값: 10.
 
-#### Pure scrollbar config {#minimap.config-purescrollbarconfig}
+#### 순수 스크롤바 구성 {#minimap.config-purescrollbarconfig}
 
 
-"Pure scrollbar" is a configuration when window width is not enough to show
-encoded content. It has following differences from default "map" approach:
+"순수 스크롤바(Pure scrollbar)"는 창 너비가 인코딩된 콘텐츠를 표시하기에 충분하지 않은 구성입니다. 기본 "맵" 접근 방식과 다음과 같은 차이점이 있습니다:
 
-- It doesn't perform line encoding with [MiniMap.encode\_strings()](mini-map.qmd#minimap.encode_strings)
-  but instead uses encoding with fixed number of lines (equal to window
-  height).
+- [MiniMap.encode\_strings()](mini-map.qmd#minimap.encode_strings)로 라인 인코딩을 수행하지 않고 대신 고정된 수의 라인(창 높이와 동일)으로 인코딩을 사용합니다.
 
-- Integration highlights are not computed.
+- 통합 하이라이트가 계산되지 않습니다.
 
-Config:
+구성:
 
   ```lua
   require('mini.map').setup({
-    -- Customize `symbols` to your liking
+    -- `symbols`를 기호에 맞게 사용자 정의하세요
 
     window = {
-      -- Set this to the maximum width of your scroll symbols
+      -- 이를 스크롤 심볼의 최대 너비로 설정하세요
       width = 1,
 
-      -- Set this to your liking. Try values 0, 25, 50, 75, 100
+      -- 이를 기호에 맞게 설정하세요. 0, 25, 50, 75, 100 값을 시도해 보세요
       winblend = 100,
 
-      -- Don't need extra column
+      -- 추가 열이 필요하지 않습니다
       show_integration_count = false,
     }
   })
@@ -484,76 +382,48 @@ Config:
 ### current {#minimap.current .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.current`</p>
-Table with information about current state of map
+맵의 현재 상태에 대한 정보가 포함된 테이블
 
-At least these keys are supported:
+최소한 다음 키들이 지원됩니다:
 
-- <span class="help-syntax-keys">\<buf_data\></span> - table with buffer identifiers. Field <span class="help-syntax-keys">\<map\></span> contains
-  identifier of a buffer used to display map. Field <span class="help-syntax-keys">\<source\></span> - buffer
-  identifier which content map is displaying (i.e. source buffer).
+- <span class="help-syntax-keys">\<buf_data\></span> - 버퍼 식별자가 포함된 테이블. <span class="help-syntax-keys">\<map\></span> 필드에는 맵을 표시하는 데 사용되는 버퍼의 식별자가 포함됩니다. <span class="help-syntax-keys">\<source\></span> 필드에는 맵이 콘텐츠를 표시하고 있는 버퍼(즉, 소스 버퍼)의 식별자가 포함됩니다.
 
-- <span class="help-syntax-keys">\<win_data\></span> - table of window identifiers used to display map in certain
-  tabpage. Keys: tabpage identifier. Values: window identifier.
+- <span class="help-syntax-keys">\<win_data\></span> - 특정 탭페이지에서 맵을 표시하는 데 사용되는 창 식별자 테이블. 키: 탭페이지 식별자, 값: 창 식별자.
 
-- <span class="help-syntax-keys">\<opts\></span> - current options used to control map display. Same structure
-  as [MiniMap.config](mini-map.qmd#minimap.config). Takes precedence over global and buffer-local configs.
-  Is reset when last map window is closed with [MiniMap.close()](mini-map.qmd#minimap.close).
+- <span class="help-syntax-keys">\<opts\></span> - 맵 표시를 제어하는 데 사용되는 현재 옵션. [MiniMap.config](mini-map.qmd#minimap.config)와 동일한 구조입니다. 글로벌 및 버퍼 로컬 구성보다 우선순위가 높습니다. [MiniMap.close()](mini-map.qmd#minimap.close)로 마지막 맵 창을 닫을 때 재설정됩니다.
 
 ---
 
 ### encode_strings() {#minimap.encode_strings .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.encode_strings`(<span class="help-syntax-special">{strings}</span>, <span class="help-syntax-special">{opts}</span>)</p>
-Encode strings
+문자열 인코딩
 
-This takes arbitrary array of strings and computes its non-whitespace
-outline. Output is an array of strings with configurable array length, string
-width, and symbols representing encoding.
+임의의 문자열 배열을 가져와 논-화이트스페이스 윤곽선을 계산합니다. 출력은 구성 가능한 배열 길이, 문자열 너비 및 인코딩을 나타내는 심볼이 있는 문자열 배열입니다.
 
-Each encode symbol is assumed to have resolution within which it can convey
-binary information. For example, resolution `3x2` (row resolution 3,
-column - 2) means that each symbol can encode 3 rows and 2 columns of
-binary data. Here it is used to encode non-whitespace mask. See more in
-"Encode symbols" section of [MiniMap.config](mini-map.qmd#minimap.config).
+각 인코딩 심볼은 이진 정보를 전달할 수 있는 해상도를 가지고 있다고 가정합니다. 예를 들어 해상도 `3x2`(행 해상도 3, 열 해상도 2)는 각 심볼이 3개 행과 2개 열의 이진 데이터를 인코딩할 수 있음을 의미합니다. 여기서는 논-화이트스페이스 마스크를 인코딩하는 데 사용됩니다. 자세한 내용은 [MiniMap.config](mini-map.qmd#minimap.config)의 "Encode symbols" 섹션을 참조하세요.
 
-Encoding has the following steps:
+인코딩 단계는 다음과 같습니다:
 
-- Convert strings to boolean mask: 2d boolean array with each row
-  representing a string. Element in every row subarray is `true` if
-  respective (possibly multibyte) character in a string is not a whitespace,
-  `false` otherwise. Note: tabs are expanded into 'tabstop' spaces.
+- 문자열을 불리언 마스크로 변환: 각 행이 문자열을 나타내는 2D 불리언 배열. 문자열의 각 문자(멀티바이트 가능)가 화이트스페이스가 아니면 각 행 하위 배열의 요소가 `true`, 그렇지 않으면 `false`입니다. 참고: 탭은 'tabstop' 공백으로 확장됩니다.
 
-- Rescale to appropriate dimensions:
+- 적절한 차원으로 리스케일링:
 
-    - Each output dimension is just enough to encode all input strings, but
-      not more than supplied dimensions (`opts.n_rows * resolution.row` and
-      `opts.n_cols * resolution.col` respectively).
+    - 각 출력 차원은 모든 입력 문자열을 인코딩하기에 충분하지만 제공된 차원(각각 `opts.n_rows * resolution.row` 및 `opts.n_cols * resolution.col`)을 넘지 않습니다.
 
-    - If input dimensions are too big to fit inside output, perform grid
-      downscaling with loss of information. Input boolean mask is divided
-      into 2d-bins with as equal as possible dimensions. Each bin then
-      converted into single boolean value: `true` if bin contains at least
-      one `true` element, `false` otherwise. This leads to a whitespace
-      output meaning that all entries in a bin are whitespace, while
-      non-whitespace output means that some entry is non-whitespace.
+    - 입력 차원이 출력에 맞기에 너무 큰 경우 정보 손실이 있는 그리드 다운스케일링을 수행합니다. 입력 불리언 마스크는 가능한 한 동일한 차원을 갖는 2D 빈(bins)으로 나뉩니다. 각 빈은 단일 불리언 값으로 변환됩니다: 빈에 하나 이상의 `true` 요소가 포함되면 `true`, 그렇지 않으면 `false`입니다. 이는 화이트스페이스 출력이 빈의 모든 항목이 화이트스페이스임을 의미하고, 논-화이트스페이스 출력은 일부 항목이 논-화이트스페이스임을 의미합니다.
 
-- Convert boolean mask to symbol strings:
+- 불리언 마스크를 심볼 문자열로 변환:
 
-    - Input rescaled boolean mask is divided into bins with dimensions of
-      symbol resolution (assuming `false` outer padding).
+    - 리스케일링된 입력 불리언 마스크는 심볼 해상도 차원의 빈으로 나뉩니다 (`false` 외부 패딩 가정).
 
-    - Each bin with resolution dimensions is transformed into encode symbol.
-      Single convertible `(resolution.row, resolution.col)` boolean
-      mask is treated as (reversed) binary digit: `true` as 1; `false` as 0.
-      Traversing left-right, top-bottom (top-left is lowest bit,
-      bottom-right - highest).
+    - 해상도 차원을 갖는 각 빈은 인코딩 심볼로 변환됩니다. 단일 변환 가능한 `(resolution.row, resolution.col)` 불리언 마스크는 (역순) 이진 숫자로 취급됩니다: `true`는 1, `false`는 0. 왼쪽에서 오른쪽으로, 위에서 아래로 순회합니다(왼쪽 상단이 최하위 비트, 오른쪽 하단이 최상위 비트).
 
-Example:
+예:
 
-Assume the output should have 3 rows of symbols each with width 2. Encode
-symbols are ' ', '▌', '▐', '█' with `1x2` resolution.
+출력에 너비가 2인 심볼이 3개 행 있어야 한다고 가정합니다. 인코딩 심볼은 `1x2` 해상도의 ' ', '▌', '▐', '█'입니다.
 
-Assume input strings:
+입력 문자열 가정:
 
   ```
   aaaaa
@@ -563,10 +433,9 @@ Assume input strings:
   e e
   ```
 
-Steps:
+단계:
 
-- Convert to boolean mask (each row is a boolean array, "t"/"f" ~ `true`/`false`,
-  empty spots are equivalent to being `false`):
+- 불리언 마스크로 변환 (각 행은 불리언 배열, "t"/"f" ~ `true`/`false`, 빈 곳은 `false`와 동일):
 
   ```
   ttttt
@@ -577,9 +446,7 @@ Steps:
   ```
 
 
-- Rescale. Output dimensions are `n_rows * resolution.row = 3 * 1 = 3` rows and
-  `n_cols * resolution.col = 2 * 2 = 4`. It creates as equal as possible grid
-  with 3 rows and 4 columns and converts bins to single booleans. Result:
+- 리스케일링. 출력 차원은 `n_rows * resolution.row = 3 * 1 = 3` 행과 `n_cols * resolution.col = 2 * 2 = 4` 열입니다. 가능한 한 동일한 3개 행과 4개 열 그리드를 만들고 빈을 단일 불리언으로 변환합니다. 결과:
 
   ```
   tttt
@@ -588,9 +455,7 @@ Steps:
   ```
 
 
-- Convert to symbols. It makes `1x2` bins, treats their input as (reversed)
-  binary digits (`ff=00=0`, `tf=10=1`, `ft=01=2`, `tt=11=3`) and takes
-  corresponding symbols from supplied options (value plus 1). Result:
+- 심볼로 변환. `1x2` 빈을 만들고 입력을 (역순) 이진 숫자(`ff=00=0`, `tf=10=1`, `ft=01=2`, `tt=11=3`)로 취급하고 제공된 옵션에서 해당하는 심볼(값에 1을 더한 값)을 가져옵니다. 결과:
 
   ```
   ██
@@ -598,302 +463,267 @@ Steps:
   █
   ```
 
-#### Parameters {#minimap.encode_strings-parameters}
+#### 매개변수 {#minimap.encode_strings-parameters}
 
 
 
-<span class="help-syntax-special">{strings}</span> `(table)` Array of arbitrary strings.
+<span class="help-syntax-special">{strings}</span> `(table)` 임의의 문자열 배열.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Possible fields:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 가능한 필드:
 
-  - <span class="help-syntax-keys">\<n_rows\></span> - number of rows in output encoding. If too big, will be
-    truncated to be maximum needed to encode all input strings (taking into
-    account symbols row resolution). Default: `math.huge`.
+  - <span class="help-syntax-keys">\<n_rows\></span> - 출력 인코딩의 행 수. 너무 크면 모든 입력 문자열을 인코딩하는 데 필요한 최대치로 잘립니다 (심볼 행 해상도 고려). 기본값: `math.huge`.
 
-  - <span class="help-syntax-keys">\<n_cols\></span> - width of every encoding string. If too big, will be truncated
-    to be maximum needed to encode all input strings (taking into account
-    symbols column resolution). Default: `math.huge`.
+  - <span class="help-syntax-keys">\<n_cols\></span> - 모든 인코딩 문자열의 너비. 너무 크면 모든 입력 문자열을 인코딩하는 데 필요한 최대치로 잘립니다 (심볼 열 해상도 고려). 기본값: `math.huge`.
 
-  - <span class="help-syntax-keys">\<symbols\></span> - array of symbols with extra `resolution` field. See "Encode
-    symbols" section of [MiniMap.config](mini-map.qmd#minimap.config) for more details. Default: output
-    of [MiniMap.gen\_encode\_symbols.block()](mini-map.qmd#minimap.gen_encode_symbols.block) with `'3x2'` identifier.
+  - <span class="help-syntax-keys">\<symbols\></span> - 추가 `resolution` 필드가 있는 심볼 배열. 자세한 내용은 [MiniMap.config](mini-map.qmd#minimap.config)의 "Encode symbols" 섹션을 참조하세요. 기본값: `'3x2'` 식별자가 있는 [MiniMap.gen\_encode\_symbols.block()](mini-map.qmd#minimap.gen_encode_symbols.block)의 출력.
 
-#### Return {#minimap.encode_strings-return}
+#### 반환 {#minimap.encode_strings-return}
 
 
-`(table)` Array of encoded strings.
+`(table)` 인코딩된 문자열 배열.
 
 ---
 
 ### open() {#minimap.open .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.open`(<span class="help-syntax-special">{opts}</span>)</p>
-Open map window
+맵 창 열기
 
-This creates and shows map window in current tabpage. It basically has
-two steps:
+현재 탭페이지에 맵 창을 만들고 표시합니다. 기본적으로 두 단계로 진행됩니다:
 
-- If not already done, create map buffer (used to set lines and other
-  visual indicators) and map window.
+- 아직 생성되지 않은 경우 맵 버퍼(라인 및 기타 시각적 지표를 설정하는 데 사용됨)와 맵 창을 생성합니다.
 
-- Call [MiniMap.refresh()](mini-map.qmd#minimap.refresh).
+- [MiniMap.refresh()](mini-map.qmd#minimap.refresh)를 호출합니다.
 
-#### Parameters {#minimap.open-parameters}
+#### 매개변수 {#minimap.open-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options used to define map configuration. Same structure
-  as [MiniMap.config](mini-map.qmd#minimap.config). Will have effect until at least one tabpage has opened
-  map window. Default values are taken in the following order:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 맵 구성을 정의하는 데 사용되는 옵션. [MiniMap.config](mini-map.qmd#minimap.config)와 동일한 구조입니다. 적어도 한 개의 탭페이지에 맵 창이 열려 있을 때까지 효력이 있습니다. 기본값은 다음 순서대로 가져옵니다:
 
-  - From `opts` field of [MiniMap.current](mini-map.qmd#minimap.current).
+  - [MiniMap.current](mini-map.qmd#minimap.current)의 `opts` 필드에서.
 
-  - From `vim.b.minimap_config`.
+  - `vim.b.minimap_config`에서.
 
-  - From [MiniMap.config](mini-map.qmd#minimap.config).
+  - [MiniMap.config](mini-map.qmd#minimap.config)에서.
 
 ---
 
 ### refresh() {#minimap.refresh .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.refresh`(<span class="help-syntax-special">{opts}</span>, <span class="help-syntax-special">{parts}</span>)</p>
-Refresh map window
+맵 창 새로고침
 
-This function serves two purposes:
+이 함수는 두 가지 목적으로 사용됩니다:
 
-- Update current map configuration via `opts`.
+- `opts`를 통해 현재 맵 구성을 업데이트합니다.
 
-- Update parts of displayed content via `parts`.
+- `parts`를 통해 표시되는 콘텐츠의 일부를 업데이트합니다.
 
-#### Parameters {#minimap.refresh-parameters}
+#### 매개변수 {#minimap.refresh-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options used to define map configuration. Same structure
-  as [MiniMap.config](mini-map.qmd#minimap.config). Will have effect until at least one tabpage has opened
-  map window. Default values are taken in the following order:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 맵 구성을 정의하는 데 사용되는 옵션. [MiniMap.config](mini-map.qmd#minimap.config)와 동일한 구조입니다. 적어도 한 개의 탭페이지에 맵 창이 열려 있을 때까지 효력이 있습니다. 기본값은 다음 순서대로 가져옵니다:
 
-  - From `opts` field of [MiniMap.current](mini-map.qmd#minimap.current).
+  - [MiniMap.current](mini-map.qmd#minimap.current)의 `opts` 필드에서.
 
-  - From `vim.b.minimap_config`.
+  - `vim.b.minimap_config`에서.
 
-  - From [MiniMap.config](mini-map.qmd#minimap.config).
+  - [MiniMap.config](mini-map.qmd#minimap.config)에서.
 
-<span class="help-syntax-special">{parts}</span> `(table|nil)` Which parts to update. Recognised keys with boolean
-  values (all `true` by default):
+<span class="help-syntax-special">{parts}</span> `(table|nil)` 업데이트할 부분. 불리언 값을 갖는 인식되는 키 (모두 기본값은 `true`):
 
-  - <span class="help-syntax-keys">\<integrations\></span> - whether to update integration highlights.
+  - <span class="help-syntax-keys">\<integrations\></span> - 통합 하이라이트를 업데이트할지 여부.
 
-  - <span class="help-syntax-keys">\<lines\></span> - whether to update map lines.
+  - <span class="help-syntax-keys">\<lines\></span> - 맵 라인을 업데이트할지 여부.
 
-  - <span class="help-syntax-keys">\<scrollbar\></span> - whether to update scrollbar.
+  - <span class="help-syntax-keys">\<scrollbar\></span> - 스크롤바를 업데이트할지 여부.
 
 ---
 
 ### close() {#minimap.close .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.close`()</p>
-Close map window
+맵 창 닫기
 
-Also resets `opts` field of [MiniMap.current](mini-map.qmd#minimap.current) after closing last map window
-(among possibly several tabpages).
+또한 (가능한 여러 탭페이지 중) 마지막 맵 창을 닫은 후 [MiniMap.current](mini-map.qmd#minimap.current)의 `opts` 필드를 재설정합니다.
 
 ---
 
 ### toggle() {#minimap.toggle .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.toggle`(<span class="help-syntax-special">{opts}</span>)</p>
-Toggle map window
+맵 창 토글
 
-Open if not shown in current tabpage, close otherwise.
+현재 탭페이지에 표시되지 않으면 열고, 그렇지 않으면 닫습니다.
 
-#### Parameters {#minimap.toggle-parameters}
+#### 매개변수 {#minimap.toggle-parameters}
 
 
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Input for [MiniMap.open()](mini-map.qmd#minimap.open).
+<span class="help-syntax-special">{opts}</span> `(table|nil)` [MiniMap.open()](mini-map.qmd#minimap.open)에 대한 입력.
 
 ---
 
 ### toggle_focus() {#minimap.toggle_focus .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.toggle_focus`(<span class="help-syntax-special">{use_previous_cursor}</span>)</p>
-Toggle focus to/from map window
+맵 창으로/에서 포커스 토글
 
-When not inside map window, put cursor inside map window; otherwise put
-cursor in previous window with source buffer.
+맵 창 내부에 있지 않으면 커서를 맵 창 내부에 둡니다. 그렇지 않으면 소스 버퍼가 있는 이전 창에 커서를 둡니다.
 
-When cursor is moving inside map window (but not just after focusing), view of
-source window is updated to show first line convertible to current map line.
-This allows quick targeted source buffer exploration.
+커서가 맵 창 내부에서 이동할 때(포커스 직후가 아닌 경우), 소스 창의 뷰가 현재 맵 라인으로 변환 가능한 첫 번째 라인을 표시하도록 업데이트됩니다. 이를 통해 소스 버퍼를 빠르게 타겟팅하여 탐색할 수 있습니다.
 
-There are at least these extra methods to focus back from map window:
+맵 창에서 다시 포커스를 맞추는 데는 적어도 다음과 같은 추가적인 방법이 있습니다:
 
-- Press `<CR>` to accept current explored position in source buffer.
-  Equivalent to calling this function with `false` argument.
+- 소스 버퍼에서 현재 탐색된 위치를 수락하려면 `<CR>`을 누릅니다. `false` 인수로 이 함수를 호출하는 것과 동일합니다.
 
-- Press `<Esc>` to go back to original position prior focusing on map window.
-  Equivalent to calling this function with `true` argument.
+- 맵 창에 포커스를 맞추기 전의 원래 위치로 돌아가려면 `<Esc>`를 누릅니다. `true` 인수로 이 함수를 호출하는 것과 동일합니다.
 
-#### Parameters {#minimap.toggle_focus-parameters}
+#### 매개변수 {#minimap.toggle_focus-parameters}
 
 
 
-<span class="help-syntax-special">{use_previous_cursor}</span> `(boolean|nil)` Whether to focus on source window at
-  original cursor position (the one prior focusing on map window).
+<span class="help-syntax-special">{use_previous_cursor}</span> `(boolean|nil)` 원래 커서 위치(맵 창에 포커스를 맞추기 전의 위치)에서 소스 창에 포커스를 맞출지 여부.
 
 ---
 
 ### toggle_side() {#minimap.toggle_side .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.toggle_side`()</p>
-Toggle side of map window
+맵 창 사이드 토글
 
-A small convenience wrapper for calling [MiniMap.refresh()](mini-map.qmd#minimap.refresh) to change the
-side of map window.
+맵 창의 사이드를 변경하기 위해 [MiniMap.refresh()](mini-map.qmd#minimap.refresh)를 호출하는 간단한 편의용 래퍼입니다.
 
 ---
 
 ### gen_encode_symbols {#minimap.gen_encode_symbols .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.gen_encode_symbols`</p>
-Generate encode symbols
+인코딩 심볼 생성
 
-This is a table with function elements. Call to actually get encode symbols.
+이것은 함수 요소를 가진 테이블입니다. 실제로 인코딩 심볼을 가져오려면 호출하세요.
 
-Each element takes a string resolution identifier of a form `'rxc'` (like `'3x2'`)
-where `r` is a row resolution of each symbol (how many rows of binary data it
-can encode) and `c` is a column resolution (how many columns it can encode).
+각 요소는 `'rxc'` 형식(예: `'3x2'`)의 문자열 해상도 식별자를 사용합니다. 여기서 `r`은 각 심볼의 행 해상도(인코딩할 수 있는 이진 데이터의 행 수)이고 `c`는 열 해상도(인코딩할 수 있는 열 수)입니다.
 
 ---
 
 ### gen_encode_symbols.block() {#minimap.gen_encode_symbols.block .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.gen_encode_symbols.block`(<span class="help-syntax-special">{id}</span>)</p>
-Generate block encode symbols
+블록 인코딩 심볼 생성
 
-Outputs use solid block to encode binary data. Example: '🬗', '▟', '█'.
+출력은 이진 데이터를 인코딩하기 위해 속이 찬 블록을 사용합니다. 예: '🬗', '▟', '█'.
 
-#### Parameters {#minimap.gen_encode_symbols.block-parameters}
+#### 매개변수 {#minimap.gen_encode_symbols.block-parameters}
 
 
 
-<span class="help-syntax-special">{id}</span> `(string)` Resolution identifier.
-  Available values: `'1x2'`, `'2x1'`, `'2x2'`, `'3x2'` (default in 'mini.map').
+<span class="help-syntax-special">{id}</span> `(string)` 해상도 식별자. 사용 가능한 값: `'1x2'`, `'2x1'`, `'2x2'`, `'3x2'` ('mini.map'의 기본값).
 
 ---
 
 ### gen_encode_symbols.dot() {#minimap.gen_encode_symbols.dot .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.gen_encode_symbols.dot`(<span class="help-syntax-special">{id}</span>)</p>
-Generate dot encode symbols
+점 인코딩 심볼 생성
 
-Outputs use dots to encode binary data. Example: '⡪', '⣼', '⣿'.
+출력은 이진 데이터를 인코딩하기 위해 점을 사용합니다. 예: '⡪', '⣼', '⣿'.
 
-#### Parameters {#minimap.gen_encode_symbols.dot-parameters}
+#### 매개변수 {#minimap.gen_encode_symbols.dot-parameters}
 
 
 
-<span class="help-syntax-special">{id}</span> `(string)` Resolution identifier. Available values: `'4x2'`, `'3x2'`.
+<span class="help-syntax-special">{id}</span> `(string)` 해상도 식별자. 사용 가능한 값: `'4x2'`, `'3x2'`.
 
 ---
 
 ### gen_encode_symbols.shade() {#minimap.gen_encode_symbols.shade .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.gen_encode_symbols.shade`(<span class="help-syntax-special">{id}</span>)</p>
-Generate shade encode symbols
+그림자 인코딩 심볼 생성
 
-Outputs use whole cell shades to encode binary data. They use same set of
-characters ('░', '▒', '▒', '▓), but with different resolution.
+출력은 이진 데이터를 인코딩하기 위해 전체 셀 그림자를 사용합니다. 동일한 문자 세트('░', '▒', '▒', '▓)를 사용하지만 해상도가 다릅니다.
 
-#### Parameters {#minimap.gen_encode_symbols.shade-parameters}
-
+#### 매개변수 {#minimap.gen_encode_symbols.shade-parameters}
 
 
-<span class="help-syntax-special">{id}</span> `(string)` Resolution identifier. Available values: `'1x2'`, `'2x1'`.
+
+<span class="help-syntax-special">{id}</span> `(string)` 해상도 식별자. 사용 가능한 값: `'1x2'`, `'2x1'`.
 
 ---
 
 ### gen_integration {#minimap.gen_integration .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.gen_integration`</p>
-Generate integrations
+통합 생성
 
-This is a table with function elements. Call to actually get encode symbols.
+이것은 함수 요소를 가진 테이블입니다. 실제로 인코딩 심볼을 가져오려면 호출하세요.
 
-Each element takes a table defining highlight groups used for to highlight
-map lines.
+각 요소는 맵 라인을 하이라이트하는 데 사용되는 하이라이트 그룹을 정의하는 테이블을 사용합니다.
 
 ---
 
 ### gen_integration.builtin_search() {#minimap.gen_integration.builtin_search .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.gen_integration.builtin_search`(<span class="help-syntax-special">{hl_groups}</span>)</p>
-Builtin search
+내장 검색
 
-Highlight lines with matches of current builtin search (like with [/](https://neovim.io/doc/user/helptag.html?tag=/), [?](https://neovim.io/doc/user/helptag.html?tag=?), etc.).
-Integration count reflects number of actual matches.
+현재 내장 검색([/](https://neovim.io/doc/user/helptag.html?tag=/), [?](https://neovim.io/doc/user/helptag.html?tag=?) 등)과 일치하는 라인을 하이라이트합니다. 통합 카운트는 실제 일치 횟수를 반영합니다.
 
-It prompts integration highlighting update on every change of ['hlsearch'](https://neovim.io/doc/user/helptag.html?tag='hlsearch')
-(see [OptionSet](https://neovim.io/doc/user/helptag.html?tag=OptionSet)) or [v:hlsearch](https://neovim.io/doc/user/helptag.html?tag=v:hlsearch). Note that it is not happening for some keys:
+['hlsearch'](https://neovim.io/doc/user/helptag.html?tag='hlsearch') ([OptionSet](https://neovim.io/doc/user/helptag.html?tag=OptionSet) 참조) 또는 [v:hlsearch](https://neovim.io/doc/user/helptag.html?tag=v:hlsearch)가 변경될 때마다 통합 하이라이팅 업데이트를 유도합니다. 일부 키의 경우에는 발생하지 않음에 유의하세요:
 
-- After starting search with [n](https://neovim.io/doc/user/helptag.html?tag=n), [N](https://neovim.io/doc/user/helptag.html?tag=N), [star](https://neovim.io/doc/user/helptag.html?tag=star), or [#](https://neovim.io/doc/user/helptag.html?tag=#).
-  To enable highlight update on this keys, make custom mappings. Like this:
+- [n](https://neovim.io/doc/user/helptag.html?tag=n), [N](https://neovim.io/doc/user/helptag.html?tag=N), [star](https://neovim.io/doc/user/helptag.html?tag=star) 또는 [#](https://neovim.io/doc/user/helptag.html?tag=#)로 검색을 시작한 후. 이러한 키에서 하이라이트 업데이트를 활성화하려면 커스텀 매핑을 만드세요. 다음과 같이:
 
   ```lua
   for _, key in ipairs({ 'n', 'N', '*', '#' }) do
     local rhs = key ..
       '<Cmd>lua MiniMap.refresh({}, {lines = false, scrollbar = false})<CR>'
+    -- 해당 키를 누르면 검색 후 미니맵을 새로고칩니다
     vim.keymap.set('n', key, rhs)
   end
   ```
 
-#### Parameters {#minimap.gen_integration.builtin_search-parameters}
+#### 매개변수 {#minimap.gen_integration.builtin_search-parameters}
 
 
 
-<span class="help-syntax-special">{hl_groups}</span> `(table|nil)` Table defining highlight groups. Can have the
-  following fields:
+<span class="help-syntax-special">{hl_groups}</span> `(table|nil)` 하이라이트 그룹을 정의하는 테이블. 다음 필드를 가질 수 있습니다:
 
-  - <span class="help-syntax-keys">\<search\></span> - highlight group for search matches. Default: [hl-Search](https://neovim.io/doc/user/helptag.html?tag=hl-Search).
+  - <span class="help-syntax-keys">\<search\></span> - 검색 일치 항목에 대한 하이라이트 그룹. 기본값: [hl-Search](https://neovim.io/doc/user/helptag.html?tag=hl-Search).
 
 ---
 
 ### gen_integration.diagnostic() {#minimap.gen_integration.diagnostic .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.gen_integration.diagnostic`(<span class="help-syntax-special">{hl_groups}</span>)</p>
-Builtin diagnostic
+내장 진단
 
-Highlight lines with matches of current diagnostic items. Items are computed
-with [vim.diagnostic.get()](https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.get\(\)) for current (source) buffer.
+현재 진단 항목과 일치하는 라인을 하이라이트합니다. 항목은 현재(소스) 버퍼에 대해 [vim.diagnostic.get()](https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.get\(\))으로 계산됩니다.
 
-It prompts integration highlighting update on every [DiagnosticChanged](https://neovim.io/doc/user/helptag.html?tag=DiagnosticChanged) event.
-Diagnostic items with higher severity (see [vim.diagnostic.severity](https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.severity)) have
-higher highlight priority (errors will be shown over all others, etc.).
+[DiagnosticChanged](https://neovim.io/doc/user/helptag.html?tag=DiagnosticChanged) 이벤트마다 통합 하이라이팅 업데이트를 유도합니다. 심각도([vim.diagnostic.severity](https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.severity) 참조)가 높은 진단 항목이 더 높은 하이라이트 우선순위를 갖습니다 (오류가 다른 모든 항목보다 먼저 표시되는 등).
 
-#### Parameters {#minimap.gen_integration.diagnostic-parameters}
+#### 매개변수 {#minimap.gen_integration.diagnostic-parameters}
 
 
 
-<span class="help-syntax-special">{hl_groups}</span> `(table|nil)` Table defining highlight groups. Supplied fields
-  also define which diagnostic severity to highlight.
-  Can have the following fields:
+<span class="help-syntax-special">{hl_groups}</span> `(table|nil)` 하이라이트 그룹을 정의하는 테이블. 제공된 필드는 하이라이트할 진단 심각도도 정의합니다. 다음 필드를 가질 수 있습니다:
 
-  - <span class="help-syntax-keys">\<error\></span> - highlight group for error items.
-    Default: [hl-DiagnosticFloatingError](https://neovim.io/doc/user/helptag.html?tag=hl-DiagnosticFloatingError).
+  - <span class="help-syntax-keys">\<error\></span> - 오류 항목에 대한 하이라이트 그룹. 기본값: [hl-DiagnosticFloatingError](https://neovim.io/doc/user/helptag.html?tag=hl-DiagnosticFloatingError).
 
-  - <span class="help-syntax-keys">\<warn\></span> - highlight group for warning items. Default: `nil` (not shown).
+  - <span class="help-syntax-keys">\<warn\></span> - 경고 항목에 대한 하이라이트 그룹. 기본값: `nil` (표시되지 않음).
 
-  - <span class="help-syntax-keys">\<info\></span> - highlight group for info items. Default: `nil` (not shown).
+  - <span class="help-syntax-keys">\<info\></span> - 정보 항목에 대한 하이라이트 그룹. 기본값: `nil` (표시되지 않음).
 
-  - <span class="help-syntax-keys">\<hint\></span> - highlight group for hint items. Default: `nil` (not shown).
+  - <span class="help-syntax-keys">\<hint\></span> - 힌트 항목에 대한 하이라이트 그룹. 기본값: `nil` (표시되지 않음).
 
-#### Usage {#minimap.gen_integration.diagnostic-usage}
+#### 사용법 {#minimap.gen_integration.diagnostic-usage}
 
 
 
   ```lua
-  -- Show all diagnostic levels
+  -- 모든 진단 레벨 표시
   local map = require('mini.map')
   local diagnostic_integration = map.gen_integration.diagnostic({
     error = 'DiagnosticFloatingError',
@@ -901,6 +731,7 @@ higher highlight priority (errors will be shown over all others, etc.).
     info  = 'DiagnosticFloatingInfo',
     hint  = 'DiagnosticFloatingHint',
   })
+  -- 진단 통합을 사용하여 미니맵 설정
   map.setup({ integrations = { diagnostic_integration } })
   ```
 
@@ -909,44 +740,39 @@ higher highlight priority (errors will be shown over all others, etc.).
 ### gen_integration.diff() {#minimap.gen_integration.diff .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.gen_integration.diff`(<span class="help-syntax-special">{hl_groups}</span>)</p>
-General diff hunks from [mini.diff](mini-diff.qmd#mini.diff)
+[mini.diff](mini-diff.qmd#mini.diff)의 일반 diff 헝크
 
-Highlight lines which are part of current diff.
-Requires 'mini.diff' as dependency.
+현재 diff의 일부인 라인을 하이라이트합니다. 의존성으로 'mini.diff'가 필요합니다.
 
-#### Parameters {#minimap.gen_integration.diff-parameters}
-
+#### 매개변수 {#minimap.gen_integration.diff-parameters}
 
 
-<span class="help-syntax-special">{hl_groups}</span> `(table|nil)` Table defining highlight groups. If `nil` (not
-  supplied), this status is not highlighted. Can have the following fields:
 
-  - <span class="help-syntax-keys">\<add\></span> - group name for "add" hunks. Default: "MiniDiffSignAdd".
+<span class="help-syntax-special">{hl_groups}</span> `(table|nil)` 하이라이트 그룹을 정의하는 테이블. `nil`(제공되지 않음)인 경우 이 상태는 하이라이트되지 않습니다. 다음 필드를 가질 수 있습니다:
 
-  - <span class="help-syntax-keys">\<change\></span> - group name for "change" hunks. Default: "MiniDiffSignChange".
+  - <span class="help-syntax-keys">\<add\></span> - "add" 헝크에 대한 그룹 이름. 기본값: "MiniDiffSignAdd".
 
-  - <span class="help-syntax-keys">\<delete\></span> - group name for "delete" hunks. Default: "MiniDiffSignDelete".
+  - <span class="help-syntax-keys">\<change\></span> - "change" 헝크에 대한 그룹 이름. 기본값: "MiniDiffSignChange".
+
+  - <span class="help-syntax-keys">\<delete\></span> - "delete" 헝크에 대한 그룹 이름. 기본값: "MiniDiffSignDelete".
 
 ---
 
 ### gen_integration.gitsigns() {#minimap.gen_integration.gitsigns .help-syntax-right-anchor}
 
 <p align="center">`MiniMap.gen_integration.gitsigns`(<span class="help-syntax-special">{hl_groups}</span>)</p>
-Hunks from 'lewis6991/gitsigns.nvim'
+'lewis6991/gitsigns.nvim'의 헝크
 
-Highlight lines which have non-trivial Git status.
-Requires [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim).
+사소하지 않은 Git 상태를 갖는 라인을 하이라이트합니다. [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)이 필요합니다.
 
-#### Parameters {#minimap.gen_integration.gitsigns-parameters}
-
+#### 매개변수 {#minimap.gen_integration.gitsigns-parameters}
 
 
-<span class="help-syntax-special">{hl_groups}</span> `(table|nil)` Table defining highlight groups. If `nil` (not
-  supplied), this status is not highlighted. Can have the following fields:
 
-  - <span class="help-syntax-keys">\<add\></span> - group name for added lines. Default: "GitSignsAdd".
+<span class="help-syntax-special">{hl_groups}</span> `(table|nil)` 하이라이트 그룹을 정의하는 테이블. `nil`(제공되지 않음)인 경우 이 상태는 하이라이트되지 않습니다. 다음 필드를 가질 수 있습니다:
 
-  - <span class="help-syntax-keys">\<change\></span> - group name for changed lines. Default: "GitSignsChange".
+  - <span class="help-syntax-keys">\<add\></span> - 추가된 라인에 대한 그룹 이름. 기본값: "GitSignsAdd".
 
-  - <span class="help-syntax-keys">\<delete\></span> - group name for deleted lines. Default: "GitSignsDelete".
+  - <span class="help-syntax-keys">\<change\></span> - 변경된 라인에 대한 그룹 이름. 기본값: "GitSignsChange".
 
+  - <span class="help-syntax-keys">\<delete\></span> - 삭제된 라인에 대한 그룹 이름. 기본값: "GitSignsDelete".

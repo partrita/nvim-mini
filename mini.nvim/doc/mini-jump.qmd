@@ -1,110 +1,92 @@
 ---
-title: "mini.jump documentation"
+title: "mini.jump 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_'mini.nvim'의 `main` 브랜치에서 생성됨_
 
-<a name="mini.jump" href="mini-jump.qmd#mini.jump"><b>mini.jump</b></a> Jump to next/previous single character
+<a name="mini.jump" href="mini-jump.qmd#mini.jump"><b>mini.jump</b></a> 다음/이전 단일 문자로 점프
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski, Adam Blažek
-
----
-
-### Module {#module .help-syntax-right-anchor}
-
-Features:
-
-- Extend f, F, t, T to work on multiple lines.
-
-
-- Repeat jump by pressing f, F, t, T again. It is reset when cursor moved
-  as a result of not jumping or timeout after idle time (duration
-  customizable).
-
-
-- Highlight (after customizable delay) all possible target characters and
-  stop it after some (customizable) idle time.
-
-
-- Normal, Visual, and Operator-pending (with dot-repeat as in clean Neovim)
-  modes are supported.
-
-This module follows vim's 'ignorecase' and 'smartcase' options. When
-'ignorecase' is set, f, F, t, T will match case-insensitively. When
-'smartcase' is also set, f, F, t, T will only match lowercase
-characters case-insensitively.
-
-#### Setup {#module-setup}
-
-
-This module needs a setup with `require('mini.jump').setup({})`
-(replace `{}` with your `config` table). It will create global Lua table
-`MiniJump` which you can use for scripting or manually (with
-`:lua MiniJump.*`).
-
-See [MiniJump.config](mini-jump.qmd#minijump.config) for `config` structure and default values.
-
-You can override runtime config settings locally to buffer inside
-`vim.b.minijump_config` which should have same structure as
-`MiniJump.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
-
-To stop module from showing non-error feedback, set `config.silent = true`.
-
-#### Highlight groups {#module-highlightgroups}
-
-
-
-- `MiniJump` - all possible cursor positions.
-
-To change any highlight group, set it directly with [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\)).
-
-#### Disabling {#module-disabling}
-
-
-To disable core functionality, set `vim.g.minijump_disable` (globally) or
-`vim.b.minijump_disable` (for a buffer) to `true`. Considering high number of
-different scenarios and customization intentions, writing exact rules for
-disabling module's functionality is left to user. See
-[mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common recipes.
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski, Adam Blažek
 
 ---
 
-### Events {#minijump-events .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-To allow user customization and integration of external tools, certain [User](https://neovim.io/doc/user/helptag.html?tag=User)
-autocommand events are triggered under common circumstances:
+기능:
+
+- f, F, t, T가 여러 줄에서 작동하도록 확장합니다.
 
 
-- `MiniJumpGetTarget` - before asking user for the target. Use [MiniJump.state](mini-jump.qmd#minijump.state)
-  for more information about the upcoming jump.
+- f, F, t, T를 다시 눌러 점프를 반복할 수 있습니다. 점프하지 않아서 커서가 이동했거나 유휴 시간(사용자 정의 가능) 후 타임아웃이 발생하면 재설정됩니다.
 
-- `MiniJumpStart` - after jumping has started.
 
-- `MiniJumpJump` - after performing a jump.
+- 모든 가능한 대상 문자를 (사용자 정의 가능한 지연 시간 후) 강조 표시하고, 일정 유휴 시간 후 중지합니다.
 
-- `MiniJumpStop` - after jumping is stopped.
+
+- 일반(Normal), 비주얼(Visual), 오퍼레이터 대기(Operator-pending, 순정 Neovim과 동일한 점 반복 지원) 모드를 지원합니다.
+
+이 모듈은 Vim의 'ignorecase' 및 'smartcase' 옵션을 따릅니다. 'ignorecase'가 설정된 경우 f, F, t, T는 대소문자를 구분하지 않고 일치하는 항목을 찾습니다. 'smartcase'도 설정된 경우 f, F, t, T는 소문자만 대소문자 구분 없이 일치하는 항목을 찾습니다.
+
+#### 설정 {#module-setup}
+
+
+이 모듈은 `require('mini.jump').setup({})`으로 설정이 필요합니다 (`{}`를 사용자 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniJump`를 생성합니다 (`:lua MiniJump.*`로 사용 가능).
+
+`config` 구조 및 기본값은 [MiniJump.config](mini-jump.qmd#minijump.config)를 참조하세요.
+
+런타임 설정을 `vim.b.minijump_config`를 사용하여 버퍼별로 재정의할 수 있으며, 이는 `MiniJump.config`와 동일한 구조여야 합니다. 자세한 내용은 [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config)를 참조하세요.
+
+모듈이 오류가 아닌 피드백을 표시하지 않게 하려면 `config.silent = true`로 설정하세요.
+
+#### 하이라이트 그룹 {#module-highlightgroups}
+
+
+
+- `MiniJump` - 모든 가능한 커서 위치.
+
+하이라이트 그룹을 변경하려면 [nvim\_set\_hl()](https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl\(\))을 사용하여 직접 설정하세요.
+
+#### 비활성화 {#module-disabling}
+
+
+핵심 기능을 비활성화하려면 `vim.g.minijump_disable`(전역) 또는 `vim.b.minijump_disable`(버퍼별)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 방법은 [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
+
+---
+
+### 이벤트 {#minijump-events .help-syntax-right-anchor}
+
+사용자 정의 및 외부 도구와의 통합을 위해, 일반적인 상황에서 특정 [User](https://neovim.io/doc/user/helptag.html?tag=User) 자동 명령 이벤트가 트리거됩니다.
+
+
+- `MiniJumpGetTarget` - 사용자에게 대상을 묻기 전. 예정된 점프에 대한 자세한 정보는 [MiniJump.state](mini-jump.qmd#minijump.state)를 참조하세요.
+
+- `MiniJumpStart` - 점프가 시작된 후.
+
+- `MiniJumpJump` - 점프를 수행한 후.
+
+- `MiniJumpStop` - 점프가 중지된 후.
 
 ---
 
 ### setup() {#minijump.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniJump.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minijump.setup-parameters}
+#### 매개변수 {#minijump.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniJump.config](mini-jump.qmd#minijump.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniJump.config](mini-jump.qmd#minijump.config)를 참조하세요.
 
-#### Usage {#minijump.setup-usage}
+#### 사용법 {#minijump.setup-usage}
 
 
 
   ```lua
-  require('mini.jump').setup() -- use default config
-  -- OR
-  require('mini.jump').setup({}) -- replace {} with your config table
+  require('mini.jump').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.jump').setup({}) -- {}를 사용자 설정 테이블로 교체
   ```
 
 ---
@@ -112,13 +94,13 @@ Module setup
 ### config {#minijump.config .help-syntax-right-anchor}
 
 <p align="center">`MiniJump.config`</p>
-#### Defaults {#minijump.config-defaults}
+#### 기본값 {#minijump.config-defaults}
 
 
 
   ```lua
   MiniJump.config = {
-    -- Module mappings. Use `''` (empty string) to disable one.
+    -- 모듈 매핑. 비활성화하려면 `''`(빈 문자열)을 사용하세요.
     mappings = {
       forward = 'f',
       backward = 'F',
@@ -127,19 +109,18 @@ Module setup
       repeat_jump = ';',
     },
 
-    -- Delay values (in ms) for different functionalities. Set any of them to
-    -- a very big number (like 10^7) to virtually disable.
+    -- 다양한 기능에 대한 지연 시간(ms). 사실상 비활성화하려면
+    -- 매우 큰 숫자(예: 10^7)로 설정하세요.
     delay = {
-      -- Delay between jump and highlighting all possible jumps
+      -- 점프와 모든 가능한 점프 강조 표시 사이의 지연 시간
       highlight = 250,
 
-      -- Delay between jump and automatic stop if idle (no jump is done)
+      -- 점프와 유휴 상태(점프가 수행되지 않음) 시 자동 중지 사이의 지연 시간
       idle_stop = 10000000,
     },
 
-    -- Whether to disable showing non-error feedback
-    -- This also affects (purely informational) helper messages shown after
-    -- idle time if user input is required.
+    -- 오류가 아닌 피드백 표시 비활성화 여부
+    -- 이는 사용자 입력이 필요한 경우 유휴 시간 후 표시되는 (정보 제공용) 도움말 메시지에도 영향을 미칩니다.
     silent = false,
   }
   ```
@@ -149,55 +130,48 @@ Module setup
 ### state {#minijump.state .help-syntax-right-anchor}
 
 <p align="center">`MiniJump.state`</p>
-Data about jumping state
+점프 상태 데이터
 
-It stores various information used in this module. All elements, except
-`jumping`, is about the latest jump. They are used as default values for
-similar arguments.
+이 모듈에서 사용되는 다양한 정보를 저장합니다. `jumping`을 제외한 모든 요소는 최신 점프에 관한 것입니다. 이들은 유사한 인수의 기본값으로 사용됩니다.
 
-#### Usage {#minijump.state-usage}
+#### 사용법 {#minijump.state-usage}
 
 
-This can be used to define mappings which depend on state; either as
-a standalone mapping or part of [MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep). For example:
+상태에 의존하는 매핑을 정의하는 데 사용할 수 있습니다. 독립형 매핑이거나 [MiniKeymap.map\_multistep()](mini-keymap.qmd#minikeymap.map_multistep)의 일부일 수 있습니다. 예시:
 
   ```lua
-  -- Stop jumping after pressing `<Esc>`
+  -- `<Esc>`를 누르면 점프 중지
   local jump_stop = function()
     if not MiniJump.state.jumping then return '<Esc>' end
     MiniJump.stop_jumping()
   end
-  local opts = { expr = true, desc = 'Stop jumping' }
+  local opts = { expr = true, desc = '점프 중지' }
   vim.keymap.set({ 'n', 'x', 'o' }, '<Esc>', jump_stop, opts)
   ```
 
-#### Class {#minijump.state-class}
+#### 클래스 {#minijump.state-class}
 
 
 
 <span class="help-syntax-special">{JumpingState}</span>
 
-#### Fields {#minijump.state-fields}
+#### 필드 {#minijump.state-fields}
 
 
 
-<span class="help-syntax-special">{target}</span> `(string|nil)` The string to jump to.
+<span class="help-syntax-special">{target}</span> `(string|nil)` 점프할 문자열.
 
-<span class="help-syntax-special">{backward}</span> `(boolean|nil)` Whether to jump backward.
+<span class="help-syntax-special">{backward}</span> `(boolean|nil)` 뒤로 점프할지 여부.
 
-<span class="help-syntax-special">{till}</span> `(boolean|nil)` Whether to jump just before/after the match instead of
-  exactly on target. This includes positioning cursor past the end of
-  previous/current line. Note that with backward jump this might lead to
-  cursor being on target if can't be put past the line.
+<span class="help-syntax-special">{till}</span> `(boolean|nil)` 대상에 정확히 위치하는 대신 일치하는 항목 바로 앞/뒤로 점프할지 여부. 여기에는 이전/현재 줄의 끝 너머에 커서를 위치시키는 것도 포함됩니다. 뒤로 점프할 때 줄 너머에 위치시킬 수 없는 경우 커서가 대상에 위치할 수 있습니다.
 
-<span class="help-syntax-special">{n_times}</span> `(number|nil)` Number of times to perform consecutive jumps.
+<span class="help-syntax-special">{n_times}</span> `(number|nil)` 연속 점프를 수행할 횟수.
 
-<span class="help-syntax-special">{mode}</span> `(string)` Mode of latest jump (output of [mode()](https://neovim.io/doc/user/helptag.html?tag=mode\(\)) with non-zero argument).
+<span class="help-syntax-special">{mode}</span> `(string)` 최신 점프의 모드(인수가 0이 아닌 [mode()](https://neovim.io/doc/user/helptag.html?tag=mode\(\))의 출력).
 
-<span class="help-syntax-special">{jumping}</span> `(boolean)` Whether module is currently in "jumping mode": usage of
-  [MiniJump.smart\_jump()](mini-jump.qmd#minijump.smart_jump) and all mappings won't require target.
+<span class="help-syntax-special">{jumping}</span> `(boolean)` 모듈이 현재 "점프 모드"인지 여부. [MiniJump.smart\_jump()](mini-jump.qmd#minijump.smart_jump) 및 모든 매핑 사용 시 대상 입력이 필요하지 않습니다.
 
-Initial values:
+초기값:
 
 
   ```lua
@@ -216,57 +190,48 @@ Initial values:
 ### jump() {#minijump.jump .help-syntax-right-anchor}
 
 <p align="center">`MiniJump.jump`(<span class="help-syntax-special">{target}</span>, <span class="help-syntax-special">{backward}</span>, <span class="help-syntax-special">{till}</span>, <span class="help-syntax-special">{n_times}</span>)</p>
-Jump to target
+대상으로 점프
 
-Takes a string and jumps to its first occurrence in desired direction.
+문자열을 받아 원하는 방향으로 처음 나타나는 위치로 점프합니다.
 
-All default values are taken from [MiniJump.state](mini-jump.qmd#minijump.state) to emulate latest jump.
+모든 기본값은 최신 점프를 모방하기 위해 [MiniJump.state](mini-jump.qmd#minijump.state)에서 가져옵니다.
 
-#### Parameters {#minijump.jump-parameters}
+#### 매개변수 {#minijump.jump-parameters}
 
 
 
-<span class="help-syntax-special">{target}</span> `(string|nil)` The string to jump to.
+<span class="help-syntax-special">{target}</span> `(string|nil)` 점프할 문자열.
 
-<span class="help-syntax-special">{backward}</span> `(boolean|nil)` Whether to jump backward.
+<span class="help-syntax-special">{backward}</span> `(boolean|nil)` 뒤로 점프할지 여부.
 
-<span class="help-syntax-special">{till}</span> `(boolean|nil)` Whether to jump just before/after the match instead of
-  exactly on target. This includes positioning cursor past the end of
-  previous/current line. Note that with backward jump this might lead to
-  cursor being on target if can't be put past the line.
+<span class="help-syntax-special">{till}</span> `(boolean|nil)` 대상에 정확히 위치하는 대신 일치하는 항목 바로 앞/뒤로 점프할지 여부. 여기에는 이전/현재 줄의 끝 너머에 커서를 위치시키는 것도 포함됩니다. 뒤로 점프할 때 줄 너머에 위치시킬 수 없는 경우 커서가 대상에 위치할 수 있습니다.
 
-<span class="help-syntax-special">{n_times}</span> `(number|nil)` Number of times to perform consecutive jumps.
+<span class="help-syntax-special">{n_times}</span> `(number|nil)` 연속 점프를 수행할 횟수.
 
 ---
 
 ### smart_jump() {#minijump.smart_jump .help-syntax-right-anchor}
 
 <p align="center">`MiniJump.smart_jump`(<span class="help-syntax-special">{backward}</span>, <span class="help-syntax-special">{till}</span>)</p>
-Make smart jump
+스마트 점프 수행
 
-If the last movement was a jump, perform another jump with the same target.
-Otherwise, wait for a target input (via [getcharstr()](https://neovim.io/doc/user/helptag.html?tag=getcharstr\(\))). Respects [v:count](https://neovim.io/doc/user/helptag.html?tag=v:count).
+마지막 이동이 점프였다면 동일한 대상으로 다른 점프를 수행합니다. 그렇지 않으면 ([getcharstr()](https://neovim.io/doc/user/helptag.html?tag=getcharstr\(\))을 통해) 대상 입력을 기다립니다. [v:count](https://neovim.io/doc/user/helptag.html?tag=v:count)를 존중합니다.
 
-All default values are taken from [MiniJump.state](mini-jump.qmd#minijump.state) to emulate latest jump.
+모든 기본값은 최신 점프를 모방하기 위해 [MiniJump.state](mini-jump.qmd#minijump.state)에서 가져옵니다.
 
-#### Parameters {#minijump.smart_jump-parameters}
-
+#### 매개변수 {#minijump.smart_jump-parameters}
 
 
-<span class="help-syntax-special">{backward}</span> `(boolean|nil)` Whether to jump backward.
 
-<span class="help-syntax-special">{till}</span> `(boolean|nil)` Whether to jump just before/after the match instead of
-  exactly on target. This includes positioning cursor past the end of
-  previous/current line. Note that with backward jump this might lead to
-  cursor being on target if can't be put past the line.
+<span class="help-syntax-special">{backward}</span> `(boolean|nil)` 뒤로 점프할지 여부.
+
+<span class="help-syntax-special">{till}</span> `(boolean|nil)` 대상에 정확히 위치하는 대신 일치하는 항목 바로 앞/뒤로 점프할지 여부. 여기에는 이전/현재 줄의 끝 너머에 커서를 위치시키는 것도 포함됩니다. 뒤로 점프할 때 줄 너머에 위치시킬 수 없는 경우 커서가 대상에 위치할 수 있습니다.
 
 ---
 
 ### stop_jumping() {#minijump.stop_jumping .help-syntax-right-anchor}
 
 <p align="center">`MiniJump.stop_jumping`()</p>
-Stop jumping
+점프 중지
 
-Removes highlights (if any) and forces the next smart jump to prompt for
-the target. Automatically called on appropriate Neovim [events](https://neovim.io/doc/user/helptag.html?tag=events).
-
+강조 표시(있는 경우)를 제거하고 다음 스마트 점프 시 대상을 묻도록 강제합니다. 적절한 Neovim [이벤트](https://neovim.io/doc/user/helptag.html?tag=events) 발생 시 자동으로 호출됩니다.

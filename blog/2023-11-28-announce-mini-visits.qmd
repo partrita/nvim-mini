@@ -1,60 +1,60 @@
 ---
-title: "Announcing 'mini.visits'"
+title: "'mini.visits' 발표"
 author: Evgeni Chasnovski
 date: 2023-11-28
 categories: [announce, reddit]
-description: Track and reuse file system visits. Basically, parts of 'telescope-frecency.nvim' combined with parts of 'harpoon.nvim'
+description: 파일 시스템 방문 기록을 추적하고 재사용하세요. 기본적으로 'telescope-frecency.nvim'과 'harpoon.nvim'의 일부 기능을 결합한 형태입니다.
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/185yi7q/minivisits_track_and_reuse_file_system_visits/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/185yi7q/minivisits_track_and_reuse_file_system_visits/)*
 
 {{< video 2023-11-28-announce-mini-visits/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-It is my pleasure to bring you [mini.visits](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-visits.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) which can track and reuse file system visits. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.visits).
+파일 시스템 방문 기록을 추적하고 재사용할 수 있는 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.visits](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-visits.md)를 소개하게 되어 기쁩니다. 이 모듈은 [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.visits)를 통해서도 설치할 수 있습니다.
 
-**Note**: This demo uses custom `vim.ui.select()` from [mini.pick](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-pick.md).
-
-------
-
-TL;DR: This is a 'mini.nvim' version of a combination of [nvim-telescope/telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim) (persistently track file visits and select from them) and [ThePrimeagen/harpoon](https://github.com/ThePrimeagen/harpoon) (persistently add/remove labels to paths and select based on them).
-
-**But** there is no feature parity with any of them (and is not planned), as the overall design and assumed workflows are slightly different. Here is a [link to a more detailed comparisons](https://github.com/nvim-mini/mini.nvim/blob/964fab7fecd14f66a69a96162f8aa816480690fd/doc/mini-visits.txt#L64).
+**참고**: 이 데모에서는 [mini.pick](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-pick.md)의 커스텀 `vim.ui.select()`를 사용합니다.
 
 ------
 
-Features:
+요약: 이 모듈은 [nvim-telescope/telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)(지속적으로 파일 방문을 추적하고 선택)과 [ThePrimeagen/harpoon](https://github.com/ThePrimeagen/harpoon)(경로에 레이블을 지속적으로 추가/제거하고 이를 기반으로 선택)의 기능을 결합한 'mini.nvim' 버전입니다.
 
-- Persistently track file system visits (both files and directories) per project directory. Store visit index is human readable and editable.
+**하지만** 전체적인 디자인과 예상되는 워크플로우가 약간 다르기 때문에 두 플러그인과 기능적으로 완전히 동일하지는 않으며, 그럴 계획도 없습니다. [더 자세한 비교 링크](https://github.com/nvim-mini/mini.nvim/blob/964fab7fecd14f66a69a96162f8aa816480690fd/doc/mini-visits.txt#L64)를 참조하세요.
 
-- Visit index is normalized on every write to contain relevant information. Exact details can be customized.
+------
 
-- Built-in ability to persistently use label paths for later use.
+주요 기능:
 
-- Exported functions to reuse visit data:
-    - List visited paths/labels with custom filter and sort (uses "robust frecency" by default). Can be used as source for pickers.
+- 프로젝트 디렉토리별로 파일 시스템 방문(파일 및 디렉토리 모두)을 지속적으로 추적합니다. 방문 인덱스는 사람이 읽고 편집할 수 있는 형태입니다.
 
-    - Select visited paths/labels using `vim.ui.select()`.
+- 방문 인덱스는 저장될 때마다 관련 정보를 포함하도록 정규화됩니다. 상세한 내용은 커스터마이징할 수 있습니다.
 
-    - Iterate through visit paths in target direction ("forward", "backward", "first", "last").
+- 나중에 사용할 수 있도록 경로에 레이블을 지속적으로 사용하는 기능이 내장되어 있습니다.
 
-- Exported functions to manually update visit index allowing persistent track of any user information.
+- 방문 데이터를 재사용하기 위한 함수를 제공합니다:
+    - 커스텀 필터 및 정렬(기본적으로 "robust frecency" 사용)을 통해 방문한 경로/레이블 목록을 제공합니다. 피커의 소스로 사용할 수 있습니다.
 
-For more information, see these tags in help file:
+    - `vim.ui.select()`를 사용하여 방문한 경로/레이블을 선택합니다.
+
+    - 대상 방향("forward", "backward", "first", "last")으로 방문 경로를 탐색합니다.
+
+- 방문 인덱스를 수동으로 업데이트하는 함수를 제공하여 사용자 정보를 지속적으로 추적할 수 있습니다.
+
+더 자세한 정보는 도움말 파일의 다음 태그를 참조하세요:
 
 - [`*MiniVisits-overview*`](https://github.com/nvim-mini/mini.nvim/blob/964fab7fecd14f66a69a96162f8aa816480690fd/doc/mini-visits.txt#L105)
 - [`*MiniVisits-index-specification*`](https://github.com/nvim-mini/mini.nvim/blob/964fab7fecd14f66a69a96162f8aa816480690fd/doc/mini-visits.txt#L162)
 - [`*MiniVisits-examples*`](https://github.com/nvim-mini/mini.nvim/blob/964fab7fecd14f66a69a96162f8aa816480690fd/doc/mini-visits.txt#L225)
 
-For full documentation see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-visits.txt).
+전체 문서는 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-visits.txt)을 참조하세요.
 
 ------
 
-There are also two new 'mini.pick' pickers for [mini.extra](2023-11-02-announce-mini-extra.qmd): [`visit_paths()`](https://github.com/nvim-mini/mini.nvim/blob/964fab7fecd14f66a69a96162f8aa816480690fd/doc/mini-extra.txt#L731) and [`visit_labels()`](https://github.com/nvim-mini/mini.nvim/blob/964fab7fecd14f66a69a96162f8aa816480690fd/doc/mini-extra.txt#L766). These are essentially a slightly polished alternatives (with file icons, preview, etc.) to built-in pickers which use `vim.ui.select()`.
+[mini.extra](2023-11-02-announce-mini-extra.qmd)를 위한 두 가지 새로운 'mini.pick' 피커인 [`visit_paths()`](https://github.com/nvim-mini/mini.nvim/blob/964fab7fecd14f66a69a96162f8aa816480690fd/doc/mini-extra.txt#L731)와 [`visit_labels()`](https://github.com/nvim-mini/mini.nvim/blob/964fab7fecd14f66a69a96162f8aa816480690fd/doc/mini-extra.txt#L766)도 추가되었습니다. 이들은 기본적으로 `vim.ui.select()`를 사용하는 내장 피커를 조금 더 다듬은 대안(파일 아이콘, 미리보기 등 포함)입니다.
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/591).
+한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/591)에 남겨주시면 감사하겠습니다.
 
-Thanks!
+감사합니다!

@@ -1,67 +1,67 @@
 ---
-title: "Announcing 'mini.hues'"
+title: "'mini.hues' 발표"
 author: Evgeni Chasnovski
 date: 2023-05-07
 categories: [announce, reddit]
-description: Generate configurable color scheme (plus 'randomhue' color scheme with random base colors)
+description: 설정 가능한 색상 테마 생성 (랜덤 기본 색상의 'randomhue' 테마 포함)
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/13an2tg/minihues_generate_configurable_color_scheme_plus/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/13an2tg/minihues_generate_configurable_color_scheme_plus/)*
 
 {{< video 2023-05-07-announce-mini-hues/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am really happy to tell you about the release of [mini.hues](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-hues.md) - new color scheme module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) to generate configurable color scheme. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.hues).
-
-------
-
-This is an attempt to create my own color scheme leveraging the knowledge I got from [writing 'mini.colors'](2023-04-16-announce-mini-colors.qmd) and learning about [Oklab/Oklch color space](https://bottosson.github.io/posts/oklab/). But this is not **just** a color scheme, but a color scheme generator - it creates and applies palette based on (mandatory) background and foreground colors.
-
-I put quite a lot of thought into how this palette is applied to highlight groups. There are many small details that make reading code and text easier (at least for me), like bold keywords, orange delimiters, red `return`, etc.
-
-Here are [some configuration examples for you to try](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-hues.md#example-configurations) (basically what is showcased in video demo).
+설정 가능한 색상 테마를 생성하는 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 색상 테마 모듈 [mini.hues](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-hues.md)의 출시 소식을 전하게 되어 정말 기쁩니다. [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.hues)를 통해서도 설치할 수 있습니다.
 
 ------
 
-Along with 'mini.hues' comes 'randomhue'. This is a good old configuration-free color scheme, but with a twist: each call to `:colorscheme randomhue` will result into random yet coherent colors. Generation is somewhat smart: it adapts to dark/light `'background'` option while base colors always have same lightness and chroma.
+이 모듈은 ['mini.colors'를 작성](2023-04-16-announce-mini-colors.qmd)하고 [Oklab/Oklch 색 공간](https://bottosson.github.io/posts/oklab/)에 대해 배우면서 얻은 지식을 활용하여 나만의 색상 테마를 만들려는 시도입니다. 하지만 이것은 **단순한** 색상 테마가 아니라 색상 테마 생성기입니다. 필수적인 배경색과 전경색을 기반으로 팔레트를 생성하고 적용합니다.
 
-First eight examples from the video can be a result of 'randomhue'. For examples of light background see [demo in README](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-hues.md#demo).
+저는 이 팔레트가 하이라이트 그룹에 어떻게 적용될지에 대해 많은 고민을 했습니다. 굵은 글씨의 키워드, 주황색 구분 기호, 빨간색 `return` 등 코드와 텍스트를 더 읽기 쉽게 만드는(적어도 저에게는) 많은 세부 사항이 포함되어 있습니다.
 
-I've been daily driving 'randomhue' for about a week and I must say that it is quite a bit of fun. Small amount of randomness adds something special to user experience.
+[직접 사용해 볼 수 있는 몇 가지 설정 예시](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-hues.md#example-configurations)가 있습니다 (기본적으로 비디오 데모에서 보여준 내용입니다).
 
 ------
 
-Here are the features of 'mini.hues':
+'mini.hues'와 함께 'randomhue'도 제공됩니다. 이것은 설정이 필요 없는 고전적인 색상 테마이지만, 반전이 있습니다. `:colorscheme randomhue`를 호출할 때마다 무작위이면서도 일관된 색상이 생성됩니다. 생성 과정은 다소 영리합니다. 어두운/밝은 `'background'` 옵션에 적응하는 동시에 기본 색상은 항상 동일한 밝기와 채도를 유지합니다.
 
-- Required to set two base colors: background and foreground. Their shades and other non-base colors are computed to be as much perceptually different as reasonably possible.
+비디오의 처음 8개 예시가 'randomhue'의 결과일 수 있습니다. 밝은 배경의 예시는 [README의 데모](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-hues.md#demo)를 참조하세요.
 
-- Configurable:
-    - Number of hues used for non-base colors (from 0 to 8).
-    - Saturation level ('low', 'medium', 'high').
-    - Accent color used for some selected UI elements.
-    - Plugin integration (can be selectively enabled for faster startup).
+저는 일주일 정도 'randomhue'를 데일리로 사용해 왔는데, 상당히 재미있습니다. 약간의 무작위성이 사용자 경험에 특별한 무언가를 더해줍니다.
 
-- Random generator for base colors. Powers `randomhue` color scheme.
+------
 
-- Lua function to compute palette used in color scheme.
+'mini.hues'의 주요 기능은 다음과 같습니다:
 
-Supported highlight groups:
+- 배경색과 전경색이라는 두 가지 기본 색상 설정이 필요합니다. 이들의 음영 및 기타 비기본 색상은 지각적으로 가능한 한 차이가 나도록 계산됩니다.
 
-- All built-in UI and syntax groups.
+- 커스터마이징 가능:
+    - 비기본 색상에 사용되는 색조(hues)의 수 (0에서 8까지).
+    - 채도 레벨 ('low', 'medium', 'high').
+    - 일부 선택된 UI 요소에 사용되는 액센트 색상.
+    - 플러그인 통합 (빠른 시작을 위해 선택적으로 활성화 가능).
 
-- Built-in Neovim LSP and diagnostic.
+- 기본 색상을 위한 무작위 생성기. `randomhue` 색상 테마를 구동합니다.
+
+- 색상 테마에 사용되는 팔레트를 계산하는 Lua 함수.
+
+지원되는 하이라이트 그룹:
+
+- 모든 내장 UI 및 구문(syntax) 그룹.
+
+- 내장 Neovim LSP 및 진단(diagnostic).
 
 - Tree-sitter.
 
-- LSP semantic tokens.
+- LSP 시맨틱 토큰 (semantic tokens).
 
-- 30+ modern Neovim plugins.
+- 30개 이상의 최신 Neovim 플러그인.
 
-For more information, see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-hues.txt).
+자세한 내용은 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-hues.txt)을 참조하세요.
 
 ------
 
-Please, check it out and tell me what you think! I am also very curious about user experience with plugins (to be honest, not all of them were checked with an actual working plugin). You can leave your suggestions either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/319).
+사용해 보시고 의견을 들려주세요! 플러그인 사용 경험에 대해서도 매우 궁금합니다 (솔직히 말씀드리면 모든 플러그인을 실제 작동하는 환경에서 확인한 것은 아닙니다). 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/319)를 통해 남겨주세요.
 
-Thanks!
+감사합니다!

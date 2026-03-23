@@ -1,52 +1,52 @@
 ---
-title: "Announcing 'mini.operators'"
+title: "'mini.operators' 발표"
 author: Evgeni Chasnovski
 date: 2023-08-15
 categories: [announce, reddit]
-description: "Text edit operators: replace, exchange, multiply, sort, evaluate; with count and dot-repeat support"
+description: "텍스트 편집 연산자: 교체, 교환, 복제, 정렬, 평가; count 및 점 반복 지원"
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/15rv9gn/minioperators_text_edit_operators_replace/)*
+*원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/15rv9gn/minioperators_text_edit_operators_replace/)*
 
 {{< video 2023-08-15-announce-mini-operators/demo.mp4 >}}
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-I am overjoyed to release [mini.operators](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-operators.md) - new module of [mini.nvim](https://github.com/nvim-mini/mini.nvim) with various text edit operators. It can also be installed using [separate GitHub repository](https://github.com/nvim-mini/mini.operators).
-
-------
-
-Initially I planned to do a 'mini.exchange' module for only "exchange" operator. After exploration of other useful operators, I got a little excited with possibilities. As they all mostly fit into "various text edit operators" category, I decided to upgrade my plans to include more operators.
-
-At first, some of them didn't seem that useful, but continuous practice unveiled interesting minor "quality of life" improvements in frequent mundane tasks:
-
-- Dot-repeatability of "replace" operator really adds up for several quick replacements.
-
-- Hitting `grr`/`gmm` to replace/multiply current line feels more ergonomic than `VP`/`yyp`. Plus they reuse current indent (which often saves extra keystrokes) and don't affect `"` register.
-
-- "Evaluate" operator is really useful for exploring some big Lua object inside a buffer and is slightly quicker to use than [`put_text()` from 'mini.misc'](https://github.com/nvim-mini/mini.nvim/blob/2c622382236328316b9fc15d8282fd47585d5844/doc/mini-misc.txt#L99).
+다양한 텍스트 편집 연산자가 포함된 [mini.nvim](https://github.com/nvim-mini/mini.nvim)의 새로운 모듈 [mini.operators](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-operators.md)의 출시를 발표하게 되어 매우 기쁩니다. [별도의 GitHub 저장소](https://github.com/nvim-mini/mini.operators)를 통해서도 설치할 수 있습니다.
 
 ------
 
-Here are main features of 'mini.operators':
+처음에는 오직 "교환(exchange)" 연산자만을 위한 'mini.exchange' 모듈을 만들 계획이었습니다. 하지만 다른 유용한 연산자들을 탐색하다 보니 가능성에 조금 들뜨게 되었습니다. 이들은 모두 "다양한 텍스트 편집 연산자" 범주에 잘 들어맞기 때문에 더 많은 연산자를 포함하도록 계획을 격상했습니다.
 
-- Operators:
-    - Evaluate text and replace with output.
-    - Exchange text regions.
-    - Multiply (duplicate) text.
-    - Replace text with register.
-    - Sort text.
+처음에는 그중 일부가 그리 유용해 보이지 않았지만, 지속적인 연습을 통해 일상적인 작업에서 흥미롭고 소소한 "삶의 질" 향상을 발견할 수 있었습니다:
 
-- Automated configurable mappings to operate on textobject, line, selection. Can be disabled in favor of more control with `MiniOperators.make_mappings()`.
+- "교체(replace)" 연산자의 점 반복(dot-repeatability) 기능은 여러 번의 빠른 교체 작업 시 정말 큰 도움이 됩니다.
 
-- All operators support `[count]` and dot-repeat.
+- 현재 행을 교체/복제하기 위해 `grr`/`gmm`을 누르는 것은 `VP`/`yyp`보다 더 인체공학적으로 느껴집니다. 게다가 현재 들여쓰기를 재사용하므로(종종 추가 키 입력을 줄여줌) `"` 레지스터에 영향을 주지 않습니다.
 
-See [MiniOperators-overview](https://github.com/nvim-mini/mini.nvim/blob/fd071ff88eb2bb0b930265e14e626bf30013ea55/doc/mini-operators.txt#L80) and [MiniOperators.config](https://github.com/nvim-mini/mini.nvim/blob/fd071ff88eb2bb0b930265e14e626bf30013ea55/doc/mini-operators.txt#L163) for more details.
-
-For full documentation see [help file](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-operators.txt).
+- "평가(evaluate)" 연산자는 버퍼 내부에서 큰 Lua 객체를 탐색할 때 정말 유용하며, ['mini.misc'의 `put_text()`](https://github.com/nvim-mini/mini.nvim/blob/2c622382236328316b9fc15d8282fd47585d5844/doc/mini-misc.txt#L99)보다 약간 더 빠르게 사용할 수 있습니다.
 
 ------
 
-Please, check it out and tell me what you think! You can leave your suggestions either here in comments or in [dedicated beta-testing issue](https://github.com/nvim-mini/mini.nvim/issues/439).
+'mini.operators'의 주요 기능은 다음과 같습니다:
 
-Thanks!
+- 연산자:
+    - 텍스트를 평가(Evaluate)하고 출력으로 대체.
+    - 텍스트 영역 교환(Exchange).
+    - 텍스트 복제(Multiply).
+    - 텍스트를 레지스터 내용으로 교체(Replace).
+    - 텍스트 정렬(Sort).
+
+- 텍스트 객체, 행, 선택 영역에 대해 작동하는 자동 설정 가능한 매핑. `MiniOperators.make_mappings()`를 사용하여 더 세밀하게 제어하기 위해 비활성화할 수 있습니다.
+
+- 모든 연산자는 `[count]`와 점 반복(dot-repeat)을 지원합니다.
+
+자세한 내용은 [MiniOperators-overview](https://github.com/nvim-mini/mini.nvim/blob/fd071ff88eb2bb0b930265e14e626bf30013ea55/doc/mini-operators.txt#L80) 및 [MiniOperators.config](https://github.com/nvim-mini/mini.nvim/blob/fd071ff88eb2bb0b930265e14e626bf30013ea55/doc/mini-operators.txt#L163)를 참조하세요.
+
+전체 문서는 [도움말 파일](https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-operators.txt)을 참조하세요.
+
+------
+
+사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 [전용 베타 테스트 이슈](https://github.com/nvim-mini/mini.nvim/issues/439)를 통해 남겨주시면 감사하겠습니다.
+
+감사합니다!

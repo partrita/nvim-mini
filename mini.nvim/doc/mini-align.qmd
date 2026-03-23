@@ -1,394 +1,306 @@
 ---
-title: "mini.align documentation"
+title: "mini.align 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_'mini.nvim'의 `main` 브랜치에서 생성됨_
 
-<a name="mini.align" href="mini-align.qmd#mini.align"><b>mini.align</b></a> Align text interactively
+<a name="mini.align" href="mini-align.qmd#mini.align"><b>mini.align</b></a> 대화형으로 텍스트 정렬
 
 MIT License Copyright (c) 2022 Evgeni Chasnovski
 
 ---
 
-### Module {#module .help-syntax-right-anchor}
+### 모듈 {#module .help-syntax-right-anchor}
 
-Rich and flexible customization of both alignment rules and user interaction.
-Works with charwise, linewise, and blockwise selections in both Normal mode
-(on textobject/motion; with dot-repeat) and Visual mode.
+정렬 규칙과 사용자 상호작용 모두에 대해 풍부하고 유연한 사용자 정의를 제공합니다.
+Normal 모드(텍스트 개체/동작 시; 점 반복 포함)와 Visual 모드 모두에서 문자 단위(charwise), 줄 단위(linewise), 블록 단위(blockwise) 선택과 함께 작동합니다.
 
-Features:
+기능:
 
-- Alignment is done in three main steps:
+- 정렬은 세 가지 주요 단계로 수행됩니다:
 
-    - <span class="help-syntax-keys">\<Split\></span> lines into parts based on Lua pattern(s) or user-supplied rule.
+    - <span class="help-syntax-keys">\<Split\></span> Lua 패턴 또는 사용자가 제공한 규칙에 따라 줄을 여러 부분으로 나눕니다.
 
-    - <span class="help-syntax-keys">\<Justify\></span> parts for certain side(s) to be same width inside columns.
+    - <span class="help-syntax-keys">\<Justify\></span> 열 내부에서 특정 측면이 동일한 너비가 되도록 각 부분을 조정합니다.
 
-    - <span class="help-syntax-keys">\<Merge\></span> parts to be lines, with customizable delimiter(s).
+    - <span class="help-syntax-keys">\<Merge\></span> 사용자 정의 가능한 구분 기호를 사용하여 각 부분을 다시 줄로 병합합니다.
 
-    Each main step can be preceded by other steps (pre-steps) to achieve
-    highly customizable outcome. See `steps` value in [MiniAlign.config](mini-align.qmd#minialign.config).
-    For more details, see [MiniAlign-glossary](mini-align.qmd#minialign-glossary) and [MiniAlign-algorithm](mini-align.qmd#minialign-algorithm).
+    각 주요 단계 앞에는 고도로 사용자 정의된 결과를 얻기 위해 다른 단계(사전 단계)가 올 수 있습니다. [MiniAlign.config](mini-align.qmd#minialign.config)의 `steps` 값을 참조하세요.
+    자세한 내용은 [MiniAlign-용어집](mini-align.qmd#minialign-glossary) 및 [MiniAlign-알고리즘](mini-align.qmd#minialign-algorithm)을 참조하세요.
 
 
-- User can control alignment interactively by pressing customizable modifiers
-  (single keys representing how alignment steps and/or options should change).
-  Some of default modifiers:
+- 사용자는 사용자 정의 가능한 수식어(정렬 단계 및/또는 옵션이 어떻게 변경되어야 하는지를 나타내는 단일 키)를 눌러 대화형으로 정렬을 제어할 수 있습니다.
+  일부 기본 수식어는 다음과 같습니다:
 
-    - Press `s` to enter split Lua pattern.
+    - Lua 패턴 분할을 입력하려면 `s`를 누릅니다.
 
-    - Press `j` to choose justification side from available ones ("left",
-      "center", "right", "none").
+    - 사용 가능한 정렬 측면("left", "center", "right", "none") 중에서 선택하려면 `j`를 누릅니다.
 
-    - Press `m` to enter merge delimiter.
+    - 병합 구분 기호를 입력하려면 `m`을 누릅니다.
 
-    - Press `f` to enter filter Lua expression to configure which parts
-      will be affected (like "align only first column").
+    - 어떤 부분이 영향을 받을지 구성하기 위해 필터 Lua 표현식을 입력하려면 `f`를 누릅니다(예: "첫 번째 열만 정렬").
 
-    - Press `i` to ignore some commonly unwanted split matches.
+    - 일반적으로 원치 않는 일부 분할 일치를 무시하려면 `i`를 누릅니다.
 
-    - Press `p` to pair neighboring parts so they be aligned together.
+    - 이웃한 부분들을 쌍으로 묶어 함께 정렬하려면 `p`를 누릅니다.
 
-    - Press `t` to trim whitespace from parts.
+    - 각 부분에서 공백을 제거하려면 `t`를 누릅니다.
 
-    - Press `<BS>` (backspace) to delete some last pre-step.
+    - 마지막 사전 단계를 삭제하려면 `<BS>`(백스페이스)를 누릅니다.
 
-    For more details, see [MiniAlign-modifiers-builtin](mini-align.qmd#minialign-modifiers-builtin) and [MiniAlign-examples](mini-align.qmd#minialign-examples).
+    자세한 내용은 [MiniAlign-내장-수식어](mini-align.qmd#minialign-modifiers-builtin) 및 [MiniAlign-예제](mini-align.qmd#minialign-examples)를 참조하세요.
 
 
-- Alignment can be done with instant preview (result is updated after each
-  modifier) or without it (result is shown and accepted after non-default
-  split pattern is set).
+- 정렬은 즉시 미리보기(각 수식어 입력 후 결과가 업데이트됨)와 함께 수행되거나 미리보기 없이(기본값이 아닌 분할 패턴이 설정된 후 결과가 표시되고 수락됨) 수행될 수 있습니다.
 
 
-- Every user interaction is accompanied with helper status message showing
-  relevant information about current alignment process.
+- 모든 사용자 상호작용에는 현재 정렬 프로세스에 대한 관련 정보를 보여주는 도우미 상태 메시지가 동반됩니다.
 
-#### Setup {#module-setup}
+#### 설정 {#module-setup}
 
 
-This module needs a setup with `require('mini.align').setup({})` (replace
-`{}` with your `config` table). It will create global Lua table `MiniAlign`
-which you can use for scripting or manually (with `:lua MiniAlign.*`).
+이 모듈은 `require('mini.align').setup({})`으로 설정이 필요합니다(`{}`를 `config` 테이블로 교체하세요). 이는 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 `MiniAlign`을 생성합니다(`:lua MiniAlign.*` 사용).
 
-See [MiniAlign.config](mini-align.qmd#minialign.config) for available config settings.
+사용 가능한 설정에 대해서는 [MiniAlign.config](mini-align.qmd#minialign.config)를 참조하세요.
 
-You can override runtime config settings (like `config.modifiers`) locally
-to buffer inside `vim.b.minialign_config` which should have same structure
-as `MiniAlign.config`. See [mini.nvim-buffer-local-config](mini-nvim.qmd#mini.nvim-buffer-local-config) for more details.
+`vim.b.minialign_config`를 통해 버퍼 로컬에서 런타임 설정(예: `config.modifiers`)을 재정의할 수 있으며, 이는 `MiniAlign.config`와 동일한 구조를 가져야 합니다. 자세한 내용은 [mini.nvim-버퍼-로컬-설정](mini-nvim.qmd#mini.nvim-buffer-local-config)을 참조하세요.
 
-To stop module from showing non-error feedback, set `config.silent = true`.
+모듈이 오류가 아닌 피드백을 표시하지 않도록 하려면 `config.silent = true`로 설정하세요.
 
-#### Comparisons {#module-comparisons}
+#### 비교 {#module-comparisons}
 
 
 
 - [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align):
 
-    - 'mini.align' is mostly designed after 'junegunn/vim-easy-align', so
-      there are a lot of similarities.
+    - 'mini.align'은 주로 'junegunn/vim-easy-align'을 본따 설계되었으므로 많은 유사점이 있습니다.
 
-    - Both plugins allow users to change alignment options interactively by
-      pressing modifier keys (albeit completely different default ones).
-      'junegunn/vim-easy-align' has those modifiers fixed, while 'mini.align'
-      allows their full customization. See [MiniAlign.config](mini-align.qmd#minialign.config) for examples.
+    - 두 플러그인 모두 사용자가 수식어 키를 눌러 대화형으로 정렬 옵션을 변경할 수 있도록 허용합니다(비록 기본값은 완전히 다르지만). 'junegunn/vim-easy-align'은 이러한 수식어가 고정되어 있는 반면, 'mini.align'은 완전한 사용자 정의를 허용합니다. 예제는 [MiniAlign.config](mini-align.qmd#minialign.config)를 참조하세요.
 
-    - 'junegunn/vim-easy-align' is designed to treat delimiters differently
-      than other parts of strings. 'mini.align' doesn't distinguish split
-      parts from one another by design: splitting is allowed to be done
-      based on some other logic than by splitting on delimiters.
+    - 'junegunn/vim-easy-align'은 구분 기호를 문자열의 다른 부분과 다르게 처리하도록 설계되었습니다. 'mini.align'은 설계상 분할된 부분들을 서로 구별하지 않습니다. 구분 기호로 분할하는 것 외에 다른 논리에 기반한 분할이 허용됩니다.
 
-    - 'junegunn/vim-easy-align' initially aligns by only first delimiter.
-      'mini.align' initially aligns by all delimiter.
+    - 'junegunn/vim-easy-align'은 처음에 첫 번째 구분 기호로만 정렬합니다. 'mini.align'은 처음에 모든 구분 기호로 정렬합니다.
 
-    - 'junegunn/vim-easy-align' implements special filtering by delimiter
-      row number. 'mini.align' has builtin filtering based on Lua code
-      supplied by user in modifier phase. See [MiniAlign.gen\_step.filter()](mini-align.qmd#minialign.gen_step.filter)
-      and 'f' builtin modifier.
+    - 'junegunn/vim-easy-align'은 구분 기호 행 번호별 특수 필터링을 구현합니다. 'mini.align'은 수식어 단계에서 사용자가 제공한 Lua 코드를 기반으로 한 내장 필터링 기능을 제공합니다. [MiniAlign.gen\_step.filter()](mini-align.qmd#minialign.gen_step.filter) 및 'f' 내장 수식어를 참조하세요.
 
-    - 'mini.align' treats any non-registered modifier as a plain delimiter
-      pattern, while 'junegunn/vim-easy-align' does not.
+    - 'mini.align'은 등록되지 않은 모든 수식어를 일반 구분 기호 패턴으로 처리하지만, 'junegunn/vim-easy-align'은 그렇지 않습니다.
 
-    - 'mini.align' exports core Lua function used for aligning strings
-      ([MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings)).
+    - 'mini.align'은 문자열 정렬에 사용되는 핵심 Lua 함수([MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings))를 내보냅니다.
 
 - [godlygeek/tabular](https://github.com/godlygeek/tabular):
 
-    - 'godlygeek/tabular' is mostly designed around single command which is
-      customized by printing its parameters. 'mini.align' implements
-      different concept of interactive alignment through pressing
-      customizable single character modifiers.
+    - 'godlygeek/tabular'은 주로 매개변수를 입력하여 사용자 정의되는 단일 명령을 중심으로 설계되었습니다. 'mini.align'은 사용자 정의 가능한 단일 문자 수식어를 누르는 대화형 정렬이라는 다른 개념을 구현합니다.
 
-    - 'godlygeek/tabular' can detect region upon which alignment can be
-      desirable. 'mini.align' does not by design: use Visual selection or
-      textobject/motion to explicitly define region to align.
+    - 'godlygeek/tabular'은 정렬이 바람직할 수 있는 영역을 감지할 수 있습니다. 'mini.align'은 설계상 그렇지 않습니다. 정렬할 영역을 명시적으로 정의하려면 Visual 선택이나 텍스트 개체/동작을 사용하세요.
 
-#### Disabling {#module-disabling}
+#### 비활성화 {#module-disabling}
 
 
-To disable, set `vim.g.minialign_disable` (globally) or `vim.b.minialign_disable`
-(for a buffer) to `true`. Considering high number of different scenarios
-and customization intentions, writing exact rules for disabling module's
-functionality is left to user. See [mini.nvim-disabling-recipes](mini-nvim.qmd#mini.nvim-disabling-recipes) for common
-recipes.
+비활성화하려면 `vim.g.minialign_disable`(전역) 또는 `vim.b.minialign_disable`(버퍼용)을 `true`로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려할 때, 모듈 기능을 비활성화하기 위한 정확한 규칙을 작성하는 것은 사용자의 몫으로 남겨둡니다. 일반적인 방법은 [mini.nvim-비활성화-레시피](mini-nvim.qmd#mini.nvim-disabling-recipes)를 참조하세요.
 
 ---
 
-### Glossary {#minialign-glossary .help-syntax-right-anchor}
+### 용어집 {#minialign-glossary .help-syntax-right-anchor}
 
-#### PARTS {#minialign-glossary-parts}
-
-
-2d array of strings (array of arrays of strings).
-See more in [MiniAlign.as\_parts()](mini-align.qmd#minialign.as_parts).
-
-#### ROW {#minialign-glossary-row}
+#### 부분 (PARTS) {#minialign-glossary-parts}
 
 
-First-level array of parts (like `parts[1]`).
+문자열의 2차원 배열(문자열 배열의 배열)입니다. [MiniAlign.as\_parts()](mini-align.qmd#minialign.as_parts)에서 자세히 알아보세요.
 
-#### COLUMN {#minialign-glossary-column}
-
-
-Array of strings, constructed from parts elements with the same
-| second-level index (like `{ parts[1][1],` `parts[2][1], | }`). |
-
-#### STEP {#minialign-glossary-step}
+#### 행 (ROW) {#minialign-glossary-row}
 
 
-A named callable. See [MiniAlign.new\_step()](mini-align.qmd#minialign.new_step). When used in terms of alignment
-steps, callable takes two arguments: some object (parts or string array)
-and option table.
+부분들의 첫 번째 레벨 배열입니다(예: `parts[1]`).
 
-#### SPLIT {#minialign-glossary-split}
+#### 열 (COLUMN) {#minialign-glossary-column}
 
 
-Process of taking array of strings and converting it into parts.
+동일한 두 번째 레벨 인덱스를 가진 부분 요소들로 구성된 문자열 배열입니다(예: `{ parts[1][1], parts[2][1], ... }`).
 
-#### JUSTIFY {#minialign-glossary-justify}
-
-
-Process of taking parts and converting them to aligned parts (all elements
-have same widths inside columns).
-
-#### MERGE {#minialign-glossary-merge}
+#### 단계 (STEP) {#minialign-glossary-step}
 
 
-Process of taking parts and converting it back to array of strings. Usually
-by concatenating rows into strings.
+이름이 지정된 호출 가능한 객체(callable)입니다. [MiniAlign.new\_step()](mini-align.qmd#minialign.new_step)을 참조하세요. 정렬 단계 측면에서 사용될 때, 이 호출 가능한 객체는 두 개의 인수를 받습니다: 객체(부분 또는 문자열 배열)와 옵션 테이블.
 
-#### REGION {#minialign-glossary-region}
-
-
-Table representing region in a buffer. Fields <span class="help-syntax-keys">\<from\></span> / <span class="help-syntax-keys">\<to\></span> have inclusive
-start / end positions (<span class="help-syntax-keys">\<to\></span> might be `nil` to describe empty region).
-Positions are also tables with <span class="help-syntax-keys">\<line\></span> and <span class="help-syntax-keys">\<col\></span> fields (both start at 1).
-
-#### MODE {#minialign-glossary-mode}
+#### 분할 (SPLIT) {#minialign-glossary-split}
 
 
-Either charwise ("char", `v`, [charwise](https://neovim.io/doc/user/helptag.html?tag=charwise)), linewise ("line", `V`, [linewise](https://neovim.io/doc/user/helptag.html?tag=linewise))
-or blockwise ("block", `<C-v>`, [blockwise-visual](https://neovim.io/doc/user/helptag.html?tag=blockwise-visual))
+문자열 배열을 가져와서 부분(parts)으로 변환하는 프로세스입니다.
+
+#### 조정 (JUSTIFY) {#minialign-glossary-justify}
+
+
+부분들을 가져와 정렬된 부분(열 내부의 모든 요소가 동일한 너비를 가짐)으로 변환하는 프로세스입니다.
+
+#### 병합 (MERGE) {#minialign-glossary-merge}
+
+
+부분들을 가져와 다시 문자열 배열로 변환하는 프로세스입니다. 보통 행들을 문자열로 연결하여 수행합니다.
+
+#### 영역 (REGION) {#minialign-glossary-region}
+
+
+버퍼의 영역을 나타내는 테이블입니다. <span class="help-syntax-keys">\<from\></span> / <span class="help-syntax-keys">\<to\></span> 필드는 포함적인 시작 / 끝 위치를 가집니다(<span class="help-syntax-keys">\<to\></span>는 빈 영역을 설명하기 위해 `nil`일 수 있습니다).
+위치 또한 <span class="help-syntax-keys">\<line\></span> 및 <span class="help-syntax-keys">\<col\></span> 필드를 가진 테이블입니다(둘 다 1부터 시작).
+
+#### 모드 (MODE) {#minialign-glossary-mode}
+
+
+문자 단위("char", `v`), 줄 단위("line", `V`) 또는 블록 단위("block", `<C-v>`) 중 하나입니다.
 
 ---
 
-### Algorithm {#minialign-algorithm .help-syntax-right-anchor}
+### 알고리즘 {#minialign-algorithm .help-syntax-right-anchor}
 
-There are two main processes implemented in 'mini.align': strings alignment
-and interactive region alignment. See [MiniAlign-glossary](mini-align.qmd#minialign-glossary) for more information
-about used terms.
+'mini.align'에는 문자열 정렬과 대화형 영역 정렬이라는 두 가지 주요 프로세스가 구현되어 있습니다. 사용된 용어에 대한 자세한 정보는 [MiniAlign-용어집](mini-align.qmd#minialign-glossary)을 참조하세요.
 
-#### Strings alignment {#minialign-algorithm-stringsalignment}
+#### 문자열 정렬 {#minialign-algorithm-stringsalignment}
 
 
-Main implementation is in [MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings). Its input is array of
-strings and output - array of aligned strings. The process consists from three
-main steps (split, justify, merge) which can be preceded by any number of
-preliminary steps (pre-split, pre-justify, pre-merge).
+주요 구현은 [MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings)에 있습니다. 입력은 문자열 배열이고 출력은 정렬된 문자열 배열입니다. 프로세스는 세 가지 주요 단계(분할, 조정, 병합)로 구성되며, 각 단계 앞에는 임의의 수의 사전 단계(사전 분할, 사전 조정, 사전 병합)가 올 수 있습니다.
 
-Algorithm:
+알고리즘:
 
-- <span class="help-syntax-keys">\<Pre-split\></span>. Take input array of strings and consecutively apply all
-  pre-split steps (`steps.pre_split`). Each one has `(strings, opts)` signature
-  and should modify array in place.
+- <span class="help-syntax-keys">\<Pre-split\></span>. 입력 문자열 배열을 가져와 모든 사전 분할 단계(`steps.pre_split`)를 연속적으로 적용합니다. 각 단계는 `(strings, opts)` 시그니처를 가지며 배열을 직접 수정해야 합니다.
 
-- <span class="help-syntax-keys">\<Split\></span>. Take array of strings and convert it to parts with `steps.split()`.
-  It has `(strings, opts)` signature and should return parts.
+- <span class="help-syntax-keys">\<Split\></span>. 문자열 배열을 가져와 `steps.split()`을 사용하여 부분(parts)으로 변환합니다. `(strings, opts)` 시그니처를 가지며 부분들을 반환해야 합니다.
 
-- <span class="help-syntax-keys">\<Pre-justify\></span>. Take parts and consecutively apply all pre-justify
-  steps (`steps.pre_justify`). Each one has `(parts, opts)` signature and
-  should modify parts in place.
+- <span class="help-syntax-keys">\<Pre-justify\></span>. 부분들을 가져와 모든 사전 조정 단계(`steps.pre_justify`)를 연속적으로 적용합니다. 각 단계는 `(parts, opts)` 시그니처를 가지며 부분들을 직접 수정해야 합니다.
 
-- <span class="help-syntax-keys">\<Justify\></span>. Take parts and apply `steps.justify()`. It has `(parts, opts)`
-  signature and should modify parts in place.
+- <span class="help-syntax-keys">\<Justify\></span>. 부분들을 가져와 `steps.justify()`를 적용합니다. `(parts, opts)` 시그니처를 가지며 부분들을 직접 수정해야 합니다.
 
-- <span class="help-syntax-keys">\<Pre-merge\></span>. Take parts and consecutively apply all pre-merge
-  steps (`steps.pre_merge`). Each one has `(parts, opts)` signature and
-  should modify parts in place.
+- <span class="help-syntax-keys">\<Pre-merge\></span>. 부분들을 가져와 모든 사전 병합 단계(`steps.pre_merge`)를 연속적으로 적용합니다. 각 단계는 `(parts, opts)` 시그니처를 가지며 부분들을 직접 수정해야 합니다.
 
-- <span class="help-syntax-keys">\<Merge\></span>. Take parts and convert it to array of strings with `steps.merge()`.
-  It has `(parts, opts)` signature and should return array of strings.
+- <span class="help-syntax-keys">\<Merge\></span>. 부분들을 가져와 `steps.merge()`를 사용하여 문자열 배열로 변환합니다. `(parts, opts)` 시그니처를 가지며 문자열 배열을 반환해야 합니다.
 
-Notes:
+참고:
 
-- All table objects are initially copied so that modification in place doesn't
-  affect workflow.
+- 모든 테이블 객체는 처음에 복사되므로, 직접 수정이 워크플로우에 영향을 주지 않습니다.
 
-- Default main steps are designed to be controlled via options. See
-  [MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings) and default step entries in [MiniAlign.gen\_step](mini-align.qmd#minialign.gen_step).
+- 기본 주요 단계는 옵션을 통해 제어되도록 설계되었습니다. [MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings) 및 [MiniAlign.gen\_step](mini-align.qmd#minialign.gen_step)의 기본 단계 항목을 참조하세요.
 
-- All steps are guaranteed to take same option table as second argument.
-  This allows steps to "talk" to each other, i.e. earlier steps can pass data
-  to later ones.
+- 모든 단계는 두 번째 인수로 동일한 옵션 테이블을 받도록 보장됩니다. 이를 통해 단계들이 서로 "대화"할 수 있습니다. 즉, 이전 단계가 이후 단계로 데이터를 전달할 수 있습니다.
 
-#### Interactive region alignment {#minialign-algorithm-interactiveregionalignment}
+#### 대화형 영역 정렬 {#minialign-algorithm-interactiveregionalignment}
 
 
-Interactive alignment is a main entry point for most users. It can be done
-in two flavors:
+대화형 정렬은 대부분의 사용자에게 주요 진입점입니다. 두 가지 방식으로 수행될 수 있습니다:
 
-- <span class="help-syntax-keys">\<Without-preview\></span>. Initiated via mapping defined in `start` of
-  `MiniAlign.config.mappings`. Alignment is accepted once split pattern becomes
-  non-default.
+- <span class="help-syntax-keys">\<Without-preview\></span> (미리보기 없음). `MiniAlign.config.mappings`의 `start`에 정의된 매핑을 통해 시작됩니다. 분할 패턴이 기본값이 아닌 것으로 설정되면 정렬이 수락됩니다.
 
-- <span class="help-syntax-keys">\<With-preview\></span>. Initiated via mapping defined in `start_with_preview` of
-  `MiniAlign.config.mappings`. Alignment result is shown after every modifier
-  and is accepted after `<CR>` (`Enter`) is hit. Note: each preview is done by
-  applying current alignment steps and options to the initial region lines,
-  not the ones currently displaying in preview.
+- <span class="help-syntax-keys">\<With-preview\></span> (미리보기 포함). `MiniAlign.config.mappings`의 `start_with_preview`에 정의된 매핑을 통해 시작됩니다. 정렬 결과는 모든 수식어 입력 후 표시되며 `<CR>`(`Enter`)을 누르면 수락됩니다. 참고: 각 미리보기는 현재 정렬 단계와 옵션을 미리보기에 표시되는 현재 줄이 아닌, 초기 영역 줄에 적용하여 수행됩니다.
 
-Lifecycle (assuming default mappings):
+수명 주기 (기본 매핑 가정):
 
 - <span class="help-syntax-keys">\<Initiate-alignment\></span>:
 
-    - In Normal mode type `ga` (or `gA` to show preview) followed by textobject
-      or motion defining region to be aligned.
+    - Normal 모드에서 `ga`(또는 미리보기를 보려면 `gA`)를 입력한 후 정렬할 영역을 정의하는 텍스트 개체 또는 동작을 입력합니다.
 
-    - In Visual mode select region and type `ga` (or `gA` to show preview).
-  Strings contained in selected region will be used as input to
-  [MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings).
-  Beware of mode when selecting region: charwise (`v`), linewise (`V`), or
-  blockwise (`<C-v>`). They all behave differently.
+    - Visual 모드에서 영역을 선택하고 `ga`(또는 미리보기를 보려면 `gA`)를 입력합니다. 선택한 영역에 포함된 문자열이 [MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings)의 입력으로 사용됩니다. 영역을 선택할 때 모드에 유의하세요: 문자 단위(`v`), 줄 단위(`V`), 블록 단위(`<C-v>`). 모두 다르게 작동합니다.
 
-- <span class="help-syntax-keys">\<Press-modifiers\></span>. Press single keys one at a time:
+- <span class="help-syntax-keys">\<Press-modifiers\></span>. 단일 키를 하나씩 누릅니다:
 
-    - If pressed key is among table keys of `modifiers` table of
-      [MiniAlign.config](mini-align.qmd#minialign.config), its function value is executed. It usually modifies
-      some options(s) and/or affects some pre-step(s).
+    - 누른 키가 [MiniAlign.config](mini-align.qmd#minialign.config)의 `modifiers` 테이블 키 중 하나인 경우, 해당 함수 값이 실행됩니다. 보통 일부 옵션을 수정하거나 일부 사전 단계에 영향을 미칩니다.
 
-    - If pressed key is not among defined modifiers, it is treated as plain
-      split pattern.
-  This process can either end by itself (usually in case of no preview and
-  non-default split pattern being set) or you can choose to end it manually.
+    - 누른 키가 정의된 수식어 중 하나가 아닌 경우, 일반 분할 패턴으로 처리됩니다. 이 프로세스는 저절로 종료되거나(대개 미리보기가 없고 기본값이 아닌 분할 패턴이 설정된 경우) 수동으로 종료할 수 있습니다.
 
-- <span class="help-syntax-keys">\<Accept-or-discard\></span>. In case of active preview, accept current result by
-  pressing `<CR>`. Discard any result and return to initial regions with
-  either `<Esc>` or `<C-c>`.
+- <span class="help-syntax-keys">\<Accept-or-discard\></span>. 미리보기가 활성화된 경우, `<CR>`을 눌러 현재 결과를 수락합니다. 결과를 폐기하고 초기 영역으로 돌아가려면 `<Esc>` 또는 `<C-c>`를 누르세요.
 
-See more in [MiniAlign-modifiers-builtin](mini-align.qmd#minialign-modifiers-builtin) and [MiniAlign-examples](mini-align.qmd#minialign-examples).
+자세한 내용은 [MiniAlign-내장-수식어](mini-align.qmd#minialign-modifiers-builtin) 및 [MiniAlign-예제](mini-align.qmd#minialign-examples)를 참조하세요.
 
-Notes:
+참고:
 
-- Visual blockwise selection works best with 'virtualedit' equal to "block"
-  or "all".
+- Visual 블록 단위 선택은 'virtualedit'이 "block" 또는 "all"로 설정되어 있을 때 가장 잘 작동합니다.
 
-- Alignment with preview works best with 'showmode' disabled.
+- 미리보기가 포함된 정렬은 'showmode'가 비활성화되어 있을 때 가장 잘 작동합니다.
 
 ---
 
-### Modifiers builtin {#minialign-modifiers-builtin .help-syntax-right-anchor}
+### 내장 수식어 {#minialign-modifiers-builtin .help-syntax-right-anchor}
 
-Overview of builtin modifiers
+내장 수식어 개요
 
-All examples assume interactive alignment with preview in linewise mode. With
-default mappings, use `V` to select lines and `gA` to initiate alignment. It
-might be helpful to copy lines into modifiable buffer and experiment yourself.
+모든 예제는 줄 단위 모드에서 미리보기를 포함한 대화형 정렬을 가정합니다. 기본 매핑을 사용하면 `V`로 줄을 선택하고 `gA`로 정렬을 시작합니다. 줄을 수정 가능한 버퍼에 복사하여 직접 실험해보는 것이 도움이 될 수 있습니다.
 
-Notes:
+참고:
 
-- Any pressed key which doesn't have defined modifier will be treated as
-  plain split pattern.
+- 정의된 수식어가 없는 누른 키는 일반 분할 패턴으로 처리됩니다.
 
-- All modifiers can be customized inside [MiniAlign.setup()](mini-align.qmd#minialign.setup). See "Modifiers"
-  section of [MiniAlign.config](mini-align.qmd#minialign.config).
+- 모든 수식어는 [MiniAlign.setup()](mini-align.qmd#minialign.setup) 내에서 사용자 정의할 수 있습니다. [MiniAlign.config](mini-align.qmd#minialign.config)의 "수식어" 섹션을 참조하세요.
 
-#### Main option modifiers {#minialign-modifiers-builtin-mainoptionmodifiers}
+#### 주요 옵션 수식어 {#minialign-modifiers-builtin-mainoptionmodifiers}
 
 
-<span class="help-syntax-keys">\<s\></span> Enter split pattern (confirm prompt by pressing `<CR>`). Input is treated
-  as plain delimiter.
+<span class="help-syntax-keys">\<s\></span> 분할 패턴을 입력합니다(`<CR>`을 눌러 확인). 입력은 일반 구분 기호로 처리됩니다.
 
-  Before:
+  전:
 
   ```
   a-b-c
   aa-bb-cc
   ```
 
-  After typing `s-<CR>`:
+  `s-<CR>` 입력 후:
 
   ```
   a -b -c
   aa-bb-cc
   ```
 
-<span class="help-syntax-keys">\<j\></span> Choose justify side. Prompts user (with helper message) to type single
-  character identifier of side: `l`eft, `c`enter, `r`ight, `n`one.
+<span class="help-syntax-keys">\<j\></span> 조정 측면을 선택합니다. 사용자에게 측면의 단일 문자 식별자를 입력하도록 요청합니다(도우미 메시지와 함께): `l`eft(왼쪽), `c`enter(가운데), `r`ight(오른쪽), `n`one(없음).
 
-  Before:
+  전:
 
   ```
   a_b_c
   aa_bb_cc
   ```
 
-  After typing `_jr` (first make split by `_`):
+  `_jr` 입력 후(먼저 `_`로 분할):
 
   ```
    a_ b_ c
   aa_bb_cc
   ```
 
-<span class="help-syntax-keys">\<m\></span> Enter merge delimiter (confirm prompt by pressing `<CR>`).
+<span class="help-syntax-keys">\<m\></span> 병합 구분 기호를 입력합니다(`<CR>`을 눌러 확인).
 
-  Before:
+  전:
 
   ```
   a_b_c
   aa_bb_cc
   ```
 
-  After typing `_m--<CR>` (first make split by `_`):
+  `_m--<CR>` 입력 후(먼저 `_`로 분할):
 
   ```
   a --_--b --_--c
   aa--_--bb--_--cc
   ```
 
-#### Modifiers adding pre-steps {#minialign-modifiers-builtin-modifiersaddingpre-steps}
+#### 사전 단계를 추가하는 수식어 {#minialign-modifiers-builtin-modifiersaddingpre-steps}
 
 
-<span class="help-syntax-keys">\<f\></span> Enter filter expression. See more details in [MiniAlign.gen\_step.filter()](mini-align.qmd#minialign.gen_step.filter).
+<span class="help-syntax-keys">\<f\></span> 필터 표현식을 입력합니다. 자세한 내용은 [MiniAlign.gen\_step.filter()](mini-align.qmd#minialign.gen_step.filter)를 참조하세요.
 
-  Before:
+  전:
 
   ```
   a_b_c
   aa_bb_cc
   ```
 
-  After typing `_fn==1<CR>` (first make split by `_`):
+  `_fn==1<CR>` 입력 후(먼저 `_`로 분할):
 
   ```
   a _b_c
   aa_bb_cc
   ```
 
-<span class="help-syntax-keys">\<i\></span> Ignore some split matches. It modifies `split_exclude_patterns` option by
-  adding commonly wanted patterns. See more details in
-  [MiniAlign.gen\_step.ignore\_split()](mini-align.qmd#minialign.gen_step.ignore_split).
+<span class="help-syntax-keys">\<i\></span> 일부 분할 일치를 무시합니다. 일반적으로 사용되는 패턴을 추가하여 `split_exclude_patterns` 옵션을 수정합니다. 자세한 내용은 [MiniAlign.gen\_step.ignore\_split()](mini-align.qmd#minialign.gen_step.ignore_split)를 참조하세요.
 
-  Before:
+  전:
 
   ```
   /* This_is_assumed_to_be_comment */
@@ -396,7 +308,7 @@ Notes:
   aa_bb
   ```
 
-  After typing `_i` (first make split by `_`):
+  `_i` 입력 후(먼저 `_`로 분할):
 
   ```
   /* This_is_assumed_to_be_comment */
@@ -404,60 +316,55 @@ Notes:
   aa  _bb
   ```
 
-<span class="help-syntax-keys">\<p\></span> Pair neighboring parts.
+<span class="help-syntax-keys">\<p\></span> 인접한 부분들을 쌍으로 묶습니다.
 
-  Before:
+  전:
 
   ```
   a_b_c
   aaa_bbb_ccc
   ```
 
-  After typing `_p` (first make split by `_`):
+  `_p` 입력 후(먼저 `_`로 분할):
 
   ```
   a_  b_  c
   aaa_bbb_ccc
   ```
 
-<span class="help-syntax-keys">\<t\></span> Trim parts from whitespace on both sides (keeping indentation).
+<span class="help-syntax-keys">\<t\></span> 양쪽의 공백을 제거합니다(들여쓰기 유지).
 
-  Before:
+  전:
 
   ```
   a   _   b   _   c
     aa _bb _cc
   ```
 
-  After typing `_t` (first make split by `_`):
+  `_t` 입력 후(먼저 `_`로 분할):
 
   ```
   a   _b _c
     aa_bb_cc
   ```
 
-#### Delete some last pre-step {#minialign-modifiers-builtin-deletesomelastpre-step}
+#### 마지막 사전 단계 삭제 {#minialign-modifiers-builtin-deletesomelastpre-step}
 
 
-<span class="help-syntax-keys">\<BS\></span> Delete one of the pre-steps. If there is only one kind of pre-steps,
-  remove its latest added one. If not, prompt user to choose pre-step kind
-  by entering single character: `s`plit, `j`ustify, `m`erge.
+<span class="help-syntax-keys">\<BS\></span> 사전 단계 중 하나를 삭제합니다. 사전 단계의 종류가 하나뿐인 경우 마지막으로 추가된 단계를 삭제합니다. 그렇지 않은 경우 사용자에게 단일 문자를 입력하여 삭제할 사전 단계 종류를 선택하도록 요청합니다: `s`plit(분할), `j`ustify(조정), `m`erge(병합).
 
-  Examples:
+  예제:
 
-  - `tp<BS>` results in only "trim" step to be left.
+  - `tp<BS>`는 "trim" 단계만 남깁니다.
 
-  - `it<BS>` prompts to choose which step to delete (pre-split or
-    pre-justify in this case).
+  - `it<BS>`는 삭제할 단계를 선택하도록 요청합니다(이 경우 사전 분할 또는 사전 조정).
 
-#### Special configurations for common splits {#minialign-modifiers-builtin-specialconfigurationsforcommonsplits}
+#### 일반적인 분할을 위한 특수 구성 {#minialign-modifiers-builtin-specialconfigurationsforcommonsplits}
 
 
-<span class="help-syntax-keys">\<=\></span> Use special pattern to align by a group of consecutive "=". It can be
-  preceded by any number of punctuation marks and followed by some sommon
-  punctuation characters. Trim whitespace and merge with single space.
+<span class="help-syntax-keys">\<=\></span> 연속된 "=" 그룹으로 정렬하기 위해 특수 패턴을 사용합니다. 앞에는 임의의 수의 문장 부호가 올 수 있고 뒤에는 몇몇 일반적인 문장 부호가 올 수 있습니다. 공백을 제거하고 단일 공백으로 병합합니다.
 
-  Before:
+  전:
 
   ```
   a=b
@@ -466,7 +373,7 @@ Notes:
   aaaa   =   cccc
   ```
 
-  After typing `=`:
+  `=` 입력 후:
 
   ```
   a    =   b
@@ -475,10 +382,9 @@ Notes:
   aaaa =   cccc
   ```
 
-<span class="help-syntax-keys">\<,\></span> Besides splitting by "," character, trim whitespace, pair neighboring
-  parts and merge with single space.
+<span class="help-syntax-keys">\<,\></span> "," 문자로 분할하는 것 외에, 공백을 제거하고 인접한 부분을 쌍으로 묶으며 단일 공백으로 병합합니다.
 
-  Before:
+  전:
 
   ```
   a,b
@@ -486,7 +392,7 @@ Notes:
   aaa    ,    bbb
   ```
 
-  After typing `,`:
+  `,` 입력 후:
 
   ```
   a,   b
@@ -494,9 +400,9 @@ Notes:
   aaa, bbb
   ```
 
-<span class="help-syntax-keys">\<|\></span> Split by "|" character, trim whitespace, merge with single space.
+<span class="help-syntax-keys">\<|\></span> "|" 문자로 분할하고, 공백을 제거하며 단일 공백으로 병합합니다.
 
-  Before:
+  전:
 
   ```
   |a|b|
@@ -504,7 +410,7 @@ Notes:
   |aaa    |    bbb   |
   ```
 
-  After typing `|`:
+  `|` 입력 후:
 
   ```
   | a   | b   |
@@ -512,17 +418,16 @@ Notes:
   | aaa | bbb |
   ```
 
-<span class="help-syntax-keys">\<Space\></span> (Space bar) Squash consecutive whitespace into single space (except
-  possible indentation) and split by `%s+` pattern (keeps indentation).
+<span class="help-syntax-keys">\<Space\></span> (스페이스바) 연속된 공백을 단일 공백으로 압축하고(가능한 들여쓰기 제외) `%s+` 패턴으로 분할합니다(들여쓰기 유지).
 
-  Before:
+  전:
 
   ```
   a b c
     aa    bb   cc
   ```
 
-  After typing `<Space>`:
+  `<Space>` 입력 후:
 
     ```
     a  b  c
@@ -531,16 +436,15 @@ Notes:
 
 ---
 
-### Examples {#minialign-examples .help-syntax-right-anchor}
+### 예제 {#minialign-examples .help-syntax-right-anchor}
 
-Copy lines in modifiable buffer, initiate alignment with preview (`gAip`)
-and try typing suggested key sequences.
-These are modified examples taken from 'junegunn/vim-easy-align'.
+수정 가능한 버퍼에 줄을 복사하고 미리보기를 포함한 정렬을 시작한 후(`gAip`) 제안된 키 시퀀스를 입력해 보세요.
+이것들은 'junegunn/vim-easy-align'에서 가져와 수정한 예제들입니다.
 
-#### Equal sign {#minialign-examples-equalsign}
+#### 등호 {#minialign-examples-equalsign}
 
 
-Lines:
+줄:
 
   ```
   # This=is=assumed=to be a comment
@@ -571,7 +475,7 @@ Lines:
   gg <=> ee
   ```
 
-Key sequences:
+키 시퀀스:
 
 - `=`
 
@@ -583,7 +487,7 @@ Key sequences:
 
 - `=p`
 
-- `=i` (execute `:lua vim.o.commentstring = '# %s'` for full experience)
+- `=i` (완벽한 체험을 위해 `:lua vim.o.commentstring = '# %s'`를 실행하세요)
 
 - `=<BS>`
 
@@ -600,22 +504,22 @@ Key sequences:
 ### setup() {#minialign.setup .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.setup`(<span class="help-syntax-special">{config}</span>)</p>
-Module setup
+모듈 설정
 
-#### Parameters {#minialign.setup-parameters}
+#### 매개변수 {#minialign.setup-parameters}
 
 
 
-<span class="help-syntax-special">{config}</span> `(table|nil)` Module config table. See [MiniAlign.config](mini-align.qmd#minialign.config).
+<span class="help-syntax-special">{config}</span> `(table|nil)` 모듈 설정 테이블. [MiniAlign.config](mini-align.qmd#minialign.config)를 참조하세요.
 
-#### Usage {#minialign.setup-usage}
+#### 사용법 {#minialign.setup-usage}
 
 
 
   ```lua
-  require('mini.align').setup() -- use default config
-  -- OR
-  require('mini.align').setup({}) -- replace {} with your config table
+  require('mini.align').setup() -- 기본 설정 사용
+  -- 또는
+  require('mini.align').setup({}) -- {}를 설정 테이블로 교체
   ```
 
 ---
@@ -623,49 +527,49 @@ Module setup
 ### config {#minialign.config .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.config`</p>
-#### Defaults {#minialign.config-defaults}
+#### 기본값 {#minialign.config-defaults}
 
 
 
   ```lua
   MiniAlign.config = {
-    -- Module mappings. Use `''` (empty string) to disable one.
+    -- 모듈 매핑. 비활성화하려면 `''`(빈 문자열)을 사용하세요.
     mappings = {
       start = 'ga',
       start_with_preview = 'gA',
     },
 
-    -- Modifiers changing alignment steps and/or options
+    -- 정렬 단계 및/또는 옵션을 변경하는 수식어
     modifiers = {
-      -- Main option modifiers
-      ['s'] = --<function: enter split pattern>,
-      ['j'] = --<function: choose justify side>,
-      ['m'] = --<function: enter merge delimiter>,
+      -- 주요 옵션 수식어
+      ['s'] = --<function: 분할 패턴 입력>,
+      ['j'] = --<function: 조정 측면 선택>,
+      ['m'] = --<function: 병합 구분 기호 입력>,
 
-      -- Modifiers adding pre-steps
-      ['f'] = --<function: filter parts by entering Lua expression>,
-      ['i'] = --<function: ignore some split matches>,
-      ['p'] = --<function: pair parts>,
-      ['t'] = --<function: trim parts>,
+      -- 사전 단계를 추가하는 수식어
+      ['f'] = --<function: Lua 표현식을 입력하여 부분 필터링>,
+      ['i'] = --<function: 일부 분할 일치 무시>,
+      ['p'] = --<function: 부분 쌍 묶기>,
+      ['t'] = --<function: 공백 제거>,
 
-      -- Delete some last pre-step
-      ['<BS>'] = --<function: delete some last pre-step>,
+      -- 마지막 사전 단계 삭제
+      ['<BS>'] = --<function: 마지막 사전 단계 삭제>,
 
-      -- Special configurations for common splits
-      ['='] = --<function: enhanced setup for '='>,
-      [','] = --<function: enhanced setup for ','>,
-      ['|'] = --<function: enhanced setup for '|'>,
-      [' '] = --<function: enhanced setup for ' '>,
+      -- 일반적인 분할을 위한 특수 구성
+      ['='] = --<function: '='을 위한 강화된 설정>,
+      [','] = --<function: ','를 위한 강화된 설정>,
+      ['|'] = --<function: '|'를 위한 강화된 설정>,
+      [' '] = --<function: ' '를 위한 강화된 설정>,
     },
 
-    -- Default options controlling alignment process
+    -- 정렬 프로세스를 제어하는 기본 옵션
     options = {
       split_pattern = '',
       justify_side = 'left',
       merge_delimiter = '',
     },
 
-    -- Default steps performing alignment (if `nil`, default is used)
+    -- 정렬을 수행하는 기본 단계 (`nil`인 경우 기본값 사용)
     steps = {
       pre_split = {},
       split = nil,
@@ -675,29 +579,27 @@ Module setup
       merge = nil,
     },
 
-    -- Whether to disable showing non-error feedback
-    -- This also affects (purely informational) helper messages shown after
-    -- idle time if user input is required.
+    -- 오류가 아닌 피드백 표시를 비활성화할지 여부
+    -- 이는 사용자 입력이 필요한 경우 유휴 시간 후에 표시되는
+    -- (순수하게 정보 제공용) 도우미 메시지에도 영향을 미칩니다.
     silent = false,
   }
   ```
 
-#### Modifiers {#minialign.config-modifiers}
+#### 수식어 {#minialign.config-modifiers}
 
 
-`MiniAlign.config.modifiers` is used to define interactive user experience
-of managing alignment process. It is a table with single character keys and
-modifier function values.
+`MiniAlign.config.modifiers`는 정렬 프로세스를 관리하는 대화형 사용자 경험을 정의하는 데 사용됩니다. 단일 문자 키와 수식어 함수 값을 가진 테이블입니다.
 
-Each modifier function:
+각 수식어 함수는:
 
-- Is called when corresponding modifier key is pressed.
+- 해당 수식어 키가 눌릴 때 호출됩니다.
 
-- Has signature `(steps, opts)` and should modify any of its input in place.
+- `(steps, opts)` 시그니처를 가지며 입력을 직접 수정해야 합니다.
 
-Examples:
+예제:
 
-- Modifier function used for default 'i' modifier:
+- 기본 'i' 수식어에 사용되는 수식어 함수:
 
   ```lua
   function(steps, _)
@@ -706,7 +608,7 @@ Examples:
   ```
 
 
-- Tweak 't' modifier to use highest indentation instead of keeping it:
+- 들여쓰기를 유지하는 대신 가장 높은 들여쓰기를 사용하도록 't' 수식어를 조정합니다:
 
   ```lua
   require('mini.align').setup({
@@ -720,8 +622,7 @@ Examples:
   ```
 
 
-- Tweak `j` modifier to cycle through available "justify_side" option
-  values (like in 'junegunn/vim-easy-align'):
+- 'junegunn/vim-easy-align'에서와 같이 사용 가능한 "justify_side" 옵션 값을 순환하도록 `j` 수식어를 조정합니다:
 
   ```lua
   require('mini.align').setup({
@@ -736,28 +637,25 @@ Examples:
   })
   ```
 
-#### Options {#minialign.config-options}
+#### 옵션 {#minialign.config-options}
 
 
-`MiniAlign.config.options` defines default values of options used to control
-behavior of steps.
+`MiniAlign.config.options`는 단계의 동작을 제어하는 데 사용되는 옵션의 기본값을 정의합니다.
 
-Examples:
+예제:
 
-- Set `justify_side = 'center'` to center align at initialization.
+- 초기화 시 가운데 정렬하도록 `justify_side = 'center'`로 설정합니다.
 
-For more details about options see [MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings) and entries of
-[MiniAlign.gen\_step](mini-align.qmd#minialign.gen_step) for default main steps.
+옵션에 대한 자세한 내용은 [MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings) 및 기본 주요 단계에 대한 [MiniAlign.gen\_step](mini-align.qmd#minialign.gen_step) 항목을 참조하세요.
 
-#### Steps {#minialign.config-steps}
+#### 단계 {#minialign.config-steps}
 
 
-`MiniAlign.config.steps` defines default steps to be applied during
-alignment process.
+`MiniAlign.config.steps`는 정렬 프로세스 중에 적용될 기본 단계를 정의합니다.
 
-Examples:
+예제:
 
-- Align by default only first pair of columns:
+- 기본적으로 첫 번째 열 쌍만 정렬합니다:
 
   ```lua
   local align = require('mini.align')
@@ -773,34 +671,31 @@ Examples:
 ### align_strings() {#minialign.align_strings .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.align_strings`(<span class="help-syntax-special">{strings}</span>, <span class="help-syntax-special">{opts}</span>, <span class="help-syntax-special">{steps}</span>)</p>
-Align strings
+문자열 정렬
 
-For details about alignment process see [MiniAlign-algorithm](mini-align.qmd#minialign-algorithm).
+정렬 프로세스에 대한 자세한 내용은 [MiniAlign-알고리즘](mini-align.qmd#minialign-algorithm)을 참조하세요.
 
-#### Parameters {#minialign.align_strings-parameters}
+#### 매개변수 {#minialign.align_strings-parameters}
 
 
 
-<span class="help-syntax-special">{strings}</span> `(table)` Array of strings.
+<span class="help-syntax-special">{strings}</span> `(table)` 문자열 배열.
 
-<span class="help-syntax-special">{opts}</span> `(table|nil)` Options. Its copy will be passed to steps as second
-  argument. Extended with `MiniAlign.config.options`.
-  This is a place to control default main steps:
+<span class="help-syntax-special">{opts}</span> `(table|nil)` 옵션. 사본이 두 번째 인수로 단계에 전달됩니다. `MiniAlign.config.options`로 확장됩니다. 다음은 기본 주요 단계를 제어하는 곳입니다:
 
-  - `opts.split_pattern` - Lua pattern(s) used to make split parts.
+  - `opts.split_pattern` - 부분을 나누는 데 사용되는 Lua 패턴.
 
-  - `opts.split_exclude_patterns` - which split matches should be ignored.
+  - `opts.split_exclude_patterns` - 무시해야 할 분할 일치 항목.
 
-  - `opts.justify_side` - which direction(s) alignment should be done.
+  - `opts.justify_side` - 정렬이 수행되어야 할 방향.
 
-  - `opts.justify_offsets` - offsets tweaking width of first column
+  - `opts.justify_offsets` - 첫 번째 열의 너비를 조정하는 오프셋.
 
-  - `opts.merge_delimiter` - which delimiter(s) to use when merging.
-  For more information see [MiniAlign.gen\_step](mini-align.qmd#minialign.gen_step) entry for corresponding
-  default step.
+  - `opts.merge_delimiter` - 병합 시 사용할 구분 기호.
 
-<span class="help-syntax-special">{steps}</span> `(table|nil)` Steps. Extended with `MiniAlign.config.steps`.
-  Possible `nil` values are replaced with corresponding default steps:
+  자세한 내용은 해당 기본 단계에 대한 [MiniAlign.gen\_step](mini-align.qmd#minialign.gen_step) 항목을 참조하세요.
+
+<span class="help-syntax-special">{steps}</span> `(table|nil)` 단계. `MiniAlign.config.steps`로 확장됩니다. `nil` 값은 해당 기본 단계로 대체됩니다:
 
   - `split` - [MiniAlign.gen\_step.default\_split()](mini-align.qmd#minialign.gen_step.default_split).
 
@@ -813,125 +708,103 @@ For details about alignment process see [MiniAlign-algorithm](mini-align.qmd#min
 ### align_user() {#minialign.align_user .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.align_user`(<span class="help-syntax-special">{mode}</span>)</p>
-Align current region with user-supplied steps
+사용자 제공 단계로 현재 영역 정렬
 
-Mostly designed to be used inside mappings.
+주로 매핑 내부에서 사용되도록 설계되었습니다.
 
-Will use [MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings) and set the following options in `opts`:
+[MiniAlign.align\_strings()](mini-align.qmd#minialign.align_strings)를 사용하고 `opts`에 다음 옵션을 설정합니다:
 
-- `justify_offsets` - array of offsets used to achieve actual alignment of
-  a region. It is non-trivial (not array of zeros) only for charwise
-  selection: offset of first string is computed as width of prefix to the
-  left of region start.
+- `justify_offsets` - 영역의 실제 정렬을 달성하는 데 사용되는 오프셋 배열입니다. 문자 단위 선택의 경우에만 0이 아닌 배열이 됩니다. 첫 번째 문자열의 오프셋은 영역 시작 부분 왼쪽의 접두사 너비로 계산됩니다.
 
-- `region` - current affected region (see [MiniAlign-glossary](mini-align.qmd#minialign-glossary)). Can be
-  used to create more advanced steps.
+- `region` - 현재 영향을 받는 영역([MiniAlign-용어집](mini-align.qmd#minialign-glossary) 참조). 더 고급 단계를 만드는 데 사용할 수 있습니다.
 
-- `mode` - mode of selection (see [MiniAlign-glossary](mini-align.qmd#minialign-glossary)).
+- `mode` - 선택 모드([MiniAlign-용어집](mini-align.qmd#minialign-glossary) 참조).
 
-#### Parameters {#minialign.align_user-parameters}
+#### 매개변수 {#minialign.align_user-parameters}
 
 
 
-<span class="help-syntax-special">{mode}</span> `(string)` Selection mode. One of "char", "line", "block".
+<span class="help-syntax-special">{mode}</span> `(string)` 선택 모드. "char", "line", "block" 중 하나.
 
 ---
 
 ### as_parts() {#minialign.as_parts .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.as_parts`(<span class="help-syntax-special">{arr2d}</span>)</p>
-Convert 2d array of strings to parts
+문자열의 2차원 배열을 부분(parts)으로 변환
 
-This function verifies if input is a proper 2d array of strings and adds
-methods to its copy.
+이 함수는 입력이 적절한 문자열 2차원 배열인지 확인하고 사본에 메서드를 추가합니다.
 
-#### Class {#minialign.as_parts-class}
+#### 클래스 {#minialign.as_parts-class}
 
 
 
 <span class="help-syntax-special">{parts}</span>
 
-#### Fields {#minialign.as_parts-fields}
+#### 필드 {#minialign.as_parts-fields}
 
 
 
-<span class="help-syntax-special">{apply}</span> `(function)` Takes callable `f` and applies it to every part.
-  Callable should have signature `(s, data)`: `s` is a string part,
-  `data` - table with its data (<span class="help-syntax-keys">\<row\></span> has row number, <span class="help-syntax-keys">\<col\></span> has column number).
-  Returns new 2d array.
+<span class="help-syntax-special">{apply}</span> `(function)` 호출 가능한 `f`를 인수로 받아 모든 부분에 적용합니다. 호출 가능한 객체는 `(s, data)` 시그니처를 가져야 합니다. `s`는 문자열 부분, `data`는 해당 데이터를 가진 테이블입니다(<span class="help-syntax-keys">\<row\></span>은 행 번호, <span class="help-syntax-keys">\<col\></span>은 열 번호를 가짐). 새로운 2차원 배열을 반환합니다.
 
 
-<span class="help-syntax-special">{apply_inplace}</span> `(function)` Takes callable `f` and applies it to every part.
-  Should have same signature as in `apply` method. Outputs (should all be
-  strings) are assigned in place to a corresponding parts element. Returns
-  parts itself to enable method chaining.
+<span class="help-syntax-special">{apply_inplace}</span> `(function)` 호출 가능한 `f`를 인수로 받아 모든 부분에 적용합니다. `apply` 메서드와 동일한 시그니처를 가져야 합니다. 출력(모두 문자열이어야 함)은 해당 부분 요소에 직접 할당됩니다. 메서드 체이닝을 위해 부분 자체를 반환합니다.
 
 
-<span class="help-syntax-special">{get_dims}</span> `(function)` Return dimensions of parts array: a table with
-  <span class="help-syntax-keys">\<row\></span> and <span class="help-syntax-keys">\<col\></span> keys having number of rows and number of columns (maximum
-  number of elements across all rows).
+<span class="help-syntax-special">{get_dims}</span> `(function)` 부분 배열의 차원을 반환합니다: 행의 수와 열의 수(모든 행 중 최대 요소 수)를 가진 <span class="help-syntax-keys">\<row\></span> 및 <span class="help-syntax-keys">\<col\></span> 키를 포함하는 테이블입니다.
 
 
-<span class="help-syntax-special">{group}</span> `(function)` Concatenate neighboring strings based on supplied
-  boolean mask and direction (one of "left", default, or "right"). Has
-  signature `(mask, direction)` and modifies parts in place. Returns parts
-  itself to enable method chaining.
-  Example:
+<span class="help-syntax-special">{group}</span> `(function)` 제공된 불리언 마스크와 방향("left"(기본값) 또는 "right")에 따라 인접한 문자열을 연결합니다. `(mask, direction)` 시그니처를 가지며 부분을 직접 수정합니다. 메서드 체이닝을 위해 부분 자체를 반환합니다.
 
-  - Parts: `{ { "a", "b", "c" }, { "d", "e" }, { "f" } }`
+  예제:
 
-  - Mask: `{ { false, false, true }, { true, false }, { false } }`
+  - 부분: `{ { "a", "b", "c" }, { "d", "e" }, { "f" } }`
 
-  - Result for direction "left":  `{ { "abc" },    { "d", "e" }, { "f" } }`
+  - 마스크: `{ { false, false, true }, { true, false }, { false } }`
 
-  - Result for direction "right": `{ { "ab","c" }, { "de" },     { "f" } }`
+  - "left" 방향 결과: `{ { "abc" }, { "d", "e" }, { "f" } }`
+
+  - "right" 방향 결과: `{ { "ab","c" }, { "de" }, { "f" } }`
 
 
-<span class="help-syntax-special">{pair}</span> `(function)` Concatenate neighboring element pairs. Takes
-  `direction` as input (one of "left", default, or "right") and applies
-  `group()` for an alternating mask.
-  Example:
+<span class="help-syntax-special">{pair}</span> `(function)` 인접한 요소 쌍을 연결합니다. `direction`("left"(기본값) 또는 "right")을 입력으로 받아 교차 마스크에 대해 `group()`을 적용합니다.
 
-  - Parts: `{ { "a", "b", "c" }, { "d", "e" }, { "f" } }`
+  예제:
 
-  - Result for direction "left":  `{ { "ab", "c" }, { "de" }, { "f" } }`
+  - 부분: `{ { "a", "b", "c" }, { "d", "e" }, { "f" } }`
 
-  - Result for direction "right": `{ { "a", "bc" }, { "de" }, { "f" } }`
+  - "left" 방향 결과: `{ { "ab", "c" }, { "de" }, { "f" } }`
 
-
-<span class="help-syntax-special">{slice_col}</span> `(function)` Return column with input index `j`. Note: it might
-  not be an array if rows have unequal number of columns.
+  - "right" 방향 결과: `{ { "a", "bc" }, { "de" }, { "f" } }`
 
 
-<span class="help-syntax-special">{slice_row}</span> `(function)` Return row with input index `i`.
+<span class="help-syntax-special">{slice_col}</span> `(function)` 인덱스 `j`에 해당하는 열을 반환합니다. 참고: 행마다 열의 수가 다를 경우 배열이 아닐 수 있습니다.
 
 
-<span class="help-syntax-special">{trim}</span> `(function)` Trim elements whitespace. Has signature `(direction, indent)`
-  and modifies parts in place. Returns parts itself to enable method chaining.
+<span class="help-syntax-special">{slice_row}</span> `(function)` 인덱스 `i`에 해당하는 행을 반환합니다.
 
-  - Possible values of `direction`: "both" (default), "left", "right",
-  "none". Defines from which side whitespaces should be removed.
 
-  - Possible values of `indent`: "keep" (default), "low", "high", "remove".
-  Defines what to do with possible indent (left whitespace of first string
-  in a row). Value "keep" keeps it; "low" makes all indent equal to the
-  lowest across rows; "high" - highest across rows; "remove" - removes indent.
+<span class="help-syntax-special">{trim}</span> `(function)` 요소의 공백을 제거합니다. `(direction, indent)` 시그니처를 가지며 부분을 직접 수정합니다. 메서드 체이닝을 위해 부분 자체를 반환합니다.
 
-#### Usage {#minialign.as_parts-usage}
+  - `direction` 가능한 값: "both"(기본값), "left", "right", "none". 어느 쪽에서 공백을 제거할지 정의합니다.
+
+  - `indent` 가능한 값: "keep"(기본값), "low", "high", "remove". 가능한 들여쓰기(행의 첫 번째 문자열 왼쪽 공백)를 어떻게 처리할지 정의합니다. "keep"은 유지하고, "low"는 모든 들여쓰기를 행들 중 가장 낮은 들여쓰기와 동일하게 만들며, "high"는 가장 높은 들여쓰기로, "remove"는 들여쓰기를 제거합니다.
+
+#### 사용법 {#minialign.as_parts-usage}
 
 
 
   ```lua
   parts = MiniAlign.as_parts({ { 'a', 'b' }, { 'c' } })
-  print(vim.inspect(parts.get_dims())) -- Should be { row = 2, col = 2 }
+  print(vim.inspect(parts.get_dims())) -- { row = 2, col = 2 }여야 함
 
   parts.apply_inplace(function(s, data)
     return ' ' .. data.row .. s .. data.col .. ' '
   end)
-  print(vim.inspect(parts)) -- Should be { { ' 1a1 ', ' 1b2 ' }, { ' 2c1 ' } }
+  print(vim.inspect(parts)) -- { { ' 1a1 ', ' 1b2 ' }, { ' 2c1 ' } }여야 함
 
   parts.trim('both', 'remove').pair()
-  print(vim.inspect(parts)) -- Should be { { '1a11b2' }, { '2c1' } }
+  print(vim.inspect(parts)) -- { { '1a11b2' }, { '2c1' } }여야 함
   ```
 
 ---
@@ -939,47 +812,39 @@ methods to its copy.
 ### new_step() {#minialign.new_step .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.new_step`(<span class="help-syntax-special">{name}</span>, <span class="help-syntax-special">{action}</span>)</p>
-Create step
+단계 생성
 
-A step is basically a named callable object. Having a name bundled with
-some action powers helper status message during interactive alignment process.
+단계는 기본적으로 이름이 지정된 호출 가능한 객체입니다. 이름과 동작이 함께 묶여 있어 대화형 정렬 프로세스 중에 도우미 상태 메시지를 제공할 수 있습니다.
 
-#### Parameters {#minialign.new_step-parameters}
-
+#### 매개변수 {#minialign.new_step-parameters}
 
 
-<span class="help-syntax-special">{name}</span> `(string)` Step name.
 
-<span class="help-syntax-special">{action}</span> `(function|table)` Step action. Should be a callable object
-  (see [vim.is\_callable()](https://neovim.io/doc/user/helptag.html?tag=vim.is_callable\(\))).
+<span class="help-syntax-special">{name}</span> `(string)` 단계 이름.
 
-#### Return {#minialign.new_step-return}
+<span class="help-syntax-special">{action}</span> `(function|table)` 단계 동작. 호출 가능한 객체여야 합니다([vim.is\_callable()](https://neovim.io/doc/user/helptag.html?tag=vim.is_callable\(\)) 참조).
+
+#### 반환값 {#minialign.new_step-return}
 
 
-`(table)` A table with keys: <span class="help-syntax-keys">\<name\></span> with `name` argument, <span class="help-syntax-keys">\<action\></span> with `action`.
+`(table)` 다음 키를 포함하는 테이블: <span class="help-syntax-keys">\<name\></span>과 `name` 인수, <span class="help-syntax-keys">\<action\></span>과 `action`.
 
 ---
 
 ### gen_step {#minialign.gen_step .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.gen_step`</p>
-Generate common action steps
+공통 동작 단계 생성
 
-This is a table with function elements. Call to actually get step.
+함수 요소를 가진 테이블입니다. 실제로 단계를 얻으려면 호출하세요.
 
-Each step action is a function that has signature `(object, opts)`, where
-`object` is either parts or array of strings (depends on which stage of
-alignment process it is assumed to be applied) and `opts` is table of options.
+각 단계 동작은 `(object, opts)` 시그니처를 가진 함수입니다. 여기서 `object`는 부분(parts) 또는 문자열 배열(정렬 프로세스의 어느 단계에 적용되는지에 따라 다름)이고 `opts`는 옵션 테이블입니다.
 
-Outputs of elements named `default_*` are used as default corresponding main
-step (split, justify, merge). Behavior of all of them depend on values from
-supplied options (second argument).
+`default_*`로 명명된 요소의 출력은 해당 기본 주요 단계(분할, 조정, 병합)로 사용됩니다. 이들의 모든 동작은 제공된 옵션(두 번째 인수) 값에 따라 달라집니다.
 
-Outputs of other elements depend on both step generator input values and
-options supplied at execution. This design is mostly because their output
-can be used several times in pre-steps.
+다른 요소의 출력은 단계 생성기 입력 값과 실행 시 제공된 옵션 모두에 따라 달라집니다. 이러한 설계는 주로 그들의 출력이 사전 단계에서 여러 번 사용될 수 있기 때문입니다.
 
-#### Usage {#minialign.gen_step-usage}
+#### 사용법 {#minialign.gen_step-usage}
 
 
 
@@ -987,17 +852,17 @@ can be used several times in pre-steps.
   local align = require('mini.align')
   align.setup({
     modifiers = {
-      -- Use 'T' modifier to remove both whitespace and indent
+      -- 공백과 들여쓰기를 모두 제거하려면 'T' 수식어를 사용하세요
       T = function(steps, _)
         table.insert(steps.pre_justify, align.gen_step.trim('both', 'remove'))
       end,
     },
     options = {
-      -- By default align "right", "left", "right", "left", ...
+      -- 기본적으로 "right", "left", "right", "left", ... 순으로 정렬합니다
       justify_side = { 'right', 'left' },
     },
     steps = {
-      -- Align by default only first pair of columns
+      -- 기본적으로 첫 번째 열 쌍만 정렬합니다
       pre_justify = { align.gen_step.filter('n == 1') },
     },
   })
@@ -1008,261 +873,212 @@ can be used several times in pre-steps.
 ### gen_step.default_split() {#minialign.gen_step.default_split .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.gen_step.default_split`()</p>
-Generate default split step
+기본 분할 단계 생성
 
-Output splits strings using matches of Lua pattern(s) from `split_pattern`
-option which are not dismissed by `split_exclude_patterns` option.
+출력은 `split_exclude_patterns` 옵션에 의해 제외되지 않은 `split_pattern` 옵션의 Lua 패턴 일치 항목을 사용하여 문자열을 나눕니다.
 
-Outline of how single string is split:
+단일 문자열이 분할되는 방식 개요:
 
-- Convert `split_pattern` option to array of strings (string is converted
-  as one-element array). This array will be recycled in case there are more
-  split matches than in converted `split_pattern` array (which almost always).
+- `split_pattern` 옵션을 문자열 배열로 변환합니다(문자열은 단일 요소 배열로 변환됨). 변환된 `split_pattern` 배열보다 더 많은 분할 일치 항목이 있는 경우(거의 항상 그렇음) 이 배열은 재사용됩니다.
 
-- Find all forbidden spans (intervals inside string) - all matches of all
-  patterns in `split_exclude_patterns`.
+- `split_exclude_patterns`의 모든 패턴의 모든 일치 항목인 금지된 범위(문자열 내부 간격)를 모두 찾습니다.
 
-- Find match for the next pattern. If it is not inside any forbidden span,
-  add preceding unmatched substring and matched split as two parts. Repeat
-  with the next pattern.
+- 다음 패턴에 대한 일치 항목을 찾습니다. 금지된 범위 내에 있지 않은 경우, 앞에 일치하지 않는 부분 문자열과 일치하는 분할을 두 부분으로 추가합니다. 다음 패턴으로 반복합니다.
 
-- If no pattern match is found, add the rest of string as final part.
+- 패턴 일치 항목을 찾을 수 없는 경우 나머지 문자열을 최종 부분으로 추가합니다.
 
-Output uses following options (as part second argument, `opts` table):
+출력은 다음 옵션을 사용합니다(두 번째 인수 `opts` 테이블의 일부):
 
-- <span class="help-syntax-keys">\<split_pattern\></span> - string or array of strings used to detect split matches
-  and create parts. Default: `''` meaning no matches (whole string is used
-  as part). Examples: `'%s+'`, `{ '<', '>' }`.
+- <span class="help-syntax-keys">\<split_pattern\></span> - 분할 일치를 감지하고 부분을 생성하는 데 사용되는 문자열 또는 문자열 배열입니다. 기본값: `''`(일치 항목 없음, 전체 문자열이 부분으로 사용됨). 예제: `'%s+'`, `{ '<', '>' }`.
 
-- <span class="help-syntax-keys">\<split_exclude_patterns\></span> - array of strings defining which regions to
-  exclude from being matched. Default: `{}`. Examples: `{ '".-"', '^%s*#.*' }`.
+- <span class="help-syntax-keys">\<split_exclude_patterns\></span> - 일치 항목에서 제외할 영역을 정의하는 문자열 배열입니다. 기본값: `{}`. 예제: `{ '".-"', '^%s*#.*' }`.
 
-#### Return {#minialign.gen_step.default_split-return}
+#### 반환값 {#minialign.gen_step.default_split-return}
 
 
-`(table)` A step named "split" and with appropriate callable action.
+`(table)` 이름이 "split"이고 적절한 호출 가능한 동작을 가진 단계입니다.
 
-#### See also {#minialign.gen_step.default_split-seealso}
+#### 참고 {#minialign.gen_step.default_split-seealso}
 
 
-[MiniAlign.gen\_step.ignore\_split()](mini-align.qmd#minialign.gen_step.ignore_split) heavily uses `split_exclude_patterns`.
+[MiniAlign.gen\_step.ignore\_split()](mini-align.qmd#minialign.gen_step.ignore_split)은 `split_exclude_patterns`를 많이 사용합니다.
 
 ---
 
 ### gen_step.default_justify() {#minialign.gen_step.default_justify .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.gen_step.default_justify`()</p>
-Generate default justify step
+기본 조정 단계 생성
 
-Output makes column elements of string parts have equal width by adding
-left and/or right whitespace padding. Which side(s) to pad is defined by
-`justify_side` option. Width of first column can be tweaked with `justify_offsets`
-option.
+출력은 왼쪽 및/또는 오른쪽 공백 패딩을 추가하여 문자열 부분의 열 요소들이 동일한 너비를 갖도록 만듭니다. 어느 쪽을 패딩할지는 `justify_side` 옵션에 의해 정의됩니다. 첫 번째 열의 너비는 `justify_offsets` 옵션으로 조정할 수 있습니다.
 
-Outline of how parts are justified:
+부분이 조정되는 방식 개요:
 
-- Convert `justify_side` option to array of strings (single string is
-  converted as one-element array). Recycle this array to have length equal
-  to number of columns in parts.
+- `justify_side` 옵션을 문자열 배열로 변환합니다(단일 문자열은 단일 요소 배열로 변환됨). 부분의 열 수와 동일한 길이를 갖도록 이 배열을 재사용합니다.
 
-- For all columns compute maximum width of strings from it (add offsets from
-  `justify_offsets` to first column widths). Note: for left alignment, width
-  of last row element does not affect column width. This is mainly because
-  it won't be padded and helps dealing with "no single match" lines.
+- 모든 열에 대해 해당 열에 있는 문자열의 최대 너비를 계산합니다(첫 번째 열 너비에는 `justify_offsets`의 오프셋을 더함). 참고: 왼쪽 정렬의 경우 마지막 행 요소의 너비는 열 너비에 영향을 주지 않습니다. 이는 주로 패딩되지 않기 때문이며, "일치 항목 없음" 줄을 처리하는 데 도움이 됩니다.
 
-- Make all elements have same width inside column by adding appropriate
-  amount of whitespace. Which side(s) to add is controlled by the corresponding
-  `justify_side` array element. Note: padding is done with spaces which
-  might conflict with tab indentation.
+- 적절한 양의 공백을 추가하여 열 내부의 모든 요소가 동일한 너비를 갖도록 만듭니다. 어느 쪽에 추가할지는 해당 `justify_side` 배열 요소에 의해 제어됩니다. 참고: 패딩은 공백으로 수행되며, 이는 탭 들여쓰기와 충돌할 수 있습니다.
 
-Output uses following options (as part second argument, `opts` table):
+출력은 다음 옵션을 사용합니다(두 번째 인수 `opts` 테이블의 일부):
 
-- <span class="help-syntax-keys">\<justify_side\></span> - string or array of strings. Each element can be one of
-  "left" (pad right side), "center" (pad both sides equally), "right" (pad
-  left side), "none" (no padding). Default: "left".
+- <span class="help-syntax-keys">\<justify_side\></span> - 문자열 또는 문자열 배열입니다. 각 요소는 "left"(오른쪽 패딩), "center"(양쪽 균등 패딩), "right"(왼쪽 패딩), "none"(패딩 없음) 중 하나일 수 있습니다. 기본값: "left".
 
-- <span class="help-syntax-keys">\<justify_offsets\></span> - array of numeric left offsets of rows. Used to adjust
-  for possible not equal indents, like in case of charwise selection when
-  left edge is not on the first column. Default: array of zeros. Set
-  automatically during interactive alignment in charwise mode.
+- <span class="help-syntax-keys">\<justify_offsets\></span> - 행의 숫자 왼쪽 오프셋 배열입니다. 왼쪽 가장자리가 첫 번째 열에 있지 않은 문자 단위 선택의 경우와 같이 동일하지 않은 들여쓰기를 조정하는 데 사용됩니다. 기본값: 0의 배열. 문자 단위 모드에서 대화형 정렬 중에 자동으로 설정됩니다.
 
-#### Return {#minialign.gen_step.default_justify-return}
+#### 반환값 {#minialign.gen_step.default_justify-return}
 
 
-`(table)` A step named "justify" and with appropriate callable action.
+`(table)` 이름이 "justify"이고 적절한 호출 가능한 동작을 가진 단계입니다.
 
 ---
 
 ### gen_step.default_merge() {#minialign.gen_step.default_merge .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.gen_step.default_merge`()</p>
-Generate default merge step
+기본 병합 단계 생성
 
-Output merges rows of parts into strings by placing merge delimiter(s)
-between them.
+출력은 부분들의 행 사이에 병합 구분 기호를 배치하여 문자열로 병합합니다.
 
-Outline of how parts are converted to array of strings:
+부분이 문자열 배열로 변환되는 방식 개요:
 
-- Convert `merge_delimiter` option to array of strings (single string is
-  converted as one-element array). Recycle this array to have length equal
-  to number of columns in parts minus 1. Also possibly trim leading whitespace
-  in first merge character to not affect indentation.
+- `merge_delimiter` 옵션을 문자열 배열로 변환합니다(단일 문자열은 단일 요소 배열로 변환됨). 부분의 열 수에서 1을 뺀 길이와 동일하도록 이 배열을 재사용합니다. 또한 들여쓰기에 영향을 주지 않도록 첫 번째 병합 문자의 앞선 공백을 제거할 수 있습니다.
 
-- Exclude empty strings from parts. They add nothing to output except extra
-  usage of merge delimiter.
+- 부분에서 빈 문자열을 제외합니다. 이들은 병합 구분 기호의 추가 사용 외에는 출력에 아무것도 더하지 않습니다.
 
-- Concatenate each row interleaving with array of merge delimiters.
+- 병합 구분 기호 배열을 끼워 넣어 각 행을 연결합니다.
 
-Output uses following options (as part second argument, `opts` table):
+출력은 다음 옵션을 사용합니다(두 번째 인수 `opts` 테이블의 일부):
 
-- <span class="help-syntax-keys">\<merge_delimiter\></span> - string or array of strings. Default: `''`.
-  Examples: `' '`, `{ '', ' ' }`.
+- <span class="help-syntax-keys">\<merge_delimiter\></span> - 문자열 또는 문자열 배열입니다. 기본값: `''`. 예제: `' '`, `{ '', ' ' }`.
 
-#### Return {#minialign.gen_step.default_merge-return}
+#### 반환값 {#minialign.gen_step.default_merge-return}
 
 
-`(table)` A step named "merge" and with appropriate callable action.
+`(table)` 이름이 "merge"이고 적절한 호출 가능한 동작을 가진 단계입니다.
 
 ---
 
 ### gen_step.filter() {#minialign.gen_step.filter .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.gen_step.filter`(<span class="help-syntax-special">{expr}</span>)</p>
-Generate filter step
+필터 단계 생성
 
-Construct function predicate from supplied Lua string expression and make
-step evaluating it on every part element.
+제공된 Lua 문자열 표현식에서 함수 서술어(predicate)를 구성하고 모든 부분 요소에 대해 이를 평가하는 단계를 만듭니다.
 
-Outline of how filtering is done:
+필터링 수행 방식 개요:
 
-- Convert Lua filtering expression into function predicate which can be
-  evaluated in manually created context (some specific variables being set).
+- Lua 필터링 표현식을 수동으로 생성된 컨텍스트(일부 특정 변수가 설정됨)에서 평가할 수 있는 함수 서술어로 변환합니다.
 
-- Compute boolean mask for parts by applying predicate to each element of
-  2d array with special variables set to specific values (see next section).
+- 특별 변수가 특정 값으로 설정된(다음 섹션 참조) 2차원 배열의 각 요소에 서술어를 적용하여 부분의 불리언 마스크를 계산합니다.
 
-- Group parts with computed mask. See `group()` method of parts in
-  [MiniAlign.as\_parts()](mini-align.qmd#minialign.as_parts).
+- 계산된 마스크로 부분을 그룹화합니다. [MiniAlign.as\_parts()](mini-align.qmd#minialign.as_parts)의 부분의 `group()` 메서드를 참조하세요.
 
-Special variables which can be used in expression:
+표현식에서 사용할 수 있는 특별 변수:
 
-- <span class="help-syntax-keys">\<row\></span> - row number of current element.
+- <span class="help-syntax-keys">\<row\></span> - 현재 요소의 행 번호.
 
-- <span class="help-syntax-keys">\<ROW\></span> - total number of rows in parts.
+- <span class="help-syntax-keys">\<ROW\></span> - 부분의 총 행 수.
 
-- <span class="help-syntax-keys">\<col\></span> - column number of current element.
+- <span class="help-syntax-keys">\<col\></span> - 현재 요소의 열 번호.
 
-- <span class="help-syntax-keys">\<COL\></span> - total number of columns in current row.
+- <span class="help-syntax-keys">\<COL\></span> - 현재 행의 총 열 수.
 
-- <span class="help-syntax-keys">\<s\></span>   - string value of current element.
+- <span class="help-syntax-keys">\<s\></span>   - 현재 요소의 문자열 값.
 
-- <span class="help-syntax-keys">\<n\></span>   - column pair number of current element. Useful when filtering by
-          result of pattern splitting.
+- <span class="help-syntax-keys">\<n\></span>   - 현재 요소의 열 쌍 번호. 패턴 분할 결과로 필터링할 때 유용합니다.
 
-- <span class="help-syntax-keys">\<N\></span>   - total number of column pairs in current row.
+- <span class="help-syntax-keys">\<N\></span>   - 현재 행의 총 열 쌍 수.
 
-- All variables from global table `_G`.
+- 전역 테이블 `_G`로부터의 모든 변수.
 
-Tips:
+팁:
 
-- This general filtering approach can be used to both include and exclude
-  certain parts from alignment. Examples:
+- 이 일반적인 필터링 접근 방식은 정렬에서 특정 부분을 포함하거나 제외하는 데 모두 사용할 수 있습니다. 예제:
 
-    - Use `row ~= 2` to align all parts except from second row.
+    - 두 번째 행을 제외한 모든 부분을 정렬하려면 `row ~= 2`를 사용합니다.
 
-    - Use `n == 1` to align only by first pair of columns.
+    - 첫 번째 열 쌍으로만 정렬하려면 `n == 1`을 사용합니다.
 
-- Filtering by last equal sign usually can be done with `n >= (N - 1)`
-  (because there is usually something to the right of it).
+- 마지막 등호로 필터링하는 것은 보통 `n >= (N - 1)`로 수행할 수 있습니다(보통 등호 오른쪽에 무언가가 있기 때문입니다).
 
-#### Parameters {#minialign.gen_step.filter-parameters}
+#### 매개변수 {#minialign.gen_step.filter-parameters}
 
 
 
-<span class="help-syntax-special">{expr}</span> `(string)` Lua expression as a string which will be used as predicate.
+<span class="help-syntax-special">{expr}</span> `(string)` 서술어로 사용될 문자열 형태의 Lua 표현식.
 
-#### Return {#minialign.gen_step.filter-return}
+#### 반환값 {#minialign.gen_step.filter-return}
 
 
-`(table|nil)` A step named "filter" and with appropriate callable action.
+`(table|nil)` 이름이 "filter"이고 적절한 호출 가능한 동작을 가진 단계입니다.
 
 ---
 
 ### gen_step.ignore_split() {#minialign.gen_step.ignore_split .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.gen_step.ignore_split`(<span class="help-syntax-special">{patterns}</span>, <span class="help-syntax-special">{exclude_comment}</span>)</p>
-Generate ignore step
+무시 단계 생성
 
-Output adds certain values to `split_exclude_patterns` option. Should be
-used as pre-split step.
+출력은 `split_exclude_patterns` 옵션에 특정 값을 추가합니다. 사전 분할 단계로 사용해야 합니다.
 
-#### Parameters {#minialign.gen_step.ignore_split-parameters}
-
+#### 매개변수 {#minialign.gen_step.ignore_split-parameters}
 
 
-<span class="help-syntax-special">{patterns}</span> `(table)` Array of patterns to be added to
-  `split_exclude_patterns` as is. Default: `{ [[".-"]] }` (excludes strings
-  for most cases).
 
-<span class="help-syntax-special">{exclude_comment}</span> `(boolean|nil)` Whether to add comment pattern to
-  `split_exclude_patterns`. Comment pattern is derived from 'commentstring'
-  option. Default: `true`.
+<span class="help-syntax-special">{patterns}</span> `(table)` `split_exclude_patterns`에 그대로 추가될 패턴 배열입니다. 기본값: `{ [[".-"]] }`(대부분의 경우 문자열을 제외함).
 
-#### Return {#minialign.gen_step.ignore_split-return}
+<span class="help-syntax-special">{exclude_comment}</span> `(boolean|nil)` 주석 패턴을 `split_exclude_patterns`에 추가할지 여부입니다. 주석 패턴은 'commentstring' 옵션에서 파생됩니다. 기본값: `true`.
+
+#### 반환값 {#minialign.gen_step.ignore_split-return}
 
 
-`(table)` A step named "ignore" and with appropriate callable action.
+`(table)` 이름이 "ignore"이고 적절한 호출 가능한 동작을 가진 단계입니다.
 
-#### See also {#minialign.gen_step.ignore_split-seealso}
+#### 참고 {#minialign.gen_step.ignore_split-seealso}
 
 
-[MiniAlign.gen\_step.default\_split()](mini-align.qmd#minialign.gen_step.default_split) for details about
-  `split_exclude_patterns` option.
+`split_exclude_patterns` 옵션에 대한 자세한 내용은 [MiniAlign.gen\_step.default\_split()](mini-align.qmd#minialign.gen_step.default_split)을 참조하세요.
 
 ---
 
 ### gen_step.pair() {#minialign.gen_step.pair .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.gen_step.pair`(<span class="help-syntax-special">{direction}</span>)</p>
-Generate pair step
+쌍 묶기 단계 생성
 
-Output calls `pair()` method of parts (see [MiniAlign.as\_parts()](mini-align.qmd#minialign.as_parts)) with
-supplied `direction` argument.
+출력은 제공된 `direction` 인수를 사용하여 부분의 `pair()` 메서드를 호출합니다([MiniAlign.as\_parts()](mini-align.qmd#minialign.as_parts) 참조).
 
-#### Parameters {#minialign.gen_step.pair-parameters}
-
+#### 매개변수 {#minialign.gen_step.pair-parameters}
 
 
-<span class="help-syntax-special">{direction}</span> `(string)` Which direction to pair. One of "left" (default) or
+
+<span class="help-syntax-special">{direction}</span> `(string)` 어느 방향으로 쌍을 묶을지. "left"(기본값) 또는 "right" 중 하나.
 
 
-#### Return {#minialign.gen_step.pair-return}
+#### 반환값 {#minialign.gen_step.pair-return}
 
 
-`(table)` A step named "pair" and with appropriate callable action.
+`(table)` 이름이 "pair"이고 적절한 호출 가능한 동작을 가진 단계입니다.
 
 ---
 
 ### gen_step.trim() {#minialign.gen_step.trim .help-syntax-right-anchor}
 
 <p align="center">`MiniAlign.gen_step.trim`(<span class="help-syntax-special">{direction}</span>, <span class="help-syntax-special">{indent}</span>)</p>
-Generate trim step
+공백 제거 단계 생성
 
-Output calls `trim()` method of parts (see [MiniAlign.as\_parts()](mini-align.qmd#minialign.as_parts)) with
-supplied `direction` and `indent` arguments.
+출력은 제공된 `direction` 및 `indent` 인수를 사용하여 부분의 `trim()` 메서드를 호출합니다([MiniAlign.as\_parts()](mini-align.qmd#minialign.as_parts) 참조).
 
-#### Parameters {#minialign.gen_step.trim-parameters}
-
+#### 매개변수 {#minialign.gen_step.trim-parameters}
 
 
-<span class="help-syntax-special">{direction}</span> `(string|nil)` Which sides to trim whitespace. One of "both"
-  (default), "left", "right", "none".
 
-<span class="help-syntax-special">{indent}</span> `(string|nil)` What to do with possible indent (left whitespace
-  of first string in a row). One of "keep" (default), "low", "high", "remove".
+<span class="help-syntax-special">{direction}</span> `(string|nil)` 어느 쪽의 공백을 제거할지. "both"(기본값), "left", "right", "none" 중 하나.
 
-#### Return {#minialign.gen_step.trim-return}
+<span class="help-syntax-special">{indent}</span> `(string|nil)` 가능한 들여쓰기(행의 첫 번째 문자열 왼쪽 공백)를 어떻게 처리할지. "keep"(기본값), "low", "high", "remove" 중 하나.
+
+#### 반환값 {#minialign.gen_step.trim-return}
 
 
-`(table)` A step named "trim" and with appropriate callable action.
-
+`(table)` 이름이 "trim"이고 적절한 호출 가능한 동작을 가진 단계입니다.

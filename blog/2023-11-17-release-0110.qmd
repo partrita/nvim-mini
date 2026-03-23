@@ -1,42 +1,42 @@
 ---
-title: "Release 0.11.0"
+title: "0.11.0 버전 출시"
 author: Evgeni Chasnovski
 date: 2023-11-17
 categories: [release, reddit]
-description: New fuzzy picker in town, major hipatterns update, and many more
+description: 새로운 퍼지 피커의 등장, hipatterns 대규모 업데이트 및 다양한 기능 추가
 ---
 
-*Originally [posted on Reddit](https://www.reddit.com/r/neovim/comments/17xhmgz/mininvim_release_0110_new_fuzzy_picker_in_town/)*
+*원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/17xhmgz/mininvim_release_0110_new_fuzzy_picker_in_town/)*
 
-Hello, Neovim users!
+안녕하세요, Neovim 사용자 여러분!
 
-Today is the day to update [mini.nvim](https://github.com/nvim-mini/mini.nvim) to version 0.11.0. It includes two big plugins coming out of beta-testing and many small updates to other modules as a result of backlog cleanup.
+오늘은 [mini.nvim](https://github.com/nvim-mini/mini.nvim)을 0.11.0 버전으로 업데이트하는 날입니다. 이번 업데이트에는 베타 테스트를 마친 두 개의 큰 플러그인과 백로그 정리를 통한 다른 모듈들의 수많은 작은 업데이트가 포함되어 있습니다.
 
-Here is a [full release description](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.11.0) if you are curious.
-
-------
-
-Two new modules are about making a performant picker with minimal UI and a lot of preconfigured pickers:
-
-- [mini.pick](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-pick.md) - pick anything. A general picker as alternative to Telescope and Fzf-Lua. Both of these plugins are great, but I wanted to have a slightly different UI and UX: a one window design with on demand preview. I am daily driving it for about two and a half months now and don't miss anything. Here is a link to [the announcement](2023-10-13-announce-mini-pick.qmd).
-
-- [mini.extra](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-extra.md) - extra functionality for 'mini.nvim' modules. Its main goal is mostly to contain 20+ preconfigured pickers for 'mini.pick' (like for built-in diagnostic, LSP, Neovim histories, etc.) and several textobject specifications for 'mini.ai' (line, buffer, indent, etc.), while still allowing more diverse functionality in the future. Here is a link to [the announcement](2023-11-02-announce-mini-extra.qmd).
+궁금하신 분들은 [전체 릴리스 설명](https://github.com/nvim-mini/mini.nvim/releases/tag/v0.11.0)을 확인해 보세요.
 
 ------
 
-'mini.hipatterns' got a substantial update:
+두 개의 새로운 모듈은 최소한의 UI와 미리 설정된 수많은 피커를 갖춘 고성능 피커를 만드는 데 중점을 두었습니다.
 
-- Highlighter can now have an array of patterns to highlight, not just a single one.
-- Highlighter can now define more general `extmark_opts`. This allows highlighting not only with single highlight group over the matched range, but adding virtual text (like covering some sensitive words with `x`), highlighting whole line of the match, add sign, etc.
-- Built-in hex color highlighter now can highlight using inline extmarks (so that colored symbols appear to the left of the color and not over it). But only on Neovim>=0.10.
-- There is a new `get_matches()` function to get current matches with their positions. This powers the `pickers.hipatterns` picker form 'mini.extra'.
+- [mini.pick](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-pick.md) - 무엇이든 선택하세요. Telescope와 Fzf-Lua의 대안으로 사용할 수 있는 범용 피커입니다. 두 플러그인 모두 훌륭하지만, 저는 요청 시에만 미리보기를 제공하는 단일 창 디자인이라는 약간 다른 UI와 UX를 원했습니다. 저는 약 두 달 반 동안 메인으로 사용하고 있는데 부족함이 전혀 없습니다. [발표 소식](2023-10-13-announce-mini-pick.qmd) 링크입니다.
 
-------
-
-There are also small-ish feature updates for 'mini.bufremove', 'mini.clue', 'mini.comment', 'mini.completion', 'mini.files', 'mini.map', 'mini.misc', 'mini.starter', and 'mini.test'.
+- [mini.extra](https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-extra.md) - 'mini.nvim' 모듈을 위한 추가 기능입니다. 주요 목표는 'mini.pick'을 위해 미리 설정된 20개 이상의 피커(내장 진단, LSP, Neovim 기록 등)와 'mini.ai'를 위한 여러 텍스트 오브젝트 사양(줄, 버퍼, 들여쓰기 등)을 포함하는 것이며, 향후 더 다양한 기능을 담을 수 있도록 설계되었습니다. [발표 소식](2023-11-02-announce-mini-extra.qmd) 링크입니다.
 
 ------
 
-On another note, 'mini.nvim' just passed the 3000 GitHub stars mark. Thank you all for continuous support. I love you 3000!
+'mini.hipatterns'가 대폭 업데이트되었습니다:
 
-Thanks for reading! Hope to see you in the next module release!
+- 하이라이터가 이제 단일 패턴이 아닌 패턴 배열을 가질 수 있습니다.
+- 하이라이터가 이제 더 일반적인 `extmark_opts`를 정의할 수 있습니다. 이를 통해 일치하는 범위에 단일 하이라이트 그룹을 적용하는 것뿐만 아니라, 가상 텍스트 추가(예: 민감한 단어를 `x`로 가리기), 일치하는 전체 줄 하이라이트, 기호(sign) 추가 등이 가능해졌습니다.
+- 내장된 16진수 색상 하이라이터가 이제 인라인 extmark를 사용하여 하이라이트할 수 있습니다 (색상 기호가 색상 위에 겹치지 않고 왼쪽에 나타남). 단, Neovim>=0.10에서만 지원됩니다.
+- 현재 일치하는 항목과 그 위치를 가져오는 새로운 `get_matches()` 함수가 추가되었습니다. 이 기능은 'mini.extra'의 `pickers.hipatterns` 피커의 기반이 됩니다.
+
+------
+
+그 외에도 'mini.bufremove', 'mini.clue', 'mini.comment', 'mini.completion', 'mini.files', 'mini.map', 'mini.misc', 'mini.starter', 'mini.test'에 대한 소규모 기능 업데이트가 있었습니다.
+
+------
+
+다른 소식으로, 'mini.nvim'이 GitHub 스타 3,000개를 돌파했습니다. 지속적인 지원에 감사드립니다. 3,000만큼 사랑합니다!
+
+읽어주셔서 감사합니다! 다음 모듈 출시 때 뵙겠습니다!
