@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - korean-translate
 
 name: Render and Publish
 
