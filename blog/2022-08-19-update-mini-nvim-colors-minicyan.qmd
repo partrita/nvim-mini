@@ -3,7 +3,7 @@ title: "'mini.base16' 업데이트 및 새로운 minicyan 색상 테마"
 author: Evgeni Chasnovski
 date: 2022-08-19
 categories: [update, reddit]
-description: 'mini.base16'의 25개 새로운 플러그인 통합 및 'minicyan' 색상 테마
+description: "'mini.base16'의 25개 새로운 플러그인 통합 및 'minicyan' 색상 테마"
 ---
 
 *원래 [Reddit에 게시됨](https://www.reddit.com/r/neovim/comments/wsboke/mininvim_color_updates_25_new_plugin_integrations/)*

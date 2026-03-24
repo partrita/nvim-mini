@@ -3,7 +3,7 @@ title: "'mini.extra' 발표"
 author: Evgeni Chasnovski
 date: 2023-11-02
 categories: [announce, reddit]
-description: 'mini.nvim'의 추가 기능입니다. 'mini.pick'을 위한 다양한 피커, 'mini.ai'를 위한 텍스트 오브젝트 등을 포함합니다.
+description: "'mini.nvim'의 추가 기능입니다. 'mini.pick'을 위한 다양한 피커, 'mini.ai'를 위한 텍스트 오브젝트 등을 포함합니다."
 ---
 
 *원문: [Reddit 게시물](https://www.reddit.com/r/neovim/comments/17m65jn/miniextra_extra_mininvim_functionality_many/)*
