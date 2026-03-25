@@ -2,11 +2,11 @@
 title: "mini.jump2d 문서"
 ---
 
-_'mini.nvim'의 `main` 브랜치에서 생성됨_
+_Generated from the `main` branch of 'mini.nvim'_
 
 <a name="mini.jump2d" href="mini-jump2d.qmd#mini.jump2d"><b>mini.jump2d</b></a> 현재 보이는 줄 내에서 점프
 
-MIT 라이선스 Copyright (c) 2022 Evgeni Chasnovski
+MIT License Copyright (c) 2022 Evgeni Chasnovski
 
 ---
 

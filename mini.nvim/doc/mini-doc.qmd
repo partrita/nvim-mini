@@ -2,11 +2,11 @@
 title: "mini.doc 문서"
 ---
 
-_'mini.nvim'의 `main` 브랜치에서 생성됨_
+_Generated from the `main` branch of 'mini.nvim'_
 
 <a name="mini.doc" href="mini-doc.qmd#mini.doc"><b>mini.doc</b></a> Neovim 도움말 파일 생성
 
-MIT 라이선스 Copyright (c) 2022 Evgeni Chasnovski
+MIT License Copyright (c) 2022 Evgeni Chasnovski
 
 ---
 

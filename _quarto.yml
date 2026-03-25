@@ -16,9 +16,9 @@ website:
   navbar:
     search: true
     left:
-      - href: mini.nvim/index.qmd
+      - href: mini.nvim/index.md
         text: mini.nvim
-      - href: MiniMax/index.qmd
+      - href: MiniMax/index.md
         text: MiniMax
       - href: blog/index.qmd
         text: Blog
