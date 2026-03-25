@@ -165,49 +165,49 @@
     "href": "mini.nvim/readmes/mini-keymap.html",
     "title": "mini.keymap",
     "section": "",
-    "text": "Generated from the main branch of ‘mini.nvim’"
+    "text": "’mini.nvim’의 main 브랜치에서 생성됨"
   },
   {
-    "objectID": "mini.nvim/readmes/mini-keymap.html#demo",
-    "href": "mini.nvim/readmes/mini-keymap.html#demo",
+    "objectID": "mini.nvim/readmes/mini-keymap.html#데모",
+    "href": "mini.nvim/readmes/mini-keymap.html#데모",
     "title": "mini.keymap",
-    "section": "Demo",
-    "text": "Demo\nVideo"
+    "section": "데모",
+    "text": "데모\nVideo"
   },
   {
     "objectID": "mini.nvim/readmes/mini-keymap.html#features",
     "href": "mini.nvim/readmes/mini-keymap.html#features",
     "title": "mini.keymap",
-    "section": "Features",
-    "text": "Features\n\nMap keys to perform configurable multi-step actions: if condition for step one is true - execute step one action, else check step two, and so on until falling back to executing original keys. This is usually referred to as “smart” keys (like “smart tab”). See :h MiniKeymap.map_multistep().\nThere are many built-in steps targeted for Insert mode mappings of special keys like &lt;Tab&gt;, &lt;S-Tab&gt;, &lt;CR&gt;, and &lt;BS&gt;:\n\nNavigate and accept built-in Insert mode completion. Useful for mini.completion.\nNavigate and expand mini.snippets.\nExecute &lt;CR&gt; and &lt;BS&gt; respecting mini.pairs.\nJump before/after current tree-sitter node.\nJump before opening and after closing characters (brackets and quotes).\nIncrease/decrease indent when cursor is inside of it.\nDelete all whitespace to the left (“hungry backspace”).\nNavigate built-in snippet engine (:h vim.snippet).\nNavigate and accept in hrsh7th/nvim-cmp completion.\nNavigate and accept in Saghen/blink.cmp completion.\nNavigate and expand L3MON4D3/LuaSnip snippets.\nExecute &lt;CR&gt; and &lt;BS&gt; respecting windwp/nvim-autopairs.\n\nMap keys as “combo”: each key acts immediately plus execute extra action if all are typed within configurable delay between each other. See :h MiniKeymap.map_combo().\nSome of the common use cases include:\n\nMap insertable keys (like “jk”, “kj”) in Insert and Command-line mode to exit into Normal mode.\nFight against bad habits of pressing the same navigation key by showing a notification if there are too many of them pressed in a row.\n\n\nSources with more details:\n\n:h MiniKeymap-examples"
+    "section": "기능",
+    "text": "기능\n\n설정 가능한 다단계 액션을 수행하도록 키를 매핑합니다: 첫 번째 단계의 조건이 참이면 해당 액션을 실행하고, 그렇지 않으면 두 번째 단계를 확인하는 식으로 진행하다가 마지막에는 원래 키를 실행합니다. 이는 주로 “스마트(smart)” 키(예: “smart tab”)라고 불립니다. :h MiniKeymap.map_multistep()을 참조하세요.\n포커스된 입력(Insert) 모드 매핑을 위해 &lt;Tab&gt;, &lt;S-Tab&gt;, &lt;CR&gt;, &lt;BS&gt;와 같은 특수 키를 위한 다양한 내장 단계들을 제공합니다:\n\n내장 입력 모드 보완(completion) 탐색 및 수락. mini.completion에 유용합니다.\nmini.snippets 탐색 및 확장.\nmini.pairs를 고려한 &lt;CR&gt; 및 &lt;BS&gt; 실행.\n현재 Tree-sitter 노드 이전/이후로 점프.\n여는 문자와 닫는 문자(괄호 및 따옴표) 앞뒤로 점프.\n커서가 들여쓰기 내부에 있을 때 들여쓰기 늘리기/줄이기.\n왼쪽의 모든 공백 삭제 (“hungry backspace”).\n내장 스니펫 엔진 탐색 (:h vim.snippet).\nhrsh7th/nvim-cmp 보완 탐색 및 수락.\nSaghen/blink.cmp 보완 탐색 및 수락.\nL3MON4D3/LuaSnip 스니펫 탐색 및 확장.\nwindwp/nvim-autopairs를 고려한 &lt;CR&gt; 및 &lt;BS&gt; 실행.\n\n키를 “콤보(combo)”로 매핑합니다: 각 키는 즉시 작동함과 동시에, 설정된 시간 내에 모든 키가 입력되면 추가 액션을 실행합니다. :h MiniKeymap.map_combo()를 참조하세요.\n일반적인 사용 사례는 다음과 같습니다:\n\n입력 및 커맨드 라인 모드에서 노멀 모드로 나가기 위해 입력 가능한 키(예: “jk”, “kj”) 매핑.\n동일한 이동 키를 연달아 너무 많이 누르는 나쁜 습관을 방지하기 위해 알림 표시.\n\n\n더 자세한 정보는 다음을 참조하세요:\n\n:h MiniKeymap-examples"
   },
   {
     "objectID": "mini.nvim/readmes/mini-keymap.html#quickstart",
     "href": "mini.nvim/readmes/mini-keymap.html#quickstart",
     "title": "mini.keymap",
-    "section": "Quickstart",
-    "text": "Quickstart\n\nMulti-step\nSetup that works well with ‘mini.completion’ and ‘mini.pairs’:\nlocal map_multistep = require('mini.keymap').map_multistep\n\nmap_multistep('i', '&lt;Tab&gt;',   { 'pmenu_next' })\nmap_multistep('i', '&lt;S-Tab&gt;', { 'pmenu_prev' })\nmap_multistep('i', '&lt;CR&gt;',    { 'pmenu_accept', 'minipairs_cr' })\nmap_multistep('i', '&lt;BS&gt;',    { 'minipairs_bs' })\n\n\nCombos\n“Better escape” to Normal mode without having to reach for &lt;Esc&gt; key:\nlocal map_combo = require('mini.keymap').map_combo\n\n-- Support most common modes. This can also contain 't', but would\n-- only mean to press `&lt;Esc&gt;` inside terminal.\nlocal mode = { 'i', 'c', 'x', 's' }\nmap_combo(mode, 'jk', '&lt;BS&gt;&lt;BS&gt;&lt;Esc&gt;')\n\n-- To not have to worry about the order of keys, also map \"kj\"\nmap_combo(mode, 'kj', '&lt;BS&gt;&lt;BS&gt;&lt;Esc&gt;')\n\n-- Escape into Normal mode from Terminal mode\nmap_combo('t', 'jk', '&lt;BS&gt;&lt;BS&gt;&lt;C-\\\\&gt;&lt;C-n&gt;')\nmap_combo('t', 'kj', '&lt;BS&gt;&lt;BS&gt;&lt;C-\\\\&gt;&lt;C-n&gt;')\nShow notification if there is too much movement by repeating same key:\nlocal notify_many_keys = function(key)\n  local lhs = string.rep(key, 5)\n  local action = function() vim.notify('Too many ' .. key) end\n  require('mini.keymap').map_combo({ 'n', 'x' }, lhs, action)\nend\nnotify_many_keys('h')\nnotify_many_keys('j')\nnotify_many_keys('k')\nnotify_many_keys('l')"
+    "section": "빠른 시작",
+    "text": "빠른 시작\n\n다단계 (Multi-step)\n‘mini.completion’ 및 ’mini.pairs’와 잘 어울리는 설정:\nlocal map_multistep = require('mini.keymap').map_multistep\n\nmap_multistep('i', '&lt;Tab&gt;',   { 'pmenu_next' })\nmap_multistep('i', '&lt;S-Tab&gt;', { 'pmenu_prev' })\nmap_multistep('i', '&lt;CR&gt;',    { 'pmenu_accept', 'minipairs_cr' })\nmap_multistep('i', '&lt;BS&gt;',    { 'minipairs_bs' })\n\n\n콤보 (Combos)\n&lt;Esc&gt; 키까지 손을 뻗지 않고도 노멀 모드로 나가는 “더 나은 이스케이프”:\nlocal map_combo = require('mini.keymap').map_combo\n\n-- 대부분의 일반 모드 지원. 't'를 포함할 수도 있지만,\n-- 터미널 내부에서 `&lt;Esc&gt;`를 누르는 것만을 의미하게 됩니다.\nlocal mode = { 'i', 'c', 'x', 's' }\nmap_combo(mode, 'jk', '&lt;BS&gt;&lt;BS&gt;&lt;Esc&gt;')\n\n-- 키 순서에 신경 쓰지 않도록 \"kj\"도 매핑\nmap_combo(mode, 'kj', '&lt;BS&gt;&lt;BS&gt;&lt;Esc&gt;')\n\n-- 터미널 모드에서 노멀 모드로 탈출\nmap_combo('t', 'jk', '&lt;BS&gt;&lt;BS&gt;&lt;C-\\\\&gt;&lt;C-n&gt;')\nmap_combo('t', 'kj', '&lt;BS&gt;&lt;BS&gt;&lt;C-\\\\&gt;&lt;C-n&gt;')\n동일한 키를 반복하여 너무 많이 움직일 때 알림 표시:\nlocal notify_many_keys = function(key)\n  local lhs = string.rep(key, 5)\n  local action = function() vim.notify('Too many ' .. key) end\n  require('mini.keymap').map_combo({ 'n', 'x' }, lhs, action)\nend\nnotify_many_keys('h')\nnotify_many_keys('j')\nnotify_many_keys('k')\nnotify_many_keys('l')"
   },
   {
     "objectID": "mini.nvim/readmes/mini-keymap.html#installation",
     "href": "mini.nvim/readmes/mini-keymap.html#installation",
     "title": "mini.keymap",
-    "section": "Installation",
-    "text": "Installation\nThis plugin can be installed as part of ‘mini.nvim’ library (recommended) or as a standalone Git repository.\nThere are two branches to install from:\n\nmain (default, recommended) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).\nstable will be updated only upon releases with code tested during public beta-testing phase in main branch.\n\nHere are code snippets for some common installation methods (use only one):\n\n\nWith mini.deps\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nFollow recommended ‘mini.deps’ installation\n\n\nStable\nFollow recommended ‘mini.deps’ installation\n\n\n\nStandalone plugin:\n\n\n\n\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nadd('nvim-mini/mini.keymap')\n\n\nStable\nadd({ source = 'nvim-mini/mini.keymap', checkout = 'stable' })\n\n\n\n\n\n\n\nWith folke/lazy.nvim\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.keymap', version = false },\n\n\nStable\n{ 'nvim-mini/mini.keymap', version = '*' },\n\n\n\n\n\n\n\nWith junegunn/vim-plug\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.keymap'\n\n\nStable\nPlug 'nvim-mini/mini.keymap', { 'branch': 'stable' }\n\n\n\n\n\nImportant: no need to call require('mini.keymap').setup(), but it can be done to improve usability.\nNote: if you are on Windows, there might be problems with too long file paths (like error: unable to create file &lt;some file name&gt;: Filename too long). Try doing one of the following:\n\nEnable corresponding git global config value: git config --system core.longpaths true. Then try to reinstall.\nInstall plugin in other place with shorter path."
+    "section": "설치",
+    "text": "설치\n이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(권장), 독립적인 Git 저장소로 설치할 수 있습니다.\n두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:\n\nmain (기본값, 권장): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.\nstable: main 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.\n\n다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):\n\n\nmini.deps 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\nStable\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\n\n단독 플러그인:\n\n\n\n\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nadd('nvim-mini/mini.keymap')\n\n\nStable\nadd({ source = 'nvim-mini/mini.keymap', checkout = 'stable' })\n\n\n\n\n\n\n\nfolke/lazy.nvim 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.keymap', version = false },\n\n\nStable\n{ 'nvim-mini/mini.keymap', version = '*' },\n\n\n\n\n\n\n\njunegunn/vim-plug 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.keymap'\n\n\nStable\nPlug 'nvim-mini/mini.keymap', { 'branch': 'stable' }\n\n\n\n\n\n중요: require('mini.keymap').setup()을 반드시 호출할 필요는 없으나, 사용 편의성을 높이기 위해 호출할 수 있습니다.\n참고: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(error: unable to create file &lt;some file name&gt;: Filename too long)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:\n\n해당 git 전역 설정 값을 활성화합니다: git config --system core.longpaths true. 그 후 다시 설치를 시도하세요.\n더 짧은 경로의 다른 위치에 플러그인을 설치합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-keymap.html#default-config",
     "href": "mini.nvim/readmes/mini-keymap.html#default-config",
     "title": "mini.keymap",
-    "section": "Default config",
-    "text": "Default config\n-- No need to copy this inside `setup()`. Will be used automatically.\n{}"
+    "section": "기본 설정",
+    "text": "기본 설정\n-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.\n{}"
   },
   {
     "objectID": "mini.nvim/readmes/mini-keymap.html#similar-plugins",
     "href": "mini.nvim/readmes/mini-keymap.html#similar-plugins",
     "title": "mini.keymap",
-    "section": "Similar plugins",
-    "text": "Similar plugins\n\nmax397574/better-escape.nvim\nabecodes/tabout.nvim"
+    "section": "유사한 플러그인",
+    "text": "유사한 플러그인\n\nmax397574/better-escape.nvim\nabecodes/tabout.nvim"
   },
   {
     "objectID": "mini.nvim/readmes/mini-completion.html",
@@ -354,84 +354,84 @@
     "href": "mini.nvim/readmes/mini-jump.html",
     "title": "mini.jump",
     "section": "",
-    "text": "Generated from the main branch of ‘mini.nvim’"
+    "text": "’mini.nvim’의 main 브랜치에서 생성됨"
   },
   {
-    "objectID": "mini.nvim/readmes/mini-jump.html#demo",
-    "href": "mini.nvim/readmes/mini-jump.html#demo",
+    "objectID": "mini.nvim/readmes/mini-jump.html#데모",
+    "href": "mini.nvim/readmes/mini-jump.html#데모",
     "title": "mini.jump",
-    "section": "Demo",
-    "text": "Demo\nVideo"
+    "section": "데모",
+    "text": "데모\nVideo"
   },
   {
     "objectID": "mini.nvim/readmes/mini-jump.html#features",
     "href": "mini.nvim/readmes/mini-jump.html#features",
     "title": "mini.jump",
-    "section": "Features",
-    "text": "Features\n\nExtend f, F, t, T to work on multiple lines.\nRepeat jump by pressing f, F, t, T again. It is reset when cursor moved as a result of not jumping or timeout after idle time (duration customizable).\nHighlight (after customizable delay) all possible target characters and stop it after some (customizable) idle time.\nNormal, Visual, and Operator-pending (with dot-repeat as in clean Neovim) modes are supported."
+    "section": "기능",
+    "text": "기능\n\nf, F, t, T 기능을 확장하여 여러 줄에서 작동하도록 합니다.\nf, F, t, T를 다시 눌러 점프를 반복할 수 있습니다. 점프가 아닌 이유로 커서가 이동하거나 유휴 시간(설정 가능)이 지나면 점프 반복 상태가 초기화됩니다.\n설정 가능한 지연 시간 후에 가능한 모든 대상 문자를 하이라이트하고, 설정 가능한 유휴 시간이 지나면 하이라이트를 중단합니다.\n노멀, 비주얼, 연산자 대기(Neovim과 동일하게 점 반복 지원) 모드를 지원합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-jump.html#installation",
     "href": "mini.nvim/readmes/mini-jump.html#installation",
     "title": "mini.jump",
-    "section": "Installation",
-    "text": "Installation\nThis plugin can be installed as part of ‘mini.nvim’ library (recommended) or as a standalone Git repository.\nThere are two branches to install from:\n\nmain (default, recommended) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).\nstable will be updated only upon releases with code tested during public beta-testing phase in main branch.\n\nHere are code snippets for some common installation methods (use only one):\n\n\nWith mini.deps\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nFollow recommended ‘mini.deps’ installation\n\n\nStable\nFollow recommended ‘mini.deps’ installation\n\n\n\nStandalone plugin:\n\n\n\n\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nadd('nvim-mini/mini.jump')\n\n\nStable\nadd({ source = 'nvim-mini/mini.jump', checkout = 'stable' })\n\n\n\n\n\n\n\nWith folke/lazy.nvim\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.jump', version = false },\n\n\nStable\n{ 'nvim-mini/mini.jump', version = '*' },\n\n\n\n\n\n\n\nWith junegunn/vim-plug\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.jump'\n\n\nStable\nPlug 'nvim-mini/mini.jump', { 'branch': 'stable' }\n\n\n\n\n\nImportant: don’t forget to call require('mini.jump').setup() to enable its functionality.\nNote: if you are on Windows, there might be problems with too long file paths (like error: unable to create file &lt;some file name&gt;: Filename too long). Try doing one of the following:\n\nEnable corresponding git global config value: git config --system core.longpaths true. Then try to reinstall.\nInstall plugin in other place with shorter path."
+    "section": "설치",
+    "text": "설치\n이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(권장), 독립적인 Git 저장소로 설치할 수 있습니다.\n두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:\n\nmain (기본값, 권장): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.\nstable: main 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.\n\n다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):\n\n\nmini.deps 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\nStable\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\n\n단독 플러그인:\n\n\n\n\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nadd('nvim-mini/mini.jump')\n\n\nStable\nadd({ source = 'nvim-mini/mini.jump', checkout = 'stable' })\n\n\n\n\n\n\n\nfolke/lazy.nvim 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.jump', version = false },\n\n\nStable\n{ 'nvim-mini/mini.jump', version = '*' },\n\n\n\n\n\n\n\njunegunn/vim-plug 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.jump'\n\n\nStable\nPlug 'nvim-mini/mini.jump', { 'branch': 'stable' }\n\n\n\n\n\n중요: 기능을 활성화하려면 require('mini.jump').setup()을 호출해야 합니다.\n참고: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(error: unable to create file &lt;some file name&gt;: Filename too long)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:\n\n해당 git 전역 설정 값을 활성화합니다: git config --system core.longpaths true. 그 후 다시 설치를 시도하세요.\n더 짧은 경로의 다른 위치에 플러그인을 설치합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-jump.html#default-config",
     "href": "mini.nvim/readmes/mini-jump.html#default-config",
     "title": "mini.jump",
-    "section": "Default config",
-    "text": "Default config\n-- No need to copy this inside `setup()`. Will be used automatically.\n{\n  -- Module mappings. Use `''` (empty string) to disable one.\n  mappings = {\n    forward = 'f',\n    backward = 'F',\n    forward_till = 't',\n    backward_till = 'T',\n    repeat_jump = ';',\n  },\n\n  -- Delay values (in ms) for different functionalities. Set any of them to\n  -- a very big number (like 10^7) to virtually disable.\n  delay = {\n    -- Delay between jump and highlighting all possible jumps\n    highlight = 250,\n\n    -- Delay between jump and automatic stop if idle (no jump is done)\n    idle_stop = 10000000,\n  },\n\n  -- Whether to disable showing non-error feedback\n  -- This also affects (purely informational) helper messages shown after\n  -- idle time if user input is required.\n  silent = false,\n}"
+    "section": "기본 설정",
+    "text": "기본 설정\n-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.\n{\n  -- 모듈 매핑. 비활성화하려면 `''`(빈 문자열)을 사용하세요.\n  mappings = {\n    forward = 'f',\n    backward = 'F',\n    forward_till = 't',\n    backward_till = 'T',\n    repeat_jump = ';',\n  },\n\n  -- 다양한 기능을 위한 지연 시간(ms). 비활성화하려면 아주 큰 값(예: 10^7)을 설정하세요.\n  delay = {\n    -- 점프 후 가능한 모든 점프 대상을 하이라이트할 때까지의 지연 시간\n    highlight = 250,\n\n    -- 점프 후 아무 작업이 없을 때(유휴 상태) 자동으로 중지할 때까지의 지연 시간\n    idle_stop = 10000000,\n  },\n\n  -- 에러가 아닌 피드백 표시 여부\n  -- 이는 사용자 입력이 필요할 때 유휴 시간 후 표시되는 정보 메시지에도 영향을 미칩니다.\n  silent = false,\n}"
   },
   {
     "objectID": "mini.nvim/readmes/mini-jump.html#similar-plugins",
     "href": "mini.nvim/readmes/mini-jump.html#similar-plugins",
     "title": "mini.jump",
-    "section": "Similar plugins",
-    "text": "Similar plugins\n\nrhysd/clever-f.vim\njustinmk/vim-sneak"
+    "section": "유사한 플러그인",
+    "text": "유사한 플러그인\n\nrhysd/clever-f.vim\njustinmk/vim-sneak"
   },
   {
     "objectID": "mini.nvim/readmes/mini-operators.html",
     "href": "mini.nvim/readmes/mini-operators.html",
     "title": "mini.operators",
     "section": "",
-    "text": "Generated from the main branch of ‘mini.nvim’"
+    "text": "’mini.nvim’의 main 브랜치에서 생성됨"
   },
   {
-    "objectID": "mini.nvim/readmes/mini-operators.html#demo",
-    "href": "mini.nvim/readmes/mini-operators.html#demo",
+    "objectID": "mini.nvim/readmes/mini-operators.html#데모",
+    "href": "mini.nvim/readmes/mini-operators.html#데모",
     "title": "mini.operators",
-    "section": "Demo",
-    "text": "Demo\nVideo"
+    "section": "데모",
+    "text": "데모\nVideo"
   },
   {
     "objectID": "mini.nvim/readmes/mini-operators.html#features",
     "href": "mini.nvim/readmes/mini-operators.html#features",
     "title": "mini.operators",
-    "section": "Features",
-    "text": "Features\n\nOperators:\n\nEvaluate text and replace with output.\nExchange text regions.\nMultiply (duplicate) text.\nReplace text with register.\nSort text.\n\nAutomated configurable mappings to operate on textobject, line, selection. Can be disabled in favor of more control with MiniOperators.make_mappings().\nAll operators support [count] and dot-repeat.\n\nFor more information see theses parts of help: - :h MiniOperators-overview - :h MiniOperators.config"
+    "section": "기능",
+    "text": "기능\n\n연산자(Operators):\n\n텍스트를 평가(Evaluate)하고 출력값으로 교체합니다.\n텍스트 영역을 서로 교환(Exchange)합니다.\n텍스트를 배가(Multiply, 복제)합니다.\n텍스트를 레지스터 내용으로 교체(Replace)합니다.\n텍스트를 정렬(Sort)합니다.\n\n텍스트 오브젝트, 줄, 선택 영역에서 작동하도록 구성 가능한 매핑을 자동으로 수행합니다. 더 세밀한 제어를 위해 자동 매핑을 비활성화하고 MiniOperators.make_mappings()를 사용할 수 있습니다.\n모든 연산자는 [count]와 점 반복(dot-repeat)을 지원합니다.\n\n더 자세한 정보는 도움말의 다음 섹션들을 참조하세요: - :h MiniOperators-overview - :h MiniOperators.config"
   },
   {
     "objectID": "mini.nvim/readmes/mini-operators.html#installation",
     "href": "mini.nvim/readmes/mini-operators.html#installation",
     "title": "mini.operators",
-    "section": "Installation",
-    "text": "Installation\nThis plugin can be installed as part of ‘mini.nvim’ library (recommended) or as a standalone Git repository.\nThere are two branches to install from:\n\nmain (default, recommended) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).\nstable will be updated only upon releases with code tested during public beta-testing phase in main branch.\n\nHere are code snippets for some common installation methods (use only one):\n\n\nWith mini.deps\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nFollow recommended ‘mini.deps’ installation\n\n\nStable\nFollow recommended ‘mini.deps’ installation\n\n\n\nStandalone plugin:\n\n\n\n\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nadd('nvim-mini/mini.operators')\n\n\nStable\nadd({ source = 'nvim-mini/mini.operators', checkout = 'stable' })\n\n\n\n\n\n\n\nWith folke/lazy.nvim\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.operators', version = false },\n\n\nStable\n{ 'nvim-mini/mini.operators', version = '*' },\n\n\n\n\n\n\n\nWith junegunn/vim-plug\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.operators'\n\n\nStable\nPlug 'nvim-mini/mini.operators', { 'branch': 'stable' }\n\n\n\n\n\nImportant: don’t forget to call require('mini.operators').setup() to enable its functionality.\nNote: if you are on Windows, there might be problems with too long file paths (like error: unable to create file &lt;some file name&gt;: Filename too long). Try doing one of the following:\n\nEnable corresponding git global config value: git config --system core.longpaths true. Then try to reinstall.\nInstall plugin in other place with shorter path."
+    "section": "설치",
+    "text": "설치\n이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(권장), 독립적인 Git 저장소로 설치할 수 있습니다.\n두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:\n\nmain (기본값, 권장): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.\nstable: main 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.\n\n다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):\n\n\nmini.deps 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\nStable\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\n\n단독 플러그인:\n\n\n\n\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nadd('nvim-mini/mini.operators')\n\n\nStable\nadd({ source = 'nvim-mini/mini.operators', checkout = 'stable' })\n\n\n\n\n\n\n\nfolke/lazy.nvim 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.operators', version = false },\n\n\nStable\n{ 'nvim-mini/mini.operators', version = '*' },\n\n\n\n\n\n\n\njunegunn/vim-plug 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.operators'\n\n\nStable\nPlug 'nvim-mini/mini.operators', { 'branch': 'stable' }\n\n\n\n\n\n중요: 기능을 활성화하려면 require('mini.operators').setup()을 호출해야 합니다.\n참고: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(error: unable to create file &lt;some file name&gt;: Filename too long)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:\n\n해당 git 전역 설정 값을 활성화합니다: git config --system core.longpaths true. 그 후 다시 설치를 시도하세요.\n더 짧은 경로의 다른 위치에 플러그인을 설치합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-operators.html#default-config",
     "href": "mini.nvim/readmes/mini-operators.html#default-config",
     "title": "mini.operators",
-    "section": "Default config",
-    "text": "Default config\n-- No need to copy this inside `setup()`. Will be used automatically.\n{\n  -- Each entry configures one operator.\n  -- `prefix` defines keys mapped during `setup()`: in Normal mode\n  -- to operate on textobject and line, in Visual - on selection.\n\n  -- Evaluate text and replace with output\n  evaluate = {\n    prefix = 'g=',\n\n    -- Function which does the evaluation\n    func = nil,\n  },\n\n  -- Exchange text regions\n  exchange = {\n    -- NOTE: Default `gx` is remapped to `gX`\n    prefix = 'gx',\n\n    -- Whether to reindent new text to match previous indent\n    reindent_linewise = true,\n  },\n\n  -- Multiply (duplicate) text\n  multiply = {\n    prefix = 'gm',\n\n    -- Function which can modify text before multiplying\n    func = nil,\n  },\n\n  -- Replace text with register\n  replace = {\n    -- NOTE: Default `gr*` LSP mappings are removed\n    prefix = 'gr',\n\n    -- Whether to reindent new text to match previous indent\n    reindent_linewise = true,\n  },\n\n  -- Sort text\n  sort = {\n    prefix = 'gs',\n\n    -- Function which does the sort\n    func = nil,\n  }\n}"
+    "section": "기본 설정",
+    "text": "기본 설정\n-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.\n{\n  -- 각 엔트리는 하나의 연산자를 설정합니다.\n  -- `prefix`는 `setup()` 중에 매핑되는 키를 정의합니다: 노멀 모드에서는 \n  -- 텍스트 오브젝트 및 줄 단위로, 비주얼 모드에서는 선택 영역에 대해 작동합니다.\n\n  -- 텍스트 평가 및 결과로 교체\n  evaluate = {\n    prefix = 'g=',\n\n    -- 평가를 수행하는 함수\n    func = nil,\n  },\n\n  -- 텍스트 영역 교환\n  exchange = {\n    -- 참고: 기본 `gx`는 `gX`로 리매핑됩니다.\n    prefix = 'gx',\n\n    -- 이전 들여쓰기에 맞춰 새 텍스트의 들여쓰기를 자동 조정할지 여부\n    reindent_linewise = true,\n  },\n\n  -- 텍스트 배가(복제)\n  multiply = {\n    prefix = 'gm',\n\n    -- 배가하기 전 텍스트를 수정할 수 있는 함수\n    func = nil,\n  },\n\n  -- 레지스터 내용으로 텍스트 교체\n  replace = {\n    -- 참고: 기본 `gr*` LSP 매핑은 제거됩니다.\n    prefix = 'gr',\n\n    -- 이전 들여쓰기에 맞춰 새 텍스트의 들여쓰기를 자동 조정할지 여부\n    reindent_linewise = true,\n  },\n\n  -- 텍스트 정렬\n  sort = {\n    prefix = 'gs',\n\n    -- 정렬을 수행하는 함수\n    func = nil,\n  }\n}"
   },
   {
     "objectID": "mini.nvim/readmes/mini-operators.html#similar-plugins",
     "href": "mini.nvim/readmes/mini-operators.html#similar-plugins",
     "title": "mini.operators",
-    "section": "Similar plugins",
-    "text": "Similar plugins\n\ngbprod/substitute.nvim\nsvermeulen/vim-subversive\ntommcdo/vim-exchange\nchristoomey/vim-sort-motion"
+    "section": "유사한 플러그인",
+    "text": "유사한 플러그인\n\ngbprod/substitute.nvim\nsvermeulen/vim-subversive\ntommcdo/vim-exchange\nchristoomey/vim-sort-motion"
   },
   {
     "objectID": "mini.nvim/readmes/mini-visits.html",
@@ -900,42 +900,42 @@
     "href": "mini.nvim/readmes/mini-move.html",
     "title": "mini.move",
     "section": "",
-    "text": "Generated from the main branch of ‘mini.nvim’"
+    "text": "’mini.nvim’의 main 브랜치에서 생성됨"
   },
   {
-    "objectID": "mini.nvim/readmes/mini-move.html#demo",
-    "href": "mini.nvim/readmes/mini-move.html#demo",
+    "objectID": "mini.nvim/readmes/mini-move.html#데모",
+    "href": "mini.nvim/readmes/mini-move.html#데모",
     "title": "mini.move",
-    "section": "Demo",
-    "text": "Demo\nVideo"
+    "section": "데모",
+    "text": "데모\nVideo"
   },
   {
     "objectID": "mini.nvim/readmes/mini-move.html#features",
     "href": "mini.nvim/readmes/mini-move.html#features",
     "title": "mini.move",
-    "section": "Features",
-    "text": "Features\n\nWorks in two modes:\n\nVisual mode. Select text (charwise with v, linewise with V, and blockwise with CTRL-V) and press customizable mapping to move in all four directions (left, right, down, up). It keeps Visual mode.\nNormal mode. Press customizable mapping to move current line in all four directions (left, right, down, up).\nSpecial handling of linewise movement:\n\nVertical movement gets reindented with =.\nHorizontal movement is improved indent/dedent with &gt; / &lt;.\nCursor moves along with selection.\n\n\nProvides both mappings and Lua functions for motions. See :h MiniMove.move_selection() and :h MiniMove.move_line().\nRespects v:count. Movement mappings can be preceded by a number which multiplies command effect.\nAll consecutive moves (regardless of direction) can be undone by a single u.\nRespects preferred column for vertical movement. It will vertically move selection as how cursor is moving (not strictly vertically if target column is not present in target line)."
+    "section": "기능",
+    "text": "기능\n\n두 가지 모드에서 대상을 이동합니다:\n\n비주얼 모드: 텍스트를 선택한 후(문자 단위 v, 줄 단위 V, 블록 단위 CTRL-V) 상하좌우 네 방향으로 이동할 수 있도록 구성된 매핑을 누릅니다. 이동 후에도 비주얼 모드가 유지됩니다.\n노멀 모드: 현재 줄을 상하좌우 네 방향으로 이동하도록 구성된 매핑을 누릅니다.\n줄 단위 이동에 대한 특수 처리:\n\n수직 이동 시 =를 통해 자동으로 들여쓰기가 조정됩니다.\n수평 이동 시 &gt; / &lt;를 개선하여 들여쓰기/내어쓰기가 수행됩니다.\n선택 영역과 함께 커서가 이동합니다.\n\n\n이동을 위한 매핑과 Lua 함수를 모두 제공합니다. :h MiniMove.move_selection() 및 :h MiniMove.move_line()을 참조하세요.\nv:count를 지원합니다. 매핑 앞에 숫자를 입력하여 이동 횟수를 지정할 수 있습니다.\n연속적인 모든 이동은 어떤 방향이든 상관없이 단 한 번의 u 입력으로 모두 취소할 수 있습니다.\n수직 이동 시 선호하는 열(preferred column)을 준수합니다. 커서가 움직이는 방식과 동일하게 선택 영역을 수직으로 이동합니다 (대상이 되는 줄에 원본 열이 존재하지 않는 경우 등 엄격하게 수직이 아닐 수 있음)."
   },
   {
     "objectID": "mini.nvim/readmes/mini-move.html#installation",
     "href": "mini.nvim/readmes/mini-move.html#installation",
     "title": "mini.move",
-    "section": "Installation",
-    "text": "Installation\nThis plugin can be installed as part of ‘mini.nvim’ library (recommended) or as a standalone Git repository.\nThere are two branches to install from:\n\nmain (default, recommended) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).\nstable will be updated only upon releases with code tested during public beta-testing phase in main branch.\n\nHere are code snippets for some common installation methods (use only one):\n\n\nWith mini.deps\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nFollow recommended ‘mini.deps’ installation\n\n\nStable\nFollow recommended ‘mini.deps’ installation\n\n\n\nStandalone plugin:\n\n\n\n\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nadd('nvim-mini/mini.move')\n\n\nStable\nadd({ source = 'nvim-mini/mini.move', checkout = 'stable' })\n\n\n\n\n\n\n\nWith folke/lazy.nvim\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.move', version = false },\n\n\nStable\n{ 'nvim-mini/mini.move', version = '*' },\n\n\n\n\n\n\n\nWith junegunn/vim-plug\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.move'\n\n\nStable\nPlug 'nvim-mini/mini.move', { 'branch': 'stable' }\n\n\n\n\n\nImportant: don’t forget to call require('mini.move').setup() to enable its functionality.\nNote: if you are on Windows, there might be problems with too long file paths (like error: unable to create file &lt;some file name&gt;: Filename too long). Try doing one of the following:\n\nEnable corresponding git global config value: git config --system core.longpaths true. Then try to reinstall.\nInstall plugin in other place with shorter path."
+    "section": "설치",
+    "text": "설치\n이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(권장), 독립적인 Git 저장소로 설치할 수 있습니다.\n두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:\n\nmain (기본값, 권장): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.\nstable: main 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.\n\n다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):\n\n\nmini.deps 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\nStable\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\n\n단독 플러그인:\n\n\n\n\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nadd('nvim-mini/mini.move')\n\n\nStable\nadd({ source = 'nvim-mini/mini.move', checkout = 'stable' })\n\n\n\n\n\n\n\nfolke/lazy.nvim 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.move', version = false },\n\n\nStable\n{ 'nvim-mini/mini.move', version = '*' },\n\n\n\n\n\n\n\njunegunn/vim-plug 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.move'\n\n\nStable\nPlug 'nvim-mini/mini.move', { 'branch': 'stable' }\n\n\n\n\n\n중요: 기능을 활성화하려면 require('mini.move').setup()을 호출해야 합니다.\n참고: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(error: unable to create file &lt;some file name&gt;: Filename too long)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:\n\n해당 git 전역 설정 값을 활성화합니다: git config --system core.longpaths true. 그 후 다시 설치를 시도하세요.\n더 짧은 경로의 다른 위치에 플러그인을 설치합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-move.html#default-config",
     "href": "mini.nvim/readmes/mini-move.html#default-config",
     "title": "mini.move",
-    "section": "Default config",
-    "text": "Default config\n-- No need to copy this inside `setup()`. Will be used automatically.\n{\n  -- Module mappings. Use `''` (empty string) to disable one.\n  mappings = {\n    -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.\n    left = '&lt;M-h&gt;',\n    right = '&lt;M-l&gt;',\n    down = '&lt;M-j&gt;',\n    up = '&lt;M-k&gt;',\n\n    -- Move current line in Normal mode\n    line_left = '&lt;M-h&gt;',\n    line_right = '&lt;M-l&gt;',\n    line_down = '&lt;M-j&gt;',\n    line_up = '&lt;M-k&gt;',\n  },\n\n  -- Options which control moving behavior\n  options = {\n    -- Automatically reindent selection during linewise vertical move\n    reindent_linewise = true,\n  },\n}"
+    "section": "기본 설정",
+    "text": "기본 설정\n-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.\n{\n  -- 모듈 매핑. 비활성화하려면 `''`(빈 문자열)을 사용하세요.\n  mappings = {\n    -- 비주얼 모드에서 비주얼 선택 영역 이동. 기본값은 Alt (Meta) + hjkl입니다.\n    left = '&lt;M-h&gt;',\n    right = '&lt;M-l&gt;',\n    down = '&lt;M-j&gt;',\n    up = '&lt;M-k&gt;',\n\n    -- 노멀 모드에서 현재 줄 이동\n    line_left = '&lt;M-h&gt;',\n    line_right = '&lt;M-l&gt;',\n    line_down = '&lt;M-j&gt;',\n    line_up = '&lt;M-k&gt;',\n  },\n\n  -- 이동 동작을 제어하는 옵션\n  options = {\n    -- 줄 단위 수직 이동 중 선택 영역 들여쓰기 자동 조정\n    reindent_linewise = true,\n  },\n}"
   },
   {
     "objectID": "mini.nvim/readmes/mini-move.html#similar-plugins",
     "href": "mini.nvim/readmes/mini-move.html#similar-plugins",
     "title": "mini.move",
-    "section": "Similar plugins",
-    "text": "Similar plugins\n\nmatze/vim-move\nbooperlv/nvim-gomove"
+    "section": "유사한 플러그인",
+    "text": "유사한 플러그인\n\nmatze/vim-move\nbooperlv/nvim-gomove"
   },
   {
     "objectID": "mini.nvim/readmes/mini-cursorword.html",
@@ -3525,84 +3525,84 @@
     "href": "mini.nvim/readmes/mini-misc.html",
     "title": "mini.misc",
     "section": "",
-    "text": "Generated from the main branch of ‘mini.nvim’"
+    "text": "’mini.nvim’의 main 브랜치에서 생성됨"
   },
   {
-    "objectID": "mini.nvim/readmes/mini-misc.html#demo",
-    "href": "mini.nvim/readmes/mini-misc.html#demo",
+    "objectID": "mini.nvim/readmes/mini-misc.html#데모",
+    "href": "mini.nvim/readmes/mini-misc.html#데모",
     "title": "mini.misc",
-    "section": "Demo",
-    "text": "Demo\nVideo"
+    "section": "데모",
+    "text": "데모\nVideo"
   },
   {
     "objectID": "mini.nvim/readmes/mini-misc.html#features",
     "href": "mini.nvim/readmes/mini-misc.html#features",
     "title": "mini.misc",
-    "section": "Features",
-    "text": "Features\n\nbench_time() executes function several times and timing how long it took.\nlog_add() / log_show() and other helper functions to work with a special in-memory log array. Useful when debugging Lua code (instead of print()).\nput() and put_text() print Lua objects in command line and current buffer respectively.\nresize_window() resizes current window to its editable width.\nsafely() to execute a function on a condition and warn on error. Useful to organize ‘init.lua’ in fail-safe sections with simple lazy loading.\nsetup_auto_root() sets up automated change of current directory.\nsetup_termbg_sync() to set up terminal background synchronization (removes possible “frame” around current Neovim instance).\nsetup_restore_cursor() sets up automated restoration of cursor position on file reopen.\nstat_summary() computes summary statistics of numerical array.\ntbl_head() and tbl_tail() return first and last elements of table.\nzoom() makes current buffer full screen in a floating window.\nAnd more."
+    "section": "기능",
+    "text": "기능\n\nbench_time()은 함수를 여러 번 실행하여 걸린 시간을 측정합니다.\nlog_add() / log_show() 및 기타 헬퍼 함수들은 특수한 인메모리 로그 배열을 작업하는 데 사용됩니다. Lua 코드를 디버깅할 때 print() 대신 유용하게 사용할 수 있습니다.\nput()과 put_text()는 각각 커맨드 라인과 현재 버퍼에 Lua 객체를 출력합니다.\nresize_window()는 현재 창을 편집 가능한 너비로 조정합니다.\nsafely()는 특정 조건에서 함수를 실행하고 에러 발생 시 경고를 표시합니다. ’init.lua’를 간단한 지연 로딩(lazy loading)과 함께 안전하게 구성하는 데 유용합니다.\nsetup_auto_root()는 현재 디렉터리를 자동으로 변경하도록 설정합니다.\nsetup_termbg_sync()는 터미널 배경 동기화를 설정합니다 (현재 Neovim 인스턴스 주변에 생길 수 있는 “프레임”을 제거).\nsetup_restore_cursor()는 파일을 다시 열 때 커서 위치를 자동으로 복원하도록 설정합니다.\nstat_summary()는 숫자 배열의 요약 통계를 계산합니다.\ntbl_head()와 tbl_tail()은 테이블의 첫 번째와 마지막 요소를 반환합니다.\nzoom()은 현재 버퍼를 플로팅 창을 통해 전체 화면으로 확대합니다.\n그 외 다양한 기능을 제공합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-misc.html#installation",
     "href": "mini.nvim/readmes/mini-misc.html#installation",
     "title": "mini.misc",
-    "section": "Installation",
-    "text": "Installation\nThis plugin can be installed as part of ‘mini.nvim’ library (recommended) or as a standalone Git repository.\nThere are two branches to install from:\n\nmain (default, recommended) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).\nstable will be updated only upon releases with code tested during public beta-testing phase in main branch.\n\nHere are code snippets for some common installation methods (use only one):\n\n\nWith mini.deps\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nFollow recommended ‘mini.deps’ installation\n\n\nStable\nFollow recommended ‘mini.deps’ installation\n\n\n\nStandalone plugin:\n\n\n\n\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nadd('nvim-mini/mini.misc')\n\n\nStable\nadd({ source = 'nvim-mini/mini.misc', checkout = 'stable' })\n\n\n\n\n\n\n\nWith folke/lazy.nvim\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.misc', version = false },\n\n\nStable\n{ 'nvim-mini/mini.misc', version = '*' },\n\n\n\n\n\n\n\nWith junegunn/vim-plug\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.misc'\n\n\nStable\nPlug 'nvim-mini/mini.misc', { 'branch': 'stable' }\n\n\n\n\n\nImportant: no need to call require('mini.misc').setup(), but it can be done to improve usability.\nNote: if you are on Windows, there might be problems with too long file paths (like error: unable to create file &lt;some file name&gt;: Filename too long). Try doing one of the following:\n\nEnable corresponding git global config value: git config --system core.longpaths true. Then try to reinstall.\nInstall plugin in other place with shorter path."
+    "section": "설치",
+    "text": "설치\n이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(권장), 독립적인 Git 저장소로 설치할 수 있습니다.\n두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:\n\nmain (기본값, 권장): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.\nstable: main 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.\n\n다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):\n\n\nmini.deps 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\nStable\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\n\n단독 플러그인:\n\n\n\n\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nadd('nvim-mini/mini.misc')\n\n\nStable\nadd({ source = 'nvim-mini/mini.misc', checkout = 'stable' })\n\n\n\n\n\n\n\nfolke/lazy.nvim 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.misc', version = false },\n\n\nStable\n{ 'nvim-mini/mini.misc', version = '*' },\n\n\n\n\n\n\n\njunegunn/vim-plug 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.misc'\n\n\nStable\nPlug 'nvim-mini/mini.misc', { 'branch': 'stable' }\n\n\n\n\n\n중요: require('mini.misc').setup()을 반드시 호출할 필요는 없으나, 사용 편의성을 높이기 위해 호출할 수 있습니다.\n참고: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(error: unable to create file &lt;some file name&gt;: Filename too long)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:\n\n해당 git 전역 설정 값을 활성화합니다: git config --system core.longpaths true. 그 후 다시 설치를 시도하세요.\n더 짧은 경로의 다른 위치에 플러그인을 설치합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-misc.html#default-config",
     "href": "mini.nvim/readmes/mini-misc.html#default-config",
     "title": "mini.misc",
-    "section": "Default config",
-    "text": "Default config\n-- No need to copy this inside `setup()`. Will be used automatically.\n{\n  -- Array of fields to make global (to be used as independent variables)\n  make_global = { 'put', 'put_text' },\n}"
+    "section": "기본 설정",
+    "text": "기본 설정\n-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.\n{\n  -- 전역 변수로 만들 필드들의 배열 (독립적인 변수로 사용됨)\n  make_global = { 'put', 'put_text' },\n}"
   },
   {
     "objectID": "mini.nvim/readmes/mini-misc.html#similar-plugins",
     "href": "mini.nvim/readmes/mini-misc.html#similar-plugins",
     "title": "mini.misc",
-    "section": "Similar plugins",
-    "text": "Similar plugins\n\nnvim-lua/plenary.nvim"
+    "section": "유사한 플러그인",
+    "text": "유사한 플러그인\n\nnvim-lua/plenary.nvim"
   },
   {
     "objectID": "mini.nvim/readmes/mini-notify.html",
     "href": "mini.nvim/readmes/mini-notify.html",
     "title": "mini.notify",
     "section": "",
-    "text": "Generated from the main branch of ‘mini.nvim’"
+    "text": "’mini.nvim’의 main 브랜치에서 생성됨"
   },
   {
-    "objectID": "mini.nvim/readmes/mini-notify.html#demo",
-    "href": "mini.nvim/readmes/mini-notify.html#demo",
+    "objectID": "mini.nvim/readmes/mini-notify.html#데모",
+    "href": "mini.nvim/readmes/mini-notify.html#데모",
     "title": "mini.notify",
-    "section": "Demo",
-    "text": "Demo\nVideo"
+    "section": "데모",
+    "text": "데모\nVideo"
   },
   {
     "objectID": "mini.nvim/readmes/mini-notify.html#features",
     "href": "mini.nvim/readmes/mini-notify.html#features",
     "title": "mini.notify",
-    "section": "Features",
-    "text": "Features\n\nShow one or more highlighted notifications in a single floating window.\nManage notifications (add, update, remove, clear).\nCustom vim.notify() implementation. To adjust, use MiniNotify.make_notify() after calling setup().\nAutomated show of LSP progress report.\nTrack history which can be accessed with MiniNotify.get_all() and shown with MiniNotify.show_history()."
+    "section": "기능",
+    "text": "기능\n\n하나 이상의 하이라이트된 알림을 단일 플로팅 창에 표시합니다.\n알림을 관리합니다 (추가, 업데이트, 제거, 지우기).\n사용자 정의 vim.notify() 구현을 제공합니다. 이를 조정하려면 setup()을 호출한 후 MiniNotify.make_notify()를 사용하세요.\nLSP 진행 상황 자동 보고 기능을 제공합니다.\n알림 기록(history)을 추적하며, MiniNotify.get_all()로 확인하거나 MiniNotify.show_history()로 표시할 수 있습니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-notify.html#installation",
     "href": "mini.nvim/readmes/mini-notify.html#installation",
     "title": "mini.notify",
-    "section": "Installation",
-    "text": "Installation\nThis plugin can be installed as part of ‘mini.nvim’ library (recommended) or as a standalone Git repository.\nThere are two branches to install from:\n\nmain (default, recommended) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).\nstable will be updated only upon releases with code tested during public beta-testing phase in main branch.\n\nHere are code snippets for some common installation methods (use only one):\n\n\nWith mini.deps\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nFollow recommended ‘mini.deps’ installation\n\n\nStable\nFollow recommended ‘mini.deps’ installation\n\n\n\nStandalone plugin:\n\n\n\n\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nadd('nvim-mini/mini.notify')\n\n\nStable\nadd({ source = 'nvim-mini/mini.notify', checkout = 'stable' })\n\n\n\n\n\n\n\nWith folke/lazy.nvim\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.notify', version = false },\n\n\nStable\n{ 'nvim-mini/mini.notify', version = '*' },\n\n\n\n\n\n\n\nWith junegunn/vim-plug\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.notify'\n\n\nStable\nPlug 'nvim-mini/mini.notify', { 'branch': 'stable' }\n\n\n\n\n\nImportant: don’t forget to call require('mini.notify').setup() to enable its functionality.\nNote: if you are on Windows, there might be problems with too long file paths (like error: unable to create file &lt;some file name&gt;: Filename too long). Try doing one of the following:\n\nEnable corresponding git global config value: git config --system core.longpaths true. Then try to reinstall.\nInstall plugin in other place with shorter path."
+    "section": "설치",
+    "text": "설치\n이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(권장), 독립적인 Git 저장소로 설치할 수 있습니다.\n두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:\n\nmain (기본값, 권장): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.\nstable: main 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.\n\n다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):\n\n\nmini.deps 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\nStable\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\n\n단독 플러그인:\n\n\n\n\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nadd('nvim-mini/mini.notify')\n\n\nStable\nadd({ source = 'nvim-mini/mini.notify', checkout = 'stable' })\n\n\n\n\n\n\n\nfolke/lazy.nvim 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.notify', version = false },\n\n\nStable\n{ 'nvim-mini/mini.notify', version = '*' },\n\n\n\n\n\n\n\njunegunn/vim-plug 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.notify'\n\n\nStable\nPlug 'nvim-mini/mini.notify', { 'branch': 'stable' }\n\n\n\n\n\n중요: 기능을 활성화하려면 require('mini.notify').setup()을 호출해야 합니다.\n참고: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(error: unable to create file &lt;some file name&gt;: Filename too long)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:\n\n해당 git 전역 설정 값을 활성화합니다: git config --system core.longpaths true. 그 후 다시 설치를 시도하세요.\n더 짧은 경로의 다른 위치에 플러그인을 설치합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-notify.html#default-config",
     "href": "mini.nvim/readmes/mini-notify.html#default-config",
     "title": "mini.notify",
-    "section": "Default config",
-    "text": "Default config\n-- No need to copy this inside `setup()`. Will be used automatically.\n{\n  -- Content management\n  content = {\n    -- Function which formats the notification message\n    -- By default prepends message with notification time\n    format = nil,\n\n    -- Function which orders notification array from most to least important\n    -- By default orders first by level and then by update timestamp\n    sort = nil,\n  },\n\n  -- Notifications about LSP progress\n  lsp_progress = {\n    -- Whether to enable showing\n    enable = true,\n\n    -- Notification level\n    level = 'INFO',\n\n    -- Duration (in ms) of how long last message should be shown\n    duration_last = 1000,\n  },\n\n  -- Window options\n  window = {\n    -- Floating window config\n    config = {},\n\n    -- Maximum window width as share (between 0 and 1) of available columns\n    max_width_share = 0.382,\n\n    -- Value of 'winblend' option\n    winblend = 25,\n  },\n}"
+    "section": "기본 설정",
+    "text": "기본 설정\n-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.\n{\n  -- 콘텐츠 관리\n  content = {\n    -- 알림 메시지를 형식화하는 함수\n    -- 기본적으로 메시지 앞에 알림 시간을 붙입니다.\n    format = nil,\n\n    -- 알림 배열을 중요도 순으로 정렬하는 함수\n    -- 기본적으로 레벨(level) 순으로 먼저 정렬한 후 업데이트 타임스탬프 순으로 정렬합니다.\n    sort = nil,\n  },\n\n  -- LSP 진행 상황 알림\n  lsp_progress = {\n    -- 표시 여부 활성화\n    enable = true,\n\n    -- 알림 레벨\n    level = 'INFO',\n\n    -- 마지막 메시지를 얼마나 오래 표시할지 결정 (ms)\n    duration_last = 1000,\n  },\n\n  -- 창 옵션\n  window = {\n    -- 플로팅 창 설정\n    config = {},\n\n    -- 가용한 열 너비의 비율(0에서 1 사이)로 표시되는 최대 창 너비\n    max_width_share = 0.382,\n\n    -- 'winblend' 옵션 값\n    winblend = 25,\n  },\n}"
   },
   {
     "objectID": "mini.nvim/readmes/mini-notify.html#similar-plugins",
     "href": "mini.nvim/readmes/mini-notify.html#similar-plugins",
     "title": "mini.notify",
-    "section": "Similar plugins",
-    "text": "Similar plugins\n\nj-hui/fidget.nvim\nrcarriga/nvim-notify"
+    "section": "유사한 플러그인",
+    "text": "유사한 플러그인\n\nj-hui/fidget.nvim\nrcarriga/nvim-notify"
   },
   {
     "objectID": "mini.nvim/readmes/mini-hipatterns.html",
@@ -3791,42 +3791,42 @@
     "href": "mini.nvim/readmes/mini-cmdline.html",
     "title": "mini.cmdline",
     "section": "",
-    "text": "Generated from the main branch of ‘mini.nvim’"
+    "text": "’mini.nvim’의 main 브랜치에서 생성됨"
   },
   {
-    "objectID": "mini.nvim/readmes/mini-cmdline.html#demo",
-    "href": "mini.nvim/readmes/mini-cmdline.html#demo",
+    "objectID": "mini.nvim/readmes/mini-cmdline.html#데모",
+    "href": "mini.nvim/readmes/mini-cmdline.html#데모",
     "title": "mini.cmdline",
-    "section": "Demo",
-    "text": "Demo\nVideo"
+    "section": "데모",
+    "text": "데모\nVideo"
   },
   {
     "objectID": "mini.nvim/readmes/mini-cmdline.html#features",
     "href": "mini.nvim/readmes/mini-cmdline.html#features",
     "title": "mini.cmdline",
-    "section": "Features",
-    "text": "Features\n\nAutocomplete with customizable delay. Enhances :h cmdline-completion and manual :h 'wildchar' pressing experience. Requires Neovim&gt;=0.11, though Neovim&gt;=0.12 is recommended.\nAutocorrect words as-you-type. Only words that must come from a fixed set of candidates (like commands and options) are autocorrected by default.\nAutopeek command range as-you-type. Shows a floating window with range lines along with customizable context lines.\n\nWhat it doesn’t do:\n\nCustomization of command line UI. Use :h vim._extui (on Neovim&gt;=0.12).\nCustomization of autocompletion candidates. They are computed via :h cmdline-completion."
+    "section": "기능",
+    "text": "기능\n\n설정 가능한 지연 시간과 함께 자동 완성을 제공합니다. :h cmdline-completion 및 수동 :h 'wildchar' 입력 경험을 개선합니다. Neovim&gt;=0.11이 필요하며, Neovim&gt;=0.12를 권장합니다.\n입력하는 동안 단어를 자동 수정(Autocorrect)합니다. 기본적으로 명령어나 옵션처럼 고정된 후보군에서 가져와야 하는 단어들만 자동 수정됩니다.\n입력하는 동안 명령어의 범위(range)를 미리 보여줍니다(Autopeek). 범위에 해당하는 줄과 설정 가능한 컨텍스트 줄을 플로팅 창으로 보여줍니다.\n\n수행하지 않는 작업:\n\n커맨드 라인 UI의 커스터마이징. Neovim&gt;=0.12에서 :h vim._extui를 사용하세요.\n자동 완성 후보의 커스터마이징. 후보는 :h cmdline-completion을 통해 계산됩니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-cmdline.html#installation",
     "href": "mini.nvim/readmes/mini-cmdline.html#installation",
     "title": "mini.cmdline",
-    "section": "Installation",
-    "text": "Installation\nThis plugin can be installed as part of ‘mini.nvim’ library (recommended) or as a standalone Git repository.\nDuring beta-testing phase there is only one branch to install from:\n\nmain (default, recommended) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).\nstable will be updated only upon releases with code tested during public beta-testing phase in main branch.\n\nHere are code snippets for some common installation methods (use only one):\n\n\nWith mini.deps\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nFollow recommended ‘mini.deps’ installation\n\n\nStable\nFollow recommended ‘mini.deps’ installation\n\n\n\nStandalone plugin:\n\n\n\n\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nadd('nvim-mini/mini.cmdline')\n\n\nStable\nadd({ source = 'nvim-mini/mini.cmdline', checkout = 'stable' })\n\n\n\n\n\n\n\nWith folke/lazy.nvim\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.cmdline', version = false },\n\n\nStable\n{ 'nvim-mini/mini.cmdline', version = '*' },\n\n\n\n\n\n\n\nWith junegunn/vim-plug\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.cmdline'\n\n\nStable\nPlug 'nvim-mini/mini.cmdline', { 'branch': 'stable' }\n\n\n\n\n\nImportant: don’t forget to call require('mini.cmdline').setup() to enable its functionality.\nNote: if you are on Windows, there might be problems with too long file paths (like error: unable to create file &lt;some file name&gt;: Filename too long). Try doing one of the following:\n\nEnable corresponding git global config value: git config --system core.longpaths true. Then try to reinstall.\nInstall plugin in other place with shorter path."
+    "section": "설치",
+    "text": "설치\n이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(권장), 독립적인 Git 저장소로 설치할 수 있습니다.\n베타 테스트 단계에서는 설치할 수 있는 브랜치가 하나만 있습니다:\n\nmain (기본값, 권장): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.\nstable: main 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.\n\n다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):\n\n\nmini.deps 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\nStable\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\n\n단독 플러그인:\n\n\n\n\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nadd('nvim-mini/mini.cmdline')\n\n\nStable\nadd({ source = 'nvim-mini/mini.cmdline', checkout = 'stable' })\n\n\n\n\n\n\n\nfolke/lazy.nvim 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.cmdline', version = false },\n\n\nStable\n{ 'nvim-mini/mini.cmdline', version = '*' },\n\n\n\n\n\n\n\njunegunn/vim-plug 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.cmdline'\n\n\nStable\nPlug 'nvim-mini/mini.cmdline', { 'branch': 'stable' }\n\n\n\n\n\n중요: 기능을 활성화하려면 require('mini.cmdline').setup()을 호출해야 합니다.\n참고: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(error: unable to create file &lt;some file name&gt;: Filename too long)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:\n\n해당 git 전역 설정 값을 활성화합니다: git config --system core.longpaths true. 그 후 다시 설치를 시도하세요.\n더 짧은 경로의 다른 위치에 플러그인을 설치합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-cmdline.html#default-config",
     "href": "mini.nvim/readmes/mini-cmdline.html#default-config",
     "title": "mini.cmdline",
-    "section": "Default config",
-    "text": "Default config\n-- No need to copy this inside `setup()`. Will be used automatically.\n{\n  -- Autocompletion: show `:h 'wildmenu'` as you type\n  autocomplete = {\n    enable = true,\n\n    -- Delay (in ms) after which to trigger completion\n    -- Neovim&gt;=0.12 is recommended for positive values\n    delay = 0,\n\n    -- Custom rule of when to trigger completion\n    predicate = nil,\n\n    -- Whether to map arrow keys for more consistent wildmenu behavior\n    map_arrows = true,\n  },\n\n  -- Autocorrection: adjust non-existing words (commands, options, etc.)\n  autocorrect = {\n    enable = true,\n\n    -- Custom autocorrection rule\n    func = nil,\n  },\n\n  -- Autopeek: show command's target range in a floating window\n  autopeek = {\n    enable = true,\n\n    -- Number of lines to show above and below range lines\n    n_context = 1,\n\n    -- Custom rule of when to show peek window\n    predicate = nil,\n\n    -- Window options\n    window = {\n      -- Floating window config\n      config = {},\n\n      -- Function to render statuscolumn\n      statuscolumn = nil,\n    },\n  },\n}"
+    "section": "기본 설정",
+    "text": "기본 설정\n-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.\n{\n  -- 자동 완성: 입력하는 동안 `:h 'wildmenu'`를 표시합니다.\n  autocomplete = {\n    enable = true,\n\n    -- 보완을 트리거할 지연 시간 (ms)\n    -- 양수 값을 사용하려면 Neovim&gt;=0.12를 권장합니다.\n    delay = 0,\n\n    -- 보완을 트리거할 때의 사용자 정의 규칙\n    predicate = nil,\n\n    -- 더 일관된 wildmenu 동작을 위해 화살표 키를 매핑할지 여부\n    map_arrows = true,\n  },\n\n  -- 자동 수정: 존재하지 않는 단어(명령어, 옵션 등)를 조정합니다.\n  autocorrect = {\n    enable = true,\n\n    -- 사용자 정의 자동 수정 규칙\n    func = nil,\n  },\n\n  -- Autopeek: 플로팅 창에 명령어의 대상 범위를 표시합니다.\n  autopeek = {\n    enable = true,\n\n    -- 범위 줄의 위아래로 표시할 컨텍스트 줄 수\n    n_context = 1,\n\n    -- 미리보기 창을 표시할 때의 사용자 정의 규칙\n    predicate = nil,\n\n    -- 창 옵션\n    window = {\n      -- 플로팅 창 설정\n      config = {},\n\n      -- statuscolumn을 렌더링하는 함수\n      statuscolumn = nil,\n    },\n  },\n}"
   },
   {
     "objectID": "mini.nvim/readmes/mini-cmdline.html#similar-plugins",
     "href": "mini.nvim/readmes/mini-cmdline.html#similar-plugins",
     "title": "mini.cmdline",
-    "section": "Similar plugins",
-    "text": "Similar plugins\n\nfolke/noice.nvim\nnacro90/numb.nvim\nBuilt-in cmdline-autocompletion (on Neovim&gt;=0.12):"
+    "section": "유사한 플러그인",
+    "text": "유사한 플러그인\n\nfolke/noice.nvim\nnacro90/numb.nvim\n내장 cmdline-autocompletion (Neovim&gt;=0.12)"
   },
   {
     "objectID": "mini.nvim/readmes/mini-bracketed.html",
@@ -3875,42 +3875,42 @@
     "href": "mini.nvim/readmes/mini-jump2d.html",
     "title": "mini.jump2d",
     "section": "",
-    "text": "Generated from the main branch of ‘mini.nvim’"
+    "text": "’mini.nvim’의 main 브랜치에서 생성됨"
   },
   {
-    "objectID": "mini.nvim/readmes/mini-jump2d.html#demo",
-    "href": "mini.nvim/readmes/mini-jump2d.html#demo",
+    "objectID": "mini.nvim/readmes/mini-jump2d.html#데모",
+    "href": "mini.nvim/readmes/mini-jump2d.html#데모",
     "title": "mini.jump2d",
-    "section": "Demo",
-    "text": "Demo\nVideo"
+    "section": "데모",
+    "text": "데모\nVideo"
   },
   {
     "objectID": "mini.nvim/readmes/mini-jump2d.html#features",
     "href": "mini.nvim/readmes/mini-jump2d.html#features",
     "title": "mini.jump2d",
-    "section": "Features",
-    "text": "Features\n\nMake jump by iterative filtering of possible, equally considered jump spots until there is only one. Filtering is done by typing a label character that is visualized at jump spot.\nCustomizable:\n\nWay of computing possible jump spots with opinionated default.\nCharacters used to label jump spots during iterative filtering.\nVisual effects: how many steps ahead to show; dim lines with spots.\nAction hooks to be executed at certain events during jump.\nAllowed windows: current and/or not current.\nAllowed lines: whether to process blank or folded lines, lines before/at/after cursor line, etc. Example: user can configure to look for spots only inside current window at or after cursor line. Example: user can configure to look for word starts only inside current window at or after cursor line with ‘j’ and ‘k’ labels performing some action after jump.\n\nWorks in Visual and Operator-pending (with dot-repeat) modes.\nPreconfigured ways of computing jump spots (see help for MiniJump2d.builtin_opts()):\n\nStarts of lines.\nStarts of words.\nSingle character from user input.\nVariable length query from user input.\n\nWorks with multibyte characters."
+    "section": "기능",
+    "text": "기능\n\n동등하게 고려되는 가능한 점프 지점들을 하나만 남을 때까지 반복적으로 필터링하여 점프합니다. 필터링은 점프 지점에 표시되는 레이블 문자를 입력하여 수행됩니다.\n커스터마이징 가능:\n\n합리적인 기본값과 함께 점프 지점을 계산하는 방식.\n반복 필터링 동안 점프 지점에 레이블을 붙이는 데 사용되는 문자들.\n시각적 효과: 몇 단계 앞까지 보여줄지, 지점이 있는 줄을 어둡게 처리할지 등.\n점프 과정 중 특정 이벤트에서 실행될 액션 후크(hooks).\n허용되는 창: 현재 창 및/또는 현재 창이 아닌 창.\n허용되는 줄: 빈 줄이나 접힌(folded) 줄 처리 여부, 커서 위/현재/아래 줄 처리 여부 등. 예를 들어, 현재 창의 커서 아래 줄에서만 지점을 찾도록 설정할 수 있습니다.\n\n비주얼 및 연산자 대기(점 반복 지원) 모드에서 작동합니다.\n미리 구성된 점프 지점 계산 방식 제공 (MiniJump2d.builtin_opts() 도움말 참조):\n\n줄의 시작 부분.\n단어의 시작 부분.\n사용자 입력으로부터 받은 단일 문자.\n사용자 입력으로부터 받은 가변 길이 쿼리.\n\n멀티바이트 문자를 지원합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-jump2d.html#installation",
     "href": "mini.nvim/readmes/mini-jump2d.html#installation",
     "title": "mini.jump2d",
-    "section": "Installation",
-    "text": "Installation\nThis plugin can be installed as part of ‘mini.nvim’ library (recommended) or as a standalone Git repository.\nThere are two branches to install from:\n\nmain (default, recommended) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).\nstable will be updated only upon releases with code tested during public beta-testing phase in main branch.\n\nHere are code snippets for some common installation methods (use only one):\n\n\nWith mini.deps\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nFollow recommended ‘mini.deps’ installation\n\n\nStable\nFollow recommended ‘mini.deps’ installation\n\n\n\nStandalone plugin:\n\n\n\n\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nadd('nvim-mini/mini.jump2d')\n\n\nStable\nadd({ source = 'nvim-mini/mini.jump2d', checkout = 'stable' })\n\n\n\n\n\n\n\nWith folke/lazy.nvim\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.jump2d', version = false },\n\n\nStable\n{ 'nvim-mini/mini.jump2d', version = '*' },\n\n\n\n\n\n\n\nWith junegunn/vim-plug\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.jump2d'\n\n\nStable\nPlug 'nvim-mini/mini.jump2d', { 'branch': 'stable' }\n\n\n\n\n\nImportant: don’t forget to call require('mini.jump2d').setup() to enable its functionality.\nNote: if you are on Windows, there might be problems with too long file paths (like error: unable to create file &lt;some file name&gt;: Filename too long). Try doing one of the following:\n\nEnable corresponding git global config value: git config --system core.longpaths true. Then try to reinstall.\nInstall plugin in other place with shorter path."
+    "section": "설치",
+    "text": "설치\n이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(권장), 독립적인 Git 저장소로 설치할 수 있습니다.\n두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:\n\nmain (기본값, 권장): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.\nstable: main 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.\n\n다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):\n\n\nmini.deps 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\nStable\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\n\n단독 플러그인:\n\n\n\n\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nadd('nvim-mini/mini.jump2d')\n\n\nStable\nadd({ source = 'nvim-mini/mini.jump2d', checkout = 'stable' })\n\n\n\n\n\n\n\nfolke/lazy.nvim 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.jump2d', version = false },\n\n\nStable\n{ 'nvim-mini/mini.jump2d', version = '*' },\n\n\n\n\n\n\n\njunegunn/vim-plug 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.jump2d'\n\n\nStable\nPlug 'nvim-mini/mini.jump2d', { 'branch': 'stable' }\n\n\n\n\n\n중요: 기능을 활성화하려면 require('mini.jump2d').setup()을 호출해야 합니다.\n참고: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(error: unable to create file &lt;some file name&gt;: Filename too long)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:\n\n해당 git 전역 설정 값을 활성화합니다: git config --system core.longpaths true. 그 후 다시 설치를 시도하세요.\n더 짧은 경로의 다른 위치에 플러그인을 설치합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-jump2d.html#default-config",
     "href": "mini.nvim/readmes/mini-jump2d.html#default-config",
     "title": "mini.jump2d",
-    "section": "Default config",
-    "text": "Default config\n-- No need to copy this inside `setup()`. Will be used automatically.\n{\n  -- Function producing jump spots (byte indexed) for a particular line.\n  -- For more information see |MiniJump2d.start|.\n  -- If `nil` (default) - use |MiniJump2d.default_spotter|\n  spotter = nil,\n\n  -- Characters used for labels of jump spots (in supplied order)\n  labels = 'abcdefghijklmnopqrstuvwxyz',\n\n  -- Options for visual effects\n  view = {\n    -- Whether to dim lines with at least one jump spot\n    dim = false,\n\n    -- How many steps ahead to show. Set to big number to show all steps.\n    n_steps_ahead = 0,\n  },\n\n  -- Which lines are used for computing spots\n  allowed_lines = {\n    blank = true, -- Blank line (not sent to spotter even if `true`)\n    cursor_before = true, -- Lines before cursor line\n    cursor_at = true, -- Cursor line\n    cursor_after = true, -- Lines after cursor line\n    fold = true, -- Start of fold (not sent to spotter even if `true`)\n  },\n\n  -- Which windows from current tabpage are used for visible lines\n  allowed_windows = {\n    current = true,\n    not_current = true,\n  },\n\n  -- Functions to be executed at certain events\n  hooks = {\n    before_start = nil, -- Before jump start\n    after_jump = nil, -- After jump was actually done\n  },\n\n  -- Module mappings. Use `''` (empty string) to disable one.\n  mappings = {\n    start_jumping = '&lt;CR&gt;',\n  },\n\n  -- Whether to disable showing non-error feedback\n  -- This also affects (purely informational) helper messages shown after\n  -- idle time if user input is required.\n  silent = false,\n}"
+    "section": "기본 설정",
+    "text": "기본 설정\n-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.\n{\n  -- 특정 줄에 대해 점프 지점(바이트 인덱스)을 생성하는 함수.\n  -- 자세한 내용은 |MiniJump2d.start|를 참조하세요.\n  -- `nil` (기본값)인 경우 - |MiniJump2d.default_spotter|를 사용합니다.\n  spotter = nil,\n\n  -- 점프 지점 레이블에 사용되는 문자들 (제공된 순서대로)\n  labels = 'abcdefghijklmnopqrstuvwxyz',\n\n  -- 시각적 효과 옵션\n  view = {\n    -- 하나 이상의 점프 지점이 있는 줄을 어둡게 처리할지 여부\n    dim = false,\n\n    -- 몇 단계 앞까지 보여줄지. 모든 단계를 보려면 큰 값을 설정하세요.\n    n_steps_ahead = 0,\n  },\n\n  -- 어떤 줄을 사용하여 지점을 계산할지 결정\n  allowed_lines = {\n    blank = true, -- 빈 줄 (`true`여도 spotter로 전달되지는 않음)\n    cursor_before = true, -- 커서 줄 이전의 줄들\n    cursor_at = true, -- 커서 줄\n    cursor_after = true, -- 커서 줄 이후의 줄들\n    fold = true, -- 접힌 부분의 시작 (`true`여도 spotter로 전달되지는 않음)\n  },\n\n  -- 현재 탭페이지에서 가시적인 줄을 찾을 창들을 결정\n  allowed_windows = {\n    current = true,\n    not_current = true,\n  },\n\n  -- 특정 이벤트에서 실행될 함수들\n  hooks = {\n    before_start = nil, -- 점프 시작 전\n    after_jump = nil, -- 실제로 점프가 완료된 후\n  },\n\n  -- 모듈 매핑. 비활성화하려면 `''`(빈 문자열)을 사용하세요.\n  mappings = {\n    start_jumping = '&lt;CR&gt;',\n  },\n\n  -- 에러가 아닌 피드백 표시 여부\n  -- 이는 사용자 입력이 필요할 때 유휴 시간 후 표시되는 정보 메시지에도 영향을 미칩니다.\n  silent = false,\n}"
   },
   {
     "objectID": "mini.nvim/readmes/mini-jump2d.html#similar-plugins",
     "href": "mini.nvim/readmes/mini-jump2d.html#similar-plugins",
     "title": "mini.jump2d",
-    "section": "Similar plugins",
-    "text": "Similar plugins\n\nphaazon/hop.nvim (main inspiration behind this module)\nggandor/lightspeed.nvim\nggandor/leap.nvim\nrlane/pounce.nvim"
+    "section": "유사한 플러그인",
+    "text": "유사한 플러그인\n\nphaazon/hop.nvim (이 모듈의 주요 디자인 영감)\nggandor/lightspeed.nvim\nggandor/leap.nvim\nrlane/pounce.nvim"
   },
   {
     "objectID": "mini.nvim/readmes/mini-files.html",
@@ -4078,42 +4078,42 @@
     "href": "mini.nvim/readmes/mini-map.html",
     "title": "mini.map",
     "section": "",
-    "text": "Generated from the main branch of ‘mini.nvim’"
+    "text": "’mini.nvim’의 main 브랜치에서 생성됨"
   },
   {
-    "objectID": "mini.nvim/readmes/mini-map.html#demo",
-    "href": "mini.nvim/readmes/mini-map.html#demo",
+    "objectID": "mini.nvim/readmes/mini-map.html#데모",
+    "href": "mini.nvim/readmes/mini-map.html#데모",
     "title": "mini.map",
-    "section": "Demo",
-    "text": "Demo\nVideo"
+    "section": "데모",
+    "text": "데모\nVideo"
   },
   {
     "objectID": "mini.nvim/readmes/mini-map.html#features",
     "href": "mini.nvim/readmes/mini-map.html#features",
     "title": "mini.map",
-    "section": "Features",
-    "text": "Features\n\nShow and manage special floating window displaying automatically updated overview of current buffer text. Window takes up whole height of Neovim instance and is fixed to a left/right side. Map content is computed by taking all current lines, converting it to binary whitespace/non-whitespace mask, rescaling to appropriate dimensions, and converting back to strings consisting from special encoding symbols. All this is done very fast and asynchronously.\nSee :h MiniMap.open(), :h MiniMap.refresh(), :h MiniMap.close(), :h MiniMap.toggle(), :h MiniMap.toggle_side().\nFor a general overview and tips, see :h mini.map-usage.\nShow scrollbar next to map content. It represents current line and view (top and bottom visible lines). Can be the only thing shown, making map window a “pure scrollbar”.\nHighlight map lines representing certain data in current buffer. This is done via extensible set of callables, called integrations. There are pre-built generators for common integrations:\n\nBuiltin search.\nBuiltin diagnostic.\nGeneral diff hunks provided by ‘mini.diff’.\nHunks provided by ‘lewis6991/gitsigns.nvim’. For more details see :h MiniMap.gen_integration.\n\nFocus on map window to quickly browse current (source) buffer. Moving inside map window updates cursor position in source window enabling fast and targeted buffer exploration. To focus back, hit &lt;CR&gt; to accept current explored position or &lt;Esc&gt; to go back to original position. See :h MiniMap.toggle_focus().\nCustomizable:\n\nEncoding symbols used to display binary information of different resolution (default is 3x2). There are pre-built generators for different basic character families and resolutions. See :h MiniMap.gen_encode_symbols.\nScrollbar symbols, separate for line and view. Can have any width (even zero, which virtually disables scrollbar).\nIntegrations producing map line highlights.\nWindow options: side (left/right), width, ‘winblend’, and more."
+    "section": "기능",
+    "text": "기능\n\n현재 버퍼 텍스트의 자동으로 업데이트되는 개요(overview)를 보여주는 특별한 플로팅 창을 표시하고 관리합니다. 창은 Neovim 인스턴스의 전체 높이를 차지하며 왼쪽 또는 오른쪽에 고정됩니다. 맵(map)의 콘텐츠는 현재 모든 줄을 가져와 이진 공백/비공백 마스크로 변환하고, 적절한 크기로 조정(rescale)한 다음, 특수 인코딩 기호로 구성된 문자열로 다시 변환하여 계산됩니다. 이 모든 과정이 매우 빠르고 비동기적으로 이루어집니다.\n:h MiniMap.open(), :h MiniMap.refresh(), :h MiniMap.close(), :h MiniMap.toggle(), :h MiniMap.toggle_side()를 참조하세요.\n일반적인 개요 및 팁은 :h mini.map-usage를 참조하세요.\n맵 콘텐츠 옆에 스크롤바를 표시합니다. 스크롤바는 현재 줄(line)과 뷰(view, 상단 및 하단 가시 줄)를 나타냅니다. 스크롤바만 표시하도록 설정하여 맵 창을 “순수 스크롤바”로 사용할 수도 있습니다.\n현재 버퍼의 특정 데이터를 나타내는 맵 줄을 하이라이트합니다. 이는 확장 가능한 콜러블(callables) 세트인 통합(integrations) 기능을 통해 수행됩니다. 일반적인 사용 사례를 위한 사전에 빌드된 생성기들이 제공됩니다:\n\n내장 검색.\n내장 진단(diagnostic).\n‘mini.diff’에서 제공되는 일반적인 Diff 헝크(hunks).\n‘lewis6991/gitsigns.nvim’에서 제공되는 헝크. 자세한 내용은 :h MiniMap.gen_integration을 참조하세요.\n\n맵 창에 포커스를 맞춰 현재 (소스) 버퍼를 빠르게 훑어볼 수 있습니다. 맵 창 안에서 이동하면 소스 창의 커서 위치가 업데이트되어 빠르고 정확한 버퍼 탐색이 가능합니다. 다시 원래대로 돌아오려면 &lt;CR&gt;을 눌러 탐색된 위치를 수락하거나, &lt;Esc&gt;를 눌러 원래 위치로 돌아갑니다. :h MiniMap.toggle_focus()를 참조하세요.\n커스터마이징 가능:\n\n다양한 해상도(기본값 3x2)의 이진 정보를 표시하는 데 사용되는 인코딩 기호. 다양한 기본 문자군과 해상도를 위한 사전에 빌드된 생성기가 있습니다. :h MiniMap.gen_encode_symbols를 참조하세요.\n줄(line)과 뷰(view)를 위한 별도의 스크롤바 기호. 너비를 자유롭게 설정할 수 있습니다 (0으로 설정하면 사실상 스크롤바를 비활성화함).\n맵 줄 하이라이트를 생성하는 통합(integrations) 기능.\n창 옵션: 위치(왼쪽/오른쪽), 너비, ‘winblend’ 등."
   },
   {
     "objectID": "mini.nvim/readmes/mini-map.html#installation",
     "href": "mini.nvim/readmes/mini-map.html#installation",
     "title": "mini.map",
-    "section": "Installation",
-    "text": "Installation\nThis plugin can be installed as part of ‘mini.nvim’ library (recommended) or as a standalone Git repository.\nThere are two branches to install from:\n\nmain (default, recommended) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).\nstable will be updated only upon releases with code tested during public beta-testing phase in main branch.\n\nHere are code snippets for some common installation methods (use only one):\n\n\nWith mini.deps\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nFollow recommended ‘mini.deps’ installation\n\n\nStable\nFollow recommended ‘mini.deps’ installation\n\n\n\nStandalone plugin:\n\n\n\n\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nadd('nvim-mini/mini.map')\n\n\nStable\nadd({ source = 'nvim-mini/mini.map', checkout = 'stable' })\n\n\n\n\n\n\n\nWith folke/lazy.nvim\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\n{ 'nvim-mini/mini.map', version = false },\n\n\nStable\n{ 'nvim-mini/mini.map', version = '*' },\n\n\n\n\n\n\n\nWith junegunn/vim-plug\n\n\n‘mini.nvim’ library:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\nStandalone plugin:\n\n\n\nBranch\nCode snippet\n\n\n\n\nMain\nPlug 'nvim-mini/mini.map'\n\n\nStable\nPlug 'nvim-mini/mini.map', { 'branch': 'stable' }\n\n\n\n\n\nImportant: don’t forget to call require('mini.map').setup() to enable its functionality.\nNote: if you are on Windows, there might be problems with too long file paths (like error: unable to create file &lt;some file name&gt;: Filename too long). Try doing one of the following:\n\nEnable corresponding git global config value: git config --system core.longpaths true. Then try to reinstall.\nInstall plugin in other place with shorter path."
+    "section": "설치",
+    "text": "설치\n이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(권장), 독립적인 Git 저장소로 설치할 수 있습니다.\n두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:\n\nmain (기본값, 권장): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.\nstable: main 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.\n\n다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):\n\n\nmini.deps 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\nStable\n권장되는 ‘mini.deps’ 설치 방법을 따르세요\n\n\n\n단독 플러그인:\n\n\n\n\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nadd('nvim-mini/mini.map')\n\n\nStable\nadd({ source = 'nvim-mini/mini.map', checkout = 'stable' })\n\n\n\n\n\n\n\nfolke/lazy.nvim 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.nvim', version = false },\n\n\nStable\n{ 'nvim-mini/mini.nvim', version = '*' },\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\n{ 'nvim-mini/mini.map', version = false },\n\n\nStable\n{ 'nvim-mini/mini.map', version = '*' },\n\n\n\n\n\n\n\njunegunn/vim-plug 사용 시\n\n\n‘mini.nvim’ 라이브러리:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.nvim'\n\n\nStable\nPlug 'nvim-mini/mini.nvim', { 'branch': 'stable' }\n\n\n\n단독 플러그인:\n\n\n\n브랜치\n코드 스니펫\n\n\n\n\nMain\nPlug 'nvim-mini/mini.map'\n\n\nStable\nPlug 'nvim-mini/mini.map', { 'branch': 'stable' }\n\n\n\n\n\n중요: 기능을 활성화하려면 require('mini.map').setup()을 호출해야 합니다.\n참고: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(error: unable to create file &lt;some file name&gt;: Filename too long)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:\n\n해당 git 전역 설정 값을 활성화합니다: git config --system core.longpaths true. 그 후 다시 설치를 시도하세요.\n더 짧은 경로의 다른 위치에 플러그인을 설치합니다."
   },
   {
     "objectID": "mini.nvim/readmes/mini-map.html#default-config",
     "href": "mini.nvim/readmes/mini-map.html#default-config",
     "title": "mini.map",
-    "section": "Default config",
-    "text": "Default config\n-- No need to copy this inside `setup()`. Will be used automatically.\n{\n  -- Highlight integrations (none by default)\n  integrations = nil,\n\n  -- Symbols used to display data\n  symbols = {\n    -- Encode symbols. See [`:h MiniMap.config`](../doc/mini-map.qmd#minimap.config) for specification and\n    -- [`:h MiniMap.gen_encode_symbols`](../doc/mini-map.qmd#minimap.gen_encode_symbols) for pre-built ones.\n    -- Default: solid blocks with 3x2 resolution.\n    encode = nil,\n\n    -- Scrollbar parts for view and line. Use empty string to disable any.\n    scroll_line = '█',\n    scroll_view = '┃',\n  },\n\n  -- Window options\n  window = {\n    -- Whether window is focusable in normal way (with `wincmd` or mouse)\n    focusable = false,\n\n    -- Side to stick ('left' or 'right')\n    side = 'right',\n\n    -- Whether to show count of multiple integration highlights\n    show_integration_count = true,\n\n    -- Total width\n    width = 10,\n\n    -- Value of 'winblend' option\n    winblend = 25,\n\n    -- Z-index\n    zindex = 10,\n  },\n}"
+    "section": "기본 설정",
+    "text": "기본 설정\n-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.\n{\n  -- 하이라이트 통합 (기본적으로 없음)\n  integrations = nil,\n\n  -- 데이터를 표시하는 데 사용될 기호들\n  symbols = {\n    -- 인코딩 기호. 명세는 [`:h MiniMap.config`](../doc/mini-map.qmd#minimap.config)를,\n    -- 사전에 빌드된 것들은 [`:h MiniMap.gen_encode_symbols`](../doc/mini-map.qmd#minimap.gen_encode_symbols)를 참조하세요.\n    -- 기본값: 3x2 해상도의 꽉 찬 블록.\n    encode = nil,\n\n    -- 뷰(view) 및 줄(line)을 위한 스크롤바 기호. 비활성화하려면 빈 문자열을 사용하세요.\n    scroll_line = '█',\n    scroll_view = '┃',\n  },\n\n  -- 창 옵션\n  window = {\n    -- 일반적인 방식(`wincmd` 또는 마우스)으로 창에 포커스를 맞출 수 있는지 여부\n    focusable = false,\n\n    -- 고정될 위치 ('left' 또는 'right')\n    side = 'right',\n\n    -- 여러 통합 하이라이트의 개수 표시 여부\n    show_integration_count = true,\n\n    -- 전체 너비\n    width = 10,\n\n    -- 'winblend' 옵션 값\n    winblend = 25,\n\n    -- Z-인덱스\n    zindex = 10,\n  },\n}"
   },
   {
     "objectID": "mini.nvim/readmes/mini-map.html#similar-plugins",
     "href": "mini.nvim/readmes/mini-map.html#similar-plugins",
     "title": "mini.map",
-    "section": "Similar plugins",
-    "text": "Similar plugins\n\nwfxr/minimap.vim\ndstein64/nvim-scrollview\npetertriho/nvim-scrollbar\nlewis6991/satellite.nvim"
+    "section": "유사한 플러그인",
+    "text": "유사한 플러그인\n\nwfxr/minimap.vim\ndstein64/nvim-scrollview\npetertriho/nvim-scrollbar\nlewis6991/satellite.nvim"
   },
   {
     "objectID": "mini.nvim/readmes/mini-doc.html",
