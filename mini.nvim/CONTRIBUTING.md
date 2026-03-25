@@ -1,59 +1,59 @@
-# Contributing
+# 기여하기
 
-Thank you for your willingness to contribute to 'mini.nvim'. It means a lot!
+'mini.nvim'에 관심을 가져주시고 기여하고자 하셔서 감사합니다. 정말 큰 힘이 됩니다!
 
-You can make contributions in the following ways:
+다음과 같은 방법으로 프로젝트에 기여하실 수 있습니다:
 
-- **Mention it** somehow to help reach broader audience. This helps a lot.
-- **Create a GitHub issue**. It can be one of the following types:
-    - **Bug report**. Describe your actions in a reproducible way along with their effect and what you expected should happen. Before making one, please make your best efforts to:
-        - Make sure that it is not an intended behavior, i.e. not described in documentation as such.
-        - Make sure that it was not reported before, i.e. there is no bug report already created (no matter open or closed).
-    - **Feature request**. A concise and justified description of what one or several modules should be able to do. Before making one, please make your best efforts to make sure that it is not a feature that won't get implemented (these should be described in documentation; for example: block comments in 'mini.comment').
-- **Create a pull request (PR)**. It can be one of the following types:
-    - **Code related**. For example, fix a bug or implement a feature. **Before even starting one, please make sure that it is aligned with project vision and goals**. The best way to do so is to receive positive feedback from maintainer on your initiative in one of the GitHub issues (existing or created by you). Please, make sure to regenerate latest help file and that all tests pass (see later sections).
-    - **Documentation related**. For example, fix typo/wording in 'README.md', code comments or annotations (which are used to generate Neovim documentation; see later section). Feel free to make these without creating a GitHub issue.
-    - **Add plugin integration to 'mini.base16' and 'mini.hues' modules**.
-- **Add explicit support to other colorschemes**. Every 'mini.nvim' module supports any colorscheme right out of the box. This is done by making most highlight groups be linked to a semantically similar builtin highlight group. Other groups are hard-coded based on personal preference. However, these choices might be out of tune with a particular colorscheme. Updating as many colorschemes as possible to have explicit 'mini.nvim' support is highly appreciated. For your convenience, there is a list of all highlight groups in later section of this file.
-- **Participate in [discussions](https://github.com/nvim-mini/mini.nvim/discussions)**.
+- **주변에 알리기**: 더 많은 사용자에게 프로젝트를 알리는 것은 큰 도움이 됩니다.
+- **GitHub 이슈 생성**: 다음과 같은 유형의 이슈를 생성할 수 있습니다:
+    - **버그 제보 (Bug report)**: 예상했던 결과와 실제 발생한 현상, 재현 가능한 단계를 설명해 주세요. 이슈를 만들기 전에 다음 사항을 확인해 주세요:
+        - 의도된 동작(문서에 명시된 내용)이 아님을 확인해 주세요.
+        - 이미 보고된 내용(열려 있거나 닫힌 이슈 포함)이 아닌지 확인해 주세요.
+    - **기능 제안 (Feature request)**: 하나 이상의 모듈이 수행해야 할 기능을 간결하고 타당한 근거와 함께 설명해 주세요. 제안하기 전에, 이미 구현 계획이 없다고 명시된 기능(예: 'mini.comment'의 블록 주석)이 아닌지 확인해 주세요.
+- **풀 리퀘스트 (PR) 생성**: 다음과 같은 유형이 가능합니다:
+    - **코드 관련**: 버그 수정이나 기능 구현. **시작하기 전에 해당 내용이 프로젝트의 비전 및 목표와 일치하는지 확인해 주세요**. 가장 좋은 방법은 기존 이슈나 직접 만든 이슈에서 유지관리자로부터 긍정적인 피드백을 받는 것입니다. 최신 도움말 파일을 다시 생성했는지, 모든 테스트를 통과하는지 확인해 주세요 (나중 섹션 참조).
+    - **문서 관련**: 'README.md', 코드 주석, 도움말 생성용 애노테이션 등의 오타/문구 수정. 이슈를 따로 만들지 않고 바로 PR을 보내셔도 좋습니다.
+    - **'mini.base16' 및 'mini.hues' 모듈에 플러그인 통합 추가**.
+- **다른 컬러 스킴에 명시적 지원 추가**: 모든 'mini.nvim' 모듈은 기본적으로 모든 컬러 스킴을 지원합니다 (하이라이트 그룹을 내장 하이라이트 그룹에 링크하는 방식). 하지만 특정 컬러 스킴에서는 어울리지 않을 수 있습니다. 다양한 컬러 스킴에서 'mini.nvim'을 명시적으로 지원하도록 업데이트하는 것을 적극 권장합니다. 이 파일 뒷부분에 하이라이트 그룹 목록이 있습니다.
+- **[토론(Discussions)](https://github.com/nvim-mini/mini.nvim/discussions) 참여**.
 
-All well-intentioned, polite, and respectful contributions are always welcome! Thanks for reading this!
+정중하고 예의 바른 모든 기여를 언제나 환영합니다! 읽어주셔서 감사합니다!
 
-## Commit messages
+## 커밋 메시지
 
-- Try to make commit message as concise as possible while giving enough information about nature of a change. Think about whether it will be easy to understand in one year time when browsing through commit history.
+- 변경 사항의 본질을 충분히 전달하면서도 가능한 한 간결하게 작성하세요. 1년 뒤에 커밋 이력을 보더라도 쉽게 이해할 수 있을지 생각해 보세요.
 
-- Single commit should change either zero or one module, or affect all modules (i.e. enforcing some universal rule but not necessarily change files). Changes for two or more modules should be split in several module-specific commits.
+- 단일 커밋은 한 개의 모듈만 변경하거나, 모든 모듈에 영향을 주는(예: 전역 규칙 적용) 내용이어야 합니다. 두 개 이상의 모듈에 대한 변경 사항은 모듈별 커밋으로 나누어야 합니다.
 
-- Use [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) style:
-    - Messages should have the following structure:
+- [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) 스타일을 따르세요:
+    - 메시지 구조:
 
         ```
         <type>[optional scope][!]: <description>
-        <empty line>
+
         [optional body]
-        <empty line>
+
         [optional footer(s)]
         ```
 
-    - `<type>` is **mandatory** and can be one of:
-        - `ci` - change in how automation (GitHub actions, dual distribution scripts, etc.) is done.
-        - `docs` - change in user facing documentation (help, README, CONTRIBUTING, etc.).
-        - `feat` - adding new user facing feature.
-        - `fix` - resolving user facing issue.
-        - `refactor` - change in code or documentation that should not affect users.
-        - `style` - change in convention of how something should be done (formatting, wording, etc.) and its effects.
-        - `test` - change in tests.
-      For temporary commits which later should be squashed (when working on PR, for example), use `fixup` type.
-    - `[optional scope]`, if present, should be done in parenthesis `()`. If commit changes single module (as it usually should), using scope with module name is **mandatory**. If commit enforces something for all modules, use `ALL` scope.
-    - Breaking change, if present, should be expressed with `!` before `:`.
-    - `<description>` is a change overview in imperative, present tense ("change" not "changed" nor "changes"). Should result into first line under 72 characters. Should start with not capitalized word and NOT end with sentence ending punctuation (i.e. one of `.,?!;`).
-    - `[optional body]`, if present, should contain details and motivation about the change in plain language. Should be formatted to have maximum 80 characters in line.
-    - `[optional footer(s)]`, if present, should be instruction(s) to Git or Github. Use "Resolve #xxx" on separate line if this commit resolves issue or PR.
+    - `<type>`은 **필수**이며 다음 중 하나여야 합니다:
+        - `ci` - 자동화(GitHub actions, 스크립트 등) 관련 변경.
+        - `docs` - 사용자용 문서(help, README, CONTRIBUTING 등) 변경.
+        - `feat` - 새로운 사용자 기능 추가.
+        - `fix` - 사용자 이슈 해결.
+        - `refactor` - 사용자에게 영향을 주지 않는 코드나 문서의 변경.
+        - `style` - 관습적인 변경(포맷팅, 문구 수정 등) 및 그 효과.
+        - `test` - 테스트 관련 변경.
+      나중에 squash될 임시 커밋의 경우 `fixup` 타입을 사용하세요.
+    - `[optional scope]`가 있다면 괄호 `()` 안에 작성하세요. 단일 모듈을 변경하는 경우 모듈 이름을 scope로 사용하는 것은 **필수**입니다. 모든 모듈에 관계된 경우 `ALL`을 사용하세요.
+    - 하위 호환성이 깨지는 변경(Breaking change)은 `:` 앞에 `!`를 붙여 표시하세요.
+    - `<description>`은 명령형 현재 시제로 작성하세요 ("change" 사용, "changed"나 "changes" 금지). 첫 줄은 72자 이내여야 하며, 대문자로 시작하지 않고 마침표 등의 문장 부호로 끝내지 마세요.
+    - `[optional body]`가 있다면 평이한 문장으로 상세 내용과 동기를 작성하세요. 한 줄은 최대 80자여야 합니다.
+    - `[optional footer(s)]`가 있다면 Git이나 GitHub 명령어를 포함할 수 있습니다. 이슈나 PR을 해결하는 경우 별도의 줄에 "Resolve #xxx"를 작성하세요.
 
-- Use module's function and field names without module's name. Like `add()` and not `MiniSurround.add()`.
+- 모듈 이름 없이 함수 및 필드 이름을 사용하세요 (예: `MiniSurround.add()` 대신 `add()`).
 
-Examples:
+예시:
 
 ```
 feat(deps): add folds in update confirmation buffer
@@ -83,57 +83,48 @@ feat(hues)!: update verbatim text to be distinctive
 test(ALL): update screenshots to work on Nightly
 ```
 
-### Automated commit linting
+### 자동 커밋 메시지 검사 (Linting)
 
-- To lint messages of already done commits, execute `scripts/lintcommit-ci.sh <git-log-range>`. For example, to lint currently latest commit use `scripts/lintcommit-ci.sh HEAD~..HEAD`.
-- To lint commit message before doing commit, install [`pre-commit`](https://pre-commit.com/#install) and enable it with `pre-commit install --hook-type commit-msg` (from the root directory). NOTE: requires `nvim` executable. If it throws (usually descriptive) error - recommit with proper message.
+- 이미 작성된 커밋 메시지를 검사하려면 `scripts/lintcommit-ci.sh <git-log-range>`를 실행하세요. 최신 커밋 하나를 검사하려면 `scripts/lintcommit-ci.sh HEAD~..HEAD`를 사용합니다.
+- 커밋 전에 메시지를 검사하려면 [`pre-commit`](https://pre-commit.com/#install)을 설치하고 `pre-commit install --hook-type commit-msg`를 실행하세요. (ROOT 디렉토리에서 실행, `nvim` 실행 필요)
 
-## Generating help file
+## 도움말 파일 생성
 
-If your contribution updates annotations used to generate help file, please regenerate it. You can make this with one of the following (assuming current directory being project root):
+도움말 생성용 애노테이션을 업데이트했다면 파일을 재생성해 주세요. 프로젝트 루트에서 다음 중 하나를 실행하면 됩니다:
 
-- From command line execute `make documentation`.
-- Inside Neovim instance run `:luafile scripts/minidoc.lua` or `:lua require('mini.doc').generate()`.
+- 커맨드 라인에서 `make documentation` 실행.
+- Neovim 내부에서 `:luafile scripts/minidoc.lua` 또는 `:lua require('mini.doc').generate()` 실행.
 
-## Testing
+## 테스트
 
-If your contribution updates code, please make sure that it doesn't break existing tests. If it adds new functionality or fixes a recognized bug, add new test case(s). There are two ways of running tests:
+코드 변경 시 기존 테스트를 깨뜨리지 않는지 확인해 주세요. 기능을 추가하거나 버그를 수정한 경우 새 테스트 케이스를 추가해야 합니다.
 
-- From command line:
-    - Execute `make test` to run all tests (with `nvim` as executable).
-    - Execute `make test_xxx` to run tests only from file `tests/test_xxx.lua` (with `nvim` as executable). For example, `make test_ai`.
-    - If you have multiple Neovim executables (say, `nvim_07`, `nvim_08`, `nvim_09`, `nvim_010`), you can use `NVIM_EXEC` variable to tests against multiple versions like this:
-      `NVIM_EXEC="nvim_07 nvim_08 nvim_09 nvim_010" make test` or `NVIM_EXEC="nvim_07 nvim_08 nvim_09 nvim_010" make test_xxx`.
-- Inside Neovim instance execute `:lua require('mini.test').setup(); MiniTest.run()` to run all tests or `:lua require('mini.test').setup(); MiniTest.run_file()` to run tests only from current buffer.
+- 커맨드 라인에서:
+    - `make test`를 실행하여 모든 테스트 실행.
+    - `make test_xxx`를 실행하여 `tests/test_xxx.lua` 파일만 실행 (예: `make test_ai`).
+    - 여러 Neovim 버전(`nvim_07`, `nvim_08` 등)에 대해 테스트하려면 `NVIM_EXEC="nvim_07 nvim_08 nvim_09 nvim_010" make test`와 같이 실행하세요.
+- Neovim 내부에서 `:lua require('mini.test').setup(); MiniTest.run()`을 실행하여 모든 테스트를, 또는 `:lua require('mini.test').setup(); MiniTest.run_file()`을 실행하여 현재 버퍼의 테스트만 실행할 수 있습니다.
 
-This plugin uses 'mini.test' to manage its tests. For a more hands-on introduction, see [TESTING.md](TESTING.md).
+더 자세한 입문서는 [TESTING.md](TESTING.md)를 참조하세요.
 
-**Notes**:
+**참고**:
 
-- If new functionality relies on an external dependency (`git` CLI tool, LSP server, etc.), use mocking (writing Lua code which emulates dependency usage as close as reasonably possible). For examples, take a look at tests for 'mini.pick', 'mini.completion', and 'mini.statusline'.
-- There is a certain number of tests that are flaky (i.e. will sometimes report an error due to other reasons than actual functionality being broke). It is usually the ones which test time related functionality (i.e. that certain action was done after specific amount of delay).
+- 외부 의존성(git, LSP 서버 등)이 필요한 경우 모킹(Mocking)을 사용하여 테스트하세요. 'mini.pick', 'mini.completion' 등의 테스트 코드를 참고할 수 있습니다.
+- 일부 테스트(주로 시간 지연 관련)는 불안정(flaky)할 수 있습니다. 테스트에 실패했으나 관련 코드 변경이 없다면 해당 테스트를 여러 번 다시 실행해 보세요. [TESTING.md의 'Retry' 섹션](TESTING.md#Retry)을 참조하세요.
+- 견고한 테스트 작성을 위한 조언:
+    - 비동기/느린 실행 테스트 시 `sleep()` 도우미를 사용하고, OS별 지연 시간 상수를 활용하세요.
+    - 윈도우의 경로 구분자(`\`)를 고려하여 코딩하거나 테스트 파일을 작성하세요.
 
-    A commonly used way to know if the test is flaky is that it fails on non-nightly Neovim version yet there were no changes to its tested module after it had passed in the past. For example, some 'mini.animate' test is shown to break but there were no changes to it since test passed in CI couple of days before.
+## 포맷팅
 
-    This issue is addressed by having test cases being executed several times in case of failure (with more retries in slow context). See ["Retry" section in 'TESTING.md'](TESTING.md#Retry).
+이 프로젝트는 Lua 코드 포맷팅을 위해 [StyLua](https://github.com/JohnnyMorganz/StyLua) 버전 2.1.0을 사용합니다. 변경 사항을 반영하기 전에:
 
-    In case there is some test breaking which reasonably should not, rerun that test (or the whole file) at least several times.
-- Advice for writing more robust tests:
-    - To test asynchronous or slow execution, use common `sleep()` test helper. For a more robust testing code, **never** directly use numbers to compute sleep time. Use precomputed time delay constants, which should always take into account different testing OSs (like be bigger on Windows, etc.). If module testing requires its extensive use and tests can not be made robust enough (examples are 'mini.animate', 'mini.jump', etc.), consider using it with argument that skips entire test case if `sleep()` is called in slow context.
-    - Take into account that Windows uses "\" as default path separator instead of Unix "/". This should be accounted either in module's code (preferably) or in test files (for example, by computing path separator and relying on it).
+- [StyLua v2.1.0 설치](https://github.com/JohnnyMorganz/StyLua#installation).
+- 루트 디렉토리에서 `stylua .`를 실행하거나, `pre-commit`을 설치하여 자동 포맷팅 되도록 하세요.
 
-## Formatting
+## 하이라이트 그룹 목록
 
-This project uses [StyLua](https://github.com/JohnnyMorganz/StyLua) version 2.1.0 for formatting Lua code. Before making changes to code, please:
-
-- [Install StyLua](https://github.com/JohnnyMorganz/StyLua#installation). NOTE: use `v2.1.0`.
-- Format with it. Currently there are two ways to do this:
-    - Manually run `stylua .` from the root directory of this project.
-    - Install [`pre-commit`](https://pre-commit.com/#install) and enable it with `pre-commit install` (from the root directory). This will auto-format relevant code before making commits.
-
-## List of highlight groups
-
-Here is a list of all highlight groups defined inside 'mini.nvim' modules. See documentation in 'doc' directory to find out what they are used for.
+'mini.nvim' 모듈에서 정의하는 모든 하이라이트 그룹 목록입나다. 용도는 'doc' 디렉토리의 문서를 참조하세요.
 
 - 'mini.animate':
     - `MiniAnimateCursor`

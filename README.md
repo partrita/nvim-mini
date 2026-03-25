@@ -1,66 +1,66 @@
 # nvim-mini.org
 
-This repository contains the source code for [nvim-mini.org](https://nvim-mini.org), the official website for **MINI** (**M**odular **I**ndependent **N**eovim **I**mprovements).
+이 저장소는 **MINI** (**M**odular **I**ndependent **N**eovim **I**mprovements)의 공식 웹사이트인 [nvim-mini.org](https://nvim-mini.org)의 소스 코드를 포함하고 있습니다.
 
-## Overview
+## 개요
 
-The website is built using [Quarto](https://quarto.org/) and serves as a central hub for:
+이 웹사이트는 [Quarto](https://quarto.org/)를 사용하여 구축되었으며 다음과 같은 구성 요소의 중앙 허브 역할을 합니다:
 
-- [**mini.nvim**](https://github.com/echasnovski/mini.nvim): A collection of independent Neovim modules.
-- [**MiniMax**](https://github.com/echasnovski/MiniMax): Minimal and Maximally useful Neovim configurations.
-- **Blog**: Announcements and updates about the MINI ecosystem.
+- [**mini.nvim**](https://github.com/echasnovski/mini.nvim): 독립적인 Neovim 모듈들의 컬렉션.
+- [**MiniMax**](https://github.com/echasnovski/MiniMax): 최소한이면서도 최대한 유용한 Neovim 설정.
+- **블로그**: MINI 생태계에 관한 공지사항 및 업데이트.
 
-## Structure
+## 구조
 
-- `index.qmd`: The landing page.
-- `mini.nvim/`: Mirrored documentation and resources from the `mini.nvim` repository.
-- `MiniMax/`: Mirrored documentation and resources from the `MiniMax` repository.
-- `blog/`: Quarto blog posts.
-- `_scripts/`: Lua and shell scripts for syncing and processing documentation.
-- `assets/`: Images and other static assets.
-- `theme/`: Quarto themes and syntax definitions.
+- `index.qmd`: 랜딩 페이지.
+- `mini.nvim/`: `mini.nvim` 저장소에서 미러링된 문서 및 리소스.
+- `MiniMax/`: `MiniMax` 저장소에서 미러링된 문서 및 리소스.
+- `blog/`: Quarto 블로그 포스트.
+- `_scripts/`: 문서 동기화 및 처리를 위한 Lua 및 쉘 스크립트.
+- `assets/`: 이미지 및 기타 정적 에셋.
+- `theme/`: Quarto 테마 및 문법 정의.
 
-## Development
+## 개발
 
-The content in `mini.nvim/` and `MiniMax/` is automatically synced from their respective repositories using scripts in `_scripts/`.
+`mini.nvim/` 및 `MiniMax/`의 콘텐츠는 `_scripts/`에 있는 스크립트를 사용하여 각 저장소에서 자동으로 동기화됩니다.
 
-### Syncing Content
+### 콘텐츠 동기화
 
-To fetch and sync the latest documentation from the upstream repositories:
+업스트림 저장소에서 최신 문서를 가져와 동기화하려면 다음 명령을 실행하세요:
 
 ```bash
-# Fetch and sync both mini.nvim and MiniMax
+# mini.nvim과 MiniMax 모두 동기화
 make sync
 ```
 
-Individual components can also be synced:
+각 구성 요소를 개별적으로 동기화할 수도 있습니다:
 
 ```bash
-# Sync only mini.nvim
+# mini.nvim만 동기화
 make mini.nvim
 
-# Sync only MiniMax
+# MiniMax만 동기화
 make MiniMax
 ```
 
-### Building the Website
+### 웹사이트 빌드
 
-The website is built using Quarto. To preview or render the site locally, you'll need to have [Quarto installed](https://quarto.org/docs/get-started/).
+웹사이트는 Quarto를 사용하여 빌드됩니다. 로컬에서 사이트를 미리 보거나 렌더링하려면 [Quarto가 설치](https://quarto.org/docs/get-started/)되어 있어야 합니다.
 
 ```bash
-# Preview the website locally
+# 로컬에서 웹사이트 미리보기
 quarto preview
 
-# Render the website (output to docs/ directory)
+# 웹사이트 렌더링 (docs/ 디렉터리에 출력)
 quarto render
 ```
 
-## Contributing
+## 기여하기
 
-Contributions to the website are welcome! If you find any issues with the documentation or have suggestions for improvements, please open an issue or submit a pull request.
+웹사이트에 대한 기여는 언제나 환영합니다! 문서에 문제가 있거나 개선 사항이 있다면 이슈를 열거나 풀 리퀘스트를 제출해 주세요.
 
-Note that documentation for `mini.nvim` and `MiniMax` should be contributed directly to their respective repositories.
+참고로 `mini.nvim` 및 `MiniMax` 관련 문서는 각 해당 저장소에 직접 기여해야 합니다.
 
-## License
+## 라이선스
 
-The content of this repository is licensed under the [MIT License](LICENSE).
+이 저장소의 콘텐츠는 [MIT 라이선스](LICENSE)를 따릅니다.

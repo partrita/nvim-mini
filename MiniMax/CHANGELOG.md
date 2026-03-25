@@ -1,64 +1,68 @@
-_Generated from the `main` branch of 'MiniMax'_
+---
+title: "MiniMax 변경 이력"
+---
+
+_'MiniMax'의 `main` 브랜치에서 생성됨_
 
 ## 2026-02-17 {#2026-02-17}
 
-- Update 'mini.files' setup to use `now_if_args` instead of `later`. Otherwise it doesn't override `netrw` as the default explorer when starting Neovim like `nvim .`.
+- 'mini.files' 설정을 `later` 대신 `now_if_args`를 사용하도록 업데이트했습니다. 그렇지 않으면 `nvim .`과 같이 Neovim을 시작할 때 `netrw`를 기본 탐색기로 덮어쓰지 못하는 문제가 있었습니다.
 
 ## 2026-02-15 {#2026-02-15}
 
-- Update 'nvim-treesitter/nvim-treesitter-textobjects' plugin to not explicitly use `main` branch as it is now the default.
+- 'nvim-treesitter/nvim-treesitter-textobjects' 플러그인이 이제 `main` 브랜치를 기본값으로 사용하므로, 명시적인 브랜치 지정을 제거했습니다.
 
-- Add new reference configs:
-    - `nvim-0.10` - for Neovim>=0.10
-    - `nvim-0.12` - for Neovim>=0.12.
+- 새로운 참조 설정을 추가했습니다:
+    - `nvim-0.10` - Neovim>=0.10용
+    - `nvim-0.12` - Neovim>=0.12용
 
 ## 2026-02-10 {#2026-02-10}
 
-- Update using global variable for config as just `Config` and not `_G.Config`. This is more concise and makes it more consistent with how `MiniXxx` variables are used.
+- 설정용 전역 변수를 `_G.Config` 대신 단순히 `Config`로 사용하도록 업데이트했습니다. 이는 더 간결하며 `MiniXxx` 변수들이 사용되는 방식과 더 일관성이 있습니다.
 
 ## 2026-01-29 {#2026-01-29}
 
-- Update 'mini.completion' setup to use `now_if_args` instead of `later`. Otherwise it doesn't set proper omnifunc for files opened during startup (because necessary `LspAttach` events are already triggered).
+- 'mini.completion' 설정을 `later` 대신 `now_if_args`를 사용하도록 업데이트했습니다. 그렇지 않으면 시작 시에 열린 파일들에 대해 적절한 omnifunc가 설정되지 않는 문제(`LspAttach` 이벤트가 이미 발생했기 때문)가 있었습니다.
 
-- Move setting up 'mini.nvim' modules that need `now_if_args` in a separate "Step one or two" section.
+- `now_if_args`가 필요한 'mini.nvim' 모듈들의 설정을 별도의 "Step one or two" 섹션으로 이동했습니다.
 
 ## 2026-01-13 {#2026-01-13}
 
-- Improve 'stevearc/conform.nvim' setup:
-    - Setup plugin to allow formatting from LSP server if no dedicated formatter is available. This provides more versatile behavior. Previously it was forced in `<Leader>lf` mapping.
-    - Use plain `require('conform').format()` in `<Leader>lf` keymaps.
+- 'stevearc/conform.nvim' 설정을 개선했습니다:
+    - 전용 포맷터가 없는 경우 LSP 서버의 포맷팅을 허용하도록 설정했습니다. 이는 더 유연한 동작을 제공합니다. 기존에는 `<Leader>lf` 매핑에서 강제되었습니다.
+    - `<Leader>lf` 키맵에서 일반적인 `require('conform').format()`을 사용하도록 변경했습니다.
 
 ## 2026-01-08 {#2026-01-08}
 
-- Improve keymaps for exploring quickfix list (make implementation shorter and more robust) and location list (add it as `<Leader>eQ` to compliment `<Leader>eq` for quickfix).
+- quickfix 리스트 탐색 키맵을 개선하고(구현을 더 짧고 견고하게 만듦), location 리스트 탐색용으로 `<Leader>eq`에 대응하는 `<Leader>eQ`를 추가했습니다.
 
 ## 2026-01-03 {#2026-01-03}
 
-- Improve 'mini.clue' setup:
-    - Use array `mode` where possible for a more concise setup.
-    - Use `gen_clues.square_brackets()` to show more built-in clues.
-    - Use `s` as a trigger. Currently only for 'mini.surround' actions, but will be more useful in the future.
+- 'mini.clue' 설정을 개선했습니다:
+    - 더 간결한 설정을 위해 가능한 경우 배열 형태의 `mode`를 사용합니다.
+    - 더 많은 내장 힌트를 보여주기 위해 `gen_clues.square_brackets()`를 사용합니다.
+    - `s`를 트리거로 사용합니다. 현재는 'mini.surround' 액션에만 사용되지만, 향후 더 유용하게 쓰일 것입니다.
 
 ## 2025-12-20 {#2025-12-20}
 
-- Start using 'mini.cmdline'.
+- 'mini.cmdline'을 사용하기 시작했습니다.
 
 ## 2025-12-16 {#2025-12-16}
 
-- Update 'nvim-treesitter/nvim-treesitter' plugin to not explicitly use `main` branch as it is now the default.
+- 'nvim-treesitter/nvim-treesitter' 플러그인이 이제 `main` 브랜치를 기본값으로 사용하므로, 명시적인 브랜치 지정을 제거했습니다.
 
-- Update 'mason-org/mason.nvim' example to use `now_if_args` instead of `later`. Otherwise LSP server installed via Mason will not yet be available if Neovim is started as `nvim -- path/to/file`.
+- 'mason-org/mason.nvim' 예제에서 `later` 대신 `now_if_args`를 사용하도록 업데이트했습니다. 그렇지 않으면 `nvim -- path/to/file`과 같이 Neovim을 시작할 때 Mason을 통해 설치된 LSP 서버를 즉시 사용할 수 없는 문제가 있었습니다.
 
 ## 2025-11-22 {#2025-11-22}
 
-- Update `<Leader>fs` mapping to use `"workspace_symbol_live"` scope for `:Pick lsp` instead of `"workspace_symbol"`
+- `<Leader>fs` 매핑이 `:Pick lsp`에서 `"workspace_symbol"` 대신 `"workspace_symbol_live"` 범위를 사용하도록 업데이트했습니다.
 
 ## 2025-10-16 {#2025-10-16}
 
-- Move `now_if_args` startup helper to 'init.lua' as `Config.now_if_args` to be directly usable from other config files.
+- `now_if_args` 시작 도우미를 다른 설정 파일에서 직접 사용할 수 있도록 `Config.now_if_args`로 'init.lua'에 이동했습니다.
 
-- Enable 'mini.misc' behind `now_if_args` instead of `now`. Otherwise `setup_auto_root()` and `setup_restore_cursor()` don't work on initial file(s) if Neovim is started as `nvim -- path/to/file`.
+- 'mini.misc'를 `now` 대신 `now_if_args`에서 활성화하도록 변경했습니다. 그렇지 않으면 `nvim -- path/to/file`과 같이 Neovim을 시작할 때 `setup_auto_root()` 및 `setup_restore_cursor()`가 초기 파일에서 작동하지 않는 문제가 있었습니다.
 
 ## 2025-10-13 {#2025-10-13}
 
-- Initial release.
+- 최초 릴리스.
