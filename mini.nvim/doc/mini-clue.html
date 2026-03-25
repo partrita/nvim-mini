@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>mini.clue 문서 – MINI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/logo-mini_180x180.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-588f07447021c9b1c78c14c285b6df15.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-9a1b1f8e841c9c2d133c690b11f8ee3e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-822171c0b08fb8324585bf617d393f53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-02025811ff4c933f5630304c954c6652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": "tree",
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style> .quarto-title > h1.title { display: none } </style>
+
+
+<meta property="og:title" content="mini.clue 문서 – MINI">
+<meta property="og:description" content="Modular Independent Neovim Improvements">
+<meta property="og:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta property="og:site_name" content="MINI">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="mini.clue 문서 – MINI">
+<meta name="twitter:description" content="Modular Independent Neovim Improvements">
+<meta name="twitter:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">MINI</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mini.nvim/index.html"> 
+<span class="menu-text">mini.nvim</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../MiniMax/index.html"> 
+<span class="menu-text">MiniMax</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nvim-mini"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss-fill" role="img" aria-label="RSS">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#module" id="toc-module" class="nav-link active" data-scroll-target="#module">모듈</a>
+  <ul>
+  <li><a href="#module-setup" id="toc-module-setup" class="nav-link" data-scroll-target="#module-setup">설정</a></li>
+  <li><a href="#module-comparisons" id="toc-module-comparisons" class="nav-link" data-scroll-target="#module-comparisons">비교</a></li>
+  <li><a href="#module-highlightgroups" id="toc-module-highlightgroups" class="nav-link" data-scroll-target="#module-highlightgroups">하이라이트 그룹</a></li>
+  <li><a href="#module-disabling" id="toc-module-disabling" class="nav-link" data-scroll-target="#module-disabling">비활성화</a></li>
+  </ul></li>
+  <li><a href="#miniclue-key-query-process" id="toc-miniclue-key-query-process" class="nav-link" data-scroll-target="#miniclue-key-query-process">키 쿼리 프로세스</a>
+  <ul>
+  <li><a href="#miniclue-key-query-process-generalinfo" id="toc-miniclue-key-query-process-generalinfo" class="nav-link" data-scroll-target="#miniclue-key-query-process-generalinfo">일반 정보</a></li>
+  <li><a href="#miniclue-key-query-process-lifecycle" id="toc-miniclue-key-query-process-lifecycle" class="nav-link" data-scroll-target="#miniclue-key-query-process-lifecycle">라이프사이클</a></li>
+  <li><a href="#miniclue-key-query-process-cluewindow" id="toc-miniclue-key-query-process-cluewindow" class="nav-link" data-scroll-target="#miniclue-key-query-process-cluewindow">클루 창</a></li>
+  </ul></li>
+  <li><a href="#miniclue-examples" id="toc-miniclue-examples" class="nav-link" data-scroll-target="#miniclue-examples">예제</a>
+  <ul>
+  <li><a href="#miniclue-examples-fullstarterexample" id="toc-miniclue-examples-fullstarterexample" class="nav-link" data-scroll-target="#miniclue-examples-fullstarterexample">전체 시작 예제</a></li>
+  <li><a href="#miniclue-examples-leaderclues" id="toc-miniclue-examples-leaderclues" class="nav-link" data-scroll-target="#miniclue-examples-leaderclues">Leader 클루</a></li>
+  <li><a href="#miniclue-examples-clueswithoutmappings" id="toc-miniclue-examples-clueswithoutmappings" class="nav-link" data-scroll-target="#miniclue-examples-clueswithoutmappings">매핑이 없는 클루</a></li>
+  <li><a href="#miniclue-examples-triggersinspecialbuffers" id="toc-miniclue-examples-triggersinspecialbuffers" class="nav-link" data-scroll-target="#miniclue-examples-triggersinspecialbuffers">특수 버퍼에서의 트리거</a></li>
+  <li><a href="#miniclue-examples-submodes" id="toc-miniclue-examples-submodes" class="nav-link" data-scroll-target="#miniclue-examples-submodes">서브모드</a>
+  <ul>
+  <li><a href="#miniclue-examples-submodes-submodeexamples" id="toc-miniclue-examples-submodes-submodeexamples" class="nav-link" data-scroll-target="#miniclue-examples-submodes-submodeexamples">서브모드 예제</a></li>
+  </ul></li>
+  <li><a href="#miniclue-examples-windowconfig" id="toc-miniclue-examples-windowconfig" class="nav-link" data-scroll-target="#miniclue-examples-windowconfig">창 구성</a></li>
+  </ul></li>
+  <li><a href="#miniclue.setup" id="toc-miniclue.setup" class="nav-link" data-scroll-target="#miniclue.setup">setup()</a>
+  <ul>
+  <li><a href="#miniclue.setup-parameters" id="toc-miniclue.setup-parameters" class="nav-link" data-scroll-target="#miniclue.setup-parameters">매개변수</a></li>
+  <li><a href="#miniclue.setup-usage" id="toc-miniclue.setup-usage" class="nav-link" data-scroll-target="#miniclue.setup-usage">사용법</a></li>
+  </ul></li>
+  <li><a href="#miniclue.config" id="toc-miniclue.config" class="nav-link" data-scroll-target="#miniclue.config">config</a>
+  <ul>
+  <li><a href="#miniclue.config-defaults" id="toc-miniclue.config-defaults" class="nav-link" data-scroll-target="#miniclue.config-defaults">기본값</a></li>
+  <li><a href="#miniclue.config-generalinfo" id="toc-miniclue.config-generalinfo" class="nav-link" data-scroll-target="#miniclue.config-generalinfo">일반 정보</a></li>
+  <li><a href="#miniclue.config-clues" id="toc-miniclue.config-clues" class="nav-link" data-scroll-target="#miniclue.config-clues">클루</a></li>
+  <li><a href="#miniclue.config-triggers" id="toc-miniclue.config-triggers" class="nav-link" data-scroll-target="#miniclue.config-triggers">트리거</a></li>
+  <li><a href="#miniclue.config-window" id="toc-miniclue.config-window" class="nav-link" data-scroll-target="#miniclue.config-window">창</a></li>
+  </ul></li>
+  <li><a href="#miniclue.enable_all_triggers" id="toc-miniclue.enable_all_triggers" class="nav-link" data-scroll-target="#miniclue.enable_all_triggers">enable_all_triggers()</a></li>
+  <li><a href="#miniclue.enable_buf_triggers" id="toc-miniclue.enable_buf_triggers" class="nav-link" data-scroll-target="#miniclue.enable_buf_triggers">enable_buf_triggers()</a>
+  <ul>
+  <li><a href="#miniclue.enable_buf_triggers-parameters" id="toc-miniclue.enable_buf_triggers-parameters" class="nav-link" data-scroll-target="#miniclue.enable_buf_triggers-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#miniclue.disable_all_triggers" id="toc-miniclue.disable_all_triggers" class="nav-link" data-scroll-target="#miniclue.disable_all_triggers">disable_all_triggers()</a></li>
+  <li><a href="#miniclue.disable_buf_triggers" id="toc-miniclue.disable_buf_triggers" class="nav-link" data-scroll-target="#miniclue.disable_buf_triggers">disable_buf_triggers()</a>
+  <ul>
+  <li><a href="#miniclue.disable_buf_triggers-parameters" id="toc-miniclue.disable_buf_triggers-parameters" class="nav-link" data-scroll-target="#miniclue.disable_buf_triggers-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#miniclue.ensure_all_triggers" id="toc-miniclue.ensure_all_triggers" class="nav-link" data-scroll-target="#miniclue.ensure_all_triggers">ensure_all_triggers()</a></li>
+  <li><a href="#miniclue.ensure_buf_triggers" id="toc-miniclue.ensure_buf_triggers" class="nav-link" data-scroll-target="#miniclue.ensure_buf_triggers">ensure_buf_triggers()</a>
+  <ul>
+  <li><a href="#miniclue.ensure_buf_triggers-parameters" id="toc-miniclue.ensure_buf_triggers-parameters" class="nav-link" data-scroll-target="#miniclue.ensure_buf_triggers-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#miniclue.set_mapping_desc" id="toc-miniclue.set_mapping_desc" class="nav-link" data-scroll-target="#miniclue.set_mapping_desc">set_mapping_desc()</a>
+  <ul>
+  <li><a href="#miniclue.set_mapping_desc-parameters" id="toc-miniclue.set_mapping_desc-parameters" class="nav-link" data-scroll-target="#miniclue.set_mapping_desc-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#miniclue.gen_clues" id="toc-miniclue.gen_clues" class="nav-link" data-scroll-target="#miniclue.gen_clues">gen_clues</a></li>
+  <li><a href="#miniclue.gen_clues.builtin_completion" id="toc-miniclue.gen_clues.builtin_completion" class="nav-link" data-scroll-target="#miniclue.gen_clues.builtin_completion">gen_clues.builtin_completion()</a>
+  <ul>
+  <li><a href="#miniclue.gen_clues.builtin_completion-return" id="toc-miniclue.gen_clues.builtin_completion-return" class="nav-link" data-scroll-target="#miniclue.gen_clues.builtin_completion-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniclue.gen_clues.g" id="toc-miniclue.gen_clues.g" class="nav-link" data-scroll-target="#miniclue.gen_clues.g">gen_clues.g()</a>
+  <ul>
+  <li><a href="#miniclue.gen_clues.g-return" id="toc-miniclue.gen_clues.g-return" class="nav-link" data-scroll-target="#miniclue.gen_clues.g-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniclue.gen_clues.square_brackets" id="toc-miniclue.gen_clues.square_brackets" class="nav-link" data-scroll-target="#miniclue.gen_clues.square_brackets">gen_clues.square_brackets()</a>
+  <ul>
+  <li><a href="#miniclue.gen_clues.square_brackets-return" id="toc-miniclue.gen_clues.square_brackets-return" class="nav-link" data-scroll-target="#miniclue.gen_clues.square_brackets-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniclue.gen_clues.marks" id="toc-miniclue.gen_clues.marks" class="nav-link" data-scroll-target="#miniclue.gen_clues.marks">gen_clues.marks()</a>
+  <ul>
+  <li><a href="#miniclue.gen_clues.marks-return" id="toc-miniclue.gen_clues.marks-return" class="nav-link" data-scroll-target="#miniclue.gen_clues.marks-return">반환</a></li>
+  <li><a href="#miniclue.gen_clues.marks-seealso" id="toc-miniclue.gen_clues.marks-seealso" class="nav-link" data-scroll-target="#miniclue.gen_clues.marks-seealso">참고 항목</a></li>
+  </ul></li>
+  <li><a href="#miniclue.gen_clues.registers" id="toc-miniclue.gen_clues.registers" class="nav-link" data-scroll-target="#miniclue.gen_clues.registers">gen_clues.registers()</a>
+  <ul>
+  <li><a href="#miniclue.gen_clues.registers-parameters" id="toc-miniclue.gen_clues.registers-parameters" class="nav-link" data-scroll-target="#miniclue.gen_clues.registers-parameters">매개변수</a></li>
+  <li><a href="#miniclue.gen_clues.registers-return" id="toc-miniclue.gen_clues.registers-return" class="nav-link" data-scroll-target="#miniclue.gen_clues.registers-return">반환</a></li>
+  <li><a href="#miniclue.gen_clues.registers-seealso" id="toc-miniclue.gen_clues.registers-seealso" class="nav-link" data-scroll-target="#miniclue.gen_clues.registers-seealso">참고 항목</a></li>
+  </ul></li>
+  <li><a href="#miniclue.gen_clues.windows" id="toc-miniclue.gen_clues.windows" class="nav-link" data-scroll-target="#miniclue.gen_clues.windows">gen_clues.windows()</a>
+  <ul>
+  <li><a href="#miniclue.gen_clues.windows-parameters" id="toc-miniclue.gen_clues.windows-parameters" class="nav-link" data-scroll-target="#miniclue.gen_clues.windows-parameters">매개변수</a></li>
+  <li><a href="#miniclue.gen_clues.windows-return" id="toc-miniclue.gen_clues.windows-return" class="nav-link" data-scroll-target="#miniclue.gen_clues.windows-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniclue.gen_clues.z" id="toc-miniclue.gen_clues.z" class="nav-link" data-scroll-target="#miniclue.gen_clues.z">gen_clues.z()</a>
+  <ul>
+  <li><a href="#miniclue.gen_clues.z-return" id="toc-miniclue.gen_clues.z-return" class="nav-link" data-scroll-target="#miniclue.gen_clues.z-return">반환</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">mini.clue 문서</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>_ ’mini.nvim’의 <code>main</code> 브랜치에서 생성됨 _</p>
+<p><a name="mini.clue" href="../../mini.nvim/doc/mini-clue.html#mini.clue"><b>mini.clue</b></a> 다음 키 힌트 표시</p>
+<p>MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski</p>
+<hr>
+<section id="module" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="module">모듈</h3>
+<p>주요 기능:</p>
+<ul>
+<li><p>타겟 키 조합에 도달하기 위한 커스텀 키 쿼리 프로세스를 구현합니다:</p>
+<ul>
+<li><p>사용자 정의 가능한 옵트인 트리거(모드 + 키) 이후에 시작됩니다.</p></li>
+<li><p>각 키를 누를 때마다 가능한 타겟 세트가 좁혀집니다. <code>&lt;BS&gt;</code>를 누르면 이전 사용자 입력이 제거됩니다. <code>&lt;Esc&gt;</code> 또는 <code>&lt;C-c&gt;</code>를 누르면 프로세스가 조기에 중단됩니다. ’timeoutlen’에 의존하지 않으며 ’langmap’에 대한 기본 지원이 있습니다.</p></li>
+<li><p>타겟이 하나만 남거나 사용자가 <code>&lt;CR&gt;</code>을 누르면 종료됩니다. 모든 쿼리 키와 가능한 postkeys를 누르는 것을 에뮬레이트하는 결과로 이어집니다.</p></li>
+</ul></li>
+<li><p>힌트와 함께 창을 표시합니다 (설정 가능한 지연 시간 이후). 사용 가능한 다음 키와 해당 설명(키맵에 있는 설명과 사용자 제공 클루에서 자동 생성되며 전자를 선호함)을 나열합니다.</p></li>
+<li><p>키 조합에 대한 구성 가능한 “postkeys”를 제공합니다 - 키 쿼리 프로세스 중에 조합에 도달한 후 에뮬레이트될 키입니다.</p></li>
+<li><p>일반적인 내장 키/개념에 대한 사용자 정의 가능한 클루 세트를 제공합니다:</p>
+<ul>
+<li><p><code>g</code> 키.</p></li>
+<li><p><code>z</code> 키.</p></li>
+<li><p>창(window) 명령.</p></li>
+<li><p>내장 완성(completion).</p></li>
+<li><p>마크(marks).</p></li>
+<li><p>레지스터(registers).</p></li>
+</ul></li>
+<li><p>전역 또는 버퍼별로 트리거를 활성화/비활성화하는 Lua 함수를 제공합니다.</p></li>
+</ul>
+<p>자세한 내용은 다음을 참조하세요:</p>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-clue.html#miniclue-key-query-process">MiniClue-key-query-process</a>.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-clue.html#miniclue-examples">MiniClue-examples</a>.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-clue.html#miniclue.config">MiniClue.config</a>.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-clue.html#miniclue.gen_clues">MiniClue.gen_clues</a>.</p></li>
+</ul>
+<p>참고:</p>
+<ul>
+<li><p>클루를 정의하는 동안 매핑을 생성하는 기능은 없습니다. 이는 이 두 가지 서로 다른 작업을 명확하게 분리하기 위함입니다. 가장 권장되는 방법은 설명(<code>desc</code> 필드)이 포함된 매핑을 수동으로 만드는 것이며, 이 설명은 클루 창 내부에서 자동으로 사용됩니다.</p></li>
+<li><p>트리거는 특수한 버퍼 로컬 매핑으로 구현됩니다. 이로 인해 몇 가지 주의 사항이 있습니다:</p>
+<ul>
+<li><p>동일한 일반 버퍼 로컬 매핑을 재정의하며 전역 매핑보다 우선순위를 갖습니다.</p>
+<p>예: <code>&lt;C-w&gt;</code>를 Normal 모드 트리거로 설정하면 다른 <code>&lt;C-w&gt;</code> 매핑이 없어야 합니다.</p></li>
+<li><p>트리거는 가장 최근에 생성된 버퍼 로컬 매핑이어야 하며, 그렇지 않으면 제대로 작동하지 않습니다. 이의 가장 흔한 징후는 클루 창이 표시된 후에만 일부 매핑이 작동하기 시작하는 것입니다.</p>
+<p>예: <code>g</code>가 Normal 모드 트리거로 설정되어 있지만 <a href="../../mini.nvim/doc/mini-comment.html#mini.comment">mini.comment</a>의 <code>gcc</code>가 즉시 작동하지 않습니다. 이는 <code>g</code> 트리거에 대한 매핑 이후에 생성된 <code>g</code>로 시작하는 다른 버퍼 로컬 매핑이 있기 때문일 수 있습니다. 가장 흔한 경우는 LSP 서버의 <code>on_attach</code> 또는 버퍼에서 tree-sitter가 시작되는 동안입니다.</p>
+<p>트리거가 가장 최근의 버퍼 로컬 매핑인지 확인하려면 <code>:&lt;mode-char&gt;map &lt;trigger-keys&gt;</code>를 실행하세요 (예: <code>nmap g</code>). 트리거에 대한 매핑이 가장 먼저 나열되어야 합니다.</p>
+<p>이 모듈은 기본적으로 잘 작동하고 대부분의 일반적인 경우를 다루기 위해 최선을 다하지만, 모든 상황에서 완벽하지는 않습니다. 여기서 해결책은 모든 버퍼 로컬 매핑을 만든 후에 트리거가 생성되도록 하는 것입니다. <a href="../../mini.nvim/doc/mini-clue.html#miniclue.setup">MiniClue.setup()</a> 또는 <a href="../../mini.nvim/doc/mini-clue.html#miniclue.ensure_buf_triggers">MiniClue.ensure_buf_triggers()</a>를 실행하세요.</p></li>
+</ul></li>
+<li><p>기존 매핑의 설명이 사용자 제공 클루보다 우선합니다. 이는 클루 창에 표시되는 정보가 가능한 한 관련성이 높도록 하기 위함입니다. 이미 존재하는 매핑의 설명을 추가하거나 사용자 정의하려면 <a href="../../mini.nvim/doc/mini-clue.html#miniclue.set_mapping_desc">MiniClue.set_mapping_desc()</a>를 사용하세요.</p></li>
+<li><p>기술적인 어려움으로 인해 Operator-pending 모드 트리거(예: <a href="../../mini.nvim/doc/mini-ai.html#mini.ai">mini.ai</a>의 <code>a</code>/<code>i</code>)에 대한 완벽한 지원은 없습니다:</p>
+<ul>
+<li><p>구현상의 어려움으로 인해 “임시 Normal 모드”(예: <a href="https://neovim.io/doc/user/helptag.html?tag=i_CTRL-O">i_CTRL-O</a> 이후)에서 명령의 일부로 작동하지 않습니다.</p></li>
+<li><p>커스텀 연산자(operators)와 함께 사용할 때 예기치 않은 동작이 발생할 수 있습니다.</p></li>
+</ul></li>
+<li><p>매크로와 관련된 (대부분 해결된) 문제가 있습니다:</p>
+<ul>
+<li><p>기술적인 이유로 매크로 기록 중에는 모든 트리거가 비활성화됩니다.</p></li>
+<li><p><code>@</code> 및 <code>Q</code> 키는 트리거를 일시적으로 비활성화하기 위해 <a href="../../mini.nvim/doc/mini-clue.html#miniclue.setup">MiniClue.setup()</a> 내부에서 특수하게 매핑됩니다 (키가 아직 매핑되지 않은 경우).</p></li>
+</ul></li>
+</ul>
+<section id="module-setup" class="level4">
+<h4 class="anchored" data-anchor-id="module-setup">설정</h4>
+<p>이 모듈은 <code>require('mini.clue').setup({})</code>으로 설정이 필요합니다 (<code>{}</code>를 <code>config</code> 테이블로 교체하세요). 스크립팅이나 수동으로 사용할 수 있는 글로벌 Lua 테이블 <code>MiniClue</code>를 생성합니다 (<code>:lua MiniClue.*</code> 사용).</p>
+<p>구성 테이블에는 트리거가 구성되어 있어야 하며, 기본적으로는 아무것도 설정되어 있지 않습니다.</p>
+<p>사용 가능한 구성 설정은 <a href="../../mini.nvim/doc/mini-clue.html#miniclue.config">MiniClue.config</a>를 참조하세요.</p>
+<p>런타임 구성 설정(예: 클루 또는 창 옵션)을 <code>vim.b.miniclue_config</code> 내부의 버퍼에 로컬로 재정의할 수 있으며, 이는 <code>MiniClue.config</code>와 동일한 구조여야 합니다. 자세한 내용은 <a href="../../mini.nvim/doc/mini-nvim.html#mini.nvim-buffer-local-config">mini.nvim-buffer-local-config</a>를 참조하세요.</p>
+</section>
+<section id="module-comparisons" class="level4">
+<h4 class="anchored" data-anchor-id="module-comparisons">비교</h4>
+<ul>
+<li><p><a href="https://github.com/folke/which-key.nvim">folke/which-key.nvim</a>:</p>
+<ul>
+<li><p>둘 다 사용 가능한 다음 키와 사용자 정의 가능한 설명을 표시한다는 동일한 주요 목표를 가지고 있습니다.</p></li>
+<li><p>UI 및 콘텐츠 레이아웃이 다릅니다.</p></li>
+<li><p>구성 내에서 매핑을 생성할 수 있게 허용하지만, 이 모듈은 두 가지 서로 다른 작업을 명확하게 분리하기 위해 설계상 이를 지원하지 않습니다.</p></li>
+<li><p>서브모드(submodes) 생성을 허용하지 않지만, 이 모듈은 (<code>postkeys</code>를 통해) 허용합니다.</p></li>
+</ul></li>
+<li><p><a href="https://github.com/anuvyklack/hydra.nvim">anuvyklack/hydra.nvim</a>:</p>
+<ul>
+<li><p>둘 다 서브모드 생성을 허용합니다. 서브모드는 특정 키 조합에서 시작하고, 일부 키를 다르게 처리하며, <code>&lt;Esc&gt;</code> 이후에 종료되는 상태입니다.</p></li>
+<li><p>사용 가능한 다음 키에 대한 정보를 서브모드 외부에서 표시하지 않지만, 그것이 이 모듈의 주요 목표입니다.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="module-highlightgroups" class="level4">
+<h4 class="anchored" data-anchor-id="module-highlightgroups">하이라이트 그룹</h4>
+<ul>
+<li><p><code>MiniClueBorder</code> - 창 테두리.</p></li>
+<li><p><code>MiniClueDescGroup</code> - 클루 창의 그룹 설명.</p></li>
+<li><p><code>MiniClueDescSingle</code> - 클루 창의 단일 타겟 설명.</p></li>
+<li><p><code>MiniClueNextKey</code> - 클루 창의 다음 키 레이블.</p></li>
+<li><p><code>MiniClueNextKeyWithPostkeys</code> - 클루 창의 postkeys가 있는 다음 키 레이블.</p></li>
+<li><p><code>MiniClueSeparator</code> - 클루 창의 구분선.</p></li>
+<li><p><code>MiniClueTitle</code> - 창 제목.</p></li>
+</ul>
+<p>하이라이트 그룹을 변경하려면 <a href="https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl()">nvim_set_hl()</a>을 사용하여 직접 설정하세요.</p>
+</section>
+<section id="module-disabling" class="level4">
+<h4 class="anchored" data-anchor-id="module-disabling">비활성화</h4>
+<p>트리거 생성을 비활성화하려면 <code>vim.g.miniclue_disable</code>(전역) 또는 <code>vim.b.miniclue_disable</code>(버퍼용)을 <code>true</code>로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 레시피는 <a href="../../mini.nvim/doc/mini-nvim.html#mini.nvim-disabling-recipes">mini.nvim-disabling-recipes</a>를 참조하세요.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue-key-query-process" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue-key-query-process">키 쿼리 프로세스</h3>
+<section id="miniclue-key-query-process-generalinfo" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue-key-query-process-generalinfo">일반 정보</h4>
+<p>이 모듈은 매핑을 실행하기 위해 사용자가 키를 순서대로 누르는 일반적인 내장 메커니즘을 모방한 커스텀 키 쿼리 프로세스를 구현합니다. 기본 아이디어는 동일합니다: 타겟에 도달할 때까지 키 조합을 좁혀나갑니다.</p>
+<p>이 프로세스가 존재하는 주요 목표는 다음과 같습니다:</p>
+<ul>
+<li><p>특정 매핑에 도달하는 것이 ’timeoutlen’에 독립적이 되도록 합니다. 즉, 현재 입력된 키가 실행되는 고정된 타임아웃이 없습니다.</p></li>
+<li><p>사용자 제공 지연 시간 이후에 다음 키 클루를 자동으로 표시할 수 있게 합니다 (이 또한 ’timeoutlen’에 독립적임).</p></li>
+<li><p>특정 키 조합에 도달한 후 구성 가능한 키 입력을 에뮬레이트할 수 있게 합니다. 이 세밀한 제어를 통해 소위 “서브모드(submodes)”를 생성할 수 있습니다. 자세한 내용은 <a href="../../mini.nvim/doc/mini-clue.html#miniclue-examples-submodes">MiniClue-examples-submodes</a>를 참조하세요.</p></li>
+</ul>
+<p>이 프로세스는 주로 Normal 모드의 중첩된 <code>&lt;Leader&gt;</code> 매핑을 위해 설계되었지만, 다른 모든 주요 모드에서도 작동합니다: Visual, Insert, Operator-pending (주의 사항 있음, 완벽한 보장 없음), Command-line, Terminal.</p>
+</section>
+<section id="miniclue-key-query-process-lifecycle" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue-key-query-process-lifecycle">라이프사이클</h4>
+<ul>
+<li><p>키 쿼리 프로세스는 사용자가 트리거(특정 모드의 특정 키)를 입력할 때 시작됩니다. 해당 키는 단일 사용자 입력으로 키 쿼리에 추가됩니다. 모든 가능한 모드 키 조합은 트리거 키로 시작하는 것으로 필터링됩니다.</p>
+<p>참고: 트리거는 일반 매핑으로 구현되므로 두 개 이상의 키가 있는 경우 ‘timeoutlen’ 밀리초 이내에 눌러야 합니다.</p></li>
+<li><p>사용자가 키를 누를 때까지 (무기한으로) 기다립니다. 키에 따라 진행됩니다:</p>
+<ul>
+<li><p>특수 키:</p>
+<ul>
+<li><p><code>&lt;Esc&gt;</code> 또는 <code>&lt;C-c&gt;</code>인 경우, 아무 작업 없이 프로세스를 중단합니다.</p></li>
+<li><p><code>&lt;CR&gt;</code>인 경우, 프로세스를 중단하고 현재 키 쿼리를 실행합니다. 즉, 사용자가 해당 키를 누르는 것을 에뮬레이트합니다 (<a href="https://neovim.io/doc/user/helptag.html?tag=nvim_feedkeys()">nvim_feedkeys()</a> 사용).</p></li>
+<li><p><code>&lt;BS&gt;</code>인 경우, 쿼리에서 이전 사용자 입력을 제거합니다. 쿼리가 비어 있게 되면 아무 작업 없이 프로세스를 중단합니다.</p></li>
+<li><p>클루 창을 스크롤하기 위한 키(<code>config.window</code>의 <code>scroll_down</code> / <code>scroll_up</code>, 기본값은 <code>&lt;C-d&gt;</code> / <code>&lt;C-u&gt;</code>)인 경우, 클루 창을 스크롤하고 다음 사용자 키를 기다립니다. 참고: 클루 창이 표시되지 않은 경우 특수 키가 아닌 키로 취급됩니다.</p></li>
+</ul></li>
+<li><p>특수 키가 아닌 키. 현재 키 쿼리로 시작하도록 모든 사용 가능한 키 조합을 필터링하면서 쿼리에 키를 추가합니다. 진행:</p>
+<ul>
+<li><p>현재 키 쿼리와 일치하는 사용 가능한 키 조합이 하나만 있는 경우 이를 실행합니다.</p></li>
+<li><p>현재 쿼리로 시작하는 키 조합이 없는 경우 이를 실행합니다. 예를 들어, 이는 더 긴 키 조합이 있는 상황에서도 연산자(operators)를 원활하게 실행할 수 있게 합니다. 예:</p>
+<p align="center">
+</p><p>Normal 모드에서 <code>g</code>가 트리거이고 사용 가능한 매핑이 <code>gc</code> / <code>gcc</code>인 경우</p>
+<p></p>
+<p>(예: <a href="../../mini.nvim/doc/mini-comment.html#mini.comment">mini.comment</a>에서), 이는 <code>gci</code>로 시작하는 키 조합이 없더라도 현재 단락에 주석을 달기 위해 <code>gcip</code>를 입력할 수 있게 해줍니다.</p></li>
+<li><p>그렇지 않으면 새로운 사용자 키 입력을 기다립니다.</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="miniclue-key-query-process-cluewindow" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue-key-query-process-cluewindow">클루 창</h4>
+<p>키 쿼리 프로세스를 시작한 후와 각 키를 누른 후에 타이머가 시작되어 클루 창(사용 가능한 다음 키와 해당 설명에 대한 정보가 포함된 플로팅 창)을 표시합니다. 참고: 창이 이미 표시되어 있는 경우 콘텐츠가 즉시 업데이트됩니다.</p>
+<p>클루는 다음과 같은 유형을 가질 수 있습니다:</p>
+<ul>
+<li><p>“Terminal next key”: 누르면 쿼리 실행으로 이어집니다.</p></li>
+<li><p>“Terminal next key with postkeys”: 누르면 쿼리 실행과 함께 일부 구성된 postkeys로 이어집니다.</p></li>
+<li><p>“Group next key”: 누르면 사용 가능한 키 조합을 좁히고 다른 키 입력을 기다립니다. 참고: 구성된 설명(<code>config.clues</code> 내부)을 가질 수 있으며, 그렇지 않으면 사용 가능한 키 조합의 수에 따라 자동으로 생성됩니다.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="miniclue-examples" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue-examples">예제</h3>
+<section id="miniclue-examples-fullstarterexample" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue-examples-fullstarterexample">전체 시작 예제</h4>
+<p>어디서 시작해야 할지 모르겠다면, 이 모듈에서 제공하는 모든 클루와 Normal 및 Visual 모드의 모든 <a href="https://neovim.io/doc/user/helptag.html?tag=%3CLeader%3E"><span class="help-syntax-keys">&lt;Leader&gt;</span></a> 매핑을 포함하는 이 예제를 시도해 보세요:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">miniclue</span> <span class="op">=</span> <span class="fu">require</span><span class="op">(</span><span class="st">'mini.clue'</span><span class="op">)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">miniclue</span><span class="op">.</span>setup<span class="op">({</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">triggers</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Leader 트리거</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;'</span> <span class="op">},</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `[` 및 `]` 키</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'['</span> <span class="op">},</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">']'</span> <span class="op">},</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 내장 완성</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'i'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-x&gt;'</span> <span class="op">},</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `g` 키</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'g'</span> <span class="op">},</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 마크</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">"'"</span> <span class="op">},</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'`'</span> <span class="op">},</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 레지스터</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'"'</span> <span class="op">},</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'i'</span><span class="op">,</span> <span class="st">'c'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-r&gt;'</span> <span class="op">},</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 창 명령</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-w&gt;'</span> <span class="op">},</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `z` 키</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'z'</span> <span class="op">},</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="va">clues</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- &lt;Leader&gt; 매핑 그룹에 대한 설명을 추가하여 이를 보완하세요</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="va">miniclue</span><span class="op">.</span><span class="va">gen_clues</span><span class="op">.</span>square_brackets<span class="op">(),</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="va">miniclue</span><span class="op">.</span><span class="va">gen_clues</span><span class="op">.</span>builtin_completion<span class="op">(),</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="va">miniclue</span><span class="op">.</span><span class="va">gen_clues</span><span class="op">.</span>g<span class="op">(),</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="va">miniclue</span><span class="op">.</span><span class="va">gen_clues</span><span class="op">.</span>marks<span class="op">(),</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="va">miniclue</span><span class="op">.</span><span class="va">gen_clues</span><span class="op">.</span>registers<span class="op">(),</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="va">miniclue</span><span class="op">.</span><span class="va">gen_clues</span><span class="op">.</span>windows<span class="op">(),</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="va">miniclue</span><span class="op">.</span><span class="va">gen_clues</span><span class="op">.</span>z<span class="op">(),</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="miniclue-examples-leaderclues" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue-examples-leaderclues">Leader 클루</h4>
+<p>다음과 같은 <a href="https://neovim.io/doc/user/helptag.html?tag=%3CLeader%3E"><span class="help-syntax-keys">&lt;Leader&gt;</span></a> 매핑이 설정되어 있다고 가정합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- 매핑을 만들고 'mini.clue'를 구성하기 전에 `&lt;Leader&gt;`를 설정하세요</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">vim</span><span class="op">.</span><span class="va">g</span><span class="op">.</span><span class="va">mapleader</span> <span class="op">=</span> <span class="st">' '</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">nmap_leader</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">suffix</span><span class="op">,</span> <span class="va">rhs</span><span class="op">,</span> <span class="va">desc</span><span class="op">)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">vim</span><span class="op">.</span><span class="va">keymap</span><span class="op">.</span>set<span class="op">(</span><span class="st">'n'</span><span class="op">,</span> <span class="st">'&lt;Leader&gt;'</span> <span class="op">..</span> <span class="va">suffix</span><span class="op">,</span> <span class="va">rhs</span><span class="op">,</span> <span class="op">{</span> <span class="va">desc</span> <span class="op">=</span> <span class="va">desc</span> <span class="op">})</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">xmap_leader</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">suffix</span><span class="op">,</span> <span class="va">rhs</span><span class="op">,</span> <span class="va">desc</span><span class="op">)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">vim</span><span class="op">.</span><span class="va">keymap</span><span class="op">.</span>set<span class="op">(</span><span class="st">'x'</span><span class="op">,</span> <span class="st">'&lt;Leader&gt;'</span> <span class="op">..</span> <span class="va">suffix</span><span class="op">,</span> <span class="va">rhs</span><span class="op">,</span> <span class="op">{</span> <span class="va">desc</span> <span class="op">=</span> <span class="va">desc</span> <span class="op">})</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>nmap_leader<span class="op">(</span><span class="st">'bd'</span><span class="op">,</span> <span class="st">'&lt;Cmd&gt;lua MiniBufremove.delete()&lt;CR&gt;'</span><span class="op">,</span>  <span class="st">'삭제(Delete)'</span><span class="op">)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>nmap_leader<span class="op">(</span><span class="st">'bw'</span><span class="op">,</span> <span class="st">'&lt;Cmd&gt;lua MiniBufremove.wipeout()&lt;CR&gt;'</span><span class="op">,</span> <span class="st">'완전삭제(Wipeout)'</span><span class="op">)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>nmap_leader<span class="op">(</span><span class="st">'lf'</span><span class="op">,</span> <span class="st">'&lt;Cmd&gt;lua vim.lsp.buf.format()&lt;CR&gt;'</span><span class="op">,</span>     <span class="st">'포맷(Format)'</span><span class="op">)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>xmap_leader<span class="op">(</span><span class="st">'lf'</span><span class="op">,</span> <span class="st">'&lt;Cmd&gt;lua vim.lsp.buf.format()&lt;CR&gt;'</span><span class="op">,</span>     <span class="st">'포맷(Format)'</span><span class="op">)</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>nmap_leader<span class="op">(</span><span class="st">'lr'</span><span class="op">,</span> <span class="st">'&lt;Cmd&gt;lua vim.lsp.buf.rename()&lt;CR&gt;'</span><span class="op">,</span>     <span class="st">'이름변경(Rename)'</span><span class="op">)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>nmap_leader<span class="op">(</span><span class="st">'lR'</span><span class="op">,</span> <span class="st">'&lt;Cmd&gt;lua vim.lsp.buf.references()&lt;CR&gt;'</span><span class="op">,</span> <span class="st">'참조(References)'</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>다음 설정은 Normal 및 Visual 모드에서 <a href="https://neovim.io/doc/user/helptag.html?tag=%3CLeader%3E"><span class="help-syntax-keys">&lt;Leader&gt;</span></a>를 트리거로 활성화하고 매핑 그룹에 설명을 추가합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.clue'</span><span class="op">).</span>setup<span class="op">({</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- `&lt;Leader&gt;`를 트리거로 등록</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">triggers</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;'</span> <span class="op">},</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 매핑 그룹에 대한 설명 추가</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">clues</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;b'</span><span class="op">,</span> <span class="va">desc</span> <span class="op">=</span> <span class="st">'+버퍼(Buffers)'</span> <span class="op">},</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;l'</span><span class="op">,</span> <span class="va">desc</span> <span class="op">=</span> <span class="st">'+LSP'</span> <span class="op">},</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="miniclue-examples-clueswithoutmappings" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue-examples-clueswithoutmappings">매핑이 없는 클루</h4>
+<p>실제로 존재하는 매핑에 대해서만 클루를 표시할 수 있는 것은 아닙니다. 이는 내장 키 조합에 대한 클루를 표시하는 데 유용합니다. 다음은 내장 완성의 하위 집합에 대한 클루 예제입니다 (모든 사용 가능한 완성 소스에 대한 클루를 생성하려면 <a href="../../mini.nvim/doc/mini-clue.html#miniclue.gen_clues.builtin_completion">MiniClue.gen_clues.builtin_completion()</a>을 참조하세요):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.clue'</span><span class="op">).</span>setup<span class="op">({</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- `&lt;C-x&gt;`를 트리거로 만듭니다. 그렇지 않으면 키 쿼리 프로세스가 시작되지 않습니다.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">triggers</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'i'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-x&gt;'</span> <span class="op">},</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 커스텀 클루 등록</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">clues</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'i'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-x&gt;&lt;C-f&gt;'</span><span class="op">,</span> <span class="va">desc</span> <span class="op">=</span> <span class="st">'파일명(File names)'</span> <span class="op">},</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'i'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-x&gt;&lt;C-l&gt;'</span><span class="op">,</span> <span class="va">desc</span> <span class="op">=</span> <span class="st">'전체 행(Whole lines)'</span> <span class="op">},</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'i'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-x&gt;&lt;C-o&gt;'</span><span class="op">,</span> <span class="va">desc</span> <span class="op">=</span> <span class="st">'Omni 완성'</span> <span class="op">},</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'i'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-x&gt;&lt;C-s&gt;'</span><span class="op">,</span> <span class="va">desc</span> <span class="op">=</span> <span class="st">'맞춤법 제안(Spelling suggestions)'</span> <span class="op">},</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'i'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-x&gt;&lt;C-u&gt;'</span><span class="op">,</span> <span class="va">desc</span> <span class="op">=</span> <span class="st">"'completefunc' 사용"</span> <span class="op">},</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="miniclue-examples-triggersinspecialbuffers" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue-examples-triggersinspecialbuffers">특수 버퍼에서의 트리거</h4>
+<p>기본적으로 트리거는 나열된(‘buflisted’) 버퍼와 일부 특수한 나열되지 않은 버퍼에서 자동으로 생성됩니다. 필요할 때 수동으로 활성화하려면 <a href="../../mini.nvim/doc/mini-clue.html#miniclue.ensure_buf_triggers">MiniClue.ensure_buf_triggers()</a>를 사용하세요. 예를 들어:</p>
+<pre class="vim"><code>au FileType special_ft lua MiniClue.ensure_buf_triggers()</code></pre>
+</section>
+<section id="miniclue-examples-submodes" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue-examples-submodes">서브모드</h4>
+<p><a name="miniclue-examples-submodes" href="../../mini.nvim/doc/mini-clue.html#miniclue-examples-submodes"><b>MiniClue-examples-submodes</b></a></p>
+<p>서브모드는 키 쿼리 프로세스 중에 특정 키 조합(“접두사”)을 누른 후에 시작되는 상태로, 일부 키가 다르게 해석됩니다.</p>
+<p>이 모듈에서 서브모드는 다음 단계에 따라 구현될 수 있습니다:</p>
+<ul>
+<li><p>서브모드 내부의 각 키에 대한 매핑을 생성합니다. 매핑의 왼쪽(LHS)은 접두사 뒤에 해당 키가 오는 형태여야 합니다.</p></li>
+<li><p>서브모드 내부의 각 키에 대해 <code>postkeys</code> 값이 접두사와 동일한 클루를 생성합니다. 이는 이 서브모드에서 특정 키 조합을 실행한 후 해당 접두사를 누르는 것이 자동으로 에뮬레이트됨을 의미합니다 (다시 서브모드 내부로 돌아감).</p></li>
+<li><p>서브모드 접두사(또는 시작 부분의 일부)를 트리거로 등록합니다. <code>&lt;Leader&gt;</code> 및 <code>&lt;Leader&gt;m</code>과 같이 “겹치는” 트리거를 등록하지 마세요.</p></li>
+</ul>
+<section id="miniclue-examples-submodes-submodeexamples" class="level5">
+<h5 class="anchored" data-anchor-id="miniclue-examples-submodes-submodeexamples">서브모드 예제</h5>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-move.html#mini.move">mini.move</a>로 이동하기 위한 서브모드:</p>
+<ul>
+<li><p><code>&lt;Leader&gt;m</code>을 눌러 서브모드를 시작합니다.</p></li>
+<li><p><code>h</code>/<code>j</code>/<code>k</code>/<code>l</code> 중 하나를 눌러 선택 영역/행을 이동합니다.</p></li>
+<li><p><code>&lt;Esc&gt;</code>를 눌러 서브모드를 중지합니다.</p></li>
+</ul>
+<p>코드:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.move'</span><span class="op">).</span>setup<span class="op">({</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">mappings</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">left</span>       <span class="op">=</span> <span class="st">'&lt;Leader&gt;mh'</span><span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">right</span>      <span class="op">=</span> <span class="st">'&lt;Leader&gt;ml'</span><span class="op">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">down</span>       <span class="op">=</span> <span class="st">'&lt;Leader&gt;mj'</span><span class="op">,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">up</span>         <span class="op">=</span> <span class="st">'&lt;Leader&gt;mk'</span><span class="op">,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">line_left</span>  <span class="op">=</span> <span class="st">'&lt;Leader&gt;mh'</span><span class="op">,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">line_right</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;ml'</span><span class="op">,</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">line_down</span>  <span class="op">=</span> <span class="st">'&lt;Leader&gt;mj'</span><span class="op">,</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">line_up</span>    <span class="op">=</span> <span class="st">'&lt;Leader&gt;mk'</span><span class="op">,</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.clue'</span><span class="op">).</span>setup<span class="op">({</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="va">triggers</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `&lt;Leader&gt;m`을 직접 트리거로 설정할 수도 있지만,</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `&lt;Leader&gt;`도 사용하지 않도록 주의하세요. 서로 "겹칠" 수 있습니다.</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;'</span> <span class="op">},</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">clues</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;m'</span><span class="op">,</span> <span class="va">desc</span> <span class="op">=</span> <span class="st">'+이동(Move)'</span> <span class="op">},</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;mh'</span><span class="op">,</span> <span class="va">postkeys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;m'</span> <span class="op">},</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;mj'</span><span class="op">,</span> <span class="va">postkeys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;m'</span> <span class="op">},</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;mk'</span><span class="op">,</span> <span class="va">postkeys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;m'</span> <span class="op">},</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;ml'</span><span class="op">,</span> <span class="va">postkeys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;m'</span> <span class="op">},</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><a href="../../mini.nvim/doc/mini-bracketed.html#mini.bracketed">mini.bracketed</a>를 사용하여 버퍼와 창을 반복하기 위한 서브모드:</p>
+<ul>
+<li><p>특정 방향에 대한 키 쿼리 프로세스를 시작하려면 <code>[</code> 또는 <code>]</code>를 누릅니다.</p></li>
+<li><p>타겟에 도달할 때까지 <code>b</code> / <code>w</code>를 눌러 버퍼/창을 반복합니다.</p></li>
+<li><p><code>&lt;Esc&gt;</code>를 눌러 서브모드를 중지합니다.</p></li>
+</ul>
+<p>코드:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.bracketed'</span><span class="op">).</span>setup<span class="op">()</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.clue'</span><span class="op">).</span>setup<span class="op">({</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">triggers</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">']'</span> <span class="op">},</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'['</span> <span class="op">},</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">clues</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">']b'</span><span class="op">,</span> <span class="va">postkeys</span> <span class="op">=</span> <span class="st">']'</span> <span class="op">},</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">']w'</span><span class="op">,</span> <span class="va">postkeys</span> <span class="op">=</span> <span class="st">']'</span> <span class="op">},</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'[b'</span><span class="op">,</span> <span class="va">postkeys</span> <span class="op">=</span> <span class="st">'['</span> <span class="op">},</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'[w'</span><span class="op">,</span> <span class="va">postkeys</span> <span class="op">=</span> <span class="st">'['</span> <span class="op">},</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><a href="../../mini.nvim/doc/mini-clue.html#miniclue.gen_clues.windows">MiniClue.gen_clues.windows()</a>를 사용한 창 명령 서브모드:</p>
+<ul>
+<li><p>키 쿼리 프로세스를 시작하려면 <code>&lt;C-w&gt;</code>를 누릅니다.</p></li>
+<li><p>창을 이동 / 포커스 변경 / 크기 조절하는 키를 누릅니다.</p></li>
+<li><p><code>&lt;Esc&gt;</code>를 눌러 서브모드를 중지합니다.</p></li>
+</ul>
+<p>코드:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">miniclue</span> <span class="op">=</span> <span class="fu">require</span><span class="op">(</span><span class="st">'mini.clue'</span><span class="op">)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="va">miniclue</span><span class="op">.</span>setup<span class="op">({</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">triggers</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-w&gt;'</span> <span class="op">},</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">clues</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">miniclue</span><span class="op">.</span><span class="va">gen_clues</span><span class="op">.</span>windows<span class="op">({</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>      <span class="va">submode_move</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>      <span class="va">submode_navigate</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="va">submode_resize</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">})</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+</section>
+</section>
+<section id="miniclue-examples-windowconfig" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue-examples-windowconfig">창 구성</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.clue'</span><span class="op">).</span>setup<span class="op">({</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">triggers</span> <span class="op">=</span> <span class="op">{</span> <span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;Leader&gt;'</span> <span class="op">}</span> <span class="op">},</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">window</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 창을 즉시 표시</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">delay</span> <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">config</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      <span class="co">-- 창 너비를 자동으로 계산</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      <span class="va">width</span> <span class="op">=</span> <span class="st">'auto'</span><span class="op">,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      <span class="co">-- 이중선 테두리 사용</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>      <span class="va">border</span> <span class="op">=</span> <span class="st">'double'</span><span class="op">,</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">},</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="miniclue.setup" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.setup">setup()</h3>
+<p align="center">
+<code>MiniClue.setup</code>(<span class="help-syntax-special">{config}</span>)
+</p>
+<p>모듈 설정</p>
+<section id="miniclue.setup-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.setup-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{config}</span> <code>(table|nil)</code> 모듈 구성 테이블. <a href="../../mini.nvim/doc/mini-clue.html#miniclue.config">MiniClue.config</a>를 참조하세요.</p>
+</section>
+<section id="miniclue.setup-usage" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.setup-usage">사용법</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.clue'</span><span class="op">).</span>setup<span class="op">({})</span> <span class="co">-- {}를 사용자 구성 테이블로 교체</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                               <span class="co">-- `triggers` 필드가 필요함</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="miniclue.config" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.config">config</h3>
+<p align="center">
+<code>MiniClue.config</code>
+</p>
+<section id="miniclue.config-defaults" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.config-defaults">기본값</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="va">MiniClue</span><span class="op">.</span><span class="va">config</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 표시할 추가 클루 배열</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">clues</span> <span class="op">=</span> <span class="op">{},</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 커스텀 키 쿼리 프로세스를 시작하는 옵트인 트리거 배열.</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- **클루를 표시하려면 무언가 설정되어 있어야 합니다**.</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">triggers</span> <span class="op">=</span> <span class="op">{},</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 클루 창 설정</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">window</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 플로팅 창 구성</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">config</span> <span class="op">=</span> <span class="op">{},</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 클루 창이 나타나기 전의 지연 시간</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="va">delay</span> <span class="op">=</span> <span class="dv">1000</span><span class="op">,</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 클루 창 내부에서 스크롤하기 위한 키</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">scroll_down</span> <span class="op">=</span> <span class="st">'&lt;C-d&gt;'</span><span class="op">,</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="va">scroll_up</span> <span class="op">=</span> <span class="st">'&lt;C-u&gt;'</span><span class="op">,</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="miniclue.config-generalinfo" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.config-generalinfo">일반 정보</h4>
+<ul>
+<li><p>구성의 일부(트리거 또는 클루 내부)로 <a href="https://neovim.io/doc/user/helptag.html?tag=%3CLeader%3E"><span class="help-syntax-keys">&lt;Leader&gt;</span></a>를 사용하려면 <a href="../../mini.nvim/doc/mini-clue.html#miniclue.setup">MiniClue.setup()</a>을 실행하기 전에 이를 설정하세요.</p></li>
+<li><p>예제는 <a href="../../mini.nvim/doc/mini-clue.html#miniclue-examples">MiniClue-examples</a>를 참조하세요.</p></li>
+</ul>
+</section>
+<section id="miniclue.config-clues" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.config-clues">클루</h4>
+<p><code>config.clues</code>는 키 조합에 대한 추가 정보가 포함된 배열입니다. 각 요소는 다음 중 하나일 수 있습니다:</p>
+<ul>
+<li><p>클루 테이블.</p></li>
+<li><p>클루 테이블의 배열 (중첩 가능).</p></li>
+<li><p>이전 두 가지 중 하나를 반환하는 콜러블(함수).</p></li>
+</ul>
+<p>클루 테이블은 다음과 같은 필드를 갖는 테이블입니다:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;mode&gt;</span> <code>(string|table)</code> - <code>nvim_set_keymap()</code>에서와 같이 키 조합의 모드 단축 이름(‘n’, ‘x’, ‘i’, ‘o’, ‘c’ 등)을 나타내는 단일 문자 또는 그 배열.</p></li>
+<li><p><span class="help-syntax-keys">&lt;keys&gt;</span> <code>(string)</code> - 클루가 표시될 키 조합. <a href="https://neovim.io/doc/user/helptag.html?tag=key-notation">key-notation</a>에서와 같은 “사람이 읽을 수 있는” 키 이름(예: “<span class="help-syntax-keys">&lt;Leader&gt;</span>”, “<span class="help-syntax-keys">&lt;Space&gt;</span>”, “<span class="help-syntax-keys">&lt;Tab&gt;</span>” 등)이 허용됩니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;desc&gt;</span> <code>(string|function|nil)</code> - 클루 창에 표시되는 선택적인 키 조합 설명. 함수인 경우 문자열 설명을 반환해야 합니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;postkeys&gt;</span> <code>(string|nil)</code> - <code>keys</code> 이후에 자동으로 실행될 선택적인 postkeys. 서브모드 생성을 허용합니다 (<a href="../../mini.nvim/doc/mini-clue.html#miniclue-examples-submodes">MiniClue-examples-submodes</a> 참조).</p></li>
+</ul>
+<p>참고:</p>
+<ul>
+<li><p>Postkeys는 <a href="https://neovim.io/doc/user/helptag.html?tag=nvim_feedkeys()">nvim_feedkeys()</a>를 사용한 키 입력의 리터럴 시뮬레이션입니다.</p></li>
+<li><p>클루 구성을 위한 권장 방법은 <code>desc</code> 필드를 사용하여 매핑을 생성하고, <code>config.clues</code>에는 그룹, postkeys 및 내장 매핑을 설명하는 요소만 제공하는 것입니다.</p></li>
+</ul>
+</section>
+<section id="miniclue.config-triggers" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.config-triggers">트리거</h4>
+<p><code>config.triggers</code>는 <a href="../../mini.nvim/doc/mini-clue.html#miniclue-key-query-process">MiniClue-key-query-process</a>가 언제 시작되어야 하는지에 대한 정보가 포함된 배열입니다. 각 요소는 클루 테이블에서와 동일하게 처리되는 <span class="help-syntax-keys">&lt;mode&gt;</span> 및 <span class="help-syntax-keys">&lt;keys&gt;</span> 필드를 갖는 트리거 테이블입니다.</p>
+</section>
+<section id="miniclue.config-window" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.config-window">창</h4>
+<p><code>config.window</code>는 클루 창의 동작을 정의합니다.</p>
+<p><code>config.window.delay</code>는 클루 창이 나타날 때까지의 시간(밀리초)입니다. 즉시 표시하려면 0으로 설정할 수 있습니다.</p>
+<p><code>config.window.config</code>는 플로팅 창의 특성을 정의하는 테이블 또는 이러한 테이블을 반환하는 콜러블입니다 (모든 클루를 이미 표시하고 있는 창 버퍼의 식별자와 함께 호출됩니다). 이는 <a href="https://neovim.io/doc/user/helptag.html?tag=nvim_open_win()">nvim_open_win()</a>과 동일한 구조여야 하며 다음과 같은 향상된 기능이 있습니다:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;width&gt;</span> 필드는 <code>"auto"</code>와 같을 수 있으며, 이 경우 창 너비는 콘텐츠에 따라 자동으로 계산됩니다. 기본값은 30의 고정 너비입니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;row&gt;</span> 및 <span class="help-syntax-keys">&lt;col&gt;</span>은 <code>"auto"</code>와 같을 수 있으며, 이 경우 설정된 앵커(기본값은 “SE”, <a href="https://neovim.io/doc/user/helptag.html?tag=nvim_open_win()">nvim_open_win()</a> 참조)에 “달라붙도록” 계산됩니다. 이를 통해 창이 표시되는 모서리를 변경할 수 있습니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- 하나의 앵커 선택</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">anchor</span> <span class="op">=</span> <span class="st">'NW'</span> <span class="co">-- 왼쪽 상단</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">anchor</span> <span class="op">=</span> <span class="st">'NE'</span> <span class="co">-- 오른쪽 상단</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">anchor</span> <span class="op">=</span> <span class="st">'SW'</span> <span class="co">-- 왼쪽 하단</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">anchor</span> <span class="op">=</span> <span class="st">'SE'</span> <span class="co">-- 오른쪽 하단</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.clue'</span><span class="op">).</span>setup<span class="op">({</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">window</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">config</span> <span class="op">=</span> <span class="op">{</span> <span class="va">anchor</span> <span class="op">=</span> <span class="va">anchor</span><span class="op">,</span> <span class="va">row</span> <span class="op">=</span> <span class="st">'auto'</span><span class="op">,</span> <span class="va">col</span> <span class="op">=</span> <span class="st">'auto'</span> <span class="op">},</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+<p><code>config.window.scroll_down</code> / <code>config.window.scroll_up</code>은 클루가 현재 창 높이에 다 맞지 않는 경우 클루 창을 아래로 / 위로 스크롤하는 키를 정의하는 문자열입니다. 비활성화하려면 빈 문자열 <code>''</code>로 설정하세요.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue.enable_all_triggers" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.enable_all_triggers">enable_all_triggers()</h3>
+<p align="center">
+<code>MiniClue.enable_all_triggers</code>()
+</p>
+<p>로드되고 나열된 버퍼 및 일부 특수 버퍼에서 트리거 활성화</p>
+<hr>
+</section>
+<section id="miniclue.enable_buf_triggers" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.enable_buf_triggers">enable_buf_triggers()</h3>
+<p align="center">
+<code>MiniClue.enable_buf_triggers</code>(<span class="help-syntax-special">{buf_id}</span>)
+</p>
+<p>버퍼에서 트리거 활성화</p>
+<section id="miniclue.enable_buf_triggers-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.enable_buf_triggers-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{buf_id}</span> <code>(number|nil)</code> 버퍼 식별자. 기본값: 현재 버퍼.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue.disable_all_triggers" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.disable_all_triggers">disable_all_triggers()</h3>
+<p align="center">
+<code>MiniClue.disable_all_triggers</code>()
+</p>
+<p>로드된 버퍼에서 트리거 비활성화</p>
+<hr>
+</section>
+<section id="miniclue.disable_buf_triggers" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.disable_buf_triggers">disable_buf_triggers()</h3>
+<p align="center">
+<code>MiniClue.disable_buf_triggers</code>(<span class="help-syntax-special">{buf_id}</span>)
+</p>
+<p>버퍼에서 트리거 비활성화</p>
+<section id="miniclue.disable_buf_triggers-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.disable_buf_triggers-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{buf_id}</span> <code>(number|nil)</code> 버퍼 식별자. 기본값: 현재 버퍼.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue.ensure_all_triggers" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.ensure_all_triggers">ensure_all_triggers()</h3>
+<p align="center">
+<code>MiniClue.ensure_all_triggers</code>()
+</p>
+<p>모든 트리거가 유효한지 확인</p>
+<hr>
+</section>
+<section id="miniclue.ensure_buf_triggers" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.ensure_buf_triggers">ensure_buf_triggers()</h3>
+<p align="center">
+<code>MiniClue.ensure_buf_triggers</code>(<span class="help-syntax-special">{buf_id}</span>)
+</p>
+<p>버퍼 트리거가 유효한지 확인</p>
+<section id="miniclue.ensure_buf_triggers-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.ensure_buf_triggers-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{buf_id}</span> <code>(number|nil)</code> 버퍼 식별자. 기본값: 현재 버퍼.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue.set_mapping_desc" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.set_mapping_desc">set_mapping_desc()</h3>
+<p align="center">
+<code>MiniClue.set_mapping_desc</code>(<span class="help-syntax-special">{mode}</span>, <span class="help-syntax-special">{lhs}</span>, <span class="help-syntax-special">{desc}</span>)
+</p>
+<p>기존 매핑의 설명 업데이트</p>
+<p>참고:</p>
+<ul>
+<li>동일한 모드와 LHS를 갖는 전역 매핑과 버퍼 로컬 매핑이 모두 있는 경우 버퍼 로컬 매핑을 사용합니다. <a href="https://neovim.io/doc/user/helptag.html?tag=maparg()">maparg()</a>와 유사합니다.</li>
+</ul>
+<section id="miniclue.set_mapping_desc-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.set_mapping_desc-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{mode}</span> <code>(string)</code> 매핑 모드 (<code>maparg()</code>에서와 동일).</p>
+<p><span class="help-syntax-special">{lhs}</span> <code>(string)</code> 매핑의 왼쪽 부분 (<code>maparg()</code>에서 <code>name</code>과 동일).</p>
+<p><span class="help-syntax-special">{desc}</span> <code>(string)</code> 새로 설정할 설명.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue.gen_clues" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.gen_clues">gen_clues</h3>
+<p align="center">
+<code>MiniClue.gen_clues</code>
+</p>
+<p>사전 구성된 클루 생성</p>
+<p>이것은 함수 요소를 가진 테이블입니다. 실제로 클루 배열을 가져오려면 호출하세요.</p>
+<hr>
+</section>
+<section id="miniclue.gen_clues.builtin_completion" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.gen_clues.builtin_completion">gen_clues.builtin_completion()</h3>
+<p align="center">
+<code>MiniClue.gen_clues.builtin_completion</code>()
+</p>
+<p>내장 완성에 대한 클루 생성</p>
+<p>다음 트리거에 대한 클루를 포함합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'i'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-x&gt;'</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="miniclue.gen_clues.builtin_completion-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.builtin_completion-return">반환</h4>
+<p><code>(table)</code> 클루 배열.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue.gen_clues.g" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.gen_clues.g">gen_clues.g()</h3>
+<p align="center">
+<code>MiniClue.gen_clues.g</code>()
+</p>
+<p><code>g</code> 키에 대한 클루 생성</p>
+<p>다음 트리거에 대한 클루를 포함합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'g'</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="miniclue.gen_clues.g-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.g-return">반환</h4>
+<p><code>(table)</code> 클루 배열.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue.gen_clues.square_brackets" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.gen_clues.square_brackets">gen_clues.square_brackets()</h3>
+<p align="center">
+<code>MiniClue.gen_clues.square_brackets</code>()
+</p>
+<p><code>[</code> 및 <code>]</code> 키에 대한 클루 생성</p>
+<p>다음 트리거에 대한 클루를 포함합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'['</span> <span class="op">}</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">']'</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="miniclue.gen_clues.square_brackets-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.square_brackets-return">반환</h4>
+<p><code>(table)</code> 클루 배열.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue.gen_clues.marks" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.gen_clues.marks">gen_clues.marks()</h3>
+<p align="center">
+<code>MiniClue.gen_clues.marks</code>()
+</p>
+<p>마크에 대한 클루 생성</p>
+<p>다음 트리거에 대한 클루를 포함합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">"'"</span> <span class="op">}</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">"g'"</span> <span class="op">}</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'`'</span> <span class="op">}</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'g`'</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>참고: “g”를 트리거로 사용하는 경우 (예: <a href="../../mini.nvim/doc/mini-clue.html#miniclue.gen_clues.g">MiniClue.gen_clues.g()</a>를 활성화하기 위해), “g’” 및 “g`”를 트리거로 추가하지 마세요. 이미 고려됩니다.</p>
+<section id="miniclue.gen_clues.marks-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.marks-return">반환</h4>
+<p><code>(table)</code> 클루 배열.</p>
+</section>
+<section id="miniclue.gen_clues.marks-seealso" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.marks-seealso">참고 항목</h4>
+<p><a href="https://neovim.io/doc/user/helptag.html?tag=mark-motions">mark-motions</a></p>
+<hr>
+</section>
+</section>
+<section id="miniclue.gen_clues.registers" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.gen_clues.registers">gen_clues.registers()</h3>
+<p align="center">
+<code>MiniClue.gen_clues.registers</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>레지스터에 대한 클루 생성</p>
+<p>다음 트리거에 대한 클루를 포함합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'"'</span> <span class="op">}</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'i'</span><span class="op">,</span> <span class="st">'c'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-r&gt;'</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="miniclue.gen_clues.registers-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.registers-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 옵션. 가능한 키:</p>
+<ul>
+<li><span class="help-syntax-keys">&lt;show_contents&gt;</span> <code>(boolean)</code> - 모든 가능한 레지스터의 내용을 표시할지 여부. <code>false</code>인 경우 특수 레지스터의 설명만 표시됩니다. 기본값: <code>false</code>.</li>
+</ul>
+</section>
+<section id="miniclue.gen_clues.registers-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.registers-return">반환</h4>
+<p><code>(table)</code> 클루 배열.</p>
+</section>
+<section id="miniclue.gen_clues.registers-seealso" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.registers-seealso">참고 항목</h4>
+<p><a href="https://neovim.io/doc/user/helptag.html?tag=registers">registers</a></p>
+<hr>
+</section>
+</section>
+<section id="miniclue.gen_clues.windows" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.gen_clues.windows">gen_clues.windows()</h3>
+<p align="center">
+<code>MiniClue.gen_clues.windows</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>창 명령에 대한 클루 생성</p>
+<p>다음 트리거에 대한 클루를 포함합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="st">'n'</span><span class="op">,</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'&lt;C-w&gt;'</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>참고: 중복되지 않은 명령만 포함됩니다. 전체 목록은 <a href="https://neovim.io/doc/user/helptag.html?tag=CTRL-W">CTRL-W</a>를 참조하세요.</p>
+<section id="miniclue.gen_clues.windows-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.windows-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 옵션. 가능한 키:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;submode_move&gt;</span> <code>(boolean)</code> - <code>postkeys</code> 필드를 사용하여 이동 (레이아웃 변경) 명령을 서브모드로 만들지 여부. 기본값: <code>false</code>.</p></li>
+<li><p><span class="help-syntax-keys">&lt;submode_navigate&gt;</span> <code>(boolean)</code> - <code>postkeys</code> 필드를 사용하여 탐색 (포커스 변경) 명령을 서브모드로 만들지 여부. 기본값: <code>false</code>.</p></li>
+<li><p><span class="help-syntax-keys">&lt;submode_resize&gt;</span> <code>(boolean)</code> - <code>postkeys</code> 필드를 사용하여 크기 조절 (크기 변경) 명령을 서브모드로 만들지 여부. 기본값: <code>false</code>.</p></li>
+</ul>
+</section>
+<section id="miniclue.gen_clues.windows-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.windows-return">반환</h4>
+<p><code>(table)</code> 클루 배열.</p>
+<hr>
+</section>
+</section>
+<section id="miniclue.gen_clues.z" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniclue.gen_clues.z">gen_clues.z()</h3>
+<p align="center">
+<code>MiniClue.gen_clues.z</code>()
+</p>
+<p><code>z</code> 키에 대한 클루 생성</p>
+<p>다음 트리거에 대한 클루를 포함합니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">mode</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="va">keys</span> <span class="op">=</span> <span class="st">'z'</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="miniclue.gen_clues.z-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniclue.gen_clues.z-return">반환</h4>
+<p><code>(table)</code> 클루 배열.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- Original source: https://gc.zgo.at/count.js -->
+<!-- Inlined for security reasons (less supply chain attack possibility) -->
+<script data-goatcounter="https://nvim-mini.goatcounter.com/count">
+// GoatCounter: https://www.goatcounter.com
+// This file is released under the ISC license: https://opensource.org/licenses/ISC
+;(function() {
+	'use strict';
+
+	window.goatcounter = window.goatcounter || {}
+
+	// Load settings from data-goatcounter-settings.
+	var s = document.querySelector('script[data-goatcounter]')
+	if (s && s.dataset.goatcounterSettings) {
+		try         { var set = JSON.parse(s.dataset.goatcounterSettings) }
+		catch (err) { console.error('invalid JSON in data-goatcounter-settings: ' + err) }
+		for (var k in set)
+			if (['no_onload', 'no_events', 'allow_local', 'allow_frame', 'path', 'title', 'referrer', 'event'].indexOf(k) > -1)
+				window.goatcounter[k] = set[k]
+	}
+
+	var enc = encodeURIComponent
+
+	// Get all data we're going to send off to the counter endpoint.
+	window.goatcounter.get_data = function(vars) {
+		vars = vars || {}
+		var data = {
+			p: (vars.path     === undefined ? goatcounter.path     : vars.path),
+			r: (vars.referrer === undefined ? goatcounter.referrer : vars.referrer),
+			t: (vars.title    === undefined ? goatcounter.title    : vars.title),
+			e: !!(vars.event || goatcounter.event),
+			s: window.screen.width,
+			b: is_bot(),
+			q: location.search,
+		}
+
+		var rcb, pcb, tcb  // Save callbacks to apply later.
+		if (typeof(data.r) === 'function') rcb = data.r
+		if (typeof(data.t) === 'function') tcb = data.t
+		if (typeof(data.p) === 'function') pcb = data.p
+
+		if (is_empty(data.r)) data.r = document.referrer
+		if (is_empty(data.t)) data.t = document.title
+		if (is_empty(data.p)) data.p = get_path()
+
+		if (rcb) data.r = rcb(data.r)
+		if (tcb) data.t = tcb(data.t)
+		if (pcb) data.p = pcb(data.p)
+		return data
+	}
+
+	// Check if a value is "empty" for the purpose of get_data().
+	var is_empty = function(v) { return v === null || v === undefined || typeof(v) === 'function' }
+
+	// See if this looks like a bot; there is some additional filtering on the
+	// backend, but these properties can't be fetched from there.
+	var is_bot = function() {
+		// Headless browsers are probably a bot.
+		var w = window, d = document
+		if (w.callPhantom || w._phantom || w.phantom)
+			return 150
+		if (w.__nightmare)
+			return 151
+		if (d.__selenium_unwrapped || d.__webdriver_evaluate || d.__driver_evaluate)
+			return 152
+		if (navigator.webdriver)
+			return 153
+		return 0
+	}
+
+	// Object to urlencoded string, starting with a ?.
+	var urlencode = function(obj) {
+		var p = []
+		for (var k in obj)
+			if (obj[k] !== '' && obj[k] !== null && obj[k] !== undefined && obj[k] !== false)
+				p.push(enc(k) + '=' + enc(obj[k]))
+		return '?' + p.join('&')
+	}
+
+	// Show a warning in the console.
+	var warn = function(msg) {
+		if (console && 'warn' in console)
+			console.warn('goatcounter: ' + msg)
+	}
+
+	// Get the endpoint to send requests to.
+	var get_endpoint = function() {
+		var s = document.querySelector('script[data-goatcounter]')
+		return (s && s.dataset.goatcounter) ? s.dataset.goatcounter : goatcounter.endpoint
+	}
+
+	// Get current path.
+	var get_path = function() {
+		var loc = location,
+			c = document.querySelector('link[rel="canonical"][href]')
+		if (c) {  // May be relative or point to different domain.
+			var a = document.createElement('a')
+			a.href = c.href
+			if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
+				loc = a
+		}
+		return (loc.pathname + loc.search) || '/'
+	}
+
+	// Run function after DOM is loaded.
+	var on_load = function(f) {
+		if (document.body === null)
+			document.addEventListener('DOMContentLoaded', function() { f() }, false)
+		else
+			f()
+	}
+
+	// Filter some requests that we (probably) don't want to count.
+	window.goatcounter.filter = function() {
+		if ('visibilityState' in document && document.visibilityState === 'prerender')
+			return 'visibilityState'
+		if (!goatcounter.allow_frame && location !== parent.location)
+			return 'frame'
+		if (!goatcounter.allow_local && location.hostname.match(/(localhost$|^127\.|^10\.|^172\.(1[6-9]|2[0-9]|3[0-1])\.|^192\.168\.|^0\.0\.0\.0$)/))
+			return 'localhost'
+		if (!goatcounter.allow_local && location.protocol === 'file:')
+			return 'localfile'
+		if (localStorage && localStorage.getItem('skipgc') === 't')
+			return 'disabled with #toggle-goatcounter'
+		return false
+	}
+
+	// Get URL to send to GoatCounter.
+	window.goatcounter.url = function(vars) {
+		var data = window.goatcounter.get_data(vars || {})
+		if (data.p === null)  // null from user callback.
+			return
+		data.rnd = Math.random().toString(36).substr(2, 5)  // Browsers don't always listen to Cache-Control.
+
+		var endpoint = get_endpoint()
+		if (!endpoint)
+			return warn('no endpoint found')
+
+		return endpoint + urlencode(data)
+	}
+
+	// Count a hit.
+	window.goatcounter.count = function(vars) {
+		var f = goatcounter.filter()
+		if (f)
+			return warn('not counting because of: ' + f)
+		var url = goatcounter.url(vars)
+		if (!url)
+			return warn('not counting because path callback returned null')
+
+		if (!navigator.sendBeacon(url)) {
+			// This mostly fails due to being blocked by CSP; try again with an
+			// image-based fallback.
+			var img = document.createElement('img')
+			img.src = url
+			img.style.position = 'absolute'  // Affect layout less.
+			img.style.bottom = '0px'
+			img.style.width = '1px'
+			img.style.height = '1px'
+			img.loading = 'eager'
+			img.setAttribute('alt', '')
+			img.setAttribute('aria-hidden', 'true')
+
+			var rm = function() { if (img && img.parentNode) img.parentNode.removeChild(img) }
+			img.addEventListener('load', rm, false)
+			document.body.appendChild(img)
+		}
+	}
+
+	// Get a query parameter.
+	window.goatcounter.get_query = function(name) {
+		var s = location.search.substr(1).split('&')
+		for (var i = 0; i < s.length; i++)
+			if (s[i].toLowerCase().indexOf(name.toLowerCase() + '=') === 0)
+				return s[i].substr(name.length + 1)
+	}
+
+	// Track click events.
+	window.goatcounter.bind_events = function() {
+		if (!document.querySelectorAll)  // Just in case someone uses an ancient browser.
+			return
+
+		var send = function(elem) {
+			return function() {
+				goatcounter.count({
+					event:    true,
+					path:     (elem.dataset.goatcounterClick || elem.name || elem.id || ''),
+					title:    (elem.dataset.goatcounterTitle || elem.title || (elem.innerHTML || '').substr(0, 200) || ''),
+					referrer: (elem.dataset.goatcounterReferrer || elem.dataset.goatcounterReferral || ''),
+				})
+			}
+		}
+
+		Array.prototype.slice.call(document.querySelectorAll("*[data-goatcounter-click]")).forEach(function(elem) {
+			if (elem.dataset.goatcounterBound)
+				return
+			var f = send(elem)
+			elem.addEventListener('click', f, false)
+			elem.addEventListener('auxclick', f, false)  // Middle click.
+			elem.dataset.goatcounterBound = 'true'
+		})
+	}
+
+	// Add a "visitor counter" frame or image.
+	window.goatcounter.visit_count = function(opt) {
+		on_load(function() {
+			opt        = opt        || {}
+			opt.type   = opt.type   || 'html'
+			opt.append = opt.append || 'body'
+			opt.path   = opt.path   || get_path()
+			opt.attr   = opt.attr   || {width: '200', height: (opt.no_branding ? '60' : '80')}
+
+			opt.attr['src'] = get_endpoint() + 'er/' + enc(opt.path) + '.' + enc(opt.type) + '?'
+			if (opt.no_branding) opt.attr['src'] += '&no_branding=1'
+			if (opt.style)       opt.attr['src'] += '&style=' + enc(opt.style)
+			if (opt.start)       opt.attr['src'] += '&start=' + enc(opt.start)
+			if (opt.end)         opt.attr['src'] += '&end='   + enc(opt.end)
+
+			var tag = {png: 'img', svg: 'img', html: 'iframe'}[opt.type]
+			if (!tag)
+				return warn('visit_count: unknown type: ' + opt.type)
+
+			if (opt.type === 'html') {
+				opt.attr['frameborder'] = '0'
+				opt.attr['scrolling']   = 'no'
+			}
+
+			var d = document.createElement(tag)
+			for (var k in opt.attr)
+				d.setAttribute(k, opt.attr[k])
+
+			var p = document.querySelector(opt.append)
+			if (!p)
+				return warn('visit_count: element to append to not found: ' + opt.append)
+			p.appendChild(d)
+		})
+	}
+
+	// Make it easy to skip your own views.
+	if (location.hash === '#toggle-goatcounter') {
+		if (localStorage.getItem('skipgc') === 't') {
+			localStorage.removeItem('skipgc', 't')
+			alert('GoatCounter tracking is now ENABLED in this browser.')
+		}
+		else {
+			localStorage.setItem('skipgc', 't')
+			alert('GoatCounter tracking is now DISABLED in this browser until ' + location + ' is loaded again.')
+		}
+	}
+
+	if (!goatcounter.no_onload)
+		on_load(function() {
+			// 1. Page is visible, count request.
+			// 2. Page is not yet visible; wait until it switches to 'visible' and count.
+			// See #487
+			if (!('visibilityState' in document) || document.visibilityState === 'visible')
+				goatcounter.count()
+			else {
+				var f = function(e) {
+					if (document.visibilityState !== 'visible')
+						return
+					document.removeEventListener('visibilitychange', f)
+					goatcounter.count()
+				}
+				document.addEventListener('visibilitychange', f)
+			}
+
+			if (!goatcounter.no_events)
+				goatcounter.bind_events()
+		})
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nvim-mini\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© Evgeni Chasnovski, <a href="https://choosealicense.com/licenses/mit/">MIT</a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

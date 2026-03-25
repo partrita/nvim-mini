@@ -1,0 +1,1021 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>MINI</title>
+<link>https://nvim-mini.org/blog/</link>
+<atom:link href="https://nvim-mini.org/blog/index.xml" rel="self" type="application/rss+xml"/>
+<description>Modular Independent Neovim Improvements</description>
+<generator>quarto-1.8.27</generator>
+<lastBuildDate>Sat, 14 Feb 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>MiniMax 업데이트: Neovim 0.12용 vim.pack 및 Neovim 0.10용 설정 추가</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2026-02-15-update-minimax-configs-012-010.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>‘mini.nvim’ 기반의 Neovim 설정 생성기인 <a href="../MiniMax/index.html">MiniMax</a>에 두 개의 새로운 레퍼런스 버전이 추가되었습니다:</p>
+<ul>
+<li>Neovim 0.12를 위한 <a href="../MiniMax/configs/nvim-0.12"><code>nvim-0.12</code></a>. 현재 개발 중인 버전이지만 곧 출시될 예정입니다. 이 설정의 핵심은 플러그인 관리자를 ’mini.deps’에서 <a href="https://neovim.io/doc/user/helptag.html?tag=vim.pack"><code>vim.pack</code></a>으로 전환한다는 점입니다.</li>
+<li>Neovim 0.10을 위한 <a href="../MiniMax/configs/nvim-0.10"><code>nvim-0.10</code></a>. 최신 안정 버전은 아니지만 여전히 사용하는 분들이 계실 수 있습니다. <code>nvim-0.11</code>과 상당히 유사하지만 ‘nvim-treesitter’와 ’nvim-lspconfig’ 플러그인 설정 방식에서 주요 차이가 있습니다.</li>
+</ul>
+<p>새로운 MiniMax 사용자라면 <a href="../MiniMax/index.html#setting-up">설정하기(setting up)</a> 단계에서 Neovim 0.12 실행 파일( <code>nvim --version</code>으로 확인 가능)을 사용하면 최신 Neovim 기능을 사용하는 설정이 생성됩니다. 또한 Neovim 0.10 버전에서도 이제 MiniMax 설정을 생성할 수 있게 되었습니다.</p>
+<p>기존 MiniMax 사용자들에게는 Neovim 0.12가 정식 출시된 후 설정을 업데이트하는 연습을 할 수 있는 좋은 기회가 될 것입니다. MiniMax는 (설계상, 생성된 설정은 전적으로 사용자의 소유이므로) <a href="../MiniMax/index.html#updating">자동 업데이트 기능</a>을 제공하지 않습니다. 하지만 한 설정에서 다음 설정으로 넘어갈 때의 차이점을 보여주는 전용 페이지가 마련되었습니다:</p>
+<ul>
+<li><a href="../MiniMax/configs/diffs/nvim-0.10_nvim-0.11"><code>nvim-0.10</code> -&gt; <code>nvim-0.11</code></a></li>
+<li><a href="../MiniMax/configs/diffs/nvim-0.11_nvim-0.12"><code>nvim-0.11</code> -&gt; <code>nvim-0.12</code></a></li>
+</ul>
+<p>이 페이지들은 변경된 부분만 보여주므로 수동으로 업데이트할 때 참고하기 수월할 것입니다.</p>
+<hr>
+<p><code>nvim-0.12</code>의 공개는 MINI 프로젝트에 있어 매우 흥분되는 일입니다. 권장 플러그인 관리자로 <code>vim.pack</code>을 채택하는 첫 번째 단계이기 때문입니다. ‘mini.deps’ 모듈은 Neovim 0.12 출시 후 머지않아 은퇴(즉, 존재는 하지만 업데이트는 중단됨)할 예정입니다. 이에 대해서는 별도의 블로그 포스트를 통해 안내해 드리겠습니다.</p>
+<p>새로운 설정을 사용해 보시고 전용 이슈를 통해 의견을 남겨주세요: <a href="https://github.com/nvim-mini/MiniMax/issues/35"><code>nvim-0.12</code> 관련 이슈</a>, <a href="https://github.com/nvim-mini/MiniMax/issues/36"><code>nvim-0.10</code> 관련 이슈</a>.</p>
+<p>읽어주셔서 감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>update</category>
+  <guid>https://nvim-mini.org/blog/2026-02-15-update-minimax-configs-012-010.html</guid>
+  <pubDate>Sat, 14 Feb 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>0.17.0 버전 출시</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2025-12-18-release-0170.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p><a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a> 플러그인의 새로운 0.17.0 버전이 출시되었습니다. 이전 릴리스 이후 무려 7개월 동안 235개의 커밋이 쌓였기에, 이번 업데이트는 다소 늦은 감이 없지 않습니다.</p>
+<p>궁금하신 분들은 <a href="https://github.com/nvim-mini/mini.nvim/releases/tag/v0.17.0">전체 릴리스 설명</a>을 확인해 보세요.</p>
+<hr>
+<p>이번 릴리스에는 단 하나의 새로운 모듈이 포함되었습니다:</p>
+<ul>
+<li><a href="../mini.nvim/readmes/mini-cmdline.html">‘mini.cmdline’</a> - 커맨드 라인 개선 모듈입니다. 커맨드 라인 사용 시 자동 완성(Neovim&gt;=0.11 필요), 자동 수정, 범위 자동 미리보기(autopeek) 기능을 제공합니다. 자세한 내용은 <a href="../blog/2025-12-07-announce-mini-cmdline.html">관련 출시 포스트</a>를 읽어보세요.</li>
+</ul>
+<hr>
+<p>이번 릴리스가 이전보다 훨씬 더 많은 시간이 걸린 큰 이유 중 하나는 인접한 여러 작업이 많았기 때문입니다:</p>
+<ul>
+<li><p>전체 프로젝트의 브랜드 이름을 MINI(Modular Independent Neovim Improvements)로 개편했습니다.</p></li>
+<li><p>전용 웹사이트를 개설했습니다. 기획부터 실행까지 많은 시간이 소요되었습니다.</p></li>
+<li><p>호스팅 위치를 <code>echasnovski</code> 개인 GitHub 계정에서 전용 <code>nvim-mini</code> 조직으로 이전했습니다. 이는 프로젝트의 장기적인 안정성을 높이기 위한 변화입니다. 자세한 내용은 <a href="https://github.com/nvim-mini/mini.nvim/discussions/1970">여기</a>에서 확인하실 수 있습니다.</p></li>
+<li><p>이제 MINI 프로젝트를 함께 이끌어갈 훌륭한 <a href="https://github.com/orgs/nvim-mini/people">팀</a>이 생겼습니다. 프로젝트의 지속 가능성을 위해 ’버스 지수(bus factor)’를 높이는 것은 매우 중요합니다.</p></li>
+<li><p>’mini.nvim’을 기반으로 한 “공식” Neovim 설정 예시인 <a href="../MiniMax">MiniMax</a>를 공개했습니다. 사실 이는 단순한 하나의 예시가 아니라, 각 Neovim 버전에 맞춰 독립적으로 구성된 예시들의 컬렉션입니다. 지금은 시작 단계이지만, 시간이 지나면 Neovim 설정이 시대에 따라 어떻게 변하는지 보여주는 소중한 자료가 될 것입니다.</p></li>
+</ul>
+<p>릴리스가 늦어진 또 다른 큰 이유는 지난 7월 Neovim의 내장 플러그인 관리자(<a href="https://neovim.io/doc/user/helptag.html?tag=vim.pack"><code>vim.pack</code></a>)를 위한 제 초기 PR이 병합되었기 때문입니다. 이의 핵심 개념은 ’mini.deps’에서 따왔으며 몇 가지 조정과 전반적인 개선을 거쳤습니다. 초기 이슈 해결과 토론 과정에 많은 시간과 노력이 필요했습니다.</p>
+<hr>
+<p>0.17 버전의 전체 변경 로그는 <a href="../mini.nvim/CHANGELOG.html#v0.17.0">여기</a>에서 보실 수 있습니다. 주요 변경 사항은 다음과 같습니다:</p>
+<ul>
+<li><p><code>randomhue</code>를 보완하기 위해 <a href="../mini.nvim/readmes/mini-hues.html#four-seasons">정적 ‘mini.hues’ 기반 컬러 스킴 세트</a>가 추가되었습니다. 사계절에서 영감을 받은 <code>miniwinter</code>, <code>minispring</code>, <code>minisummer</code>, <code>miniautumn</code>으로 구성되어 있습니다.</p></li>
+<li><p>‘mini.ai’ 및 ‘mini.surround’의 tree-sitter 통합이 이제 기본적으로 ’nvim-treesitter’ 함수 대신 내장 <code>vim.treesitter</code> 방식을 사용합니다.</p></li>
+<li><p>’mini.extra’에 <code>colorschemes</code> 피커가 추가되었고, <code>lsp</code> 피커에 <code>workspace_symbol_live</code> 범위(scope)가 추가되었습니다.</p></li>
+<li><p>‘mini.files’ 개선 사항:</p>
+<ul>
+<li>커서가 미리보기할 수 없는 항목 위에 있더라도 미리보기 창을 닫지 않습니다. 이는 다양한 상황에서 화면 깜빡임을 줄여줍니다.</li>
+<li>파일 이름 뒤에 <code>/</code>를 붙이면 “파일을 삭제하고 동일한 이름의 디렉토리를 생성”하는 것으로 간주합니다. 디렉토리를 만들려다 실수로 파일로 만든 경우 유용합니다.</li>
+<li>파일 시스템 항목의 하이라이팅을 조정할 수 있는 <code>config.content.highlight</code>가 추가되었습니다.</li>
+</ul></li>
+<li><p>‘mini.hues’의 일부 그룹이 특정 이벤트에 따라 하이라이팅을 자동 조정합니다. 예를 들어 (Neovim&gt;=0.12에서) <code>Pmenu</code>는 ’pumborder’ 옵션 값에 따라 조정됩니다.</p></li>
+<li><p>’mini.jump2d’는 다른 모듈의 패턴을 따르기 위해 <code>gen_xxx_spotter</code> 함수들을 별도의 <code>gen_spotter</code> 테이블로 이동했습니다.</p></li>
+<li><p>‘mini.misc’에 로깅 관련 함수(<code>log_add</code>, <code>log_show</code> 등)가 추가되었습니다. 제가 ’mini.nvim’ 개발 중에 매우 자주 사용하는 기능입니다.</p></li>
+<li><p>‘mini.pick’ 개선 사항:</p>
+<ul>
+<li><code>grep</code> 및 <code>grep_live</code> 피커에서 <code>rg</code> 도구가 매칭 시 Neovim의 ‘ignorecase’ 및 ‘smartcase’ 옵션을 존중합니다.</li>
+<li>“붙여넣기(Paste)” 동작이 일부 특수 레지스터를 지원합니다. 예를 들어 <code>&lt;C-r&gt;&lt;C-w&gt;</code>를 누르면 커서 아래의 단어를 붙여넣습니다.</li>
+</ul></li>
+<li><p>’mini.surround’는 “매핑 영역” 확보를 위해 더 이상 <code>update_n_lines</code>를 생성하지 않습니다. 이는 나중에 유용하게 쓰일 것입니다.</p></li>
+<li><p>’mini.test’의 스크린샷 테스트 시 <code>ignore_text</code>와 <code>ignore_attr</code>을 통해 텍스트와 하이라이트 속성을 각각 따로 무시할 수 있게 되었습니다.</p></li>
+</ul>
+<hr>
+<p>‘mini.nvim’ 프로젝트에 보내주시는 끊임없는 성원에 진심으로 감사드립니다! 어느덧 별 8,400개를 넘어섰네요 🙏</p>
+<p>’mini.nvim’과 MINI를 위해 계획된 것들이 아직 많이 남아 있습니다. 앞으로도 계속 지켜봐 주세요 :)</p>
+
+
+
+ ]]></description>
+  <category>release</category>
+  <guid>https://nvim-mini.org/blog/2025-12-18-release-0170.html</guid>
+  <pubDate>Wed, 17 Dec 2025 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.cmdline’ 발표</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2025-12-07-announce-mini-cmdline.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><video src="2025-12-07-announce-mini-cmdline/demo.mp4" class="img-fluid" controls=""><a href="2025-12-07-announce-mini-cmdline/demo.mp4">Video</a></video></p>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>영겁과도 같은 시간 끝에 드디어 새로운 모듈인 <a href="../mini.nvim/readmes/mini-cmdline.html">‘mini.cmdline’</a>을 선보입니다.</p>
+<p>’mini.nvim’은 0.17 릴리스를 앞두고 있습니다. “일단 출시하자”는 생각도 했었지만, “모든 릴리스에는 적어도 하나의 새로운 모듈이 포함되어야 한다”는 전통을 지키는 것이 가치 있다고 판단했습니다.</p>
+<p>그래서 구현에 너무 오랜 시간이 걸리지 않으면서도 가장 큰 이점을 줄 수 있는 모듈이 무엇일까 고민한 끝에, Neovim의 커맨드 라인 기능을 개선하는 작업을 선택했습니다.</p>
+<hr>
+<p>’mini.cmdline’의 주요 기능:</p>
+<ul>
+<li><p>설정 가능한 지연 시간을 갖춘 자동 완성. 기본적으로 <a href="https://neovim.io/doc/user/helptag.html?tag='wildchar'"><code>'wildchar'</code></a> (기본값 <code>&lt;Tab&gt;</code>)를 자동으로 누르는 기능이며, 몇 가지 추가 설정이 가능합니다. 예상했던 것보다 훨씬 유용하다는 것이 증명되었습니다.</p>
+<p>Neovim&gt;=0.11이 필요하며, Neovim&gt;=0.12를 권장합니다.</p></li>
+<li><p>입력 중 단어 자동 수정. 기본적으로 명령어(command)나 옵션(option)처럼 고정된 후보 목록에서 선택해야 하는 단어들만 자동 수정 대상이 됩니다.</p></li>
+<li><p>입력 중 명령어 범위 자동 미리보기 (autopeek). 설정 가능한 컨텍스트 라인과 함께 범위에 해당하는 줄들을 플로팅 창으로 보여줍니다. 정말 멋져 보입니다!</p></li>
+</ul>
+<p>지원하지 않는 기능:</p>
+<ul>
+<li><p>커맨드 라인 UI 커스터마이징. 이에 대해서는 (Neovim&gt;=0.12에서) <a href="https://neovim.io/doc/user/helptag.html?tag=vim._extui"><code>:h vim._extui</code></a>로 충분하기를 바랍니다.</p></li>
+<li><p>자동 완성 후보 커스터마이징. 후보들은 현재 명령어가 정의한 완성 방식에 따라 <a href="https://neovim.io/doc/user/helptag.html?tag=cmdline-completion"><code>:h cmdline-completion</code></a>을 통해 계산됩니다.</p></li>
+</ul>
+<hr>
+<p>한번 사용해 보시고 의견을 들려주세요! 사이트에 댓글 기능이 생기기 전까지는 전용 <a href="https://github.com/nvim-mini/mini.nvim/issues/2158">베타 테스트 이슈</a>에 의견을 남겨주시면 감사하겠습니다.</p>
+<p>0.17 버전을 가급적 빨리 출시하고 싶으므로, 여러분의 폭넓은 베타 테스트 참여가 큰 도움이 될 것입니다.</p>
+<p>감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <guid>https://nvim-mini.org/blog/2025-12-07-announce-mini-cmdline.html</guid>
+  <pubDate>Sat, 06 Dec 2025 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>MiniMax - MINI의 정수를 담은 Neovim 설정</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2025-10-13-announce-minimax.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>드디어 “공식적인” MINI 설정 예시를 발표하게 되어 매우 기쁘고 다행스럽게 생각합니다. 이름은 <a href="../MiniMax/index.html">MiniMax</a>입니다.</p>
+<p>이번 발표로 오늘은 세 가지 MINI의 생일이 되었습니다:</p>
+<ul>
+<li>‘mini.nvim’ 플러그인 자체가 출시된 지 <a href="../blog/2021-10-13-announce-mini-nvim.html">4년 전</a>입니다.</li>
+<li>‘mini.pick’ 모듈이 출시된 지 <a href="../blog/2023-10-13-announce-mini-pick.html">2년 전</a>입니다.</li>
+<li>그리고 오늘, MiniMax의 생일이 추가되었습니다.</li>
+</ul>
+<hr>
+<p>MiniMax는 단순한 단일 설정 그 이상으로 설계되었습니다. 특정 조건에 맞춰 정교하게 제작된 <a href="../MiniMax/configs/index.html">설정들의 컬렉션</a>입니다. 현재는 각 안정 버전의 Neovim에 대한 전용 설정을 제공할 계획이며, 향후 다른 조건들도 고려될 수 있습니다 (물론 가까운 미래는 아닐 것입니다). 제가 알기로 이러한 방식은 기존의 “미리 구성된 설정(preconfigured configurations)”들 사이에서도 꽤 독특한 시도입니다. 이는 MiniMax를 단순한 설정 이상으로 유용하게 만들 것입니다. 시간이 지나면 Neovim 버전을 변경할 때 어떤 변경 사항들을 적용하는 것이 좋을지에 대한 좋은 참고 자료가 될 것이기 때문입니다.</p>
+<p>설정 자체는 <a href="../MiniMax/configs/nvim-0.11/index.html">매우 간결한 구조</a>를 가지고 있습니다: 작은 ‘init.lua’와 시작 시 로드되는 4개의 ’plugin/’ 파일로 구성됩니다. 이 구조와 내용은 제가 오랫동안 메인으로 사용해 온 설정을 기반으로 합니다.</p>
+<p>오늘날의 관점에서 보면 MiniMax는 ’nvim-lua/kickstart.nvim’과 스타일이 비슷합니다. 설정 파일에는 많은 문서화 주석이 포함되어 있으며 <strong>사용자가 직접 읽도록 제작되었습니다</strong>. MiniMax를 설정하고 나면, 이를 미세 조정하고 업데이트하는 것은 여러분의 몫입니다. MiniMax는 <a href="../MiniMax/index.html#what-it-is-not">배포판(distro)이나 Neovim에 관한 종합 가이드가 아닙니다</a>.</p>
+<p>한번 확인해 보시고 의견을 들려주세요. 저는 현재 상태를 최대한 사용하기 편하고, 정교하며, 오타가 없도록 만드는 데 집중하고 싶습니다. 당분간은 새로운 특정 옵션이나 플러그인 추가에 대한 제안은 받지 않을 예정입니다.</p>
+<hr>
+<p>MiniMax 개발 과정에서 유용한 피드백을 주신 <a href="https://github.com/pkazmier">Pete Kazmier</a> 님께 감사의 마음을 전합니다.</p>
+<p>그리고 지속적인 성원을 보내주시는 <em>여러분 모두</em>에게 감사드립니다! 앞으로도 이런 생일을 더 많이 함께 맞이할 수 있기를 바랍니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <guid>https://nvim-mini.org/blog/2025-10-13-announce-minimax.html</guid>
+  <pubDate>Sun, 12 Oct 2025 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>MINI 전용 사이트 오픈</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2025-10-03-announce-site.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>그동안 ‘mini.nvim’/MINI 프로젝트의 주된 문서 창구는 GitHub였습니다. 그래서 모듈의 README나 도움말 파일의 “공식” 링크는 <code>https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-ai.md</code> 또는 <code>https://github.com/nvim-mini/mini.nvim/blob/126ce3328c78399dcff58272f6f540a373b62a75/doc/mini-ai.txt#L1</code> 같은 형태였습니다. 하지만 이제는 아닙니다!</p>
+<p>마침내 공개된 <a href="https://nvim-mini.org">nvim-mini.org</a> 사이트를 환영해 주세요! 오랫동안 준비해 온 프로젝트가 드디어 빛을 보게 되었습니다. ’mini.nvim’의 문서를 내장 <code>:help</code>와 이 자동 생성된 사이트 모두에서 잘 사용할 수 있도록 업데이트하는 세심한 작업이 필요했습니다 (사이트 제작에는 <a href="https://quarto.org/">Quarto</a>와 커스텀 Lua 스크립트가 사용되었습니다).</p>
+<p>전용 사이트가 생기면서 프로젝트의 신뢰도가 높아진 것 외에도 다음과 같은 개선 사항들이 있습니다:</p>
+<ul>
+<li><p>자체 <a href="../blog/index.html">블로그</a>: 지난 4년 동안 Reddit에 올렸던 포스트들을 이미 옮겨놓았습니다. 가장 큰 장점은 웹에서 이 포스트들이 사라질 걱정을 덜 수 있다는 점입니다. 안타깝게도 제게는 <a href="https://www.reddit.com/r/neovim/comments/1mxxni1/comment/na8h6e3/?context=3">실제로 겪었던 문제</a>였거든요. 또한 다른 블로그 수집 사이트들에 자유롭게 링크를 걸 수 있는 포스트를 만들 수 있는 가능성도 열렸습니다.</p></li>
+<li><p>생성된 ‘mini.nvim’ 문서: <a href="../mini.nvim/index.html">READMEs</a>, <a href="../mini.nvim/CHANGELOG.html">변경 로그(CHANGELOG)</a>, <a href="../mini.nvim/doc/mini-nvim.html">도움말 파일</a>을 모두 포함합니다. 특히 도움말 파일은 GitHub의 “*.txt” 파일을 링크하는 것보다 훨씬 읽기 편하고 유용합니다:</p>
+<ul>
+<li><code>:help</code> 스타일의 하이라이팅이 적용됩니다.</li>
+<li>태그 링크( <code>&lt;C-]&gt;</code>를 눌러 이동할 수 있는 링크)가 자동으로 연결되어 읽기와 탐색이 <strong>훨씬</strong> 수월해집니다. ‘mini.nvim’ 태그 간의 링크뿐만 아니라, 내장 태그의 경우 <a href="https://neovim.io">neovim.io</a> 문서로도 연결됩니다!</li>
+<li>도움말 섹션(<a href="../mini.nvim/doc/mini-pick.html#minipick-overview">‘mini.pick’ 개요</a>)이나 변경 로그 항목(<a href="../mini.nvim/CHANGELOG.html#v0.16.0-mini.completion">‘v0.16.0의 mini.completion 변경 사항’</a>)에 대해 더 견고한 링크를 제공합니다. 후자의 경우 GitHub에서는 중복된 제목을 제대로 처리하지 못해 불가능했던 기능입니다.</li>
+</ul>
+<p>물론 이 방식에도 단점은 있습니다. 문서 링크가 (특정 커밋에 연결된 GitHub 링크처럼) “불변”이 아니며, 현재는 ‘main’ 브랜치의 문서만 표시합니다. 이 부분은 (릴리스별 문서 스냅샷 제공 등) 향후 개선 방안을 찾아보겠지만, 지금 당장 최우선 순위는 아닙니다.</p></li>
+<li><p>‘mini.nvim’ 플러그인 외부의 MINI 프로젝트 관련 사항들을 문서화하기에 더 적합한 공간이 생겼습니다. 곧 새로운 소식들이 있을 예정이니 기대해 주세요!</p></li>
+</ul>
+<p>결론적으로, 프로젝트를 위한 전용 웹사이트를 갖게 되어 매우 기쁩니다.</p>
+<p>포스트를 읽어주시고 MINI를 지원해 주시는 모든 분께 감사드립니다. 곧 다시 뵙겠습니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <guid>https://nvim-mini.org/blog/2025-10-03-announce-site.html</guid>
+  <pubDate>Thu, 02 Oct 2025 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>새로운 컬러 스킴</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1lwdit3/new_mininvim_color_schemes_miniwinter_minispring/">Reddit 게시물</a></em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes/demo-miniautumn-dark.png" class="img-fluid figure-img"></p>
+<figcaption>miniautumn 다크</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes/demo-miniautumn-light.png" class="img-fluid figure-img"></p>
+<figcaption>miniautumn 라이트</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes/demo-minispring-dark.png" class="img-fluid figure-img"></p>
+<figcaption>minispring 다크</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes/demo-minispring-light.png" class="img-fluid figure-img"></p>
+<figcaption>minispring 라이트</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes/demo-minisummer-dark.png" class="img-fluid figure-img"></p>
+<figcaption>minisummer 다크</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes/demo-minisummer-light.png" class="img-fluid figure-img"></p>
+<figcaption>minisummer 라이트</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes/demo-miniwinter-dark.png" class="img-fluid figure-img"></p>
+<figcaption>miniwinter 다크</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes/demo-miniwinter-light.png" class="img-fluid figure-img"></p>
+<figcaption>miniwinter 라이트</figcaption>
+</figure>
+</div>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>꽤 오래전부터 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-hues.md">mini.hues</a>를 기반으로 한 더 많은 컬러 스킴을 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a>의 일부로 제공하고 싶었습니다. 매번 무작위로 생성되는 <code>randomhue</code>가 있긴 하지만, 데모나 새로운 사용자 경험을 위해서는 “고정된” 컬러 스킴이 유용하기 때문입니다.</p>
+<p>이러한 생각은 “왜 계절에서 영감을 받은 컬러 스킴 세트는 없을까?”라는 호기심과 맞물렸습니다. 그래서 약 9개월 전부터 작업을 시작했고, 각 스킴의 다크 버전을 직접 메인으로 사용하며 다듬어왔습니다.</p>
+<p>이제 마침내 공개할 때가 되었습니다. 새로운 컬러 스킴들을 소개합니다:</p>
+<ul>
+<li><code>miniwinter</code>: 하늘색(azure) 배경의 “빙하 겨울” 팔레트.</li>
+<li><code>minispring</code>: 녹색 배경의 “꽃피는 봄” 팔레트.</li>
+<li><code>minisummer</code>: 갈색/노란색 배경의 “뜨거운 여름” 팔레트.</li>
+<li><code>miniautumn</code>: 보라색 배경의 “선선한 가을” 팔레트.</li>
+</ul>
+<p>저는 개인적으로 <code>miniwinter</code>를 가장 좋아합니다. 원래 하늘색/파란색 계열의 배경과 노란색/아이보리 계열의 전경색 조합을 선호하거든요. 또한 <code>minispring</code>이나 <code>minisummer</code>의 라이트 버전은 (찾기 힘든) 정말 쓸만한 라이트 컬러 스킴이라고 생각합니다.</p>
+<p>한번 사용해 보시고 의견을 들려주세요! 현재 최신 <code>main</code> 브랜치의 ’mini.nvim’에 포함되어 있으며, 독립된 <a href="https://github.com/nvim-mini/mini.hues">mini.hues</a> 저장소에서도 만나보실 수 있습니다.</p>
+<p>참고 사항:</p>
+<ul>
+<li>스크린샷에 사용된 폰트는 “Input Mono” 폰트에서 영감을 받아 <a href="https://github.com/echasnovski/dotfiles/blob/master/fonts/.local/share/fonts/IosevkaInput/IosevkaInput-build-plans.toml">매우 고도로 커스터마이징된 Iosevka 빌드</a>입니다.</li>
+</ul>
+<p>감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes.html</guid>
+  <pubDate>Wed, 09 Jul 2025 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>0.16.0 버전 출시</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2025-05-20-release-0160.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1kr4or7/mininvim_release_0160_smart_mappings_better/">Reddit 게시물</a></em></p>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p><a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a> 플러그인의 새로운 0.16.0 버전이 출시되었습니다. 지난 릴리스 이후 약 4개월 동안 250개의 커밋이 쌓였기에, 지금이 적기라고 판단했습니다. 궁금하신 분들은 <a href="https://github.com/nvim-mini/mini.nvim/releases/tag/v0.16.0">전체 릴리스 설명</a>을 확인해 보세요.</p>
+<hr>
+<p>새로운 모듈은 하나뿐이지만, 매핑과 관련된 몇 가지 고질적인 문제들을 해결해 줍니다:</p>
+<ul>
+<li><a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-keymap.md">mini.keymap</a> - 특수 키 매핑 모듈입니다. 다단계 동작(“스마트” 탭, 엔터 등)과 콤보(더 범용적인 “better escape” 스타일 동작)라는 두 가지 주요 기능을 제공합니다. 자세한 내용은 <a href="../blog/2025-05-03-announce-mini-keymap.html">관련 출시 포스트</a>를 읽어보세요.</li>
+</ul>
+<hr>
+<p>이번 릴리스 주기에 가장 공을 들인 부분은 ‘mini.completion’의 개편이었습니다. ’mini.snippets’ 출시 덕분에 가능해진 스니펫 지원, 정보/시그니처 창의 하이라이팅 및 스크롤 지원 개선, LSP 사양의 더욱 적절한 반영, 그리고 다양한 사용자 편의성 향상 등 오랫동안 미뤄왔던 기능들을 대거 추가했습니다. <a href="../blog/2025-03-07-update-mini-completion-snippet-support.html">관련 출시 포스트</a>도 있었지만, 포스트 이후에도 새로운 변경 사항이 있었으므로 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/CHANGELOG.md#minicompletion">전체 변경 로그</a>를 확인해 보세요.</p>
+<hr>
+<p>모든 모듈에서 특정 동작을 통일하기 위해 많은 노력을 기울였습니다:</p>
+<ul>
+<li>플로팅 창 표시 방식: 더 나은 제목 표시, 기본적으로 ‘single’ 테두리를 사용하되 새로운 ‘winborder’ 옵션 존중 등.</li>
+<li>모듈별 특수 버퍼의 명명 규칙: 버퍼 목록과 커스텀 동작 시인성을 높였습니다.</li>
+<li>사용자가 직접 설정하지 않은 경우 일반 옵션들을 자동으로 설정하도록 변경했습니다 (기존 <code>set_vim_settings</code> 설정값에 의존하던 방식 폐지).</li>
+</ul>
+<hr>
+<p>다양한 플러그인에 크고 작은 업데이트가 있었습니다:</p>
+<ul>
+<li>‘mini.ai’ 및 ‘mini.surround’: tree-sitter 캡처와 비라틴어 텍스트 오브젝트/서라운딩 식별자 지원이 개선되었습니다.</li>
+<li>‘mini.diff’: 여러 소스를 배열로 설정하여 하나씩 시도를 할 수 있는 기능이 추가되었습니다. 이를 통해 “Git 소스 시도 후 실패 시 Mercurial 소스 시도”와 같은 설정이 가능해졌습니다 (향후 다른 VCS용 내장 소스도 추가될 수 있습니다).</li>
+<li>‘mini.operators’: <code>exchange</code> 연산자가 내장 <code>gx</code>(커서 아래 URL 열기)와 충돌할 경우 <code>gx</code>를 <code>gX</code>로 자동 리매핑합니다.</li>
+<li>‘mini.pairs’: 이제 쌍(pair)에서 멀티바이트 문자를 지원합니다.</li>
+<li>‘mini.pick’: 프롬프트의 하이라이트 커스터마이징 기능이 강화되었고, 현재 및 마크된 일치 항목 설정을 위한 스크립팅 기능이 개선되었습니다.</li>
+<li>‘mini.snippets’: <code>start_lsp_server()</code> 함수를 통해 ’mini.snippets’로 로드된 스니펫의 자동 완성 제안을 제공하는 프로세스 내 LSP 서버를 시작할 수 있습니다. 이는 ’mini.completion’과 잘 통합됩니다.</li>
+<li>‘mini.tabline’: 왼쪽이나 오른쪽에 더 많은 텍스트가 있을 경우 특수한 생략 기호를 표시합니다.</li>
+</ul>
+<hr>
+<p>‘mini.nvim’ 프로젝트에 보내주시는 지속적인 성원에 감사드립니다! 어느덧 별 7,200개를 넘어섰네요 🌟❤️ ’mini.nvim’을 더 좋게 만들기 위한 수많은 아이디어가 여전히 남아 있습니다. 또한 Neovim 업스트림에 몇 가지 중요한 기능을 구현하는 데에도 시간을 할애할 계획입니다. 기대해 주세요!</p>
+<p>곧 새롭고 흥미로운 업데이트와 함께 다시 뵙겠습니다!</p>
+
+
+
+ ]]></description>
+  <category>release</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2025-05-20-release-0160.html</guid>
+  <pubDate>Mon, 19 May 2025 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.keymap’ 발표</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2025-05-03-announce-mini-keymap.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1kdrhjn/minikeymap_make_special_key_mappings_multistep/">Reddit 게시물</a></em></p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="2025-05-03-announce-mini-keymap/demo.mp4"></video></div>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>새로운 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a> 모듈인 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-keymap.md">mini.keymap</a> 출시와 함께 긴 공백기를 깨고 여러분을 초대합니다. 이 모듈은 <a href="https://github.com/nvim-mini/mini.keymap">별도의 GitHub 저장소</a>를 통해서도 설치할 수 있습니다.</p>
+<hr>
+<p>이 모듈은 세 가지 시급한 문제를 해결하기 위해 제작되었습니다:</p>
+<ul>
+<li><p>입력(Insert) 모드에서 <code>&lt;Tab&gt;</code> / <code>&lt;S-Tab&gt;</code> / <code>&lt;CR&gt;</code> / <code>&lt;BS&gt;</code> 키를 사용할 수 있는 서로 다른 모듈/플러그인들을 하나로 묶는 방법을 제공합니다. 흔히 “스마트” 키라고 알려진 이 기능을 ’mini.keymap’은 더욱 일반적이고 커스터마이징 가능한 “다단계 동작(multi-step actions)”이라는 대안으로 제공합니다.</p></li>
+<li><p>’mini.nvim’에 “better escape”와 같은 기능을 추가해 달라는 <a href="https://github.com/nvim-mini/mini.nvim/issues/86">가장 오래된 오픈 기능 요청</a>을 해결합니다. 저는 개인적으로 <code>&lt;C-S&gt;</code>(저장 기능 포함)로 일반(Normal) 모드로 나가는 것을 선호하지만, <code>jk</code>의 매력도 충분히 이해합니다. 저도 익숙해지도록 노력해 봐야겠네요. 또한 ’mini.keymap’의 최종 결과물( “콤보(combo)”라고 함)은 더욱 다재다능합니다.</p></li>
+<li><p>곧 출시될 ‘mini.nvim’ 0.16.0 버전은 주로 <a href="../blog/2025-03-07-update-mini-completion-snippet-support.html">새로운 ‘mini.completion’ 기능</a>과 다른 모듈들의 수많은 새 기능을 다룰 예정입니다. 하지만 저는 매 안정 릴리스마다 적어도 하나의 새로운 모듈을 제공하고 싶었고, 그래서 이렇게 공개하게 되었습니다.</p></li>
+</ul>
+<hr>
+<p>’mini.keymap’의 주요 기능:</p>
+<ul>
+<li><p>설정 가능한 다단계 동작을 수행하도록 키를 매핑합니다: 첫 번째 단계의 조건이 참이면 해당 동작을 실행하고, 그렇지 않으면 두 번째 단계를 확인하는 식으로 진행하다가 마지막에는 원래 키 입력을 실행합니다. 이는 주로 “스마트” 키(예: “스마트 탭”)라고 불리는 기능입니다.</p>
+<p>입력 모드에서 <code>&lt;Tab&gt;</code>, <code>&lt;S-Tab&gt;</code>, <code>&lt;CR&gt;</code>, <code>&lt;BS&gt;</code>와 같은 특수 키 매핑을 위해 미리 빌드된 수많은 단계가 있습니다. 여기 <a href="https://github.com/nvim-mini/mini.nvim/blob/ee23e1abc206efc6d6cce19ec8c0a3da7a897035/doc/mini-keymap.txt#L220-L261">전체 목록</a>과 <a href="https://github.com/nvim-mini/mini.nvim/blob/ee23e1abc206efc6d6cce19ec8c0a3da7a897035/doc/mini-keymap.txt#L81-L126">일반적인 사용 예시</a>가 있습니다. 앞으로 더 많은 플러그인(예: 인라인 완성 수락 등)을 지원할 수 있겠지만, 최대한 많은 범위를 커버하는 것이 목표는 아닙니다.</p></li>
+<li><p>키를 “콤보(combo)”로 매핑합니다: 각 키가 즉시 입력되는 동시에, 설정된 시간 지연 내에 모든 키가 입력되면 추가 동작을 실행합니다. 일반적인 사용 사례는 다음과 같습니다:</p>
+<ul>
+<li>입력 가능한 키를 일반 모드로 나가는 용도로 매핑 (이는 <code>inoremap jk &lt;Esc&gt;</code>와 달리 부작용이 없습니다).</li>
+<li>동일한 이동 키를 너무 많이 누를 경우 알림을 표시 (나쁜 습관 고치기).</li>
+</ul>
+<p>여기 <a href="https://github.com/nvim-mini/mini.nvim/blob/ee23e1abc206efc6d6cce19ec8c0a3da7a897035/doc/mini-keymap.txt#L127-L182">더 많은 예시</a>가 있습니다.</p></li>
+</ul>
+<hr>
+<p>한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 <a href="https://github.com/nvim-mini/mini.nvim/issues/1780">전용 베타 테스트 이슈</a>에 남겨주시면 감사하겠습니다. 또한 일반적인 매핑으로는 하기 불편한 유용한 콤보 아이디어도 수집하고 있으니 많은 참여 부탁드립니다.</p>
+<p>감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2025-05-03-announce-mini-keymap.html</guid>
+  <pubDate>Fri, 02 May 2025 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.completion’ 업데이트: 스니펫 지원 (드디어!)</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2025-03-07-update-mini-completion-snippet-support.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1j5n8y7/minicompletion_now_finally_has_snippet_support/">Reddit 게시물</a></em></p>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p><a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a> 플러그인의 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-completion.md">mini.completion</a> 모듈 최신 <code>main</code> 브랜치에 눈에 띄는 변화가 생겼습니다. 꽤 자주 요청되었던 기능들이 포함되어 있어 별도의 포스트로 소식을 전해드립니다.</p>
+<p>가장 큰 개선 사항은 (드디어!) 추가된 스니펫 지원입니다. 이제 ’mini.completion’은 스니펫 완성 항목을 제대로 삽입할 수 있습니다. 특히 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-snippets.md">mini.snippets</a> 모듈과 함께 잘 작동하도록 공을 들였으며, (Neovim&gt;=0.10 환경에서) <code>vim.snippet</code>으로의 자동 폴백 기능도 갖추고 있습니다.</p>
+<p>그 외 업데이트 사항:</p>
+<ul>
+<li>정보(info) 창과 시그니처(signature) 창 모두에서 위/아래로 스크롤할 수 있는 기본 매핑이 추가되었습니다. 기본값은 <code>&lt;C-f&gt;</code>와 <code>&lt;C-b&gt;</code>이며, 설정을 통해 변경할 수 있습니다 (단, <code>&lt;C-d&gt;</code>와 <code>&lt;C-u&gt;</code>는 내장 완성 팝업 활성화 시 특수한 의미를 가지므로 주의가 필요합니다).</li>
+<li>정보/시그니처 창의 하이라이팅 기능이 대폭 개선되었습니다.</li>
+<li><code>isIncomplete</code>를 지원합니다. 이는 LSP 서버의 초기 응답에 가능한 모든 항목이 포함되지 않은 경우, 다음 키 입력 시 완성 목록을 자동으로 업데이트함을 의미합니다.</li>
+<li>레이블 상세 정보(label details)와 문서 처리가 개선되었습니다. 즉, 초기 팝업에 표시될 내용과 정보 창에 표시될 내용이 더 잘 구분됩니다.</li>
+<li>정보 및 시그니처 창의 기본 UI가 테두리와 제목을 포함하는 형태로 약간 변경되었습니다.</li>
+</ul>
+<p>더 자세한 내용은 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/CHANGELOG.md#minicompletion">변경 로그(CHANGELOG)</a>를 참조하시고, <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-completion.md#demo">업데이트된 데모</a> (곧 안정 버전으로 출시될 Neovim 0.11에서 제작됨)도 확인해 보세요.</p>
+<hr>
+<p>이러한 업데이트를 완료하는 데 예상보다 <strong>훨씬</strong> 오랜 시간이 걸렸습니다. 개발 외적인 문제를 제외하더라도, LSP 관련 작업을 할 때마다 느끼는 심리적 장벽 때문인 것 같습니다. 1) LSP 사양 자체의 복잡성, 2) 이를 약간씩 다르게 구현하는 다양한 서버들을 다뤄야 하는 점, 3) 가끔 Neovim 자체(주로 Vim의 유산적인 부분)와 씨름해야 하는 점 등이 복합적으로 작용했습니다.</p>
+<p>조금씩 한 단계씩 나아간 것이 큰 도움이 되었고, 마침내 이 부분을 마무리하게 되어 기쁩니다. 여전히 LSP 관련 기능들에 대한 계획이 남아 있습니다 (’mini.snippets’로 로드된 스니펫을 위한 프로세스 내 LSP 서버 구축, ’mini.files’에 생성/이름 변경/삭제 LSP 지원 추가 등). 그러니 쉴 틈은 그리 길지 않겠네요 :)</p>
+<hr>
+<p>‘mini.nvim’ 프로젝트와 특히 ’mini.completion’에 관심을 가져주셔서 감사합니다! 이번 업데이트 이후 문제가 발생한다면 (분명히 있을 것으로 예상합니다), 이슈나 토론을 생성해 주세요. 함께 해결해 보겠습니다.</p>
+<p>곧 새롭고 흥미로운 업데이트와 함께 다시 뵙겠습니다!</p>
+
+
+
+ ]]></description>
+  <category>update</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2025-03-07-update-mini-completion-snippet-support.html</guid>
+  <pubDate>Thu, 06 Mar 2025 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>0.15.0 버전 출시</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2025-01-30-release-0150.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1idnotw/mininvim_release_0150_snippets_plus_various/">Reddit 게시물</a></em></p>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p><a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a> 플러그인의 새로운 0.15.0 버전이 출시되었습니다. 지난 릴리스 이후 4개월이 넘는 시간 동안 168개의 커밋이 쌓여, 이번 업데이트는 다소 늦은 감이 있습니다. 궁금하신 분들은 <a href="https://github.com/nvim-mini/mini.nvim/releases/tag/v0.15.0">전체 릴리스 설명</a>을 확인해 보세요.</p>
+<hr>
+<p>이번 릴리스의 핵심은 크고 중요한 모듈 하나가 베타 테스트를 마치고 정식 출시되었다는 점입니다:</p>
+<ul>
+<li><a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-snippets.md">mini.snippets</a> - 스니펫 관리 및 확장 모듈입니다. 스니펫을 관리하는 미니멀하면서도 풍부한 기능과 자체 구현된 LSP 스니펫 파싱/삽입 기능을 결합했습니다. 자세한 내용은 <a href="../blog/2024-12-23-announce-mini-snippets.html">관련 출시 포스트</a>를 읽어보세요.</li>
+</ul>
+<p>이 모듈은 여러 가지 이유로 작성하기 가장 까다로운 모듈 중 하나였지만, 마침내 해냈습니다 :)</p>
+<hr>
+<p>이번 릴리스 주기에서 제가 원래 집중하고 싶었던 부분은 ‘mini.completion’에 스니펫 지원(프로세스 내 LSP 서버를 통한 ’mini.snippets’ 통합 포함)을 추가하고 전반적인 백로그를 정리하는 것이었습니다. 하지만 백로그 정리가 예상보다 오래 걸려 (역시 여러 이유로) 아직 마무리되지 않았습니다. 그래서 이전 릴리스 이후 시간이 꽤 흘렀기에 일단 현재 상태로 릴리스를 진행하고, ‘mini.completion’ 개선은 나중에 하기로 했습니다.</p>
+<p>기존의 많은 플러그인들도 업데이트되었습니다. 주요 하이라이트는 다음과 같습니다:</p>
+<ul>
+<li><p>’mini.files’의 확인(confirm) 방식이 업데이트되었습니다:</p>
+<ul>
+<li>이제 동기화를 취소할 수 있습니다 (파일 시스템 작업 적용을 건너뛰는 대신). 취소하면 동기화 시작 전의 탐색기 상태로 돌아갑니다.</li>
+<li>탐색기를 닫을 때, (단순히 수정된 버퍼가 아닌) 대기 중인 파일 시스템 작업이 있는 경우에만 확인을 요청합니다.</li>
+</ul></li>
+<li><p>’mini.hues’에 <code>'lowmedium'</code>과 <code>'mediumhigh'</code>라는 두 가지 채도 단계가 추가되었습니다.</p></li>
+<li><p>‘mini.indentscope’ 개선 사항:</p>
+<ul>
+<li>범위 계산을 제한하는 <code>n_lines</code> 옵션을 도입하여 대규모(1만 줄 이상) 범위에서도 더 빠르게 반응합니다.</li>
+<li>범위가 그려지는 시점을 결정하는 데 사용할 수 있는 <code>draw.predicate</code>를 통해 더 세밀하게 커스터마이징할 수 있습니다.</li>
+</ul></li>
+<li><p>’mini.pick’의 주요 업데이트:</p>
+<ul>
+<li><code>grep</code> 및 <code>grep_live</code> 피커에서 <code>globs</code>를 사용하여 특정 glob 패턴으로 검색 범위를 제한할 수 있습니다. 또한 단일 glob 패턴을 추가하는 새로운 내장 <code>&lt;C-o&gt;</code> 매핑이 추가되었습니다.</li>
+<li>피커 창이 이제 윈도우 로컬 작업 디렉토리( <code>:pwd</code>로 출력되는 것)를 피커의 작업 디렉토리로 설정합니다. 이를 통해 피커의 cwd가 Neovim의 cwd와 다를 때 더 정확한 처리가 가능해졌습니다.</li>
+<li>새로운 <code>MiniPickMatch</code> 이벤트가 추가되어 쿼리 매치 업데이트마다 피커를 커스터마이징할 수 있습니다 (예: 매치 항목 수에 맞춰 창 높이 조절).</li>
+</ul></li>
+<li><p>그 외 다수.</p></li>
+</ul>
+<hr>
+<p>‘mini.nvim’ 프로젝트에 보내주시는 지속적인 성원에 감사드립니다! 어느덧 별 6,400개를 넘어섰네요 ❤️</p>
+<p>곧 새롭고 흥미로운 업데이트와 함께 뵙겠습니다!</p>
+
+
+
+ ]]></description>
+  <category>release</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2025-01-30-release-0150.html</guid>
+  <pubDate>Wed, 29 Jan 2025 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.snippets’ 발표</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-12-23-announce-mini-snippets.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1hknze1/minisnippets_manage_and_expand_snippets_lsp/">Reddit 게시물</a></em></p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="2024-12-23-announce-mini-snippets/demo.mp4"></video></div>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>지난 12월의 동지를 기념하며 오랫동안 기다려온 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a>의 새로운 모듈 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-snippets.md">mini.snippets</a>의 출시 소식을 전합니다. 이 모듈은 스니펫을 관리하고 확장할 수 있는 기능을 제공하며, <a href="https://github.com/nvim-mini/mini.snippets">별도의 GitHub 저장소</a>를 통해서도 설치할 수 있습니다.</p>
+<hr>
+<p>스니펫은 제 편집 워크플로우에서 매우 중요한 부분입니다. 그래서 약 3년 전부터 ’mini.snippets’를 만들고 싶었습니다. 초기 계획은 코어의 스니펫 확장 기능을 기다렸다가 스니펫 관리(찾기/로드/매칭 등)만 구현하는 것이었습니다. 실제로 지난 5월 0.10 버전에서 <code>vim.snippet</code>이 도입되었을 때, 저는 이를 자주 사용하는 스니펫들과 함께 사용했습니다.</p>
+<p>‘mini.icons’의 개발과 ’mini.nvim’ 기능 백로그 정리로 인해 ‘mini.snippets’ 개발은 9월 중순에야 시작할 수 있었습니다. 대내외적인 여러 이유로 인해 개발 기간이 이례적으로 길어졌는데, 그 이유는 다음과 같습니다:</p>
+<ul>
+<li><p>“제대로” 만들고 싶었습니다. 견고하면서도 유연하고, 기본 기능이 충실하면서도 커스터마이징이 가능해야 했습니다. 불과 며칠 전까지도 수많은 반복 수정을 거쳤습니다. 결국 <em>무언가</em>로 수렴되었고, 충분히 만족스럽기를 바랍니다.</p></li>
+<li><p><code>vim.snippet</code>이 이미 강력한 기능을 갖추고 있었지만, 몇몇 방향성(전용 이벤트 추가를 원치 않거나 <code>&lt;Tab&gt;</code>/<code>&lt;S-Tab&gt;</code> 오버라이드를 강제하는 등)이 저와는 잘 맞지 않았습니다. 그로 인해 자체적인 스니펫 파싱과 대화형 세션을 만드는 것이 가치가 있는지에 대해 긴 내부 토론이 이어졌습니다. 특히 제가 LSP 사양(그렇게 잘 알지 못하는 분야입니다)을 직접 다뤄야 한다는 사실 때문에 자체 구현이 더욱 망설여졌습니다.</p>
+<p>결국 저는 오랫동안 원했던 몇 가지 독특한 스니펫 세션 기능을 생각해 냈습니다. 선택 모드 매핑 제거(복잡성을 줄이고 시각적으로 조정 가능하게 함), 동적 하이라이팅, 마지막 탭스톱(tabstop)에서 세션을 즉시 중단하지 않는 기능 등입니다. 이러한 아이디어들이 저를 “너드 스나이핑(nerd-sniped)”했고, 결국 직접 구현하기로 마음먹게 되었습니다.</p></li>
+<li><p>스니펫 LSP 사양은 간결하지만, 중첩된 플레이스홀더나 연결된 탭스톱 등으로 인해 고려해야 할 까다로운 케이스가 많습니다. 이를 찾아내고 해결하기 위해 수많은 밤을 지새웠습니다.</p>
+<p>게다가 수많은 테스트와 문서 작업까지… 정말 <strong>엄청난</strong> 양의 테스트와 문서가 필요했습니다.</p></li>
+</ul>
+<p>하지만 가장 중요한 것은 ’mini.snippets’가 마침내 출시되었고, 성능이 <strong>매우 좋다</strong>는 것입니다. 덕분에 어깨의 짐을 조금이나마 덜 수 있게 되었습니다.</p>
+<p>다음 할 일은 (백로그를 조금 더 정리한 뒤에) 오랫동안 미뤄왔던 ’mini.completion’의 스니펫 지원 기능을 추가하는 것입니다. 이 역시 LSP 관련 작업이 필요하기 때문에 또 시간이 좀 걸릴 수도 있습니다.</p>
+<hr>
+<p>주요 기능:</p>
+<ul>
+<li><p>명시적으로 추가하거나 성능이 뛰어난 유연한 내장 로더 세트를 사용하여 스니펫 컬렉션을 관리합니다. <a href="https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L702"><code>MiniSnippets.gen_loader</code></a>를 참조하세요.</p></li>
+<li><p>설정된 스니펫은 확장하기 직전에 현재 로컬 컨텍스트를 기반으로 효율적으로 결정됩니다. 예를 들어, 마크다운 코드 블록과 같이 서로 다른 로컬 tree-sitter 언어에서 다른 스니펫을 사용할 수 있습니다. <a href="https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L837"><code>MiniSnippets.default_prepare()</code></a>를 참조하세요.</p></li>
+<li><p>현재 입력된 텍스트를 바탕으로 삽입할 스니펫을 매칭합니다. 정확한 매칭과 퍼지 매칭을 모두 지원합니다. <a href="https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L884"><code>MiniSnippets.default_match()</code></a>를 참조하세요.</p></li>
+<li><p>여러 매칭된 스니펫 중에서 <code>vim.ui.select()</code>를 통해 선택합니다. <a href="https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L923"><code>MiniSnippets.default_select()</code></a>를 참조하세요.</p></li>
+<li><p>설정 가능한 방식으로 스니펫 세션 중에 삽입, 이동 및 편집을 수행합니다:</p>
+<ul>
+<li>이동 및 중단을 위한 설정 가능한 매핑.</li>
+<li>더 쉬운 탐색을 위해 탭스톱 간의 순환 이동을 지원합니다.</li>
+<li>세션이 자동으로 중단되는 규칙이 이해하기 쉽습니다.</li>
+<li>연결된 탭스톱의 텍스트 동기화.</li>
+<li>동적인 탭스톱 상태 시각화 (현재/방문함/방문하지 않음 등).</li>
+<li>빈 탭스톱의 인라인 시각화 (Neovim&gt;=0.10 필요).</li>
+<li>새 줄에서 주석 리더를 보존하여 주석 내부에서도 잘 작동합니다.</li>
+<li>중첩된 세션 지원 (활성화된 세션이 있는 상태에서 다른 스니펫 확장).</li>
+</ul>
+<p><a href="https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L943"><code>MiniSnippets.default_insert()</code></a>를 참조하세요.</p></li>
+<li><p>스니펫 본문을 이해하기 쉬운 데이터 구조로 파싱하는 함수를 제공합니다. <a href="https://github.com/nvim-mini/mini.nvim/blob/2011aff270bcd3e1f3ad088253ace2d574967bed/doc/mini-snippets.txt#L1127"><code>MiniSnippets.parse()</code></a>를 참조하세요.</p></li>
+</ul>
+<hr>
+<p>한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 <a href="https://github.com/nvim-mini/mini.nvim/issues/1428">전용 베타 테스트 이슈</a>에 남겨주시면 감사하겠습니다.</p>
+<p>감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-12-23-announce-mini-snippets.html</guid>
+  <pubDate>Sun, 22 Dec 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>0.14.0 버전 출시</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-09-26-release-0140.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1fpx6q3/mininvim_release_0140_icons_icons_everywhere_plus/">Reddit 게시물</a></em></p>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>오늘 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a>의 또 다른 안정화 버전인 0.14.0 버전이 출시되었습니다 (정말 빠르게 성장하고 있네요). 궁금하신 분들은 <a href="https://github.com/nvim-mini/mini.nvim/releases/tag/v0.14.0">전체 릴리스 설명</a>을 확인해 보세요.</p>
+<hr>
+<p>이번 릴리스에서는 단 하나의 모듈만이 베타 테스트를 마치고 정식 출시되었습니다:</p>
+<ul>
+<li><a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-icons.md">mini.icons</a> - 범용 아이콘 제공 모듈입니다. 더 세밀한 아이콘 감지 규칙을 위해 내장 <code>vim.filetype.match()</code>에 의존하며, 어떤 컬러 스킴과도 쉽게 어우러지는 하이라이트 그룹 설계를 구현한 ’nvim-tree/nvim-web-devicons’의 더욱 다재다능한 대체재가 되는 것을 목표로 합니다. <a href="../blog/2024-07-03-announce-mini-icons.html">관련 출시 포스트</a>도 읽어보실 수 있습니다.</li>
+</ul>
+<p>이 모듈은 다음과 같은 수많은 추가 작업을 동반했습니다:</p>
+<ul>
+<li><p>‘nvim-web-devicons’에 의존하던 기존 모듈들이 ’mini.icons’를 우선적으로 사용하도록 전환했습니다. 해당 모듈은 ’mini.files’, ‘mini.pick’, ‘mini.statusline’, ’mini.tabline’입니다.</p></li>
+<li><p>대부분의 사용자가 “설치 즉시” 더 나은 경험을 할 수 있도록 인기 있는 컬러 스킴들이 ‘mini.icons’ 하이라이트 그룹을 정의하도록 업데이트했습니다.</p></li>
+<li><p>더 빠른 <code>vim.filetype.match()</code>를 위해 Neovim 자체에 변경 사항을 적용했습니다. 안타깝게도 이를 제대로 구현하고 코어 메인테이너들에게 병합할 가치가 있음을 설득하는 데 <strong>상당한</strong> 정신적 노력이 필요했습니다.</p></li>
+</ul>
+<hr>
+<p>남은 릴리스 주기 동안 저는 기능 백로그를 정리하고 전반적인 유지보수를 하는 데 집중하기로 했습니다. 그 결과, 수많은 기존 플러그인에 흥미로운 새 기능들이 추가되었습니다. 주요 하이라이트는 다음과 같습니다:</p>
+<ul>
+<li><p>’mini.files’에 가장 많은 공을 들였습니다: 북마크 기능, 개선된 파일 조작 등입니다. 이에 관한 <a href="../blog/2024-09-03-update-mini-files-bookmarks.html">별도의 포스트</a>가 있습니다.</p></li>
+<li><p>’mini.completion’이 이제 ’mini.icons’와 통합됩니다:</p>
+<ul>
+<li><a href="https://github.com/nvim-mini/mini.nvim/blob/64e95aa77587d04f97a5579b2106a82a08a7d968/doc/mini-icons.txt#L481"><code>MiniIcons.tweak_lsp_kind()</code></a>를 호출한 후 LSP 아이템 종류(예: “Function”, “Class” 등) 옆에 아이콘을 표시할 수 있습니다.</li>
+<li>LSP 아이템 종류를 하이라이트할 수 있습니다. ‘mini.icons’ 설정과 Neovim&gt;=0.11(현재 Nightly 버전)이 필요합니다.</li>
+</ul></li>
+<li><p>’mini.misc’에 새로운 <code>setup_termbg_sync()</code> 함수가 추가되었습니다. 이 함수는 터미널 배경 동기화를 설정하여 현재 Neovim 인스턴스 주변의 “프레임”을 제거할 수 있습니다. 또는 <a href="https://echasnovski.com/blog/2024-08-01-remove-padding-around-neovim-instance.html">이 포스트</a>의 조언을 참고할 수도 있습니다.</p></li>
+<li><p>’mini.pick’이 이제 파일 이름, 줄, 열, 텍스트를 구분하기 위해 이전의 “:” 대신 전체 높이 문자 “│”를 사용합니다. 전체 변경 사항은 조금 더 복잡하므로 변경 로그를 참조하세요.</p></li>
+<li><p>’mini.extra’의 수많은 피커가 이제 파일 및 LSP 종류 모두에 대해 ’mini.icons’를 통합합니다.</p></li>
+<li><p>’mini.test’가 이제 Windows에서 작동합니다. 파이프가 생성되는 방식에서 한 줄만 변경하면 되는 문제였습니다. <a href="https://github.com/nvim-mini/mini.nvim/pull/1101">이 PR</a>을 보내주신 <a href="https://github.com/cameronr"><span class="citation" data-cites="cameronr">@cameronr</span></a> 님께 큰 감사를 드립니다.</p></li>
+<li><p>그 외 다수.</p></li>
+</ul>
+<hr>
+<p>전반적인 유지보수도 결실을 맺었습니다:</p>
+<ul>
+<li><p>도움말 페이지가 이제 Neovim 고유의 방식으로 코드 블록을 하이라이트합니다.</p></li>
+<li><p>‘mini.test’ PR 덕분에 마침내 Windows용 CI 테스트를 설정할 수 있었습니다 (macOS도 추가하기로 했습니다). 테스트 자체를 업데이트하는 데에는 (제가 해당 OS들을 로컬에서 사용할 수 없었기에) 엄청난 노력이 필요했지만 그럴 만한 가치가 있었습니다.</p></li>
+<li><p>모든 모듈이 이제 모든 컬러 스킴에 대해 하이라이트 그룹이 정의되도록 일관되게 보장합니다. 이전에는 <code>:colorscheme ...</code> 호출 시 자체 정의 전에 모든 하이라이트 그룹을 지우는 경우가 많았는데, ’mini.nvim’이 이를 고려하지 못했었습니다.</p></li>
+</ul>
+<hr>
+<p>‘mini.nvim’ 프로젝트에 보내주시는 끊임없는 관심에 감사드립니다!</p>
+<p>곧 흥미로운 업데이트와 함께 다시 뵙겠습니다!</p>
+
+
+
+ ]]></description>
+  <category>release</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-09-26-release-0140.html</guid>
+  <pubDate>Wed, 25 Sep 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.files’ 업데이트: 북마크</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-09-03-update-mini-files-bookmarks.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1f7zrjt/minifiles_updates_bookmarks_better_file/">Reddit 게시물</a></em></p>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>요약: 여기 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/CHANGELOG.md#minifiles">지난 릴리스 이후의 전체 변경 사항 목록</a>이 있습니다. 다음 ‘mini.nvim’ 출시 전에 이 기능들을 테스트해 보시고 피견을 주시면 감사하겠습니다.</p>
+<hr>
+<p>이번 <a href="https://github.com/nvim-mini/mini.nvim/">‘mini.nvim’</a> 버전 업데이트 과정에서 저는 기존 모듈들의 전반적인 유지보수와 백로그 정리에 집중하기로 했습니다. 그중에서도 ‘mini.files’에 가장 많은 공을 들였기에, 다음 ’mini.nvim’ 출시 전에 사용자분들께서 새로운 변경 사항들을 테스트해 주시길 부탁드립니다. 전체 변경 목록은 게시물 시작 부분에 있지만, 최근 활동의 주요 하이라이트는 다음과 같습니다:</p>
+<ul>
+<li><p>’mini.files’에 내장 마크(mark)와 유사하게 작동하는 북마크 기능이 구현되었습니다:</p>
+<ul>
+<li><code>m&lt;char&gt;</code>: 포커스된 창의 디렉토리 경로를 ID가 <code>&lt;char&gt;</code>인 북마크로 설정합니다.</li>
+<li><code>'&lt;char&gt;</code>: 해당 북마크 경로로 포커스를 이동합니다.</li>
+<li><code>set_bookmark()</code>: 스크립트를 통해 커스텀 북마크를 설정할 수 있습니다. 여기 <a href="https://github.com/nvim-mini/mini.nvim/blob/eb0f557a5797cfe9c720ed84a71582c22bccb4f8/doc/mini-files.txt#L521">사용 예시</a>가 있습니다.</li>
+</ul>
+<p>이 기능을 만든 주요 동기는 서로 다른 디렉토리 간에 파일을 이동하거나 복사할 때 빠르게 전환할 수 있는 방법이 없어 번거로웠기 때문입니다. 이제 <code>'a</code>나 <code>'b</code>만으로 두 디렉토리를 오갈 수 있습니다 (물론 북마크를 먼저 생성해야 한다는 점은 잊지 마세요).</p></li>
+<li><p>한 번의 동기화로 ’file-a’를 삭제하고 ’file-b’를 ’file-a’로 복사하는 것과 같은 복잡한 파일 조작 케이스가 이제 제대로 해결됩니다. 100% 완벽한 것은 아니므로 (의도적으로), 여전히 작업을 독립적인 단계로 나누어 수행하는 것을 권장합니다.</p></li>
+<li><p>확인 정보(confirmation info) 창에서 작업 설명에 가능한 한 상대 경로를 사용합니다. 또한 가독성을 위해 의도적으로 텍스트 정렬을 맞췄습니다.</p></li>
+<li><p><code>get_target_window()</code>는 <code>get_explorer_state().target_window</code>를 위해 이제 소프트웨어적으로 사용이 중단(soft deprecated)되었습니다. 현재는 작동하지만 다음 ‘mini.nvim’ 출시 후에는 제거될 예정입니다. 이는 제가 전체 <code>explorer</code> 데이터 구조를 수정하고 싶지 않아 발생한 실수였습니다 (나중에 그럴 필요가 없었다는 것을 깨달았습니다). 불편을 드려 죄송합니다.</p></li>
+</ul>
+<p>피드백, 이슈, 제안 사항은 여기에 남겨주시거나, <a href="https://github.com/nvim-mini/mini.nvim/discussions/categories/q-a">질문</a>을 생성해 주세요 (이미 <a href="https://github.com/nvim-mini/mini.nvim/discussions/categories/q-a?discussions_q=is%3Aclose+category%3AQ%26A+label%3Amini.files">이전에 질문된 것</a>이 있는지 먼저 확인 부탁드립니다). 이슈가 아직 생성되지 않았다면 이슈를 만드셔도 좋습니다.</p>
+<p>감사합니다!</p>
+<p><strong>추가</strong>: 북마크 구현 과정이 궁금하시다면, <a href="https://github.com/nvim-mini/mini.nvim/issues/928">이 이슈</a>에 향후 참고할 만한 고민의 흔적들이 담겨 있습니다.</p>
+
+
+
+ ]]></description>
+  <category>update</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-09-03-update-mini-files-bookmarks.html</guid>
+  <pubDate>Mon, 02 Sep 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.icons’ 발표</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-07-03-announce-mini-icons.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1duf3w7/miniicons_general_icon_provider_several/">Reddit 게시물</a></em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2024-07-03-announce-mini-icons/demo-glyph-dark.png" class="img-fluid figure-img"></p>
+<figcaption>기본 “glyph” 스타일 및 다크 컬러 스킴</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2024-07-03-announce-mini-icons/demo-glyph-light.png" class="img-fluid figure-img"></p>
+<figcaption>기본 “glyph” 스타일 및 라이트 컬러 스킴</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://nvim-mini.org/blog/2024-07-03-announce-mini-icons/demo-ascii.png" class="img-fluid figure-img"></p>
+<figcaption>폴백 “ascii” 스타일</figcaption>
+</figure>
+</div>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>범용 아이콘 제공을 목표로 하는 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a>의 새로운 모듈 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-icons.md">mini.icons</a>의 출시를 함께 축하해 주세요. 이 모듈은 <a href="https://github.com/nvim-mini/mini.icons">별도의 GitHub 저장소</a>를 통해서도 설치할 수 있습니다.</p>
+<hr>
+<p>최근 ‘mini.diff’와 ’mini.git’의 출시로 ’mini.statusline’에서 외부 의존성(’lewis6991/gitsigns.nvim’)을 하나 더 줄일 수 있게 되면서, ‘nvim-tree/nvim-web-devicons’를 대체할 만한 기능을 ’mini.nvim’ 설계에 맞게 넣을 수 있을지 궁금해졌습니다. 아이콘을 위한 커스텀 솔루션이 있다면 적어도 4개 이상의 모듈(아마 그 이상)에 도움이 될 것이기에 충분히 가치 있는 일이라고 생각했습니다. 결국 저에게 잘 맞고 다음과 같은 몇 가지 아이디어에 기반한 접근 방식을 찾았습니다:</p>
+<ul>
+<li><p>’nvim-web-devicons’와 같이 “아이콘과 하이라이트 그룹을 가져오는 하나의 메인 함수”라는 개념을 유지하되, 더 유연하고 미래 지향적으로 설계했습니다. 카테고리(예: “file”, “extension”, “directory” 등)와 아이콘 이름을 명시적으로 요구합니다 (’nvim-web-devicons’는 주로 “file”, “extension”, “filetype”만 가집니다).</p></li>
+<li><p>’mini.nvim’의 기존 방식을 따라 모듈에서 사용되는 고정된 하이라이트 그룹 세트를 제공합니다. 이를 통해 컬러 스킴과의 통합(기본 제공 및 컬러 스킴 내부 모두)이 더 원활해지고 대량의 커스터마이징이 쉬워집니다.</p></li>
+<li><p>Nerd Fonts 글리프를 사용할 수 없지만 여전히 Neovim을 아름답게 사용하고 싶은 사용자를 위해 폴백을 제공합니다. 이는 <code>config.style = 'ascii'</code> 설정을 통해 가능합니다 (스크린샷 참조).</p></li>
+</ul>
+<hr>
+<p>실제 코드 로직은 비교적 간단하지만, ’mini.icons’를 만들면서 가장 많은 시간이 걸린 부분은 다음과 같았습니다:</p>
+<ul>
+<li><p>다양한 카테고리를 명시적으로 지원하기 위해 일반적인 사례들을 수집했습니다. 특히 ‘filetype’ 지원에 가장 많은 노력을 기울였는데, 이는 더 풍부한 Neovim 통합을 위한 폴백으로 사용되기 때문입니다. 현재 지원되는 파일 유형(filetype)은 무려 780개에 달합니다!</p></li>
+<li><p>각 아이콘을 일일이 확인하며 Nerd Fonts 글리프와 하이라이팅을 할당했습니다. 단조롭지만 즐거운 경험이었습니다.</p></li>
+<li><p>‘mini.icons’ 출시 직후 더 나은 기본 사용자 경험을 제공하기 위해 인기 있는 Neovim 컬러 스킴들에 PR을 보냈습니다. 총 16개의 PR을 보냈습니다!</p></li>
+<li><p>관련 모듈들이 ‘nvim-web-devicons’ 대신 ‘mini.icons’를 선호하도록 업데이트했습니다 (물론 하위 호환성을 유지하면서요). 이제 ’mini.statusline’, ‘mini.tabline’, ‘mini.files’, ‘mini.pick’ 모두 (설정된 경우) ’mini.icons’를 사용합니다.</p></li>
+</ul>
+<hr>
+<p>주요 기능:</p>
+<ul>
+<li><p>다양한 카테고리(filetype, file/directory path, extension, operating system, LSP kind)에 대해 단일 <code>MiniIcons.get()</code> 함수를 통해 아이콘과 하이라이팅을 제공합니다. 아이콘과 카테고리의 기본값은 오버라이드할 수 있습니다.</p></li>
+<li><p>설정 가능한 스타일: “glyph” (아이콘 글리프) 또는 “ascii” (글리프가 아닌 폴백).</p></li>
+<li><p>컬러 스킴과 더 잘 어우러지도록 고정된 하이라이트 그룹 세트 제공 (기본적으로 내장 그룹에 링크됨).</p></li>
+<li><p>최상의 성능을 위한 캐싱.</p></li>
+<li><p><code>vim.filetype.add()</code> 및 <code>vim.filetype.match()</code>와 통합.</p></li>
+<li><p>‘mini.nvim’ 외부의 플러그인과 더 잘 통합되도록 ’nvim-tree/nvim-web-devicons’의 메서드를 모킹(mocking)합니다. <a href="https://github.com/nvim-mini/mini.nvim/blob/bc6c0f7b49d71716c996a9422a46bbe5badec8ca/doc/mini-icons.txt#L356"><code>MiniIcons.mock_nvim_web_devicons()</code></a>를 참조하세요.</p></li>
+</ul>
+<hr>
+<p>’mini.icons’를 꼭 한번 사용해 보시길 진심으로 바랍니다. 결과적으로 일반 사용자와 플러그인 제작자 모두에게 ’nvim-web-devicons’보다 더 나은 대안이 될 것이라고 생각합니다. <a href="https://github.com/nvim-mini/mini.nvim/blob/bc6c0f7b49d71716c996a9422a46bbe5badec8ca/doc/mini-icons.txt#L58">사용자를 위한 상세 비교</a>와 <a href="https://github.com/nvim-mini/mini.nvim/blob/bc6c0f7b49d71716c996a9422a46bbe5badec8ca/doc/mini-icons.txt#L85">플러그인 제작자를 위한 상세 비교</a>를 확인해 보세요. 또한, 설정에 <code>MiniIcons.mock_nvim_web_devicons()</code>를 추가하면 (아직) ’nvim-web-devicons’만 지원하는 다른 플러그인들과도 잘 작동할 것입니다.</p>
+<p>한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 <a href="https://github.com/nvim-mini/mini.nvim/issues/1007">전용 베타 테스트 이슈</a>에 남겨주시면 감사하겠습니다.</p>
+<p>감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-07-03-announce-mini-icons.html</guid>
+  <pubDate>Tue, 02 Jul 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>0.13.0 버전 출시</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-06-13-release-0130.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1df0qzu/mininvim_release_0130_two_new_modules_visible/">Reddit 게시물</a></em></p>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>오늘은 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a> 0.13.0 버전이 출시되는 날입니다. 이번 릴리스에는 베타 테스트를 마친 풍부한 기능의 두 모듈, 기존 모듈의 주요 변경 사항, 그리고 다른 모듈들에 대한 몇 가지 소규모 업데이트가 포함되어 있습니다.</p>
+<p>이번 릴리스는 묘하게 일치하는 여러 이정표를 달성했습니다. 현재 ‘mini.nvim’ 프로젝트는 다음과 같은 상태입니다: - 40개 이상의 모듈 보유. - GitHub 스타 4,000개 돌파 (지속적인 지원에 감사드립니다 ❤️). - 4,000개 이상의 테스트 케이스 보유.</p>
+<p>궁금하신 분들은 <a href="https://github.com/nvim-mini/mini.nvim/releases/tag/v0.13.0">전체 릴리스 설명</a>을 확인해 보세요.</p>
+<hr>
+<p>베타 테스트를 마치고 정식 출시된 두 개의 새로운 모듈:</p>
+<ul>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-diff.md">mini.diff</a> - 버퍼 텍스트와 참조 간의 차이점을 대화형으로 시각화하는 모듈입니다. 기본적으로 ‘lewis6991/gitsigns.nvim’의 ’mini.nvim’ 버전이지만, 참조 텍스트(Git 인덱스뿐만 아니라)에 대해 더 일반적인 설계를 가졌으며 인라인 차이점을 보여주는 방식(“오버레이”)이 조금 다릅니다.</p></li>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-git.md">mini.git</a> - 더욱 긴밀한 Git 통합을 위한 모듈입니다. 주요 목표는 상태 표시줄에 표시할 버퍼별 Git 관련 데이터를 추적하는 것입니다. 하지만 두 가지 큰 기능 세트도 포함되어 있습니다: 현재 Neovim 세션 내에서 Git을 더 직접적으로 사용하기 위한 <code>:Git</code> 명령어와 더 대화형인 Git 기록 탐색을 위한 헬퍼 함수들입니다. ’tpope/vim-fugitive’나 모든 기능을 갖춘 Git 클라이언트를 <strong>대체하기 위한 것은 아닙니다.</strong></p></li>
+</ul>
+<hr>
+<p>두 플러그인에 주요 변경 사항이 있었습니다:</p>
+<ul>
+<li>’mini.comment’는 이제 공백을 더 일관되게 처리합니다 (기본적으로 <a href="https://echasnovski.com/blog/2024-04-05-neovim-now-has-builtin-commenting.html">코어에 병합</a>하기 위한 준비 과정에서 업데이트됨):
+<ul>
+<li>주석 처리 여부를 결정할 때 빈 줄은 무시됩니다. 실제로는 주석 처리된 줄과 빈 줄이 섞인 영역을 다시 주석 처리하는 대신 주석을 해제한다는 의미입니다.</li>
+<li>’commentstring’의 공백 처리가 더 명확해졌습니다. 기본 설정에서는 거의 눈에 띄지 않지만, <code>options.pad_comment_parts = false</code>를 사용하는 사용자에게는 중요할 수 있습니다.</li>
+</ul></li>
+<li>’mini.statusline’에 몇 가지 큰 업데이트가 있었습니다:
+<ul>
+<li>새로운 ‘mini.diff’ 및 ‘mini.git’ 모듈이 이제 ’lewis6991/gitsigns.nvim’보다 우선순위를 갖습니다. 즉, 이제 ’mini.statusline’의 잠재력을 최대한 발휘하기 위해 후자가 더 이상 필수적이지 않습니다.</li>
+<li><code>section_diagnostics()</code>는 이제 버퍼에 LSP 서버가 연결되어 있는지 여부에 의존하지 않습니다 (섹션의 목적에 더 부합하는 동작임).</li>
+<li>두 개의 새로운 섹션이 추가되어 기본 활성 상태 표시줄 콘텐츠에 즉시 사용됩니다: <code>section_diff()</code> 및 <code>section_lsp()</code>. 기본 ‘mini.statusline’ 설정을 사용하는 사용자에게는 디프가 추가 아이콘과 함께 표시되고 연결된 LSP 서버 수를 나타내는 표시기가 생겼음을 의미합니다.</li>
+</ul></li>
+</ul>
+<hr>
+<p>여러 플러그인에 작지만 유용한 업데이트가 있었습니다:</p>
+<ul>
+<li>‘mini.deps’는 이제 관례적 커밋(conventional commit) 스타일에서 주요 변경 사항(breaking change)을 나타내는 커밋 메시지를 하이라이트합니다 (’mini.nvim’ 자체도 이제 이 스타일을 사용하며 매우 만족하고 있습니다).</li>
+<li>’mini.map’에 ’mini.diff’의 헝크를 하이라이트하기 위한 <code>gen_integration.diff()</code> 통합 기능이 추가되었습니다.</li>
+<li>’mini.tabline’에 탭 레이블 형식을 지정하는 옵션이 추가되었습니다.</li>
+<li>그 외 다수…</li>
+</ul>
+<hr>
+<p>읽어주시고 ‘mini.nvim’ 프로젝트에 관심을 가져주셔서 감사합니다!</p>
+<p>곧 다음 모듈 출시 소식으로 찾아뵙겠습니다 (<strong>정말</strong> 멋진 것들이 계획되어 있습니다)!</p>
+
+
+
+ ]]></description>
+  <category>release</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-06-13-release-0130.html</guid>
+  <pubDate>Wed, 12 Jun 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.git’ 발표</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-05-21-announce-mini-git.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1cxbegq/minigit_git_integration_with_tracking_gitrelated/">Reddit 게시물</a></em></p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="2024-05-21-announce-mini-git/demo.mp4"></video></div>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>더 나은 Git 통합을 위한 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a>의 새로운 모듈 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-git.md">mini.git</a>의 출시를 함께 축하해 주세요. 이 모듈은 <a href="https://github.com/nvim-mini/mini-git">별도의 GitHub 저장소</a>를 통해서도 설치할 수 있습니다.</p>
+<hr>
+<p>먼저 전해드릴 소식이 있습니다. 이번 릴리스로 ’mini.nvim’은 두 가지 중요한 이정표를 달성했습니다: - 이미 40번째 모듈입니다. 정말 빠르게 성장하고 있네요. - 최근 GitHub 스타 4,000개를 달성했습니다. 여러분의 지원과 신뢰에 감사드립니다!</p>
+<hr>
+<p>모듈 자체에 대해 간단히 설명해 드리겠습니다. 이 모듈은 ’tpope/vim-fugitive’의 일대일 대응이나 모든 기능을 갖춘 Git 클라이언트 대체를 <strong>목표로 하지 않습니다!</strong></p>
+<p>Git 관련 기능은 2022년 10월부터 제기된 <a href="https://github.com/nvim-mini/mini.nvim/issues/139">가장 오래된 모듈 요청 중 하나</a>였습니다. 고민 끝에 기능과 유지보수성 사이의 중요한 균형을 맞춘 범위를 결정했습니다.</p>
+<p>초기 목표는 상태 표시줄(statusline)에서 사용할 수 있는 방식으로 Git 관련 데이터를 추적하는 것이었습니다 (데모의 상태 표시줄에서 사용되는 모습을 볼 수 있습니다). 이는 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-diff.md">‘mini.diff’</a>가 디프 헝크를 위해 수행하는 작업과 잘 어우러집니다. 이제 ‘mini.statusline’ 모듈은 Git 디프 관련 섹션에 기본적으로 ’mini.git’과 ’mini.diff’를 사용합니다 (lewis6991/gitsigns.nvim으로의 폴백이 제공되므로 큰 호환성 문제는 없습니다).</p>
+<p>또한 고민 끝에 Fugitive 스타일의 <code>:Git</code> 명령어와 기록 탐색을 위한 헬퍼 기능을 추가하기로 했습니다. 데모 비디오에서 두 기능이 멋지게 작동하는 모습을 확인하실 수 있습니다.</p>
+<hr>
+<p>주요 기능:</p>
+<ul>
+<li><p><a href="https://git-scm.com/">Git</a> 관련 데이터 자동 추적: 루트 경로, 상태, HEAD 등. 상태 표시줄에서 편리하게 사용할 수 있도록 버퍼 로컬 변수를 노출합니다.</p></li>
+<li><p><code>:Git</code> 명령어: 파일의 저장소 루트에서 모든 <code>git</code> 호출을 실행하며, 현재 인스턴스와 더 깊게 통합됩니다 (출력을 알림/버퍼로 표시, 커밋 메시지 편집에 사용 등).</p></li>
+<li><p>Git 기록 조회를 위한 헬퍼 함수:</p>
+<ul>
+<li><code>MiniGit.show_range_history()</code>: 특정 줄 범위가 어떻게 변해왔는지 보여줍니다.</li>
+<li><code>MiniGit.show_diff_source()</code>: 디프 항목 시점의 파일 상태를 보여줍니다.</li>
+<li><code>MiniGit.show_at_cursor()</code>: 문맥에 따라 Git 관련 데이터를 보여줍니다.</li>
+</ul></li>
+</ul>
+<p>지원하지 않는 기능:</p>
+<ul>
+<li>모든 기능을 갖춘 Git 클라이언트 대체. 원칙적으로 기능이 현재 Neovim 상태(열려 있는 버퍼 등)에 의존하지 않는다면 범위 밖입니다. 더 많은 기능이 필요하다면 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-diff.md">‘mini.diff’</a>나 전문 Git 클라이언트를 사용하세요.</li>
+</ul>
+<p>자세한 내용은 도움말 파일의 다음 태그를 참조하세요:</p>
+<ul>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/e94945129780fa5b43447ecc0a4b0273892043e3/doc/mini-git.txt#L138"><code>*:Git*</code></a></p></li>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/e94945129780fa5b43447ecc0a4b0273892043e3/doc/mini-git.txt#L73"><code>*MiniGit-examples*</code></a></p></li>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/e94945129780fa5b43447ecc0a4b0273892043e3/doc/mini-git.txt#L357"><code>*MiniGit.enable()*</code></a></p></li>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/e94945129780fa5b43447ecc0a4b0273892043e3/doc/mini-git.txt#L396"><code>*MiniGit.get_buf_data()*</code></a></p></li>
+</ul>
+<hr>
+<p>한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 <a href="https://github.com/nvim-mini/mini.nvim/issues/898">전용 베타 테스트 이슈</a>에 남겨주시면 감사하겠습니다.</p>
+<p>감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-05-21-announce-mini-git.html</guid>
+  <pubDate>Mon, 20 May 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.diff’ 발표</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-03-28-announce-mini-diff.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1bq0cxy/minidiff_work_with_diff_hunks_interactively/">Reddit 게시물</a></em></p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="2024-03-28-announce-mini-diff/demo.mp4"></video></div>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>입력하는 동안 버퍼와 참조 텍스트 간의 차이점을 시각화해 주는 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a>의 새로운 모듈 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-diff.md">mini.diff</a>의 출시를 기쁜 마음으로 전합니다. 이 모듈은 <a href="https://github.com/nvim-mini/mini.diff">별도의 GitHub 저장소</a>를 통해서도 설치할 수 있습니다.</p>
+<hr>
+<p>요약: <a href="https://github.com/lewis6991/gitsigns.nvim">‘lewis6991/gitsigns.nvim’</a>과 대체로 비슷하지만 약간의 차이점이 있습니다:</p>
+<ul>
+<li>참조 텍스트 소스를 설정할 수 있으며 Git에 종속되지 않습니다 (기본값으로는 Git이 사용됨). 덕분에 ’mini.diff’는 더 유연하고 미래 지향적입니다.</li>
+<li>텍스트 영역에 더 자세한 디프(diff) 정보를 <strong>지속적으로</strong> 보여주는 특수한 오버레이(overlay) 뷰가 있습니다. 저에게는 ’gitsigns.nvim’의 <code>preview_hunk()</code>보다 디프를 검토하기에 훨씬 더 좋은 방법이 되었습니다.</li>
+<li>헝크(hunk) 작업을 위한 합리적인 내장 매핑(적용/재설정/텍스트 오브젝트/이동)이 제공됩니다.</li>
+</ul>
+<hr>
+<p>오랫동안 ‘mini.nvim’에 포함할 ’gitsigns.nvim’의 대안을 작성하는 것을 망설여 왔습니다. 모든 디프 및 Git 기능을 적절히 작은 파일 하나에 (이는 모든 ’mini.nvim’ 모듈의 설계 목표입니다) 담아내는 것이 거의 불가능해 보였기 때문입니다.</p>
+<p>하지만 ’gitsigns.nvim’이 어떻게 구현되었는지 살펴본 후, Lewis Russell(lewis6991)이 직접 작성한 내장 <a href="https://neovim.io/doc/user/lua.html#vim.diff"><code>vim.diff()</code></a>를 활용한다는 것을 알게 되었고, 갑자기 구현 가능성이 보였습니다. 코어에서 작업해 준 Lewis의 노고에 정말 감사드립니다. 그의 작업이 없었다면 이 모듈은 아마 세상에 나오지 못했을 것입니다.</p>
+<hr>
+<p>주요 기능:</p>
+<ul>
+<li><p>버퍼 텍스트와 설정 가능한 참조 간의 차이점을 대화형으로 시각화합니다 (입력 시 실시간 업데이트). 각 줄이 차이점(헝크라고 함)의 추가, 변경 또는 삭제된 부분인지 표시합니다. 시각화는 커스터마이징 가능한 색상 기호(sign)나 줄 번호를 통해 이루어집니다.</p></li>
+<li><p>텍스트 영역 내에 더 자세한 헝크 정보를 보여주는 토글 가능한 특수 오버레이 뷰.</p></li>
+<li><p>참조 텍스트를 최신 상태로 유지하고 상호작용을 정의하기 위해 버퍼별로 완전히 설정 가능한 소스를 제공합니다. 기본적으로 Git 인덱스에 있는 버퍼의 파일 내용을 사용합니다.</p></li>
+<li><p>디프 헝크 관리를 위한 설정 가능한 매핑:</p>
+<ul>
+<li>범위 내의 헝크 적용 및 재설정 (비주얼 선택 또는 점 반복 가능한 연산자 사용).</li>
+<li>연산자 대상으로 사용할 수 있는 “커서 아래의 헝크 범위” 텍스트 오브젝트.</li>
+<li>첫 번째/이전/다음/마지막 헝크로 이동.</li>
+</ul></li>
+</ul>
+<p>지원하지 않는 기능:</p>
+<ul>
+<li>(기본) Git 소스에서 헝크를 시각화하고 스테이징(적용)하는 것 외에 직접적으로 Git 작업을 수행하는 기능. 특히, 헝크 스테이징 취소(unstage)는 지원되지 않습니다.</li>
+</ul>
+<p>더 자세한 내용은 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-diff.md#overview">README의 개요</a>를 참조하세요.</p>
+<p>추가 정보는 도움말 파일의 다음 태그를 참조하세요:</p>
+<ul>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/0ec3216d3224ebd6828e5637fa9a10a00ba67113/doc/mini-diff.txt#L300"><code>*MiniDiff-source-specification*</code></a></p></li>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/0ec3216d3224ebd6828e5637fa9a10a00ba67113/doc/mini-diff.txt#L88"><code>*MiniDiff-hunk-specification*</code></a></p></li>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/0ec3216d3224ebd6828e5637fa9a10a00ba67113/doc/mini-diff.txt#L182"><code>*MiniDiff-diff-summary*</code></a></p></li>
+</ul>
+<hr>
+<p>한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 <a href="https://github.com/nvim-mini/mini.nvim/issues/773">전용 베타 테스트 이슈</a>에 남겨주시면 감사하겠습니다.</p>
+<p>감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-03-28-announce-mini-diff.html</guid>
+  <pubDate>Wed, 27 Mar 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>0.12.0 버전 출시</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-02-29-release-0120.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1b342yx/mininvim_release_0120_three_new_modules_a_few/">Reddit 게시물</a></em></p>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>윤달을 기념하여 오랫동안 기다려온 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a>의 0.12.0 버전을 출시합니다. 이번 릴리스에는 베타 테스트를 마친 세 개의 주요 플러그인과 기존 모듈들에 대한 수많은 소규모 업데이트가 포함되어 있습니다.</p>
+<p>궁금하신 분들은 <a href="https://github.com/nvim-mini/mini.nvim/releases/tag/v0.12.0">전체 릴리스 설명</a>을 확인해 보세요.</p>
+<hr>
+<p>베타 테스트를 마치고 정식 출시된 세 개의 새로운 모듈:</p>
+<ul>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-visits.md">mini.visits</a> - 파일 시스템 방문 기록을 추적하고 재사용하는 모듈입니다. ‘nvim-telescope/telescope-frecency.nvim’(파일 방문을 지속적으로 추적하고 선택)의 ‘mini.nvim’ 버전이며, ‘ThePrimeagen/harpoon’(경로에 레이블을 지속적으로 추가/제거하고 선택)의 기능이 일부 결합되었습니다.</p></li>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-notify.md">mini.notify</a> - 알림 표시 모듈입니다. 커스텀 ‘vim.notify’ 생성기를 제공하여 사용자가 예쁘고 덜 방해되는 플러그인 알림을 받을 수 있게 해줍니다. 또한 기본적으로 LSP 진행 상황 업데이트에 대한 알림을 설정합니다 (직접 써보기 전까지는 필요성을 몰랐던 기능입니다).</p></li>
+<li><p><a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md">mini.deps</a> - 플러그인 관리자 모듈입니다. ’mini.nvim’이 이미 대부분의 필수 에디터 기능을 포함하고 있지만, 세상에는 훌륭한 다른 플러그인들도 많습니다. ’mini.deps’는 최소한의 구성으로 충분한 사용자 경험을 제공하며 다른 플러그인의 설치/업데이트/제거/스냅샷 생성을 도와줍니다 (이 점에서는 ’junegunn/vim-plug’와 비슷하다고 생각합니다).</p></li>
+</ul>
+<hr>
+<p>기존 모듈들도 상당한 업데이트가 있었습니다:</p>
+<ul>
+<li>’mini.comment’는 이제 주석 처리 동작에 대한 데이터와 함께 훅을 호출합니다.</li>
+<li>’mini.hues’는 이제 ’nvim-treesitter’와 Neovim&gt;=0.10에서 도입된 새로운 tree-sitter 캡처를 지원합니다.</li>
+<li>’mini.statusline’의 기본 콘텐츠에 <code>search_count</code> 섹션이 추가되었습니다.</li>
+<li>그 외 다수…</li>
+</ul>
+<hr>
+<p>읽어주셔서 감사합니다! 곧 다음 모듈 출시 소식으로 찾아뵙겠습니다!</p>
+
+
+
+ ]]></description>
+  <category>release</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-02-29-release-0120.html</guid>
+  <pubDate>Wed, 28 Feb 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.deps’ 발표</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-02-11-announce-mini-deps.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/1aodopi/minideps_a_plugin_manager_with_minimal_yet/">Reddit 게시물</a></em></p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="2024-02-11-announce-mini-deps/demo.mp4"></video></div>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>다른 플러그인을 설치하고 관리하는 플러그인 관리자 역할을 하는 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a>의 새로운 모듈 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md">mini.deps</a>의 출시 소식을 전하게 되어 기쁩니다. 이 모듈은 <a href="https://github.com/nvim-mini/mini.deps">별도의 GitHub 저장소</a>를 통해서도 설치할 수 있습니다.</p>
+<hr>
+<p>이 모듈은 지금까지 작성한 모듈 중 가장 까다로운 것 중 하나였습니다. 플러그인을 관리한다는 전반적인 목표는 비교적 명확해 보이지만, 단순함과 사용성 사이의 균형을 설계하는 것은 생각보다 쉽지 않았습니다. 결국 전반적인 접근 방식을 세 번이나 다시 설계해야 했습니다. 플러그인 업데이트 시뮬레이션의 느린 반복 과정, 복잡한 테스트, 그리고 몇 가지 개인적인 사정이 겹쳐 예상보다 훨씬 오랜 시간이 걸렸습니다. 이러한 우여곡절 끝에 마침내 설계, 구현, 테스트 및 문서화가 완료되었습니다.</p>
+<p>전반적으로 Git과 내장 패키지 기능을 사용하여 플러그인을 설치, 업데이트, 제거 및 스냅샷을 생성합니다. <a href="https://github.com/folke/lazy.nvim">‘folke/lazy.nvim’</a>보다는 기능이 훨씬 적지만, <a href="https://github.com/savq/paq-nvim">‘savq/paq-nvim’</a>보다는 약간 더 사용자 친화적입니다. 사용자 경험 측면에서는 <a href="https://github.com/junegunn/vim-plug">‘junegunn/vim-plug’</a>와 비슷한 수준이라고 생각합니다.</p>
+<hr>
+<p>주요 기능:</p>
+<ul>
+<li>Git 및 내장 패키지를 활용한 플러그인 관리:
+<ul>
+<li>현재 세션에 플러그인 추가 (없으면 다운로드).</li>
+<li>확인 여부 및 병렬 다운로드 여부를 선택하여 업데이트.</li>
+<li>확인 여부를 선택하여 사용하지 않는 플러그인 삭제.</li>
+<li>스냅샷 가져오기 / 설정 / 저장 / 로드.</li>
+</ul></li>
+<li>작지만 유연한 플러그인 사양:
+<ul>
+<li>플러그인 소스.</li>
+<li>대상 플러그인 디렉토리 이름.</li>
+<li>체크아웃 대상: 브랜치, 커밋, 태그 등.</li>
+<li>체크아웃 없이 업데이트를 추적하기 위한 브랜치 모니터링.</li>
+<li>대상 플러그인 전에 설정되어야 할 의존성.</li>
+<li>플러그인 생성/변경 전후에 호출할 훅(hook).</li>
+</ul></li>
+<li>2단계 시작(startup)을 구현하는 헬퍼: <code>now()</code> 및 <code>later()</code>.</li>
+</ul>
+<p>더 자세한 내용은 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md#overview">README의 개요</a>를 참조하세요.</p>
+<p>추가 정보는 도움말 파일의 다음 태그를 참조하세요: - <a href="https://github.com/nvim-mini/mini.nvim/blob/490dd84b69008f75bcd5e593b7a92b06832d5b16/doc/mini-deps.txt#L240"><code>*MiniDeps-plugin-specification*</code></a> - <a href="https://github.com/nvim-mini/mini.nvim/blob/490dd84b69008f75bcd5e593b7a92b06832d5b16/doc/mini-deps.txt#L286"><code>*MiniDeps-commands*</code></a></p>
+<hr>
+<p>한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 <a href="https://github.com/nvim-mini/mini.nvim/issues/689">전용 베타 테스트 이슈</a>에 남겨주시면 감사하겠습니다.</p>
+<p>메인 설정에 영향을 주지 않고 먼저 테스트해 보는 것을 권장합니다. <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-deps.md#overview">두 가지 간단한 단계로 테스트하는 방법</a>을 확인해 보세요.</p>
+<p>감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-02-11-announce-mini-deps.html</guid>
+  <pubDate>Sat, 10 Feb 2024 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘mini.notify’ 발표</title>
+  <dc:creator>Evgeni Chasnovski</dc:creator>
+  <link>https://nvim-mini.org/blog/2024-01-04-announce-mini-notify.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>원문: <a href="https://www.reddit.com/r/neovim/comments/18ye17d/mininotify_show_notifications_a_vimnotify_maker/">Reddit 게시물</a></em></p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="2024-01-04-announce-mini-notify/demo.mp4"></video></div>
+<p>안녕하세요, Neovim 사용자 여러분!</p>
+<p>플로팅 창에 하나 이상의 하이라이트된 알림을 표시하는 <a href="https://github.com/nvim-mini/mini.nvim">mini.nvim</a>의 새로운 모듈 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-notify.md">mini.notify</a>와 함께 2024년을 맞이해 주세요. 이 모듈은 <a href="https://github.com/nvim-mini/mini.notify">별도의 GitHub 저장소</a>를 통해서도 설치할 수 있습니다.</p>
+<hr>
+<p>저는 개인적으로 ‘mini.notify’ 전에는 화려한 알림 기능을 사용하지 않았지만, 제 할 일 목록(TODO list)에는 항상 있었습니다. 최근에 곧 출시될 적어도 하나의 모듈 데모에서 여러 알림을 동시에 보여줄 수 있다면 더 흥미로울 것 같다는 생각이 들었습니다. 그래서 이 기능을 목록 상단으로 옮기기로 결정했고, 이렇게 공개하게 되었습니다.</p>
+<hr>
+<p>주요 기능:</p>
+<ul>
+<li><p>단일 플로팅 창에 하나 이상의 하이라이트된 알림을 표시합니다.</p></li>
+<li><p>알림 관리 (추가, 업데이트, 제거, 지우기).</p></li>
+<li><p><code>vim.notify()</code> 래퍼 생성기 (<a href="https://github.com/nvim-mini/mini.nvim/blob/a118a964c94543c06d8b1f2f7542535dd2e19d36/doc/mini-notify.txt#L204">MiniNotify.make_notify()</a> 참조).</p></li>
+<li><p>자동화된 LSP 진행 상황 보고 표시.</p></li>
+<li><p><code>MiniNotify.get_all()</code>로 접근하고 <code>MiniNotify.show_history()</code>로 표시할 수 있는 알림 기록 추적.</p></li>
+</ul>
+<p>전체 문서는 <a href="https://github.com/nvim-mini/mini.nvim/blob/main/doc/mini-notify.txt">도움말 파일</a>을 참조하세요.</p>
+<hr>
+<p>한번 사용해 보시고 의견을 들려주세요! 제안 사항은 여기 댓글이나 <a href="https://github.com/nvim-mini/mini.nvim/issues/640">전용 베타 테스트 이슈</a>에 남겨주시면 감사하겠습니다.</p>
+<p>감사합니다!</p>
+
+
+
+ ]]></description>
+  <category>announce</category>
+  <category>reddit</category>
+  <guid>https://nvim-mini.org/blog/2024-01-04-announce-mini-notify.html</guid>
+  <pubDate>Wed, 03 Jan 2024 15:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

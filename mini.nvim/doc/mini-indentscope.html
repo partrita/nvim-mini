@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>mini.indentscope 문서 – MINI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/logo-mini_180x180.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-588f07447021c9b1c78c14c285b6df15.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-9a1b1f8e841c9c2d133c690b11f8ee3e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-822171c0b08fb8324585bf617d393f53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-02025811ff4c933f5630304c954c6652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": "tree",
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style> .quarto-title > h1.title { display: none } </style>
+
+
+<meta property="og:title" content="mini.indentscope 문서 – MINI">
+<meta property="og:description" content="Modular Independent Neovim Improvements">
+<meta property="og:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta property="og:site_name" content="MINI">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="mini.indentscope 문서 – MINI">
+<meta name="twitter:description" content="Modular Independent Neovim Improvements">
+<meta name="twitter:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">MINI</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mini.nvim/index.html"> 
+<span class="menu-text">mini.nvim</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../MiniMax/index.html"> 
+<span class="menu-text">MiniMax</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nvim-mini"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss-fill" role="img" aria-label="RSS">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#module" id="toc-module" class="nav-link active" data-scroll-target="#module">모듈</a>
+  <ul>
+  <li><a href="#module-setup" id="toc-module-setup" class="nav-link" data-scroll-target="#module-setup">설정</a></li>
+  <li><a href="#module-comparisons" id="toc-module-comparisons" class="nav-link" data-scroll-target="#module-comparisons">비교</a></li>
+  <li><a href="#module-highlightgroups" id="toc-module-highlightgroups" class="nav-link" data-scroll-target="#module-highlightgroups">하이라이트 그룹</a></li>
+  <li><a href="#module-disabling" id="toc-module-disabling" class="nav-link" data-scroll-target="#module-disabling">비활성화</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope-drawing" id="toc-miniindentscope-drawing" class="nav-link" data-scroll-target="#miniindentscope-drawing">그리기</a>
+  <ul>
+  <li><a href="#miniindentscope-drawing-specialcases" id="toc-miniindentscope-drawing-specialcases" class="nav-link" data-scroll-target="#miniindentscope-drawing-specialcases">특별한 경우</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.setup" id="toc-miniindentscope.setup" class="nav-link" data-scroll-target="#miniindentscope.setup">setup()</a>
+  <ul>
+  <li><a href="#miniindentscope.setup-parameters" id="toc-miniindentscope.setup-parameters" class="nav-link" data-scroll-target="#miniindentscope.setup-parameters">매개변수</a></li>
+  <li><a href="#miniindentscope.setup-usage" id="toc-miniindentscope.setup-usage" class="nav-link" data-scroll-target="#miniindentscope.setup-usage">사용법</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.config" id="toc-miniindentscope.config" class="nav-link" data-scroll-target="#miniindentscope.config">config</a>
+  <ul>
+  <li><a href="#miniindentscope.config-defaults" id="toc-miniindentscope.config-defaults" class="nav-link" data-scroll-target="#miniindentscope.config-defaults">기본값</a></li>
+  <li><a href="#miniindentscope.config-options" id="toc-miniindentscope.config-options" class="nav-link" data-scroll-target="#miniindentscope.config-options">옵션</a>
+  <ul>
+  <li><a href="#miniindentscope.config-options-border" id="toc-miniindentscope.config-options-border" class="nav-link" data-scroll-target="#miniindentscope.config-options-border">테두리</a></li>
+  <li><a href="#miniindentscope.config-options-indentatcursor" id="toc-miniindentscope.config-options-indentatcursor" class="nav-link" data-scroll-target="#miniindentscope.config-options-indentatcursor">커서에서의 들여쓰기</a></li>
+  <li><a href="#miniindentscope.config-options-numberoflines" id="toc-miniindentscope.config-options-numberoflines" class="nav-link" data-scroll-target="#miniindentscope.config-options-numberoflines">라인 수</a></li>
+  <li><a href="#miniindentscope.config-options-tryasborder" id="toc-miniindentscope.config-options-tryasborder" class="nav-link" data-scroll-target="#miniindentscope.config-options-tryasborder">테두리로 시도</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#miniindentscope.get_scope" id="toc-miniindentscope.get_scope" class="nav-link" data-scroll-target="#miniindentscope.get_scope">get_scope()</a>
+  <ul>
+  <li><a href="#miniindentscope.get_scope-algorithmoverview" id="toc-miniindentscope.get_scope-algorithmoverview" class="nav-link" data-scroll-target="#miniindentscope.get_scope-algorithmoverview">알고리즘 개요</a></li>
+  <li><a href="#miniindentscope.get_scope-indentcomputation" id="toc-miniindentscope.get_scope-indentcomputation" class="nav-link" data-scroll-target="#miniindentscope.get_scope-indentcomputation">들여쓰기 계산</a></li>
+  <li><a href="#miniindentscope.get_scope-parameters" id="toc-miniindentscope.get_scope-parameters" class="nav-link" data-scroll-target="#miniindentscope.get_scope-parameters">매개변수</a></li>
+  <li><a href="#miniindentscope.get_scope-return" id="toc-miniindentscope.get_scope-return" class="nav-link" data-scroll-target="#miniindentscope.get_scope-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.draw" id="toc-miniindentscope.draw" class="nav-link" data-scroll-target="#miniindentscope.draw">draw()</a>
+  <ul>
+  <li><a href="#miniindentscope.draw-parameters" id="toc-miniindentscope.draw-parameters" class="nav-link" data-scroll-target="#miniindentscope.draw-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.undraw" id="toc-miniindentscope.undraw" class="nav-link" data-scroll-target="#miniindentscope.undraw">undraw()</a></li>
+  <li><a href="#miniindentscope.gen_animation" id="toc-miniindentscope.gen_animation" class="nav-link" data-scroll-target="#miniindentscope.gen_animation">gen_animation</a>
+  <ul>
+  <li><a href="#miniindentscope.gen_animation-seealso" id="toc-miniindentscope.gen_animation-seealso" class="nav-link" data-scroll-target="#miniindentscope.gen_animation-seealso">참고 항목</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.gen_animation.none" id="toc-miniindentscope.gen_animation.none" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.none">gen_animation.none()</a></li>
+  <li><a href="#miniindentscope.gen_animation.linear" id="toc-miniindentscope.gen_animation.linear" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.linear">gen_animation.linear()</a>
+  <ul>
+  <li><a href="#miniindentscope.gen_animation.linear-parameters" id="toc-miniindentscope.gen_animation.linear-parameters" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.linear-parameters">매개변수</a></li>
+  <li><a href="#miniindentscope.gen_animation.linear-return" id="toc-miniindentscope.gen_animation.linear-return" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.linear-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.gen_animation.quadratic" id="toc-miniindentscope.gen_animation.quadratic" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.quadratic">gen_animation.quadratic()</a>
+  <ul>
+  <li><a href="#miniindentscope.gen_animation.quadratic-parameters" id="toc-miniindentscope.gen_animation.quadratic-parameters" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.quadratic-parameters">매개변수</a></li>
+  <li><a href="#miniindentscope.gen_animation.quadratic-return" id="toc-miniindentscope.gen_animation.quadratic-return" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.quadratic-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.gen_animation.cubic" id="toc-miniindentscope.gen_animation.cubic" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.cubic">gen_animation.cubic()</a>
+  <ul>
+  <li><a href="#miniindentscope.gen_animation.cubic-parameters" id="toc-miniindentscope.gen_animation.cubic-parameters" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.cubic-parameters">매개변수</a></li>
+  <li><a href="#miniindentscope.gen_animation.cubic-return" id="toc-miniindentscope.gen_animation.cubic-return" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.cubic-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.gen_animation.quartic" id="toc-miniindentscope.gen_animation.quartic" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.quartic">gen_animation.quartic()</a>
+  <ul>
+  <li><a href="#miniindentscope.gen_animation.quartic-parameters" id="toc-miniindentscope.gen_animation.quartic-parameters" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.quartic-parameters">매개변수</a></li>
+  <li><a href="#miniindentscope.gen_animation.quartic-return" id="toc-miniindentscope.gen_animation.quartic-return" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.quartic-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.gen_animation.exponential" id="toc-miniindentscope.gen_animation.exponential" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.exponential">gen_animation.exponential()</a>
+  <ul>
+  <li><a href="#miniindentscope.gen_animation.exponential-parameters" id="toc-miniindentscope.gen_animation.exponential-parameters" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.exponential-parameters">매개변수</a></li>
+  <li><a href="#miniindentscope.gen_animation.exponential-return" id="toc-miniindentscope.gen_animation.exponential-return" class="nav-link" data-scroll-target="#miniindentscope.gen_animation.exponential-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.move_cursor" id="toc-miniindentscope.move_cursor" class="nav-link" data-scroll-target="#miniindentscope.move_cursor">move_cursor()</a>
+  <ul>
+  <li><a href="#miniindentscope.move_cursor-parameters" id="toc-miniindentscope.move_cursor-parameters" class="nav-link" data-scroll-target="#miniindentscope.move_cursor-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.operator" id="toc-miniindentscope.operator" class="nav-link" data-scroll-target="#miniindentscope.operator">operator()</a>
+  <ul>
+  <li><a href="#miniindentscope.operator-parameters" id="toc-miniindentscope.operator-parameters" class="nav-link" data-scroll-target="#miniindentscope.operator-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#miniindentscope.textobject" id="toc-miniindentscope.textobject" class="nav-link" data-scroll-target="#miniindentscope.textobject">textobject()</a>
+  <ul>
+  <li><a href="#miniindentscope.textobject-parameters" id="toc-miniindentscope.textobject-parameters" class="nav-link" data-scroll-target="#miniindentscope.textobject-parameters">매개변수</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">mini.indentscope 문서</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>mini.nvim의 ‘main’ 브랜치에서 생성됨</em></p>
+<p><a name="mini.indentscope" href="../../mini.nvim/doc/mini-indentscope.html#mini.indentscope"><b>mini.indentscope</b></a> 들여쓰기 범위 시각화 및 작업</p>
+<p>MIT 라이선스 Copyright (c) 2022 Evgeni Chasnovski</p>
+<hr>
+<section id="module" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="module">모듈</h3>
+<p>들여쓰기 범위(또는 간단히 “범위(scope)”)는 특정 참조 라인(기본적으로 커서 라인)을 포함하고, 모든 멤버가 특정 참조 들여쓰기(기본적으로 “커서에서의 들여쓰기”: 커서 열과 커서 라인의 들여쓰기 중 최소값) 이상의 들여쓰기를 갖는 최대 연속 라인 세트입니다.</p>
+<p>주요 기능:</p>
+<ul>
+<li><p>애니메이션 수직선으로 범위를 시각화합니다. 매우 빠르며 논-블로킹(non-blocking) 방식으로 자동으로 수행됩니다 (커서 이동과 같은 다른 작업을 수행할 수 있음). 디바운스(debounce) 지연 시간과 애니메이션 규칙을 사용자 정의할 수 있습니다.</p></li>
+<li><p>범위 계산 옵션의 사용자 정의는 전역 레벨(<a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.config">MiniIndentscope.config</a>), 특정 버퍼(<code>vim.b.miniindentscope_config</code> 버퍼 변수 사용), 또는 호출 내(<a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.get_scope">MiniIndentscope.get_scope()</a>의 <code>opts</code> 변수 사용)에서 수행할 수 있습니다.</p></li>
+<li><p>테두리(border)에 대한 사용자 정의 가능한 개념: 들여쓰기가 엄격하게 낮은 인접 라인 중 어느 라인을 테두리로 인식할지 결정합니다. 이는 특정 파일 유형(예: Python 또는 일반 텍스트)에 유용합니다.</p></li>
+<li><p>라인을 “테두리 우선(border first)”으로 간주하는 사용자 정의 가능한 방법. 함수 헤더에 커서를 놓고 그 본문의 범위를 가져오고 싶을 때 유용합니다.</p></li>
+<li><p>범위에서 작동하는 텍스트 오브젝트(textobjects)와 동작(motions)을 제공합니다. <a href="https://neovim.io/doc/user/helptag.html?tag=count">개수(count)</a>와 점 반복(operator pending 모드에서)을 지원합니다.</p></li>
+</ul>
+<section id="module-setup" class="level4">
+<h4 class="anchored" data-anchor-id="module-setup">설정</h4>
+<p>이 모듈은 <code>require('mini.indentscope').setup({})</code>으로 설정이 필요합니다 (<code>{}</code>를 <code>config</code> 테이블로 교체하세요). 스크립팅이나 수동으로 사용할 수 있는 글로벌 Lua 테이블 <code>MiniIndentscope</code>를 생성합니다 (<code>:lua MiniIndentscope.*</code> 사용).</p>
+<p>사용 가능한 구성 설정은 <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.config">MiniIndentscope.config</a>를 참조하세요.</p>
+<p>런타임 구성 설정을 <code>vim.b.miniindentscope_config</code> 내부의 버퍼에 로컬로 재정의할 수 있으며, 이는 <code>MiniIndentscope.config</code>와 동일한 구조여야 합니다. 자세한 내용은 <a href="../../mini.nvim/doc/mini-nvim.html#mini.nvim-buffer-local-config">mini.nvim-buffer-local-config</a>를 참조하세요.</p>
+</section>
+<section id="module-comparisons" class="level4">
+<h4 class="anchored" data-anchor-id="module-comparisons">비교</h4>
+<ul>
+<li><p><a href="https://github.com/lukas-reineke/indent-blankline.nvim">lukas-reineke/indent-blankline.nvim</a>:</p>
+<ul>
+<li><p>주요 기능은 들여쓰기 레벨의 정적 가이드를 표시하는 것입니다.</p></li>
+<li><p>’mini.indentscope’의 구현은 ’indent-blankline.nvim’과 유사합니다 (빈 라인에서도 표시되도록 첫 번째 열에 <a href="https://neovim.io/doc/user/helptag.html?tag=extmarks">extmarks</a>를 사용함). 동시에 사용할 수 있지만, 시각화 중 하나가 다른 하나 위에 표시(가려짐)될 수 있습니다.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="module-highlightgroups" class="level4">
+<h4 class="anchored" data-anchor-id="module-highlightgroups">하이라이트 그룹</h4>
+<ul>
+<li><p><code>MiniIndentscopeSymbol</code> - 들여쓰기가 ’shiftwidth’의 배수인 경우 범위의 모든 라인에 표시되는 심볼.</p></li>
+<li><p><code>MiniIndentscopeSymbolOff</code> - 들여쓰기가 ’shiftwidth’의 배수가 아닌 경우 범위의 모든 라인에 표시되는 심볼. 기본값: <code>MiniIndentscopeSymbol</code>에 링크됨.</p></li>
+</ul>
+<p>하이라이트 그룹을 변경하려면 <a href="https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl()">nvim_set_hl()</a>을 사용하여 직접 설정하세요.</p>
+</section>
+<section id="module-disabling" class="level4">
+<h4 class="anchored" data-anchor-id="module-disabling">비활성화</h4>
+<p>자동 그리기를 비활성화하려면 <code>vim.g.miniindentscope_disable</code>(전역) 또는 <code>vim.b.miniindentscope_disable</code>(버퍼용)을 <code>true</code>로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 레시피는 <a href="../../mini.nvim/doc/mini-nvim.html#mini.nvim-disabling-recipes">mini.nvim-disabling-recipes</a>를 참조하세요.</p>
+<hr>
+</section>
+</section>
+<section id="miniindentscope-drawing" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope-drawing">그리기</h3>
+<p>범위 지표 그리기는 반복적인 애니메이션으로 수행됩니다. 다음과 같은 설계로 되어 있습니다:</p>
+<ul>
+<li><p>오리진 라인(커서가 있는 곳)에 지표를 즉시 그립니다. 지표는 범위의 테두리 들여쓰기 오른쪽에 배치된 <code>MiniIndentscope.config.symbol</code>로 시각화됩니다. 이는 상단에서 하단 범위 가장자리까지의 선을 만듭니다.</p></li>
+<li><p>한 라인당 위쪽과 아래쪽으로 동시에 그립니다. 양방향으로 한 라인씩 진행되는 것을 애니메이션의 한 단계(step)로 간주합니다.</p></li>
+<li><p>각 단계 전에 “애니메이션 함수”에 의해 결정된 일정 시간 동안 기다립니다. 이 함수는 다음 및 전체 단계 번호(둘 다 1 이상)를 가져와 다음 단계를 그리기 전까지 기다릴 밀리초를 반환합니다. 애니메이션에서 더 일반적인 “이징 함수(easing functions)”(입력: 애니메이션 시작 후 경과 시간, 출력: 완료된 애니메이션 비율)와 비교할 때, 이는 파생된 이산 역버전입니다. 이러한 인터페이스는 당면한 작업 종류에 더 적절한 것으로 입증되었습니다.</p></li>
+</ul>
+<section id="miniindentscope-drawing-specialcases" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope-drawing-specialcases">특별한 경우</h4>
+<ul>
+<li><p>그려질 범위가 현재 보이는 범위(그리는 중이거나 완료된 범위)와 교차(동일한 들여쓰기, 범위 겹침)하는 경우, 애니메이션 없이 즉시 그리기가 수행됩니다. 가장 흔한 예인 새 텍스트 입력의 경우, 이것이 더 자연스럽게 느껴집니다.</p></li>
+<li><p>버퍼 전체의 범위는 일반적으로 불필요하므로 그리지 않습니다. 기술적으로는 (테두리 들여쓰기가 -1이므로) 보이지 않는 0번 열에 그려진 것으로 생각할 수 있습니다.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.setup" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.setup">setup()</h3>
+<p align="center">
+<code>MiniIndentscope.setup</code>(<span class="help-syntax-special">{config}</span>)
+</p>
+<p>모듈 설정</p>
+<section id="miniindentscope.setup-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.setup-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{config}</span> <code>(table|nil)</code> 모듈 구성 테이블. <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.config">MiniIndentscope.config</a>를 참조하세요.</p>
+</section>
+<section id="miniindentscope.setup-usage" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.setup-usage">사용법</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.indentscope'</span><span class="op">).</span>setup<span class="op">()</span> <span class="co">-- 기본 구성 사용</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- 또는</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.indentscope'</span><span class="op">).</span>setup<span class="op">({})</span> <span class="co">-- {}를 사용자 구성 테이블로 교체</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.config" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.config">config</h3>
+<p align="center">
+<code>MiniIndentscope.config</code>
+</p>
+<section id="miniindentscope.config-defaults" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.config-defaults">기본값</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">MiniIndentscope</span><span class="op">.</span><span class="va">config</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 그리기 옵션</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">draw</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 이벤트와 범위 지표 그리기 시작 사이의 지연 시간 (ms)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">delay</span> <span class="op">=</span> <span class="dv">100</span><span class="op">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 범위의 첫 번째 그리기에 대한 애니메이션 규칙.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 다음 및 전체 단계 번호가 주어지면 대기 시간(ms)을 반환하는 함수입니다.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 내장 옵션은 |MiniIndentscope.gen_animation|을 참조하세요.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 애니메이션을 비활성화하려면 `require('mini.indentscope').gen_animation.none()`을 사용하세요.</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">animation</span> <span class="op">=</span> <span class="co">--&lt;function: 단계 사이의 상수를 20ms로 구현함&gt;,</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 범위 자동 그리기 여부: 그리려면 `true`, 그렇지 않으면 `false` 반환.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 기본값은 완전히 계산된 범위만 그립니다 (`options.n_lines` 참조).</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="va">predicate</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">scope</span><span class="op">)</span> <span class="cf">return</span> <span class="kw">not</span> <span class="va">scope</span><span class="op">.</span><span class="va">body</span><span class="op">.</span><span class="va">is_incomplete</span> <span class="kw">end</span><span class="op">,</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 심볼 우선순위. 더 많은 심볼 위에 표시하려면 높이세요.</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">priority</span> <span class="op">=</span> <span class="dv">2</span><span class="op">,</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 모듈 매핑. 비활성화하려면 `''` (빈 문자열)을 사용하세요.</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="va">mappings</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 텍스트 오브젝트</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="va">object_scope</span> <span class="op">=</span> <span class="st">'ii'</span><span class="op">,</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="va">object_scope_with_border</span> <span class="op">=</span> <span class="st">'ai'</span><span class="op">,</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 동작 (해당 테두리 라인으로 점프; 없는 경우 본문 라인)</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="va">goto_top</span> <span class="op">=</span> <span class="st">'[i'</span><span class="op">,</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="va">goto_bottom</span> <span class="op">=</span> <span class="st">']i'</span><span class="op">,</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 범위 계산을 제어하는 옵션</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="va">options</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 범위의 테두리 유형: 더 작은 들여쓰기를 가진 어느 라인을 테두리로 분류할지 결정합니다.</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 'both', 'top', 'bottom', 'none' 중 하나일 수 있습니다.</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="va">border</span> <span class="op">=</span> <span class="st">'both'</span><span class="op">,</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 참조 들여쓰기를 계산할 때 커서 열을 사용할지 여부.</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 가로 커서 이동에 따른 점진적인 범위를 보는 데 유용합니다.</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="va">indent_at_cursor</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 범위가 계산되는 상하 최대 라인 수</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="va">n_lines</span> <span class="op">=</span> <span class="dv">10000</span><span class="op">,</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 입력 라인이 인접한 범위의 테두리인지 먼저 확인할지 여부.</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 함수 헤더에 커서를 놓고 그 본문의 범위를 가져오고 싶을 때 사용하세요.</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="va">try_as_border</span> <span class="op">=</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 범위 지표를 그리는 데 사용할 문자</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  <span class="va">symbol</span> <span class="op">=</span> <span class="st">'╎'</span><span class="op">,</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="miniindentscope.config-options" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.config-options">옵션</h4>
+<section id="miniindentscope.config-options-border" class="level5">
+<h5 class="anchored" data-anchor-id="miniindentscope.config-options-border">테두리</h5>
+<p><code>border</code> 필드는 더 작은 들여쓰기를 가진 어느 라인을 테두리로 분류할지 제어합니다. 이는 텍스트 오브젝트와 동작에 중요합니다. 또한 빈 라인이 처리되는 방식도 제어합니다: 테두리가 뒤따르는 경우에만 범위에 포함됩니다. 이를 보는 또 다른 방법은 빈 라인의 들여쓰기가 <code>border</code> 옵션 값에 따라 계산된다는 것입니다. 다음은 빈 라인이 있을 때 <code>border</code>가 어떻게 작동하는지에 대한 그림입니다:</p>
+<pre><code>                           |both|bottom|top|none|
+1|function foo()           | 0  |  0   | 0 | 0  |
+2|                         | 4  |  0   | 4 | 0  |
+3|    print('Hello world') | 4  |  4   | 4 | 4  |
+4|                         | 4  |  4   | 2 | 2  |
+5|  end                    | 2  |  2   | 2 | 2  |</code></pre>
+<p>테이블 내부의 숫자는 특정 <code>border</code> 값으로 계산된 라인의 들여쓰기 값입니다. 따라서 예를 들어 참조 라인 3과 가장 오른쪽 열을 가진 범위는 <code>border</code> 옵션 값에 따라 본문 범위가 달라집니다:</p>
+<ul>
+<li><p><code>border</code>가 “both”인 경우: 범위는 2-4, 테두리는 1과 5(들여쓰기 2)입니다.</p></li>
+<li><p><code>border</code>가 “top”인 경우: 범위는 2-3, 테두리는 1(들여쓰기 0)입니다.</p></li>
+<li><p><code>border</code>가 “bottom”인 경우: 범위는 3-4, 테두리는 5(들여쓰기 0)입니다.</p></li>
+<li><p><code>border</code>가 “none”인 경우: 범위는 3-3, 테두리는 비어 있음(들여쓰기 <code>nil</code>)입니다.</p></li>
+</ul>
+</section>
+<section id="miniindentscope.config-options-indentatcursor" class="level5">
+<h5 class="anchored" data-anchor-id="miniindentscope.config-options-indentatcursor">커서에서의 들여쓰기</h5>
+<p><code>indent_at_cursor</code> 필드는 커서 위치가 범위 계산에 영향을 미쳐야 하는지 제어합니다. <code>true</code>인 경우 참조 들여쓰기는 참조 라인의 들여쓰기와 커서 열 중 최소값입니다. 주요 예시에서 커서 열과 <code>indent_at_cursor</code> 값에 따라 범위의 본문 범위가 어떻게 달라지는지는 다음과 같습니다 (커서가 3행에 있고 버퍼 전체라고 가정):</p>
+<pre><code>열\옵션     true|false
+ 1 및 2    2-5 | 2-4
+3 및 그 이상 2-4 | 2-4</code></pre>
+</section>
+<section id="miniindentscope.config-options-numberoflines" class="level5">
+<h5 class="anchored" data-anchor-id="miniindentscope.config-options-numberoflines">라인 수</h5>
+<p><code>n_lines</code> 필드는 반복이 중지되기 전까지 위/아래로 몇 라인을 확인할지에 대한 <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.get_scope">MiniIndentscope.get_scope()</a> 동작을 정의합니다. 계산 제한에 도달한 범위는 <span class="help-syntax-keys">&lt;is_incomplete&gt;</span> 필드가 <code>true</code>로 설정됩니다. 또한 기본 <code>config.draw.predicate</code>로 자동 그려지지 않습니다.</p>
+<p>값이 낮을수록 전체적인 성능은 좋아지지만 불완전한 범위 계산이 더 자주 발생합니다. 제한을 두지 않으려면 <code>math.huge</code>로 설정하세요.</p>
+</section>
+<section id="miniindentscope.config-options-tryasborder" class="level5">
+<h5 class="anchored" data-anchor-id="miniindentscope.config-options-tryasborder">테두리로 시도</h5>
+<p><code>try_as_border</code> 필드는 입력 라인이 일부 인접한 들여쓰기 범위의 테두리로 인식될 수 있을 때 어떻게 행동할지 제어합니다. 주요 예시에서 입력 라인이 1이고 내부 범위의 테두리로 인식될 수 있을 때, <code>try_as_border=true</code> 값은 내부 범위가 반환됨을 의미합니다. 마찬가지로 입력 라인 5가 테두리로 인식되면 내부 범위가 반환됩니다.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="miniindentscope.get_scope" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.get_scope">get_scope()</h3>
+<p align="center">
+<code>MiniIndentscope.get_scope</code>(<span class="help-syntax-special">{line}</span>, <span class="help-syntax-special">{col}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>들여쓰기 범위 계산</p>
+<p>들여쓰기 범위(또는 간단히 “범위”)는 특정 참조 라인(기본적으로 커서 라인)을 포함하고, 모든 멤버가 특정 참조 들여쓰기(기본적으로 “열에서의 들여쓰기”) 이상의 들여쓰기를 갖는 최대 연속 라인 세트입니다. 여기서 “열에서의 들여쓰기”는 입력 열 값과 참조 라인의 들여쓰기 중 최소값을 의미합니다. 커서 열을 사용할 때, 이는 라인 내에서 가로 이동을 함으로써 중첩된 들여쓰기 범위에 대한 유용한 대화형 뷰를 가능하게 합니다.</p>
+<p>실제 계산을 제어하는 옵션은 다음 순서대로 가져옵니다:</p>
+<ul>
+<li><p>인수 <code>opts</code>. 다른 소스로부터의 독립성을 보장하기 위해 사용하세요.</p></li>
+<li><p>버퍼 로컬 변수 <code>vim.b.miniindentscope_config</code> (<code>options</code> 필드). 로컬 동작을 정의하는 데 유용합니다 (예: 특정 파일 유형의 경우).</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.config">MiniIndentscope.config</a>의 전역 옵션.</p></li>
+</ul>
+<section id="miniindentscope.get_scope-algorithmoverview" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.get_scope-algorithmoverview">알고리즘 개요</h4>
+<ul>
+<li><p>참조 “열에서의 들여쓰기”를 계산합니다. 참조 라인은 입력 <code>line</code>이며, <code>try_as_border</code> 옵션이 <code>true</code>인 경우 인접한 라인 중 하나로 수정될 수 있습니다 (인접한 범위의 테두리로 보일 수 있는 경우 그렇게 됩니다).</p></li>
+<li><p>참조 라인에서 위쪽과 아래쪽으로 진행하며 참조 들여쓰기보다 엄격하게 작은 들여쓰기를 가진 라인을 검색합니다. 이는 “벽”(들여쓰기 오른쪽 문자 또는 버퍼 가장자리)을 만날 때까지 참조 라인과 참조 들여쓰기에서 위아래로 광선을 쏘는 것과 같습니다. 벽을 만나기 전의 마지막 라인이 각각의 범위 본문의 끝입니다. 참조 라인이 그러한 라인이므로 항상 존재합니다. 광선 쏘기는 <code>opts.n_lines</code> 라인을 넘어가면 강제로 중지됩니다.</p></li>
+<li><p>엄격하게 낮은 들여쓰기를 가진 상단 및 하단 라인을 기반으로 범위의 테두리를 구성합니다. 계산 방식은 <code>border</code> 옵션에 따라 결정됩니다 (자세한 내용은 <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.config">MiniIndentscope.config</a> 참조).</p></li>
+<li><p>테두리 라인의 최대 들여쓰기(테두리가 없는 경우 참조 들여쓰기 마이너스 1)로 테두리 들여쓰기를 계산합니다. 이는 시각적 지표를 그리는 동안 사용됩니다.</p></li>
+</ul>
+</section>
+<section id="miniindentscope.get_scope-indentcomputation" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.get_scope-indentcomputation">들여쓰기 계산</h4>
+<p>모든 라인에 대해 들여쓰기가 명확하게 계산되도록 되어 있습니다:</p>
+<ul>
+<li><p>“일반” 라인의 들여쓰기는 <a href="https://neovim.io/doc/user/helptag.html?tag=indent()">indent()</a>의 출력입니다.</p></li>
+<li><p>가상의 0번 라인과 마지막 라인 이후의 들여쓰기는 <code>-1</code>입니다.</p></li>
+<li><p>빈 라인과 공백 라인의 들여쓰기는 이전(<a href="https://neovim.io/doc/user/helptag.html?tag=prevnonblank()">prevnonblank()</a>) 및 다음(<a href="https://neovim.io/doc/user/helptag.html?tag=nextnonblank()">nextnonblank()</a>) 비공백 라인을 기반으로 계산됩니다. 계산 방식은 테두리가 없는 경우 범위 본문의 가장자리에 빈 라인을 포함하지 않기 위해 <code>border</code>를 기반으로 결정됩니다. 자세한 예시는 <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.config">MiniIndentscope.config</a>를 참조하세요.</p></li>
+</ul>
+</section>
+<section id="miniindentscope.get_scope-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.get_scope-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{line}</span> <code>(number|nil)</code> 입력 라인 번호 (1부터 시작). <code>try_as_border</code>가 <code>true</code>인 경우 인접한 라인으로 수정될 수 있습니다. 기본값: 커서 라인.</p>
+<p><span class="help-syntax-special">{col}</span> <code>(number|nil)</code> 열 번호 (1부터 시작). 기본값: <code>indent_at_cursor</code> 옵션이 <code>true</code>인 경우 <a href="https://neovim.io/doc/user/helptag.html?tag=getcurpos()">getcurpos()</a>의 <code>curswant</code>에서 가져온 커서 열 (빈 라인에서 더 자연스러운 동작을 가능하게 함), 그렇지 않으면 계산에 커서를 포함하지 않기 위해 <code>math.huge</code>.</p>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 전역 또는 버퍼 로컬 옵션을 재정의할 옵션 (<a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.config">MiniIndentscope.config</a> 참조).</p>
+</section>
+<section id="miniindentscope.get_scope-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.get_scope-return">반환</h4>
+<p><code>(table)</code> 범위 정보가 포함된 테이블:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;body&gt;</span> - <span class="help-syntax-keys">&lt;top&gt;</span> (범위의 상단 라인, 포함), <span class="help-syntax-keys">&lt;bottom&gt;</span> (범위의 하단 라인, 포함), 그리고 <span class="help-syntax-keys">&lt;indent&gt;</span> (범위 내의 최소 들여쓰기) 키가 포함된 테이블. 라인 번호는 1부터 시작합니다. <code>opts.n_lines</code> 제한으로 인해 계산이 중지된 경우 <code>true</code>로 설정된 <span class="help-syntax-keys">&lt;is_incomplete&gt;</span> 키를 가질 수도 있습니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;border&gt;</span> - <span class="help-syntax-keys">&lt;top&gt;</span> (상단 테두리 라인, <code>nil</code>일 수 있음), <span class="help-syntax-keys">&lt;bottom&gt;</span> (하단 테두리 라인, <code>nil</code>일 수 있음), 그리고 <span class="help-syntax-keys">&lt;indent&gt;</span> (테두리의 들여쓰기) 키가 포함된 테이블. 라인 번호는 1부터 시작합니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;buf_id&gt;</span> - 현재 버퍼의 식별자.</p></li>
+<li><p><span class="help-syntax-keys">&lt;reference&gt;</span> - <span class="help-syntax-keys">&lt;line&gt;</span> (참조 라인), <span class="help-syntax-keys">&lt;column&gt;</span> (참조 열), 그리고 <span class="help-syntax-keys">&lt;indent&gt;</span> (“열에서의 들여쓰기”) 키가 포함된 테이블.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.draw" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.draw">draw()</h3>
+<p align="center">
+<code>MiniIndentscope.draw</code>(<span class="help-syntax-special">{scope}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>수동으로 범위 그리기</p>
+<p>범위는 범위 본문 범위 내에서 테두리 들여쓰기 더하기 1(또는 테두리가 없는 경우 본문 들여쓰기)과 같은 열에 수직선으로 시각화됩니다. 번호 매기기는 1부터 시작합니다.</p>
+<section id="miniindentscope.draw-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.draw-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{scope}</span> <code>(table|nil)</code> 범위. 기본값: 기본 인수를 사용한 <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.get_scope">MiniIndentscope.get_scope()</a>의 출력.</p>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 옵션. 현재 지원되는 항목:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;animation_fun&gt;</span> - 그리기를 위한 애니메이션 함수. <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope-drawing">MiniIndentscope-drawing</a> 및 <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.gen_animation">MiniIndentscope.gen_animation</a>을 참조하세요.</p></li>
+<li><p><span class="help-syntax-keys">&lt;priority&gt;</span> - 시각화를 위한 우선순위 번호. <a href="https://neovim.io/doc/user/helptag.html?tag=nvim_buf_set_extmark()">nvim_buf_set_extmark()</a>의 <code>priority</code> 옵션을 참조하세요.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.undraw" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.undraw">undraw()</h3>
+<p align="center">
+<code>MiniIndentscope.undraw</code>()
+</p>
+<p>현재 표시된 범위를 수동으로 지우기</p>
+<hr>
+</section>
+<section id="miniindentscope.gen_animation" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.gen_animation">gen_animation</h3>
+<p align="center">
+<code>MiniIndentscope.gen_animation</code>
+</p>
+<p>내장 애니메이션 함수 생성</p>
+<p>이것은 <code>MiniIndentscope.config.draw.animation</code>에서 사용할 애니메이션 함수를 생성하는 내장 소스입니다. 대부분은 범위 시각적 지표를 표시하기 위해 특정 유형의 진행을 제공하는 일반적인 이징 함수의 변형입니다.</p>
+<p>각 필드는 적절한 인수를 제공하여 추가로 사용자 정의할 수 있는 하나의 진행 패밀리에 해당합니다.</p>
+<p>예시:</p>
+<ul>
+<li><p>애니메이션 사용 안 함: <code>MiniIndentscope.gen_animation.none()</code></p></li>
+<li><p>총 지속 시간이 1000ms인 이차(quadratic) “out” 이징 사용:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">gen_animation</span><span class="op">.</span>quadratic<span class="op">({</span> <span class="va">easing</span> <span class="op">=</span> <span class="st">'out'</span><span class="op">,</span> <span class="va">duration</span> <span class="op">=</span> <span class="dv">1000</span><span class="op">,</span> <span class="va">unit</span> <span class="op">=</span> <span class="st">'total'</span> <span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+<section id="miniindentscope.gen_animation-seealso" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation-seealso">참고 항목</h4>
+<p>그리기가 어떻게 수행되는지에 대한 자세한 내용은 <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope-drawing">MiniIndentscope-drawing</a>을 참조하세요.</p>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.gen_animation.none" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.gen_animation.none">gen_animation.none()</h3>
+<p align="center">
+<code>MiniIndentscope.gen_animation.none</code>()
+</p>
+<p>애니메이션 생성 안 함</p>
+<p>지표를 즉시 표시합니다. 항상 0을 반환하는 애니메이션 함수와 동일합니다.</p>
+<hr>
+</section>
+<section id="miniindentscope.gen_animation.linear" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.gen_animation.linear">gen_animation.linear()</h3>
+<p align="center">
+<code>MiniIndentscope.gen_animation.linear</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>선형 진행 생성</p>
+<section id="miniindentscope.gen_animation.linear-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.linear-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 진행을 제어하는 옵션. 가능한 키:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;easing&gt;</span> <code>(string)</code> - 진행의 하위 유형. “in”(속도 0에서 가속), “out”(속도 0으로 감속), “in-out”(기본값; 절반까지 가속, 그 후 감속) 중 하나.</p></li>
+<li><p><span class="help-syntax-keys">&lt;duration&gt;</span> <code>(number)</code> - 단위의 지속 시간 (ms). 기본값: 20.</p></li>
+<li><p><span class="help-syntax-keys">&lt;unit&gt;</span> <code>(string)</code> - <code>opts.duration</code>이 제어하는 단위의 지속 시간. “step”(기본값; 단계의 평균 지속 시간이 <code>opts.duration</code>이 되도록 보장) 또는 “total”(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.</p></li>
+</ul>
+</section>
+<section id="miniindentscope.gen_animation.linear-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.linear-return">반환</h4>
+<p><code>(function)</code> 애니메이션 함수 (<a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope-drawing">MiniIndentscope-drawing</a> 참조).</p>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.gen_animation.quadratic" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.gen_animation.quadratic">gen_animation.quadratic()</h3>
+<p align="center">
+<code>MiniIndentscope.gen_animation.quadratic</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>이차 진행 생성</p>
+<section id="miniindentscope.gen_animation.quadratic-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.quadratic-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 진행을 제어하는 옵션. 가능한 키:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;easing&gt;</span> <code>(string)</code> - 진행의 하위 유형. “in”(속도 0에서 가속), “out”(속도 0으로 감속), “in-out”(기본값; 절반까지 가속, 그 후 감속) 중 하나.</p></li>
+<li><p><span class="help-syntax-keys">&lt;duration&gt;</span> <code>(number)</code> - 단위의 지속 시간 (ms). 기본값: 20.</p></li>
+<li><p><span class="help-syntax-keys">&lt;unit&gt;</span> <code>(string)</code> - <code>opts.duration</code>이 제어하는 단위의 지속 시간. “step”(기본값; 단계의 평균 지속 시간이 <code>opts.duration</code>이 되도록 보장) 또는 “total”(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.</p></li>
+</ul>
+</section>
+<section id="miniindentscope.gen_animation.quadratic-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.quadratic-return">반환</h4>
+<p><code>(function)</code> 애니메이션 함수 (<a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope-drawing">MiniIndentscope-drawing</a> 참조).</p>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.gen_animation.cubic" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.gen_animation.cubic">gen_animation.cubic()</h3>
+<p align="center">
+<code>MiniIndentscope.gen_animation.cubic</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>삼차 진행 생성</p>
+<section id="miniindentscope.gen_animation.cubic-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.cubic-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 진행을 제어하는 옵션. 가능한 키:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;easing&gt;</span> <code>(string)</code> - 진행의 하위 유형. “in”(속도 0에서 가속), “out”(속도 0으로 감속), “in-out”(기본값; 절반까지 가속, 그 후 감속) 중 하나.</p></li>
+<li><p><span class="help-syntax-keys">&lt;duration&gt;</span> <code>(number)</code> - 단위의 지속 시간 (ms). 기본값: 20.</p></li>
+<li><p><span class="help-syntax-keys">&lt;unit&gt;</span> <code>(string)</code> - <code>opts.duration</code>이 제어하는 단위의 지속 시간. “step”(기본값; 단계의 평균 지속 시간이 <code>opts.duration</code>이 되도록 보장) 또는 “total”(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.</p></li>
+</ul>
+</section>
+<section id="miniindentscope.gen_animation.cubic-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.cubic-return">반환</h4>
+<p><code>(function)</code> 애니메이션 함수 (<a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope-drawing">MiniIndentscope-drawing</a> 참조).</p>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.gen_animation.quartic" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.gen_animation.quartic">gen_animation.quartic()</h3>
+<p align="center">
+<code>MiniIndentscope.gen_animation.quartic</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>사차 진행 생성</p>
+<section id="miniindentscope.gen_animation.quartic-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.quartic-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 진행을 제어하는 옵션. 가능한 키:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;easing&gt;</span> <code>(string)</code> - 진행의 하위 유형. “in”(속도 0에서 가속), “out”(속도 0으로 감속), “in-out”(기본값; 절반까지 가속, 그 후 감속) 중 하나.</p></li>
+<li><p><span class="help-syntax-keys">&lt;duration&gt;</span> <code>(number)</code> - 단위의 지속 시간 (ms). 기본값: 20.</p></li>
+<li><p><span class="help-syntax-keys">&lt;unit&gt;</span> <code>(string)</code> - <code>opts.duration</code>이 제어하는 단위의 지속 시간. “step”(기본값; 단계의 평균 지속 시간이 <code>opts.duration</code>이 되도록 보장) 또는 “total”(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.</p></li>
+</ul>
+</section>
+<section id="miniindentscope.gen_animation.quartic-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.quartic-return">반환</h4>
+<p><code>(function)</code> 애니메이션 함수 (<a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope-drawing">MiniIndentscope-drawing</a> 참조).</p>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.gen_animation.exponential" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.gen_animation.exponential">gen_animation.exponential()</h3>
+<p align="center">
+<code>MiniIndentscope.gen_animation.exponential</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>지수 진행 생성</p>
+<section id="miniindentscope.gen_animation.exponential-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.exponential-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 진행을 제어하는 옵션. 가능한 키:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;easing&gt;</span> <code>(string)</code> - 진행의 하위 유형. “in”(속도 0에서 가속), “out”(속도 0으로 감속), “in-out”(기본값; 절반까지 가속, 그 후 감속) 중 하나.</p></li>
+<li><p><span class="help-syntax-keys">&lt;duration&gt;</span> <code>(number)</code> - 단위의 지속 시간 (ms). 기본값: 20.</p></li>
+<li><p><span class="help-syntax-keys">&lt;unit&gt;</span> <code>(string)</code> - <code>opts.duration</code>이 제어하는 단위의 지속 시간. “step”(기본값; 단계의 평균 지속 시간이 <code>opts.duration</code>이 되도록 보장) 또는 “total”(범위에 관계없이 고정된 총 지속 시간을 보장) 중 하나.</p></li>
+</ul>
+</section>
+<section id="miniindentscope.gen_animation.exponential-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.gen_animation.exponential-return">반환</h4>
+<p><code>(function)</code> 애니메이션 함수 (<a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope-drawing">MiniIndentscope-drawing</a> 참조).</p>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.move_cursor" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.move_cursor">move_cursor()</h3>
+<p align="center">
+<code>MiniIndentscope.move_cursor</code>(<span class="help-syntax-special">{side}</span>, <span class="help-syntax-special">{use_border}</span>, <span class="help-syntax-special">{scope}</span>)
+</p>
+<p>범위 내에서 커서 이동</p>
+<p>커서는 대상 라인의 첫 번째 비공백 문자에 배치됩니다.</p>
+<section id="miniindentscope.move_cursor-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.move_cursor-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{side}</span> <code>(string)</code> “top” 또는 “bottom” 중 하나.</p>
+<p><span class="help-syntax-special">{use_border}</span> <code>(boolean|nil)</code> 테두리로 이동할지 아니면 범위 본문 내로 이동할지 여부. 특정 테두리가 없으면 본문이 사용됩니다.</p>
+<p><span class="help-syntax-special">{scope}</span> <code>(table|nil)</code> 사용할 범위. 기본값: <a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.get_scope">MiniIndentscope.get_scope()</a>의 출력.</p>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.operator" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.operator">operator()</h3>
+<p align="center">
+<code>MiniIndentscope.operator</code>(<span class="help-syntax-special">{side}</span>, <span class="help-syntax-special">{add_to_jumplist}</span>)
+</p>
+<p>동작 매핑용 함수</p>
+<p>테두리의 특정 사이드로 이동합니다. <a href="https://neovim.io/doc/user/helptag.html?tag=count">개수(count)</a>와 점 반복(operator-pending 모드에서)을 존중합니다. 표시되지 않는 범위(그리기 들여쓰기가 0보다 작은 경우)에 대해서는 커서를 이동하지 않습니다.</p>
+<section id="miniindentscope.operator-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.operator-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{side}</span> <code>(string)</code> “top” 또는 “bottom” 중 하나.</p>
+<p><span class="help-syntax-special">{add_to_jumplist}</span> <code>(boolean|nil)</code> 점프 목록에 이동을 추가할지 여부. Normal 모드 매핑에 대해서만 <code>true</code>입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniindentscope.textobject" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniindentscope.textobject">textobject()</h3>
+<p align="center">
+<code>MiniIndentscope.textobject</code>(<span class="help-syntax-special">{use_border}</span>)
+</p>
+<p>텍스트 오브젝트 매핑용 함수</p>
+<p><a href="https://neovim.io/doc/user/helptag.html?tag=count">개수(count)</a>와 점 반복(operator-pending 모드에서)을 존중합니다. 표시되지 않는 범위(그리기 들여쓰기가 0보다 작은 경우)에 대해서는 작동하지 않습니다.</p>
+<section id="miniindentscope.textobject-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniindentscope.textobject-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{use_border}</span> <code>(boolean|nil)</code> 텍스트 오브젝트에 테두리를 포함할지 여부. <code>true</code>이고 <code>try_as_border</code> 옵션이 <code>false</code>인 경우, 점진적 선택을 위한 “체이닝(chaining)” 호출을 허용합니다.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- Original source: https://gc.zgo.at/count.js -->
+<!-- Inlined for security reasons (less supply chain attack possibility) -->
+<script data-goatcounter="https://nvim-mini.goatcounter.com/count">
+// GoatCounter: https://www.goatcounter.com
+// This file is released under the ISC license: https://opensource.org/licenses/ISC
+;(function() {
+	'use strict';
+
+	window.goatcounter = window.goatcounter || {}
+
+	// Load settings from data-goatcounter-settings.
+	var s = document.querySelector('script[data-goatcounter]')
+	if (s && s.dataset.goatcounterSettings) {
+		try         { var set = JSON.parse(s.dataset.goatcounterSettings) }
+		catch (err) { console.error('invalid JSON in data-goatcounter-settings: ' + err) }
+		for (var k in set)
+			if (['no_onload', 'no_events', 'allow_local', 'allow_frame', 'path', 'title', 'referrer', 'event'].indexOf(k) > -1)
+				window.goatcounter[k] = set[k]
+	}
+
+	var enc = encodeURIComponent
+
+	// Get all data we're going to send off to the counter endpoint.
+	window.goatcounter.get_data = function(vars) {
+		vars = vars || {}
+		var data = {
+			p: (vars.path     === undefined ? goatcounter.path     : vars.path),
+			r: (vars.referrer === undefined ? goatcounter.referrer : vars.referrer),
+			t: (vars.title    === undefined ? goatcounter.title    : vars.title),
+			e: !!(vars.event || goatcounter.event),
+			s: window.screen.width,
+			b: is_bot(),
+			q: location.search,
+		}
+
+		var rcb, pcb, tcb  // Save callbacks to apply later.
+		if (typeof(data.r) === 'function') rcb = data.r
+		if (typeof(data.t) === 'function') tcb = data.t
+		if (typeof(data.p) === 'function') pcb = data.p
+
+		if (is_empty(data.r)) data.r = document.referrer
+		if (is_empty(data.t)) data.t = document.title
+		if (is_empty(data.p)) data.p = get_path()
+
+		if (rcb) data.r = rcb(data.r)
+		if (tcb) data.t = tcb(data.t)
+		if (pcb) data.p = pcb(data.p)
+		return data
+	}
+
+	// Check if a value is "empty" for the purpose of get_data().
+	var is_empty = function(v) { return v === null || v === undefined || typeof(v) === 'function' }
+
+	// See if this looks like a bot; there is some additional filtering on the
+	// backend, but these properties can't be fetched from there.
+	var is_bot = function() {
+		// Headless browsers are probably a bot.
+		var w = window, d = document
+		if (w.callPhantom || w._phantom || w.phantom)
+			return 150
+		if (w.__nightmare)
+			return 151
+		if (d.__selenium_unwrapped || d.__webdriver_evaluate || d.__driver_evaluate)
+			return 152
+		if (navigator.webdriver)
+			return 153
+		return 0
+	}
+
+	// Object to urlencoded string, starting with a ?.
+	var urlencode = function(obj) {
+		var p = []
+		for (var k in obj)
+			if (obj[k] !== '' && obj[k] !== null && obj[k] !== undefined && obj[k] !== false)
+				p.push(enc(k) + '=' + enc(obj[k]))
+		return '?' + p.join('&')
+	}
+
+	// Show a warning in the console.
+	var warn = function(msg) {
+		if (console && 'warn' in console)
+			console.warn('goatcounter: ' + msg)
+	}
+
+	// Get the endpoint to send requests to.
+	var get_endpoint = function() {
+		var s = document.querySelector('script[data-goatcounter]')
+		return (s && s.dataset.goatcounter) ? s.dataset.goatcounter : goatcounter.endpoint
+	}
+
+	// Get current path.
+	var get_path = function() {
+		var loc = location,
+			c = document.querySelector('link[rel="canonical"][href]')
+		if (c) {  // May be relative or point to different domain.
+			var a = document.createElement('a')
+			a.href = c.href
+			if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
+				loc = a
+		}
+		return (loc.pathname + loc.search) || '/'
+	}
+
+	// Run function after DOM is loaded.
+	var on_load = function(f) {
+		if (document.body === null)
+			document.addEventListener('DOMContentLoaded', function() { f() }, false)
+		else
+			f()
+	}
+
+	// Filter some requests that we (probably) don't want to count.
+	window.goatcounter.filter = function() {
+		if ('visibilityState' in document && document.visibilityState === 'prerender')
+			return 'visibilityState'
+		if (!goatcounter.allow_frame && location !== parent.location)
+			return 'frame'
+		if (!goatcounter.allow_local && location.hostname.match(/(localhost$|^127\.|^10\.|^172\.(1[6-9]|2[0-9]|3[0-1])\.|^192\.168\.|^0\.0\.0\.0$)/))
+			return 'localhost'
+		if (!goatcounter.allow_local && location.protocol === 'file:')
+			return 'localfile'
+		if (localStorage && localStorage.getItem('skipgc') === 't')
+			return 'disabled with #toggle-goatcounter'
+		return false
+	}
+
+	// Get URL to send to GoatCounter.
+	window.goatcounter.url = function(vars) {
+		var data = window.goatcounter.get_data(vars || {})
+		if (data.p === null)  // null from user callback.
+			return
+		data.rnd = Math.random().toString(36).substr(2, 5)  // Browsers don't always listen to Cache-Control.
+
+		var endpoint = get_endpoint()
+		if (!endpoint)
+			return warn('no endpoint found')
+
+		return endpoint + urlencode(data)
+	}
+
+	// Count a hit.
+	window.goatcounter.count = function(vars) {
+		var f = goatcounter.filter()
+		if (f)
+			return warn('not counting because of: ' + f)
+		var url = goatcounter.url(vars)
+		if (!url)
+			return warn('not counting because path callback returned null')
+
+		if (!navigator.sendBeacon(url)) {
+			// This mostly fails due to being blocked by CSP; try again with an
+			// image-based fallback.
+			var img = document.createElement('img')
+			img.src = url
+			img.style.position = 'absolute'  // Affect layout less.
+			img.style.bottom = '0px'
+			img.style.width = '1px'
+			img.style.height = '1px'
+			img.loading = 'eager'
+			img.setAttribute('alt', '')
+			img.setAttribute('aria-hidden', 'true')
+
+			var rm = function() { if (img && img.parentNode) img.parentNode.removeChild(img) }
+			img.addEventListener('load', rm, false)
+			document.body.appendChild(img)
+		}
+	}
+
+	// Get a query parameter.
+	window.goatcounter.get_query = function(name) {
+		var s = location.search.substr(1).split('&')
+		for (var i = 0; i < s.length; i++)
+			if (s[i].toLowerCase().indexOf(name.toLowerCase() + '=') === 0)
+				return s[i].substr(name.length + 1)
+	}
+
+	// Track click events.
+	window.goatcounter.bind_events = function() {
+		if (!document.querySelectorAll)  // Just in case someone uses an ancient browser.
+			return
+
+		var send = function(elem) {
+			return function() {
+				goatcounter.count({
+					event:    true,
+					path:     (elem.dataset.goatcounterClick || elem.name || elem.id || ''),
+					title:    (elem.dataset.goatcounterTitle || elem.title || (elem.innerHTML || '').substr(0, 200) || ''),
+					referrer: (elem.dataset.goatcounterReferrer || elem.dataset.goatcounterReferral || ''),
+				})
+			}
+		}
+
+		Array.prototype.slice.call(document.querySelectorAll("*[data-goatcounter-click]")).forEach(function(elem) {
+			if (elem.dataset.goatcounterBound)
+				return
+			var f = send(elem)
+			elem.addEventListener('click', f, false)
+			elem.addEventListener('auxclick', f, false)  // Middle click.
+			elem.dataset.goatcounterBound = 'true'
+		})
+	}
+
+	// Add a "visitor counter" frame or image.
+	window.goatcounter.visit_count = function(opt) {
+		on_load(function() {
+			opt        = opt        || {}
+			opt.type   = opt.type   || 'html'
+			opt.append = opt.append || 'body'
+			opt.path   = opt.path   || get_path()
+			opt.attr   = opt.attr   || {width: '200', height: (opt.no_branding ? '60' : '80')}
+
+			opt.attr['src'] = get_endpoint() + 'er/' + enc(opt.path) + '.' + enc(opt.type) + '?'
+			if (opt.no_branding) opt.attr['src'] += '&no_branding=1'
+			if (opt.style)       opt.attr['src'] += '&style=' + enc(opt.style)
+			if (opt.start)       opt.attr['src'] += '&start=' + enc(opt.start)
+			if (opt.end)         opt.attr['src'] += '&end='   + enc(opt.end)
+
+			var tag = {png: 'img', svg: 'img', html: 'iframe'}[opt.type]
+			if (!tag)
+				return warn('visit_count: unknown type: ' + opt.type)
+
+			if (opt.type === 'html') {
+				opt.attr['frameborder'] = '0'
+				opt.attr['scrolling']   = 'no'
+			}
+
+			var d = document.createElement(tag)
+			for (var k in opt.attr)
+				d.setAttribute(k, opt.attr[k])
+
+			var p = document.querySelector(opt.append)
+			if (!p)
+				return warn('visit_count: element to append to not found: ' + opt.append)
+			p.appendChild(d)
+		})
+	}
+
+	// Make it easy to skip your own views.
+	if (location.hash === '#toggle-goatcounter') {
+		if (localStorage.getItem('skipgc') === 't') {
+			localStorage.removeItem('skipgc', 't')
+			alert('GoatCounter tracking is now ENABLED in this browser.')
+		}
+		else {
+			localStorage.setItem('skipgc', 't')
+			alert('GoatCounter tracking is now DISABLED in this browser until ' + location + ' is loaded again.')
+		}
+	}
+
+	if (!goatcounter.no_onload)
+		on_load(function() {
+			// 1. Page is visible, count request.
+			// 2. Page is not yet visible; wait until it switches to 'visible' and count.
+			// See #487
+			if (!('visibilityState' in document) || document.visibilityState === 'visible')
+				goatcounter.count()
+			else {
+				var f = function(e) {
+					if (document.visibilityState !== 'visible')
+						return
+					document.removeEventListener('visibilitychange', f)
+					goatcounter.count()
+				}
+				document.addEventListener('visibilitychange', f)
+			}
+
+			if (!goatcounter.no_events)
+				goatcounter.bind_events()
+		})
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nvim-mini\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© Evgeni Chasnovski, <a href="https://choosealicense.com/licenses/mit/">MIT</a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

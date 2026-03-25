@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>mini.git 문서 – MINI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/logo-mini_180x180.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-588f07447021c9b1c78c14c285b6df15.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-9a1b1f8e841c9c2d133c690b11f8ee3e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-822171c0b08fb8324585bf617d393f53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-02025811ff4c933f5630304c954c6652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": "tree",
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style> .quarto-title > h1.title { display: none } </style>
+
+
+<meta property="og:title" content="mini.git 문서 – MINI">
+<meta property="og:description" content="Modular Independent Neovim Improvements">
+<meta property="og:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta property="og:site_name" content="MINI">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="mini.git 문서 – MINI">
+<meta name="twitter:description" content="Modular Independent Neovim Improvements">
+<meta name="twitter:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">MINI</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mini.nvim/index.html"> 
+<span class="menu-text">mini.nvim</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../MiniMax/index.html"> 
+<span class="menu-text">MiniMax</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nvim-mini"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss-fill" role="img" aria-label="RSS">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#module" id="toc-module" class="nav-link active" data-scroll-target="#module">모듈</a>
+  <ul>
+  <li><a href="#module-setup" id="toc-module-setup" class="nav-link" data-scroll-target="#module-setup">설정</a></li>
+  <li><a href="#module-comparisons" id="toc-module-comparisons" class="nav-link" data-scroll-target="#module-comparisons">비교</a></li>
+  <li><a href="#module-disabling" id="toc-module-disabling" class="nav-link" data-scroll-target="#module-disabling">비활성화</a></li>
+  </ul></li>
+  <li><a href="#minigit-examples" id="toc-minigit-examples" class="nav-link" data-scroll-target="#minigit-examples">예시</a>
+  <ul>
+  <li><a href="#minigit-examples-statuslinecomponent" id="toc-minigit-examples-statuslinecomponent" class="nav-link" data-scroll-target="#minigit-examples-statuslinecomponent">상태줄 구성 요소</a></li>
+  <li><a href="#minigit-examples-tweakingcommandoutput" id="toc-minigit-examples-tweakingcommandoutput" class="nav-link" data-scroll-target="#minigit-examples-tweakingcommandoutput">명령어 출력 조정</a></li>
+  <li><a href="#minigit-examples-historynavigation" id="toc-minigit-examples-historynavigation" class="nav-link" data-scroll-target="#minigit-examples-historynavigation">히스토리 탐색</a></li>
+  </ul></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git">:Git</a>
+  <ul>
+  <li><a href="#git-events" id="toc-git-events" class="nav-link" data-scroll-target="#git-events">이벤트</a></li>
+  </ul></li>
+  <li><a href="#minigit.setup" id="toc-minigit.setup" class="nav-link" data-scroll-target="#minigit.setup">setup()</a>
+  <ul>
+  <li><a href="#minigit.setup-parameters" id="toc-minigit.setup-parameters" class="nav-link" data-scroll-target="#minigit.setup-parameters">매개변수</a></li>
+  <li><a href="#minigit.setup-usage" id="toc-minigit.setup-usage" class="nav-link" data-scroll-target="#minigit.setup-usage">사용법</a></li>
+  </ul></li>
+  <li><a href="#minigit.config" id="toc-minigit.config" class="nav-link" data-scroll-target="#minigit.config">config</a>
+  <ul>
+  <li><a href="#minigit.config-defaults" id="toc-minigit.config-defaults" class="nav-link" data-scroll-target="#minigit.config-defaults">기본값</a></li>
+  <li><a href="#minigit.config-job" id="toc-minigit.config-job" class="nav-link" data-scroll-target="#minigit.config-job">작업(Job)</a></li>
+  <li><a href="#minigit.config-command" id="toc-minigit.config-command" class="nav-link" data-scroll-target="#minigit.config-command">명령어(Command)</a></li>
+  </ul></li>
+  <li><a href="#minigit.show_at_cursor" id="toc-minigit.show_at_cursor" class="nav-link" data-scroll-target="#minigit.show_at_cursor">show_at_cursor()</a>
+  <ul>
+  <li><a href="#minigit.show_at_cursor-parameters" id="toc-minigit.show_at_cursor-parameters" class="nav-link" data-scroll-target="#minigit.show_at_cursor-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minigit.show_diff_source" id="toc-minigit.show_diff_source" class="nav-link" data-scroll-target="#minigit.show_diff_source">show_diff_source()</a>
+  <ul>
+  <li><a href="#minigit.show_diff_source-parameters" id="toc-minigit.show_diff_source-parameters" class="nav-link" data-scroll-target="#minigit.show_diff_source-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minigit.show_range_history" id="toc-minigit.show_range_history" class="nav-link" data-scroll-target="#minigit.show_range_history">show_range_history()</a>
+  <ul>
+  <li><a href="#minigit.show_range_history-parameters" id="toc-minigit.show_range_history-parameters" class="nav-link" data-scroll-target="#minigit.show_range_history-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minigit.diff_foldexpr" id="toc-minigit.diff_foldexpr" class="nav-link" data-scroll-target="#minigit.diff_foldexpr">diff_foldexpr()</a>
+  <ul>
+  <li><a href="#minigit.diff_foldexpr-parameters" id="toc-minigit.diff_foldexpr-parameters" class="nav-link" data-scroll-target="#minigit.diff_foldexpr-parameters">매개변수</a></li>
+  <li><a href="#minigit.diff_foldexpr-return" id="toc-minigit.diff_foldexpr-return" class="nav-link" data-scroll-target="#minigit.diff_foldexpr-return">반환값</a></li>
+  </ul></li>
+  <li><a href="#minigit.enable" id="toc-minigit.enable" class="nav-link" data-scroll-target="#minigit.enable">enable()</a>
+  <ul>
+  <li><a href="#minigit.enable-parameters" id="toc-minigit.enable-parameters" class="nav-link" data-scroll-target="#minigit.enable-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minigit.disable" id="toc-minigit.disable" class="nav-link" data-scroll-target="#minigit.disable">disable()</a>
+  <ul>
+  <li><a href="#minigit.disable-parameters" id="toc-minigit.disable-parameters" class="nav-link" data-scroll-target="#minigit.disable-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minigit.toggle" id="toc-minigit.toggle" class="nav-link" data-scroll-target="#minigit.toggle">toggle()</a>
+  <ul>
+  <li><a href="#minigit.toggle-parameters" id="toc-minigit.toggle-parameters" class="nav-link" data-scroll-target="#minigit.toggle-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minigit.get_buf_data" id="toc-minigit.get_buf_data" class="nav-link" data-scroll-target="#minigit.get_buf_data">get_buf_data()</a>
+  <ul>
+  <li><a href="#minigit.get_buf_data-parameters" id="toc-minigit.get_buf_data-parameters" class="nav-link" data-scroll-target="#minigit.get_buf_data-parameters">매개변수</a></li>
+  <li><a href="#minigit.get_buf_data-return" id="toc-minigit.get_buf_data-return" class="nav-link" data-scroll-target="#minigit.get_buf_data-return">반환값</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">mini.git 문서</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>_ ’mini.nvim’의 <code>main</code> 브랜치에서 생성됨 _</p>
+<p><a name="mini.git" href="../../mini.nvim/doc/mini-git.html#mini.git"><b>mini.git</b></a> Git 통합</p>
+<p>MIT 라이선스 Copyright (c) 2024 Evgeni Chasnovski</p>
+<hr>
+<section id="module" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="module">모듈</h3>
+<p>기능:</p>
+<ul>
+<li><p>Git 관련 데이터 자동 추적: 루트 경로, 상태, HEAD 등. 상태줄(statusline)에서 편리하게 사용할 수 있도록 버퍼 로컬 변수를 노출합니다. 자세한 내용은 <a href="../../mini.nvim/doc/mini-git.html#minigit.enable">MiniGit.enable()</a> 및 <a href="../../mini.nvim/doc/mini-git.html#minigit.get_buf_data">MiniGit.get_buf_data()</a>를 참조하세요.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#git">:Git</a> 명령어: 현재 인스턴스와의 긴밀한 통합을 통해 파일의 저장소 루트 내에서 임의의 <code>git</code> 호출을 실행합니다 (출력을 알림/버퍼로 표시, 커밋 메시지 편집에 사용 등).</p></li>
+<li><p>Git 히스토리를 조사하기 위한 헬퍼 함수:</p>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#minigit.show_range_history">MiniGit.show_range_history()</a>: 특정 줄 범위가 어떻게 변해왔는지 보여줍니다.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#minigit.show_diff_source">MiniGit.show_diff_source()</a>: diff 항목 시점의 파일 상태를 보여줍니다.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#minigit.show_at_cursor">MiniGit.show_at_cursor()</a>: 컨텍스트에 따라 Git 관련 데이터를 보여줍니다.</p></li>
+</ul></li>
+</ul>
+<p>제공하지 않는 기능:</p>
+<ul>
+<li>모든 기능을 갖춘 Git 클라이언트를 대체하지 않습니다. 원칙: 기능이 현재 Neovim의 상태(열려 있는 버퍼 등)에 의존하지 않는다면 범위 밖입니다. 더 많은 기능이 필요한 경우 <a href="../../mini.nvim/doc/mini-diff.html#mini.diff">mini.diff</a>를 사용하거나 모든 기능을 갖춘 Git 클라이언트를 사용하세요.</li>
+</ul>
+<p>상세 정보 소스:</p>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#git">:Git</a></p></li>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#minigit-examples">MiniGit-examples</a></p></li>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#minigit.enable">MiniGit.enable()</a></p></li>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#minigit.get_buf_data">MiniGit.get_buf_data()</a></p></li>
+</ul>
+<section id="module-setup" class="level4">
+<h4 class="anchored" data-anchor-id="module-setup">설정</h4>
+<p>이 모듈은 <code>require('mini.git').setup({})</code>을 통한 설정이 필요합니다 (<code>{}</code>를 사용자 <code>config</code> 테이블로 대체). 그러면 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 <code>MiniGit</code>이 생성됩니다 (예: <code>:lua MiniGit.*</code>).</p>
+<p><code>config</code> 구조와 기본값은 <a href="../../mini.nvim/doc/mini-git.html#minigit.config">MiniGit.config</a>를 참조하세요.</p>
+</section>
+<section id="module-comparisons" class="level4">
+<h4 class="anchored" data-anchor-id="module-comparisons">비교</h4>
+<ul>
+<li><p><a href="https://github.com/tpope/vim-fugitive">tpope/vim-fugitive</a>:</p>
+<ul>
+<li><p>주로 전용 Git 클라이언트인 반면, 이 모듈은 그렇지 않습니다 (의도된 설계).</p></li>
+<li><p>고정된 상태줄 구성 요소를 통해서만 버퍼 로컬 Git 데이터를 제공하지만, 이 모듈은 Lua 테이블 형태로 더 풍부한 데이터를 제공합니다.</p></li>
+<li><p>둘 다 <a href="../../mini.nvim/doc/mini-git.html#git">:Git</a> 명령어를 제공하지만, ’vim-fugitive’는 일부 사례(예: <code>:Git blame</code> 등)를 특별하게 처리하는 반면, 이 모듈은 대부분 모든 사례를 동일하게 처리합니다. 수동으로 사용자 정의하는 방법은 <a href="../../mini.nvim/doc/mini-git.html#minigit-examples">MiniGit-examples</a>를 참조하세요. 또한 이 모듈은 약간 다른 (보통 더 풍부한) 자동 완성 제안을 제공합니다.</p></li>
+</ul></li>
+<li><p><a href="https://github.com/NeogitOrg/neogit">NeogitOrg/neogit</a>:</p>
+<ul>
+<li>’tpope/vim-fugitive’와 유사하지만 <code>:Git</code> 명령어가 없습니다.</li>
+</ul></li>
+<li><p><a href="https://github.com/lewis6991/gitsigns.nvim">lewis6991/gitsigns.nvim</a>:</p>
+<ul>
+<li>세부적인 diff 상태에 중점을 둔 버퍼 로컬 Git 데이터를 제공하지만, 이 모듈은 저장소 및 파일 레벨 데이터(루트, HEAD, 파일 상태 등)에 더 중점을 둡니다. diff 추적에는 <a href="../../mini.nvim/doc/mini-diff.html#mini.diff">mini.diff</a>를 사용하세요.</li>
+</ul></li>
+</ul>
+</section>
+<section id="module-disabling" class="level4">
+<h4 class="anchored" data-anchor-id="module-disabling">비활성화</h4>
+<p>버퍼가 추적되지 않게 하려면 <code>vim.g.minigit_disable</code>(전역) 또는 <code>vim.b.minigit_disable</code>(버퍼별)을 <code>true</code>로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화에 대한 정확한 규칙을 작성하는 것은 사용자의 몫으로 남겨둡니다. 일반적인 방법은 <a href="../../mini.nvim/doc/mini-nvim.html#mini.nvim-disabling-recipes">mini.nvim-disabling-recipes</a>를 참조하세요.</p>
+<hr>
+</section>
+</section>
+<section id="minigit-examples" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit-examples">예시</h3>
+<section id="minigit-examples-statuslinecomponent" class="level4">
+<h4 class="anchored" data-anchor-id="minigit-examples-statuslinecomponent">상태줄 구성 요소</h4>
+<p>추적된 버퍼 데이터는 <code>vim.b.minigit_summary_string</code> 버퍼 로컬 변수를 통해 상태줄에서 사용할 수 있습니다. 이는 있는 그대로 사용될 것으로 예상됩니다. 다른 정보를 표시하려면 <code>MiniGitUpdated</code> <code>User</code> 이벤트 내에서 버퍼 로컬 변수를 직접 수정하세요:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- HEAD 이름만 요약 문자열로 사용</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">format_summary</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 버퍼 로컬 테이블 요약 활용</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">local</span> <span class="va">summary</span> <span class="op">=</span> <span class="va">vim</span><span class="op">.</span><span class="va">b</span><span class="op">[</span><span class="va">data</span><span class="op">.</span><span class="va">buf</span><span class="op">].</span><span class="va">minigit_summary</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">vim</span><span class="op">.</span><span class="va">b</span><span class="op">[</span><span class="va">data</span><span class="op">.</span><span class="va">buf</span><span class="op">].</span><span class="va">minigit_summary_string</span> <span class="op">=</span> <span class="va">summary</span><span class="op">.</span><span class="va">head_name</span> <span class="kw">or</span> <span class="st">''</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">au_opts</span> <span class="op">=</span> <span class="op">{</span> <span class="va">pattern</span> <span class="op">=</span> <span class="st">'MiniGitUpdated'</span><span class="op">,</span> <span class="va">callback</span> <span class="op">=</span> <span class="va">format_summary</span> <span class="op">}</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="va">vim</span><span class="op">.</span><span class="va">api</span><span class="op">.</span>nvim_create_autocmd<span class="op">(</span><span class="st">'User'</span><span class="op">,</span> <span class="va">au_opts</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="minigit-examples-tweakingcommandoutput" class="level4">
+<h4 class="anchored" data-anchor-id="minigit-examples-tweakingcommandoutput">명령어 출력 조정</h4>
+<p><a href="../../mini.nvim/doc/mini-git.html#git">:Git</a> 명령어의 버퍼 출력은 <code>MiniGitCommandSplit</code> <code>User</code> 이벤트의 자동 명령 내에서 조정할 수 있습니다 (<a href="../../mini.nvim/doc/mini-git.html#minigit-command-events">MiniGit-command-events</a> 참조). 예를 들어, <code>:vertical Git blame -- %</code> 명령어가 blame 출력을 현재 창 상태와 맞추도록 하려면 다음 코드를 사용하세요:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">align_blame</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">au_data</span><span class="op">)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="va">au_data</span><span class="op">.</span><span class="va">data</span><span class="op">.</span><span class="va">git_subcommand</span> <span class="op">~=</span> <span class="st">'blame'</span> <span class="cf">then</span> <span class="cf">return</span> <span class="cf">end</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- blame 출력을 소스와 맞춤</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">local</span> <span class="va">win_src</span> <span class="op">=</span> <span class="va">au_data</span><span class="op">.</span><span class="va">data</span><span class="op">.</span><span class="va">win_source</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">vim</span><span class="op">.</span><span class="va">wo</span><span class="op">.</span><span class="va">wrap</span> <span class="op">=</span> <span class="kw">false</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">vim</span><span class="op">.</span><span class="va">fn</span><span class="op">.</span>winrestview<span class="op">({</span> <span class="va">topline</span> <span class="op">=</span> <span class="va">vim</span><span class="op">.</span><span class="va">fn</span><span class="op">.</span>line<span class="op">(</span><span class="st">'w0'</span><span class="op">,</span> <span class="va">win_src</span><span class="op">)</span> <span class="op">})</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">vim</span><span class="op">.</span><span class="va">api</span><span class="op">.</span>nvim_win_set_cursor<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="op">{</span> <span class="va">vim</span><span class="op">.</span><span class="va">fn</span><span class="op">.</span>line<span class="op">(</span><span class="st">'.'</span><span class="op">,</span> <span class="va">win_src</span><span class="op">),</span> <span class="dv">0</span> <span class="op">})</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 두 창을 묶어서 함께 스크롤되도록 함</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">vim</span><span class="op">.</span><span class="va">wo</span><span class="op">[</span><span class="va">win_src</span><span class="op">].</span><span class="va">scrollbind</span><span class="op">,</span> <span class="va">vim</span><span class="op">.</span><span class="va">wo</span><span class="op">.</span><span class="va">scrollbind</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span> <span class="kw">true</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">au_opts</span> <span class="op">=</span> <span class="op">{</span> <span class="va">pattern</span> <span class="op">=</span> <span class="st">'MiniGitCommandSplit'</span><span class="op">,</span> <span class="va">callback</span> <span class="op">=</span> <span class="va">align_blame</span> <span class="op">}</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="va">vim</span><span class="op">.</span><span class="va">api</span><span class="op">.</span>nvim_create_autocmd<span class="op">(</span><span class="st">'User'</span><span class="op">,</span> <span class="va">au_opts</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="minigit-examples-historynavigation" class="level4">
+<h4 class="anchored" data-anchor-id="minigit-examples-historynavigation">히스토리 탐색</h4>
+<p><a href="../../mini.nvim/doc/mini-git.html#minigit.show_at_cursor">MiniGit.show_at_cursor()</a> 함수는 Git 히스토리 탐색을 쉽게 하기 위해 특별히 제공됩니다. 다음과 같은 다양한 방식으로 사용할 수 있습니다:</p>
+<ul>
+<li><p>이미 커밋된 파일의 버퍼 내에서 호출하여 현재 줄(또는 비주얼 모드로 선택된 범위)의 히스토리 진화를 보여줍니다. 이는 본질적으로 적절한 <code>-L</code> 플래그가 붙은 <code>:Git log HEAD</code>입니다. 이는 <a href="../../mini.nvim/doc/mini-git.html#minigit.show_diff_source">MiniGit.show_diff_source()</a>의 출력 내부에서도 작동합니다.</p></li>
+<li><p>커밋 해시 위에서 호출하여 해당 커밋을 전체적으로 조사합니다. 이는 보통 <code>:Git log</code> 출력에서 유용합니다.</p></li>
+<li><p>diff 항목 내에서 호출하여 특정 커밋 시점의 파일 상태를 조사합니다. 기본적으로 커밋 후의 상태를 보여주지만, 커서가 “삭제된” 줄(즉, “-”로 시작하는 줄)에 있는 경우 커밋 전의 상태를 보여줍니다.</p></li>
+</ul>
+<p>이 워크플로우는 다음과 같이 매핑을 사용하면 더 대화형으로 만들 수 있습니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">rhs</span> <span class="op">=</span> <span class="st">'&lt;Cmd&gt;lua MiniGit.show_at_cursor()&lt;CR&gt;'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">vim</span><span class="op">.</span><span class="va">keymap</span><span class="op">.</span>set<span class="op">({</span> <span class="st">'n'</span><span class="op">,</span> <span class="st">'x'</span> <span class="op">},</span> <span class="st">'&lt;Leader&gt;gs'</span><span class="op">,</span> <span class="va">rhs</span><span class="op">,</span> <span class="op">{</span> <span class="va">desc</span> <span class="op">=</span> <span class="st">'Show at cursor'</span> <span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="git" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="git">:Git</h3>
+<p><code>:Git</code> 사용자 명령어는 현재 열려 있는 Neovim 프로세스와의 추가 통합을 통해 <code>git</code> CLI 호출을 실행합니다:</p>
+<ul>
+<li><p>명령어는 현재 활성화된 파일의 저장소 루트 내에서 실행됩니다 (파일이 이 모듈에 의해 추적되지 않는 경우 <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리(current-directory)</a> 내에서 실행됨).</p></li>
+<li><p>명령어 출력은 창 분할 내의 전용 버퍼 또는 <a href="https://neovim.io/doc/user/helptag.html?tag=vim.notify()">vim.notify()</a>를 통한 알림으로 표시됩니다. 어떤 방식이 사용될지는 특정 Git 하위 명령어가 사용자가 조사할 데이터를 보여주기로 되어 있는지(<code>log</code>, <code>status</code> 등) 아니면 그렇지 않은지(<code>commit</code>, <code>push</code> 등)에 따라 결정됩니다. 이는 Git 자체가 제공하는 데이터를 기반으로 자동으로 결정됩니다. 명령어 실행 후 분할 창이 현재 창이 됩니다.</p>
+<p>출력을 특정 유형의 분할로 강제하려면 분할 관련 <a href="https://neovim.io/doc/user/helptag.html?tag=:command-modifiers">:command-modifiers</a> (<a href="https://neovim.io/doc/user/helptag.html?tag=:vertical">:vertical</a>, <a href="https://neovim.io/doc/user/helptag.html?tag=:horizontal">:horizontal</a>, 또는 <a href="https://neovim.io/doc/user/helptag.html?tag=:tab">:tab</a>)를 사용하세요. 기본 분할 방향은 <a href="../../mini.nvim/doc/mini-git.html#minigit.config">MiniGit.config</a>의 <code>command.split</code>에 의해 제어됩니다.</p>
+<p>출력을 전혀 표시하지 않으려면 <a href="https://neovim.io/doc/user/helptag.html?tag=:silent">:silent</a> 명령 수식어를 사용하세요.</p>
+<p>에러와 경고는 항상 알림으로 표시됩니다.</p>
+<p>명령어 출력을 조정하는 예시는 <a href="../../mini.nvim/doc/mini-git.html#minigit-examples">MiniGit-examples</a>를 참조하세요.</p></li>
+<li><p>대화형 사용자 입력이 필요한 작업(예: <code>:Git commit</code> 또는 <code>:Git rebase --interactive</code>)을 위한 편집기는 현재 세션 내의 별도 분할 창에서 열립니다. 일반 버퍼에서와 같이 수정하고, <a href="https://neovim.io/doc/user/helptag.html?tag=:write">:write</a>로 변경 사항을 저장한 후 <a href="https://neovim.io/doc/user/helptag.html?tag=:close">:close</a> / <a href="https://neovim.io/doc/user/helptag.html?tag=:quit">:quit</a>을 실행하면 Git CLI 명령어가 재개됩니다.</p></li>
+</ul>
+<p>사용 예시:</p>
+<ul>
+<li><p><code>:Git log --oneline</code>: 현재 저장소의 요약 로그 표시.</p></li>
+<li><p><code>:vert Git blame -- %</code>: 수직 분할 창에서 줄별 최신 커밋 표시.</p></li>
+<li><p><code>:Git help rebase</code>: <code>rebase</code> 하위 명령에 대한 도움말 페이지 표시.</p></li>
+<li><p><code>:Git -C &lt;cwd&gt; status</code>: <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리(current-directory)</a> 내에서 <code>git status</code> 실행.</p></li>
+</ul>
+<p><code>&lt;Tab&gt;</code> 키로 호출할 수 있는 컨텍스트 인식 자동 완성도 제공됩니다:</p>
+<ul>
+<li><p>완성할 단어가 “-”로 시작하면 현재 Git 하위 명령에 대한 옵션이 표시됩니다. 예를 들어 <code>:Git log -</code>에서 자동 완성을 하면 <code>-L</code>, <code>--oneline</code> 등이 제안됩니다.</p></li>
+<li><p>커서 왼쪽에 명시적인 ” – “가 있으면 점진적인 경로 제안이 표시됩니다.</p></li>
+<li><p>아직 인식된 Git 하위 명령이 없으면 하위 명령 목록을 보여줍니다. 그렇지 않으면 일부 일반적인 하위 명령의 경우 대상 목록이 제안됩니다. 예: <code>:Git branch</code>의 경우 브랜치 목록 등.</p></li>
+</ul>
+<p>참고 사항:</p>
+<ul>
+<li><p>경로는 항상 명령어 실행 디렉토리(파일의 저장소 루트 또는 없는 경우 <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리(current-directory)</a>)에 대한 상대 경로로 처리됩니다.</p></li>
+<li><p>공백이 포함된 항목에 따옴표를 사용하지 말고, 직접 <code>\</code>로 이스케이프하세요. 예: <code>:Git commit -m Hello\ world</code> ( <code>:Git commit -m 'Hello world'</code>는 <code>'Hello</code>와 <code>world'</code>를 별개의 인수로 취급하므로 사용하지 마세요).</p></li>
+</ul>
+<section id="git-events" class="level4">
+<h4 class="anchored" data-anchor-id="git-events">이벤트</h4>
+<p><a name="minigit-command-events" href="../../mini.nvim/doc/mini-git.html#minigit-command-events"><b>MiniGit-command-events</b></a></p>
+<p>명령어 실행 중에 트리거되는 여러 <code>User</code> 이벤트가 있습니다:</p>
+<ul>
+<li><p><code>MiniGitCommandDone</code>: 명령어 실행이 완료된 후. Lua 콜백의 경우 다음과 같은 필드를 가진 특수 <code>data</code> 테이블을 제공합니다:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;cmd_input&gt;</span> <code>(table)</code>: 실행된 명령어에 대한 구조화된 데이터. <a href="https://neovim.io/doc/user/helptag.html?tag=nvim_create_user_command()">nvim_create_user_command()</a>의 Lua 함수 입력과 동일한 구조를 가집니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;cwd&gt;</span> <code>(string)</code>: Git 명령어가 실행된 디렉토리 경로.</p></li>
+<li><p><span class="help-syntax-keys">&lt;exit_code&gt;</span> <code>(number)</code>: CLI 프로세스의 종료 코드.</p></li>
+<li><p><span class="help-syntax-keys">&lt;git_command&gt;</span> <code>(table)</code>: 실행된 전체 명령어의 인수가 포함된 배열.</p></li>
+<li><p><span class="help-syntax-keys">&lt;git_subcommand&gt;</span> <code>(string)</code>: 감지된 Git 하위 명령 (예: “log” 등).</p></li>
+<li><p><span class="help-syntax-keys">&lt;stderr&gt;</span> <code>(string)</code>: 프로세스의 <code>stderr</code> 출력.</p></li>
+<li><p><span class="help-syntax-keys">&lt;stdout&gt;</span> <code>(string)</code>: 프로세스의 <code>stdout</code> 출력.</p></li>
+</ul></li>
+<li><p><code>MiniGitCommandSplit</code>: 명령어가 분할 창에 출력을 표시한 후. <code>MiniGitCommandDone</code> 이후에 트리거되며, 추가 필드가 포함된 유사한 <code>data</code> 테이블을 제공합니다:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;win_source&gt;</span> <code>(number)</code>: “소스” 창(명령 실행 직전의 현재 창)의 식별자.</p></li>
+<li><p><span class="help-syntax-keys">&lt;win_stdout&gt;</span> <code>(number)</code>: 명령어 출력 창의 식별자.</p></li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="minigit.setup" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.setup">setup()</h3>
+<p align="center">
+<code>MiniGit.setup</code>(<span class="help-syntax-special">{config}</span>)
+</p>
+<p>모듈 설정</p>
+<p>일반적인 부수 효과( <a href="../../mini.nvim/doc/mini-nvim.html#mini.nvim">mini.nvim</a> 참조) 외에도 다음을 수행합니다:</p>
+<ul>
+<li><p>디스크에 있는 실제 파일에 대해 모든 일반 버퍼에서 자동 활성화를 설정합니다.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#git">:Git</a> 명령어를 생성합니다.</p></li>
+</ul>
+<section id="minigit.setup-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.setup-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{config}</span> <code>(table|nil)</code> 모듈 설정 테이블. <a href="../../mini.nvim/doc/mini-git.html#minigit.config">MiniGit.config</a>를 참조하세요.</p>
+</section>
+<section id="minigit.setup-usage" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.setup-usage">사용법</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.git'</span><span class="op">).</span>setup<span class="op">()</span> <span class="co">-- 기본 설정 사용</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- 또는</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.git'</span><span class="op">).</span>setup<span class="op">({})</span> <span class="co">-- {}를 사용자 설정 테이블로 대체</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="minigit.config" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.config">config</h3>
+<p align="center">
+<code>MiniGit.config</code>
+</p>
+<section id="minigit.config-defaults" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.config-defaults">기본값</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">MiniGit</span><span class="op">.</span><span class="va">config</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 일반 CLI 실행</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">job</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Git 실행 파일 경로</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">git_executable</span> <span class="op">=</span> <span class="st">'git'</span><span class="op">,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 강제 종료 전까지 각 작업의 타임아웃 (ms 단위)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">timeout</span> <span class="op">=</span> <span class="dv">30000</span><span class="op">,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- `:Git` 명령어 옵션</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="va">command</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 기본 분할 방향</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">split</span> <span class="op">=</span> <span class="st">'auto'</span><span class="op">,</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="minigit.config-job" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.config-job">작업(Job)</h4>
+<p><code>config.job</code>은 CLI 실행을 사용자 정의하기 위한 옵션을 포함합니다.</p>
+<p><code>job.git_executable</code>은 Git 실행 파일의 전체 경로를 정의합니다. 기본값: “git”.</p>
+<p><code>job.timeout</code>은 작업 시작부터 강제로 중단될 때까지의 기간(ms 단위)입니다. 기본값: 30000.</p>
+</section>
+<section id="minigit.config-command" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.config-command">명령어(Command)</h4>
+<p><code>config.command</code>는 <a href="../../mini.nvim/doc/mini-git.html#git">:Git</a> 명령어를 사용자 정의하기 위한 옵션을 포함합니다.</p>
+<p><code>command.split</code>은 <a href="../../mini.nvim/doc/mini-git.html#git">:Git</a> 명령어 출력의 기본 분할 방향을 정의합니다. “horizontal”, “vertical”, “tab”, “auto” 중 하나일 수 있습니다. “auto” 값은 탭페이지에 ‘mini.git’ 버퍼만 표시되는 경우 <a href="https://neovim.io/doc/user/helptag.html?tag=:vertical">:vertical</a>을 사용하고, 그렇지 않으면 <a href="https://neovim.io/doc/user/helptag.html?tag=:tab">:tab</a>을 사용합니다. 기본값: “auto”.</p>
+<hr>
+</section>
+</section>
+<section id="minigit.show_at_cursor" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.show_at_cursor">show_at_cursor()</h3>
+<p align="center">
+<code>MiniGit.show_at_cursor</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>커서 위치의 Git 관련 데이터 표시</p>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-deps.html#mini.deps">mini.deps</a> 확인 버퍼 내부인 경우, 분할 창에 관련 커밋 데이터를 표시합니다.</p></li>
+<li><p>커밋 형태의 <a href="https://neovim.io/doc/user/helptag.html?tag=%3Ccword%3E"><span class="help-syntax-keys">&lt;cword&gt;</span></a>가 있으면 분할 창에 표시합니다.</p></li>
+<li><p>가능하다면 <a href="../../mini.nvim/doc/mini-git.html#minigit.show_diff_source">MiniGit.show_diff_source()</a>를 통해 diff 소스를 표시합니다.</p></li>
+<li><p>가능하다면 <a href="../../mini.nvim/doc/mini-git.html#minigit.show_range_history">MiniGit.show_range_history()</a>를 통해 범위 히스토리를 표시합니다.</p></li>
+<li><p>그렇지 않으면 에러를 발생시킵니다.</p></li>
+</ul>
+<section id="minigit.show_at_cursor-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.show_at_cursor-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 옵션. 가능한 값:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;split&gt;</span> <code>(string)</code>: 분할 방향. “horizontal”, “vertical”, “tab”, “auto”(기본값) 중 하나. “auto” 값은 탭페이지에 ‘mini.git’ 버퍼만 표시되는 경우 <a href="https://neovim.io/doc/user/helptag.html?tag=:vertical">:vertical</a>을 사용하고, 그렇지 않으면 <a href="https://neovim.io/doc/user/helptag.html?tag=:tab">:tab</a>을 사용합니다.</p></li>
+<li><p>다른 함수로 전달하기에 적절한 필드들.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="minigit.show_diff_source" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.show_diff_source">show_diff_source()</h3>
+<p align="center">
+<code>MiniGit.show_diff_source</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>diff 소스 표시</p>
+<p>버퍼에 통합 패치(unified patch) 형식의 텍스트가 포함된 경우 (예: <code>:Git log --patch</code>, <code>:Git diff</code>, <a href="../../mini.nvim/doc/mini-git.html#minigit.show_range_history">MiniGit.show_range_history()</a> 이후), 특정 시점의 파일 상태를 보여줍니다. 대상 커밋/상태, 경로 및 줄 번호는 커서 위치에서 추론됩니다.</p>
+<p>참고 사항:</p>
+<ul>
+<li><p>상대 경로가 작동하려면 <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리(current-directory)</a>가 Git 루트여야 합니다.</p></li>
+<li><p>커서가 헌크(hunk) 줄 내부 또는 경로가 있는 “—” / “+++” 줄 위에 있어야 합니다.</p></li>
+<li><p><code>:Git diff</code> 출력의 기본 형식만 지원됩니다: <code>:Git diff</code>, <code>:Git diff --cached</code>, <code>:Git diff &lt;commit&gt;</code>.</p></li>
+</ul>
+<section id="minigit.show_diff_source-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.show_diff_source-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 옵션. 가능한 값:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;split&gt;</span> <code>(string)</code>: 분할 방향. “horizontal”, “vertical”, “tab”, “auto”(기본값) 중 하나. “auto” 값은 탭페이지에 ‘mini.git’ 버퍼만 표시되는 경우 <a href="https://neovim.io/doc/user/helptag.html?tag=:vertical">:vertical</a>을 사용하고, 그렇지 않으면 <a href="https://neovim.io/doc/user/helptag.html?tag=:tab">:tab</a>을 사용합니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;target&gt;</span> <code>(string)</code>: 어떤 파일 상태를 보여줄지 설정. “before”, “after”, “both” (수직 분할로 두 상태 모두 표시), “auto”(기본값) 중 하나. “auto” 값은 커서 줄이 “-”로 시작하면 “before” 상태를, 그렇지 않으면 “after” 상태를 보여줍니다.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="minigit.show_range_history" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.show_range_history">show_range_history()</h3>
+<p align="center">
+<code>MiniGit.show_range_history</code>(<span class="help-syntax-special">{opts}</span>)
+</p>
+<p>범위 히스토리 표시</p>
+<p>현재 버퍼의 특정 줄 범위가 Git 히스토리를 통해 어떻게 변해왔는지에 대한 데이터를 계산하고 분할 창에 표시합니다. 본질적으로 <code>-L</code> 플래그가 붙은 <code>git log</code>입니다.</p>
+<p>참고 사항:</p>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#minigit.diff_foldexpr">MiniGit.diff_foldexpr()</a>와 잘 작동합니다.</p></li>
+<li><p>유효한 줄 범위를 계산하기 쉽지 않으므로, 커밋되지 않은 변경 사항이 있는 경우에는 작동하지 않습니다.</p></li>
+</ul>
+<section id="minigit.show_range_history-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.show_range_history-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 옵션. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;line_start&gt;</span> <code>(number)</code>: 범위 시작 줄.</p></li>
+<li><p><span class="help-syntax-keys">&lt;line_end&gt;</span> <code>(number)</code>: 범위 끝 줄. <span class="help-syntax-keys">&lt;line_start&gt;</span>와 <span class="help-syntax-keys">&lt;line_end&gt;</span>가 모두 제공되지 않으면 노멀 모드에서는 현재 줄이, 비주얼 모드에서는 비주얼 선택 영역이 기본값이 됩니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;log_args&gt;</span> <code>(table)</code>: <code>git log</code> 호출에 추가할 옵션 배열.</p></li>
+<li><p><span class="help-syntax-keys">&lt;split&gt;</span> <code>(string)</code>: 분할 방향. “horizontal”, “vertical”, “tab”, “auto”(기본값) 중 하나. “auto” 값은 탭페이지에 ‘mini.git’ 버퍼만 표시되는 경우 <a href="https://neovim.io/doc/user/helptag.html?tag=:vertical">:vertical</a>을 사용하고, 그렇지 않으면 <a href="https://neovim.io/doc/user/helptag.html?tag=:tab">:tab</a>을 사용합니다.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="minigit.diff_foldexpr" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.diff_foldexpr">diff_foldexpr()</h3>
+<p align="center">
+<code>MiniGit.diff_foldexpr</code>(<span class="help-syntax-special">{lnum}</span>)
+</p>
+<p>Git 로그를 위한 접기 표현식</p>
+<p>통합 diff(unified diff)에서 헌크(hunk), 파일 패치 및 로그 항목의 내용을 접습니다. “diff” (예: <code>:Git diff</code> 이후) 및 “git” (예: <code>:Git log --patch</code> 또는 커밋에 대한 <code>:Git show</code> 이후) 파일 유형에 유용합니다. <a href="../../mini.nvim/doc/mini-git.html#minigit.show_range_history">MiniGit.show_range_history()</a>와 잘 작동합니다.</p>
+<p>접기 레벨의 일반적인 개념 ( <a href="https://neovim.io/doc/user/helptag.html?tag=zr">zr</a> 및 <a href="https://neovim.io/doc/user/helptag.html?tag=zm">zm</a>을 사용하여 대화형으로 조정 가능):</p>
+<ul>
+<li><p>레벨 0에서는 전체 패치 또는 로그 항목당 한 줄이 표시됩니다.</p></li>
+<li><p>레벨 1에서는 패치된 파일당 한 줄이 표시됩니다.</p></li>
+<li><p>레벨 2에서는 헌크(hunk)당 한 줄이 표시됩니다.</p></li>
+<li><p>레벨 3에서는 접기가 없습니다.</p></li>
+</ul>
+<p>자동 설정을 위해 “git” 및 “diff” 파일 유형에 대해 다음과 같이 설정하세요 ( <a href="https://neovim.io/doc/user/helptag.html?tag=FileType">FileType</a> 자동 명령 또는 <a href="https://neovim.io/doc/user/helptag.html?tag=ftplugin">ftplugin</a> 내부):</p>
+<pre class="vim"><code>setlocal foldmethod=expr foldexpr=v:lua.MiniGit.diff_foldexpr()</code></pre>
+<section id="minigit.diff_foldexpr-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.diff_foldexpr-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{lnum}</span> <code>(number|nil)</code> 접기 레벨이 계산되는 줄 번호. 기본값: <a href="https://neovim.io/doc/user/helptag.html?tag=v:lnum">v:lnum</a>.</p>
+</section>
+<section id="minigit.diff_foldexpr-return" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.diff_foldexpr-return">반환값</h4>
+<p><code>(number|string)</code> 줄 접기 레벨. <a href="https://neovim.io/doc/user/helptag.html?tag=fold-expr">fold-expr</a>을 참조하세요.</p>
+<hr>
+</section>
+</section>
+<section id="minigit.enable" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.enable">enable()</h3>
+<p align="center">
+<code>MiniGit.enable</code>(<span class="help-syntax-special">{buf_id}</span>)
+</p>
+<p>파일 버퍼에서 Git 추적 활성화</p>
+<p>추적은 파일 내용 또는 파일 저장소의 변경에 반응하여 버퍼 데이터를 최신 상태로 유지함으로써 수행됩니다. 데이터는 다음을 통해 사용할 수 있습니다:</p>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-git.html#minigit.get_buf_data">MiniGit.get_buf_data()</a>: 실제로 추적되는 데이터 목록은 해당 도움말을 참조하세요.</p></li>
+<li><p><code>vim.b.minigit_summary</code> (테이블) 및 <code>vim.b.minigit_summary_string</code> (문자열) 버퍼 로컬 변수: 상태줄에 더 적합합니다. <code>vim.b.minigit_summary_string</code>은 HEAD, 파일 상태 및 진행 중인 작업에 대한 정보를 포함합니다 (자세한 내용은 <a href="../../mini.nvim/doc/mini-git.html#minigit.get_buf_data">MiniGit.get_buf_data()</a> 참조). 상태줄에서 조정하고 사용하는 방법은 <a href="../../mini.nvim/doc/mini-git.html#minigit-examples">MiniGit-examples</a>를 참조하세요.</p></li>
+</ul>
+<p>참고: 이 함수는 모든 새로운 일반 버퍼에 대해 자동으로 호출됩니다. 버퍼가 비활성화된 경우 명시적으로 호출하세요.</p>
+<p>추적 데이터가 업데이트될 때마다 <code>User</code> 이벤트 <code>MiniGitUpdated</code>가 트리거됩니다. 이벤트가 트리거되는 시점에 <a href="../../mini.nvim/doc/mini-git.html#minigit.get_buf_data">MiniGit.get_buf_data()</a>에 나열된 모든 데이터가 (아직) 존재하지 않을 수도 있습니다.</p>
+<section id="minigit.enable-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.enable-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{buf_id}</span> <code>(number)</code> 대상 버퍼 식별자. 기본값: 현재 버퍼의 경우 0.</p>
+<hr>
+</section>
+</section>
+<section id="minigit.disable" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.disable">disable()</h3>
+<p align="center">
+<code>MiniGit.disable</code>(<span class="help-syntax-special">{buf_id}</span>)
+</p>
+<p>버퍼에서 Git 추적 비활성화</p>
+<section id="minigit.disable-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.disable-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{buf_id}</span> <code>(number)</code> 대상 버퍼 식별자. 기본값: 현재 버퍼의 경우 0.</p>
+<hr>
+</section>
+</section>
+<section id="minigit.toggle" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.toggle">toggle()</h3>
+<p align="center">
+<code>MiniGit.toggle</code>(<span class="help-syntax-special">{buf_id}</span>)
+</p>
+<p>버퍼에서 Git 추적 토글</p>
+<p>비활성화되어 있으면 활성화하고, 활성화되어 있으면 비활성화합니다.</p>
+<section id="minigit.toggle-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.toggle-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{buf_id}</span> <code>(number)</code> 대상 버퍼 식별자. 기본값: 현재 버퍼의 경우 0.</p>
+<hr>
+</section>
+</section>
+<section id="minigit.get_buf_data" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minigit.get_buf_data">get_buf_data()</h3>
+<p align="center">
+<code>MiniGit.get_buf_data</code>(<span class="help-syntax-special">{buf_id}</span>)
+</p>
+<p>버퍼 데이터 가져오기</p>
+<section id="minigit.get_buf_data-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.get_buf_data-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{buf_id}</span> <code>(number)</code> 대상 버퍼 식별자. 기본값: 현재 버퍼의 경우 0.</p>
+</section>
+<section id="minigit.get_buf_data-return" class="level4">
+<h4 class="anchored" data-anchor-id="minigit.get_buf_data-return">반환값</h4>
+<p><code>(table|nil)</code> 버퍼의 Git 데이터가 포함된 테이블 또는 버퍼가 활성화되지 않은 경우 <code>nil</code>. 파일이 Git 저장소의 일부가 아닌 경우 테이블은 비어 있습니다. 테이블에는 다음 필드가 있습니다:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;repo&gt;</span> <code>(string)</code>: ‘.git’ 디렉토리의 전체 경로.</p></li>
+<li><p><span class="help-syntax-keys">&lt;root&gt;</span> <code>(string)</code>: 워킹 트리 루트의 전체 경로.</p></li>
+<li><p><span class="help-syntax-keys">&lt;head&gt;</span> <code>(string)</code>: 현재 HEAD의 전체 커밋.</p></li>
+<li><p><span class="help-syntax-keys">&lt;head_name&gt;</span> <code>(string)</code>: 현재 HEAD의 짧은 이름 (예: “master”). 분리된(detached) HEAD인 경우 “HEAD”입니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;status&gt;</span> <code>(string)</code>: <code>git status</code>에 의해 반환된 두 문자 파일 상태.</p></li>
+<li><p><span class="help-syntax-keys">&lt;in_progress&gt;</span> <code>(string)</code>: 현재 진행 중인 작업의 이름 (bisect, merge 등). “,”로 구분된 여러 작업의 조합일 수 있습니다.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- Original source: https://gc.zgo.at/count.js -->
+<!-- Inlined for security reasons (less supply chain attack possibility) -->
+<script data-goatcounter="https://nvim-mini.goatcounter.com/count">
+// GoatCounter: https://www.goatcounter.com
+// This file is released under the ISC license: https://opensource.org/licenses/ISC
+;(function() {
+	'use strict';
+
+	window.goatcounter = window.goatcounter || {}
+
+	// Load settings from data-goatcounter-settings.
+	var s = document.querySelector('script[data-goatcounter]')
+	if (s && s.dataset.goatcounterSettings) {
+		try         { var set = JSON.parse(s.dataset.goatcounterSettings) }
+		catch (err) { console.error('invalid JSON in data-goatcounter-settings: ' + err) }
+		for (var k in set)
+			if (['no_onload', 'no_events', 'allow_local', 'allow_frame', 'path', 'title', 'referrer', 'event'].indexOf(k) > -1)
+				window.goatcounter[k] = set[k]
+	}
+
+	var enc = encodeURIComponent
+
+	// Get all data we're going to send off to the counter endpoint.
+	window.goatcounter.get_data = function(vars) {
+		vars = vars || {}
+		var data = {
+			p: (vars.path     === undefined ? goatcounter.path     : vars.path),
+			r: (vars.referrer === undefined ? goatcounter.referrer : vars.referrer),
+			t: (vars.title    === undefined ? goatcounter.title    : vars.title),
+			e: !!(vars.event || goatcounter.event),
+			s: window.screen.width,
+			b: is_bot(),
+			q: location.search,
+		}
+
+		var rcb, pcb, tcb  // Save callbacks to apply later.
+		if (typeof(data.r) === 'function') rcb = data.r
+		if (typeof(data.t) === 'function') tcb = data.t
+		if (typeof(data.p) === 'function') pcb = data.p
+
+		if (is_empty(data.r)) data.r = document.referrer
+		if (is_empty(data.t)) data.t = document.title
+		if (is_empty(data.p)) data.p = get_path()
+
+		if (rcb) data.r = rcb(data.r)
+		if (tcb) data.t = tcb(data.t)
+		if (pcb) data.p = pcb(data.p)
+		return data
+	}
+
+	// Check if a value is "empty" for the purpose of get_data().
+	var is_empty = function(v) { return v === null || v === undefined || typeof(v) === 'function' }
+
+	// See if this looks like a bot; there is some additional filtering on the
+	// backend, but these properties can't be fetched from there.
+	var is_bot = function() {
+		// Headless browsers are probably a bot.
+		var w = window, d = document
+		if (w.callPhantom || w._phantom || w.phantom)
+			return 150
+		if (w.__nightmare)
+			return 151
+		if (d.__selenium_unwrapped || d.__webdriver_evaluate || d.__driver_evaluate)
+			return 152
+		if (navigator.webdriver)
+			return 153
+		return 0
+	}
+
+	// Object to urlencoded string, starting with a ?.
+	var urlencode = function(obj) {
+		var p = []
+		for (var k in obj)
+			if (obj[k] !== '' && obj[k] !== null && obj[k] !== undefined && obj[k] !== false)
+				p.push(enc(k) + '=' + enc(obj[k]))
+		return '?' + p.join('&')
+	}
+
+	// Show a warning in the console.
+	var warn = function(msg) {
+		if (console && 'warn' in console)
+			console.warn('goatcounter: ' + msg)
+	}
+
+	// Get the endpoint to send requests to.
+	var get_endpoint = function() {
+		var s = document.querySelector('script[data-goatcounter]')
+		return (s && s.dataset.goatcounter) ? s.dataset.goatcounter : goatcounter.endpoint
+	}
+
+	// Get current path.
+	var get_path = function() {
+		var loc = location,
+			c = document.querySelector('link[rel="canonical"][href]')
+		if (c) {  // May be relative or point to different domain.
+			var a = document.createElement('a')
+			a.href = c.href
+			if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
+				loc = a
+		}
+		return (loc.pathname + loc.search) || '/'
+	}
+
+	// Run function after DOM is loaded.
+	var on_load = function(f) {
+		if (document.body === null)
+			document.addEventListener('DOMContentLoaded', function() { f() }, false)
+		else
+			f()
+	}
+
+	// Filter some requests that we (probably) don't want to count.
+	window.goatcounter.filter = function() {
+		if ('visibilityState' in document && document.visibilityState === 'prerender')
+			return 'visibilityState'
+		if (!goatcounter.allow_frame && location !== parent.location)
+			return 'frame'
+		if (!goatcounter.allow_local && location.hostname.match(/(localhost$|^127\.|^10\.|^172\.(1[6-9]|2[0-9]|3[0-1])\.|^192\.168\.|^0\.0\.0\.0$)/))
+			return 'localhost'
+		if (!goatcounter.allow_local && location.protocol === 'file:')
+			return 'localfile'
+		if (localStorage && localStorage.getItem('skipgc') === 't')
+			return 'disabled with #toggle-goatcounter'
+		return false
+	}
+
+	// Get URL to send to GoatCounter.
+	window.goatcounter.url = function(vars) {
+		var data = window.goatcounter.get_data(vars || {})
+		if (data.p === null)  // null from user callback.
+			return
+		data.rnd = Math.random().toString(36).substr(2, 5)  // Browsers don't always listen to Cache-Control.
+
+		var endpoint = get_endpoint()
+		if (!endpoint)
+			return warn('no endpoint found')
+
+		return endpoint + urlencode(data)
+	}
+
+	// Count a hit.
+	window.goatcounter.count = function(vars) {
+		var f = goatcounter.filter()
+		if (f)
+			return warn('not counting because of: ' + f)
+		var url = goatcounter.url(vars)
+		if (!url)
+			return warn('not counting because path callback returned null')
+
+		if (!navigator.sendBeacon(url)) {
+			// This mostly fails due to being blocked by CSP; try again with an
+			// image-based fallback.
+			var img = document.createElement('img')
+			img.src = url
+			img.style.position = 'absolute'  // Affect layout less.
+			img.style.bottom = '0px'
+			img.style.width = '1px'
+			img.style.height = '1px'
+			img.loading = 'eager'
+			img.setAttribute('alt', '')
+			img.setAttribute('aria-hidden', 'true')
+
+			var rm = function() { if (img && img.parentNode) img.parentNode.removeChild(img) }
+			img.addEventListener('load', rm, false)
+			document.body.appendChild(img)
+		}
+	}
+
+	// Get a query parameter.
+	window.goatcounter.get_query = function(name) {
+		var s = location.search.substr(1).split('&')
+		for (var i = 0; i < s.length; i++)
+			if (s[i].toLowerCase().indexOf(name.toLowerCase() + '=') === 0)
+				return s[i].substr(name.length + 1)
+	}
+
+	// Track click events.
+	window.goatcounter.bind_events = function() {
+		if (!document.querySelectorAll)  // Just in case someone uses an ancient browser.
+			return
+
+		var send = function(elem) {
+			return function() {
+				goatcounter.count({
+					event:    true,
+					path:     (elem.dataset.goatcounterClick || elem.name || elem.id || ''),
+					title:    (elem.dataset.goatcounterTitle || elem.title || (elem.innerHTML || '').substr(0, 200) || ''),
+					referrer: (elem.dataset.goatcounterReferrer || elem.dataset.goatcounterReferral || ''),
+				})
+			}
+		}
+
+		Array.prototype.slice.call(document.querySelectorAll("*[data-goatcounter-click]")).forEach(function(elem) {
+			if (elem.dataset.goatcounterBound)
+				return
+			var f = send(elem)
+			elem.addEventListener('click', f, false)
+			elem.addEventListener('auxclick', f, false)  // Middle click.
+			elem.dataset.goatcounterBound = 'true'
+		})
+	}
+
+	// Add a "visitor counter" frame or image.
+	window.goatcounter.visit_count = function(opt) {
+		on_load(function() {
+			opt        = opt        || {}
+			opt.type   = opt.type   || 'html'
+			opt.append = opt.append || 'body'
+			opt.path   = opt.path   || get_path()
+			opt.attr   = opt.attr   || {width: '200', height: (opt.no_branding ? '60' : '80')}
+
+			opt.attr['src'] = get_endpoint() + 'er/' + enc(opt.path) + '.' + enc(opt.type) + '?'
+			if (opt.no_branding) opt.attr['src'] += '&no_branding=1'
+			if (opt.style)       opt.attr['src'] += '&style=' + enc(opt.style)
+			if (opt.start)       opt.attr['src'] += '&start=' + enc(opt.start)
+			if (opt.end)         opt.attr['src'] += '&end='   + enc(opt.end)
+
+			var tag = {png: 'img', svg: 'img', html: 'iframe'}[opt.type]
+			if (!tag)
+				return warn('visit_count: unknown type: ' + opt.type)
+
+			if (opt.type === 'html') {
+				opt.attr['frameborder'] = '0'
+				opt.attr['scrolling']   = 'no'
+			}
+
+			var d = document.createElement(tag)
+			for (var k in opt.attr)
+				d.setAttribute(k, opt.attr[k])
+
+			var p = document.querySelector(opt.append)
+			if (!p)
+				return warn('visit_count: element to append to not found: ' + opt.append)
+			p.appendChild(d)
+		})
+	}
+
+	// Make it easy to skip your own views.
+	if (location.hash === '#toggle-goatcounter') {
+		if (localStorage.getItem('skipgc') === 't') {
+			localStorage.removeItem('skipgc', 't')
+			alert('GoatCounter tracking is now ENABLED in this browser.')
+		}
+		else {
+			localStorage.setItem('skipgc', 't')
+			alert('GoatCounter tracking is now DISABLED in this browser until ' + location + ' is loaded again.')
+		}
+	}
+
+	if (!goatcounter.no_onload)
+		on_load(function() {
+			// 1. Page is visible, count request.
+			// 2. Page is not yet visible; wait until it switches to 'visible' and count.
+			// See #487
+			if (!('visibilityState' in document) || document.visibilityState === 'visible')
+				goatcounter.count()
+			else {
+				var f = function(e) {
+					if (document.visibilityState !== 'visible')
+						return
+					document.removeEventListener('visibilitychange', f)
+					goatcounter.count()
+				}
+				document.addEventListener('visibilitychange', f)
+			}
+
+			if (!goatcounter.no_events)
+				goatcounter.bind_events()
+		})
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nvim-mini\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© Evgeni Chasnovski, <a href="https://choosealicense.com/licenses/mit/">MIT</a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

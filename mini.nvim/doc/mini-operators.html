@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>mini.operators 문서 – MINI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/logo-mini_180x180.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-588f07447021c9b1c78c14c285b6df15.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-9a1b1f8e841c9c2d133c690b11f8ee3e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-822171c0b08fb8324585bf617d393f53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-02025811ff4c933f5630304c954c6652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": "tree",
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style> .quarto-title > h1.title { display: none } </style>
+
+
+<meta property="og:title" content="mini.operators 문서 – MINI">
+<meta property="og:description" content="Modular Independent Neovim Improvements">
+<meta property="og:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta property="og:site_name" content="MINI">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="mini.operators 문서 – MINI">
+<meta name="twitter:description" content="Modular Independent Neovim Improvements">
+<meta name="twitter:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">MINI</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mini.nvim/index.html"> 
+<span class="menu-text">mini.nvim</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../MiniMax/index.html"> 
+<span class="menu-text">MiniMax</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nvim-mini"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss-fill" role="img" aria-label="RSS">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#module" id="toc-module" class="nav-link active" data-scroll-target="#module">모듈</a>
+  <ul>
+  <li><a href="#module-setup" id="toc-module-setup" class="nav-link" data-scroll-target="#module-setup">설정</a></li>
+  <li><a href="#module-comparisons" id="toc-module-comparisons" class="nav-link" data-scroll-target="#module-comparisons">비교</a></li>
+  <li><a href="#module-highlightgroups" id="toc-module-highlightgroups" class="nav-link" data-scroll-target="#module-highlightgroups">하이라이트 그룹</a></li>
+  <li><a href="#module-disabling" id="toc-module-disabling" class="nav-link" data-scroll-target="#module-disabling">비활성화</a></li>
+  </ul></li>
+  <li><a href="#minioperators-overview" id="toc-minioperators-overview" class="nav-link" data-scroll-target="#minioperators-overview">개요</a>
+  <ul>
+  <li><a href="#minioperators-overview-mappings" id="toc-minioperators-overview-mappings" class="nav-link" data-scroll-target="#minioperators-overview-mappings">매핑</a></li>
+  </ul></li>
+  <li><a href="#minioperators.setup" id="toc-minioperators.setup" class="nav-link" data-scroll-target="#minioperators.setup">setup()</a>
+  <ul>
+  <li><a href="#minioperators.setup-parameters" id="toc-minioperators.setup-parameters" class="nav-link" data-scroll-target="#minioperators.setup-parameters">매개변수</a></li>
+  <li><a href="#minioperators.setup-usage" id="toc-minioperators.setup-usage" class="nav-link" data-scroll-target="#minioperators.setup-usage">사용법</a></li>
+  </ul></li>
+  <li><a href="#minioperators.config" id="toc-minioperators.config" class="nav-link" data-scroll-target="#minioperators.config">config</a>
+  <ul>
+  <li><a href="#minioperators.config-defaults" id="toc-minioperators.config-defaults" class="nav-link" data-scroll-target="#minioperators.config-defaults">기본값</a></li>
+  <li><a href="#minioperators.config-evaluate" id="toc-minioperators.config-evaluate" class="nav-link" data-scroll-target="#minioperators.config-evaluate">평가 (Evaluate)</a></li>
+  <li><a href="#minioperators.config-exchange" id="toc-minioperators.config-exchange" class="nav-link" data-scroll-target="#minioperators.config-exchange">교환 (Exchange)</a></li>
+  <li><a href="#minioperators.config-multiply" id="toc-minioperators.config-multiply" class="nav-link" data-scroll-target="#minioperators.config-multiply">배가 (Multiply)</a></li>
+  <li><a href="#minioperators.config-replace" id="toc-minioperators.config-replace" class="nav-link" data-scroll-target="#minioperators.config-replace">교체 (Replace)</a></li>
+  <li><a href="#minioperators.config-sort" id="toc-minioperators.config-sort" class="nav-link" data-scroll-target="#minioperators.config-sort">정렬 (Sort)</a></li>
+  </ul></li>
+  <li><a href="#minioperators.evaluate" id="toc-minioperators.evaluate" class="nav-link" data-scroll-target="#minioperators.evaluate">evaluate()</a>
+  <ul>
+  <li><a href="#minioperators.evaluate-parameters" id="toc-minioperators.evaluate-parameters" class="nav-link" data-scroll-target="#minioperators.evaluate-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minioperators.exchange" id="toc-minioperators.exchange" class="nav-link" data-scroll-target="#minioperators.exchange">exchange()</a>
+  <ul>
+  <li><a href="#minioperators.exchange-parameters" id="toc-minioperators.exchange-parameters" class="nav-link" data-scroll-target="#minioperators.exchange-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minioperators.multiply" id="toc-minioperators.multiply" class="nav-link" data-scroll-target="#minioperators.multiply">multiply()</a>
+  <ul>
+  <li><a href="#minioperators.multiply-parameters" id="toc-minioperators.multiply-parameters" class="nav-link" data-scroll-target="#minioperators.multiply-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minioperators.replace" id="toc-minioperators.replace" class="nav-link" data-scroll-target="#minioperators.replace">replace()</a>
+  <ul>
+  <li><a href="#minioperators.replace-parameters" id="toc-minioperators.replace-parameters" class="nav-link" data-scroll-target="#minioperators.replace-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minioperators.sort" id="toc-minioperators.sort" class="nav-link" data-scroll-target="#minioperators.sort">sort()</a>
+  <ul>
+  <li><a href="#minioperators.sort-parameters" id="toc-minioperators.sort-parameters" class="nav-link" data-scroll-target="#minioperators.sort-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minioperators.make_mappings" id="toc-minioperators.make_mappings" class="nav-link" data-scroll-target="#minioperators.make_mappings">make_mappings()</a>
+  <ul>
+  <li><a href="#minioperators.make_mappings-parameters" id="toc-minioperators.make_mappings-parameters" class="nav-link" data-scroll-target="#minioperators.make_mappings-parameters">매개변수</a></li>
+  <li><a href="#minioperators.make_mappings-usage" id="toc-minioperators.make_mappings-usage" class="nav-link" data-scroll-target="#minioperators.make_mappings-usage">사용법</a></li>
+  </ul></li>
+  <li><a href="#minioperators.default_evaluate_func" id="toc-minioperators.default_evaluate_func" class="nav-link" data-scroll-target="#minioperators.default_evaluate_func">default_evaluate_func()</a>
+  <ul>
+  <li><a href="#minioperators.default_evaluate_func-parameters" id="toc-minioperators.default_evaluate_func-parameters" class="nav-link" data-scroll-target="#minioperators.default_evaluate_func-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#minioperators.default_sort_func" id="toc-minioperators.default_sort_func" class="nav-link" data-scroll-target="#minioperators.default_sort_func">default_sort_func()</a>
+  <ul>
+  <li><a href="#minioperators.default_sort_func-parameters" id="toc-minioperators.default_sort_func-parameters" class="nav-link" data-scroll-target="#minioperators.default_sort_func-parameters">매개변수</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">mini.operators 문서</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>’mini.nvim’의 <code>main</code> 브랜치에서 생성됨</em></p>
+<p><a name="mini.operators" href="../../mini.nvim/doc/mini-operators.html#mini.operators"><b>mini.operators</b></a> 텍스트 편집 오퍼레이터</p>
+<p>MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski</p>
+<hr>
+<section id="module" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="module">모듈</h3>
+<p>기능:</p>
+<ul>
+<li><p>오퍼레이터:</p>
+<ul>
+<li><p>텍스트를 평가(evaluate)하고 그 출력으로 교체합니다.</p></li>
+<li><p>텍스트 영역을 교환(exchange)합니다.</p></li>
+<li><p>텍스트를 배가(multiply, 복제)합니다.</p></li>
+<li><p>레지스터의 내용으로 텍스트를 교체(replace)합니다.</p></li>
+<li><p>텍스트를 정렬(sort)합니다.</p></li>
+</ul></li>
+<li><p>텍스트 오브젝트, 줄, 선택 영역에 대해 작동하도록 구성 가능한 자동 매핑을 제공합니다. <a href="../../mini.nvim/doc/mini-operators.html#minioperators.make_mappings">MiniOperators.make_mappings()</a>를 사용하여 더 세밀하게 제어하거나 비활성화할 수 있습니다.</p></li>
+<li><p>모든 오퍼레이터는 <a href="https://neovim.io/doc/user/helptag.html?tag=%5Bcount%5D">[count]</a>와 점 반복(dot-repeat)을 지원합니다.</p></li>
+</ul>
+<p>자세한 내용은 <a href="../../mini.nvim/doc/mini-operators.html#minioperators-overview">MiniOperators-overview</a> 및 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.config">MiniOperators.config</a>를 참조하세요.</p>
+<section id="module-setup" class="level4">
+<h4 class="anchored" data-anchor-id="module-setup">설정</h4>
+<p>이 모듈은 <code>require('mini.operators').setup({})</code>으로 설정이 필요합니다 (<code>{}</code>를 사용자 <code>config</code> 테이블로 교체하세요). 이는 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 <code>MiniOperators</code>를 생성합니다 (<code>:lua MiniOperators.*</code>로 사용 가능).</p>
+<p>사용 가능한 설정은 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.config">MiniOperators.config</a>를 참조하세요.</p>
+<p>런타임 설정(<code>config.mappings</code> 제외)을 <code>vim.b.minioperators_config</code>를 사용하여 버퍼별로 재정의할 수 있으며, 이는 <code>MiniOperators.config</code>와 동일한 구조여야 합니다. 자세한 내용은 <a href="../../mini.nvim/doc/mini-nvim.html#mini.nvim-buffer-local-config">mini.nvim-buffer-local-config</a>를 참조하세요.</p>
+</section>
+<section id="module-comparisons" class="level4">
+<h4 class="anchored" data-anchor-id="module-comparisons">비교</h4>
+<ul>
+<li><p><a href="https://github.com/gbprod/substitute.nvim">gbprod/substitute.nvim</a>:</p>
+<ul>
+<li><p>“replace” 및 “exchange” 변형을 제공하지만, 이 모듈의 다른 기능은 제공하지 않습니다.</p></li>
+<li><p>범위에 대한 “replace/substitute” 기능을 제공하지만, 이 모듈은 설계상 이를 제공하지 않습니다 (이는 <a href="https://neovim.io/doc/user/helptag.html?tag=:s">:s</a> 기능과 유사하면서도 정신적 복잡성을 크게 낮추지 않기 때문입니다).</p></li>
+<li><p>“Replace”는 붙여넣은 텍스트를 강조하지만, 이 모듈은 그렇지 않습니다.</p></li>
+<li><p>“Exchange”는 버퍼 간에 작동하지 않지만, 이 모듈은 작동합니다.</p></li>
+</ul></li>
+<li><p><a href="https://github.com/svermeulen/vim-subversive">svermeulen/vim-subversive</a>:</p>
+<ul>
+<li><p>“replace” 기능의 주요 영감이 되었으므로 이 오퍼레이터에 대해서는 대부분 유사합니다.</p></li>
+<li><p>범위에 대한 “replace/substitute” 기능을 제공하지만, 이 모듈은 설계상 이를 제공하지 않습니다.</p></li>
+</ul></li>
+<li><p><a href="https://github.com/tommcdo/vim-exchange">tommcdo/vim-exchange</a>:</p>
+<ul>
+<li><p>“exchange” 기능의 주요 영감이 되었으므로 이 오퍼레이터에 대해서는 대부분 유사합니다.</p></li>
+<li><p>버퍼 간에 작동하지 않지만, 이 모듈은 작동합니다.</p></li>
+</ul></li>
+<li><p><a href="https://github.com/christoomey/vim-sort-motion">christoomey/vim-sort-motion</a>:</p>
+<ul>
+<li><p>줄 단위 정렬에 <a href="https://neovim.io/doc/user/helptag.html?tag=:sort">:sort</a>를 사용하는 반면, 이 모듈은 일관된 정렬 알고리즘을 사용합니다 (기본값은 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.default_sort_func">MiniOperators.default_sort_func()</a> 참조).</p></li>
+<li><p>정렬 알고리즘을 사용자 정의할 수 없지만, 이 모듈은 가능합니다 (<a href="../../mini.nvim/doc/mini-operators.html#minioperators.config">MiniOperators.config</a>의 <code>sort.func</code> 참조).</p></li>
+<li><p>문자 단위 영역에 대해 쉼표만 구분자로 사용하지만, 이 모듈은 세미콜론이나 공백으로도 구분할 수 있습니다 (기본값은 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.default_sort_func">MiniOperators.default_sort_func()</a> 참조).</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="module-highlightgroups" class="level4">
+<h4 class="anchored" data-anchor-id="module-highlightgroups">하이라이트 그룹</h4>
+<ul>
+<li><code>MiniOperatorsExchangeFrom</code> - 교환할 첫 번째 영역.</li>
+</ul>
+<p>하이라이트 그룹을 변경하려면 <a href="https://neovim.io/doc/user/helptag.html?tag=nvim_set_hl()">nvim_set_hl()</a>을 사용하여 직접 설정하세요.</p>
+</section>
+<section id="module-disabling" class="level4">
+<h4 class="anchored" data-anchor-id="module-disabling">비활성화</h4>
+<p>주요 기능을 비활성화하려면 <code>vim.g.minioperators_disable</code>(전역) 또는 <code>vim.b.minioperators_disable</code>(버퍼별)을 <code>true</code>로 설정하세요. 다양한 시나리오와 사용자 정의 의도를 고려하여 모듈 기능 비활성화를 위한 정확한 규칙 작성은 사용자의 몫으로 남겨둡니다. 일반적인 방법은 <a href="../../mini.nvim/doc/mini-nvim.html#mini.nvim-disabling-recipes">mini.nvim-disabling-recipes</a>를 참조하세요.</p>
+<hr>
+</section>
+</section>
+<section id="minioperators-overview" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators-overview">개요</h3>
+<p>오퍼레이터는 (<a href="https://neovim.io/doc/user/helptag.html?tag=d">d</a>, <a href="https://neovim.io/doc/user/helptag.html?tag=c">c</a> 등과 유사하게) 텍스트 오브젝트, 모션 또는 비주얼 선택 영역에 대해 수행될 동작을 정의합니다. 필요한 경우 제공된 레지스터도 존중할 수 있습니다 (“replace” 오퍼레이터와 같이).</p>
+<p>이 모듈은 각 오퍼레이터를 별도의 전용 함수로 구현합니다 (예: “replace” 오퍼레이터의 경우 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.replace">MiniOperators.replace()</a>). 각 함수는 <code>mode</code>를 인수로 받아 그에 따라 동작합니다.</p>
+<ul>
+<li><p><code>mode</code>가 <code>nil</code>인 경우(또는 명시적으로 제공되지 않은 경우), <a href="https://neovim.io/doc/user/helptag.html?tag='operatorfunc'">‘operatorfunc’</a>를 이 전용 함수로 설정하고 표현식 매핑에서 호출된 것으로 가정하여 <code>g@</code>를 반환합니다. 자세한 내용은 <a href="https://neovim.io/doc/user/helptag.html?tag=:map-operator">:map-operator</a> 및 <a href="https://neovim.io/doc/user/helptag.html?tag=:map-expression">:map-expression</a>을 참조하세요.</p></li>
+<li><p><code>mode</code>가 “char”, “line” 또는 “block”인 경우, <code>operatorfunc</code>로 동작하며 [<code>[](https://neovim.io/doc/user/helptag.html?tag=</code>[) 및 |`]| 마크 사이의 영역에 대해 동작을 수행합니다.</p></li>
+<li><p><code>mode</code>가 “visual”인 경우, [<code>&lt;](https://neovim.io/doc/user/helptag.html?tag=</code>&lt;) 및 |`&gt;| 마크 사이의 영역에 대해 동작을 수행합니다.</p></li>
+</ul>
+<p>특정 오퍼레이터에 대한 자세한 내용은 해당 함수 도움말을 참조하세요.</p>
+<ul>
+<li><p>평가 (Evaluate): <a href="../../mini.nvim/doc/mini-operators.html#minioperators.evaluate">MiniOperators.evaluate()</a></p></li>
+<li><p>교환 (Exchange): <a href="../../mini.nvim/doc/mini-operators.html#minioperators.exchange">MiniOperators.exchange()</a></p></li>
+<li><p>배가 (Multiply): <a href="../../mini.nvim/doc/mini-operators.html#minioperators.multiply">MiniOperators.multiply()</a></p></li>
+<li><p>교체 (Replace): <a href="../../mini.nvim/doc/mini-operators.html#minioperators.replace">MiniOperators.replace()</a></p></li>
+<li><p>정렬 (Sort): <a href="../../mini.nvim/doc/mini-operators.html#minioperators.sort">MiniOperators.sort()</a></p></li>
+</ul>
+<section id="minioperators-overview-mappings" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators-overview-mappings">매핑</h4>
+<p><a name="minioperators-mappings" href="../../mini.nvim/doc/mini-operators.html#minioperators-mappings"><b>MiniOperators-mappings</b></a></p>
+<p>모든 오퍼레이터는 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.setup">MiniOperators.setup()</a> 실행 중에 자동으로 매핑됩니다. 매핑 키는 해당 <code>config</code> 항목의 <code>prefix</code> 필드에서 유추됩니다. 모든 내장 충돌 매핑은 제거됩니다 (Neovim&gt;=0.11의 <a href="https://neovim.io/doc/user/helptag.html?tag=gra">gra</a>, <a href="https://neovim.io/doc/user/helptag.html?tag=grn">grn</a> 등). <a href="https://neovim.io/doc/user/helptag.html?tag=gx">gx</a> 및 <a href="https://neovim.io/doc/user/helptag.html?tag=v_gx">v_gx</a>는 모두 <code>gX</code>로 재매핑됩니다 (이미 사용 중이 아닌 경우).</p>
+<p>각 오퍼레이터에 대해 다음 매핑이 생성됩니다.</p>
+<ul>
+<li><p>일반 모드에서 텍스트 오브젝트에 대해 작동. <code>prefix</code>를 직접 사용합니다.</p></li>
+<li><p>일반 모드에서 줄에 대해 작동. <code>prefix</code>에 마지막 문자를 추가합니다. 이는 <a href="https://neovim.io/doc/user/helptag.html?tag=operator-doubled">operator-doubled</a> 및 <a href="https://neovim.io/doc/user/helptag.html?tag=guu">guu</a>, <a href="https://neovim.io/doc/user/helptag.html?tag=gUU">gUU</a>와 같이 세 글자 이상의 오퍼레이터에 대해 확립된 패턴과 일치합니다.</p></li>
+<li><p>비주얼 모드에서 비주얼 선택 영역에 대해 작동. <code>prefix</code>를 직접 사용합니다.</p></li>
+</ul>
+<p>“replace”의 기본 매핑 예시:</p>
+<ul>
+<li><p>일반 모드에서 텍스트 오브젝트에 작동하는 <code>gr</code>. 사용 예: <code>griw</code>는 “inner word”를 기본 레지스터로 교체합니다.</p></li>
+<li><p>일반 모드에서 줄에 작동하는 <code>grr</code>. 사용 예: <code>grr</code>은 현재 줄을 교체합니다.</p></li>
+<li><p>비주얼 모드에서 비주얼 선택 영역에 작동하는 <code>gr</code>. 사용 예: <code>viw</code>로 “inner word”를 선택하고 <code>gr</code>로 교체합니다.</p></li>
+</ul>
+<p>매핑을 사용자 정의하는 두 가지 제안된 방법:</p>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-operators.html#minioperators.setup">MiniOperators.setup()</a> 호출 시 <code>prefix</code>를 변경합니다. 예를 들어, 다음과 같이 하면:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.operators'</span><span class="op">).</span>setup<span class="op">({</span> <span class="va">replace</span> <span class="op">=</span> <span class="op">{</span> <span class="va">prefix</span> <span class="op">=</span> <span class="st">'cr'</span> <span class="op">}</span> <span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>매핑이 <code>gr</code> / <code>grr</code> / <code>gr</code> 대신 <code>cr</code> / <code>crr</code> / <code>cr</code>이 됩니다.</p></li>
+<li><p>접두사로 빈 문자열을 제공하여 자동 매핑 생성을 비활성화하고 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.make_mappings">MiniOperators.make_mappings()</a>를 직접 사용합니다. 예를 들어:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- "replace"의 자동 생성 비활성화</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">operators</span> <span class="op">=</span> <span class="fu">require</span><span class="op">(</span><span class="st">'mini.operators'</span><span class="op">)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">operators</span><span class="op">.</span>setup<span class="op">({</span> <span class="va">replace</span> <span class="op">=</span> <span class="op">{</span> <span class="va">prefix</span> <span class="op">=</span> <span class="st">''</span> <span class="op">}</span> <span class="op">})</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- 사용자 정의 매핑 만들기</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="va">operators</span><span class="op">.</span>make_mappings<span class="op">(</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'replace'</span><span class="op">,</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="va">textobject</span> <span class="op">=</span> <span class="st">'cr'</span><span class="op">,</span> <span class="va">line</span> <span class="op">=</span> <span class="st">'crr'</span><span class="op">,</span> <span class="va">selection</span> <span class="op">=</span> <span class="st">'cr'</span> <span class="op">}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="minioperators.setup" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.setup">setup()</h3>
+<p align="center">
+<code>MiniOperators.setup</code>(<span class="help-syntax-special">{config}</span>)
+</p>
+<p>모듈 설정</p>
+<section id="minioperators.setup-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.setup-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{config}</span> <code>(table|nil)</code> 모듈 설정 테이블. <a href="../../mini.nvim/doc/mini-operators.html#minioperators.config">MiniOperators.config</a>를 참조하세요.</p>
+</section>
+<section id="minioperators.setup-usage" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.setup-usage">사용법</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.operators'</span><span class="op">).</span>setup<span class="op">()</span> <span class="co">-- 기본 설정 사용</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- 또는</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.operators'</span><span class="op">).</span>setup<span class="op">({})</span> <span class="co">-- {}를 사용자 설정 테이블로 교체</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="minioperators.config" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.config">config</h3>
+<p align="center">
+<code>MiniOperators.config</code>
+</p>
+<section id="minioperators.config-defaults" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.config-defaults">기본값</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">MiniOperators</span><span class="op">.</span><span class="va">config</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 각 항목은 하나의 오퍼레이터를 설정합니다.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- `prefix`는 `setup()` 중에 매핑되는 키를 정의합니다.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 일반 모드에서는 텍스트 오브젝트와 줄에 대해, 비주얼 모드에서는 선택 영역에 대해 작동합니다.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 텍스트를 평가하고 그 출력으로 교체</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">evaluate</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">prefix</span> <span class="op">=</span> <span class="st">'g='</span><span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 평가를 수행하는 함수</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">func</span> <span class="op">=</span> <span class="kw">nil</span><span class="op">,</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 텍스트 영역 교환</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="va">exchange</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 참고: 기본 `gx`는 `gX`로 재매핑됩니다.</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="va">prefix</span> <span class="op">=</span> <span class="st">'gx'</span><span class="op">,</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 새 텍스트를 이전 들여쓰기에 맞게 다시 들여쓸지 여부</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="va">reindent_linewise</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 텍스트 배가 (복제)</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="va">multiply</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="va">prefix</span> <span class="op">=</span> <span class="st">'gm'</span><span class="op">,</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 복제 전 텍스트를 수정할 수 있는 함수</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="va">func</span> <span class="op">=</span> <span class="kw">nil</span><span class="op">,</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 레지스터의 내용으로 텍스트 교체</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="va">replace</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 참고: 기본 `gr*` LSP 매핑은 제거됩니다.</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="va">prefix</span> <span class="op">=</span> <span class="st">'gr'</span><span class="op">,</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 새 텍스트를 이전 들여쓰기에 맞게 다시 들여쓸지 여부</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="va">reindent_linewise</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 텍스트 정렬</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="va">prefix</span> <span class="op">=</span> <span class="st">'gs'</span><span class="op">,</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 정렬을 수행하는 함수</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="va">func</span> <span class="op">=</span> <span class="kw">nil</span><span class="op">,</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="minioperators.config-evaluate" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.config-evaluate">평가 (Evaluate)</h4>
+<p><code>evaluate.prefix</code>는 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.setup">MiniOperators.setup()</a> 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. <a href="../../mini.nvim/doc/mini-operators.html#minioperators-mappings">MiniOperators-mappings</a>를 참조하세요.</p>
+<p><code>evaluate.func</code>는 텍스트 영역을 실제로 평가하는 데 사용되는 함수입니다. <code>nil</code>(기본값)인 경우 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.default_evaluate_func">MiniOperators.default_evaluate_func()</a>가 사용됩니다.</p>
+<p>이 함수는 선택된 텍스트를 나타내는 콘텐츠 테이블을 입력으로 받고, 출력으로 줄 배열(한 항목당 한 줄)을 반환해야 합니다. 콘텐츠 테이블에는 영역 줄들의 배열인 <code>lines</code>와 문자 단위, 줄 단위, 블록 단위에 따라 <code>v</code>, <code>V</code>, <code>\22</code>(이스케이프된 <code>&lt;C-v&gt;</code>) 중 하나인 <code>submode</code> 필드가 있습니다.</p>
+<p>언어별로 평가를 사용자 정의하려면 버퍼별 설정(<code>vim.b.minioperators_config</code>)에서 <code>evaluate.func</code>를 설정하세요. <a href="../../mini.nvim/doc/mini-nvim.html#mini.nvim-buffer-local-config">mini.nvim-buffer-local-config</a>를 참조하세요.</p>
+</section>
+<section id="minioperators.config-exchange" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.config-exchange">교환 (Exchange)</h4>
+<p><code>exchange.prefix</code>는 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.setup">MiniOperators.setup()</a> 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. <a href="../../mini.nvim/doc/mini-operators.html#minioperators-mappings">MiniOperators-mappings</a>를 참조하세요.</p>
+<p>참고: 기본값 “gx”는 <a href="https://neovim.io/doc/user/helptag.html?tag=gx">gx</a> / <a href="https://neovim.io/doc/user/helptag.html?tag=v_gx">v_gx</a>를 덮어씁니다. 대신 이들은 <code>gX</code>로 재매핑됩니다 (이미 사용 중이 아닌 경우). 내장 기능(커서 위치의 URL 열기)과 함께 <code>gx</code>를 계속 사용하려면 다른 <code>config.prefix</code>를 선택하세요.</p>
+<p><code>exchange.reindent_linewise</code>는 새로 놓인 줄 단위 텍스트가 교체된 텍스트의 들여쓰기를 유지해야 하는지 여부를 나타내는 불리언 값입니다. 즉, <code>false</code>인 경우 영역들이 들여쓰기를 유지한 채 교환되고, <code>true</code>인 경우 그렇지 않습니다.</p>
+</section>
+<section id="minioperators.config-multiply" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.config-multiply">배가 (Multiply)</h4>
+<p><code>multiply.prefix</code>는 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.setup">MiniOperators.setup()</a> 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. <a href="../../mini.nvim/doc/mini-operators.html#minioperators-mappings">MiniOperators-mappings</a>를 참조하세요.</p>
+<p><code>multiply.func</code>는 선택적으로 복제된 텍스트를 업데이트하는 데 사용되는 함수입니다. <code>nil</code>(기본값)인 경우 텍스트가 그대로 사용됩니다.</p>
+<p>콘텐츠 테이블을 입력으로 받고( “Evaluate” 섹션 참조), 출력으로 줄 배열을 반환해야 합니다.</p>
+</section>
+<section id="minioperators.config-replace" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.config-replace">교체 (Replace)</h4>
+<p><code>replace.prefix</code>는 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.setup">MiniOperators.setup()</a> 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. <a href="../../mini.nvim/doc/mini-operators.html#minioperators-mappings">MiniOperators-mappings</a>를 참조하세요.</p>
+<p><code>replace.reindent_linewise</code>는 새로 놓인 줄 단위 텍스트가 교체된 텍스트의 들여쓰기를 유지해야 하는지 여부를 나타내는 불리언 값입니다.</p>
+</section>
+<section id="minioperators.config-sort" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.config-sort">정렬 (Sort)</h4>
+<p><code>sort.prefix</code>는 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.setup">MiniOperators.setup()</a> 중에 오퍼레이터 매핑 키를 자동으로 유추하는 데 사용되는 문자열입니다. <a href="../../mini.nvim/doc/mini-operators.html#minioperators-mappings">MiniOperators-mappings</a>를 참조하세요.</p>
+<p><code>sort.func</code>는 텍스트 영역을 실제로 정렬하는 데 사용되는 함수입니다. <code>nil</code>(기본값)인 경우 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.default_sort_func">MiniOperators.default_sort_func()</a>가 사용됩니다.</p>
+<p>콘텐츠 테이블을 입력으로 받고( “Evaluate” 섹션 참조), 출력으로 줄 배열을 반환해야 합니다.</p>
+<p>문자 단위 영역에 대해 사용자에게 사용자 정의 구분자를 묻는 <code>sort.func</code> 예시:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">sort_func</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">content</span><span class="op">)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">local</span> <span class="va">opts</span> <span class="op">=</span> <span class="op">{}</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="va">content</span><span class="op">.</span><span class="va">submode</span> <span class="op">==</span> <span class="st">'v'</span> <span class="cf">then</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 구분자를 있는 그대로(Lua 패턴이 아님) 처리하도록 요청</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">delimiter</span> <span class="op">=</span> <span class="va">vim</span><span class="op">.</span><span class="va">fn</span><span class="op">.</span>input<span class="op">(</span><span class="st">'정렬 구분자: '</span><span class="op">)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 주변 공백을 분할의 일부로 처리</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">opts</span><span class="op">.</span><span class="va">split_patterns</span> <span class="op">=</span> <span class="op">{</span> <span class="st">'%s*'</span> <span class="op">..</span> <span class="va">vim</span><span class="op">.</span>pesc<span class="op">(</span><span class="va">delimiter</span><span class="op">)</span> <span class="op">..</span> <span class="st">'%s*'</span> <span class="op">}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">MiniOperators</span><span class="op">.</span>default_sort_func<span class="op">(</span><span class="va">content</span><span class="op">,</span> <span class="va">opts</span><span class="op">)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.operators'</span><span class="op">).</span>setup<span class="op">({</span> <span class="fu">sort</span> <span class="op">=</span> <span class="op">{</span> <span class="va">func</span> <span class="op">=</span> <span class="va">sort_func</span> <span class="op">}</span> <span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="minioperators.evaluate" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.evaluate">evaluate()</h3>
+<p align="center">
+<code>MiniOperators.evaluate</code>(<span class="help-syntax-special">{mode}</span>)
+</p>
+<p>텍스트를 평가하고 그 출력으로 교체</p>
+<p>영역을 <code>config.evaluate.func</code>의 출력으로 교체합니다. 기본적으로는 영역 서브모드에 따라 텍스트를 Lua 코드로 평가하는 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.default_evaluate_func">MiniOperators.default_evaluate_func()</a>입니다.</p>
+<section id="minioperators.evaluate-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.evaluate-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{mode}</span> <code>(string|nil)</code> <code>nil</code>, <code>'char'</code>, <code>'line'</code>, <code>'block'</code>, <code>'visual'</code> 중 하나.</p>
+<hr>
+</section>
+</section>
+<section id="minioperators.exchange" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.exchange">exchange()</h3>
+<p align="center">
+<code>MiniOperators.exchange</code>(<span class="help-syntax-special">{mode}</span>)
+</p>
+<p>텍스트 영역 교환</p>
+<p>2단계 로직을 갖습니다.</p>
+<ul>
+<li><p>첫 번째 호출은 영역을 교환할 영역으로 기억하고 <code>MiniOperatorsExchangeFrom</code> 하이라이트 그룹으로 강조합니다.</p></li>
+<li><p>두 번째 호출은 교환을 수행합니다. 기본적으로 “두 영역 모두 얀크(yank)”하고 각각을 서로 교체하는 두 단계의 동작입니다.</p></li>
+</ul>
+<p>참고:</p>
+<ul>
+<li><p>첫 번째 단계 후 교환을 중지하려면 <code>&lt;C-c&gt;</code>를 사용하세요.</p></li>
+<li><p>교환되는 영역은 서로 다른 (문자, 줄, 블록) 단위 서브모드를 가질 수 있습니다.</p></li>
+<li><p>대부분의 겹치는 영역 사례에서 작동하지만, 공식적으로 지원되지는 않습니다.</p></li>
+</ul>
+<section id="minioperators.exchange-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.exchange-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{mode}</span> <code>(string|nil)</code> <code>nil</code>, <code>'char'</code>, <code>'line'</code>, <code>'block'</code>, <code>'visual'</code> 중 하나.</p>
+<hr>
+</section>
+</section>
+<section id="minioperators.multiply" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.multiply">multiply()</h3>
+<p align="center">
+<code>MiniOperators.multiply</code>(<span class="help-syntax-special">{mode}</span>)
+</p>
+<p>텍스트 배가 (복제)</p>
+<p>영역을 (레지스터에 영향을 주지 않고) 복사하여 바로 뒤에 놓습니다.</p>
+<p>참고:</p>
+<ul>
+<li><p>두 가지 유형의 <a href="https://neovim.io/doc/user/helptag.html?tag=%5Bcount%5D">[count]</a>를 지원합니다. 기본 <code>config.multiply.prefix</code>를 사용하는 <code>[count1]gm[count2][textobject]</code>는 <code>[count2][textobject]</code>에 의해 정의된 영역의 <code>[count1]</code>개 복사본을 만듭니다. 예: <code>2gm3aw</code> - <code>3aw</code>의 복사본 2개.</p></li>
+<li><p>“line” 매핑(기본적으로 <code>gmm</code>)에 대한 <a href="https://neovim.io/doc/user/helptag.html?tag=%5Bcount%5D">[count]</a>는 이전 참고의 <code>[count1]</code>으로 처리됩니다.</p></li>
+<li><p>“얀크(yank)” + “붙여넣기(paste)” 대신 이것을 사용하는 장점:</p>
+<ul>
+<li><p>어떤 레지스터도 수정하지 않는 반면, 별도의 단계는 복제된 텍스트를 보관할 레지스터가 필요합니다.</p></li>
+<li><p>대부분의 경우 별도의 단계는 “얀크” + “커서 이동” + “붙여넣기”가 되겠지만, “multiply”는 이를 한 번에 수행합니다.</p></li>
+</ul></li>
+</ul>
+<section id="minioperators.multiply-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.multiply-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{mode}</span> <code>(string|nil)</code> <code>nil</code>, <code>'char'</code>, <code>'line'</code>, <code>'block'</code>, <code>'visual'</code> 중 하나.</p>
+<hr>
+</section>
+</section>
+<section id="minioperators.replace" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.replace">replace()</h3>
+<p align="center">
+<code>MiniOperators.replace</code>(<span class="help-syntax-special">{mode}</span>)
+</p>
+<p>레지스터의 내용으로 텍스트 교체</p>
+<p>참고:</p>
+<ul>
+<li><p>두 가지 유형의 <a href="https://neovim.io/doc/user/helptag.html?tag=%5Bcount%5D">[count]</a>를 지원합니다. 기본 <code>config.replace.prefix</code>를 사용하는 <code>[count1]gr[count2][textobject]</code>는 <code>[count2][textobject]</code>에 의해 정의된 영역 위에 레지스터 내용을 <code>[count1]</code>개 놓습니다. 예: <code>2gr3aw</code> - <code>3aw</code> 위에 레지스터 내용 2개.</p></li>
+<li><p>“line” 매핑(기본적으로 <code>grr</code>)에 대한 <a href="https://neovim.io/doc/user/helptag.html?tag=%5Bcount%5D">[count]</a>는 이전 참고의 <code>[count1]</code>으로 처리됩니다.</p></li>
+<li><p>“비주얼 선택” + “<a href="https://neovim.io/doc/user/helptag.html?tag=v_P">v_P</a>로 붙여넣기” 대신 이것을 사용하는 장점:</p>
+<ul>
+<li><p>오퍼레이터로서 점 반복이 가능하므로 여러 번 교체해야 하는 경우 누적 이득이 있습니다.</p></li>
+<li><p>자동으로 들여쓰기를 다시 조정할 수 있습니다.</p></li>
+</ul></li>
+</ul>
+<section id="minioperators.replace-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.replace-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{mode}</span> <code>(string|nil)</code> <code>nil</code>, <code>'char'</code>, <code>'line'</code>, <code>'block'</code>, <code>'visual'</code> 중 하나.</p>
+<hr>
+</section>
+</section>
+<section id="minioperators.sort" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.sort">sort()</h3>
+<p align="center">
+<code>MiniOperators.sort</code>(<span class="help-syntax-special">{mode}</span>)
+</p>
+<p>텍스트 정렬</p>
+<p>영역을 <code>config.sort.func</code>의 출력으로 교체합니다. 기본적으로는 서브모드에 따라 텍스트를 정렬하는 <a href="../../mini.nvim/doc/mini-operators.html#minioperators.default_sort_func">MiniOperators.default_sort_func()</a>입니다.</p>
+<p>참고:</p>
+<ul>
+<li>“line” 매핑은 문자 단위입니다 (한 줄을 줄 단위로 정렬하는 것은 별 의미가 없기 때문입니다). 이로 인해 <a href="https://neovim.io/doc/user/helptag.html?tag=%5Bcount%5D">[count]</a>도 지원되지 않습니다.</li>
+</ul>
+<section id="minioperators.sort-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.sort-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{mode}</span> <code>(string|nil)</code> <code>nil</code>, <code>'char'</code>, <code>'line'</code>, <code>'block'</code>, <code>'visual'</code> 중 하나.</p>
+<hr>
+</section>
+</section>
+<section id="minioperators.make_mappings" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.make_mappings">make_mappings()</h3>
+<p align="center">
+<code>MiniOperators.make_mappings</code>(<span class="help-syntax-special">{operator_name}</span>, <span class="help-syntax-special">{lhs_tbl}</span>)
+</p>
+<p>오퍼레이터 매핑 만들기</p>
+<section id="minioperators.make_mappings-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.make_mappings-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{operator_name}</span> <code>(string)</code> 이 모듈의 기존 오퍼레이터 이름.</p>
+<p><span class="help-syntax-special">{lhs_tbl}</span> <code>(table)</code> 매핑 키 테이블. 다음 필드들이 있어야 합니다.</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;textobject&gt;</span> <code>(string)</code> - 텍스트 오브젝트에 대해 작동하는 일반 모드 매핑.</p></li>
+<li><p><span class="help-syntax-keys">&lt;line&gt;</span> <code>(string)</code> - 줄에 대해 작동하는 일반 모드 매핑. 보통 텍스트 오브젝트 매핑 뒤에 <a href="https://neovim.io/doc/user/helptag.html?tag=_">_</a>가 붙는 별칭입니다. “sort”의 경우 줄 전체에 대해 좌우 공백 없이 문자 단위로 작동합니다 (한 줄을 줄 단위로 정렬하는 것은 의미가 없기 때문입니다).</p></li>
+<li><p><span class="help-syntax-keys">&lt;selection&gt;</span> <code>(string)</code> - 선택 영역에 대해 작동하는 비주얼 모드 매핑.</p></li>
+</ul>
+<p>특정 매핑을 만들지 않으려면 빈 문자열을 제공하세요. 참고: <code>line</code> 매핑을 만들려면 <code>textobject</code> 매핑이 설정되어 있어야 합니다.</p>
+</section>
+<section id="minioperators.make_mappings-usage" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.make_mappings-usage">사용법</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.operators'</span><span class="op">).</span>make_mappings<span class="op">(</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'replace'</span><span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="va">textobject</span> <span class="op">=</span> <span class="st">'cr'</span><span class="op">,</span> <span class="va">line</span> <span class="op">=</span> <span class="st">'crr'</span><span class="op">,</span> <span class="va">selection</span> <span class="op">=</span> <span class="st">'cr'</span> <span class="op">}</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="minioperators.default_evaluate_func" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.default_evaluate_func">default_evaluate_func()</h3>
+<p align="center">
+<code>MiniOperators.default_evaluate_func</code>(<span class="help-syntax-special">{content}</span>)
+</p>
+<p>기본 평가 함수</p>
+<p>텍스트를 Lua 코드로 평가하고 마지막 줄의 객체를 반환합니다 (마지막 줄에 <code>return</code>이 없는 경우 앞에 붙인 것과 같습니다).</p>
+<p>동작은 영역 서브모드에 따라 달라집니다.</p>
+<ul>
+<li><p>문자 단위 및 줄 단위 영역의 경우, 텍스트가 그대로 평가됩니다.</p></li>
+<li><p>블록 단위 영역의 경우, 줄별로 평가되며 출력의 첫 번째 줄만 사용합니다. 이를 통해 줄 단위 영역과 비교하여 다른 동작을 줄 수 있도록 줄별 실행이 가능합니다.</p></li>
+</ul>
+<section id="minioperators.default_evaluate_func-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.default_evaluate_func-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{content}</span> <code>(table)</code> 다음 필드를 포함하는 테이블.</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;lines&gt;</span> <code>(table)</code> - 콘텐츠 줄 배열.</p></li>
+<li><p><span class="help-syntax-keys">&lt;submode&gt;</span> <code>(string)</code> - 영역 서브모드. <code>'v'</code>, <code>'V'</code>, <code>'&lt;C-v&gt;'</code>(이스케이프됨) 중 하나.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="minioperators.default_sort_func" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="minioperators.default_sort_func">default_sort_func()</h3>
+<p align="center">
+<code>MiniOperators.default_sort_func</code>(<span class="help-syntax-special">{content}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>기본 정렬 함수</p>
+<p>영역 서브모드에 따라 텍스트를 정렬합니다.</p>
+<ul>
+<li><p>문자 단위 영역의 경우, 구분자 패턴으로 분할하고 각 부분을 정렬한 후 구분자와 함께 다시 합칩니다. 실제 패턴은 <code>opts.split_patterns</code> 배열의 패턴을 기반으로 유추됩니다. 텍스트에 존재하는 요소 중 가장 먼저 나타나는 패턴을 우선적으로 사용합니다. 예: 기본 <code>opts.split_patterns</code>로 “c, b; a” 줄을 정렬하면 쉼표로만 분할되므로 “b; a, c”가 됩니다.</p></li>
+<li><p>줄 단위 및 블록 단위 영역의 경우 줄을 있는 그대로 정렬합니다.</p></li>
+</ul>
+<p>참고:</p>
+<ul>
+<li><p>정렬은 줄 배열에 대해 <a href="https://neovim.io/doc/user/helptag.html?tag=table.sort()">table.sort()</a>로 수행되며, 공백이나 숫자를 특별하게 처리하지 않습니다. 더 복잡한 작업에는 <a href="https://neovim.io/doc/user/helptag.html?tag=:sort">:sort</a>를 사용하세요.</p></li>
+<li><p>패턴은 빈 문자열일 수 있으며, 이 경우 모든 문자를 부분으로 분할합니다.</p></li>
+<li><p><code>split_patterns</code>의 패턴에 <code>%s*</code>를 추가하여 구분자에 공백을 포함시키세요. 예: “<em>” 패턴을 사용한 ”b </em> a” 줄은 ” a_b “(각 부분이”b “,”<em>“,” a”로 분할되기 때문)로 정렬되는 반면, “%s_%s” 패턴을 사용하면 “a _ b”(“b”, ” </em> “,”a”로 분할됨)가 됩니다.</p></li>
+</ul>
+<section id="minioperators.default_sort_func-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="minioperators.default_sort_func-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{content}</span> <code>(table)</code> 다음 필드를 포함하는 테이블.</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;lines&gt;</span> <code>(table)</code> - 콘텐츠 줄 배열.</p></li>
+<li><p><span class="help-syntax-keys">&lt;submode&gt;</span> <code>(string)</code> - 영역 서브모드. <code>'v'</code>, <code>'V'</code>, <code>'&lt;C-v&gt;'</code>(이스케이프됨) 중 하나.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> 옵션. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;compare_fun&gt;</span> <code>(function)</code> - <a href="https://neovim.io/doc/user/helptag.html?tag=table.sort()">table.sort()</a>와 호환되는 비교 함수. 기본값: <code>&lt;</code>를 사용한 직접 비교.</p></li>
+<li><p><span class="help-syntax-keys">&lt;split_patterns&gt;</span> <code>(table)</code> - 문자 단위 서브모드에 사용될 분할 Lua 패턴 배열. 순서가 중요합니다. 기본값: <code>{ '%s*,%s*', '%s*;%s*', '%s+', '' }</code>.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- Original source: https://gc.zgo.at/count.js -->
+<!-- Inlined for security reasons (less supply chain attack possibility) -->
+<script data-goatcounter="https://nvim-mini.goatcounter.com/count">
+// GoatCounter: https://www.goatcounter.com
+// This file is released under the ISC license: https://opensource.org/licenses/ISC
+;(function() {
+	'use strict';
+
+	window.goatcounter = window.goatcounter || {}
+
+	// Load settings from data-goatcounter-settings.
+	var s = document.querySelector('script[data-goatcounter]')
+	if (s && s.dataset.goatcounterSettings) {
+		try         { var set = JSON.parse(s.dataset.goatcounterSettings) }
+		catch (err) { console.error('invalid JSON in data-goatcounter-settings: ' + err) }
+		for (var k in set)
+			if (['no_onload', 'no_events', 'allow_local', 'allow_frame', 'path', 'title', 'referrer', 'event'].indexOf(k) > -1)
+				window.goatcounter[k] = set[k]
+	}
+
+	var enc = encodeURIComponent
+
+	// Get all data we're going to send off to the counter endpoint.
+	window.goatcounter.get_data = function(vars) {
+		vars = vars || {}
+		var data = {
+			p: (vars.path     === undefined ? goatcounter.path     : vars.path),
+			r: (vars.referrer === undefined ? goatcounter.referrer : vars.referrer),
+			t: (vars.title    === undefined ? goatcounter.title    : vars.title),
+			e: !!(vars.event || goatcounter.event),
+			s: window.screen.width,
+			b: is_bot(),
+			q: location.search,
+		}
+
+		var rcb, pcb, tcb  // Save callbacks to apply later.
+		if (typeof(data.r) === 'function') rcb = data.r
+		if (typeof(data.t) === 'function') tcb = data.t
+		if (typeof(data.p) === 'function') pcb = data.p
+
+		if (is_empty(data.r)) data.r = document.referrer
+		if (is_empty(data.t)) data.t = document.title
+		if (is_empty(data.p)) data.p = get_path()
+
+		if (rcb) data.r = rcb(data.r)
+		if (tcb) data.t = tcb(data.t)
+		if (pcb) data.p = pcb(data.p)
+		return data
+	}
+
+	// Check if a value is "empty" for the purpose of get_data().
+	var is_empty = function(v) { return v === null || v === undefined || typeof(v) === 'function' }
+
+	// See if this looks like a bot; there is some additional filtering on the
+	// backend, but these properties can't be fetched from there.
+	var is_bot = function() {
+		// Headless browsers are probably a bot.
+		var w = window, d = document
+		if (w.callPhantom || w._phantom || w.phantom)
+			return 150
+		if (w.__nightmare)
+			return 151
+		if (d.__selenium_unwrapped || d.__webdriver_evaluate || d.__driver_evaluate)
+			return 152
+		if (navigator.webdriver)
+			return 153
+		return 0
+	}
+
+	// Object to urlencoded string, starting with a ?.
+	var urlencode = function(obj) {
+		var p = []
+		for (var k in obj)
+			if (obj[k] !== '' && obj[k] !== null && obj[k] !== undefined && obj[k] !== false)
+				p.push(enc(k) + '=' + enc(obj[k]))
+		return '?' + p.join('&')
+	}
+
+	// Show a warning in the console.
+	var warn = function(msg) {
+		if (console && 'warn' in console)
+			console.warn('goatcounter: ' + msg)
+	}
+
+	// Get the endpoint to send requests to.
+	var get_endpoint = function() {
+		var s = document.querySelector('script[data-goatcounter]')
+		return (s && s.dataset.goatcounter) ? s.dataset.goatcounter : goatcounter.endpoint
+	}
+
+	// Get current path.
+	var get_path = function() {
+		var loc = location,
+			c = document.querySelector('link[rel="canonical"][href]')
+		if (c) {  // May be relative or point to different domain.
+			var a = document.createElement('a')
+			a.href = c.href
+			if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
+				loc = a
+		}
+		return (loc.pathname + loc.search) || '/'
+	}
+
+	// Run function after DOM is loaded.
+	var on_load = function(f) {
+		if (document.body === null)
+			document.addEventListener('DOMContentLoaded', function() { f() }, false)
+		else
+			f()
+	}
+
+	// Filter some requests that we (probably) don't want to count.
+	window.goatcounter.filter = function() {
+		if ('visibilityState' in document && document.visibilityState === 'prerender')
+			return 'visibilityState'
+		if (!goatcounter.allow_frame && location !== parent.location)
+			return 'frame'
+		if (!goatcounter.allow_local && location.hostname.match(/(localhost$|^127\.|^10\.|^172\.(1[6-9]|2[0-9]|3[0-1])\.|^192\.168\.|^0\.0\.0\.0$)/))
+			return 'localhost'
+		if (!goatcounter.allow_local && location.protocol === 'file:')
+			return 'localfile'
+		if (localStorage && localStorage.getItem('skipgc') === 't')
+			return 'disabled with #toggle-goatcounter'
+		return false
+	}
+
+	// Get URL to send to GoatCounter.
+	window.goatcounter.url = function(vars) {
+		var data = window.goatcounter.get_data(vars || {})
+		if (data.p === null)  // null from user callback.
+			return
+		data.rnd = Math.random().toString(36).substr(2, 5)  // Browsers don't always listen to Cache-Control.
+
+		var endpoint = get_endpoint()
+		if (!endpoint)
+			return warn('no endpoint found')
+
+		return endpoint + urlencode(data)
+	}
+
+	// Count a hit.
+	window.goatcounter.count = function(vars) {
+		var f = goatcounter.filter()
+		if (f)
+			return warn('not counting because of: ' + f)
+		var url = goatcounter.url(vars)
+		if (!url)
+			return warn('not counting because path callback returned null')
+
+		if (!navigator.sendBeacon(url)) {
+			// This mostly fails due to being blocked by CSP; try again with an
+			// image-based fallback.
+			var img = document.createElement('img')
+			img.src = url
+			img.style.position = 'absolute'  // Affect layout less.
+			img.style.bottom = '0px'
+			img.style.width = '1px'
+			img.style.height = '1px'
+			img.loading = 'eager'
+			img.setAttribute('alt', '')
+			img.setAttribute('aria-hidden', 'true')
+
+			var rm = function() { if (img && img.parentNode) img.parentNode.removeChild(img) }
+			img.addEventListener('load', rm, false)
+			document.body.appendChild(img)
+		}
+	}
+
+	// Get a query parameter.
+	window.goatcounter.get_query = function(name) {
+		var s = location.search.substr(1).split('&')
+		for (var i = 0; i < s.length; i++)
+			if (s[i].toLowerCase().indexOf(name.toLowerCase() + '=') === 0)
+				return s[i].substr(name.length + 1)
+	}
+
+	// Track click events.
+	window.goatcounter.bind_events = function() {
+		if (!document.querySelectorAll)  // Just in case someone uses an ancient browser.
+			return
+
+		var send = function(elem) {
+			return function() {
+				goatcounter.count({
+					event:    true,
+					path:     (elem.dataset.goatcounterClick || elem.name || elem.id || ''),
+					title:    (elem.dataset.goatcounterTitle || elem.title || (elem.innerHTML || '').substr(0, 200) || ''),
+					referrer: (elem.dataset.goatcounterReferrer || elem.dataset.goatcounterReferral || ''),
+				})
+			}
+		}
+
+		Array.prototype.slice.call(document.querySelectorAll("*[data-goatcounter-click]")).forEach(function(elem) {
+			if (elem.dataset.goatcounterBound)
+				return
+			var f = send(elem)
+			elem.addEventListener('click', f, false)
+			elem.addEventListener('auxclick', f, false)  // Middle click.
+			elem.dataset.goatcounterBound = 'true'
+		})
+	}
+
+	// Add a "visitor counter" frame or image.
+	window.goatcounter.visit_count = function(opt) {
+		on_load(function() {
+			opt        = opt        || {}
+			opt.type   = opt.type   || 'html'
+			opt.append = opt.append || 'body'
+			opt.path   = opt.path   || get_path()
+			opt.attr   = opt.attr   || {width: '200', height: (opt.no_branding ? '60' : '80')}
+
+			opt.attr['src'] = get_endpoint() + 'er/' + enc(opt.path) + '.' + enc(opt.type) + '?'
+			if (opt.no_branding) opt.attr['src'] += '&no_branding=1'
+			if (opt.style)       opt.attr['src'] += '&style=' + enc(opt.style)
+			if (opt.start)       opt.attr['src'] += '&start=' + enc(opt.start)
+			if (opt.end)         opt.attr['src'] += '&end='   + enc(opt.end)
+
+			var tag = {png: 'img', svg: 'img', html: 'iframe'}[opt.type]
+			if (!tag)
+				return warn('visit_count: unknown type: ' + opt.type)
+
+			if (opt.type === 'html') {
+				opt.attr['frameborder'] = '0'
+				opt.attr['scrolling']   = 'no'
+			}
+
+			var d = document.createElement(tag)
+			for (var k in opt.attr)
+				d.setAttribute(k, opt.attr[k])
+
+			var p = document.querySelector(opt.append)
+			if (!p)
+				return warn('visit_count: element to append to not found: ' + opt.append)
+			p.appendChild(d)
+		})
+	}
+
+	// Make it easy to skip your own views.
+	if (location.hash === '#toggle-goatcounter') {
+		if (localStorage.getItem('skipgc') === 't') {
+			localStorage.removeItem('skipgc', 't')
+			alert('GoatCounter tracking is now ENABLED in this browser.')
+		}
+		else {
+			localStorage.setItem('skipgc', 't')
+			alert('GoatCounter tracking is now DISABLED in this browser until ' + location + ' is loaded again.')
+		}
+	}
+
+	if (!goatcounter.no_onload)
+		on_load(function() {
+			// 1. Page is visible, count request.
+			// 2. Page is not yet visible; wait until it switches to 'visible' and count.
+			// See #487
+			if (!('visibilityState' in document) || document.visibilityState === 'visible')
+				goatcounter.count()
+			else {
+				var f = function(e) {
+					if (document.visibilityState !== 'visible')
+						return
+					document.removeEventListener('visibilitychange', f)
+					goatcounter.count()
+				}
+				document.addEventListener('visibilitychange', f)
+			}
+
+			if (!goatcounter.no_events)
+				goatcounter.bind_events()
+		})
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nvim-mini\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© Evgeni Chasnovski, <a href="https://choosealicense.com/licenses/mit/">MIT</a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

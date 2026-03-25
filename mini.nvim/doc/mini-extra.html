@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>mini.extra 문서 – MINI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/logo-mini_180x180.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-588f07447021c9b1c78c14c285b6df15.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-9a1b1f8e841c9c2d133c690b11f8ee3e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-822171c0b08fb8324585bf617d393f53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-02025811ff4c933f5630304c954c6652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": "tree",
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style> .quarto-title > h1.title { display: none } </style>
+
+
+<meta property="og:title" content="mini.extra 문서 – MINI">
+<meta property="og:description" content="Modular Independent Neovim Improvements">
+<meta property="og:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta property="og:site_name" content="MINI">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="mini.extra 문서 – MINI">
+<meta name="twitter:description" content="Modular Independent Neovim Improvements">
+<meta name="twitter:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">MINI</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../mini.nvim/index.html"> 
+<span class="menu-text">mini.nvim</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../MiniMax/index.html"> 
+<span class="menu-text">MiniMax</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nvim-mini"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"> <i class="bi bi-rss-fill" role="img" aria-label="RSS">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#module" id="toc-module" class="nav-link active" data-scroll-target="#module">모듈</a>
+  <ul>
+  <li><a href="#module-setup" id="toc-module-setup" class="nav-link" data-scroll-target="#module-setup">설정</a></li>
+  <li><a href="#module-comparisons" id="toc-module-comparisons" class="nav-link" data-scroll-target="#module-comparisons">비교</a></li>
+  </ul></li>
+  <li><a href="#miniextra.setup" id="toc-miniextra.setup" class="nav-link" data-scroll-target="#miniextra.setup">setup()</a>
+  <ul>
+  <li><a href="#miniextra.setup-parameters" id="toc-miniextra.setup-parameters" class="nav-link" data-scroll-target="#miniextra.setup-parameters">매개변수</a></li>
+  <li><a href="#miniextra.setup-usage" id="toc-miniextra.setup-usage" class="nav-link" data-scroll-target="#miniextra.setup-usage">사용법</a></li>
+  </ul></li>
+  <li><a href="#miniextra.config" id="toc-miniextra.config" class="nav-link" data-scroll-target="#miniextra.config">config</a>
+  <ul>
+  <li><a href="#miniextra.config-defaults" id="toc-miniextra.config-defaults" class="nav-link" data-scroll-target="#miniextra.config-defaults">기본값</a></li>
+  </ul></li>
+  <li><a href="#miniextra.gen_ai_spec" id="toc-miniextra.gen_ai_spec" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec">gen_ai_spec</a></li>
+  <li><a href="#miniextra.gen_ai_spec.buffer" id="toc-miniextra.gen_ai_spec.buffer" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.buffer">gen_ai_spec.buffer()</a>
+  <ul>
+  <li><a href="#miniextra.gen_ai_spec.buffer-return" id="toc-miniextra.gen_ai_spec.buffer-return" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.buffer-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.gen_ai_spec.diagnostic" id="toc-miniextra.gen_ai_spec.diagnostic" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.diagnostic">gen_ai_spec.diagnostic()</a>
+  <ul>
+  <li><a href="#miniextra.gen_ai_spec.diagnostic-parameters" id="toc-miniextra.gen_ai_spec.diagnostic-parameters" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.diagnostic-parameters">매개변수</a></li>
+  <li><a href="#miniextra.gen_ai_spec.diagnostic-return" id="toc-miniextra.gen_ai_spec.diagnostic-return" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.diagnostic-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.gen_ai_spec.indent" id="toc-miniextra.gen_ai_spec.indent" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.indent">gen_ai_spec.indent()</a>
+  <ul>
+  <li><a href="#miniextra.gen_ai_spec.indent-return" id="toc-miniextra.gen_ai_spec.indent-return" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.indent-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.gen_ai_spec.line" id="toc-miniextra.gen_ai_spec.line" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.line">gen_ai_spec.line()</a>
+  <ul>
+  <li><a href="#miniextra.gen_ai_spec.line-return" id="toc-miniextra.gen_ai_spec.line-return" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.line-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.gen_ai_spec.number" id="toc-miniextra.gen_ai_spec.number" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.number">gen_ai_spec.number()</a>
+  <ul>
+  <li><a href="#miniextra.gen_ai_spec.number-return" id="toc-miniextra.gen_ai_spec.number-return" class="nav-link" data-scroll-target="#miniextra.gen_ai_spec.number-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.gen_highlighter" id="toc-miniextra.gen_highlighter" class="nav-link" data-scroll-target="#miniextra.gen_highlighter">gen_highlighter</a></li>
+  <li><a href="#miniextra.gen_highlighter.words" id="toc-miniextra.gen_highlighter.words" class="nav-link" data-scroll-target="#miniextra.gen_highlighter.words">gen_highlighter.words()</a>
+  <ul>
+  <li><a href="#miniextra.gen_highlighter.words-parameters" id="toc-miniextra.gen_highlighter.words-parameters" class="nav-link" data-scroll-target="#miniextra.gen_highlighter.words-parameters">매개변수</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers" id="toc-miniextra.pickers" class="nav-link" data-scroll-target="#miniextra.pickers">pickers</a></li>
+  <li><a href="#miniextra.pickers.buf_lines" id="toc-miniextra.pickers.buf_lines" class="nav-link" data-scroll-target="#miniextra.pickers.buf_lines">pickers.buf_lines()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.buf_lines-parameters" id="toc-miniextra.pickers.buf_lines-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.buf_lines-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.buf_lines-return" id="toc-miniextra.pickers.buf_lines-return" class="nav-link" data-scroll-target="#miniextra.pickers.buf_lines-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.colorschemes" id="toc-miniextra.pickers.colorschemes" class="nav-link" data-scroll-target="#miniextra.pickers.colorschemes">pickers.colorschemes()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.colorschemes-parameters" id="toc-miniextra.pickers.colorschemes-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.colorschemes-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.colorschemes-return" id="toc-miniextra.pickers.colorschemes-return" class="nav-link" data-scroll-target="#miniextra.pickers.colorschemes-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.commands" id="toc-miniextra.pickers.commands" class="nav-link" data-scroll-target="#miniextra.pickers.commands">pickers.commands()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.commands-parameters" id="toc-miniextra.pickers.commands-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.commands-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.commands-return" id="toc-miniextra.pickers.commands-return" class="nav-link" data-scroll-target="#miniextra.pickers.commands-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.diagnostic" id="toc-miniextra.pickers.diagnostic" class="nav-link" data-scroll-target="#miniextra.pickers.diagnostic">pickers.diagnostic()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.diagnostic-parameters" id="toc-miniextra.pickers.diagnostic-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.diagnostic-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.diagnostic-return" id="toc-miniextra.pickers.diagnostic-return" class="nav-link" data-scroll-target="#miniextra.pickers.diagnostic-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.explorer" id="toc-miniextra.pickers.explorer" class="nav-link" data-scroll-target="#miniextra.pickers.explorer">pickers.explorer()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.explorer-parameters" id="toc-miniextra.pickers.explorer-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.explorer-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.explorer-return" id="toc-miniextra.pickers.explorer-return" class="nav-link" data-scroll-target="#miniextra.pickers.explorer-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.git_branches" id="toc-miniextra.pickers.git_branches" class="nav-link" data-scroll-target="#miniextra.pickers.git_branches">pickers.git_branches()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.git_branches-parameters" id="toc-miniextra.pickers.git_branches-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.git_branches-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.git_branches-return" id="toc-miniextra.pickers.git_branches-return" class="nav-link" data-scroll-target="#miniextra.pickers.git_branches-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.git_commits" id="toc-miniextra.pickers.git_commits" class="nav-link" data-scroll-target="#miniextra.pickers.git_commits">pickers.git_commits()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.git_commits-parameters" id="toc-miniextra.pickers.git_commits-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.git_commits-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.git_commits-return" id="toc-miniextra.pickers.git_commits-return" class="nav-link" data-scroll-target="#miniextra.pickers.git_commits-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.git_files" id="toc-miniextra.pickers.git_files" class="nav-link" data-scroll-target="#miniextra.pickers.git_files">pickers.git_files()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.git_files-parameters" id="toc-miniextra.pickers.git_files-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.git_files-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.git_files-return" id="toc-miniextra.pickers.git_files-return" class="nav-link" data-scroll-target="#miniextra.pickers.git_files-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.git_hunks" id="toc-miniextra.pickers.git_hunks" class="nav-link" data-scroll-target="#miniextra.pickers.git_hunks">pickers.git_hunks()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.git_hunks-parameters" id="toc-miniextra.pickers.git_hunks-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.git_hunks-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.git_hunks-return" id="toc-miniextra.pickers.git_hunks-return" class="nav-link" data-scroll-target="#miniextra.pickers.git_hunks-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.hipatterns" id="toc-miniextra.pickers.hipatterns" class="nav-link" data-scroll-target="#miniextra.pickers.hipatterns">pickers.hipatterns()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.hipatterns-parameters" id="toc-miniextra.pickers.hipatterns-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.hipatterns-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.hipatterns-return" id="toc-miniextra.pickers.hipatterns-return" class="nav-link" data-scroll-target="#miniextra.pickers.hipatterns-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.history" id="toc-miniextra.pickers.history" class="nav-link" data-scroll-target="#miniextra.pickers.history">pickers.history()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.history-parameters" id="toc-miniextra.pickers.history-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.history-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.history-return" id="toc-miniextra.pickers.history-return" class="nav-link" data-scroll-target="#miniextra.pickers.history-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.hl_groups" id="toc-miniextra.pickers.hl_groups" class="nav-link" data-scroll-target="#miniextra.pickers.hl_groups">pickers.hl_groups()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.hl_groups-parameters" id="toc-miniextra.pickers.hl_groups-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.hl_groups-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.hl_groups-return" id="toc-miniextra.pickers.hl_groups-return" class="nav-link" data-scroll-target="#miniextra.pickers.hl_groups-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.keymaps" id="toc-miniextra.pickers.keymaps" class="nav-link" data-scroll-target="#miniextra.pickers.keymaps">pickers.keymaps()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.keymaps-parameters" id="toc-miniextra.pickers.keymaps-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.keymaps-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.keymaps-return" id="toc-miniextra.pickers.keymaps-return" class="nav-link" data-scroll-target="#miniextra.pickers.keymaps-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.list" id="toc-miniextra.pickers.list" class="nav-link" data-scroll-target="#miniextra.pickers.list">pickers.list()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.list-parameters" id="toc-miniextra.pickers.list-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.list-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.list-return" id="toc-miniextra.pickers.list-return" class="nav-link" data-scroll-target="#miniextra.pickers.list-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.lsp" id="toc-miniextra.pickers.lsp" class="nav-link" data-scroll-target="#miniextra.pickers.lsp">pickers.lsp()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.lsp-parameters" id="toc-miniextra.pickers.lsp-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.lsp-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.lsp-return" id="toc-miniextra.pickers.lsp-return" class="nav-link" data-scroll-target="#miniextra.pickers.lsp-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.manpages" id="toc-miniextra.pickers.manpages" class="nav-link" data-scroll-target="#miniextra.pickers.manpages">pickers.manpages()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.manpages-parameters" id="toc-miniextra.pickers.manpages-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.manpages-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.manpages-return" id="toc-miniextra.pickers.manpages-return" class="nav-link" data-scroll-target="#miniextra.pickers.manpages-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.marks" id="toc-miniextra.pickers.marks" class="nav-link" data-scroll-target="#miniextra.pickers.marks">pickers.marks()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.marks-parameters" id="toc-miniextra.pickers.marks-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.marks-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.marks-return" id="toc-miniextra.pickers.marks-return" class="nav-link" data-scroll-target="#miniextra.pickers.marks-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.oldfiles" id="toc-miniextra.pickers.oldfiles" class="nav-link" data-scroll-target="#miniextra.pickers.oldfiles">pickers.oldfiles()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.oldfiles-parameters" id="toc-miniextra.pickers.oldfiles-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.oldfiles-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.oldfiles-return" id="toc-miniextra.pickers.oldfiles-return" class="nav-link" data-scroll-target="#miniextra.pickers.oldfiles-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.options" id="toc-miniextra.pickers.options" class="nav-link" data-scroll-target="#miniextra.pickers.options">pickers.options()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.options-parameters" id="toc-miniextra.pickers.options-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.options-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.options-return" id="toc-miniextra.pickers.options-return" class="nav-link" data-scroll-target="#miniextra.pickers.options-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.registers" id="toc-miniextra.pickers.registers" class="nav-link" data-scroll-target="#miniextra.pickers.registers">pickers.registers()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.registers-parameters" id="toc-miniextra.pickers.registers-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.registers-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.registers-return" id="toc-miniextra.pickers.registers-return" class="nav-link" data-scroll-target="#miniextra.pickers.registers-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.spellsuggest" id="toc-miniextra.pickers.spellsuggest" class="nav-link" data-scroll-target="#miniextra.pickers.spellsuggest">pickers.spellsuggest()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.spellsuggest-parameters" id="toc-miniextra.pickers.spellsuggest-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.spellsuggest-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.spellsuggest-return" id="toc-miniextra.pickers.spellsuggest-return" class="nav-link" data-scroll-target="#miniextra.pickers.spellsuggest-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.treesitter" id="toc-miniextra.pickers.treesitter" class="nav-link" data-scroll-target="#miniextra.pickers.treesitter">pickers.treesitter()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.treesitter-parameters" id="toc-miniextra.pickers.treesitter-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.treesitter-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.treesitter-return" id="toc-miniextra.pickers.treesitter-return" class="nav-link" data-scroll-target="#miniextra.pickers.treesitter-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.visit_paths" id="toc-miniextra.pickers.visit_paths" class="nav-link" data-scroll-target="#miniextra.pickers.visit_paths">pickers.visit_paths()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.visit_paths-parameters" id="toc-miniextra.pickers.visit_paths-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.visit_paths-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.visit_paths-return" id="toc-miniextra.pickers.visit_paths-return" class="nav-link" data-scroll-target="#miniextra.pickers.visit_paths-return">반환</a></li>
+  </ul></li>
+  <li><a href="#miniextra.pickers.visit_labels" id="toc-miniextra.pickers.visit_labels" class="nav-link" data-scroll-target="#miniextra.pickers.visit_labels">pickers.visit_labels()</a>
+  <ul>
+  <li><a href="#miniextra.pickers.visit_labels-parameters" id="toc-miniextra.pickers.visit_labels-parameters" class="nav-link" data-scroll-target="#miniextra.pickers.visit_labels-parameters">매개변수</a></li>
+  <li><a href="#miniextra.pickers.visit_labels-return" id="toc-miniextra.pickers.visit_labels-return" class="nav-link" data-scroll-target="#miniextra.pickers.visit_labels-return">반환</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">mini.extra 문서</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>_ ’mini.nvim’의 <code>main</code> 브랜치에서 생성됨 _</p>
+<p><a name="mini.extra" href="../../mini.nvim/doc/mini-extra.html#mini.extra"><b>mini.extra</b></a> 추가적인 ‘mini.nvim’ 기능</p>
+<p>MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski</p>
+<hr>
+<section id="module" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="module">모듈</h3>
+<p>다른 ‘mini.nvim’ 모듈에 직접 포함하기에는 필수적이지 않지만 유용한 추가 기능들입니다.</p>
+<p>주요 기능:</p>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-pick.html#mini.pick">mini.pick</a>을 위한 다양한 피커:</p>
+<ul>
+<li><p>내장 진단(<a href="../../mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic">MiniExtra.pickers.diagnostic()</a>).</p></li>
+<li><p>파일 탐색기(<a href="../../mini.nvim/doc/mini-extra.html#miniextra.pickers.explorer">MiniExtra.pickers.explorer()</a>).</p></li>
+<li><p>Git 브랜치/커밋/파일/헌크(<a href="../../mini.nvim/doc/mini-extra.html#miniextra.pickers.git_hunks">MiniExtra.pickers.git_hunks()</a> 등).</p></li>
+<li><p>명령/검색/입력 기록(<a href="../../mini.nvim/doc/mini-extra.html#miniextra.pickers.history">MiniExtra.pickers.history()</a>).</p></li>
+<li><p>LSP 참조/심볼/기타(<a href="../../mini.nvim/doc/mini-extra.html#miniextra.pickers.lsp">MiniExtra.pickers.lsp()</a>).</p></li>
+<li><p>Tree-sitter 노드(<a href="../../mini.nvim/doc/mini-extra.html#miniextra.pickers.treesitter">MiniExtra.pickers.treesitter()</a>).</p></li>
+<li><p>그리고 더 많은 기능들. 자세한 내용은 <a href="../../mini.nvim/doc/mini-extra.html#miniextra.pickers">MiniExtra.pickers</a>를 참조하세요.</p></li>
+</ul></li>
+<li><p><a href="../../mini.nvim/doc/mini-ai.html#mini.ai">mini.ai</a>를 위한 다양한 텍스트 오브젝트 사양. <a href="../../mini.nvim/doc/mini-extra.html#miniextra.gen_ai_spec">MiniExtra.gen_ai_spec</a>을 참조하세요.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-hipatterns.html#mini.hipatterns">mini.hipatterns</a>를 위한 다양한 하이라이터. <a href="../../mini.nvim/doc/mini-extra.html#miniextra.gen_highlighter">MiniExtra.gen_highlighter</a>를 참조하세요.</p></li>
+</ul>
+<p>참고:</p>
+<ul>
+<li>이 모듈은 특정 기능에 필요한 ‘mini.nvim’ 모듈(예: 피커의 경우 ‘mini.pick’)만 요구합니다.</li>
+</ul>
+<section id="module-setup" class="level4">
+<h4 class="anchored" data-anchor-id="module-setup">설정</h4>
+<p>이 모듈은 <code>require('mini.extra').setup({})</code>을 통한 설정이 필요합니다 (<code>{}</code>를 원하는 <code>config</code> 테이블로 교체하세요). 이를 통해 스크립팅이나 수동으로 사용할 수 있는 전역 Lua 테이블 <code>MiniExtra</code>가 생성됩니다 ( <code>:lua MiniExtra.*</code> 사용).</p>
+<p>사용 가능한 설정값은 <a href="../../mini.nvim/doc/mini-extra.html#miniextra.config">MiniExtra.config</a>를 참조하세요.</p>
+<p>이 모듈에는 런타임 옵션이 없으므로 <code>vim.b.miniextra_config</code>를 사용해도 효과가 없습니다.</p>
+</section>
+<section id="module-comparisons" class="level4">
+<h4 class="anchored" data-anchor-id="module-comparisons">비교</h4>
+<ul>
+<li><p><a href="https://github.com/nvim-telescope/telescope.nvim">nvim-telescope/telescope.nvim</a>:</p>
+<ul>
+<li><a href="../../mini.nvim/doc/mini-extra.html#miniextra.pickers">MiniExtra.pickers</a>를 사용하면 ’mini.pick’은 내장 피커 측면에서 상당히 대등한 수준입니다.</li>
+</ul></li>
+<li><p><a href="https://github.com/ibhagwan/fzf-lua">ibhagwan/fzf-lua</a>:</p>
+<ul>
+<li>’nvim-telescope/telescope.nvim’과 동일합니다.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="miniextra.setup" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.setup">setup()</h3>
+<p align="center">
+<code>MiniExtra.setup</code>(<span class="help-syntax-special">{config}</span>)
+</p>
+<p>모듈 설정</p>
+<section id="miniextra.setup-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.setup-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{config}</span> <code>(table|nil)</code> 모듈 설정 테이블입니다. <a href="../../mini.nvim/doc/mini-extra.html#miniextra.config">MiniExtra.config</a>를 참조하세요.</p>
+</section>
+<section id="miniextra.setup-usage" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.setup-usage">사용법</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.extra'</span><span class="op">).</span>setup<span class="op">()</span> <span class="co">-- 기본 설정 사용</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- 또는</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.extra'</span><span class="op">).</span>setup<span class="op">({})</span> <span class="co">-- {}를 원하는 설정 테이블로 교체</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="miniextra.config" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.config">config</h3>
+<p align="center">
+<code>MiniExtra.config</code>
+</p>
+<section id="miniextra.config-defaults" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.config-defaults">기본값</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">MiniExtra</span><span class="op">.</span><span class="va">config</span> <span class="op">=</span> <span class="op">{}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="miniextra.gen_ai_spec" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.gen_ai_spec">gen_ai_spec</h3>
+<p align="center">
+<code>MiniExtra.gen_ai_spec</code>
+</p>
+<p><a href="../../mini.nvim/doc/mini-ai.html#mini.ai">mini.ai</a> 텍스트 오브젝트 사양 생성기</p>
+<p>함수 요소를 가진 테이블입니다. 사양을 얻으려면 호출하세요.</p>
+<p><a href="../../mini.nvim/doc/mini-ai.html#miniai.setup">MiniAi.setup()</a>의 일부로 사용되도록 설계되었습니다. 예시:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">gen_ai_spec</span> <span class="op">=</span> <span class="fu">require</span><span class="op">(</span><span class="st">'mini.extra'</span><span class="op">).</span><span class="va">gen_ai_spec</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.ai'</span><span class="op">).</span>setup<span class="op">({</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">custom_textobjects</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cn">B</span> <span class="op">=</span> <span class="va">gen_ai_spec</span><span class="op">.</span>buffer<span class="op">(),</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cn">D</span> <span class="op">=</span> <span class="va">gen_ai_spec</span><span class="op">.</span>diagnostic<span class="op">(),</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">I</span> <span class="op">=</span> <span class="va">gen_ai_spec</span><span class="op">.</span>indent<span class="op">(),</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cn">L</span> <span class="op">=</span> <span class="va">gen_ai_spec</span><span class="op">.</span>line<span class="op">(),</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cn">N</span> <span class="op">=</span> <span class="va">gen_ai_spec</span><span class="op">.</span>number<span class="op">(),</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="miniextra.gen_ai_spec.buffer" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.gen_ai_spec.buffer">gen_ai_spec.buffer()</h3>
+<p align="center">
+<code>MiniExtra.gen_ai_spec.buffer</code>()
+</p>
+<p>현재 버퍼 텍스트 오브젝트</p>
+<p>참고:</p>
+<ul>
+<li><p><code>a</code> 텍스트 오브젝트는 버퍼의 모든 줄을 선택합니다.</p></li>
+<li><p><code>i</code> 텍스트 오브젝트는 시작과 끝의 빈 줄을 제외한 모든 줄을 선택합니다.</p></li>
+</ul>
+<section id="miniextra.gen_ai_spec.buffer-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.gen_ai_spec.buffer-return">반환</h4>
+<p><code>(function)</code> <a href="../../mini.nvim/doc/mini-ai.html#miniai-textobject-specification">MiniAi-텍스트 오브젝트 사양</a>을 구현하는 함수입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.gen_ai_spec.diagnostic" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.gen_ai_spec.diagnostic">gen_ai_spec.diagnostic()</h3>
+<p align="center">
+<code>MiniExtra.gen_ai_spec.diagnostic</code>(<span class="help-syntax-special">{severity}</span>)
+</p>
+<p>현재 버퍼 진단(diagnostic) 텍스트 오브젝트</p>
+<p>참고:</p>
+<ul>
+<li><code>a</code>와 <code>i</code> 텍스트 오브젝트 모두 현재 버퍼에 대한 <a href="https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.get()">vim.diagnostic.get()</a> 출력을 반환합니다. 이는 <a href="../../mini.nvim/doc/mini-ai.html#miniai-textobject-specification">MiniAi-텍스트 오브젝트 사양</a>에 맞게 수정되었습니다.</li>
+</ul>
+<section id="miniextra.gen_ai_spec.diagnostic-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.gen_ai_spec.diagnostic-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{severity}</span> <code>(any)</code> 사용할 심각도(severity)입니다. <a href="https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.get()">vim.diagnostic.get()</a>으로 전달됩니다. 기본값: <code>nil</code> (모든 진단 항목 사용).</p>
+</section>
+<section id="miniextra.gen_ai_spec.diagnostic-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.gen_ai_spec.diagnostic-return">반환</h4>
+<p><code>(function)</code> <a href="../../mini.nvim/doc/mini-ai.html#miniai-textobject-specification">MiniAi-텍스트 오브젝트 사양</a>을 구현하는 함수입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.gen_ai_spec.indent" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.gen_ai_spec.indent">gen_ai_spec.indent()</h3>
+<p align="center">
+<code>MiniExtra.gen_ai_spec.indent</code>()
+</p>
+<p>현재 버퍼 들여쓰기 범위(indent scope) 텍스트 오브젝트</p>
+<p>들여쓰기 범위는 다음 속성을 가진 연속된 줄의 집합입니다:</p>
+<ul>
+<li><p>첫 번째 줄 위와 마지막 줄 아래는 비어 있지 않은 줄입니다. 이를 경계(border)라고 부릅니다.</p></li>
+<li><p>집합 내에 적어도 하나의 비어 있지 않은 줄이 있습니다.</p></li>
+<li><p>경계 사이의 모든 비어 있지 않은 줄은 어느 경계보다도 엄격하게 더 큰 들여쓰기(<a href="https://neovim.io/doc/user/helptag.html?tag='tabstop'">‘tabstop’</a>을 존중하는 시각적 앞쪽 공백)를 가집니다.</p></li>
+</ul>
+<p>참고:</p>
+<ul>
+<li><p><code>a</code> 텍스트 오브젝트는 경계를 포함한 범위를 선택합니다.</p></li>
+<li><p><code>i</code> 텍스트 오브젝트는 범위를 문자 단위(charwise)로 선택합니다.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-indentscope.html#miniindentscope.textobject">MiniIndentscope.textobject()</a>와의 차이점:</p>
+<ul>
+<li><p>이 텍스트 오브젝트는 <code>i</code> 텍스트 오브젝트의 위아래 빈 줄을 항상 그 일부로 취급하지만, ’mini.indentscope’는 이를 설정할 수 있습니다.</p></li>
+<li><p>이 텍스트 오브젝트는 감싸고 있지 않은(non-covering) 범위를 선택할 수 있지만, ’mini.indentscope’는 (설계상) 불가능합니다.</p></li>
+<li><p>이 텍스트 오브젝트 범위 계산은 위에서 아래로만 수행되며 ’mini.indentscope’처럼 양방향으로 수행되지 않습니다. 이는 대부분의 일반적인 시나리오에서 작동하며, 하단 경계의 들여쓰기가 상단보다 클 것으로 예상되는 경우에만 작동하지 않습니다.</p></li>
+</ul></li>
+</ul>
+<section id="miniextra.gen_ai_spec.indent-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.gen_ai_spec.indent-return">반환</h4>
+<p><code>(function)</code> <a href="../../mini.nvim/doc/mini-ai.html#miniai-textobject-specification">MiniAi-텍스트 오브젝트 사양</a>을 구현하는 함수입니다. 버퍼의 모든 들여쓰기 범위를 시작 줄 번호에 따라 오름차순으로 정렬된 지역 배열로 반환합니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.gen_ai_spec.line" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.gen_ai_spec.line">gen_ai_spec.line()</h3>
+<p align="center">
+<code>MiniExtra.gen_ai_spec.line</code>()
+</p>
+<p>현재 줄 텍스트 오브젝트</p>
+<p>참고:</p>
+<ul>
+<li><p><code>a</code> 텍스트 오브젝트는 전체 줄을 선택합니다.</p></li>
+<li><p><code>i</code> 텍스트 오브젝트는 시작 들여쓰기 이후의 줄 내용을 선택합니다.</p></li>
+</ul>
+<section id="miniextra.gen_ai_spec.line-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.gen_ai_spec.line-return">반환</h4>
+<p><code>(function)</code> <a href="../../mini.nvim/doc/mini-ai.html#miniai-textobject-specification">MiniAi-텍스트 오브젝트 사양</a>을 구현하는 함수입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.gen_ai_spec.number" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.gen_ai_spec.number">gen_ai_spec.number()</h3>
+<p align="center">
+<code>MiniExtra.gen_ai_spec.number</code>()
+</p>
+<p>숫자 텍스트 오브젝트</p>
+<p>참고:</p>
+<ul>
+<li><p><code>a</code> 텍스트 오브젝트는 앞에 “-”가 붙을 수 있고 뒤에 소수점 부분(점과 숫자)이 붙을 수 있는 전체 숫자를 선택합니다.</p></li>
+<li><p><code>i</code> 텍스트 오브젝트는 연속된 숫자를 선택합니다.</p></li>
+</ul>
+<section id="miniextra.gen_ai_spec.number-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.gen_ai_spec.number-return">반환</h4>
+<p><code>(function)</code> <a href="../../mini.nvim/doc/mini-ai.html#miniai-textobject-specification">MiniAi-텍스트 오브젝트 사양</a>을 구현하는 함수입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.gen_highlighter" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.gen_highlighter">gen_highlighter</h3>
+<p align="center">
+<code>MiniExtra.gen_highlighter</code>
+</p>
+<p><a href="../../mini.nvim/doc/mini-hipatterns.html#mini.hipatterns">mini.hipatterns</a> 하이라이터 생성기</p>
+<p>함수 요소를 가진 테이블입니다. 사양을 얻으려면 호출하세요.</p>
+<p><a href="../../mini.nvim/doc/mini-hipatterns.html#minihipatterns.setup">MiniHipatterns.setup()</a>의 일부로 사용되도록 설계되었습니다. 예시:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">hi_words</span> <span class="op">=</span> <span class="fu">require</span><span class="op">(</span><span class="st">'mini.extra'</span><span class="op">).</span><span class="va">gen_highlighter</span><span class="op">.</span><span class="va">words</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span><span class="st">'mini.hipatterns'</span><span class="op">).</span>setup<span class="op">({</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">highlighters</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">todo</span> <span class="op">=</span> hi_words<span class="op">({</span> <span class="st">'TODO'</span><span class="op">,</span> <span class="st">'Todo'</span><span class="op">,</span> <span class="st">'todo'</span> <span class="op">},</span> <span class="st">'MiniHipatternsTodo'</span><span class="op">),</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="miniextra.gen_highlighter.words" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.gen_highlighter.words">gen_highlighter.words()</h3>
+<p align="center">
+<code>MiniExtra.gen_highlighter.words</code>(<span class="help-syntax-special">{words}</span>, <span class="help-syntax-special">{group}</span>, <span class="help-syntax-special">{extmark_opts}</span>)
+</p>
+<p>단어 하이라이트</p>
+<p>참고:</p>
+<ul>
+<li><p>단어는 영숫자(라틴 문자 또는 숫자)로 시작하고 끝나야 합니다.</p></li>
+<li><p>단어는 전체가 일치할 때만 하이라이트되며, 더 큰 단어의 일부인 경우는 제외됩니다. 즉, 단어 앞뒤에 영숫자가 없어야 합니다.</p></li>
+</ul>
+<section id="miniextra.gen_highlighter.words-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.gen_highlighter.words-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{words}</span> <code>(table)</code> 하이라이트할 단어 배열입니다. Lua 패턴이 아닌 리터럴로 매칭됩니다.</p>
+<p><span class="help-syntax-special">{group}</span> <code>(string|function)</code> 하이라이터의 <code>group</code> 필드입니다. <a href="../../mini.nvim/doc/mini-hipatterns.html#minihipatterns.config">MiniHipatterns.config</a>를 참조하세요.</p>
+<p><span class="help-syntax-special">{extmark_opts}</span> <code>(any)</code> 하이라이터의 <code>extmark_opts</code> 필드입니다. <a href="../../mini.nvim/doc/mini-hipatterns.html#minihipatterns.config">MiniHipatterns.config</a>를 참조하세요.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers">pickers</h3>
+<p align="center">
+<code>MiniExtra.pickers</code>
+</p>
+<p><a href="../../mini.nvim/doc/mini-pick.html#mini.pick">mini.pick</a> 피커</p>
+<p>‘mini.pick’ 피커(필수 의존성)를 포함하는 테이블입니다. 참고:</p>
+<ul>
+<li><p>모든 피커는 동일한 시그니처를 가집니다:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;local_opts&gt;</span> - 피커 로컬 옵션을 포함하는 선택적 테이블입니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;opts&gt;</span> - <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 선택적 옵션 테이블입니다.</p></li>
+</ul></li>
+<li><p><a href="../../mini.nvim/doc/mini-extra.html#miniextra.setup">MiniExtra.setup()</a> 또는 <a href="../../mini.nvim/doc/mini-pick.html#minipick.setup">MiniPick.setup()</a> 중 하나만 호출해도 <a href="../../mini.nvim/doc/mini-pick.html#minipick.registry">MiniPick.registry</a>에 자동으로 등록됩니다.</p></li>
+<li><p>별도의 언급이 없는 한 모든 피커는 <a href="../../mini.nvim/doc/mini-pick.html#minipick-source.preview">MiniPick-source.preview</a>, <a href="../../mini.nvim/doc/mini-pick.html#minipick-source.choose">MiniPick-source.choose</a>, <a href="../../mini.nvim/doc/mini-pick.html#minipick-source.choose_marked">MiniPick-source.choose_marked</a>의 기본 버전을 사용합니다. 표시되는 텍스트와 <a href="../../mini.nvim/doc/mini-pick.html#minipick-source.show">MiniPick-source.show</a>는 선택된 항목에 맞춰집니다.</p></li>
+</ul>
+<p>사용 예시:</p>
+<ul>
+<li><p>Lua 코드: <code>MiniExtra.pickers.buf_lines()</code>.</p></li>
+<li><p><a href="../../mini.nvim/doc/mini-pick.html#pick">:Pick</a> 명령 사용: <code>:Pick buf_lines scope='current'</code> 참고: 이를 위해서는 <a href="../../mini.nvim/doc/mini-extra.html#miniextra.setup">MiniExtra.setup()</a> 호출이 필요합니다.</p></li>
+</ul>
+<hr>
+</section>
+<section id="miniextra.pickers.buf_lines" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.buf_lines">pickers.buf_lines()</h3>
+<p align="center">
+<code>MiniExtra.pickers.buf_lines</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>버퍼 줄(lines) 피커</p>
+<p>버퍼의 줄 중에서 선택합니다. 참고:</p>
+<ul>
+<li>현재 로드되지 않은 모든 대상 버퍼를 로드합니다.</li>
+</ul>
+<section id="miniextra.pickers.buf_lines-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.buf_lines-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - “all” (나열된 일반 버퍼들) 또는 “current” 중 하나입니다. 기본값: “all”.</p></li>
+<li><p><span class="help-syntax-keys">&lt;preserve_order&gt;</span> <code>(boolean)</code> - 쿼리 중에 원래 순서를 유지할지 여부입니다. 기본값: <code>false</code>.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.buf_lines-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.buf_lines-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.colorschemes" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.colorschemes">pickers.colorschemes()</h3>
+<p align="center">
+<code>MiniExtra.pickers.colorschemes</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>컬러 스킴(color scheme) 피커</p>
+<p>컬러 스킴을 선택하고 적용합니다. 미리보기는 항목의 컬러 스킴을 일시적으로 적용하고 선택된 하이라이트 그룹이 어떻게 보이는지 보여줍니다. 취소하면 피커 시작 전의 컬러 스킴으로 돌아갑니다:</p>
+<ul>
+<li><p><a href="../../mini.nvim/doc/mini-colors.html#mini.colors">mini.colors</a>가 사용 가능한 경우 <a href="../../mini.nvim/doc/mini-colors.html#minicolors-colorschemeapply">MiniColors-colorscheme:apply()</a>를 사용합니다.</p></li>
+<li><p><a href="https://neovim.io/doc/user/helptag.html?tag=g:colors_name">g:colors_name</a>이 사용 가능한 경우 <a href="https://neovim.io/doc/user/helptag.html?tag=:colorscheme">:colorscheme</a>을 사용합니다.</p></li>
+</ul>
+<section id="miniextra.pickers.colorschemes-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.colorschemes-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;names&gt;</span> <code>(table)</code> - 선택할 컬러 스킴 이름 배열입니다. 기본값: 사용 가능한 모든 컬러 스킴.</p></li>
+<li><p><span class="help-syntax-keys">&lt;preview_hl_groups&gt;</span> <code>(table)</code> - 미리보기 창에 표시할 하이라이트 그룹 배열입니다. 기본값: 정의된 모든 하이라이트 그룹을 알파벳 순으로 표시.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.colorschemes-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.colorschemes-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.commands" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.commands">pickers.commands()</h3>
+<p align="center">
+<code>MiniExtra.pickers.commands</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Neovim 명령 피커</p>
+<p>Neovim 내장 명령(<a href="https://neovim.io/doc/user/helptag.html?tag=Ex-commands">Ex-commands</a>) 및 <a href="https://neovim.io/doc/user/helptag.html?tag=user-commands">사용자 정의 명령</a> 중에서 선택합니다. 참고:</p>
+<ul>
+<li><p>미리보기는 명령에 대한 정보(가능한 경우)를 보여줍니다.</p></li>
+<li><p>선택하면 명령을 직접 실행하거나(인자가 필요 없다고 판단되는 경우), 명령줄에 해당 명령을 입력합니다.</p></li>
+</ul>
+<section id="miniextra.pickers.commands-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.commands-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 현재는 사용되지 않습니다.</p>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.commands-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.commands-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.diagnostic" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.diagnostic">pickers.diagnostic()</h3>
+<p align="center">
+<code>MiniExtra.pickers.diagnostic</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>내장 진단 피커</p>
+<p><a href="https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.get()">vim.diagnostic.get()</a>을 사용하여 <a href="https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic">vim.diagnostic</a>에서 진단 항목을 선택합니다.</p>
+<section id="miniextra.pickers.diagnostic-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.diagnostic-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;get_opts&gt;</span> <code>(table)</code> - <a href="https://neovim.io/doc/user/helptag.html?tag=vim.diagnostic.get()">vim.diagnostic.get()</a>을 위한 옵션입니다. 심각도나 네임스페이스를 제한하는 데 사용할 수 있습니다. 기본값: <code>{}</code>.</p></li>
+<li><p><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - “all” (사용 가능한 전체) 또는 “current” (버퍼) 중 하나입니다. 기본값: “all”.</p></li>
+<li><p><span class="help-syntax-keys">&lt;sort_by&gt;</span> <code>(string)</code> - 정렬 우선순위입니다. “severity”, “path”, “none” 중 하나입니다. 기본값: “severity”.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.diagnostic-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.diagnostic-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.explorer" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.explorer">pickers.explorer()</h3>
+<p align="center">
+<code>MiniExtra.pickers.explorer</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>파일 탐색기 피커</p>
+<p>파일 시스템을 탐색하고 파일을 엽니다. 참고:</p>
+<ul>
+<li><p>디렉토리를 선택하면 그 안으로 이동하여 피커의 항목과 현재 작업 디렉토리를 변경합니다.</p></li>
+<li><p>쿼리와 미리보기는 평소와 같이 작동합니다 ( <code>move_next</code>/<code>move_prev</code>만 사용할 수 있는 것은 아님).</p></li>
+<li><p>미리보기는 모든 항목에 대해 작동합니다.</p></li>
+</ul>
+<p>예시:</p>
+<ul>
+<li><p><code>MiniExtra.pickers.explorer()</code></p></li>
+<li><p><code>:Pick explorer cwd='..'</code> - 부모 디렉토리에서 탐색기를 엽니다.</p></li>
+</ul>
+<section id="miniextra.pickers.explorer-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.explorer-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;cwd&gt;</span> <code>(string)</code> - 탐색을 시작할 초기 디렉토리입니다. 유효한 디렉토리 경로여야 합니다. 기본값: <code>nil</code> (<a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>).</p></li>
+<li><p><span class="help-syntax-keys">&lt;filter&gt;</span> <code>(function)</code> - 표시할 항목을 필터링하는 호출 가능한 서술부(predicate)입니다. 모든 항목에 대해 호출되며, 표시해야 하는 경우 <code>true</code>를 반환해야 합니다. 각 항목은 다음 필드를 가진 테이블입니다:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;fs_type&gt;</span> <code>(string)</code> - 경로 유형입니다. “directory” 또는 “file” 중 하나입니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;path&gt;</span> <code>(string)</code> - 항목 경로입니다.</p></li>
+<li><p><span class="help-syntax-keys">&lt;text&gt;</span> <code>(string)</code> - 표시되는 텍스트(경로의 기본 이름).</p></li>
+</ul></li>
+<li><p><span class="help-syntax-keys">&lt;sort&gt;</span> <code>(function)</code> - 호출 가능한 항목 정렬기입니다. 항목 배열(위에 설명된 구조를 가진 각 요소)과 함께 호출되며 정렬된 항목 배열을 반환해야 합니다.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.explorer-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.explorer-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.git_branches" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.git_branches">pickers.git_branches()</h3>
+<p align="center">
+<code>MiniExtra.pickers.git_branches</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Git 브랜치 피커</p>
+<p><code>git branch</code>를 사용하여 Git 브랜치 중에서 선택합니다. 참고:</p>
+<ul>
+<li><p>실행 가능한 <code>git</code>이 필요합니다.</p></li>
+<li><p>대상 경로가 Git 저장소의 일부여야 합니다.</p></li>
+<li><p>탐색 및 내비게이션 목적으로 제공됩니다. Git 작업을 수행하는 것은 전용 Git 클라이언트를 사용하는 것이 좋으며, 별도의 기능 추가 계획은 없습니다.</p></li>
+<li><p>선택 시 브랜치의 이력이 포함된 스크래치 버퍼를 엽니다.</p></li>
+</ul>
+<p>예시:</p>
+<ul>
+<li><p><code>MiniExtra.pickers.git_branches({ scope = 'local' })</code> - <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a> 부모 Git 저장소의 로컬 브랜치.</p></li>
+<li><p><code>:Pick git_branches path='%'</code> - 현재 파일 부모 Git 저장소의 모든 브랜치.</p></li>
+</ul>
+<section id="miniextra.pickers.git_branches-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.git_branches-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;path&gt;</span> <code>(string|nil)</code> - Git 작업을 위한 대상 경로(필요한 경우)입니다. 항목을 구성할 Git 저장소를 찾는 데에도 사용됩니다. 기본값: <code>nil</code> (<a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>를 포함하는 Git 저장소의 루트).</p></li>
+<li><p><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - 표시할 브랜치 범위입니다. “all”, “local”, “remotes” 중 하나입니다. 기본값: “all”.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.git_branches-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.git_branches-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.git_commits" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.git_commits">pickers.git_commits()</h3>
+<p align="center">
+<code>MiniExtra.pickers.git_commits</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Git 커밋 피커</p>
+<p><code>git log</code>를 사용하여 Git 커밋 중에서 선택합니다. 참고:</p>
+<ul>
+<li><p>실행 가능한 <code>git</code>이 필요합니다.</p></li>
+<li><p>대상 경로가 Git 저장소의 일부여야 합니다.</p></li>
+<li><p>탐색 및 내비게이션 목적으로 제공됩니다. Git 작업을 수행하는 것은 전용 Git 클라이언트를 사용하는 것이 좋으며, 별도의 기능 추가 계획은 없습니다.</p></li>
+<li><p>선택 시 커밋의 diff가 포함된 스크래치 버퍼를 엽니다.</p></li>
+</ul>
+<p>예시:</p>
+<ul>
+<li><p><code>MiniExtra.pickers.git_commits()</code> - <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>의 부모 Git 저장소에 있는 모든 커밋.</p></li>
+<li><p><code>MiniExtra.pickers.git_commits({ path = 'subdir' })</code> - ‘subdir’ 하위 디렉토리의 파일에 영향을 주는 커밋들.</p></li>
+<li><p><code>:Pick git_commits path='%'</code> 현재 파일에 영향을 주는 커밋들.</p></li>
+</ul>
+<section id="miniextra.pickers.git_commits-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.git_commits-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><span class="help-syntax-keys">&lt;path&gt;</span> <code>(string|nil)</code> - Git 작업을 위한 대상 경로(필요한 경우)입니다. 항목을 구성할 Git 저장소를 찾는 데에도 사용됩니다. 기본값: <code>nil</code> (<a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>를 포함하는 Git 저장소의 루트).</li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.git_commits-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.git_commits-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.git_files" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.git_files">pickers.git_files()</h3>
+<p align="center">
+<code>MiniExtra.pickers.git_files</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Git 파일 피커</p>
+<p><code>git ls-files</code>를 사용하여 Git 파일 중에서 선택합니다. 참고:</p>
+<ul>
+<li><p>실행 가능한 <code>git</code>이 필요합니다.</p></li>
+<li><p>대상 경로가 Git 저장소의 일부여야 합니다.</p></li>
+<li><p>탐색 및 내비게이션 목적으로 제공됩니다. Git 작업을 수행하는 것은 전용 Git 클라이언트를 사용하는 것이 좋으며, 별도의 기능 추가 계획은 없습니다.</p></li>
+</ul>
+<p>예시:</p>
+<ul>
+<li><p><code>MiniExtra.pickers.git_files({ scope = 'ignored' })</code> - <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>의 부모 Git 저장소에서 무시된 파일들.</p></li>
+<li><p><code>:Pick git_files path='subdir' scope='modified'</code> - Git에서 무시된 ‘subdir’ 하위 디렉토리의 파일들.</p></li>
+</ul>
+<section id="miniextra.pickers.git_files-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.git_files-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;path&gt;</span> <code>(string|nil)</code> - Git 작업을 위한 대상 경로(필요한 경우)입니다. 항목을 구성할 Git 저장소를 찾는 데에도 사용됩니다. 기본값: <code>nil</code> (<a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>를 포함하는 Git 저장소의 루트).</p></li>
+<li><p><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - 표시할 파일 범위입니다. 다음 중 하나입니다:</p>
+<ul>
+<li><p>“tracked” (<code>--cached</code> Git 플래그).</p></li>
+<li><p>“modified” (<code>--modified</code> Git 플래그).</p></li>
+<li><p>“untracked” (<code>--others</code> Git 플래그).</p></li>
+<li><p>“ignored” (<code>--ignored</code> Git 플래그).</p></li>
+<li><p>“deleted” (<code>--deleted</code> Git 플래그). 기본값: “tracked”.</p></li>
+</ul></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.git_files-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.git_files-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.git_hunks" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.git_hunks">pickers.git_hunks()</h3>
+<p align="center">
+<code>MiniExtra.pickers.git_hunks</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Git 헌크(hunks) 피커</p>
+<p><code>git diff</code>를 사용하여 Git 헌크 중에서 선택합니다. 참고:</p>
+<ul>
+<li><p>실행 가능한 <code>git</code>이 필요합니다.</p></li>
+<li><p>대상 경로가 Git 저장소의 일부여야 합니다.</p></li>
+<li><p>탐색 및 내비게이션 목적으로 제공됩니다. Git 작업을 수행하는 것은 전용 Git 클라이언트를 사용하는 것이 좋으며, 별도의 기능 추가 계획은 없습니다.</p></li>
+<li><p>선택 시 헌크의 첫 번째 변경 사항으로 이동합니다.</p></li>
+</ul>
+<p>예시:</p>
+<ul>
+<li><p><code>MiniExtra.pickers.git_hunks({ scope = 'staged' })</code> - <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>의 부모 Git 저장소에서 스테이징된(staged) 헌크들.</p></li>
+<li><p><code>:Pick git_hunks path='%' n_context=0</code> - 현재 파일에서 컨텍스트 없이 계산된 헌크들.</p></li>
+</ul>
+<section id="miniextra.pickers.git_hunks-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.git_hunks-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;n_context&gt;</span> <code>(number)</code> - 헌크 미리보기에 표시할 컨텍스트 줄 수입니다. 기본값: 3.</p></li>
+<li><p><span class="help-syntax-keys">&lt;path&gt;</span> <code>(string|nil)</code> - Git 작업을 위한 대상 경로(필요한 경우)입니다. 항목을 구성할 Git 저장소를 찾는 데에도 사용됩니다. 기본값: <code>nil</code> (<a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>를 포함하는 Git 저장소의 루트).</p></li>
+<li><p><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - 표시할 헌크 범위입니다. “unstaged” 또는 “staged” 중 하나입니다. 기본값: “unstaged”.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.git_hunks-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.git_hunks-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.hipatterns" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.hipatterns">pickers.hipatterns()</h3>
+<p align="center">
+<code>MiniExtra.pickers.hipatterns</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>‘mini.hipatterns’ 매치 피커</p>
+<p><a href="../../mini.nvim/doc/mini-hipatterns.html#minihipatterns.get_matches">MiniHipatterns.get_matches()</a>를 사용하여 <a href="../../mini.nvim/doc/mini-hipatterns.html#mini.hipatterns">mini.hipatterns</a> 매치 중에서 선택합니다. 참고:</p>
+<ul>
+<li><p>’mini.hipatterns’가 필요합니다.</p></li>
+<li><p>하이라이터 식별자는 해당 하이라이트 그룹으로 하이라이트됩니다.</p></li>
+</ul>
+<section id="miniextra.pickers.hipatterns-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.hipatterns-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - “all” (’mini.hipatterns’가 활성화된 버퍼들) 또는 “current” (버퍼) 중 하나입니다. 기본값: “all”.</p></li>
+<li><p><span class="help-syntax-keys">&lt;highlighters&gt;</span> <code>(table|nil)</code> - 매치를 찾을 하이라이터입니다. <a href="../../mini.nvim/doc/mini-hipatterns.html#minihipatterns.get_matches">MiniHipatterns.get_matches()</a>로 전달됩니다. 기본값: <code>nil</code>.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.hipatterns-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.hipatterns-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.history" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.history">pickers.history()</h3>
+<p align="center">
+<code>MiniExtra.pickers.history</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Neovim 기록(history) 피커</p>
+<p><a href="https://neovim.io/doc/user/helptag.html?tag=:history">:history</a> 출력에서 선택합니다. <code>&lt;C-e&gt;</code>를 사용하여 명령줄에서 현재 매치를 편집할 수 있습니다.</p>
+<p>참고:</p>
+<ul>
+<li><p>미리보기가 없습니다.</p></li>
+<li><p>선택 시 동작은 범위(scope)에 따라 다릅니다:</p>
+<ul>
+<li><p>“cmd” / “:” 범위의 경우, 명령이 실행됩니다.</p></li>
+<li><p>“search” / “/” / “?” 범위의 경우, 검색이 다시 수행됩니다.</p></li>
+<li><p>다른 범위의 경우 아무 작업도 수행되지 않습니다 (하지만 선택된 항목은 여전히 반환됨).</p></li>
+</ul></li>
+<li><p><code>&lt;C-e&gt;</code>는 “cmd” / “:” / “search” / “/” / “?” 범위에서만 작동합니다.</p></li>
+</ul>
+<p>예시:</p>
+<ul>
+<li><p>명령 기록: <code>MiniExtra.pickers.history({ scope = ':' })</code></p></li>
+<li><p>검색 기록: <code>:Pick history scope='/'</code></p></li>
+</ul>
+<section id="miniextra.pickers.history-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.history-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - <a href="https://neovim.io/doc/user/helptag.html?tag=:history">:history</a> 명령의 허용되는 모든 {name} 플래그입니다. 참고: 단어 줄임표는 허용되지 않습니다. 기본값: “all”.</li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.history-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.history-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.hl_groups" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.hl_groups">pickers.hl_groups()</h3>
+<p align="center">
+<code>MiniExtra.pickers.hl_groups</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>하이라이트 그룹 피커</p>
+<p>하이라이트 그룹을 선택하고 미리 봅니다. 참고:</p>
+<ul>
+<li><p>항목 줄은 그것이 나타내는 것과 동일한 하이라이트 그룹으로 색칠됩니다.</p></li>
+<li><p>미리보기는 하이라이트 정의를 보여줍니다 ( <a href="https://neovim.io/doc/user/helptag.html?tag=:highlight">:highlight</a>와 <span class="help-syntax-special">{group-name}</span> 사용 시와 동일).</p></li>
+<li><p>선택하면 업데이트 및 적용을 위해 하이라이트 정의를 명령줄에 배치합니다.</p></li>
+</ul>
+<section id="miniextra.pickers.hl_groups-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.hl_groups-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 현재는 사용되지 않습니다.</p>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.hl_groups-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.hl_groups-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.keymaps" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.keymaps">pickers.keymaps()</h3>
+<p align="center">
+<code>MiniExtra.pickers.keymaps</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Neovim 키맵 피커</p>
+<p>Neovim 키맵에 대한 데이터를 선택하고 미리 봅니다. 참고:</p>
+<ul>
+<li><p>항목 줄에는 키맵 모드, 버퍼 로컬 여부, 왼쪽 키 시퀀스, 추론된 설명에 대한 데이터가 포함됩니다.</p></li>
+<li><p>미리보기는 키맵 데이터 또는 콜백 소스(존재하고 접근 가능한 경우)를 보여줍니다.</p></li>
+<li><p>선택하면 키맵의 왼쪽 키 시퀀스를 누르는 것과 동일한 동작을 수행합니다.</p></li>
+</ul>
+<section id="miniextra.pickers.keymaps-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.keymaps-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;mode&gt;</span> <code>(string)</code> - 표시할 모드입니다. “all” 또는 <a href="https://neovim.io/doc/user/helptag.html?tag=nvim_set_keymap()">nvim_set_keymap()</a>을 위한 적절한 모드 중 하나입니다. 기본값: “all”.</p></li>
+<li><p><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - 표시할 범위입니다. “all”, “global”, “buf” 중 하나입니다. 기본값: “all”.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.keymaps-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.keymaps-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.list" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.list">pickers.list()</h3>
+<p align="center">
+<code>MiniExtra.pickers.list</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Neovim 리스트 피커</p>
+<p>다음 Neovim 리스트의 요소를 선택하고 탐색합니다:</p>
+<ul>
+<li><p><a href="https://neovim.io/doc/user/helptag.html?tag=quickfix">quickfix</a> 리스트.</p></li>
+<li><p>현재 창의 <a href="https://neovim.io/doc/user/helptag.html?tag=location-list">location-list</a>.</p></li>
+<li><p><a href="https://neovim.io/doc/user/helptag.html?tag=jumplist">jumplist</a>.</p></li>
+<li><p><a href="https://neovim.io/doc/user/helptag.html?tag=changelist">changelist</a>.</p></li>
+</ul>
+<p>참고: 명시적인 <code>scope</code>가 필요합니다.</p>
+<p>예시:</p>
+<ul>
+<li><p><code>MiniExtra.pickers.list({ scope = 'quickfix' })</code> - quickfix 리스트.</p></li>
+<li><p><code>:Pick list scope='jump'</code> - 점프 리스트.</p></li>
+</ul>
+<section id="miniextra.pickers.list-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.list-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - 표시할 리스트 유형입니다. “quickfix”, “location”, “jump”, “change” 중 하나입니다. 기본값: <code>nil</code> (명시적 범위 지정 필요).</li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.list-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.list-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.lsp" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.lsp">pickers.lsp()</h3>
+<p align="center">
+<code>MiniExtra.pickers.lsp</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>LSP 피커</p>
+<p>LSP 메서드를 사용하여 선택하고 탐색합니다. 참고:</p>
+<ul>
+<li><p>지원되는 목록 중 하나에서 명시적인 범위(scope)를 지정해야 합니다:</p>
+<ul>
+<li><p>“declaration”.</p></li>
+<li><p>“definition”.</p></li>
+<li><p>“document_symbol”.</p></li>
+<li><p>“implementation”.</p></li>
+<li><p>“references”.</p></li>
+<li><p>“type_definition”.</p></li>
+<li><p>“workspace_symbol”.</p></li>
+<li><p>“workspace_symbol_live” - “workspace_symbol”과 동일하지만 피커의 프롬프트를 LSP 서버 쿼리로 취급하여 실시간 피드백을 제공합니다. <a href="../../mini.nvim/doc/mini-pick.html#minipick.builtin.grep_live">MiniPick.builtin.grep_live()</a>와 <a href="../../mini.nvim/doc/mini-pick.html#minipick.builtin.grep">MiniPick.builtin.grep()</a>의 관계와 유사합니다. 일반 매칭을 사용하려면 <a href="../../mini.nvim/doc/mini-pick.html#minipick-actions-refine">MiniPick-actions-refine</a>을 활성화하세요.</p></li>
+</ul></li>
+<li><p><a href="https://neovim.io/doc/user/helptag.html?tag=vim.lsp.LocationOpts.OnList">vim.lsp.LocationOpts.OnList</a>를 지원하는 <code>vim.lsp.buf</code> 메서드에 의존합니다. 특히, LSP 서버가 단일 위치가 아닌 위치 목록을 반환하는 경우에만 피커가 시작됨을 의미합니다.</p></li>
+<li><p><code>vim.lsp.buf</code> 메서드의 비동기 특성으로 인해 아무것도 반환하지 않습니다.</p></li>
+<li><p>“document_symbol”, “workspace_symbol”, “workspace_symbol_live” 범위에서 추가 아이콘과 하이라이트를 표시하려면 <a href="../../mini.nvim/doc/mini-icons.html#mini.icons">mini.icons</a> 설정이 필요합니다.</p></li>
+</ul>
+<p>예시:</p>
+<ul>
+<li><p><code>MiniExtra.pickers.lsp({ scope = 'references' })</code> - 커서 아래 심볼의 참조(references).</p></li>
+<li><p><code>:Pick lsp scope='document_symbol'</code> - 현재 파일의 심볼들.</p></li>
+</ul>
+<section id="miniextra.pickers.lsp-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.lsp-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - 사용할 LSP 메서드입니다. 지원되는 메서드 중 하나여야 합니다 (위에 목록 참조). 기본값: <code>nil</code> (명시적 범위 지정 필요).</p></li>
+<li><p><span class="help-syntax-keys">&lt;symbol_query&gt;</span> <code>(string)</code> - <code>"workspace_symbol"</code> 범위를 위한 쿼리입니다. 기본값: (LSP 사양에 따라) 모든 심볼을 위한 빈 문자열.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.lsp-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.lsp-return">반환</h4>
+<p><code>(nil)</code> 아무것도 반환하지 않습니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.manpages" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.manpages">pickers.manpages()</h3>
+<p align="center">
+<code>MiniExtra.pickers.manpages</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>매뉴얼 페이지(Man pages)</p>
+<p>매뉴얼 페이지(<a href="https://neovim.io/doc/user/helptag.html?tag=ft-man-plugin">ft-man-plugin</a>에 설명된 것과 동일)를 선택합니다. 참고:</p>
+<ul>
+<li><p>항목을 미리 보고 선택하기 위해 <a href="https://neovim.io/doc/user/helptag.html?tag=:Man">:Man</a> 명령에 의존합니다.</p></li>
+<li><p>대상 창에 페이지를 표시합니다. 분할 창을 사용하려면 <a href="../../mini.nvim/doc/mini-pick.html#minipick-actions-choose">MiniPick-actions-choose</a>를 사용하세요.</p></li>
+</ul>
+<section id="miniextra.pickers.manpages-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.manpages-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 현재는 사용되지 않습니다.</p>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.manpages-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.manpages-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.marks" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.marks">pickers.marks()</h3>
+<p align="center">
+<code>MiniExtra.pickers.marks</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Neovim 마크(marks) 피커</p>
+<p>Neovim <a href="https://neovim.io/doc/user/helptag.html?tag=mark">마크</a>의 위치를 선택하고 미리 봅니다.</p>
+<section id="miniextra.pickers.marks-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.marks-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - 표시할 범위입니다. “all”, “global”, “buf” 중 하나입니다. 기본값: “all”.</li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.marks-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.marks-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.oldfiles" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.oldfiles">pickers.oldfiles()</h3>
+<p align="center">
+<code>MiniExtra.pickers.oldfiles</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>이전 파일(old files) 피커</p>
+<p>읽기 가능한 파일을 나타내는 <a href="https://neovim.io/doc/user/helptag.html?tag=v:oldfiles">v:oldfiles</a> 항목 중에서 선택합니다.</p>
+<section id="miniextra.pickers.oldfiles-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.oldfiles-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;current_dir&gt;</span> <code>(boolean)</code> - 현재 작업 디렉토리와 그 하위 디렉토리의 파일만 반환할지 여부입니다. 기본값: <code>false</code>.</p></li>
+<li><p><span class="help-syntax-keys">&lt;preserve_order&gt;</span> <code>(boolean)</code> - 쿼리 중에 원래 순서를 유지할지 여부입니다. 기본값: <code>false</code>.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.oldfiles-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.oldfiles-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.options" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.options">pickers.options()</h3>
+<p align="center">
+<code>MiniExtra.pickers.options</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Neovim 옵션 피커</p>
+<p>Neovim 옵션에 대한 데이터를 선택하고 미리 봅니다. 참고:</p>
+<ul>
+<li><p>항목 줄은 설정 여부에 따라 색상이 지정됩니다 (설정되지 않은 경우 어둡게 표시).</p></li>
+<li><p>미리보기는 대상 창에서의 옵션 값과 일반 정보를 보여줍니다.</p></li>
+<li><p>선택하면 업데이트 및 적용을 위해 옵션 이름을 명령줄에 배치합니다.</p></li>
+</ul>
+<section id="miniextra.pickers.options-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.options-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><span class="help-syntax-keys">&lt;scope&gt;</span> <code>(string)</code> - 표시할 옵션입니다. “all”, “global”, “win”, “buf” 중 하나입니다. 기본값: “all”.</li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.options-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.options-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.registers" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.registers">pickers.registers()</h3>
+<p align="center">
+<code>MiniExtra.pickers.registers</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Neovim 레지스터 피커</p>
+<p>Neovim <a href="https://neovim.io/doc/user/helptag.html?tag=registers">레지스터</a>에서 선택합니다. 참고:</p>
+<ul>
+<li><p>미리보기가 없습니다 (모든 정보가 항목의 텍스트에 포함됨).</p></li>
+<li><p>선택하면 레지스터의 내용을 붙여넣습니다: 입력 모드에서는 <a href="https://neovim.io/doc/user/helptag.html?tag=i_CTRL-R">i_CTRL-R</a>, 명령줄 모드에서는 <a href="https://neovim.io/doc/user/helptag.html?tag=c_CTRL-R">c_CTRL-R</a>, 그 외의 경우에는 <a href="https://neovim.io/doc/user/helptag.html?tag=P">P</a>를 사용합니다. 표현식 레지스터 <a href="https://neovim.io/doc/user/helptag.html?tag=quote=">quote=</a>는 (존재하는 경우) 다시 평가되어 붙여넣어집니다.</p></li>
+</ul>
+<section id="miniextra.pickers.registers-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.registers-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 현재는 사용되지 않습니다.</p>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.registers-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.registers-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.spellsuggest" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.spellsuggest">pickers.spellsuggest()</h3>
+<p align="center">
+<code>MiniExtra.pickers.spellsuggest</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Neovim 맞춤법 제안(spell suggestions) 피커</p>
+<p>맞춤법 제안을 선택하고 적용합니다. 참고:</p>
+<ul>
+<li><p>미리보기를 사용할 수 없습니다.</p></li>
+<li><p>선택하면 현재 단어(<a href="https://neovim.io/doc/user/helptag.html?tag=%3Ccword%3E"><span class="help-syntax-keys">&lt;cword&gt;</span></a>)를 제안된 단어로 교체합니다.</p></li>
+</ul>
+<section id="miniextra.pickers.spellsuggest-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.spellsuggest-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><span class="help-syntax-keys">&lt;n_suggestions&gt;</span> <code>(number)</code> - 맞춤법 제안의 개수입니다. 기본값: 25.</li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.spellsuggest-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.spellsuggest-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.treesitter" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.treesitter">pickers.treesitter()</h3>
+<p align="center">
+<code>MiniExtra.pickers.treesitter</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>Tree-sitter 노드 피커</p>
+<p>현재 버퍼의 <a href="https://neovim.io/doc/user/helptag.html?tag=treesitter">treesitter</a> 노드를 선택하고 탐색합니다. 참고:</p>
+<ul>
+<li>현재 버퍼에 활성화된 tree-sitter 파서가 필요합니다.</li>
+</ul>
+<section id="miniextra.pickers.treesitter-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.treesitter-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 현재는 사용되지 않습니다.</p>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.treesitter-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.treesitter-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.visit_paths" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.visit_paths">pickers.visit_paths()</h3>
+<p align="center">
+<code>MiniExtra.pickers.visit_paths</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>‘mini.visits’ 방문 경로 피커</p>
+<p><a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_paths">MiniVisits.list_paths()</a>를 사용하여 <a href="../../mini.nvim/doc/mini-visits.html#mini.visits">mini.visits</a>에서 경로를 선택합니다. 참고:</p>
+<ul>
+<li>’mini.visits’가 필요합니다.</li>
+</ul>
+<p>예시:</p>
+<ul>
+<li><p><code>MiniExtra.pickers.visit_paths()</code> - <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>에 등록되고 “최신 빈도수(robust frecency)” 순으로 정렬된 방문 기록.</p></li>
+<li><p><code>:Pick visit_paths cwd='' recency_weight=1 filter='core'</code> - “core” 레이블이 있는 모든 방문 기록을 최신 순으로 정렬.</p></li>
+</ul>
+<section id="miniextra.pickers.visit_paths-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.visit_paths-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;cwd&gt;</span> <code>(string)</code> - <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_paths">MiniVisits.list_paths()</a>로 전달됩니다. 기본값: <code>nil</code> (<a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>에 등록된 경로를 가져옴).</p></li>
+<li><p><span class="help-syntax-keys">&lt;filter&gt;</span> <code>(function|string)</code> - <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_paths">MiniVisits.list_paths()</a>로 전달됩니다. 기본값: <code>nil</code> (모든 경로 사용).</p></li>
+<li><p><span class="help-syntax-keys">&lt;preserve_order&gt;</span> <code>(boolean)</code> - 쿼리 중에 원래 순서를 유지할지 여부입니다. 기본값: <code>false</code>.</p></li>
+<li><p><span class="help-syntax-keys">&lt;recency_weight&gt;</span> <code>(number)</code> - <a href="../../mini.nvim/doc/mini-visits.html#minivisits.gen_sort.default">MiniVisits.gen_sort.default()</a>로 전달됩니다. 기본값: 0.5 (“최신 빈도수(robust frecency)” 정렬 사용).</p></li>
+<li><p><span class="help-syntax-keys">&lt;sort&gt;</span> <code>(function)</code> - <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_paths">MiniVisits.list_paths()</a>로 전달됩니다. 기본값: <code>nil</code> (“최신 빈도수” 사용). 참고: 제공된 경우 <code>recency_weight</code>보다 우선합니다.</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.visit_paths-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.visit_paths-return">반환</h4>
+<p><code>(any)</code> 호출된 피커의 출력입니다.</p>
+<hr>
+</section>
+</section>
+<section id="miniextra.pickers.visit_labels" class="level3 help-syntax-right-anchor">
+<h3 class="help-syntax-right-anchor anchored" data-anchor-id="miniextra.pickers.visit_labels">pickers.visit_labels()</h3>
+<p align="center">
+<code>MiniExtra.pickers.visit_labels</code>(<span class="help-syntax-special">{local_opts}</span>, <span class="help-syntax-special">{opts}</span>)
+</p>
+<p>‘mini.visits’ 방문 레이블 피커</p>
+<p><a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_labels">MiniVisits.list_labels()</a> 및 <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_paths">MiniVisits.list_paths()</a>를 사용하여 <a href="../../mini.nvim/doc/mini-visits.html#mini.visits">mini.visits</a>에서 레이블을 선택합니다. 참고:</p>
+<ul>
+<li><p>’mini.visits’가 필요합니다.</p></li>
+<li><p>미리보기는 미리 본 레이블을 가진 방문 경로로 필터링하여 보여줍니다.</p></li>
+<li><p>선택하면 본질적으로 선택된 레이블을 가진 경로에 대해 <a href="../../mini.nvim/doc/mini-extra.html#miniextra.pickers.visit_paths">MiniExtra.pickers.visit_paths()</a>를 시작합니다.</p></li>
+</ul>
+<p>예시:</p>
+<ul>
+<li><p><code>MiniExtra.pickers.visit_labels()</code> - <a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>에 등록된 방문 기록의 레이블.</p></li>
+<li><p><code>:Pick visit_labels cwd=''</code> - 모든 방문 기록의 레이블.</p></li>
+</ul>
+<section id="miniextra.pickers.visit_labels-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.visit_labels-parameters">매개변수</h4>
+<p><span class="help-syntax-special">{local_opts}</span> <code>(table|nil)</code> 이 특정 피커의 동작을 정의하는 옵션입니다. 가능한 필드:</p>
+<ul>
+<li><p><span class="help-syntax-keys">&lt;cwd&gt;</span> <code>(string)</code> - <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_labels">MiniVisits.list_labels()</a>로 전달됩니다. 기본값: <code>nil</code> (<a href="https://neovim.io/doc/user/helptag.html?tag=current-directory">현재 디렉토리</a>에 등록된 방문 기록에서 레이블을 가져옴).</p></li>
+<li><p><span class="help-syntax-keys">&lt;filter&gt;</span> <code>(function|string)</code> - <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_labels">MiniVisits.list_labels()</a>로 전달됩니다. 기본값: <code>nil</code> (모든 방문 기록 사용).</p></li>
+<li><p><span class="help-syntax-keys">&lt;path&gt;</span> <code>(string)</code> - <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_labels">MiniVisits.list_labels()</a>로 전달됩니다. 기본값: <code>""</code> (대상 <code>cwd</code>에 대한 모든 방문 기록에서 레이블을 가져옴).</p></li>
+<li><p><span class="help-syntax-keys">&lt;sort&gt;</span> <code>(function)</code> - 미리보기 및 선택을 위해 <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_paths">MiniVisits.list_paths()</a>로 전달됩니다. 기본값: <code>nil</code> (“최신 빈도수” 사용).</p></li>
+</ul>
+<p><span class="help-syntax-special">{opts}</span> <code>(table|nil)</code> <a href="../../mini.nvim/doc/mini-pick.html#minipick.start">MiniPick.start()</a>로 전달되는 옵션입니다.</p>
+</section>
+<section id="miniextra.pickers.visit_labels-return" class="level4">
+<h4 class="anchored" data-anchor-id="miniextra.pickers.visit_labels-return">반환</h4>
+<p><code>(...)</code> 선택된 경로입니다.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- Original source: https://gc.zgo.at/count.js -->
+<!-- Inlined for security reasons (less supply chain attack possibility) -->
+<script data-goatcounter="https://nvim-mini.goatcounter.com/count">
+// GoatCounter: https://www.goatcounter.com
+// This file is released under the ISC license: https://opensource.org/licenses/ISC
+;(function() {
+	'use strict';
+
+	window.goatcounter = window.goatcounter || {}
+
+	// Load settings from data-goatcounter-settings.
+	var s = document.querySelector('script[data-goatcounter]')
+	if (s && s.dataset.goatcounterSettings) {
+		try         { var set = JSON.parse(s.dataset.goatcounterSettings) }
+		catch (err) { console.error('invalid JSON in data-goatcounter-settings: ' + err) }
+		for (var k in set)
+			if (['no_onload', 'no_events', 'allow_local', 'allow_frame', 'path', 'title', 'referrer', 'event'].indexOf(k) > -1)
+				window.goatcounter[k] = set[k]
+	}
+
+	var enc = encodeURIComponent
+
+	// Get all data we're going to send off to the counter endpoint.
+	window.goatcounter.get_data = function(vars) {
+		vars = vars || {}
+		var data = {
+			p: (vars.path     === undefined ? goatcounter.path     : vars.path),
+			r: (vars.referrer === undefined ? goatcounter.referrer : vars.referrer),
+			t: (vars.title    === undefined ? goatcounter.title    : vars.title),
+			e: !!(vars.event || goatcounter.event),
+			s: window.screen.width,
+			b: is_bot(),
+			q: location.search,
+		}
+
+		var rcb, pcb, tcb  // Save callbacks to apply later.
+		if (typeof(data.r) === 'function') rcb = data.r
+		if (typeof(data.t) === 'function') tcb = data.t
+		if (typeof(data.p) === 'function') pcb = data.p
+
+		if (is_empty(data.r)) data.r = document.referrer
+		if (is_empty(data.t)) data.t = document.title
+		if (is_empty(data.p)) data.p = get_path()
+
+		if (rcb) data.r = rcb(data.r)
+		if (tcb) data.t = tcb(data.t)
+		if (pcb) data.p = pcb(data.p)
+		return data
+	}
+
+	// Check if a value is "empty" for the purpose of get_data().
+	var is_empty = function(v) { return v === null || v === undefined || typeof(v) === 'function' }
+
+	// See if this looks like a bot; there is some additional filtering on the
+	// backend, but these properties can't be fetched from there.
+	var is_bot = function() {
+		// Headless browsers are probably a bot.
+		var w = window, d = document
+		if (w.callPhantom || w._phantom || w.phantom)
+			return 150
+		if (w.__nightmare)
+			return 151
+		if (d.__selenium_unwrapped || d.__webdriver_evaluate || d.__driver_evaluate)
+			return 152
+		if (navigator.webdriver)
+			return 153
+		return 0
+	}
+
+	// Object to urlencoded string, starting with a ?.
+	var urlencode = function(obj) {
+		var p = []
+		for (var k in obj)
+			if (obj[k] !== '' && obj[k] !== null && obj[k] !== undefined && obj[k] !== false)
+				p.push(enc(k) + '=' + enc(obj[k]))
+		return '?' + p.join('&')
+	}
+
+	// Show a warning in the console.
+	var warn = function(msg) {
+		if (console && 'warn' in console)
+			console.warn('goatcounter: ' + msg)
+	}
+
+	// Get the endpoint to send requests to.
+	var get_endpoint = function() {
+		var s = document.querySelector('script[data-goatcounter]')
+		return (s && s.dataset.goatcounter) ? s.dataset.goatcounter : goatcounter.endpoint
+	}
+
+	// Get current path.
+	var get_path = function() {
+		var loc = location,
+			c = document.querySelector('link[rel="canonical"][href]')
+		if (c) {  // May be relative or point to different domain.
+			var a = document.createElement('a')
+			a.href = c.href
+			if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
+				loc = a
+		}
+		return (loc.pathname + loc.search) || '/'
+	}
+
+	// Run function after DOM is loaded.
+	var on_load = function(f) {
+		if (document.body === null)
+			document.addEventListener('DOMContentLoaded', function() { f() }, false)
+		else
+			f()
+	}
+
+	// Filter some requests that we (probably) don't want to count.
+	window.goatcounter.filter = function() {
+		if ('visibilityState' in document && document.visibilityState === 'prerender')
+			return 'visibilityState'
+		if (!goatcounter.allow_frame && location !== parent.location)
+			return 'frame'
+		if (!goatcounter.allow_local && location.hostname.match(/(localhost$|^127\.|^10\.|^172\.(1[6-9]|2[0-9]|3[0-1])\.|^192\.168\.|^0\.0\.0\.0$)/))
+			return 'localhost'
+		if (!goatcounter.allow_local && location.protocol === 'file:')
+			return 'localfile'
+		if (localStorage && localStorage.getItem('skipgc') === 't')
+			return 'disabled with #toggle-goatcounter'
+		return false
+	}
+
+	// Get URL to send to GoatCounter.
+	window.goatcounter.url = function(vars) {
+		var data = window.goatcounter.get_data(vars || {})
+		if (data.p === null)  // null from user callback.
+			return
+		data.rnd = Math.random().toString(36).substr(2, 5)  // Browsers don't always listen to Cache-Control.
+
+		var endpoint = get_endpoint()
+		if (!endpoint)
+			return warn('no endpoint found')
+
+		return endpoint + urlencode(data)
+	}
+
+	// Count a hit.
+	window.goatcounter.count = function(vars) {
+		var f = goatcounter.filter()
+		if (f)
+			return warn('not counting because of: ' + f)
+		var url = goatcounter.url(vars)
+		if (!url)
+			return warn('not counting because path callback returned null')
+
+		if (!navigator.sendBeacon(url)) {
+			// This mostly fails due to being blocked by CSP; try again with an
+			// image-based fallback.
+			var img = document.createElement('img')
+			img.src = url
+			img.style.position = 'absolute'  // Affect layout less.
+			img.style.bottom = '0px'
+			img.style.width = '1px'
+			img.style.height = '1px'
+			img.loading = 'eager'
+			img.setAttribute('alt', '')
+			img.setAttribute('aria-hidden', 'true')
+
+			var rm = function() { if (img && img.parentNode) img.parentNode.removeChild(img) }
+			img.addEventListener('load', rm, false)
+			document.body.appendChild(img)
+		}
+	}
+
+	// Get a query parameter.
+	window.goatcounter.get_query = function(name) {
+		var s = location.search.substr(1).split('&')
+		for (var i = 0; i < s.length; i++)
+			if (s[i].toLowerCase().indexOf(name.toLowerCase() + '=') === 0)
+				return s[i].substr(name.length + 1)
+	}
+
+	// Track click events.
+	window.goatcounter.bind_events = function() {
+		if (!document.querySelectorAll)  // Just in case someone uses an ancient browser.
+			return
+
+		var send = function(elem) {
+			return function() {
+				goatcounter.count({
+					event:    true,
+					path:     (elem.dataset.goatcounterClick || elem.name || elem.id || ''),
+					title:    (elem.dataset.goatcounterTitle || elem.title || (elem.innerHTML || '').substr(0, 200) || ''),
+					referrer: (elem.dataset.goatcounterReferrer || elem.dataset.goatcounterReferral || ''),
+				})
+			}
+		}
+
+		Array.prototype.slice.call(document.querySelectorAll("*[data-goatcounter-click]")).forEach(function(elem) {
+			if (elem.dataset.goatcounterBound)
+				return
+			var f = send(elem)
+			elem.addEventListener('click', f, false)
+			elem.addEventListener('auxclick', f, false)  // Middle click.
+			elem.dataset.goatcounterBound = 'true'
+		})
+	}
+
+	// Add a "visitor counter" frame or image.
+	window.goatcounter.visit_count = function(opt) {
+		on_load(function() {
+			opt        = opt        || {}
+			opt.type   = opt.type   || 'html'
+			opt.append = opt.append || 'body'
+			opt.path   = opt.path   || get_path()
+			opt.attr   = opt.attr   || {width: '200', height: (opt.no_branding ? '60' : '80')}
+
+			opt.attr['src'] = get_endpoint() + 'er/' + enc(opt.path) + '.' + enc(opt.type) + '?'
+			if (opt.no_branding) opt.attr['src'] += '&no_branding=1'
+			if (opt.style)       opt.attr['src'] += '&style=' + enc(opt.style)
+			if (opt.start)       opt.attr['src'] += '&start=' + enc(opt.start)
+			if (opt.end)         opt.attr['src'] += '&end='   + enc(opt.end)
+
+			var tag = {png: 'img', svg: 'img', html: 'iframe'}[opt.type]
+			if (!tag)
+				return warn('visit_count: unknown type: ' + opt.type)
+
+			if (opt.type === 'html') {
+				opt.attr['frameborder'] = '0'
+				opt.attr['scrolling']   = 'no'
+			}
+
+			var d = document.createElement(tag)
+			for (var k in opt.attr)
+				d.setAttribute(k, opt.attr[k])
+
+			var p = document.querySelector(opt.append)
+			if (!p)
+				return warn('visit_count: element to append to not found: ' + opt.append)
+			p.appendChild(d)
+		})
+	}
+
+	// Make it easy to skip your own views.
+	if (location.hash === '#toggle-goatcounter') {
+		if (localStorage.getItem('skipgc') === 't') {
+			localStorage.removeItem('skipgc', 't')
+			alert('GoatCounter tracking is now ENABLED in this browser.')
+		}
+		else {
+			localStorage.setItem('skipgc', 't')
+			alert('GoatCounter tracking is now DISABLED in this browser until ' + location + ' is loaded again.')
+		}
+	}
+
+	if (!goatcounter.no_onload)
+		on_load(function() {
+			// 1. Page is visible, count request.
+			// 2. Page is not yet visible; wait until it switches to 'visible' and count.
+			// See #487
+			if (!('visibilityState' in document) || document.visibilityState === 'visible')
+				goatcounter.count()
+			else {
+				var f = function(e) {
+					if (document.visibilityState !== 'visible')
+						return
+					document.removeEventListener('visibilitychange', f)
+					goatcounter.count()
+				}
+				document.addEventListener('visibilitychange', f)
+			}
+
+			if (!goatcounter.no_events)
+				goatcounter.bind_events()
+		})
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nvim-mini\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© Evgeni Chasnovski, <a href="https://choosealicense.com/licenses/mit/">MIT</a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
