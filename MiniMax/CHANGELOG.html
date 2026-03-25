@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>changelog – MINI</title>
+<title>MiniMax 변경 이력 – MINI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,13 +74,13 @@ ul.task-list li input[type="checkbox"] {
 <style> .quarto-title > h1.title { display: none } </style>
 
 
-<meta property="og:title" content="MINI">
+<meta property="og:title" content="MiniMax 변경 이력 – MINI">
 <meta property="og:description" content="Modular Independent Neovim Improvements">
 <meta property="og:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
 <meta property="og:site_name" content="MINI">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
-<meta name="twitter:title" content="MINI">
+<meta name="twitter:title" content="MiniMax 변경 이력 – MINI">
 <meta name="twitter:description" content="Modular Independent Neovim Improvements">
 <meta name="twitter:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
 <meta name="twitter:image-height" content="630">
@@ -333,100 +333,116 @@ ul.task-list li input[type="checkbox"] {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">MiniMax 변경 이력</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
-<p><em>Generated from the <code>main</code> branch of ‘MiniMax’</em></p>
+</header>
+
+
+<p><em>’MiniMax’의 <code>main</code> 브랜치에서 생성됨</em></p>
 <section id="2026-02-17" class="level2">
 <h2 class="anchored" data-anchor-id="2026-02-17">2026-02-17</h2>
 <ul>
-<li>Update ‘mini.files’ setup to use <code>now_if_args</code> instead of <code>later</code>. Otherwise it doesn’t override <code>netrw</code> as the default explorer when starting Neovim like <code>nvim .</code>.</li>
+<li>‘mini.files’ 설정을 <code>later</code> 대신 <code>now_if_args</code>를 사용하도록 업데이트했습니다. 그렇지 않으면 <code>nvim .</code>과 같이 Neovim을 시작할 때 <code>netrw</code>를 기본 탐색기로 덮어쓰지 못하는 문제가 있었습니다.</li>
 </ul>
 </section>
 <section id="2026-02-15" class="level2">
 <h2 class="anchored" data-anchor-id="2026-02-15">2026-02-15</h2>
 <ul>
-<li><p>Update ‘nvim-treesitter/nvim-treesitter-textobjects’ plugin to not explicitly use <code>main</code> branch as it is now the default.</p></li>
-<li><p>Add new reference configs:</p>
+<li><p>‘nvim-treesitter/nvim-treesitter-textobjects’ 플러그인이 이제 <code>main</code> 브랜치를 기본값으로 사용하므로, 명시적인 브랜치 지정을 제거했습니다.</p></li>
+<li><p>새로운 참조 설정을 추가했습니다:</p>
 <ul>
-<li><code>nvim-0.10</code> - for Neovim&gt;=0.10</li>
-<li><code>nvim-0.12</code> - for Neovim&gt;=0.12.</li>
+<li><code>nvim-0.10</code> - Neovim&gt;=0.10용</li>
+<li><code>nvim-0.12</code> - Neovim&gt;=0.12용</li>
 </ul></li>
 </ul>
 </section>
 <section id="2026-02-10" class="level2">
 <h2 class="anchored" data-anchor-id="2026-02-10">2026-02-10</h2>
 <ul>
-<li>Update using global variable for config as just <code>Config</code> and not <code>_G.Config</code>. This is more concise and makes it more consistent with how <code>MiniXxx</code> variables are used.</li>
+<li>설정용 전역 변수를 <code>_G.Config</code> 대신 단순히 <code>Config</code>로 사용하도록 업데이트했습니다. 이는 더 간결하며 <code>MiniXxx</code> 변수들이 사용되는 방식과 더 일관성이 있습니다.</li>
 </ul>
 </section>
 <section id="2026-01-29" class="level2">
 <h2 class="anchored" data-anchor-id="2026-01-29">2026-01-29</h2>
 <ul>
-<li><p>Update ‘mini.completion’ setup to use <code>now_if_args</code> instead of <code>later</code>. Otherwise it doesn’t set proper omnifunc for files opened during startup (because necessary <code>LspAttach</code> events are already triggered).</p></li>
-<li><p>Move setting up ‘mini.nvim’ modules that need <code>now_if_args</code> in a separate “Step one or two” section.</p></li>
+<li><p>‘mini.completion’ 설정을 <code>later</code> 대신 <code>now_if_args</code>를 사용하도록 업데이트했습니다. 그렇지 않으면 시작 시에 열린 파일들에 대해 적절한 omnifunc가 설정되지 않는 문제(<code>LspAttach</code> 이벤트가 이미 발생했기 때문)가 있었습니다.</p></li>
+<li><p><code>now_if_args</code>가 필요한 ‘mini.nvim’ 모듈들의 설정을 별도의 “Step one or two” 섹션으로 이동했습니다.</p></li>
 </ul>
 </section>
 <section id="2026-01-13" class="level2">
 <h2 class="anchored" data-anchor-id="2026-01-13">2026-01-13</h2>
 <ul>
-<li>Improve ‘stevearc/conform.nvim’ setup:
+<li>‘stevearc/conform.nvim’ 설정을 개선했습니다:
 <ul>
-<li>Setup plugin to allow formatting from LSP server if no dedicated formatter is available. This provides more versatile behavior. Previously it was forced in <code>&lt;Leader&gt;lf</code> mapping.</li>
-<li>Use plain <code>require('conform').format()</code> in <code>&lt;Leader&gt;lf</code> keymaps.</li>
+<li>전용 포맷터가 없는 경우 LSP 서버의 포맷팅을 허용하도록 설정했습니다. 이는 더 유연한 동작을 제공합니다. 기존에는 <code>&lt;Leader&gt;lf</code> 매핑에서 강제되었습니다.</li>
+<li><code>&lt;Leader&gt;lf</code> 키맵에서 일반적인 <code>require('conform').format()</code>을 사용하도록 변경했습니다.</li>
 </ul></li>
 </ul>
 </section>
 <section id="2026-01-08" class="level2">
 <h2 class="anchored" data-anchor-id="2026-01-08">2026-01-08</h2>
 <ul>
-<li>Improve keymaps for exploring quickfix list (make implementation shorter and more robust) and location list (add it as <code>&lt;Leader&gt;eQ</code> to compliment <code>&lt;Leader&gt;eq</code> for quickfix).</li>
+<li>quickfix 리스트 탐색 키맵을 개선하고(구현을 더 짧고 견고하게 만듦), location 리스트 탐색용으로 <code>&lt;Leader&gt;eq</code>에 대응하는 <code>&lt;Leader&gt;eQ</code>를 추가했습니다.</li>
 </ul>
 </section>
 <section id="2026-01-03" class="level2">
 <h2 class="anchored" data-anchor-id="2026-01-03">2026-01-03</h2>
 <ul>
-<li>Improve ‘mini.clue’ setup:
+<li>‘mini.clue’ 설정을 개선했습니다:
 <ul>
-<li>Use array <code>mode</code> where possible for a more concise setup.</li>
-<li>Use <code>gen_clues.square_brackets()</code> to show more built-in clues.</li>
-<li>Use <code>s</code> as a trigger. Currently only for ‘mini.surround’ actions, but will be more useful in the future.</li>
+<li>더 간결한 설정을 위해 가능한 경우 배열 형태의 <code>mode</code>를 사용합니다.</li>
+<li>더 많은 내장 힌트를 보여주기 위해 <code>gen_clues.square_brackets()</code>를 사용합니다.</li>
+<li><code>s</code>를 트리거로 사용합니다. 현재는 ‘mini.surround’ 액션에만 사용되지만, 향후 더 유용하게 쓰일 것입니다.</li>
 </ul></li>
 </ul>
 </section>
 <section id="2025-12-20" class="level2">
 <h2 class="anchored" data-anchor-id="2025-12-20">2025-12-20</h2>
 <ul>
-<li>Start using ‘mini.cmdline’.</li>
+<li>’mini.cmdline’을 사용하기 시작했습니다.</li>
 </ul>
 </section>
 <section id="2025-12-16" class="level2">
 <h2 class="anchored" data-anchor-id="2025-12-16">2025-12-16</h2>
 <ul>
-<li><p>Update ‘nvim-treesitter/nvim-treesitter’ plugin to not explicitly use <code>main</code> branch as it is now the default.</p></li>
-<li><p>Update ‘mason-org/mason.nvim’ example to use <code>now_if_args</code> instead of <code>later</code>. Otherwise LSP server installed via Mason will not yet be available if Neovim is started as <code>nvim -- path/to/file</code>.</p></li>
+<li><p>‘nvim-treesitter/nvim-treesitter’ 플러그인이 이제 <code>main</code> 브랜치를 기본값으로 사용하므로, 명시적인 브랜치 지정을 제거했습니다.</p></li>
+<li><p>‘mason-org/mason.nvim’ 예제에서 <code>later</code> 대신 <code>now_if_args</code>를 사용하도록 업데이트했습니다. 그렇지 않으면 <code>nvim -- path/to/file</code>과 같이 Neovim을 시작할 때 Mason을 통해 설치된 LSP 서버를 즉시 사용할 수 없는 문제가 있었습니다.</p></li>
 </ul>
 </section>
 <section id="2025-11-22" class="level2">
 <h2 class="anchored" data-anchor-id="2025-11-22">2025-11-22</h2>
 <ul>
-<li>Update <code>&lt;Leader&gt;fs</code> mapping to use <code>"workspace_symbol_live"</code> scope for <code>:Pick lsp</code> instead of <code>"workspace_symbol"</code></li>
+<li><code>&lt;Leader&gt;fs</code> 매핑이 <code>:Pick lsp</code>에서 <code>"workspace_symbol"</code> 대신 <code>"workspace_symbol_live"</code> 범위를 사용하도록 업데이트했습니다.</li>
 </ul>
 </section>
 <section id="2025-10-16" class="level2">
 <h2 class="anchored" data-anchor-id="2025-10-16">2025-10-16</h2>
 <ul>
-<li><p>Move <code>now_if_args</code> startup helper to ‘init.lua’ as <code>Config.now_if_args</code> to be directly usable from other config files.</p></li>
-<li><p>Enable ‘mini.misc’ behind <code>now_if_args</code> instead of <code>now</code>. Otherwise <code>setup_auto_root()</code> and <code>setup_restore_cursor()</code> don’t work on initial file(s) if Neovim is started as <code>nvim -- path/to/file</code>.</p></li>
+<li><p><code>now_if_args</code> 시작 도우미를 다른 설정 파일에서 직접 사용할 수 있도록 <code>Config.now_if_args</code>로 ’init.lua’에 이동했습니다.</p></li>
+<li><p>’mini.misc’를 <code>now</code> 대신 <code>now_if_args</code>에서 활성화하도록 변경했습니다. 그렇지 않으면 <code>nvim -- path/to/file</code>과 같이 Neovim을 시작할 때 <code>setup_auto_root()</code> 및 <code>setup_restore_cursor()</code>가 초기 파일에서 작동하지 않는 문제가 있었습니다.</p></li>
 </ul>
 </section>
 <section id="2025-10-13" class="level2">
 <h2 class="anchored" data-anchor-id="2025-10-13">2025-10-13</h2>
 <ul>
-<li>Initial release.</li>
+<li>최초 릴리스.</li>
 </ul>
 
 

@@ -352,17 +352,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#track-and-reuse-file-system-visits" id="toc-track-and-reuse-file-system-visits" class="nav-link active" data-scroll-target="#track-and-reuse-file-system-visits">Track and reuse file system visits</a></li>
-  <li><a href="#demo" id="toc-demo" class="nav-link" data-scroll-target="#demo">Demo</a></li>
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a>
+  <li><a href="#파일-시스템-방문-기록-추적-및-재사용" id="toc-파일-시스템-방문-기록-추적-및-재사용" class="nav-link active" data-scroll-target="#파일-시스템-방문-기록-추적-및-재사용">파일 시스템 방문 기록 추적 및 재사용</a></li>
+  <li><a href="#데모" id="toc-데모" class="nav-link" data-scroll-target="#데모">데모</a></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">기능</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">개요</a>
   <ul>
-  <li><a href="#tracking-visits" id="toc-tracking-visits" class="nav-link" data-scroll-target="#tracking-visits">Tracking visits</a></li>
-  <li><a href="#reusing-visits" id="toc-reusing-visits" class="nav-link" data-scroll-target="#reusing-visits">Reusing visits</a></li>
+  <li><a href="#방문-추적-tracking" id="toc-방문-추적-tracking" class="nav-link" data-scroll-target="#방문-추적-tracking">방문 추적 (Tracking)</a></li>
+  <li><a href="#방문-재사용-reusing" id="toc-방문-재사용-reusing" class="nav-link" data-scroll-target="#방문-재사용-reusing">방문 재사용 (Reusing)</a></li>
   </ul></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#default-config" id="toc-default-config" class="nav-link" data-scroll-target="#default-config">Default config</a></li>
-  <li><a href="#similar-plugins" id="toc-similar-plugins" class="nav-link" data-scroll-target="#similar-plugins">Similar plugins</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">설치</a></li>
+  <li><a href="#default-config" id="toc-default-config" class="nav-link" data-scroll-target="#default-config">기본 설정</a></li>
+  <li><a href="#similar-plugins" id="toc-similar-plugins" class="nav-link" data-scroll-target="#similar-plugins">유사한 플러그인</a></li>
   </ul>
 </nav>
     </div>
@@ -393,11 +393,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="https://github.com/nvim-mini/assets/blob/main/logo-2/logo-visits_readme.png?raw=true" alt="mini.visits" style="max-width:100%;border:solid 2px">
 </p>
 <p align="center">
-<em>Generated from the <code>main</code> branch of ‘mini.nvim’</em>
+<em>’mini.nvim’의 <code>main</code> 브랜치에서 생성됨</em>
 </p>
-<section id="track-and-reuse-file-system-visits" class="level3">
-<h3 class="anchored" data-anchor-id="track-and-reuse-file-system-visits">Track and reuse file system visits</h3>
-<p>See more details in <a href="#features">Features</a> and <a href="../../mini.nvim/doc/mini-visits.html">Documentation</a>.</p>
+<section id="파일-시스템-방문-기록-추적-및-재사용" class="level3">
+<h3 class="anchored" data-anchor-id="파일-시스템-방문-기록-추적-및-재사용">파일 시스템 방문 기록 추적 및 재사용</h3>
+<p>더 자세한 내용은 <a href="#features">기능</a> 및 <a href="../../mini.nvim/doc/mini-visits.html">상세 문서</a>를 참조하세요.</p>
 <hr>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -409,44 +409,44 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This was previously hosted at a personal <code>echasnovski</code> GitHub account. It was transferred to a dedicated organization to improve long term project stability. See more details <a href="https://github.com/nvim-mini/mini.nvim/discussions/1970">here</a>.</p>
+<p>이 프로젝트는 이전에 개인 계정인 <code>echasnovski</code>에서 관리되었습니다. 장기적인 프로젝트 안정성을 개선하기 위해 전용 조직으로 이전되었습니다. 자세한 내용은 <a href="https://github.com/nvim-mini/mini.nvim/discussions/1970">여기</a>를 참조하세요.</p>
 </div>
 </div>
-<p>⦿ This is a part of <a href="https://nvim-mini.org/mini.nvim">mini.nvim</a> library. Please use <a href="https://nvim-mini.org/mini.nvim/readmes/mini-visits">this link</a> if you want to mention this module.</p>
-<p>⦿ All contributions (issues, pull requests, discussions, etc.) are done inside of ‘mini.nvim’.</p>
-<p>⦿ See <a href="https://nvim-mini.org/mini.nvim/doc/mini-nvim">whole library documentation</a> to learn about general design principles, disable/configuration recipes, and more.</p>
-<p>⦿ See <a href="https://nvim-mini.org/MiniMax">MiniMax</a> for a full config example that uses this module.</p>
+<p>⦿ 이 모듈은 <a href="https://nvim-mini.org/mini.nvim">mini.nvim</a> 라이브러리의 일부입니다. 이 모듈을 언급할 때는 <a href="https://nvim-mini.org/mini.nvim/readmes/mini-visits">이 링크</a>를 사용해 주세요.</p>
+<p>⦿ 모든 기여(이슈, 풀 리퀘스트, 토론 등)는 ‘mini.nvim’ 저장소에서 진행됩니다.</p>
+<p>⦿ 일반적인 디자인 원칙, 비활성화/설정 레시피 등은 <a href="https://nvim-mini.org/mini.nvim/doc/mini-nvim">전체 라이브러리 문서</a>를 참조하세요.</p>
+<p>⦿ 이 모듈을 사용하는 전체 설정 예제는 <a href="https://nvim-mini.org/MiniMax">MiniMax</a>를 참조하세요.</p>
 <hr>
-<p>If you want to help this project grow but don’t know where to start, check out <a href="https://nvim-mini.org/mini.nvim/CONTRIBUTING">contributing guides of ‘mini.nvim’</a> or leave a Github star for ‘mini.nvim’ project and/or any its standalone Git repositories.</p>
+<p>이 프로젝트의 성장을 돕고 싶지만 어디서부터 시작해야 할지 모르겠다면, <a href="https://nvim-mini.org/mini.nvim/CONTRIBUTING">’mini.nvim’의 기여 가이드</a>를 확인하거나 ‘mini.nvim’ 프로젝트 및 해당 독립 저장소에 Github 스타를 남겨주세요.</p>
 </section>
-<section id="demo" class="level2">
-<h2 class="anchored" data-anchor-id="demo">Demo</h2>
+<section id="데모" class="level2">
+<h2 class="anchored" data-anchor-id="데모">데모</h2>
 <p><video src="https://github.com/nvim-mini/assets/blob/main/demo/demo-visits.mp4?raw=true" class="img-fluid" controls=""><a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-visits.mp4?raw=true">Video</a></video></p>
-<p><strong>Note</strong>: This demo uses custom <code>vim.ui.select()</code> from <a href="https://nvim-mini.org/mini.nvim/readmes/mini-pick">mini.pick</a>.</p>
+<p><strong>참고</strong>: 이 데모는 <a href="https://nvim-mini.org/mini.nvim/readmes/mini-pick">mini.pick</a>의 커스텀 <code>vim.ui.select()</code>를 사용합니다.</p>
 </section>
 <section id="features" class="level2">
-<h2 class="anchored" data-anchor-id="features">Features</h2>
+<h2 class="anchored" data-anchor-id="features">기능</h2>
 <ul>
-<li><p>Persistently track file system visits (both files and directories) per project directory. Store visit index is human readable and editable.</p></li>
-<li><p>Visit index is normalized on every write to contain relevant information. Exact details can be customized. See <code>:h MiniVisits.normalize()</code>.</p></li>
-<li><p>Built-in ability to persistently use label paths for later use. See <a href="../../mini.nvim/doc/mini-visits.html#minivisits.add_label"><code>:h MiniVisits.add_label()</code></a> and <a href="../../mini.nvim/doc/mini-visits.html#minivisits.remove_label"><code>:h MiniVisits.remove_label()</code></a>.</p></li>
-<li><p>Exported functions to reuse visit data:</p>
+<li><p>프로젝트 디렉터리별로 파일 시스템 방문(파일 및 디렉터리 모두)을 영구적으로 추적합니다. 저장된 방문 인덱스는 사람이 읽고 편집할 수 있는 형식입니다.</p></li>
+<li><p>방문 인덱스는 써질 때마다 관련 정보를 포함하도록 정규화(normalize)됩니다. 구체적인 세부 사항은 커스터마이징이 가능합니다. <code>:h MiniVisits.normalize()</code>를 참조하세요.</p></li>
+<li><p>경로에 라벨(labels)을 지정하여 나중에 영구적으로 사용할 수 있는 기능을 내장하고 있습니다. <a href="../../mini.nvim/doc/mini-visits.html#minivisits.add_label"><code>:h MiniVisits.add_label()</code></a> 및 <a href="../../mini.nvim/doc/mini-visits.html#minivisits.remove_label"><code>:h MiniVisits.remove_label()</code></a>을 참조하세요.</p></li>
+<li><p>방문 데이터를 재사용하기 위한 함수를 제공합니다:</p>
 <ul>
-<li><p>List visited paths/labels with custom filter and sort (uses “robust frecency” by default). Can be used as source for pickers.</p>
-<p>See <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_paths"><code>:h MiniVisits.list_paths()</code></a> and <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_labels"><code>:h MiniVisits.list_labels()</code></a>. See <a href="../../mini.nvim/doc/mini-visits.html#minivisits.gen_filter"><code>:h MiniVisits.gen_filter</code></a> and <a href="../../mini.nvim/doc/mini-visits.html#minivisits.gen_sort"><code>:h MiniVisits.gen_sort</code></a>.</p></li>
-<li><p>Select visited paths/labels using <code>vim.ui.select()</code>.</p>
-<p>See <a href="../../mini.nvim/doc/mini-visits.html#minivisits.select_path"><code>:h MiniVisits.select_path()</code></a> and <a href="../../mini.nvim/doc/mini-visits.html#minivisits.select_label"><code>:h MiniVisits.select_label()</code></a>.</p></li>
-<li><p>Iterate through visit paths in target direction (“forward”, “backward”, “first”, “last”). See <a href="../../mini.nvim/doc/mini-visits.html#minivisits.iterate_paths"><code>:h MiniVisits.iterate_paths()</code></a>.</p></li>
+<li><p>커스텀 필터와 정렬(기본적으로 “경고한 최신 빈도(robust frecency)” 사용)을 사용하여 방문한 경로/라벨 목록을 가져옵니다. 선택기(pickers)의 소스로 사용할 수 있습니다.</p>
+<p><a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_paths"><code>:h MiniVisits.list_paths()</code></a> 및 <a href="../../mini.nvim/doc/mini-visits.html#minivisits.list_labels"><code>:h MiniVisits.list_labels()</code></a>를 참조하세요. <a href="../../mini.nvim/doc/mini-visits.html#minivisits.gen_filter"><code>:h MiniVisits.gen_filter</code></a> 및 <a href="../../mini.nvim/doc/mini-visits.html#minivisits.gen_sort"><code>:h MiniVisits.gen_sort</code></a>를 참조하세요.</p></li>
+<li><p><code>vim.ui.select()</code>를 사용하여 방문한 경로/라벨을 선택합니다.</p>
+<p><a href="../../mini.nvim/doc/mini-visits.html#minivisits.select_path"><code>:h MiniVisits.select_path()</code></a> 및 <a href="../../mini.nvim/doc/mini-visits.html#minivisits.select_label"><code>:h MiniVisits.select_label()</code></a>을 참조하세요.</p></li>
+<li><p>대상 방향(“순방향”, “역방향”, “처음”, “마지막”)으로 방문 경로를 순회합니다. <a href="../../mini.nvim/doc/mini-visits.html#minivisits.iterate_paths"><code>:h MiniVisits.iterate_paths()</code></a>를 참조하세요.</p></li>
 </ul></li>
-<li><p>Exported functions to manually update visit index allowing persistent track of any user information. See <code>*_index()</code> functions.</p></li>
+<li><p>방문 인덱스를 수동으로 업데이트하여 모든 사용자 정보를 영구적으로 추적할 수 있는 기능을 제공합니다. <code>_index()</code> 세트 함수를 참조하세요.</p></li>
 </ul>
-<p>Notes:</p>
+<p>참고:</p>
 <ul>
-<li><p>All data is stored <em>only</em> in in-session Lua variable (for quick operation) and at <code>config.store.path</code> on disk (for persistent usage).</p></li>
-<li><p>It doesn’t account for paths being renamed or moved (because there is no general way to detect that). Usually a manual intervention to the visit index is required after the change but <em>before</em> the next writing to disk (usually before closing current session) because it will treat previous path as deleted and remove it from index.</p>
-<p>There is a <a href="../../mini.nvim/doc/mini-visits.html#minivisits.rename_in_index"><code>MiniVisits.rename_in_index()</code></a> helper for that. If rename/move is done with <a href="https://nvim-mini.org/mini.nvim/readmes/mini-files">‘mini.files’</a>, index is autoupdated.</p></li>
+<li><p>모든 데이터는 빠른 동작을 위해 세션 내 Lua 변수에 저장되며, 영구적인 사용을 위해 디스크의 <code>config.store.path</code>에 저장됩니다.</p></li>
+<li><p>경로 이름 변경이나 이동은 감지하지 못합니다 (이를 감지할 일반적인 방법이 없기 때문입니다). 일반적으로 변경 후, 하지만 디스크에 쓰기 <em>전</em>(보통 세션 종료 전)에 방문 인덱스를 수동으로 수정해야 합니다. 그렇지 않으면 이전 경로를 삭제된 것으로 간주하고 인덱스에서 제거합니다.</p>
+<p>이를 위한 <a href="../../mini.nvim/doc/mini-visits.html#minivisits.rename_in_index"><code>MiniVisits.rename_in_index()</code></a> 도우미가 제공됩니다. 만약 이름 변경/이동을 <a href="https://nvim-mini.org/mini.nvim/readmes/mini-files">‘mini.files’</a>로 수행한다면 인덱스는 자동으로 업데이트됩니다.</p></li>
 </ul>
-<p>For more information see these parts of help:</p>
+<p>더 자세한 정보는 도움말의 다음 섹션들을 참조하세요:</p>
 <ul>
 <li><a href="../../mini.nvim/doc/mini-visits.html#minivisits-overview"><code>:h MiniVisits-overview</code></a></li>
 <li><a href="../../mini.nvim/doc/mini-visits.html#minivisits-index-specification"><code>:h MiniVisits-index-specification</code></a></li>
@@ -454,75 +454,75 @@ Note
 </ul>
 </section>
 <section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<section id="tracking-visits" class="level3">
-<h3 class="anchored" data-anchor-id="tracking-visits">Tracking visits</h3>
-<p>File system visits (both directory and files) tracking is done in two steps:</p>
+<h2 class="anchored" data-anchor-id="overview">개요</h2>
+<section id="방문-추적-tracking" class="level3">
+<h3 class="anchored" data-anchor-id="방문-추적-tracking">방문 추적 (Tracking)</h3>
+<p>파일 시스템 방문(디렉터리 및 파일 모두) 추적은 두 단계로 이루어집니다:</p>
 <ul>
-<li><p>On every dedicated event timer is (re)started to actually register visit after certain amount of time.</p></li>
-<li><p>When delay time passes without any dedicated events being triggered (meaning user is “settled” on certain buffer), visit is registered if all of the following conditions are met:</p>
+<li><p>전용 이벤트가 발생할 때마다 타이머가 시작(또는 재시작)되어 일정 시간 후에 실제로 방문을 등록합니다.</p></li>
+<li><p>전용 이벤트 발생 없이 지연 시간이 지나면 (즉, 사용자가 특정 버퍼에 “정착”하면), 다음 조건을 모두 만족할 때 방문이 등록됩니다:</p>
 <ul>
-<li>Module is not disabled.</li>
-<li>Buffer is normal with non-empty name (used as visit path).</li>
-<li>Visit path does not equal to the latest tracked one.</li>
+<li>모듈이 비활성화되지 않음.</li>
+<li>버퍼가 비어 있지 않은 이름(방문 경로로 사용됨)을 가진 일반 버퍼임.</li>
+<li>방문 경로가 마지막으로 추적된 경로와 동일하지 않음.</li>
 </ul></li>
 </ul>
-<p>Visit is autoregistered for current directory and leads to increase of count and latest time of visit. See <a href="../../mini.nvim/doc/mini-visits.html#minivisits-index-specification"><code>:h MiniVisits-index-specification</code></a> for more details.</p>
-<p>Notes:</p>
+<p>방문은 현재 디렉터리에 대해 자동으로 등록되며, 방문 횟수가 증가하고 최신 방문 시간이 기록됩니다. 자세한 내용은 <a href="../../mini.nvim/doc/mini-visits.html#minivisits-index-specification"><code>:h MiniVisits-index-specification</code></a>을 참조하세요.</p>
+<p>참고:</p>
 <ul>
-<li><p>All data is stored <em>only</em> in in-session Lua variable (for quick operation) and in one place on disk (for persistent usage). It is automatically written to disk before every Neovim exit.</p></li>
-<li><p>Tracking can be disabled by supplying empty string as <code>track.event</code>. Then it is up to the user to properly call <a href="../../mini.nvim/doc/mini-visits.html#minivisits.register_visit"><code>MiniVisits.register_visit()</code></a>.</p></li>
+<li><p>모든 데이터는 빠른 동작을 위해 세션 내 Lua 변수에 저장되며, 영구 사용을 위해 디스크의 한 곳에 저장됩니다. Neovim을 종료하기 전에 자동으로 디스크에 기록됩니다.</p></li>
+<li><p><code>track.event</code>에 빈 문자열을 설정하여 자동 추적을 비활성화할 수 있습니다. 이 경우 사용자가 직접 <a href="../../mini.nvim/doc/mini-visits.html#minivisits.register_visit"><code>MiniVisits.register_visit()</code></a>를 호출해야 합니다.</p></li>
 </ul>
 </section>
-<section id="reusing-visits" class="level3">
-<h3 class="anchored" data-anchor-id="reusing-visits">Reusing visits</h3>
-<p>Visit data can be reused in at least these ways:</p>
+<section id="방문-재사용-reusing" class="level3">
+<h3 class="anchored" data-anchor-id="방문-재사용-reusing">방문 재사용 (Reusing)</h3>
+<p>방문 데이터는 최소한 다음과 같은 방식으로 재사용될 수 있습니다:</p>
 <ul>
-<li><p>Get a list of visited paths and use it to visualize/pick/navigate visit history.</p></li>
-<li><p>Select one of the visited paths to open it.</p></li>
-<li><p>Move along visit history.</p></li>
-<li><p>Utilize labels. Any visit can be added one or more labels (like “core”, “tmp”, etc.). They are bound to the visit and are stored persistently.</p>
-<p>Labels can be used to manually create groups of files and/or directories that have particular interest to the user.</p>
-<p>There is no one right way to use them, though. See <a href="../../mini.nvim/doc/mini-visits.html#minivisits-examples"><code>:h MiniVisits-examples</code></a> for some inspiration.</p></li>
-<li><p>Utilizing custom data. Visit index can be manipulated manually using <code>_index()</code> set of functions. All “storable” user data inside index is then stored on disk, so it can be used to create any kind of workflow user wants.</p></li>
+<li><p>방문한 경로 목록을 가져와 방문 기록을 시각화/선택/탐색하는 데 사용합니다.</p></li>
+<li><p>방문한 경로 중 하나를 선택하여 엽니다.</p></li>
+<li><p>방문 기록을 따라 이동합니다.</p></li>
+<li><p>라벨을 활용합니다. 모든 방문 기록에 하나 이상의 라벨(“core”, “tmp” 등)을 추가할 수 있습니다. 라벨은 방문 기록에 묶여 영구적으로 저장됩니다.</p>
+<p>라벨은 사용자가 특별히 관심을 갖는 파일 및/또는 디렉터리 그룹을 수동으로 만드는 데 사용할 수 있습니다.</p>
+<p>라벨을 사용하는 단 하나의 정착된 방법은 없습니다. 영감을 얻으려면 <a href="../../mini.nvim/doc/mini-visits.html#minivisits-examples"><code>:h MiniVisits-examples</code></a>를 참조하세요.</p></li>
+<li><p>사용자 정의 데이터를 활용합니다. <code>_index()</code> 계열 함수를 사용하여 방문 인덱스를 수동으로 조작할 수 있습니다. 인덱스 내부의 모든 “저장 가능한” 사용자 데이터는 디스크에 기록되므로, 사용자가 원하는 어떤 종류의 워크플로우도 만들 수 있습니다.</p></li>
 </ul>
-<p>See <a href="../../mini.nvim/doc/mini-visits.html#minivisits-examples"><code>:h MiniVisits-examples</code></a> for some actual configuration and workflow examples.</p>
+<p>실제 설정 및 워크플로우 예시는 <a href="../../mini.nvim/doc/mini-visits.html#minivisits-examples"><code>:h MiniVisits-examples</code></a>를 참조하세요.</p>
 </section>
 </section>
 <section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>This plugin can be installed as part of ‘mini.nvim’ library (<strong>recommended</strong>) or as a standalone Git repository.</p>
-<p>There are two branches to install from:</p>
+<h2 class="anchored" data-anchor-id="installation">설치</h2>
+<p>이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(<strong>권장</strong>), 독립적인 Git 저장소로 설치할 수 있습니다.</p>
+<p>두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:</p>
 <ul>
-<li><code>main</code> (default, <strong>recommended</strong>) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).</li>
-<li><code>stable</code> will be updated only upon releases with code tested during public beta-testing phase in <code>main</code> branch.</li>
+<li><code>main</code> (기본값, <strong>권장</strong>): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.</li>
+<li><code>stable</code>: <code>main</code> 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.</li>
 </ul>
-<p>Here are code snippets for some common installation methods (use only one):</p>
+<p>다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):</p>
 <details>
 <summary>
-With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a>
+<a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a> 사용 시
 </summary>
 <ul>
-<li><p>‘mini.nvim’ library:</p>
+<li><p>‘mini.nvim’ 라이브러리:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Main</td>
-<td><em>Follow recommended ‘mini.deps’ installation</em></td>
+<td><em>권장되는 ‘mini.deps’ 설치 방법을 따르세요</em></td>
 </tr>
 <tr class="even">
 <td>Stable</td>
-<td><em>Follow recommended ‘mini.deps’ installation</em></td>
+<td><em>권장되는 ‘mini.deps’ 설치 방법을 따르세요</em></td>
 </tr>
 </tbody>
 </table></li>
-<li><p>Standalone plugin:</p>
+<li><p>단독 플러그인:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 10%">
@@ -530,8 +530,8 @@ With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -549,15 +549,15 @@ With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a>
 </details>
 <details>
 <summary>
-With <a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a>
+<a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a> 사용 시
 </summary>
 <ul>
-<li><p>‘mini.nvim’ library:</p>
+<li><p>‘mini.nvim’ 라이브러리:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -571,12 +571,12 @@ With <a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a>
 </tr>
 </tbody>
 </table></li>
-<li><p>Standalone plugin:</p>
+<li><p>단독 플러그인:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -594,15 +594,15 @@ With <a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a>
 </details>
 <details>
 <summary>
-With <a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
+<a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a> 사용 시
 </summary>
 <ul>
-<li><p>‘mini.nvim’ library:</p>
+<li><p>‘mini.nvim’ 라이브러리:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -616,12 +616,12 @@ With <a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
 </tr>
 </tbody>
 </table></li>
-<li><p>Standalone plugin:</p>
+<li><p>단독 플러그인:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -637,54 +637,54 @@ With <a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
 </table></li>
 </ul>
 </details>
-<p><strong>Important</strong>: don’t forget to call <code>require('mini.visits').setup()</code> to enable its functionality.</p>
-<p><strong>Note</strong>: if you are on Windows, there might be problems with too long file paths (like <code>error: unable to create file &lt;some file name&gt;: Filename too long</code>). Try doing one of the following:</p>
+<p><strong>중요</strong>: 기능을 활성화하려면 <code>require('mini.visits').setup()</code>을 호출해야 합니다.</p>
+<p><strong>참고</strong>: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(<code>error: unable to create file &lt;some file name&gt;: Filename too long</code>)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:</p>
 <ul>
-<li>Enable corresponding git global config value: <code>git config --system core.longpaths true</code>. Then try to reinstall.</li>
-<li>Install plugin in other place with shorter path.</li>
+<li>해당 git 전역 설정 값을 활성화합니다: <code>git config --system core.longpaths true</code>. 그 후 다시 설치를 시도하세요.</li>
+<li>더 짧은 경로의 다른 위치에 플러그인을 설치합니다.</li>
 </ul>
 </section>
 <section id="default-config" class="level2">
-<h2 class="anchored" data-anchor-id="default-config">Default config</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- No need to copy this inside `setup()`. Will be used automatically.</span></span>
+<h2 class="anchored" data-anchor-id="default-config">기본 설정</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- How visit index is converted to list of paths</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 방문 인덱스가 경로 목록으로 변환되는 방식</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">list</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Predicate for which paths to include (all by default)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 포함할 경로에 대한 서술어 (기본적으로 모두 포함)</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">filter</span> <span class="op">=</span> <span class="kw">nil</span><span class="op">,</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Sort paths based on the visit data (robust frecency by default)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 방문 데이터를 기반으로 경로 정렬 (기본적으로 견고한 최신 빈도 순)</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sort</span> <span class="op">=</span> <span class="kw">nil</span><span class="op">,</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Whether to disable showing non-error feedback</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 에러가 아닌 피드백 표시를 비활성화할지 여부</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="va">silent</span> <span class="op">=</span> <span class="kw">false</span><span class="op">,</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- How visit index is stored</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 방문 인덱스가 저장되는 방식</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="va">store</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Whether to write all visits before Neovim is closed</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Neovim이 닫히기 전에 모든 방문 기록을 기록할지 여부</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">autowrite</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Function to ensure that written index is relevant</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 기록된 인덱스가 유효한지 확인하는 함수</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="va">normalize</span> <span class="op">=</span> <span class="kw">nil</span><span class="op">,</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Path to store visit index</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 방문 인덱스를 저장할 경로</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="va">path</span> <span class="op">=</span> <span class="va">vim</span><span class="op">.</span><span class="va">fn</span><span class="op">.</span>stdpath<span class="op">(</span><span class="st">'data'</span><span class="op">)</span> <span class="op">..</span> <span class="st">'/mini-visits-index'</span><span class="op">,</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- How visit tracking is done</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 방문 추적이 수행되는 방식</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="va">track</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Start visit register timer at this event</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Supply empty string (`''`) to not do this automatically</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 이 이벤트에서 방문 등록 타이머 시작</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 자동으로 수행하지 않으려면 빈 문자열(`''`) 입력</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="va">event</span> <span class="op">=</span> <span class="st">'BufEnter'</span><span class="op">,</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Debounce delay after event to register a visit</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 방문을 등록하기 전 이벤트 발생 후의 디바운스(Debounce) 지연 시간</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="va">delay</span> <span class="op">=</span> <span class="dv">1000</span><span class="op">,</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="similar-plugins" class="level2">
-<h2 class="anchored" data-anchor-id="similar-plugins">Similar plugins</h2>
+<h2 class="anchored" data-anchor-id="similar-plugins">유사한 플러그인</h2>
 <ul>
 <li><a href="https://github.com/nvim-telescope/telescope-frecency.nvim">nvim-telescope/telescope-frecency.nvim</a></li>
 <li><a href="https://github.com/ThePrimeagen/harpoon">ThePrimeagen/harpoon</a></li>
