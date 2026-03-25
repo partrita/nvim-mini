@@ -9,8 +9,8 @@
 <link>https://nvim-mini.org/blog/</link>
 <atom:link href="https://nvim-mini.org/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>Modular Independent Neovim Improvements</description>
-<generator>quarto-1.8.27</generator>
-<lastBuildDate>Sat, 14 Feb 2026 15:00:00 GMT</lastBuildDate>
+<generator>quarto-1.8.24</generator>
+<lastBuildDate>Sun, 15 Feb 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>MiniMax 업데이트: Neovim 0.12용 vim.pack 및 Neovim 0.10용 설정 추가</title>
   <dc:creator>Evgeni Chasnovski</dc:creator>
@@ -22,13 +22,13 @@
 
 
 <p>안녕하세요, Neovim 사용자 여러분!</p>
-<p>‘mini.nvim’ 기반의 Neovim 설정 생성기인 <a href="../MiniMax/index.html">MiniMax</a>에 두 개의 새로운 레퍼런스 버전이 추가되었습니다:</p>
+<p>‘mini.nvim’ 기반의 Neovim 설정 생성기인 <a href="../MiniMax/index.md">MiniMax</a>에 두 개의 새로운 레퍼런스 버전이 추가되었습니다:</p>
 <ul>
 <li>Neovim 0.12를 위한 <a href="../MiniMax/configs/nvim-0.12"><code>nvim-0.12</code></a>. 현재 개발 중인 버전이지만 곧 출시될 예정입니다. 이 설정의 핵심은 플러그인 관리자를 ’mini.deps’에서 <a href="https://neovim.io/doc/user/helptag.html?tag=vim.pack"><code>vim.pack</code></a>으로 전환한다는 점입니다.</li>
 <li>Neovim 0.10을 위한 <a href="../MiniMax/configs/nvim-0.10"><code>nvim-0.10</code></a>. 최신 안정 버전은 아니지만 여전히 사용하는 분들이 계실 수 있습니다. <code>nvim-0.11</code>과 상당히 유사하지만 ‘nvim-treesitter’와 ’nvim-lspconfig’ 플러그인 설정 방식에서 주요 차이가 있습니다.</li>
 </ul>
-<p>새로운 MiniMax 사용자라면 <a href="../MiniMax/index.html#setting-up">설정하기(setting up)</a> 단계에서 Neovim 0.12 실행 파일( <code>nvim --version</code>으로 확인 가능)을 사용하면 최신 Neovim 기능을 사용하는 설정이 생성됩니다. 또한 Neovim 0.10 버전에서도 이제 MiniMax 설정을 생성할 수 있게 되었습니다.</p>
-<p>기존 MiniMax 사용자들에게는 Neovim 0.12가 정식 출시된 후 설정을 업데이트하는 연습을 할 수 있는 좋은 기회가 될 것입니다. MiniMax는 (설계상, 생성된 설정은 전적으로 사용자의 소유이므로) <a href="../MiniMax/index.html#updating">자동 업데이트 기능</a>을 제공하지 않습니다. 하지만 한 설정에서 다음 설정으로 넘어갈 때의 차이점을 보여주는 전용 페이지가 마련되었습니다:</p>
+<p>새로운 MiniMax 사용자라면 <a href="../MiniMax/index.md#setting-up">설정하기(setting up)</a> 단계에서 Neovim 0.12 실행 파일( <code>nvim --version</code>으로 확인 가능)을 사용하면 최신 Neovim 기능을 사용하는 설정이 생성됩니다. 또한 Neovim 0.10 버전에서도 이제 MiniMax 설정을 생성할 수 있게 되었습니다.</p>
+<p>기존 MiniMax 사용자들에게는 Neovim 0.12가 정식 출시된 후 설정을 업데이트하는 연습을 할 수 있는 좋은 기회가 될 것입니다. MiniMax는 (설계상, 생성된 설정은 전적으로 사용자의 소유이므로) <a href="../MiniMax/index.md#updating">자동 업데이트 기능</a>을 제공하지 않습니다. 하지만 한 설정에서 다음 설정으로 넘어갈 때의 차이점을 보여주는 전용 페이지가 마련되었습니다:</p>
 <ul>
 <li><a href="../MiniMax/configs/diffs/nvim-0.10_nvim-0.11"><code>nvim-0.10</code> -&gt; <code>nvim-0.11</code></a></li>
 <li><a href="../MiniMax/configs/diffs/nvim-0.11_nvim-0.12"><code>nvim-0.11</code> -&gt; <code>nvim-0.12</code></a></li>
@@ -44,7 +44,7 @@
  ]]></description>
   <category>update</category>
   <guid>https://nvim-mini.org/blog/2026-02-15-update-minimax-configs-012-010.html</guid>
-  <pubDate>Sat, 14 Feb 2026 15:00:00 GMT</pubDate>
+  <pubDate>Sun, 15 Feb 2026 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>0.17.0 버전 출시</title>
@@ -106,7 +106,7 @@
  ]]></description>
   <category>release</category>
   <guid>https://nvim-mini.org/blog/2025-12-18-release-0170.html</guid>
-  <pubDate>Wed, 17 Dec 2025 15:00:00 GMT</pubDate>
+  <pubDate>Thu, 18 Dec 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.cmdline’ 발표</title>
@@ -146,7 +146,7 @@
  ]]></description>
   <category>announce</category>
   <guid>https://nvim-mini.org/blog/2025-12-07-announce-mini-cmdline.html</guid>
-  <pubDate>Sat, 06 Dec 2025 15:00:00 GMT</pubDate>
+  <pubDate>Sun, 07 Dec 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>MiniMax - MINI의 정수를 담은 Neovim 설정</title>
@@ -159,7 +159,7 @@
 
 
 <p>안녕하세요, Neovim 사용자 여러분!</p>
-<p>드디어 “공식적인” MINI 설정 예시를 발표하게 되어 매우 기쁘고 다행스럽게 생각합니다. 이름은 <a href="../MiniMax/index.html">MiniMax</a>입니다.</p>
+<p>드디어 “공식적인” MINI 설정 예시를 발표하게 되어 매우 기쁘고 다행스럽게 생각합니다. 이름은 <a href="../MiniMax/index.md">MiniMax</a>입니다.</p>
 <p>이번 발표로 오늘은 세 가지 MINI의 생일이 되었습니다:</p>
 <ul>
 <li>‘mini.nvim’ 플러그인 자체가 출시된 지 <a href="../blog/2021-10-13-announce-mini-nvim.html">4년 전</a>입니다.</li>
@@ -169,7 +169,7 @@
 <hr>
 <p>MiniMax는 단순한 단일 설정 그 이상으로 설계되었습니다. 특정 조건에 맞춰 정교하게 제작된 <a href="../MiniMax/configs/index.html">설정들의 컬렉션</a>입니다. 현재는 각 안정 버전의 Neovim에 대한 전용 설정을 제공할 계획이며, 향후 다른 조건들도 고려될 수 있습니다 (물론 가까운 미래는 아닐 것입니다). 제가 알기로 이러한 방식은 기존의 “미리 구성된 설정(preconfigured configurations)”들 사이에서도 꽤 독특한 시도입니다. 이는 MiniMax를 단순한 설정 이상으로 유용하게 만들 것입니다. 시간이 지나면 Neovim 버전을 변경할 때 어떤 변경 사항들을 적용하는 것이 좋을지에 대한 좋은 참고 자료가 될 것이기 때문입니다.</p>
 <p>설정 자체는 <a href="../MiniMax/configs/nvim-0.11/index.html">매우 간결한 구조</a>를 가지고 있습니다: 작은 ‘init.lua’와 시작 시 로드되는 4개의 ’plugin/’ 파일로 구성됩니다. 이 구조와 내용은 제가 오랫동안 메인으로 사용해 온 설정을 기반으로 합니다.</p>
-<p>오늘날의 관점에서 보면 MiniMax는 ’nvim-lua/kickstart.nvim’과 스타일이 비슷합니다. 설정 파일에는 많은 문서화 주석이 포함되어 있으며 <strong>사용자가 직접 읽도록 제작되었습니다</strong>. MiniMax를 설정하고 나면, 이를 미세 조정하고 업데이트하는 것은 여러분의 몫입니다. MiniMax는 <a href="../MiniMax/index.html#what-it-is-not">배포판(distro)이나 Neovim에 관한 종합 가이드가 아닙니다</a>.</p>
+<p>오늘날의 관점에서 보면 MiniMax는 ’nvim-lua/kickstart.nvim’과 스타일이 비슷합니다. 설정 파일에는 많은 문서화 주석이 포함되어 있으며 <strong>사용자가 직접 읽도록 제작되었습니다</strong>. MiniMax를 설정하고 나면, 이를 미세 조정하고 업데이트하는 것은 여러분의 몫입니다. MiniMax는 <a href="../MiniMax/index.md#what-it-is-not">배포판(distro)이나 Neovim에 관한 종합 가이드가 아닙니다</a>.</p>
 <p>한번 확인해 보시고 의견을 들려주세요. 저는 현재 상태를 최대한 사용하기 편하고, 정교하며, 오타가 없도록 만드는 데 집중하고 싶습니다. 당분간은 새로운 특정 옵션이나 플러그인 추가에 대한 제안은 받지 않을 예정입니다.</p>
 <hr>
 <p>MiniMax 개발 과정에서 유용한 피드백을 주신 <a href="https://github.com/pkazmier">Pete Kazmier</a> 님께 감사의 마음을 전합니다.</p>
@@ -180,7 +180,7 @@
  ]]></description>
   <category>announce</category>
   <guid>https://nvim-mini.org/blog/2025-10-13-announce-minimax.html</guid>
-  <pubDate>Sun, 12 Oct 2025 15:00:00 GMT</pubDate>
+  <pubDate>Mon, 13 Oct 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>MINI 전용 사이트 오픈</title>
@@ -198,7 +198,7 @@
 <p>전용 사이트가 생기면서 프로젝트의 신뢰도가 높아진 것 외에도 다음과 같은 개선 사항들이 있습니다:</p>
 <ul>
 <li><p>자체 <a href="../blog/index.html">블로그</a>: 지난 4년 동안 Reddit에 올렸던 포스트들을 이미 옮겨놓았습니다. 가장 큰 장점은 웹에서 이 포스트들이 사라질 걱정을 덜 수 있다는 점입니다. 안타깝게도 제게는 <a href="https://www.reddit.com/r/neovim/comments/1mxxni1/comment/na8h6e3/?context=3">실제로 겪었던 문제</a>였거든요. 또한 다른 블로그 수집 사이트들에 자유롭게 링크를 걸 수 있는 포스트를 만들 수 있는 가능성도 열렸습니다.</p></li>
-<li><p>생성된 ‘mini.nvim’ 문서: <a href="../mini.nvim/index.html">READMEs</a>, <a href="../mini.nvim/CHANGELOG.html">변경 로그(CHANGELOG)</a>, <a href="../mini.nvim/doc/mini-nvim.html">도움말 파일</a>을 모두 포함합니다. 특히 도움말 파일은 GitHub의 “*.txt” 파일을 링크하는 것보다 훨씬 읽기 편하고 유용합니다:</p>
+<li><p>생성된 ‘mini.nvim’ 문서: <a href="../mini.nvim/index.md">READMEs</a>, <a href="../mini.nvim/CHANGELOG.html">변경 로그(CHANGELOG)</a>, <a href="../mini.nvim/doc/mini-nvim.html">도움말 파일</a>을 모두 포함합니다. 특히 도움말 파일은 GitHub의 “*.txt” 파일을 링크하는 것보다 훨씬 읽기 편하고 유용합니다:</p>
 <ul>
 <li><code>:help</code> 스타일의 하이라이팅이 적용됩니다.</li>
 <li>태그 링크( <code>&lt;C-]&gt;</code>를 눌러 이동할 수 있는 링크)가 자동으로 연결되어 읽기와 탐색이 <strong>훨씬</strong> 수월해집니다. ‘mini.nvim’ 태그 간의 링크뿐만 아니라, 내장 태그의 경우 <a href="https://neovim.io">neovim.io</a> 문서로도 연결됩니다!</li>
@@ -215,7 +215,7 @@
  ]]></description>
   <category>announce</category>
   <guid>https://nvim-mini.org/blog/2025-10-03-announce-site.html</guid>
-  <pubDate>Thu, 02 Oct 2025 15:00:00 GMT</pubDate>
+  <pubDate>Fri, 03 Oct 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>새로운 컬러 스킴</title>
@@ -300,7 +300,7 @@
   <category>announce</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2025-07-10-announce-new-colorschemes.html</guid>
-  <pubDate>Wed, 09 Jul 2025 15:00:00 GMT</pubDate>
+  <pubDate>Thu, 10 Jul 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>0.16.0 버전 출시</title>
@@ -350,7 +350,7 @@
   <category>release</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2025-05-20-release-0160.html</guid>
-  <pubDate>Mon, 19 May 2025 15:00:00 GMT</pubDate>
+  <pubDate>Tue, 20 May 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.keymap’ 발표</title>
@@ -395,7 +395,7 @@
   <category>announce</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2025-05-03-announce-mini-keymap.html</guid>
-  <pubDate>Fri, 02 May 2025 15:00:00 GMT</pubDate>
+  <pubDate>Sat, 03 May 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.completion’ 업데이트: 스니펫 지원 (드디어!)</title>
@@ -433,7 +433,7 @@
   <category>update</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2025-03-07-update-mini-completion-snippet-support.html</guid>
-  <pubDate>Thu, 06 Mar 2025 15:00:00 GMT</pubDate>
+  <pubDate>Fri, 07 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>0.15.0 버전 출시</title>
@@ -487,7 +487,7 @@
   <category>release</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2025-01-30-release-0150.html</guid>
-  <pubDate>Wed, 29 Jan 2025 15:00:00 GMT</pubDate>
+  <pubDate>Thu, 30 Jan 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.snippets’ 발표</title>
@@ -546,7 +546,7 @@
   <category>announce</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-12-23-announce-mini-snippets.html</guid>
-  <pubDate>Sun, 22 Dec 2024 15:00:00 GMT</pubDate>
+  <pubDate>Mon, 23 Dec 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>0.14.0 버전 출시</title>
@@ -604,7 +604,7 @@
   <category>release</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-09-26-release-0140.html</guid>
-  <pubDate>Wed, 25 Sep 2024 15:00:00 GMT</pubDate>
+  <pubDate>Thu, 26 Sep 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.files’ 업데이트: 북마크</title>
@@ -643,7 +643,7 @@
   <category>update</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-09-03-update-mini-files-bookmarks.html</guid>
-  <pubDate>Mon, 02 Sep 2024 15:00:00 GMT</pubDate>
+  <pubDate>Tue, 03 Sep 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.icons’ 발표</title>
@@ -712,7 +712,7 @@
   <category>announce</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-07-03-announce-mini-icons.html</guid>
-  <pubDate>Tue, 02 Jul 2024 15:00:00 GMT</pubDate>
+  <pubDate>Wed, 03 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>0.13.0 버전 출시</title>
@@ -768,7 +768,7 @@
   <category>release</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-06-13-release-0130.html</guid>
-  <pubDate>Wed, 12 Jun 2024 15:00:00 GMT</pubDate>
+  <pubDate>Thu, 13 Jun 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.git’ 발표</title>
@@ -824,7 +824,7 @@
   <category>announce</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-05-21-announce-mini-git.html</guid>
-  <pubDate>Mon, 20 May 2024 15:00:00 GMT</pubDate>
+  <pubDate>Tue, 21 May 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.diff’ 발표</title>
@@ -884,7 +884,7 @@
   <category>announce</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-03-28-announce-mini-diff.html</guid>
-  <pubDate>Wed, 27 Mar 2024 15:00:00 GMT</pubDate>
+  <pubDate>Thu, 28 Mar 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>0.12.0 버전 출시</title>
@@ -924,7 +924,7 @@
   <category>release</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-02-29-release-0120.html</guid>
-  <pubDate>Wed, 28 Feb 2024 15:00:00 GMT</pubDate>
+  <pubDate>Thu, 29 Feb 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.deps’ 발표</title>
@@ -977,7 +977,7 @@
   <category>announce</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-02-11-announce-mini-deps.html</guid>
-  <pubDate>Sat, 10 Feb 2024 15:00:00 GMT</pubDate>
+  <pubDate>Sun, 11 Feb 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>‘mini.notify’ 발표</title>
@@ -1015,7 +1015,7 @@
   <category>announce</category>
   <category>reddit</category>
   <guid>https://nvim-mini.org/blog/2024-01-04-announce-mini-notify.html</guid>
-  <pubDate>Wed, 03 Jan 2024 15:00:00 GMT</pubDate>
+  <pubDate>Thu, 04 Jan 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

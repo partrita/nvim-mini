@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,12 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-588f07447021c9b1c78c14c285b6df15.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-9a1b1f8e841c9c2d133c690b11f8ee3e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0ed1a58f1961f20e100ea025a42ebf64.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-fdc1b2fd0a2d1e1fd2f41bfe1f0ec5c1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-822171c0b08fb8324585bf617d393f53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-02025811ff4c933f5630304c954c6652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2340dc3d84c2292709c2bc9a48df96e7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-a6c58798d87e8f1a74aa0ab11dab83cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -299,6 +299,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">MINI</span>
     </a>
@@ -350,19 +352,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#neovim-with-maximum-mini" id="toc-neovim-with-maximum-mini" class="nav-link active" data-scroll-target="#neovim-with-maximum-mini">Neovim with maximum MINI</a>
+  <li><a href="#mini를-최대한-활용한-neovim" id="toc-mini를-최대한-활용한-neovim" class="nav-link active" data-scroll-target="#mini를-최대한-활용한-neovim">MINI를 최대한 활용한 Neovim</a>
   <ul>
-  <li><a href="#how-it-looks" id="toc-how-it-looks" class="nav-link" data-scroll-target="#how-it-looks">How it looks</a></li>
-  <li><a href="#what-it-is-not" id="toc-what-it-is-not" class="nav-link" data-scroll-target="#what-it-is-not">What it is not</a></li>
-  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a>
+  <li><a href="#미리보기" id="toc-미리보기" class="nav-link" data-scroll-target="#미리보기">미리보기</a></li>
+  <li><a href="#지향하지-않는-것" id="toc-지향하지-않는-것" class="nav-link" data-scroll-target="#지향하지-않는-것">지향하지 않는 것</a></li>
+  <li><a href="#요구-사항" id="toc-요구-사항" class="nav-link" data-scroll-target="#요구-사항">요구 사항</a>
   <ul>
-  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
-  <li><a href="#knowledge" id="toc-knowledge" class="nav-link" data-scroll-target="#knowledge">Knowledge</a></li>
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#소프트웨어" id="toc-소프트웨어" class="nav-link" data-scroll-target="#소프트웨어">소프트웨어</a></li>
+  <li><a href="#지식" id="toc-지식" class="nav-link" data-scroll-target="#지식">지식</a></li>
+  <li><a href="#동기-부여" id="toc-동기-부여" class="nav-link" data-scroll-target="#동기-부여">동기 부여</a></li>
   </ul></li>
-  <li><a href="#setting-up" id="toc-setting-up" class="nav-link" data-scroll-target="#setting-up">Setting up</a></li>
-  <li><a href="#updating" id="toc-updating" class="nav-link" data-scroll-target="#updating">Updating</a></li>
-  <li><a href="#similar-projects" id="toc-similar-projects" class="nav-link" data-scroll-target="#similar-projects">Similar projects</a></li>
+  <li><a href="#setting-up" id="toc-setting-up" class="nav-link" data-scroll-target="#setting-up">설정 방법</a></li>
+  <li><a href="#updating" id="toc-updating" class="nav-link" data-scroll-target="#updating">업데이트</a></li>
+  <li><a href="#유사한-프로젝트" id="toc-유사한-프로젝트" class="nav-link" data-scroll-target="#유사한-프로젝트">유사한 프로젝트</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -394,52 +396,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="logo.png" alt="mini.nvim" style="max-width:100%;border:solid 2px">
 </p>
 <p align="center">
-<em>Generated from the <code>main</code> branch of ‘MiniMax’</em>
+<em>’MiniMax’의 <code>main</code> 브랜치에서 생성됨</em>
 </p>
-<section id="neovim-with-maximum-mini" class="level2">
-<h2 class="anchored" data-anchor-id="neovim-with-maximum-mini">Neovim with maximum MINI</h2>
-<p>MiniMax is a Neovim config generator. After <a href="#setting-up">running a script</a>, your config will:</p>
+<section id="mini를-최대한-활용한-neovim" class="level2">
+<h2 class="anchored" data-anchor-id="mini를-최대한-활용한-neovim">MINI를 최대한 활용한 Neovim</h2>
+<p>MiniMax는 Neovim 설정 생성기입니다. <a href="#setting-up">스크립트를 실행</a>하고 나면, 당신의 설정은:</p>
 <ul>
-<li>Be primarily based on the ‘mini.nvim’ modules for a coherent, powerful, and flexible setup.</li>
-<li>Provide out of the box a stable, polished, and feature rich Neovim experience.</li>
-<li>Have minimal structure with potential to build upon.</li>
-<li>Contain extensively commented files meant to be read.</li>
+<li>일관되고 강력하며 유연한 구성을 위해 주로 ‘mini.nvim’ 모듈을 기반으로 합니다.</li>
+<li>즉시 사용할 수 있는 안정적이고 정제된, 기능이 풍부한 Neovim 환경을 제공합니다.</li>
+<li>추가 개발이 가능한 최소한의 구조를 가집니다.</li>
+<li>읽기 쉽게 작성된 상세한 주석이 포함되어 있습니다.</li>
 </ul>
-<p>Explore <a href="configs">reference configs</a>. The most appropriate one is picked during generation based on Neovim version.</p>
-<p>See <a href="../MiniMax/CHANGELOG.html">change log</a> for a history of changes.</p>
-<p>If you find this project useful, please consider leaving a Github star.</p>
-<section id="how-it-looks" class="level3">
-<h3 class="anchored" data-anchor-id="how-it-looks">How it looks</h3>
-<p><a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_1.png?raw=true"> <img alt="During setup" src="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_1.png?raw=true" style="width: 45%"> </a> <a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_2.png?raw=true"> <img alt="Picker" src="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_2.png?raw=true" style="width: 45%"> </a></p>
-<p><a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_3.png?raw=true"> <img alt="Clues" src="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_3.png?raw=true" style="width: 45%"> </a> <a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_4.png?raw=true"> <img alt="File explorer" src="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_4.png?raw=true" style="width: 45%"> </a></p>
+<p><a href="configs">참조 설정</a>을 둘러보세요. 생성 과정에서 Neovim 버전에 따라 가장 적합한 설정이 선택됩니다.</p>
+<p>변경 이력은 <a href="../MiniMax/CHANGELOG.html">변경 이력</a>을 참조하세요.</p>
+<p>이 프로젝트가 유용하다고 생각된다면 Github 스타를 남겨주세요.</p>
+<section id="미리보기" class="level3">
+<h3 class="anchored" data-anchor-id="미리보기">미리보기</h3>
+<p><a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_1.png?raw=true"> <img alt="설정 과정" src="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_1.png?raw=true" style="width: 45%"> </a> <a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_2.png?raw=true"> <img alt="피커(Picker)" src="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_2.png?raw=true" style="width: 45%"> </a></p>
+<p><a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_3.png?raw=true"> <img alt="힌트(Clues)" src="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_3.png?raw=true" style="width: 45%"> </a> <a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_4.png?raw=true"> <img alt="파일 탐색기" src="https://github.com/nvim-mini/assets/blob/main/demo/demo-minimax_4.png?raw=true" style="width: 45%"> </a></p>
 </section>
-<section id="what-it-is-not" class="level3">
-<h3 class="anchored" data-anchor-id="what-it-is-not">What it is not</h3>
-<p>It is not a “Neovim distribution”, i.e.&nbsp;there are no automatic config updates. After your config is set up, it is yours to improve and update (which makes this approach more stable). You can still see how MiniMax itself gets updated (see <a href="#updating">Updating</a> and <a href="../MiniMax/CHANGELOG.html">Change log</a>) and adjust the config accordingly.</p>
-<p>It is not a comprehensive guide on how to set up and use every Neovim feature and plugin. Most of the config parts are carefully chosen in order to reach a balance between stability and features.</p>
+<section id="지향하지-않는-것" class="level3">
+<h3 class="anchored" data-anchor-id="지향하지-않는-것">지향하지 않는 것</h3>
+<p>MiniMax는 “Neovim 배포판(distribution)”이 아닙니다. 즉, 자동 설정 업데이트가 없습니다. 설정이 완료된 후에는 당신이 직접 개선하고 업데이트해야 하며, 이 방식이 훨씬 더 안정적입니다. MiniMax 자체가 어떻게 업데이트되는지는 <a href="#updating">업데이트</a> 및 <a href="../MiniMax/CHANGELOG.html">변경 이력</a>을 통해 확인할 수 있으며, 이에 맞춰 자신의 설정을 조정할 수 있습니다.</p>
+<p>또한 모든 Neovim 기능과 플러그인의 설치 및 사용법을 다루는 종합 가이드가 아닙니다. 설정의 대부분은 안정성과 기능 사이의 균형을 맞추기 위해 신중하게 선택되었습니다.</p>
 </section>
-<section id="requirements" class="level3">
-<h3 class="anchored" data-anchor-id="requirements">Requirements</h3>
-<section id="software" class="level4">
-<h4 class="anchored" data-anchor-id="software">Software</h4>
+<section id="요구-사항" class="level3">
+<h3 class="anchored" data-anchor-id="요구-사항">요구 사항</h3>
+<section id="소프트웨어" class="level4">
+<h4 class="anchored" data-anchor-id="소프트웨어">소프트웨어</h4>
 <ul>
-<li><a href="https://neovim.io/">Neovim</a> executable. Assumed to be named <code>nvim</code>.</li>
-<li><a href="https://git-scm.com/">Git</a> executable. Assumed to be named <code>git</code>.</li>
-<li>Operating system: any OS supported by Neovim.</li>
-<li>Internet connection for downloading plugins.</li>
-<li>(Optional, but recommended) <a href="https://github.com/BurntSushi/ripgrep#installation"><code>ripgrep</code></a>.</li>
-<li>(Optional, but recommended) Terminal emulator (or GUI) with <a href="https://github.com/termstandard/colors#truecolor-support-in-output-devices">true colors</a> and <a href="https://www.nerdfonts.com/">Nerd Font icons</a> support. No need for a full Nerd font, using <a href="https://github.com/ryanoasis/nerd-fonts/releases/latest"><code>NerdFontsSymbolsOnly</code></a> as a fallback is usually enough.</li>
-<li>(Optional, but recommended) System requirements for <a href="https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#requirements"><code>main</code> branch of ‘nvim-treesitter/nvim-treesitter’ plugin</a>.</li>
+<li><a href="https://neovim.io/">Neovim</a> 실행 파일. 이름은 <code>nvim</code>으로 가정합니다.</li>
+<li><a href="https://git-scm.com/">Git</a> 실행 파일. 이름은 <code>git</code>으로 가정합니다.</li>
+<li>운영체제: Neovim이 지원하는 모든 OS.</li>
+<li>플러그인 다운로드를 위한 인터넷 연결.</li>
+<li>(선택 사항, 권장) <a href="https://github.com/BurntSushi/ripgrep#installation"><code>ripgrep</code></a>.</li>
+<li>(선택 사항, 권장) <a href="https://github.com/termstandard/colors#truecolor-support-in-output-devices">트루 컬러(true colors)</a> 및 <a href="https://www.nerdfonts.com/">Nerd Font 아이콘</a>을 지원하는 터미널 에뮬레이터(또는 GUI). 전체 Nerd Font가 필요하지는 않으며, <a href="https://github.com/ryanoasis/nerd-fonts/releases/latest"><code>NerdFontsSymbolsOnly</code></a>를 폴백으로 사용하는 것만으로도 충분합니다.</li>
+<li>(선택 사항, 권장) <a href="https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#requirements"><code>nvim-treesitter/nvim-treesitter</code> 플러그인의 <code>main</code> 브랜치</a>를 위한 시스템 요구 사항.</li>
 </ul>
 </section>
-<section id="knowledge" class="level4">
-<h4 class="anchored" data-anchor-id="knowledge">Knowledge</h4>
-<p>Basic level of understanding of how to:</p>
+<section id="지식" class="level4">
+<h4 class="anchored" data-anchor-id="지식">지식</h4>
+<p>다음에 대한 기초적인 이해가 필요합니다:</p>
 <ul>
-<li><p>Use CLI (command line): open, navigate file system, execute commands, close.</p></li>
-<li><p>Use Neovim: open, modal editing, reading help, close. If inside Neovim, type <a href="https://neovim.io/doc/user/helptag.html?tag=help.txt"><code>:h help.txt</code></a> (or click it if it is a link) followed by <code>&lt;Enter&gt;</code> and it should guide you through understanding basics.</p>
-<p>Several personal recommendations (no need to read in full; be aware of their content): <a href="https://neovim.io/doc/user/helptag.html?tag=notation"><code>:h notation</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=key-notation"><code>:h key-notation</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=vim-modes"><code>:h vim-modes</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=mode-switching"><code>:h mode-switching</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=windows-intro"><code>:h windows-intro</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=vimtutor"><code>:h vimtutor</code></a></p></li>
-<li><p>Read help files from inside Neovim: notion of help tags, key notations, navigation.</p>
+<li><p>CLI(커맨드 라인) 사용: 터미널 열기, 파일 시스템 탐색, 명령 실행, 종료.</p></li>
+<li><p>Neovim 사용: 열기, 모드 기반 편집, 도움말 읽기, 종료. Neovim 내부에서 <a href="https://neovim.io/doc/user/helptag.html?tag=help.txt"><code>:h help.txt</code></a> (또는 링크 클릭)를 입력하고 <code>&lt;Enter&gt;</code>를 누르면 기본 사항을 익히는 데 도움이 됩니다.</p>
+<p>개인적인 추천 사항 (전문 수록은 아니지만 내용을 숙지하세요): <a href="https://neovim.io/doc/user/helptag.html?tag=notation"><code>:h notation</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=key-notation"><code>:h key-notation</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=vim-modes"><code>:h vim-modes</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=mode-switching"><code>:h mode-switching</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=windows-intro"><code>:h windows-intro</code></a>, <a href="https://neovim.io/doc/user/helptag.html?tag=vimtutor"><code>:h vimtutor</code></a></p></li>
+<li><p>Neovim 내부에서 도움말 파일 읽기: 도움말 태그(tags), 키 표기법(key notations), 탐색 방식.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -450,71 +452,73 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If already inside MiniMax config, press <code>&lt;Space&gt;</code> + <code>f</code> + <code>h</code> to fuzzy search across all help tags.</p>
+<p>이미 MiniMax 설정을 사용 중이라면, <code>&lt;Space&gt;</code> + <code>f</code> + <code>h</code>를 눌러 모든 도움말 태그를 퍼지 검색할 수 있습니다.</p>
 </div>
 </div></li>
-<li><p>Read <a href="https://learnxinyminutes.com/lua/">Lua language</a>: variables, tables, function calls, iterations. See also <a href="https://neovim.io/doc/user/helptag.html?tag=lua-concepts"><code>:h lua-concepts</code></a> and <a href="https://neovim.io/doc/user/helptag.html?tag=lua-guide"><code>:h lua-guide</code></a>.</p></li>
+<li><p><a href="https://learnxinyminutes.com/lua/">Lua 언어</a> 읽기: 변수, 테이블, 함수 호출, 반복문. <a href="https://neovim.io/doc/user/helptag.html?tag=lua-concepts"><code>:h lua-concepts</code></a> 및 <a href="https://neovim.io/doc/user/helptag.html?tag=lua-guide"><code>:h lua-guide</code></a>도 함께 확인하세요.</p></li>
 </ul>
 </section>
-<section id="motivation" class="level4">
-<h4 class="anchored" data-anchor-id="motivation">Motivation</h4>
+<section id="동기-부여" class="level4">
+<h4 class="anchored" data-anchor-id="동기-부여">동기 부여</h4>
 <ul>
-<li>It will be really helpful if you are mentally ready to read documentation and practice. If you are new to Neovim and/or MINI, it might feel like a lot. It gets easier the more you learn and practice. Without this you likely won’t enjoy Neovim and MiniMax as much.</li>
+<li>문서를 읽고 연습할 준비가 되어 있다면 정말 큰 도움이 될 것입니다. Neovim이나 MINI가 처음이라면 내용이 많게 느껴질 수 있습니다. 하지만 배우고 연습할수록 쉬워집니다. 이런 과정 없이는 Neovim과 MiniMax를 충분히 즐기기 어려울 수 있습니다.</li>
 </ul>
 </section>
 </section>
 <section id="setting-up" class="level3">
-<h3 class="anchored" data-anchor-id="setting-up">Setting up</h3>
-<p>This sets up temporary ‘nvim-minimax’ config and doesn’t affect your regular config. To set up a full time config, remove all instances of <code>NVIM_APPNAME=nvim-minimax</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download</span></span>
+<h3 class="anchored" data-anchor-id="setting-up">설정 방법</h3>
+<p>이 방법은 임시로 ‘nvim-minimax’ 설정을 구성하며 기존 설정에는 영향을 주지 않습니다. 상시 설정으로 사용하려면 <code>NVIM_APPNAME=nvim-minimax</code> 부분을 모두 제거하세요.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 다운로드</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--filter</span><span class="op">=</span>blob:none https://github.com/nvim-mini/MiniMax ./MiniMax</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up config (copies config files and possibly initiates Git repository)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 설정 구성 (설정 파일을 복사하고 Git 저장소를 초기화할 수 있음)</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">NVIM_APPNAME</span><span class="op">=</span>nvim-minimax <span class="ex">nvim</span> <span class="at">-l</span> ./MiniMax/setup.lua</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Start Neovim</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Neovim 시작</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="va">NVIM_APPNAME</span><span class="op">=</span>nvim-minimax <span class="ex">nvim</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># On Neovim&gt;=0.12 press `y` to confirm installation of all listed plugins</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Wait for plugins to install (there should be no new notifications)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Neovim&gt;=0.12에서는 `y`를 눌러 나열된 모든 플러그인 설치를 승인하세요.</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 플러그인 설치가 완료될 때까지 기다리세요 (새로운 알림이 더 이상 나타나지 않아야 함).</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Enjoy your new config!</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with reading its files. Type `&lt;Space&gt;`+`e`+`i` to open 'init.lua'.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Notes:</p>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 새로운 설정을 즐기세요!</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 설정 파일을 읽는 것부터 시작해 보세요. `&lt;Space&gt;`+`e`+`i`를 입력하면 'init.lua'가 열립니다.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>참고:</p>
 <ul>
-<li><p>MiniMax project can be downloaded manually (like via GitHub UI).</p></li>
-<li><p>With <code>NVIM_APPNAME=nvim-minimax</code> config directory is ‘~/.config/nvim-minimax’ on Unix and ‘~/AppData/Local/nvim-minimax’ on Windows.</p>
-<p>A full-time config directory is ‘~/.config/nvim’ on Unix and ‘~/AppData/Local/nvim’ on Windows.</p></li>
-<li><p>If there are messages about backed up files during setup, it means the target config directory already contained files that are meant to come from MiniMax. Previous files were moved to <code>MiniMax-backup</code> directory. Review/restore them and delete the whole backup directory.</p></li>
-<li><p>You can explore <a href="configs">MiniMax</a> manually to find which (parts of) reference configs suit you best. Read through the relevant config example (starting at ‘init.lua’) and use interesting parts in your already existing config.</p></li>
+<li><p>MiniMax 프로젝트는 GitHub UI 등을 통해 수동으로 다운로드할 수도 있습니다.</p></li>
+<li><p><code>NVIM_APPNAME=nvim-minimax</code>를 사용하면 설정 디렉토리는 유닉스 계열에서는 ‘~/.config/nvim-minimax’, 윈도우에서는 ’~/AppData/Local/nvim-minimax’가 됩니다.</p>
+<p>상시 설정 디렉토리는 유닉스 계열에서는 ‘~/.config/nvim’, 윈도우에서는 ’~/AppData/Local/nvim’입니다.</p></li>
+<li><p>설정 도중 파일이 백업되었다는 메시지가 나오면, 대상 설정 디렉토리에 MiniMax의 파일들과 충돌하는 파일이 이미 존재함을 의미합니다. 기존 파일은 <code>MiniMax-backup</code> 디렉토리로 이동되었습니다. 필요에 따라 복원하고 백업 디렉토리를 삭제하세요.</p></li>
+<li><p><a href="configs">MiniMax</a> 디렉토리를 직접 탐색하여 자신에게 가장 잘 맞는 참조 설정이나 그 일부분을 찾을 수 있습니다. 관련 설정 예제(’init.lua’부터 시작)를 읽어보고 흥미로운 부분을 기존 설정에 적용해 보세요.</p></li>
 </ul>
 </section>
 <section id="updating" class="level3">
-<h3 class="anchored" data-anchor-id="updating">Updating</h3>
-<p>MiniMax doesn’t provide fully automatic updates of an already set up config. The recommended approach is to manually explore <a href="configs">reference configs</a> and <a href="../MiniMax/CHANGELOG.html">change log</a> to see the changes.</p>
-<p>The closest approach to automatic updating is:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull updates of MiniMax itself</span></span>
+<h3 class="anchored" data-anchor-id="updating">업데이트</h3>
+<p>MiniMax는 이미 설정된 구성에 대해 완전 자동 업데이트를 제공하지 않습니다. <a href="configs">참조 설정</a>과 <a href="../MiniMax/CHANGELOG.html">변경 이력</a>을 수동으로 확인하여 변경 사항을 살펴보는 것이 권장되는 방식입니다.</p>
+<p>자동 업데이트에 가장 가까운 방법은 다음과 같습니다:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MiniMax 자체 업데이트 가져오기</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> ./MiniMax pull</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run setup script again. Remove `NVIM_APPNAME=nvim-minimax` for full-time config</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 설정 스크립트 다시 실행. 상시 설정인 경우 `NVIM_APPNAME=nvim-minimax` 제거</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">NVIM_APPNAME</span><span class="op">=</span>nvim-minimax <span class="ex">nvim</span> <span class="at">-l</span> ./MiniMax/setup.lua</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># There probably be messages about backed up files:</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Examine 'MiniMax-backup' directory with conflicting files.</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Recover the ones you need.</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Delete the backup directory.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 백업된 파일에 대한 메시지가 나타날 수 있습니다:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 충돌하는 파일이 있는 'MiniMax-backup' 디렉토리를 확인합니다.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 필요한 파일을 복구합니다.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 백업 디렉토리를 삭제합니다.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="similar-projects" class="level3">
-<h3 class="anchored" data-anchor-id="similar-projects">Similar projects</h3>
+<section id="유사한-프로젝트" class="level3">
+<h3 class="anchored" data-anchor-id="유사한-프로젝트">유사한 프로젝트</h3>
 <ul>
 <li><p><a href="https://github.com/nvim-lua/kickstart.nvim">nvim-lua/kickstart.nvim</a></p></li>
-<li><p>More automated approaches (“Neovim distributions”):</p>
+<li><p>더 자동화된 방식 (“Neovim 배포판”):</p>
 <ul>
 <li><a href="https://github.com/LazyVim/LazyVim">LazyVim/LazyVim</a></li>
 <li><a href="https://github.com/NvChad/NvChad">NvChad/NvChad</a></li>
 <li><a href="https://github.com/AstroNvim/AstroNvim">AstroNvim/AstroNvim</a></li>
 </ul></li>
 </ul>
+<hr>
+<p>© Evgeni Chasnovski, <a href="https://choosealicense.com/licenses/mit/">MIT</a></p>
 
 
 </section>

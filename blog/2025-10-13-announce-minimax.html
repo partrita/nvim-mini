@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -41,12 +41,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-588f07447021c9b1c78c14c285b6df15.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-9a1b1f8e841c9c2d133c690b11f8ee3e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0ed1a58f1961f20e100ea025a42ebf64.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-fdc1b2fd0a2d1e1fd2f41bfe1f0ec5c1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-822171c0b08fb8324585bf617d393f53.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-02025811ff4c933f5630304c954c6652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2340dc3d84c2292709c2bc9a48df96e7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-a6c58798d87e8f1a74aa0ab11dab83cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -266,6 +266,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">MINI</span>
     </a>
@@ -359,7 +361,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>안녕하세요, Neovim 사용자 여러분!</p>
-<p>드디어 “공식적인” MINI 설정 예시를 발표하게 되어 매우 기쁘고 다행스럽게 생각합니다. 이름은 <a href="../MiniMax/index.html">MiniMax</a>입니다.</p>
+<p>드디어 “공식적인” MINI 설정 예시를 발표하게 되어 매우 기쁘고 다행스럽게 생각합니다. 이름은 <a href="../MiniMax/index.md">MiniMax</a>입니다.</p>
 <p>이번 발표로 오늘은 세 가지 MINI의 생일이 되었습니다:</p>
 <ul>
 <li>‘mini.nvim’ 플러그인 자체가 출시된 지 <a href="../blog/2021-10-13-announce-mini-nvim.html">4년 전</a>입니다.</li>
@@ -369,7 +371,7 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 <p>MiniMax는 단순한 단일 설정 그 이상으로 설계되었습니다. 특정 조건에 맞춰 정교하게 제작된 <a href="../MiniMax/configs/index.html">설정들의 컬렉션</a>입니다. 현재는 각 안정 버전의 Neovim에 대한 전용 설정을 제공할 계획이며, 향후 다른 조건들도 고려될 수 있습니다 (물론 가까운 미래는 아닐 것입니다). 제가 알기로 이러한 방식은 기존의 “미리 구성된 설정(preconfigured configurations)”들 사이에서도 꽤 독특한 시도입니다. 이는 MiniMax를 단순한 설정 이상으로 유용하게 만들 것입니다. 시간이 지나면 Neovim 버전을 변경할 때 어떤 변경 사항들을 적용하는 것이 좋을지에 대한 좋은 참고 자료가 될 것이기 때문입니다.</p>
 <p>설정 자체는 <a href="../MiniMax/configs/nvim-0.11/index.html">매우 간결한 구조</a>를 가지고 있습니다: 작은 ‘init.lua’와 시작 시 로드되는 4개의 ’plugin/’ 파일로 구성됩니다. 이 구조와 내용은 제가 오랫동안 메인으로 사용해 온 설정을 기반으로 합니다.</p>
-<p>오늘날의 관점에서 보면 MiniMax는 ’nvim-lua/kickstart.nvim’과 스타일이 비슷합니다. 설정 파일에는 많은 문서화 주석이 포함되어 있으며 <strong>사용자가 직접 읽도록 제작되었습니다</strong>. MiniMax를 설정하고 나면, 이를 미세 조정하고 업데이트하는 것은 여러분의 몫입니다. MiniMax는 <a href="../MiniMax/index.html#what-it-is-not">배포판(distro)이나 Neovim에 관한 종합 가이드가 아닙니다</a>.</p>
+<p>오늘날의 관점에서 보면 MiniMax는 ’nvim-lua/kickstart.nvim’과 스타일이 비슷합니다. 설정 파일에는 많은 문서화 주석이 포함되어 있으며 <strong>사용자가 직접 읽도록 제작되었습니다</strong>. MiniMax를 설정하고 나면, 이를 미세 조정하고 업데이트하는 것은 여러분의 몫입니다. MiniMax는 <a href="../MiniMax/index.md#what-it-is-not">배포판(distro)이나 Neovim에 관한 종합 가이드가 아닙니다</a>.</p>
 <p>한번 확인해 보시고 의견을 들려주세요. 저는 현재 상태를 최대한 사용하기 편하고, 정교하며, 오타가 없도록 만드는 데 집중하고 싶습니다. 당분간은 새로운 특정 옵션이나 플러그인 추가에 대한 제안은 받지 않을 예정입니다.</p>
 <hr>
 <p>MiniMax 개발 과정에서 유용한 피드백을 주신 <a href="https://github.com/pkazmier">Pete Kazmier</a> 님께 감사의 마음을 전합니다.</p>
