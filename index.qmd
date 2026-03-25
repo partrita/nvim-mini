@@ -19,7 +19,7 @@ format:
 </span>
 
 - <p style="font-size:1.5em"><b><a href="mini.nvim/index.html">mini.nvim</a></b></p>
-    - [모듈](mini.nvim/index.md#modules)
+    - [모듈](mini.nvim/index.qmd#modules)
     - [문서](mini.nvim/doc/mini-nvim.qmd)
     - [변경 이력](mini.nvim/CHANGELOG.md)
 

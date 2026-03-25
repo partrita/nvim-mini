@@ -2,11 +2,11 @@
 title: "mini.tabline 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_'mini.nvim'의 `main` 브랜치에서 생성됨_
 
 <a name="mini.tabline" href="mini-tabline.qmd#mini.tabline"><b>mini.tabline</b></a> 탭 라인
 
-MIT License Copyright (c) 2021 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2021 Evgeni Chasnovski
 
 ---
 

@@ -5,7 +5,6 @@ project:
 website:
   title: MINI
   description: "Modular Independent Neovim Improvements"
-  site-url: https://nvim-mini.org
   repo-url: https://github.com/nvim-mini
   favicon: /assets/logo-mini_180x180.png
 
@@ -17,9 +16,9 @@ website:
   navbar:
     search: true
     left:
-      - href: mini.nvim/index.md
+      - href: mini.nvim/index.qmd
         text: mini.nvim
-      - href: MiniMax/index.md
+      - href: MiniMax/index.qmd
         text: MiniMax
       - href: blog/index.qmd
         text: Blog

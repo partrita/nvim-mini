@@ -2,11 +2,11 @@
 title: "mini.hipatterns 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_'mini.nvim'의 `main` 브랜치에서 생성됨_
 
 <a name="mini.hipatterns" href="mini-hipatterns.qmd#mini.hipatterns"><b>mini.hipatterns</b></a> 텍스트 패턴 강조
 
-MIT License Copyright (c) 2023 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 

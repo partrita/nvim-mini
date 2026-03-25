@@ -6,7 +6,7 @@ _'mini.nvim'의 `main` 브랜치에서 생성됨_
 
 <a name="mini.align" href="mini-align.qmd#mini.align"><b>mini.align</b></a> 대화형으로 텍스트 정렬
 
-MIT License Copyright (c) 2022 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2022 Evgeni Chasnovski
 
 ---
 

@@ -6,7 +6,7 @@ _'mini.nvim'의 `main` 브랜치에서 생성됨_
 
 <a name="mini.icons" href="mini-icons.qmd#mini.icons"><b>mini.icons</b></a> 아이콘 제공자
 
-MIT License Copyright (c) 2024 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2024 Evgeni Chasnovski
 
 ---
 

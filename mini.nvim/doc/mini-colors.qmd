@@ -2,11 +2,11 @@
 title: "mini.colors 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_'mini.nvim'의 `main` 브랜치에서 생성됨_
 
 <a name="mini.colors" href="mini-colors.qmd#mini.colors"><b>mini.colors</b></a> 모든 색상 스키마를 조정하고 저장합니다
 
-MIT License Copyright (c) 2023 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 

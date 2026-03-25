@@ -2,11 +2,11 @@
 title: "mini.pick 문서"
 ---
 
-_Generated from the `main` branch of 'mini.nvim'_
+_'mini.nvim'의 `main` 브랜치에서 생성됨_
 
 <a name="mini.pick" href="mini-pick.qmd#mini.pick"><b>mini.pick</b></a> 무엇이든 선택하세요
 
-MIT License Copyright (c) 2023 Evgeni Chasnovski
+MIT 라이선스 Copyright (c) 2023 Evgeni Chasnovski
 
 ---
 
