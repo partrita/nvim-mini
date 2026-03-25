@@ -352,14 +352,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#autocompletion-and-signature-help-plugin" id="toc-autocompletion-and-signature-help-plugin" class="nav-link active" data-scroll-target="#autocompletion-and-signature-help-plugin">Autocompletion and signature help plugin</a></li>
-  <li><a href="#demo" id="toc-demo" class="nav-link" data-scroll-target="#demo">Demo</a></li>
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
-  <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies">Dependencies</a></li>
-  <li><a href="#snippets" id="toc-snippets" class="nav-link" data-scroll-target="#snippets">Snippets</a></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#default-config" id="toc-default-config" class="nav-link" data-scroll-target="#default-config">Default config</a></li>
-  <li><a href="#similar-plugins" id="toc-similar-plugins" class="nav-link" data-scroll-target="#similar-plugins">Similar plugins</a></li>
+  <li><a href="#자동-완성-및-시그니처-헬프signature-help-플러그인" id="toc-자동-완성-및-시그니처-헬프signature-help-플러그인" class="nav-link active" data-scroll-target="#자동-완성-및-시그니처-헬프signature-help-플러그인">자동 완성 및 시그니처 헬프(signature help) 플러그인</a></li>
+  <li><a href="#데모" id="toc-데모" class="nav-link" data-scroll-target="#데모">데모</a></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">기능</a></li>
+  <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies">의존성</a></li>
+  <li><a href="#snippets" id="toc-snippets" class="nav-link" data-scroll-target="#snippets">스니펫</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">설치</a></li>
+  <li><a href="#default-config" id="toc-default-config" class="nav-link" data-scroll-target="#default-config">기본 설정</a></li>
+  <li><a href="#similar-plugins" id="toc-similar-plugins" class="nav-link" data-scroll-target="#similar-plugins">유사한 플러그인</a></li>
   </ul>
 </nav>
     </div>
@@ -390,15 +390,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="https://github.com/nvim-mini/assets/blob/main/logo-2/logo-completion_readme.png?raw=true" alt="mini.completion" style="max-width:100%;border:solid 2px">
 </p>
 <p align="center">
-<em>Generated from the <code>main</code> branch of ‘mini.nvim’</em>
+<em>’mini.nvim’의 <code>main</code> 브랜치에서 생성됨</em>
 </p>
-<section id="autocompletion-and-signature-help-plugin" class="level3">
-<h3 class="anchored" data-anchor-id="autocompletion-and-signature-help-plugin">Autocompletion and signature help plugin</h3>
+<section id="자동-완성-및-시그니처-헬프signature-help-플러그인" class="level3">
+<h3 class="anchored" data-anchor-id="자동-완성-및-시그니처-헬프signature-help-플러그인">자동 완성 및 시그니처 헬프(signature help) 플러그인</h3>
 <ul>
-<li>Async (with customizable ‘debounce’ delay) ‘two-stage chain completion’: first builtin LSP, then configurable fallback.</li>
-<li>Has functionality for completion item info and function signature (both in floating window appearing after customizable delay).</li>
+<li>비동기식(커스터마이징 가능한 ‘디바운스’ 지연 시간 포함) ’2단계 체인 자동 완성’을 지원합니다: 먼저 내장 LSP를 시도하고, 실패 시 설정된 폴백(fallback)을 실행합니다.</li>
+<li>자동 완성 항목 정보 및 함수 시그니처 표시 기능을 제공합니다 (둘 다 설정 가능한 지연 시간 후 플로팅 창에 표시됨).</li>
 </ul>
-<p>See more details in <a href="#features">Features</a> and <a href="../../mini.nvim/doc/mini-completion.html">Documentation</a>.</p>
+<p>더 자세한 내용은 <a href="#features">기능</a> 및 <a href="../../mini.nvim/doc/mini-completion.html">상세 문서</a>를 참조하세요.</p>
 <hr>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -410,91 +410,91 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This was previously hosted at a personal <code>echasnovski</code> GitHub account. It was transferred to a dedicated organization to improve long term project stability. See more details <a href="https://github.com/nvim-mini/mini.nvim/discussions/1970">here</a>.</p>
+<p>이 프로젝트는 이전에 개인 계정인 <code>echasnovski</code>에서 관리되었습니다. 장기적인 프로젝트 안정성을 개선하기 위해 전용 조직으로 이전되었습니다. 자세한 내용은 <a href="https://github.com/nvim-mini/mini.nvim/discussions/1970">여기</a>를 참조하세요.</p>
 </div>
 </div>
-<p>⦿ This is a part of <a href="https://nvim-mini.org/mini.nvim">mini.nvim</a> library. Please use <a href="https://nvim-mini.org/mini.nvim/readmes/mini-completion">this link</a> if you want to mention this module.</p>
-<p>⦿ All contributions (issues, pull requests, discussions, etc.) are done inside of ‘mini.nvim’.</p>
-<p>⦿ See <a href="https://nvim-mini.org/mini.nvim/doc/mini-nvim">whole library documentation</a> to learn about general design principles, disable/configuration recipes, and more.</p>
-<p>⦿ See <a href="https://nvim-mini.org/MiniMax">MiniMax</a> for a full config example that uses this module.</p>
+<p>⦿ 이 모듈은 <a href="https://nvim-mini.org/mini.nvim">mini.nvim</a> 라이브러리의 일부입니다. 이 모듈을 언급할 때는 <a href="https://nvim-mini.org/mini.nvim/readmes/mini-completion">이 링크</a>를 사용해 주세요.</p>
+<p>⦿ 모든 기여(이슈, 풀 리퀘스트, 토론 등)는 ‘mini.nvim’ 저장소에서 진행됩니다.</p>
+<p>⦿ 일반적인 디자인 원칙, 비활성화/설정 레시피 등은 <a href="https://nvim-mini.org/mini.nvim/doc/mini-nvim">전체 라이브러리 문서</a>를 참조하세요.</p>
+<p>⦿ 이 모듈을 사용하는 전체 설정 예제는 <a href="https://nvim-mini.org/MiniMax">MiniMax</a>를 참조하세요.</p>
 <hr>
-<p>If you want to help this project grow but don’t know where to start, check out <a href="https://nvim-mini.org/mini.nvim/CONTRIBUTING">contributing guides of ‘mini.nvim’</a> or leave a Github star for ‘mini.nvim’ project and/or any its standalone Git repositories.</p>
+<p>이 프로젝트의 성장을 돕고 싶지만 어디서부터 시작해야 할지 모르겠다면, <a href="https://nvim-mini.org/mini.nvim/CONTRIBUTING">’mini.nvim’의 기여 가이드</a>를 확인하거나 ‘mini.nvim’ 프로젝트 및 해당 독립 저장소에 Github 스타를 남겨주세요.</p>
 </section>
-<section id="demo" class="level2">
-<h2 class="anchored" data-anchor-id="demo">Demo</h2>
+<section id="데모" class="level2">
+<h2 class="anchored" data-anchor-id="데모">데모</h2>
 <p><video src="https://github.com/nvim-mini/assets/blob/main/demo/demo-completion.mp4?raw=true" class="img-fluid" controls=""><a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-completion.mp4?raw=true">Video</a></video></p>
 </section>
 <section id="features" class="level2">
-<h2 class="anchored" data-anchor-id="features">Features</h2>
+<h2 class="anchored" data-anchor-id="features">기능</h2>
 <ul>
-<li>Two-stage chain completion:
+<li>2단계 체인 자동 완성:
 <ul>
-<li>First stage is an LSP completion. Supports <code>additionalTextEdits</code> (like auto-import, etc.) and snippets (see <a href="#snippets">“Snippets”</a>) (best results require <a href="https://nvim-mini.org/mini.nvim/readmes/mini-snippets">‘mini.snippets’</a> dependency).</li>
-<li>If first stage is not set up or resulted into no candidates, fallback action is executed. The most tested actions are Neovim’s built-in insert completion.</li>
+<li>1단계는 LSP 자동 완성입니다. <code>additionalTextEdits</code>(자동 임포트 등) 및 스니펫( <a href="#snippets">“스니펫”</a> 참조)을 지원합니다. (최상의 결과를 위해 <a href="https://nvim-mini.org/mini.nvim/readmes/mini-snippets">‘mini.snippets’</a> 의존성이 권장됩니다).</li>
+<li>1단계가 설정되지 않았거나 결과가 없는 경우, 폴백 동작이 실행됩니다. 가장 많이 테스트된 동작은 Neovim의 내장 Insert 모드 자동 완성입니다.</li>
 </ul></li>
-<li>Automatic display in floating window of completion item info (via ‘completionItem/resolve’ request) and signature help (with highlighting of active parameter if LSP server provides such information). Scrolling is possible in both info/signature window (<code>&lt;C-f&gt;</code> / <code>&lt;C-b&gt;</code> by default).</li>
-<li>Automatic actions are done after some configurable amount of delay. This reduces computational load and allows fast typing (completion and signature help) and item selection (item info)</li>
-<li>User can force two-stage/fallback completion (<code>&lt;C-Space&gt;</code> / <code>&lt;A-Space&gt;</code> by default).</li>
-<li>Customizable highlighting of LSP items. Requires Neovim&gt;=0.11. Supported:
+<li>자동 완성 항목 정보(‘completionItem/resolve’ 요청을 통해) 및 시그니처 헬프(LSP 서버가 정보를 제공하는 경우 활성 매개변수 하이라이트 포함)를 플로팅 창에 자동으로 표시합니다. 정보/시그니처 창 모두에서 스크롤이 가능합니다 (기본값 <code>&lt;C-f&gt;</code> / <code>&lt;C-b&gt;</code>).</li>
+<li>자동화된 동작은 설정 가능한 지연 시간 후에 수행됩니다. 이는 계산 부하를 줄이고 빠른 타이핑(자동 완성 및 시그니처 헬프) 및 항목 선택(항목 정보)을 가능하게 합니다.</li>
+<li>사용자가 2단계/폴백 자동 완성을 강제로 실행할 수 있습니다 (기본값 <code>&lt;C-Space&gt;</code> / <code>&lt;A-Space&gt;</code>).</li>
+<li>LSP 항목의 하이라이트를 커스터마이징할 수 있습니다 (Neovim&gt;=0.11 필요). 다음을 지원합니다:
 <ul>
-<li>Item label. By default only checks if item is marked as deprecated and sets <code>MiniCompletionDeprecated</code> highlight group.</li>
-<li>LSP kind (like “Function”, “Keyword”, etc.). Requires enabled <a href="https://nvim-mini.org/mini.nvim/readmes/mini-icons">‘mini.icons’</a> (uses its “lsp” category)</li>
+<li>항목 레이블: 기본적으로 항목이 사용 중단(deprecated)으로 표시되었는지만 확인하고 <code>MiniCompletionDeprecated</code> 하이라이트 그룹을 설정합니다.</li>
+<li>LSP 종류(Kind, 예: “Function”, “Keyword” 등): <a href="https://nvim-mini.org/mini.nvim/readmes/mini-icons">‘mini.icons’</a> 모듈이 활성화되어 있어야 합니다 (해당 모듈의 “lsp” 카테고리를 사용함).</li>
 </ul></li>
 </ul>
 </section>
 <section id="dependencies" class="level2">
-<h2 class="anchored" data-anchor-id="dependencies">Dependencies</h2>
-<p>For full experience needs (still works without any of suggestions):</p>
+<h2 class="anchored" data-anchor-id="dependencies">의존성</h2>
+<p>완전한 경험을 위해 권장되는 사항입니다 (권장 사항 없이도 작동합니다):</p>
 <ul>
-<li>Enabled <a href="https://nvim-mini.org/mini.nvim/readmes/mini-icons">‘mini.icons’</a> module to highlight LSP kind (requires Neovim&gt;=0.11). If absent, <a href="../../mini.nvim/doc/mini-completion.html#minicompletion.default_process_items"><code>MiniCompletion.default_process_items()</code></a> does not add highlighting. Also take a look at <a href="../../mini.nvim/doc/mini-icons.html#miniicons.tweak_lsp_kind"><code>MiniIcons.tweak_lsp_kind()</code></a>.</li>
-<li>Enabled <a href="https://nvim-mini.org/mini.nvim/readmes/mini-snippets">‘mini.snippets’</a> module for better snippet handling (<strong>much recommended</strong>). If absent and custom snippet insert is not configured, <code>vim.snippet.expand()</code> is used on Neovim&gt;=0.10 (nothing extra is done on earlier versions). See <a href="../../mini.nvim/doc/mini-completion.html#minicompletion.default_snippet_insert"><code>:h MiniCompletion.default_snippet_insert()</code></a>.</li>
+<li>LSP 종류(Kind)를 하이라이트하기 위해 <a href="https://nvim-mini.org/mini.nvim/readmes/mini-icons">‘mini.icons’</a> 모듈 활성화 (Neovim&gt;=0.11 필요). 없는 경우 <a href="../../mini.nvim/doc/mini-completion.html#minicompletion.default_process_items"><code>MiniCompletion.default_process_items()</code></a>는 하이라이트를 추가하지 않습니다. <a href="../../mini.nvim/doc/mini-icons.html#miniicons.tweak_lsp_kind"><code>MiniIcons.tweak_lsp_kind()</code></a>도 확인해 보세요.</li>
+<li>더 나은 스니펫 처리를 위해 <a href="https://nvim-mini.org/mini.nvim/readmes/mini-snippets">‘mini.snippets’</a> 모듈 활성화 (<strong>적극 권장</strong>). 없는 경우 및 커스텀 스니펫 삽입이 설정되지 않은 경우, Neovim&gt;=0.10에서는 <code>vim.snippet.expand()</code>가 사용됩니다 (이전 버전에서는 추가 작업이 수행되지 않습니다). <a href="../../mini.nvim/doc/mini-completion.html#minicompletion.default_snippet_insert"><code>:h MiniCompletion.default_snippet_insert()</code></a>를 참조하세요.</li>
 </ul>
 </section>
 <section id="snippets" class="level2">
-<h2 class="anchored" data-anchor-id="snippets">Snippets</h2>
-<p>As per LSP specification, some completion items can be supplied in the form of snippet - a template with both pre-defined text and places (called “tabstops”) for user to interactively change/add text during snippet session.</p>
-<p>In ‘mini.completion’ items that will insert snippet have “S” symbol shown in the popup. To actually insert a snippet:</p>
+<h2 class="anchored" data-anchor-id="snippets">스니펫</h2>
+<p>LSP 사양에 따라, 일부 자동 완성 항목은 스니펫 형태로 제공될 수 있습니다. 스니펫은 미리 정의된 텍스트와 사용자가 스니펫 세션 동안 대화식으로 텍스트를 변경/추가할 수 있는 위치(“탭스탑, tabstops”)가 포함된 템플릿입니다.</p>
+<p>’mini.completion’에서 스니펫을 삽입하는 항목은 팝업창에 “S” 심볼이 표시됩니다. 스니펫을 실제로 삽입하려면:</p>
 <ul>
-<li><p>Select an item via <code>&lt;C-n&gt;</code> / <code>&lt;C-p&gt;</code>. This will insert item’s label (usually not full snippet) first to reduce visual flicker. The full snippet text will be shown in info window if LSP server doesn’t provide its own info for an item.</p></li>
-<li><p>Press <code>&lt;C-y&gt;</code> or attempt inserting a non-keyword character (like <code>&lt;CR&gt;</code>; new character will be removed). It will clear text from previous step, set cursor, and call <code>lsp_completion.snippet_insert</code> with snippet text.</p></li>
-<li><p>Press <code>&lt;C-e&gt;</code> to cancel snippet insert and properly end completion.</p></li>
+<li><code>&lt;C-n&gt;</code> / <code>&lt;C-p&gt;</code>를 통해 항목을 선택합니다. 시각적 떨림을 줄이기 위해 항목의 레이블(보통 전체 스니펫이 아님)이 먼저 삽입됩니다. LSP 서버가 항목에 대한 자체 정보를 제공하지 않는 경우 전체 스니펫 텍스트가 정보 창에 표시됩니다.</li>
+<li><code>&lt;C-y&gt;</code>를 누르거나 키워드가 아닌 문자(예: <code>&lt;CR&gt;</code>; 입력된 문자는 제거됨)를 입력하려고 시도합니다. 그러면 이전 단계의 텍스트를 지우고, 커서를 설정한 다음 스니펫 텍스트와 함께 <code>lsp_completion.snippet_insert</code>를 호출합니다.</li>
+<li>스니펫 삽입을 취소하고 자동 완성을 제대로 종료하려면 <code>&lt;C-e&gt;</code>를 누르세요.</li>
 </ul>
-<p>See <a href="../../mini.nvim/doc/mini-completion.html#minicompletion.default_snippet_insert"><code>:h MiniCompletion.default_snippet_insert()</code></a> for overview of how to work with inserted snippets.</p>
+<p>삽입된 스니펫을 다루는 방법에 대한 개요는 <a href="../../mini.nvim/doc/mini-completion.html#minicompletion.default_snippet_insert"><code>:h MiniCompletion.default_snippet_insert()</code></a>를 참조하세요.</p>
 </section>
 <section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>This plugin can be installed as part of ‘mini.nvim’ library (<strong>recommended</strong>) or as a standalone Git repository.</p>
-<p>There are two branches to install from:</p>
+<h2 class="anchored" data-anchor-id="installation">설치</h2>
+<p>이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(<strong>권장</strong>), 독립적인 Git 저장소로 설치할 수 있습니다.</p>
+<p>두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:</p>
 <ul>
-<li><code>main</code> (default, <strong>recommended</strong>) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).</li>
-<li><code>stable</code> will be updated only upon releases with code tested during public beta-testing phase in <code>main</code> branch.</li>
+<li><code>main</code> (기본값, <strong>권장</strong>): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.</li>
+<li><code>stable</code>: <code>main</code> 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.</li>
 </ul>
-<p>Here are code snippets for some common installation methods (use only one):</p>
+<p>다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):</p>
 <details>
 <summary>
-With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a>
+<a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a> 사용 시
 </summary>
 <ul>
-<li><p>‘mini.nvim’ library:</p>
+<li><p>‘mini.nvim’ 라이브러리:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Main</td>
-<td><em>Follow recommended ‘mini.deps’ installation</em></td>
+<td><em>권장되는 ‘mini.deps’ 설치 방법을 따르세요</em></td>
 </tr>
 <tr class="even">
 <td>Stable</td>
-<td><em>Follow recommended ‘mini.deps’ installation</em></td>
+<td><em>권장되는 ‘mini.deps’ 설치 방법을 따르세요</em></td>
 </tr>
 </tbody>
 </table></li>
-<li><p>Standalone plugin:</p>
+<li><p>단독 플러그인:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 10%">
@@ -502,8 +502,8 @@ With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -521,7 +521,7 @@ With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a>
 </details>
 <details>
 <summary>
-With <a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a>
+<a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a> 사용 시
 </summary>
 <ul>
 <li><p>‘mini.nvim’ library:</p>
@@ -566,15 +566,15 @@ With <a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a>
 </details>
 <details>
 <summary>
-With <a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
+<a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a> 사용 시
 </summary>
 <ul>
-<li><p>‘mini.nvim’ library:</p>
+<li><p>‘mini.nvim’ 라이브러리:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -588,12 +588,12 @@ With <a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
 </tr>
 </tbody>
 </table></li>
-<li><p>Standalone plugin:</p>
+<li><p>단독 플러그인:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -609,73 +609,73 @@ With <a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
 </table></li>
 </ul>
 </details>
-<p><strong>Important</strong>: don’t forget to call <code>require('mini.completion').setup()</code> to enable its functionality.</p>
-<p><strong>Note</strong>: if you are on Windows, there might be problems with too long file paths (like <code>error: unable to create file &lt;some file name&gt;: Filename too long</code>). Try doing one of the following:</p>
+<p><strong>중요</strong>: 기능을 활성화하려면 <code>require('mini.completion').setup()</code>을 호출해야 합니다.</p>
+<p><strong>참고</strong>: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(<code>error: unable to create file &lt;some file name&gt;: Filename too long</code>)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:</p>
 <ul>
-<li>Enable corresponding git global config value: <code>git config --system core.longpaths true</code>. Then try to reinstall.</li>
-<li>Install plugin in other place with shorter path.</li>
+<li>해당 git 전역 설정 값을 활성화합니다: <code>git config --system core.longpaths true</code>. 그 후 다시 설치를 시도하세요.</li>
+<li>더 짧은 경로의 다른 위치에 플러그인을 설치합니다.</li>
 </ul>
 </section>
 <section id="default-config" class="level2">
-<h2 class="anchored" data-anchor-id="default-config">Default config</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- No need to copy this inside `setup()`. Will be used automatically.</span></span>
+<h2 class="anchored" data-anchor-id="default-config">기본 설정</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Delay (debounce type, in ms) between certain Neovim event and action.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- This can be used to (virtually) disable certain automatic actions by</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- setting very high delay time (like 10^7).</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 특정 Neovim 이벤트와 동작 사이의 지연 시간 (ms 단위, 디바운스 타입).</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 매우 높은 지연 시간(예: 10^7)을 설정하여 특정 자동 동작을 </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- (가상으로) 비활성화할 수 있습니다.</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">delay</span> <span class="op">=</span> <span class="op">{</span> <span class="va">completion</span> <span class="op">=</span> <span class="dv">100</span><span class="op">,</span> <span class="va">info</span> <span class="op">=</span> <span class="dv">100</span><span class="op">,</span> <span class="va">signature</span> <span class="op">=</span> <span class="dv">50</span> <span class="op">},</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Configuration for action windows:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- - `height` and `width` are maximum dimensions.</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- - `border` defines border (as in `nvim_open_win()`; default "single").</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 전용 창 설정:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- - `height` 및 `width`는 최대 크기입니다.</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- - `border`는 테두리를 정의합니다 (`nvim_open_win()` 방식; 기본값 "single").</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">window</span> <span class="op">=</span> <span class="op">{</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">info</span> <span class="op">=</span> <span class="op">{</span> <span class="va">height</span> <span class="op">=</span> <span class="dv">25</span><span class="op">,</span> <span class="va">width</span> <span class="op">=</span> <span class="dv">80</span><span class="op">,</span> <span class="va">border</span> <span class="op">=</span> <span class="kw">nil</span> <span class="op">},</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">signature</span> <span class="op">=</span> <span class="op">{</span> <span class="va">height</span> <span class="op">=</span> <span class="dv">25</span><span class="op">,</span> <span class="va">width</span> <span class="op">=</span> <span class="dv">80</span><span class="op">,</span> <span class="va">border</span> <span class="op">=</span> <span class="kw">nil</span> <span class="op">},</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Way of how module does LSP completion</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 모듈이 LSP 자동 완성을 수행하는 방식</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="va">lsp_completion</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `source_func` should be one of 'completefunc' or 'omnifunc'.</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `source_func`는 'completefunc' 또는 'omnifunc' 중 하나여야 합니다.</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="va">source_func</span> <span class="op">=</span> <span class="st">'completefunc'</span><span class="op">,</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `auto_setup` should be boolean indicating if LSP completion is set up</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- on every `BufEnter` event.</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `auto_setup`은 모든 `BufEnter` 이벤트에서 LSP 자동 완성을 </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 설정할지 여부를 나타내는 불리언 값입니다.</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="va">auto_setup</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- A function which takes LSP 'textDocument/completion' response items</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- (each with `client_id` field for item's server) and word to complete.</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Output should be a table of the same nature as input. Common use case</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- is custom filter/sort. Default: `default_process_items`</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- LSP 'textDocument/completion' 응답 항목(각 항목은 해당 서버에 대한 </span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- `client_id` 필드를 가짐)과 자동 완성할 단어를 인자로 받는 함수입니다.</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 출력은 입력과 동일한 형태의 테이블이어야 합니다. 일반적인 용도는 </span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 사용자 정의 필터링/정렬입니다. 기본값: `default_process_items`</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="va">process_items</span> <span class="op">=</span> <span class="kw">nil</span><span class="op">,</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- A function which takes a snippet as string and inserts it at cursor.</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Default: `default_snippet_insert` which tries to use 'mini.snippets'</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- and falls back to `vim.snippet.expand` (on Neovim&gt;=0.10).</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 스니펫을 문자열로 받아 커서 위치에 삽입하는 함수입니다.</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 기본값: `default_snippet_insert`는 'mini.snippets' 사용을 시도하고 </span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Neovim&gt;=0.10에서는 `vim.snippet.expand`로 폴백합니다.</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="va">snippet_insert</span> <span class="op">=</span> <span class="kw">nil</span><span class="op">,</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Fallback action as function/string. Executed in Insert mode.</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- To use built-in completion (`:h ins-completion`), set its mapping as</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- string. Example: set '&lt;C-x&gt;&lt;C-l&gt;' for 'whole lines' completion.</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 함수 또는 문자열 형태의 폴백(fallback) 동작. Insert 모드에서 실행됩니다.</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 내장 자동 완성(`:h ins-completion`)을 사용하려면 해당 매핑을 </span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 문자열로 설정하세요. 예: '전체 줄' 자동 완성의 경우 '&lt;C-x&gt;&lt;C-l&gt;'.</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="va">fallback_action</span> <span class="op">=</span> <span class="st">'&lt;C-n&gt;'</span><span class="op">,</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Module mappings. Use `''` (empty string) to disable one. Some of them</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- might conflict with system mappings.</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 모듈 매핑. 비활성화하려면 `''`(빈 문자열)을 사용하세요. </span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 일부는 시스템 매핑과 충돌할 수 있습니다.</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="va">mappings</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Force two-step/fallback completions</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 2단계/폴백 자동 완성 강제 실행</span></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="va">force_twostep</span> <span class="op">=</span> <span class="st">'&lt;C-Space&gt;'</span><span class="op">,</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="va">force_fallback</span> <span class="op">=</span> <span class="st">'&lt;A-Space&gt;'</span><span class="op">,</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Scroll info/signature window down/up. When overriding, check for</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- conflicts with built-in keys for popup menu (like `&lt;C-u&gt;`/`&lt;C-o&gt;`</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- for 'completefunc'/'omnifunc' source function; or `&lt;C-n&gt;`/`&lt;C-p&gt;`).</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 정보/시그니처 창을 아래/위로 스크롤. 덮어쓸 때 팝업 메뉴용 </span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 내장 키와 충돌하는지 확인하세요 (예: `source_func`이 </span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 'completefunc'/'omnifunc'인 경우 `&lt;C-u&gt;`/`&lt;C-o&gt;`, 또는 `&lt;C-n&gt;`/`&lt;C-p&gt;`).</span></span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="va">scroll_down</span> <span class="op">=</span> <span class="st">'&lt;C-f&gt;'</span><span class="op">,</span></span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="va">scroll_up</span> <span class="op">=</span> <span class="st">'&lt;C-b&gt;'</span><span class="op">,</span></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="similar-plugins" class="level2">
-<h2 class="anchored" data-anchor-id="similar-plugins">Similar plugins</h2>
+<h2 class="anchored" data-anchor-id="similar-plugins">유사한 플러그인</h2>
 <ul>
 <li><a href="https://github.com/hrsh7th/nvim-cmp">hrsh7th/nvim-cmp</a></li>
 <li><a href="https://github.com/Shougo/ddc.vim">Shougo/ddc.vim</a></li>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MiniMax configs – MINI</title>
+<title>MiniMax 설정 – MINI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,13 +74,13 @@ ul.task-list li input[type="checkbox"] {
 <style> .quarto-title > h1.title { display: none } </style>
 
 
-<meta property="og:title" content="MiniMax configs – MINI">
+<meta property="og:title" content="MiniMax 설정 – MINI">
 <meta property="og:description" content="Modular Independent Neovim Improvements">
 <meta property="og:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
 <meta property="og:site_name" content="MINI">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
-<meta name="twitter:title" content="MiniMax configs – MINI">
+<meta name="twitter:title" content="MiniMax 설정 – MINI">
 <meta name="twitter:description" content="Modular Independent Neovim Improvements">
 <meta name="twitter:image" content="https://nvim-mini.org/assets/logo-mini_social.png">
 <meta name="twitter:image-height" content="630">
@@ -317,20 +317,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#minimax-reference-configs" id="toc-minimax-reference-configs" class="nav-link active" data-scroll-target="#minimax-reference-configs">MiniMax reference configs</a>
+  <li><a href="#minimax-참조-설정" id="toc-minimax-참조-설정" class="nav-link active" data-scroll-target="#minimax-참조-설정">MiniMax 참조 설정</a>
   <ul>
-  <li><a href="#structure" id="toc-structure" class="nav-link" data-scroll-target="#structure">Structure</a>
+  <li><a href="#구조" id="toc-구조" class="nav-link" data-scroll-target="#구조">구조</a>
   <ul>
   <li><a href="#init.lua" id="toc-init.lua" class="nav-link" data-scroll-target="#init.lua"><code>init.lua</code></a>
   <ul class="collapse">
-  <li><a href="#nvim-pack-lock.json-for-neovim0.12" id="toc-nvim-pack-lock.json-for-neovim0.12" class="nav-link" data-scroll-target="#nvim-pack-lock.json-for-neovim0.12"><code>nvim-pack-lock.json</code> (for Neovim&gt;=0.12)</a></li>
+  <li><a href="#nvim-pack-lock.json-neovim0.12용" id="toc-nvim-pack-lock.json-neovim0.12용" class="nav-link" data-scroll-target="#nvim-pack-lock.json-neovim0.12용"><code>nvim-pack-lock.json</code> (Neovim&gt;=0.12용)</a></li>
   </ul></li>
   <li><a href="#plugin" id="toc-plugin" class="nav-link" data-scroll-target="#plugin"><code>plugin/</code></a></li>
   <li><a href="#snippets" id="toc-snippets" class="nav-link" data-scroll-target="#snippets"><code>snippets/</code></a></li>
   <li><a href="#after" id="toc-after" class="nav-link" data-scroll-target="#after"><code>after/</code></a>
   <ul class="collapse">
   <li><a href="#afterftplugin" id="toc-afterftplugin" class="nav-link" data-scroll-target="#afterftplugin"><code>after/ftplugin/</code></a></li>
-  <li><a href="#afterlsp-for-neovim0.11" id="toc-afterlsp-for-neovim0.11" class="nav-link" data-scroll-target="#afterlsp-for-neovim0.11"><code>after/lsp/</code> (for Neovim&gt;=0.11)</a></li>
+  <li><a href="#afterlsp-neovim0.11용" id="toc-afterlsp-neovim0.11용" class="nav-link" data-scroll-target="#afterlsp-neovim0.11용"><code>after/lsp/</code> (Neovim&gt;=0.11용)</a></li>
   <li><a href="#aftersnippets" id="toc-aftersnippets" class="nav-link" data-scroll-target="#aftersnippets"><code>after/snippets/</code></a></li>
   </ul></li>
   </ul></li>
@@ -344,7 +344,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">MiniMax configs</h1>
+<h1 class="title">MiniMax 설정</h1>
 </div>
 
 
@@ -361,41 +361,41 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><em>Generated from the <code>main</code> branch of ‘MiniMax’</em></p>
-<section id="minimax-reference-configs" class="level2">
-<h2 class="anchored" data-anchor-id="minimax-reference-configs">MiniMax reference configs</h2>
-<p>The most appropriate one based on Neovim version is chosen during initial config generation.</p>
-<p>Available:</p>
+<p>_ ’MiniMax’의 <code>main</code> 브랜치에서 생성됨 _</p>
+<section id="minimax-참조-설정" class="level2">
+<h2 class="anchored" data-anchor-id="minimax-참조-설정">MiniMax 참조 설정</h2>
+<p>초기 설정 생성 중에 Neovim 버전에 따라 가장 적합한 설정이 선택됩니다.</p>
+<p>사용 가능한 버전:</p>
 <ul>
-<li><a href="nvim-0.10"><code>nvim-0.10</code></a> - for Neovim&gt;=0.10</li>
-<li><a href="nvim-0.11"><code>nvim-0.11</code></a> - for Neovim&gt;=0.11</li>
-<li><a href="nvim-0.12"><code>nvim-0.12</code></a> - for Neovim&gt;=0.12 (currently under development)</li>
+<li><a href="nvim-0.10"><code>nvim-0.10</code></a> - Neovim&gt;=0.10용</li>
+<li><a href="nvim-0.11"><code>nvim-0.11</code></a> - Neovim&gt;=0.11용</li>
+<li><a href="nvim-0.12"><code>nvim-0.12</code></a> - Neovim&gt;=0.12용 (현재 개발 중)</li>
 </ul>
-<p>Differences between selected configs:</p>
+<p>선택된 설정 간의 차이점:</p>
 <ul>
-<li><a href="https://nvim-mini.org/MiniMax/configs/diffs/nvim-0.10_nvim-0.11">Between <code>nvim-0.10</code> and <code>nvim-0.11</code></a></li>
-<li><a href="https://nvim-mini.org/MiniMax/configs/diffs/nvim-0.11_nvim-0.12">Between <code>nvim-0.11</code> and <code>nvim-0.12</code></a></li>
+<li><a href="https://nvim-mini.org/MiniMax/configs/diffs/nvim-0.10_nvim-0.11"><code>nvim-0.10</code>과 <code>nvim-0.11</code> 사이의 차이점</a></li>
+<li><a href="https://nvim-mini.org/MiniMax/configs/diffs/nvim-0.11_nvim-0.12"><code>nvim-0.11</code>과 <code>nvim-0.12</code> 사이의 차이점</a></li>
 </ul>
-<section id="structure" class="level3">
-<h3 class="anchored" data-anchor-id="structure">Structure</h3>
+<section id="구조" class="level3">
+<h3 class="anchored" data-anchor-id="구조">구조</h3>
 <section id="init.lua" class="level4">
 <h4 class="anchored" data-anchor-id="init.lua"><code>init.lua</code></h4>
-<p>Initial file executed first during startup.</p>
-<section id="nvim-pack-lock.json-for-neovim0.12" class="level5">
-<h5 class="anchored" data-anchor-id="nvim-pack-lock.json-for-neovim0.12"><code>nvim-pack-lock.json</code> (for Neovim&gt;=0.12)</h5>
-<p>Lockfile for <code>vim.pack</code> (built-in plugin manager) that contains information about all installed plugins. Provided to install necessary plugins during initial setting up at revisions that were tested to work in MiniMax.</p>
-<p>It is updated automatically whenever installed plugins change: their state on disk is updated, their tracked <code>version</code> is changed, they are deleted, etc. Do not delete and do not edit by hand.</p>
-<p>See <a href="https://neovim.io/doc/user/helptag.html?tag=vim.pack-lockfile"><code>:h vim.pack-lockfile</code></a> for more information about the lockfile and <a href="https://neovim.io/doc/user/helptag.html?tag=vim.pack"><code>:h vim.pack</code></a> about the plugin manager in general.</p>
+<p>시작 시 가장 먼저 실행되는 초기 파일입니다.</p>
+<section id="nvim-pack-lock.json-neovim0.12용" class="level5">
+<h5 class="anchored" data-anchor-id="nvim-pack-lock.json-neovim0.12용"><code>nvim-pack-lock.json</code> (Neovim&gt;=0.12용)</h5>
+<p>모든 설치된 플러그인에 대한 정보를 포함하는 <code>vim.pack</code> (내장 플러그인 관리자)용 락파일(lockfile)입니다. MiniMax에서 작동이 확인된 특정 리비전의 필수 플러그인을 초기 설정 중에 설치하기 위해 제공됩니다.</p>
+<p>설치된 플러그인이 변경될 때마다(디스크에서의 상태 업데이트, 추적되는 <code>version</code> 변경, 삭제 등) 자동으로 업데이트됩니다. 수동으로 삭제하거나 편집하지 마세요.</p>
+<p>락파일에 대한 자세한 내용은 <a href="https://neovim.io/doc/user/helptag.html?tag=vim.pack-lockfile"><code>:h vim.pack-lockfile</code></a>을, 플러그인 관리자 전반에 대해서는 <a href="https://neovim.io/doc/user/helptag.html?tag=vim.pack"><code>:h vim.pack</code></a>을 참조하세요.</p>
 </section>
 </section>
 <section id="plugin" class="level4">
 <h4 class="anchored" data-anchor-id="plugin"><code>plugin/</code></h4>
-<p>Files automatically executed in alphabetical order during startup:</p>
+<p>시작 시 알파벳 순서로 자동으로 실행되는 파일들입니다:</p>
 <ul>
-<li><code>10_options.lua</code> - built-in Neovim behavior.</li>
-<li><code>20_keymaps.lua</code> - custom mappings, mostly for the <a href="https://neovim.io/doc/user/helptag.html?tag=%3CLeader%3E"><code>:h &lt;Leader&gt;</code></a> key.</li>
-<li><code>30_mini.lua</code> - MINI configuration.</li>
-<li><code>40_plugins.lua</code> - plugins outside of MINI.</li>
+<li><code>10_options.lua</code> - 내장 Neovim 동작.</li>
+<li><code>20_keymaps.lua</code> - 사용자 정의 매핑, 주로 <a href="https://neovim.io/doc/user/helptag.html?tag=%3CLeader%3E"><code>:h &lt;Leader&gt;</code></a> 키 위주.</li>
+<li><code>30_mini.lua</code> - MINI 설정.</li>
+<li><code>40_plugins.lua</code> - MINI 외의 플러그인.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -407,8 +407,8 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Many configurations prefer to use the ‘lua/’ directory with explicit <code>require()</code> calls to modularize their config. It is okay to use, but has a drawback that it occupies ‘lua’ namespace. As it is shared across all plugins, it might lead to conflicts during <code>require()</code>. Usually solved by having config files inside a dedicated “user” directory like ‘lua/username’.</p>
-<p>The ‘plugin/’ approach doesn’t have this issue. It also doesn’t need explicit <code>require()</code> calls inside ‘init.lua’ for files to be executed.</p>
+<p>많은 설정에서 설정을 모듈화하기 위해 명시적인 <code>require()</code> 호출과 함께 ‘lua/’ 디렉토리를 사용하는 것을 선호합니다. 사용해도 괜찮지만, ‘lua’ 네임스페이스를 차지한다는 단점이 있습니다. 모든 플러그인에서 공유되기 때문에 <code>require()</code> 중에 충돌이 발생할 수 있습니다. 보통 ’lua/username’과 같이 전용 “사용자” 디렉토리 안에 설정 파일을 두어 해결합니다.</p>
+<p>‘plugin/’ 방식은 이 문제가 없습니다. 또한 파일을 실행하기 위해 ‘init.lua’ 내부에서 명시적인 <code>require()</code> 호출이 필요하지 않습니다.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -421,32 +421,32 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For more details about this approach, see <a href="https://neovim.io/doc/user/helptag.html?tag=load-plugins"><code>:h load-plugins</code></a>. In particular: - Subdirectories are allowed. Their files are also sourced in alphabetical order. - ‘plugin/’ files still get executed if Neovim is started with <code>nvim -u path/to/file</code>. Make sure to also pass <code>--noplugin</code> or use <a href="https://neovim.io/doc/user/helptag.html?tag=$NVIM_APPNAME"><code>:h $NVIM_APPNAME</code></a> approach.</p>
+<p>이 방식에 대한 자세한 내용은 <a href="https://neovim.io/doc/user/helptag.html?tag=load-plugins"><code>:h load-plugins</code></a>를 참조하세요. 특히: - 하위 디렉토리가 허용됩니다. 해당 파일들도 알파벳 순서로 소싱됩니다. - Neovim이 <code>nvim -u path/to/file</code>과 같이 시작되어도 ‘plugin/’ 파일들은 여전히 실행됩니다. <code>--noplugin</code>을 함께 전달하거나 <a href="https://neovim.io/doc/user/helptag.html?tag=$NVIM_APPNAME"><code>:h $NVIM_APPNAME</code></a> 방식을 사용하세요.</p>
 </div>
 </div>
 </section>
 <section id="snippets" class="level4">
 <h4 class="anchored" data-anchor-id="snippets"><code>snippets/</code></h4>
-<p>User defined snippets. Contains a single ‘global.json’ file as a demo (used in the ‘mini.snippets’ setup).</p>
+<p>사용자 정의 스니펫. 데모용으로 단일 ‘global.json’ 파일이 포함되어 있습니다 (‘mini.snippets’ 설정에서 사용됨).</p>
 </section>
 <section id="after" class="level4">
 <h4 class="anchored" data-anchor-id="after"><code>after/</code></h4>
-<p>Files for overriding behavior added by plugins. Usually located inside special subdirectories like ‘ftplugin/’ (see <a href="https://neovim.io/doc/user/helptag.html?tag='runtimepath'"><code>:h 'runtimepath'</code></a>). Files from this directory take effect after similar files provided by plugins.</p>
-<p>For demonstration purposes, it contains examples of common ways to use ‘after/’.</p>
+<p>플러그인에 의해 추가된 동작을 덮어쓰기 위한 파일들입니다. 보통 ’ftplugin/’과 같은 특수 하위 디렉토리에 위치합니다 (<a href="https://neovim.io/doc/user/helptag.html?tag='runtimepath'"><code>:h 'runtimepath'</code></a> 참조). 이 디렉토리의 파일은 플러그인에서 제공하는 유사한 파일 다음에 적용됩니다.</p>
+<p>교본용으로 제작되었으며, ’after/’를 사용하는 일반적인 방법의 예시가 포함되어 있습니다.</p>
 <section id="afterftplugin" class="level5">
 <h5 class="anchored" data-anchor-id="afterftplugin"><code>after/ftplugin/</code></h5>
-<p>Filetype plugins. Contains files that are sourced when <a href="https://neovim.io/doc/user/helptag.html?tag='filetype'"><code>:h 'filetype'</code></a> option is set.</p>
-<p>For example, ‘*.txt’ files have <code>text</code> filetype, so ‘ftplugin/text.lua’ is sourced when ‘*.txt’ file is opened. It defines behavior that should exist only in <code>text</code> files.</p>
+<p>파일 유형(filetype) 플러그인. <a href="https://neovim.io/doc/user/helptag.html?tag='filetype'"><code>:h 'filetype'</code></a> 옵션이 설정될 때 소싱되는 파일들이 포함됩니다.</p>
+<p>예를 들어, ‘*.txt’ 파일은 <code>text</code> 파일 유형을 가지므로, ‘*.txt’ 파일을 열 때 ’ftplugin/text.lua’가 소싱됩니다. 여기에는 <code>text</code> 파일에만 존재해야 하는 동작을 정의합니다.</p>
 </section>
-<section id="afterlsp-for-neovim0.11" class="level5">
-<h5 class="anchored" data-anchor-id="afterlsp-for-neovim0.11"><code>after/lsp/</code> (for Neovim&gt;=0.11)</h5>
-<p>Files that configure LSP servers. These are used by Neovim’s built-in <a href="https://neovim.io/doc/user/helptag.html?tag=vim.lsp.config()"><code>:h vim.lsp.config()</code></a> and <a href="https://neovim.io/doc/user/helptag.html?tag=vim.lsp.enable()"><code>:h vim.lsp.enable()</code></a>. See also <a href="https://neovim.io/doc/user/helptag.html?tag=lsp-quickstart"><code>:h lsp-quickstart</code></a> for more details.</p>
-<p>For example, the ‘lsp/lua_ls.lua’ file defines part of configuration that will be used during <code>vim.lsp.enable({ 'lua_ls' })</code> (i.e.&nbsp;with the same name).</p>
+<section id="afterlsp-neovim0.11용" class="level5">
+<h5 class="anchored" data-anchor-id="afterlsp-neovim0.11용"><code>after/lsp/</code> (Neovim&gt;=0.11용)</h5>
+<p>LSP 서버를 설정하는 파일들입니다. Neovim 내장 기능인 <a href="https://neovim.io/doc/user/helptag.html?tag=vim.lsp.config()"><code>:h vim.lsp.config()</code></a> 및 <a href="https://neovim.io/doc/user/helptag.html?tag=vim.lsp.enable()"><code>:h vim.lsp.enable()</code></a>에서 사용됩니다. 자세한 내용은 <a href="https://neovim.io/doc/user/helptag.html?tag=lsp-quickstart"><code>:h lsp-quickstart</code></a>를 참조하세요.</p>
+<p>예를 들어, ‘lsp/lua_ls.lua’ 파일은 <code>vim.lsp.enable({ 'lua_ls' })</code> (즉, 동일한 이름으로) 호출 시 사용될 설정의 일부를 정의합니다.</p>
 </section>
 <section id="aftersnippets" class="level5">
 <h5 class="anchored" data-anchor-id="aftersnippets"><code>after/snippets/</code></h5>
-<p>Files containing snippet definition per language. Used by <a href="https://nvim-mini.org/mini.nvim/doc/mini-snippets.html">‘mini.snippets’</a>. As they are located in ‘after/’, they override any snippets provided by plugins (like ‘rafamadriz/friendly-snippets’).</p>
-<p>For example, based on ‘snippets/lua.json’, typing <code>l</code> + <code>&lt;C-j&gt;</code> in Insert mode inside Lua files will always insert <code>local $1 = $0</code> snippet. No matter if any other snippet provider contains this or conflicting snippet.</p>
+<p>언어별 스니펫 정의가 포함된 파일들입니다. <a href="https://nvim-mini.org/mini.nvim/doc/mini-snippets.html">‘mini.snippets’</a>에서 사용됩니다. ‘after/’에 위치하므로 플러그인(예: ’rafamadriz/friendly-snippets’)에서 제공하는 모든 스니펫을 덮어씁니다.</p>
+<p>예를 들어, ’snippets/lua.json’을 기반으로 Lua 파일 내부 Insert 모드에서 <code>l</code> + <code>&lt;C-j&gt;</code>를 입력하면 항상 <code>local $1 = $0</code> 스니펫이 삽입됩니다. 다른 스니펫 제공자에 이 스니펫이 있거나 충돌하는 스니펫이 있더라도 상관없습니다.</p>
 
 
 </section>

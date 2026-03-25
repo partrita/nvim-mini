@@ -352,20 +352,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#work-with-diff-hunks" id="toc-work-with-diff-hunks" class="nav-link active" data-scroll-target="#work-with-diff-hunks">Work with diff hunks</a></li>
-  <li><a href="#demo" id="toc-demo" class="nav-link" data-scroll-target="#demo">Demo</a></li>
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a>
+  <li><a href="#diff-헝크hunk-작업" id="toc-diff-헝크hunk-작업" class="nav-link active" data-scroll-target="#diff-헝크hunk-작업">Diff 헝크(hunk) 작업</a></li>
+  <li><a href="#데모" id="toc-데모" class="nav-link" data-scroll-target="#데모">데모</a></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">기능</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">개요</a>
   <ul>
-  <li><a href="#diffs-and-hunks" id="toc-diffs-and-hunks" class="nav-link" data-scroll-target="#diffs-and-hunks">Diffs and hunks</a></li>
-  <li><a href="#life-cycle" id="toc-life-cycle" class="nav-link" data-scroll-target="#life-cycle">Life cycle</a></li>
-  <li><a href="#overlay" id="toc-overlay" class="nav-link" data-scroll-target="#overlay">Overlay</a></li>
-  <li><a href="#mappings" id="toc-mappings" class="nav-link" data-scroll-target="#mappings">Mappings</a></li>
-  <li><a href="#buffer-local-variables" id="toc-buffer-local-variables" class="nav-link" data-scroll-target="#buffer-local-variables">Buffer-local variables</a></li>
+  <li><a href="#diff와-헝크-diffs-and-hunks" id="toc-diff와-헝크-diffs-and-hunks" class="nav-link" data-scroll-target="#diff와-헝크-diffs-and-hunks">Diff와 헝크 (Diffs and hunks)</a></li>
+  <li><a href="#라이프-사이클-life-cycle" id="toc-라이프-사이클-life-cycle" class="nav-link" data-scroll-target="#라이프-사이클-life-cycle">라이프 사이클 (Life cycle)</a></li>
+  <li><a href="#오버레이-overlay" id="toc-오버레이-overlay" class="nav-link" data-scroll-target="#오버레이-overlay">오버레이 (Overlay)</a></li>
+  <li><a href="#매핑-mappings" id="toc-매핑-mappings" class="nav-link" data-scroll-target="#매핑-mappings">매핑 (Mappings)</a></li>
+  <li><a href="#버퍼-로컬-변수-buffer-local-variables" id="toc-버퍼-로컬-변수-buffer-local-variables" class="nav-link" data-scroll-target="#버퍼-로컬-변수-buffer-local-variables">버퍼 로컬 변수 (Buffer-local variables)</a></li>
   </ul></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#default-config" id="toc-default-config" class="nav-link" data-scroll-target="#default-config">Default config</a></li>
-  <li><a href="#similar-plugins" id="toc-similar-plugins" class="nav-link" data-scroll-target="#similar-plugins">Similar plugins</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">설치</a></li>
+  <li><a href="#default-config" id="toc-default-config" class="nav-link" data-scroll-target="#default-config">기본 설정</a></li>
+  <li><a href="#similar-plugins" id="toc-similar-plugins" class="nav-link" data-scroll-target="#similar-plugins">유사한 플러그인</a></li>
   </ul>
 </nav>
     </div>
@@ -396,11 +396,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="https://github.com/nvim-mini/assets/blob/main/logo-2/logo-diff_readme.png?raw=true" alt="mini.diff" style="max-width:100%;border:solid 2px">
 </p>
 <p align="center">
-<em>Generated from the <code>main</code> branch of ‘mini.nvim’</em>
+<em>’mini.nvim’의 <code>main</code> 브랜치에서 생성됨</em>
 </p>
-<section id="work-with-diff-hunks" class="level3">
-<h3 class="anchored" data-anchor-id="work-with-diff-hunks">Work with diff hunks</h3>
-<p>See more details in <a href="#features">Features</a> and <a href="../../mini.nvim/doc/mini-diff.html">Documentation</a>.</p>
+<section id="diff-헝크hunk-작업" class="level3">
+<h3 class="anchored" data-anchor-id="diff-헝크hunk-작업">Diff 헝크(hunk) 작업</h3>
+<p>더 자세한 내용은 <a href="#features">기능</a> 및 <a href="../../mini.nvim/doc/mini-diff.html">상세 문서</a>를 참조하세요.</p>
 <hr>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -412,38 +412,38 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This was previously hosted at a personal <code>echasnovski</code> GitHub account. It was transferred to a dedicated organization to improve long term project stability. See more details <a href="https://github.com/nvim-mini/mini.nvim/discussions/1970">here</a>.</p>
+<p>이 프로젝트는 이전에 개인 계정인 <code>echasnovski</code>에서 관리되었습니다. 장기적인 프로젝트 안정성을 개선하기 위해 전용 조직으로 이전되었습니다. 자세한 내용은 <a href="https://github.com/nvim-mini/mini.nvim/discussions/1970">여기</a>를 참조하세요.</p>
 </div>
 </div>
-<p>⦿ This is a part of <a href="https://nvim-mini.org/mini.nvim">mini.nvim</a> library. Please use <a href="https://nvim-mini.org/mini.nvim/readmes/mini-diff">this link</a> if you want to mention this module.</p>
-<p>⦿ All contributions (issues, pull requests, discussions, etc.) are done inside of ‘mini.nvim’.</p>
-<p>⦿ See <a href="https://nvim-mini.org/mini.nvim/doc/mini-nvim">whole library documentation</a> to learn about general design principles, disable/configuration recipes, and more.</p>
-<p>⦿ See <a href="https://nvim-mini.org/MiniMax">MiniMax</a> for a full config example that uses this module.</p>
+<p>⦿ 이 모듈은 <a href="https://nvim-mini.org/mini.nvim">mini.nvim</a> 라이브러리의 일부입니다. 이 모듈을 언급할 때는 <a href="https://nvim-mini.org/mini.nvim/readmes/mini-diff">이 링크</a>를 사용해 주세요.</p>
+<p>⦿ 모든 기여(이슈, 풀 리퀘스트, 토론 등)는 ‘mini.nvim’ 저장소에서 진행됩니다.</p>
+<p>⦿ 일반적인 디자인 원칙, 비활성화/설정 레시피 등은 <a href="https://nvim-mini.org/mini.nvim/doc/mini-nvim">전체 라이브러리 문서</a>를 참조하세요.</p>
+<p>⦿ 이 모듈을 사용하는 전체 설정 예제는 <a href="https://nvim-mini.org/MiniMax">MiniMax</a>를 참조하세요.</p>
 <hr>
-<p>If you want to help this project grow but don’t know where to start, check out <a href="https://nvim-mini.org/mini.nvim/CONTRIBUTING">contributing guides of ‘mini.nvim’</a> or leave a Github star for ‘mini.nvim’ project and/or any its standalone Git repositories.</p>
+<p>이 프로젝트의 성장을 돕고 싶지만 어디서부터 시작해야 할지 모르겠다면, <a href="https://nvim-mini.org/mini.nvim/CONTRIBUTING">’mini.nvim’의 기여 가이드</a>를 확인하거나 ‘mini.nvim’ 프로젝트 및 해당 독립 저장소에 Github 스타를 남겨주세요.</p>
 </section>
-<section id="demo" class="level2">
-<h2 class="anchored" data-anchor-id="demo">Demo</h2>
+<section id="데모" class="level2">
+<h2 class="anchored" data-anchor-id="데모">데모</h2>
 <p><video src="https://github.com/nvim-mini/assets/blob/main/demo/demo-diff.mp4?raw=true" class="img-fluid" controls=""><a href="https://github.com/nvim-mini/assets/blob/main/demo/demo-diff.mp4?raw=true">Video</a></video></p>
 </section>
 <section id="features" class="level2">
-<h2 class="anchored" data-anchor-id="features">Features</h2>
+<h2 class="anchored" data-anchor-id="features">기능</h2>
 <ul>
-<li><p>Visualize difference between buffer text and its configurable reference interactively (updates as you type). This is done per line showing whether it is inside added, changed, or deleted part of difference (called hunk). Visualization can be with customizable colored signs or line numbers.</p></li>
-<li><p>Special toggleable overlay view with more hunk details inside text area.</p></li>
-<li><p>Completely configurable per buffer source(s) of reference text used to keep it up to date and define interactions with it. Can be array of sources which are attempted to attach in order. By default uses Git source (buffer’s file text from Git index as reference).</p></li>
-<li><p>Configurable mappings to manage diff hunks:</p>
+<li><p>버퍼 텍스트와 설정 가능한 참조(reference) 데이터 간의 차이를 대화식으로 시각화합니다 (입력하는 동안 업데이트됨). 줄 단위로 수행되며, 각 줄이 추가, 변경 또는 삭제된 부분(이를 ’헝크, hunk’라고 함)에 속하는지 보여줍니다. 커스터마이징 가능한 컬러 기호(signs) 또는 줄 번호를 통해 시각화할 수 있습니다.</p></li>
+<li><p>텍스트 영역 내에서 더 자세한 헝크 정보를 보여주는 특별한 토글형 오버레이(overlay) 뷰를 제공합니다.</p></li>
+<li><p>참조 텍스트를 최신 상태로 유지하고 상호 작용을 정의하기 위해 버퍼별로 완전히 설정 가능한 소스(source)를 제공합니다. 순서대로 연결을 시도하는 소스 배열일 수 있습니다. 기본적으로 Git 소스를 사용합니다 (Git 인덱스의 버퍼 파일 내용을 참조로 사용).</p></li>
+<li><p>Diff 헝크를 관리하기 위한 설정 가능한 매핑:</p>
 <ul>
-<li>Apply and reset hunks inside region (selected visually or with a dot-repeatable operator).</li>
-<li>“Hunk range under cursor” textobject to be used as operator target.</li>
-<li>Navigate to first/previous/next/last hunk.</li>
+<li>지정된 영역(비주얼 선택 또는 점 반복 가능한 연산자) 내의 헝크를 적용(stage)하거나 리셋합니다.</li>
+<li>연산자의 대상으로 사용할 수 있는 “커서 아래의 헝크 범위” 텍스트 오브젝트를 제공합니다.</li>
+<li>첫 번째/이전/다음/마지막 헝크로 탐색합니다.</li>
 </ul></li>
 </ul>
-<p>What it doesn’t do:</p>
+<p>수행하지 않는 작업:</p>
 <ul>
-<li>Provide functionality to work directly with Git outside of visualizing and staging (applying) hunks with (default) Git source. In particular, unstaging hunks is not supported.</li>
+<li>(기본) Git 소스에서 헝크를 시각화하고 스테이징(적용)하는 것 외에, Git과 직접적으로 관련된 기능(예: 헝크 스테이징 해제 등)은 지원하지 않습니다.</li>
 </ul>
-<p>For more information see these parts of help:</p>
+<p>더 자세한 정보는 도움말의 다음 부분을 참조하세요:</p>
 <ul>
 <li><a href="../../mini.nvim/doc/mini-diff.html#minidiff-overview"><code>:h MiniDiff-overview</code></a></li>
 <li><a href="../../mini.nvim/doc/mini-diff.html#minidiff-source-specification"><code>:h MiniDiff-source-specification</code></a></li>
@@ -452,74 +452,73 @@ Note
 </ul>
 </section>
 <section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<section id="diffs-and-hunks" class="level3">
-<h3 class="anchored" data-anchor-id="diffs-and-hunks">Diffs and hunks</h3>
-<p>The “diff” (short for “difference”) is a result of computing how two text strings differ from one another. This is done on per line basis, i.e.&nbsp;the goal is to compute sequences of lines common to both files, interspersed with groups of differing lines (called “hunks”).</p>
-<p>Although computing diff is a general concept (used on its own, in Git, etc.), this module computes difference between current text in a buffer and some reference text which is kept up to date specifically for that buffer. For example, default reference text is computed as file content in Git index. This can be customized in <code>config.source</code>.</p>
+<h2 class="anchored" data-anchor-id="overview">개요</h2>
+<section id="diff와-헝크-diffs-and-hunks" class="level3">
+<h3 class="anchored" data-anchor-id="diff와-헝크-diffs-and-hunks">Diff와 헝크 (Diffs and hunks)</h3>
+<p>“Diff”(difference의 줄임말)는 두 문자열이 어떻게 다른지 계산한 결과입니다. 이는 줄 단위로 수행됩니다. 즉, 두 파일에서 공통된 줄 시퀀스 사이에 차이가 있는 줄 그룹(이를 “헝크, hunks”라고 함)이 끼어 있는 형태를 계산하는 것이 목표입니다.</p>
+<p>Diff 계산은 (Git 등에서 사용되는) 일반적인 개념이지만, 이 모듈은 현재 버퍼의 텍스트와 해당 버퍼를 위해 특별히 관리되는 참조 텍스트 간의 차이를 계산합니다. 예를 들어, 기본 참조 텍스트는 Git 인덱스의 파일 내용으로 계산됩니다. 이는 <code>config.source</code>에서 커스터마이징할 수 있습니다.</p>
 </section>
-<section id="life-cycle" class="level3">
-<h3 class="anchored" data-anchor-id="life-cycle">Life cycle</h3>
+<section id="라이프-사이클-life-cycle" class="level3">
+<h3 class="anchored" data-anchor-id="라이프-사이클-life-cycle">라이프 사이클 (Life cycle)</h3>
 <ul>
-<li>When entering proper (not already enabled, valid, showing text) buffer, it is attempted to be enabled for diff processing.</li>
-<li>During enabling, attempt attaching the source. This should set up how reference text is kept up to date.</li>
-<li>On every text change, diff computation is scheduled in debounced fashion after customizable delay (200 ms by default).</li>
-<li>After the diff is computed, do the following:
+<li>적절한(이미 활성화되지 않았고, 유효하며, 텍스트를 표시 중인) 버퍼에 진입하면 Diff 프로세싱 활성화를 시도합니다.</li>
+<li>활성화하는 동안 소스 연결을 시도합니다. 이는 참조 텍스트가 최신 상태를 유지하는 방식을 설정합니다.</li>
+<li>텍스트가 변경될 때마다, 설정 가능한 지연 시간(기본값 200ms) 후에 디바운스(debounced) 방식으로 Diff 계산이 예약됩니다.</li>
+<li>Diff가 계산되면 다음 작업을 수행합니다:
 <ul>
-<li>Update visualization based on configurable style: either by placing colored text in sign column or coloring line numbers. Colors for both styles are defined per hunk type in corresponding <code>MiniDiffSign*</code> highlight group and sign text for “sign” style can be configured in <code>config.view.signs</code>.</li>
-<li>Update overlay view (if it is enabled).</li>
-<li>Update <code>vim.b.minidiff_summary</code> and <code>vim.b.minidiff_summary_string</code> buffer-local variables. These can be used, for example, in statusline.</li>
-<li>Trigger <code>MiniDiffUpdated</code> <code>User</code> event. See <a href="../../mini.nvim/doc/mini-diff.html#minidiff-diff-summary"><code>:h MiniDiff-diff-summary</code></a> for example of how to use it.</li>
+<li>설정 가능한 스타일에 따라 시각화를 업데이트합니다: 기호 열(sign column)에 유색 텍스트를 배치하거나 줄 번호에 색상을 입힙니다. 두 스타일 모두 해당 <code>MiniDiffSign*</code> 하이라이트 그룹에서 헝크 유형별로 색상이 정의되며, “기호(sign)” 스타일의 기호 텍스트는 <code>config.view.signs</code>에서 설정할 수 있습니다.</li>
+<li>오버레이 뷰(활성화된 경우)를 업데이트합니다.</li>
+<li>현재 버퍼에 대해 <code>vim.b.minidiff_summary</code> 및 <code>vim.b.minidiff_summary_string</code> 변수를 업데이트합니다. 이는 상태 표시줄(statusline) 등에서 사용할 수 있습니다.</li>
+<li><code>MiniDiffUpdated</code> <code>User</code> 이벤트를 발생시킵니다. 사용 예시는 <a href="../../mini.nvim/doc/mini-diff.html#minidiff-diff-summary"><code>:h MiniDiff-diff-summary</code></a>를 참조하세요.</li>
 </ul></li>
 </ul>
-<p>Notes:</p>
+<p>참고:</p>
 <ul>
-<li>Use <code>:edit</code> to reset (disable and re-enable) current buffer.</li>
+<li><code>:edit</code> 명령을 사용하여 현재 버퍼를 리셋(비활성화 후 다시 활성화)할 수 있습니다.</li>
 </ul>
 </section>
-<section id="overlay" class="level3">
-<h3 class="anchored" data-anchor-id="overlay">Overlay</h3>
-<p>Along with basic visualization, there is a special view called “overlay”. Although it is meant for temporary overview of diff details and can be manually toggled via <a href="../../mini.nvim/doc/mini-diff.html#minidiff.toggle_overlay"><code>MiniDiff.toggle_overlay()</code></a>, text can be changed with overlay reacting accordingly.</p>
-<p>It shows more diff details inside text area:</p>
+<section id="오버레이-overlay" class="level3">
+<h3 class="anchored" data-anchor-id="오버레이-overlay">오버레이 (Overlay)</h3>
+<p>기본 시각화와 함께 “오버레이”라는 특별한 뷰가 있습니다. 이는 Diff 세부 정보를 일시적으로 확인하기 위한 용도이며 <a href="../../mini.nvim/doc/mini-diff.html#minidiff.toggle_overlay"><code>MiniDiff.toggle_overlay()</code></a>를 통해 수동으로 토글할 수 있지만, 오버레이가 켜진 상태에서 텍스트를 변경하면 그에 맞춰 반응합니다.</p>
+<p>텍스트 영역 내에서 더 많은 Diff 세부 정보를 보여줍니다:</p>
 <ul>
-<li><p>Added buffer lines are highlighted with <code>MiniDiffOverAdd</code> highlight group.</p></li>
-<li><p>Deleted reference lines are shown as virtual text and highlighted with <code>MiniDiffOverDelete</code> highlight group.</p></li>
-<li><p>Changed reference lines are shown as virtual text and highlighted with <code>MiniDiffOverChange</code> highlight group.</p>
-<p>“Change” hunks with equal number of buffer and reference lines have special treatment and show “word diff”. Reference line is shown next to its buffer counterpart and only changed parts of both lines are highlighted with <code>MiniDiffOverChange</code>. The rest of reference line has <code>MiniDiffOverContext</code> highlighting.</p>
-<p>This usually is the case when <code>config.options.linematch</code> is enabled.</p></li>
+<li><p>추가된 버퍼 줄은 <code>MiniDiffOverAdd</code> 하이라이트 그룹으로 강조됩니다.</p></li>
+<li><p>삭제된 참조 줄은 가상 텍스트(virtual text)로 표시되며 <code>MiniDiffOverDelete</code> 하이라이트 그룹으로 강조됩니다.</p></li>
+<li><p>변경된 참조 줄은 가상 텍스트로 표시되며 <code>MiniDiffOverChange</code> 하이라이트 그룹으로 강조됩니다.</p>
+<p>버퍼 줄과 참조 줄의 개수가 동일한 “변경” 헝크의 경우 특별 처리를 통해 “단어 단위 Diff”를 보여줍니다. 참조 줄이 버퍼 줄 옆에 표시되며, 두 줄의 변경된 부분만 <code>MiniDiffOverChange</code>로 강조됩니다. 참조 줄의 나머지 부분은 <code>MiniDiffOverContext</code> 하이라이트가 적용됩니다. 이는 보통 <code>config.options.linematch</code>가 활성화되어 있을 때 적용됩니다.</p></li>
 </ul>
 </section>
-<section id="mappings" class="level3">
-<h3 class="anchored" data-anchor-id="mappings">Mappings</h3>
-<p>This module provides mappings for common actions with diffs, like:</p>
+<section id="매핑-mappings" class="level3">
+<h3 class="anchored" data-anchor-id="매핑-mappings">매핑 (Mappings)</h3>
+<p>이 모듈은 Diff와 관련된 일반적인 작업에 대한 매핑을 제공합니다:</p>
 <ul>
-<li>Apply and reset hunks.</li>
-<li>“Hunk range under cursor” textobject.</li>
-<li>Go to first/previous/next/last hunk range.</li>
+<li>헝크 적용(apply) 및 리셋(reset).</li>
+<li>“커서 아래의 헝크 범위” 텍스트 오브젝트.</li>
+<li>첫 번째/이전/다음/마지막 헝크 범위로 이동.</li>
 </ul>
-<p>Examples:</p>
+<p>예시:</p>
 <ul>
-<li><code>vip</code> followed by <code>gh</code> / <code>gH</code> applies/resets hunks inside current paragraph. Same can be achieved in operator form <code>ghip</code> / <code>gHip</code>, which has the advantage of being dot-repeatable.</li>
-<li><code>gh_</code> / <code>gH_</code> applies/resets current line (even if it is not a full hunk).</li>
-<li><code>ghgh</code> / <code>gHgh</code> applies/resets hunk range under cursor.</li>
-<li><code>dgh</code> deletes hunk range under cursor.</li>
-<li><code>[H</code> / <code>[h</code> / <code>]h</code> / <code>]H</code> navigate cursor to the first / previous / next / last hunk range of the current buffer.</li>
+<li><code>vip</code> 다음에 <code>gh</code> / <code>gH</code>를 누르면 현재 단락 내부의 헝크를 적용/리셋합니다. 연산자 형태인 <code>ghip</code> / <code>gHip</code>으로도 동일한 결과를 얻을 수 있으며, 이는 점 반복이 가능하다는 장점이 있습니다.</li>
+<li><code>gh_</code> / <code>gH_</code>는 (전체 헝크가 아니더라도) 현재 줄을 적용/리셋합니다.</li>
+<li><code>ghgh</code> / <code>gHgh</code>는 커서 아래의 헝크 범위를 적용/리셋합니다.</li>
+<li><code>dgh</code>는 커서 아래의 헝크 범위를 삭제합니다.</li>
+<li><code>[H</code> / <code>[h</code> / <code>]h</code> / <code>]H</code>는 현재 버퍼의 첫 번째 / 이전 / 다음 / 마지막 헝크 범위로 커서를 이동합니다.</li>
 </ul>
-<p>Mappings for some functionality are assumed to be done manually. See <a href="../../mini.nvim/doc/mini-diff.html#minidiff.operator"><code>:h MiniDiff.operator()</code></a>.</p>
+<p>일부 기능에 대한 매핑은 수동으로 수행하는 것을 가정합니다. <a href="../../mini.nvim/doc/mini-diff.html#minidiff.operator"><code>:h MiniDiff.operator()</code></a>를 참조하세요.</p>
 </section>
-<section id="buffer-local-variables" class="level3">
-<h3 class="anchored" data-anchor-id="buffer-local-variables">Buffer-local variables</h3>
-<p>Each enabled buffer has the following buffer-local variables which can be used in custom statusline to show an overview of hunks in current buffer:</p>
+<section id="버퍼-로컬-변수-buffer-local-variables" class="level3">
+<h3 class="anchored" data-anchor-id="버퍼-로컬-변수-buffer-local-variables">버퍼 로컬 변수 (Buffer-local variables)</h3>
+<p>Diff가 활성화된 각 버퍼는 커스텀 상태 표시줄에서 헝크 개요를 보여주는 데 사용할 수 있는 다음과 같은 버퍼 로컬 변수를 갖습니다:</p>
 <ul>
-<li><p><code>vim.b.minidiff_summary</code> is a table with the following fields:</p>
+<li><p><code>vim.b.minidiff_summary</code>는 다음과 같은 필드를 갖는 테이블입니다:</p>
 <ul>
-<li><code>source_name</code> - name of the source.</li>
-<li><code>n_ranges</code> - number of hunk ranges (sequences of contiguous hunks).</li>
-<li><code>add</code> - number of added lines.</li>
-<li><code>change</code> - number of changed lines.</li>
-<li><code>delete</code> - number of deleted lines.</li>
+<li><code>source_name</code> - 소스 이름.</li>
+<li><code>n_ranges</code> - 헝크 범위(연속된 헝크의 시퀀스) 수.</li>
+<li><code>add</code> - 추가된 줄 수.</li>
+<li><code>change</code> - 변경된 줄 수.</li>
+<li><code>delete</code> - 삭제된 줄 수.</li>
 </ul></li>
-<li><p><code>vim.b.minidiff_summary_string</code> is a string representation of summary with a fixed format. It is expected to be used as is. To achieve different formatting, use <code>vim.b.minidiff_summary</code> to construct one. The best way to do this is by overriding <code>vim.b.minidiff_summary_string</code> in the callback for <code>MiniDiffUpdated</code> event:</p>
+<li><p><code>vim.b.minidiff_summary_string</code>은 고정된 형식의 요약 문자열 표현입니다. 그대로 사용하도록 제작되었습니다. 다른 포맷을 사용하려면 <code>vim.b.minidiff_summary</code>를 사용하여 직접 만들어 보세요. 가장 좋은 방법은 <code>MiniDiffUpdated</code> 이벤트의 콜백에서 <code>vim.b.minidiff_summary_string</code>을 덮어쓰는 것입니다:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">local</span> <span class="va">format_summary</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">local</span> <span class="va">summary</span> <span class="op">=</span> <span class="va">vim</span><span class="op">.</span><span class="va">b</span><span class="op">[</span><span class="va">data</span><span class="op">.</span><span class="va">buf</span><span class="op">].</span><span class="va">minidiff_summary</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">local</span> <span class="va">t</span> <span class="op">=</span> <span class="op">{}</span></span>
@@ -534,39 +533,39 @@ Note
 </section>
 </section>
 <section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>This plugin can be installed as part of ‘mini.nvim’ library (<strong>recommended</strong>) or as a standalone Git repository.</p>
-<p>There are two branches to install from:</p>
+<h2 class="anchored" data-anchor-id="installation">설치</h2>
+<p>이 플러그인은 ‘mini.nvim’ 라이브러리의 일부로 설치하거나(<strong>권장</strong>), 독립적인 Git 저장소로 설치할 수 있습니다.</p>
+<p>두 가지 브랜치 중 하나를 골라 설치할 수 있습니다:</p>
 <ul>
-<li><code>main</code> (default, <strong>recommended</strong>) will have latest development version of plugin. All changes since last stable release should be perceived as being in beta testing phase (meaning they already passed alpha-testing and are moderately settled).</li>
-<li><code>stable</code> will be updated only upon releases with code tested during public beta-testing phase in <code>main</code> branch.</li>
+<li><code>main</code> (기본값, <strong>권장</strong>): 플러그인의 최신 개발 버전입니다. 마지막 안정 릴리스 이후의 모든 변경 사항은 베타 테스트 단계(알파 테스트를 통과하고 어느 정도 안정됨을 의미)로 간주되어야 합니다.</li>
+<li><code>stable</code>: <code>main</code> 브랜치에서 공개 베타 테스트를 거친 코드가 포함된 릴리스 시에만 업데이트됩니다.</li>
 </ul>
-<p>Here are code snippets for some common installation methods (use only one):</p>
+<p>다음은 몇 가지 일반적인 설치 방법의 코드 스니펫입니다 (하나만 사용하세요):</p>
 <details>
 <summary>
-With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a>
+<a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a> 사용 시
 </summary>
 <ul>
-<li><p>‘mini.nvim’ library:</p>
+<li><p>‘mini.nvim’ 라이브러리:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Main</td>
-<td><em>Follow recommended ‘mini.deps’ installation</em></td>
+<td><em>권장되는 ‘mini.deps’ 설치 방법을 따르세요</em></td>
 </tr>
 <tr class="even">
 <td>Stable</td>
-<td><em>Follow recommended ‘mini.deps’ installation</em></td>
+<td><em>권장되는 ‘mini.deps’ 설치 방법을 따르세요</em></td>
 </tr>
 </tbody>
 </table></li>
-<li><p>Standalone plugin:</p>
+<li><p>단독 플러그인:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 11%">
@@ -574,8 +573,8 @@ With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -593,15 +592,15 @@ With <a href="https://nvim-mini.org/mini.nvim/readmes/mini-deps">mini.deps</a>
 </details>
 <details>
 <summary>
-With <a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a>
+<a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a> 사용 시
 </summary>
 <ul>
-<li><p>‘mini.nvim’ library:</p>
+<li><p>‘mini.nvim’ 라이브러리:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -615,12 +614,12 @@ With <a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a>
 </tr>
 </tbody>
 </table></li>
-<li><p>Standalone plugin:</p>
+<li><p>단독 플러그인:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -638,15 +637,15 @@ With <a href="https://github.com/folke/lazy.nvim">folke/lazy.nvim</a>
 </details>
 <details>
 <summary>
-With <a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
+<a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a> 사용 시
 </summary>
 <ul>
-<li><p>‘mini.nvim’ library:</p>
+<li><p>‘mini.nvim’ 라이브러리:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -660,12 +659,12 @@ With <a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
 </tr>
 </tbody>
 </table></li>
-<li><p>Standalone plugin:</p>
+<li><p>단독 플러그인:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Branch</th>
-<th>Code snippet</th>
+<th>브랜치</th>
+<th>코드 스니펫</th>
 </tr>
 </thead>
 <tbody>
@@ -681,77 +680,77 @@ With <a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
 </table></li>
 </ul>
 </details>
-<p><strong>Important</strong>: don’t forget to call <code>require('mini.diff').setup()</code> to enable its functionality.</p>
-<p><strong>Note</strong>: if you are on Windows, there might be problems with too long file paths (like <code>error: unable to create file &lt;some file name&gt;: Filename too long</code>). Try doing one of the following:</p>
+<p><strong>중요</strong>: 기능을 활성화하려면 <code>require('mini.diff').setup()</code>을 호출해야 합니다.</p>
+<p><strong>참고</strong>: 윈도우 환경에서는 파일 경로가 너무 길어 발생하는 문제(<code>error: unable to create file &lt;some file name&gt;: Filename too long</code>)가 있을 수 있습니다. 다음 중 하나를 시도해 보세요:</p>
 <ul>
-<li>Enable corresponding git global config value: <code>git config --system core.longpaths true</code>. Then try to reinstall.</li>
-<li>Install plugin in other place with shorter path.</li>
+<li>해당 git 전역 설정 값을 활성화합니다: <code>git config --system core.longpaths true</code>. 그 후 다시 설치를 시도하세요.</li>
+<li>더 짧은 경로의 다른 위치에 플러그인을 설치합니다.</li>
 </ul>
 </section>
 <section id="default-config" class="level2">
-<h2 class="anchored" data-anchor-id="default-config">Default config</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- No need to copy this inside `setup()`. Will be used automatically.</span></span>
+<h2 class="anchored" data-anchor-id="default-config">기본 설정</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- `setup()` 안에 이 내용을 복사할 필요는 없습니다. 자동으로 사용됩니다.</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Options for how hunks are visualized</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 헝크가 시각화되는 방식에 대한 옵션</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">view</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Visualization style. Possible values are 'sign' and 'number'.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Default: 'number' if line numbers are enabled, 'sign' otherwise.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 시각화 스타일. 'sign' 및 'number'가 가능합니다.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 기본값: 줄 번호가 켜져 있으면 'number', 그렇지 않으면 'sign'.</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">style</span> <span class="op">=</span> <span class="va">vim</span><span class="op">.</span><span class="va">go</span><span class="op">.</span><span class="va">number</span> <span class="kw">and</span> <span class="st">'number'</span> <span class="kw">or</span> <span class="st">'sign'</span><span class="op">,</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Signs used for hunks with 'sign' view</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 'sign' 뷰에서 사용되는 기호</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">signs</span> <span class="op">=</span> <span class="op">{</span> <span class="va">add</span> <span class="op">=</span> <span class="st">'▒'</span><span class="op">,</span> <span class="va">change</span> <span class="op">=</span> <span class="st">'▒'</span><span class="op">,</span> <span class="va">delete</span> <span class="op">=</span> <span class="st">'▒'</span> <span class="op">},</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Priority of used visualization extmarks</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 사용되는 시각화 extmarks의 우선순위</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">priority</span> <span class="op">=</span> <span class="dv">199</span><span class="op">,</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Source(s) for how reference text is computed/updated/etc</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Uses content from Git index by default</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 참조 텍스트가 계산/업데이트되는 방식에 대한 소스</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 기본적으로 Git 인덱스의 내용을 사용합니다.</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">source</span> <span class="op">=</span> <span class="kw">nil</span><span class="op">,</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Delays (in ms) defining asynchronous processes</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 비동기 프로세스를 정의하는 지연 시간 (ms)</span></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="va">delay</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- How much to wait before update following every text change</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 텍스트가 변경될 때마다 업데이트하기 전 대기 시간</span></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="va">text_change</span> <span class="op">=</span> <span class="dv">200</span><span class="op">,</span></span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Module mappings. Use `''` (empty string) to disable one.</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 모듈 매핑. 비활성화하려면 `''`(빈 문자열)을 사용하세요.</span></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="va">mappings</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Apply hunks inside a visual/operator region</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 비주얼/연산자 영역 내의 헝크 적용</span></span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="va">apply</span> <span class="op">=</span> <span class="st">'gh'</span><span class="op">,</span></span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Reset hunks inside a visual/operator region</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 비주얼/연산자 영역 내의 헝크 리셋</span></span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="va">reset</span> <span class="op">=</span> <span class="st">'gH'</span><span class="op">,</span></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Hunk range textobject to be used inside operator</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Works also in Visual mode if mapping differs from apply and reset</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 연산자 내부에서 사용될 헝크 범위 텍스트 오브젝트.</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 매핑이 apply 및 reset과 다를 경우 비주얼 모드에서도 작동합니다.</span></span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="va">textobject</span> <span class="op">=</span> <span class="st">'gh'</span><span class="op">,</span></span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Go to hunk range in corresponding direction</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 해당 방향의 헝크 범위로 이동</span></span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="va">goto_first</span> <span class="op">=</span> <span class="st">'[H'</span><span class="op">,</span></span>
 <span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="va">goto_prev</span> <span class="op">=</span> <span class="st">'[h'</span><span class="op">,</span></span>
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="va">goto_next</span> <span class="op">=</span> <span class="st">']h'</span><span class="op">,</span></span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="va">goto_last</span> <span class="op">=</span> <span class="st">']H'</span><span class="op">,</span></span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Various options</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- 다양한 옵션</span></span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="va">options</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Diff algorithm. See `:h vim.diff()`.</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Diff 알고리즘. `:h vim.diff()` 참조.</span></span>
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    <span class="va">algorithm</span> <span class="op">=</span> <span class="st">'histogram'</span><span class="op">,</span></span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Whether to use "indent heuristic". See `:h vim.diff()`.</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- "들여쓰기 휴리스틱(indent heuristic)" 사용 여부. `:h vim.diff()` 참조.</span></span>
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="va">indent_heuristic</span> <span class="op">=</span> <span class="kw">true</span><span class="op">,</span></span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- The amount of second-stage diff to align lines</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 줄 정렬을 위한 2단계 Diff 양</span></span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="va">linematch</span> <span class="op">=</span> <span class="dv">60</span><span class="op">,</span></span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Whether to wrap around edges during hunk navigation</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- 헝크 탐색 시 끝에 도달하면 순환(wrap)할지 여부</span></span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="va">wrap_goto</span> <span class="op">=</span> <span class="kw">false</span><span class="op">,</span></span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  <span class="op">},</span></span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="similar-plugins" class="level2">
-<h2 class="anchored" data-anchor-id="similar-plugins">Similar plugins</h2>
+<h2 class="anchored" data-anchor-id="similar-plugins">유사한 플러그인</h2>
 <ul>
 <li><a href="https://github.com/lewis6991/gitsigns.nvim">lewis6991/gitsigns.nvim</a></li>
 </ul>
